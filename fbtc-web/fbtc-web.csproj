@@ -17,7 +17,35 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Compile Remove="ClientApp\app\components\counter\**" />
+    <Compile Remove="ClientApp\app\components\fetchdata\**" />
+    <Compile Remove="ClientApp\app\components\navmenu\**" />
     <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\counter\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\fetchdata\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\navmenu\**" />
+    <None Remove="ClientApp\app\components\counter\**" />
+    <None Remove="ClientApp\app\components\fetchdata\**" />
+    <None Remove="ClientApp\app\components\navmenu\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\SampleDataController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\components\shared\header.component.ts" />
+    <None Remove="ClientApp\app\components\shared\model\associado.ts" />
+    <None Remove="ClientApp\app\components\shared\model\colaborador.ts" />
+    <None Remove="ClientApp\app\components\shared\model\endereco.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\shared\header\header.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\associado.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\colaborador.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\endereco.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\pessoa.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
