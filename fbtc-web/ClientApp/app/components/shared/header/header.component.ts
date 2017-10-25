@@ -4,6 +4,7 @@
     selector: 'shared-header',
     templateUrl: './header.component.html' 
 })
+
 export class HeaderComponent {
 
     constructor() {

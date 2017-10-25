@@ -35,17 +35,51 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\shared\header.component.ts" />
+    <None Remove="ClientApp\app\components\shared\model\anuidade.ts" />
+    <None Remove="ClientApp\app\components\shared\model\associado.isento.ts" />
     <None Remove="ClientApp\app\components\shared\model\associado.ts" />
+    <None Remove="ClientApp\app\components\shared\model\ata.isencao.ts" />
+    <None Remove="ClientApp\app\components\shared\model\atc.ts" />
+    <None Remove="ClientApp\app\components\shared\model\cartao.associado.ts" />
     <None Remove="ClientApp\app\components\shared\model\colaborador.ts" />
     <None Remove="ClientApp\app\components\shared\model\endereco.ts" />
+    <None Remove="ClientApp\app\components\shared\model\evento.ts" />
+    <None Remove="ClientApp\app\components\shared\model\pagamento.fbtc.ts" />
+    <None Remove="ClientApp\app\components\shared\model\parametro.adimplencia.ts" />
+    <None Remove="ClientApp\app\components\shared\model\pessoaEA.ts" />
+    <None Remove="ClientApp\app\components\shared\model\tipo.publico.ts" />
+    <None Remove="ClientApp\app\components\shared\model\valor.anuidade.publico.ts" />
+    <None Remove="ClientApp\app\components\shared\model\valor.evento.publico.ts" />
+    <None Remove="ClientApp\app\components\shared\servicces\associado.service.ts" />
+    <None Remove="ClientApp\app\components\shared\servicces\colaborador.service.ts" />
+    <None Remove="ClientApp\app\components\shared\servicces\endereco.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\associado\assocaido-list\associado-list.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\associado\associado-form\associado-form.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\colaborador\colaborador-form\colaborador-form.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\colaborador\colaborador-list\colaborador-list.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\header\header.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\anuidade.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\associado.isento.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\associado.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\ata.isencao.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\atc.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\cartao.associado.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\colaborador.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\endereco.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\evento.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\pagamento.fbtc.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\parametro.adimplencia.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\pessoa.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\pessoaEA.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\tipo.publico.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\valor.anuidade.publico.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\model\valor.evento.publico.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\servicces\associado.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\servicces\colaborador.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\servicces\endereco.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

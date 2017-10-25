@@ -22,7 +22,6 @@ import { HeaderComponent } from './components/shared/header/header.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            //{ path: 'home', component: HomeComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

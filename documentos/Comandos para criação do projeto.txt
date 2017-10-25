@@ -1,0 +1,389 @@
+Microsoft Windows [versão 10.0.15063]
+(c) 2017 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Cláudio de Assis>node -- version
+module.js:473
+      throw err;
+      ^
+
+Error: Cannot find module 'C:\Users\Cláudio de Assis\version'
+    at Function.Module._resolveFilename (module.js:527:15)
+    at Function.Module._load (module.js:453:25)
+    at Function.Module.runMain (module.js:665:10)
+    at startup (bootstrap_node.js:187:16)
+    at bootstrap_node.js:608:3
+
+C:\Users\Cláudio de Assis>node --version
+v8.7.0
+
+C:\Users\Cláudio de Assis>dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
+
+Bem-vindo ao .NET Core!
+---------------------
+Saiba mais sobre o .NET Core em https://aka.ms/dotnet-docs. Use dotnet --help para ver os comandos disponíveis ou acesse https://aka.ms/dotnet-cli-docs.
+
+Telemetria
+--------------
+As ferramentas do .NET Core coletam dados de uso para melhorar sua experiência. Os dados são anônimos e não incluem argumentos de linha de comando. Os dados são coletados pela Microsoft e compartilhados com a comunidade.
+É possível recusar a telemetria ao configurar uma variável de ambiente DOTNET_CLI_TELEMETRY_OPTOUT como 1 usando seu shell favorito.
+Leia mais sobre a telemetria das ferramentas do .NET Core em https://aka.ms/dotnet-cli-telemetry.
+Preparando-se...
+  Restoring packages for C:\Users\Cláudio de Assis\.templateengine\dotnetcli\v2.0.2\scratch\restore.csproj...
+  Installing Microsoft.AspNetCore.SpaTemplates 1.0.0.
+  Generating MSBuild file C:\Users\Cláudio de Assis\.templateengine\dotnetcli\v2.0.2\scratch\obj\restore.csproj.nuget.g.props.
+  Generating MSBuild file C:\Users\Cláudio de Assis\.templateengine\dotnetcli\v2.0.2\scratch\obj\restore.csproj.nuget.g.targets.
+  Restore completed in 2,14 sec for C:\Users\Cláudio de Assis\.templateengine\dotnetcli\v2.0.2\scratch\restore.csproj.
+
+
+Modelos                                           Nome Curto       Idioma            Marcas
+--------------------------------------------------------------------------------------------------------
+Console Application                               console          [C#], F#, VB      Common/Console
+Class library                                     classlib         [C#], F#, VB      Common/Library
+Unit Test Project                                 mstest           [C#], F#, VB      Test/MSTest
+xUnit Test Project                                xunit            [C#], F#, VB      Test/xUnit
+ASP.NET Core Empty                                web              [C#], F#          Web/Empty
+ASP.NET Core Web App (Model-View-Controller)      mvc              [C#], F#          Web/MVC
+ASP.NET Core Web App                              razor            [C#]              Web/MVC/Razor Pages
+ASP.NET Core with Aurelia                         aurelia          [C#]              Web/MVC/SPA
+ASP.NET Core with Knockout.js                     knockout         [C#]              Web/MVC/SPA
+ASP.NET Core with Vue.js                          vue              [C#]              Web/MVC/SPA
+ASP.NET Core with Angular                         angular          [C#]              Web/MVC/SPA
+ASP.NET Core with React.js                        react            [C#]              Web/MVC/SPA
+ASP.NET Core with React.js and Redux              reactredux       [C#]              Web/MVC/SPA
+ASP.NET Core Web API                              webapi           [C#], F#          Web/WebAPI
+global.json file                                  globaljson                         Config
+Nuget Config                                      nugetconfig                        Config
+Web Config                                        webconfig                          Config
+Solution File                                     sln                                Solution
+Razor Page                                        page                               Web/ASP.NET
+MVC ViewImports                                   viewimports                        Web/ASP.NET
+MVC ViewStart                                     viewstart                          Web/ASP.NET
+
+
+Examples:
+    dotnet new mvc --auth Individual
+    dotnet new vue
+    dotnet new --help
+
+C:\Users\Cláudio de Assis>cd\
+
+C:\>cd c-projetos
+
+C:\C-Projetos>mkdir demos
+
+C:\C-Projetos>cd demos
+
+C:\C-Projetos\demos>mkdir CrankBank
+
+C:\C-Projetos\demos>cd crankbank
+
+C:\C-Projetos\demos\CrankBank>dotnet new-l
+Nenhum executável encontrado correspondente ao comando "dotnet-new-l"
+
+C:\C-Projetos\demos\CrankBank>dotnet new -l
+Uso: new [options]
+
+Opções:
+  -h, --help          Exibe a ajuda para esse comando.
+  -l, --list          Lista os modelos contendo o nome especificado. Se nenhum nome for especificado, listará todos os modelos.
+  -n, --name          O nome para a saída que está sendo criada. Se nenhum nome for especificado, o nome do diretório atual será usado.
+  -o, --output        Local para colocar a saída gerada.
+  -i, --install       Instala uma fonte ou um pacote de modelos.
+  -u, --uninstall     Desinstala uma fonte ou um pacote de modelos.
+  --type              Filtra os modelos com base nos tipos disponíveis. Os valores predefinidos são "projeto", "item" ou "outros".
+  --force             Força o conteúdo a ser gerado, mesmo que isso altere arquivos existentes.
+  -lang, --language   Especifica o idioma do modelo que será criado.
+
+
+Modelos                                           Nome Curto       Idioma            Marcas
+--------------------------------------------------------------------------------------------------------
+Console Application                               console          [C#], F#, VB      Common/Console
+Class library                                     classlib         [C#], F#, VB      Common/Library
+Unit Test Project                                 mstest           [C#], F#, VB      Test/MSTest
+xUnit Test Project                                xunit            [C#], F#, VB      Test/xUnit
+ASP.NET Core Empty                                web              [C#], F#          Web/Empty
+ASP.NET Core Web App (Model-View-Controller)      mvc              [C#], F#          Web/MVC
+ASP.NET Core Web App                              razor            [C#]              Web/MVC/Razor Pages
+ASP.NET Core with Aurelia                         aurelia          [C#]              Web/MVC/SPA
+ASP.NET Core with Knockout.js                     knockout         [C#]              Web/MVC/SPA
+ASP.NET Core with Vue.js                          vue              [C#]              Web/MVC/SPA
+ASP.NET Core with Angular                         angular          [C#]              Web/MVC/SPA
+ASP.NET Core with React.js                        react            [C#]              Web/MVC/SPA
+ASP.NET Core with React.js and Redux              reactredux       [C#]              Web/MVC/SPA
+ASP.NET Core Web API                              webapi           [C#], F#          Web/WebAPI
+global.json file                                  globaljson                         Config
+Nuget Config                                      nugetconfig                        Config
+Web Config                                        webconfig                          Config
+Solution File                                     sln                                Solution
+Razor Page                                        page                               Web/ASP.NET
+MVC ViewImports                                   viewimports                        Web/ASP.NET
+MVC ViewStart                                     viewstart                          Web/ASP.NET
+
+
+C:\C-Projetos\demos\CrankBank>dotnet new angular
+O modelo "ASP.NET Core with Angular" foi criado com êxito.
+
+Processando ações de pós-criação...
+Executando o 'dotnet restore' em C:\C-Projetos\demos\CrankBank\CrankBank.csproj...
+  Restoring packages for C:\C-Projetos\demos\CrankBank\CrankBank.csproj...
+  Restoring packages for C:\C-Projetos\demos\CrankBank\CrankBank.csproj...
+  Restore completed in 3,06 sec for C:\C-Projetos\demos\CrankBank\CrankBank.csproj.
+  Generating MSBuild file C:\C-Projetos\demos\CrankBank\obj\CrankBank.csproj.nuget.g.props.
+  Generating MSBuild file C:\C-Projetos\demos\CrankBank\obj\CrankBank.csproj.nuget.g.targets.
+  Restore completed in 6,01 sec for C:\C-Projetos\demos\CrankBank\CrankBank.csproj.
+
+
+A restauração foi bem-sucedida.
+
+Descrição:
+
+-------------------------------------------------------------------
+IMPORTANT: Before running this project on the command line,
+           you must restore NPM packages by running "npm install"
+-------------------------------------------------------------------
+
+Instruções manuais: Run "npm install"
+
+
+C:\C-Projetos\demos\CrankBank>
+C:\C-Projetos\demos\CrankBank>dir
+ O volume na unidade C não tem nome.
+ O Número de Série do Volume é BACF-F11C
+
+ Pasta de C:\C-Projetos\demos\CrankBank
+
+24/10/2017  12:22    <DIR>          .
+24/10/2017  12:22    <DIR>          ..
+24/10/2017  12:22             3.848 .gitignore
+24/10/2017  12:22               366 appsettings.Development.json
+24/10/2017  12:22               225 appsettings.json
+24/10/2017  12:22    <DIR>          ClientApp
+24/10/2017  12:22    <DIR>          Controllers
+24/10/2017  12:22             2.513 CrankBank.csproj
+24/10/2017  12:22           135.991 npm-shrinkwrap.json
+24/10/2017  12:22    <DIR>          obj
+24/10/2017  12:22             1.851 package.json
+24/10/2017  12:22               623 Program.cs
+24/10/2017  12:22             1.809 Startup.cs
+24/10/2017  12:22               563 tsconfig.json
+24/10/2017  12:22    <DIR>          Views
+24/10/2017  12:22             3.739 webpack.config.js
+24/10/2017  12:22             3.744 webpack.config.vendor.js
+24/10/2017  12:22    <DIR>          wwwroot
+              11 arquivo(s)        155.272 bytes
+               7 pasta(s)   40.247.812.096 bytes disponíveis
+
+C:\C-Projetos\demos\CrankBank>dotnet restore
+  Restore completed in 72,64 ms for C:\C-Projetos\demos\CrankBank\CrankBank.csproj.
+  Restore completed in 82,82 ms for C:\C-Projetos\demos\CrankBank\CrankBank.csproj.
+
+C:\C-Projetos\demos\CrankBank>npm install
+npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but npm-shrinkwrap.json was generated for lockfileVersion@0. I'll try to do my best with it!
+npm WARN deprecated coa@1.0.3: Please upgrade to 1.0.4 for node 0.10, 0.12, or to 2.0+ for node 4+
+npm WARN deprecated chalk@2.0.1: Please upgrade to Chalk 2.1.0 - template literals in this version (2.0.1) are quite buggy.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.2 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 806 packages in 167.099s
+
+C:\C-Projetos\demos\CrankBank>start crankBank.csproj
+
+C:\C-Projetos\demos\CrankBank>start crankBank.csproj
+
+C:\C-Projetos\demos\CrankBank>https:cd..
+A sintaxe do nome do arquivo, do nome do diretório ou do rótulo do volume está incorreta.
+
+C:\C-Projetos\demos\CrankBank>cd..
+
+C:\C-Projetos\demos>cd..
+
+C:\C-Projetos>cd fbtcAssociados
+
+C:\C-Projetos\fbtcAssociados>dir
+ O volume na unidade C não tem nome.
+ O Número de Série do Volume é BACF-F11C
+
+ Pasta de C:\C-Projetos\fbtcAssociados
+
+24/10/2017  11:36    <DIR>          .
+24/10/2017  11:36    <DIR>          ..
+23/10/2017  14:54             2.581 .gitattributes
+23/10/2017  14:54             3.997 .gitignore
+23/10/2017  16:48    <DIR>          fbtcAssociados
+24/10/2017  11:45    <DIR>          fbtcAssociados - Copia
+23/10/2017  14:54             1.008 fbtcAssociados.sln
+23/10/2017  16:44                27 package-lock.json
+24/10/2017  11:21    <DIR>          Teste-Projeto
+               4 arquivo(s)          7.613 bytes
+               5 pasta(s)   43.341.832.192 bytes disponíveis
+
+C:\C-Projetos\fbtcAssociados>xs fbtcassociados
+'xs' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
+
+C:\C-Projetos\fbtcAssociados>cd fbtcAssociados
+
+C:\C-Projetos\fbtcAssociados\fbtcAssociados>dir
+ O volume na unidade C não tem nome.
+ O Número de Série do Volume é BACF-F11C
+
+ Pasta de C:\C-Projetos\fbtcAssociados\fbtcAssociados
+
+23/10/2017  16:48    <DIR>          .
+23/10/2017  16:48    <DIR>          ..
+23/10/2017  14:54             3.888 .gitignore
+23/10/2017  14:54               165 appsettings.json
+23/10/2017  14:54    <DIR>          ClientApp
+23/10/2017  14:54    <DIR>          Controllers
+23/10/2017  14:54               294 Dockerfile
+23/10/2017  14:54             1.039 fbtcAssociados.xproj
+24/10/2017  11:39    <DIR>          node_modules
+23/10/2017  16:48           310.405 package-lock.json
+23/10/2017  16:48             1.343 package.json
+23/10/2017  14:54               815 Program.cs
+23/10/2017  14:54             2.065 project.json
+23/10/2017  14:54           446.020 project.lock.json
+23/10/2017  14:54             2.190 README.md
+23/10/2017  14:54             2.282 Startup.cs
+23/10/2017  14:54    <DIR>          Views
+23/10/2017  14:54               549 web.config
+23/10/2017  14:54             2.125 webpack.config.js
+23/10/2017  14:54             1.795 webpack.config.vendor.js
+23/10/2017  14:54    <DIR>          wwwroot
+              14 arquivo(s)        774.975 bytes
+               7 pasta(s)   43.341.746.176 bytes disponíveis
+
+C:\C-Projetos\fbtcAssociados\fbtcAssociados>cd..
+
+C:\C-Projetos\fbtcAssociados>dotnet new angular
+A criação desse modelo fará alterações nos arquivos existentes:
+  Substituir   .gitignore
+
+Execute novamente o comando e passe --force para aceitar e criar.
+
+C:\C-Projetos\fbtcAssociados>dotnet new angular --force
+O modelo "ASP.NET Core with Angular" foi criado com êxito.
+
+Processando ações de pós-criação...
+Executando o 'dotnet restore' em C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj...
+  Restoring packages for C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj...
+  Restoring packages for C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj...
+  Restore completed in 3,08 sec for C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj.
+  Generating MSBuild file C:\C-Projetos\fbtcAssociados\obj\fbtcAssociados.csproj.nuget.g.props.
+  Generating MSBuild file C:\C-Projetos\fbtcAssociados\obj\fbtcAssociados.csproj.nuget.g.targets.
+  Restore completed in 6,64 sec for C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj.
+
+
+A restauração foi bem-sucedida.
+
+Descrição:
+
+-------------------------------------------------------------------
+IMPORTANT: Before running this project on the command line,
+           you must restore NPM packages by running "npm install"
+-------------------------------------------------------------------
+
+Instruções manuais: Run "npm install"
+
+
+C:\C-Projetos\fbtcAssociados>npm install
+npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but npm-shrinkwrap.json was generated for lockfileVersion@0. I'll try to do my best with it!
+npm WARN deprecated coa@1.0.3: Please upgrade to 1.0.4 for node 0.10, 0.12, or to 2.0+ for node 4+
+npm WARN deprecated chalk@2.0.1: Please upgrade to Chalk 2.1.0 - template literals in this version (2.0.1) are quite buggy.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.2 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 806 packages in 315.207s
+
+C:\C-Projetos\fbtcAssociados>start fbtcAssociados
+
+C:\C-Projetos\fbtcAssociados>start fbtcAssociados.csproj
+
+C:\C-Projetos\fbtcAssociados>dotnet restore
+C:\C-Projetos\fbtcAssociados\fbtcAssociados\fbtcAssociados.xproj(8,3): error MSB4019: O projeto "C:\Program Files\dotnet\sdk\2.0.2\Microsoft\VisualStudio\v14.0\DotNet\Microsoft.DotNet.Props" importado não foi encontrado. Confirme se o caminho na declaração <Import> está correto e se o arquivo existe no disco.
+C:\C-Projetos\fbtcAssociados\fbtcAssociados\fbtcAssociados.xproj : warning NU1503: Skipping restore for project 'C:\C-Projetos\fbtcAssociados\fbtcAssociados\fbtcAssociados.xproj'. The project file may be invalid or missing targets required for restore. [C:\C-Projetos\fbtcAssociados\fbtcAssociados.sln]
+C:\Program Files\dotnet\sdk\2.0.2\NuGet.targets(102,5): warning : Unable to find a project to restore! [C:\C-Projetos\fbtcAssociados\fbtcAssociados.sln]
+
+C:\C-Projetos\fbtcAssociados>dotnet new angular --force
+O modelo "ASP.NET Core with Angular" foi criado com êxito.
+
+Processando ações de pós-criação...
+Executando o 'dotnet restore' em C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj...
+C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj : warning NU1503: Skipping restore for project 'C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj'. The project file may be invalid or missing targets required for restore.
+C:\Program Files\dotnet\sdk\2.0.2\NuGet.targets(102,5): warning : Unable to find a project to restore! [C:\C-Projetos\fbtcAssociados\fbtcAssociados.csproj]
+
+
+A restauração foi bem-sucedida.
+
+Descrição:
+
+-------------------------------------------------------------------
+IMPORTANT: Before running this project on the command line,
+           you must restore NPM packages by running "npm install"
+-------------------------------------------------------------------
+
+Instruções manuais: Run "npm install"
+
+
+C:\C-Projetos\fbtcAssociados>npm install
+npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but npm-shrinkwrap.json was generated for lockfileVersion@0. I'll try to do my best with it!
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.2 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 115 packages in 25.006s
+
+C:\C-Projetos\fbtcAssociados>start fbtcAssociados.csproj
+
+C:\C-Projetos\fbtcAssociados>cd..
+
+C:\C-Projetos>cd fbtc
+
+C:\C-Projetos\fbtc>cd fbtc-associados
+
+C:\C-Projetos\fbtc\fbtc-associados>cd..
+
+C:\C-Projetos\fbtc>mkdir fbtc-web
+
+C:\C-Projetos\fbtc>mkdir fbtc-api
+
+C:\C-Projetos\fbtc>mkdir documentos
+
+C:\C-Projetos\fbtc>cd fbtc-web
+
+C:\C-Projetos\fbtc\fbtc-web>dotnet new angular
+O modelo "ASP.NET Core with Angular" foi criado com êxito.
+
+Processando ações de pós-criação...
+Executando o 'dotnet restore' em C:\C-Projetos\fbtc\fbtc-web\fbtc-web.csproj...
+  Restoring packages for C:\C-Projetos\fbtc\fbtc-web\fbtc-web.csproj...
+  Restoring packages for C:\C-Projetos\fbtc\fbtc-web\fbtc-web.csproj...
+  Restore completed in 1,47 sec for C:\C-Projetos\fbtc\fbtc-web\fbtc-web.csproj.
+  Generating MSBuild file C:\C-Projetos\fbtc\fbtc-web\obj\fbtc-web.csproj.nuget.g.props.
+  Generating MSBuild file C:\C-Projetos\fbtc\fbtc-web\obj\fbtc-web.csproj.nuget.g.targets.
+  Restore completed in 3,73 sec for C:\C-Projetos\fbtc\fbtc-web\fbtc-web.csproj.
+
+
+A restauração foi bem-sucedida.
+
+Descrição:
+
+-------------------------------------------------------------------
+IMPORTANT: Before running this project on the command line,
+           you must restore NPM packages by running "npm install"
+-------------------------------------------------------------------
+
+Instruções manuais: Run "npm install"
+
+
+C:\C-Projetos\fbtc\fbtc-web>npm install
+npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but npm-shrinkwrap.json was generated for lockfileVersion@0. I'll try to do my best with it!
+npm WARN deprecated coa@1.0.3: Please upgrade to 1.0.4 for node 0.10, 0.12, or to 2.0+ for node 4+
+npm WARN deprecated chalk@2.0.1: Please upgrade to Chalk 2.1.0 - template literals in this version (2.0.1) are quite buggy.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.2 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 806 packages in 209.723s
+
+C:\C-Projetos\fbtc\fbtc-web>start fbtc-web.csproj
+
+C:\C-Projetos\fbtc\fbtc-web>
