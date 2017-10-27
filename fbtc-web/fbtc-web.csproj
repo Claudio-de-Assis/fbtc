@@ -17,13 +17,19 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Compile Remove="ClientApp\app\components\associado\associado-list\**" />
+    <Compile Remove="ClientApp\app\components\ata-anuidade\ata-anuidade-form\**" />
     <Compile Remove="ClientApp\app\components\counter\**" />
     <Compile Remove="ClientApp\app\components\fetchdata\**" />
     <Compile Remove="ClientApp\app\components\navmenu\**" />
     <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\associado\associado-list\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\ata-anuidade\ata-anuidade-form\**" />
     <EmbeddedResource Remove="ClientApp\app\components\counter\**" />
     <EmbeddedResource Remove="ClientApp\app\components\fetchdata\**" />
     <EmbeddedResource Remove="ClientApp\app\components\navmenu\**" />
+    <None Remove="ClientApp\app\components\associado\associado-list\**" />
+    <None Remove="ClientApp\app\components\ata-anuidade\ata-anuidade-form\**" />
     <None Remove="ClientApp\app\components\counter\**" />
     <None Remove="ClientApp\app\components\fetchdata\**" />
     <None Remove="ClientApp\app\components\navmenu\**" />
@@ -56,10 +62,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\components\associado\assocaido-list\associado-list.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\associado\associado-form\associado-form.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\colaborador\colaborador-form\colaborador-form.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\colaborador\colaborador-list\colaborador-list.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\header\header.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\anuidade.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\associado.isento.ts" />
