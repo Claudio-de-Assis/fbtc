@@ -17,19 +17,13 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
-    <Compile Remove="ClientApp\app\components\associado\associado-list\**" />
-    <Compile Remove="ClientApp\app\components\ata-anuidade\ata-anuidade-form\**" />
     <Compile Remove="ClientApp\app\components\counter\**" />
     <Compile Remove="ClientApp\app\components\fetchdata\**" />
     <Compile Remove="ClientApp\app\components\navmenu\**" />
     <Content Remove="ClientApp\**" />
-    <EmbeddedResource Remove="ClientApp\app\components\associado\associado-list\**" />
-    <EmbeddedResource Remove="ClientApp\app\components\ata-anuidade\ata-anuidade-form\**" />
     <EmbeddedResource Remove="ClientApp\app\components\counter\**" />
     <EmbeddedResource Remove="ClientApp\app\components\fetchdata\**" />
     <EmbeddedResource Remove="ClientApp\app\components\navmenu\**" />
-    <None Remove="ClientApp\app\components\associado\associado-list\**" />
-    <None Remove="ClientApp\app\components\ata-anuidade\ata-anuidade-form\**" />
     <None Remove="ClientApp\app\components\counter\**" />
     <None Remove="ClientApp\app\components\fetchdata\**" />
     <None Remove="ClientApp\app\components\navmenu\**" />
@@ -40,6 +34,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\associado.module.ts" />
+    <None Remove="ClientApp\app\ata.anuidade.module.ts" />
+    <None Remove="ClientApp\app\ata.evento.module.ts" />
+    <None Remove="ClientApp\app\autenticacao.module.ts" />
+    <None Remove="ClientApp\app\colaborador.module.ts" />
+    <None Remove="ClientApp\app\components\ata-anuidade\ata_anuidade.module.ts" />
+    <None Remove="ClientApp\app\components\recebimento-anuidade\recebimento.anuidade.router.module.ts" />
     <None Remove="ClientApp\app\components\shared\header.component.ts" />
     <None Remove="ClientApp\app\components\shared\model\anuidade.ts" />
     <None Remove="ClientApp\app\components\shared\model\associado.isento.ts" />
@@ -56,9 +57,22 @@
     <None Remove="ClientApp\app\components\shared\model\tipo.publico.ts" />
     <None Remove="ClientApp\app\components\shared\model\valor.anuidade.publico.ts" />
     <None Remove="ClientApp\app\components\shared\model\valor.evento.publico.ts" />
-    <None Remove="ClientApp\app\components\shared\servicces\associado.service.ts" />
-    <None Remove="ClientApp\app\components\shared\servicces\colaborador.service.ts" />
-    <None Remove="ClientApp\app\components\shared\servicces\endereco.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\associado.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\ata-evento.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\ata-isencao.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\ata-reuniao.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\autenticacao.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\colaborador.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\endereco.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\evento.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\file.tsx" />
+    <None Remove="ClientApp\app\components\shared\services\recebimento-anuidade.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\recebimento-anuidade.ts" />
+    <None Remove="ClientApp\app\components\shared\services\recebimento-evento.service.ts" />
+    <None Remove="ClientApp\app\components\shared\services\user.service.ts" />
+    <None Remove="ClientApp\app\evento.module.ts" />
+    <None Remove="ClientApp\app\rebimento.anuidade.module.ts" />
+    <None Remove="ClientApp\app\recebimento.evento.module.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,9 +93,15 @@
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\tipo.publico.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\valor.anuidade.publico.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\valor.evento.publico.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\shared\servicces\associado.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\shared\servicces\colaborador.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\shared\servicces\endereco.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\associado.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\ata-isencao.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\autenticacao.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\colaborador.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\endereco.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\evento.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\recebimento-anuidade.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\recebimento-evento.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\services\user.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
