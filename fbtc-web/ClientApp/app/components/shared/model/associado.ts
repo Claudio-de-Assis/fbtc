@@ -10,7 +10,7 @@ export class Associado extends Pessoa {
     NrMatricula: string
     Crp: string;
     Crm: string;
-    MomeInsFormacao: string;
+    NomeInsFormacao: string;
     Certificado: boolean;
     DtCertificacao: Date;
     DivulgarContato: boolean;

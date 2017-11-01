@@ -6,12 +6,14 @@ import { AssociadoFormComponent } from '../associado/associado-form/associado.fo
 import { AssociadoListComponent } from '../associado/associado-list/associado.list.component';
 import { AssociadoService } from '../../components/shared/services/associado.service';
 import { AssociadoRoutingModule } from './associado.routing.module';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        AssociadoRoutingModule
+        AssociadoRoutingModule,
+        //BrowserAnimationsModule
     ],
     declarations: [
         AssociadoFormComponent,

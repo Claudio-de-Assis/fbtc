@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AssociadoListComponent } from '../associado/associado-list/associado.list.component';
 import { AssociadoFormComponent } from '../associado/associado-form/associado.form.component';
+import { ColaboradorListComponent } from '../colaborador/colaborador-list/colaborador.list.component';
+
 
 const associadoRoutes: Routes = [
     { path: 'Associado', component: AssociadoListComponent },

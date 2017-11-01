@@ -1,14 +1,14 @@
 ﻿<div>
-    <h2>Listagem de associados</h2>
-    <p>Selecione um associado</p>
-    <
-    <ul class="items">
+    <h2>{{ title }}</h2>
+    <p>{{ subTitle }}</p>
+    <ul class="associados">
         <li *ngFor="let associado of associado$ | async"
-            [class.selected]="associado.AssociadoId === associadoId">
-            <a [routerLink]="['/associado', associado.AssociadoId]">
-                <span class="badge">{{ associado.AssociadoId }}</span>{{ associado.Nome }}
+            [class.selected]="associado.AssociadoId === selectedId" (click)="onSelect(associado)">
+            <a [routerLink]="['/Associado', associado.AssociadoId]">
+               <span class="badge">{{ associado.AssociadoId }}</span>{{ associado.Nome }}
             </a>
-        </li>
+         </li>
     </ul>
+    <!--<associado-form></associado-form>-->
     <button routerLink="/home">Retornar</button>
 </div>

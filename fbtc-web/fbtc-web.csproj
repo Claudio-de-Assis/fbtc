@@ -20,13 +20,16 @@
     <Compile Remove="ClientApp\app\components\counter\**" />
     <Compile Remove="ClientApp\app\components\fetchdata\**" />
     <Compile Remove="ClientApp\app\components\navmenu\**" />
+    <Compile Remove="ClientApp\app\components\shared\NovaPasta1\**" />
     <Content Remove="ClientApp\**" />
     <EmbeddedResource Remove="ClientApp\app\components\counter\**" />
     <EmbeddedResource Remove="ClientApp\app\components\fetchdata\**" />
     <EmbeddedResource Remove="ClientApp\app\components\navmenu\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\shared\NovaPasta1\**" />
     <None Remove="ClientApp\app\components\counter\**" />
     <None Remove="ClientApp\app\components\fetchdata\**" />
     <None Remove="ClientApp\app\components\navmenu\**" />
+    <None Remove="ClientApp\app\components\shared\NovaPasta1\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +44,9 @@
     <None Remove="ClientApp\app\colaborador.module.ts" />
     <None Remove="ClientApp\app\components\ata-anuidade\ata_anuidade.module.ts" />
     <None Remove="ClientApp\app\components\recebimento-anuidade\recebimento.anuidade.router.module.ts" />
+    <None Remove="ClientApp\app\components\shared\animations.ts" />
     <None Remove="ClientApp\app\components\shared\header.component.ts" />
+    <None Remove="ClientApp\app\components\shared\mock\mock-associados.ts" />
     <None Remove="ClientApp\app\components\shared\model\anuidade.ts" />
     <None Remove="ClientApp\app\components\shared\model\associado.isento.ts" />
     <None Remove="ClientApp\app\components\shared\model\associado.ts" />
@@ -76,7 +81,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\shared\animations.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\header\header.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\mock\mock-associados.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\anuidade.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\associado.isento.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\model\associado.ts" />

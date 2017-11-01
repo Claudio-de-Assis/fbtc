@@ -12,5 +12,5 @@ export class Pessoa {
     DtCadastro: Date;
     Ativo: Boolean;
 
-    Enderecos: Endereco[];
+    //Enderecos: Endereco[];
 }
