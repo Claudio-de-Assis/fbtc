@@ -15,7 +15,9 @@ import { Associado } from '../../shared/model/associado';
 export class AssociadoFormComponent implements OnInit
 {
     private selectedId: any;
-    associado$: Observable<Associado[]>;
+
+    associado$: Observable<Associado>;
+
     associado: Associado;
 
     editNome: string;
@@ -54,13 +56,15 @@ export class AssociadoFormComponent implements OnInit
     ) { }
 
     /** Called by Angular after AssociadoForm component initialized */
-    ngOnInit(): void {
-        /*this.associado$ = this.route.paramMap.switchMap((params: ParamMap) =>
-            this.service.getAssociadoById(params.get('AssociadoId')));*/
-        this.route.data.subscribe((data: { associado: Associado }) => {
+    ngOnInit() {
+        this.associado$ = this.route.paramMap
+            .switchMap((params: ParamMap) =>
+                this.service.getAssociadoById(params.get('selectedId')));
+
+        /*this.route.data.subscribe((data: { associado: Associado }) => {
             this.editNome = data.associado.Nome;
             this.editDtNascimento = data.associado.DtNascimento;
-        });
+        });*/
     }
 
     gotoAssociados() {

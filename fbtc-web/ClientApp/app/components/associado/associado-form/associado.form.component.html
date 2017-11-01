@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div *ngIf="associado$ | async as associado">
     <h2>{{ title }}</h2>
     <p>{{ subTitle }}</p>
     <div>
@@ -109,7 +109,9 @@
         <label>Ativo:</label>
         <input [(ngModel)]="editAtivo" placeholder="Ativo" />
     </div>
-    <button routerLink="/associado">Retornar</button>
-    <button (click)="save()">Salvar</button>
-    <button (click)="cancel()">Cancelar</button>
+    <p>
+        <button (click)="gotoAssociados()">Retornar</button>
+        <button (click)="save()">Salvar</button>
+        <button (click)="cancel()">Cancelar</button>
+     </p>
 </div>

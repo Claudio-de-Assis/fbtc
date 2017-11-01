@@ -18,14 +18,16 @@ export class AssociadoService {
     constructor() {
     } 
 
+    getListAssociados() { return Observable.of(ASSOCIADOS); }
+
     getAssociados(): Promise<Associado[]> {
         return Promise.resolve(ASSOCIADOS);
     }
 
-    getAssociadoById(id: any): Promise<Associado[]>{
-        return Promise.resolve(ASSOCIADOS);
+    getAssociadoById(id: number | string) {
+        return this.getListAssociados()
+            .map(associados => associados.find(associado => associado.AssociadoId === +id));
 
-        //return this.associado$;
         //usando a API do EasyAgendamento para teste de conexão do serviço:
         //return this.http.get('http://localhost:54709/api/Pessoa/${id}')
           //  .map(response => response.json() as PessoaEA)
