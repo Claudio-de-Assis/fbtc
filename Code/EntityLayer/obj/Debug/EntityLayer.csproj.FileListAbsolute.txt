@@ -1,0 +1,12 @@
+C:\Profissional\Projetos\FBTC\fbtc-web\EntityLayer\bin\Debug\EntityLayer.dll
+C:\Profissional\Projetos\FBTC\fbtc-web\EntityLayer\bin\Debug\EntityLayer.pdb
+C:\Profissional\Projetos\FBTC\fbtc-web\EntityLayer\obj\Debug\EntityLayer.csprojResolveAssemblyReference.cache
+C:\Profissional\Projetos\FBTC\fbtc-web\EntityLayer\obj\Debug\EntityLayer.csproj.CoreCompileInputs.cache
+C:\Profissional\Projetos\FBTC\fbtc-web\EntityLayer\obj\Debug\EntityLayer.dll
+C:\Profissional\Projetos\FBTC\fbtc-web\EntityLayer\obj\Debug\EntityLayer.pdb
+C:\Profissional\Projetos\FBTC\Code\EntityLayer\bin\Debug\EntityLayer.dll
+C:\Profissional\Projetos\FBTC\Code\EntityLayer\bin\Debug\EntityLayer.pdb
+C:\Profissional\Projetos\FBTC\Code\EntityLayer\obj\Debug\EntityLayer.csprojResolveAssemblyReference.cache
+C:\Profissional\Projetos\FBTC\Code\EntityLayer\obj\Debug\EntityLayer.csproj.CoreCompileInputs.cache
+C:\Profissional\Projetos\FBTC\Code\EntityLayer\obj\Debug\EntityLayer.dll
+C:\Profissional\Projetos\FBTC\Code\EntityLayer\obj\Debug\EntityLayer.pdb

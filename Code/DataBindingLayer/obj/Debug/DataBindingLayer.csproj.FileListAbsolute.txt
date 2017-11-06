@@ -1,0 +1,6 @@
+C:\Profissional\Projetos\FBTC\fbtc-web\DataBindingLayer\bin\Debug\DataBindingLayer.dll
+C:\Profissional\Projetos\FBTC\fbtc-web\DataBindingLayer\bin\Debug\DataBindingLayer.pdb
+C:\Profissional\Projetos\FBTC\fbtc-web\DataBindingLayer\obj\Debug\DataBindingLayer.csprojResolveAssemblyReference.cache
+C:\Profissional\Projetos\FBTC\fbtc-web\DataBindingLayer\obj\Debug\DataBindingLayer.csproj.CoreCompileInputs.cache
+C:\Profissional\Projetos\FBTC\fbtc-web\DataBindingLayer\obj\Debug\DataBindingLayer.dll
+C:\Profissional\Projetos\FBTC\fbtc-web\DataBindingLayer\obj\Debug\DataBindingLayer.pdb

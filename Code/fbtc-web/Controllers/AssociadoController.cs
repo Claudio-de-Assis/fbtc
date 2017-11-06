@@ -26,7 +26,7 @@ namespace fbtc_web.Controllers
         [HttpGet]
         public IEnumerable<Associado> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return manterAssociado.GetAll();
         }
 
 
