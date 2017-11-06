@@ -1,0 +1,117 @@
+<div *ngIf="associado$ | async as associado">
+  <h2>{{ title }}</h2>
+  <p>{{ subTitle }}</p>
+  <div>
+      <label>Nome</label>
+      <input [(ngModel)]="editNome" placeholder="Nome"/>
+  </div>
+  <div>
+      <label>Data de Nascimento:</label>
+      <input [(ngModel)]="editDtNascimento" placeholder="Data de Nascimento"/>
+  </div>
+  <div>
+      <label>E-Mail:</label>
+      <input [(ngModel)]="editEMail" placeholder="E-Mail"/>
+  </div>
+  <div>
+      <label>Sexo:</label>
+      <input [(ngModel)]="editSexo" placeholder="Sexo"/>
+  </div>
+  <div>
+      <label>Celular:</label>
+      <input [(ngModel)]="editCelular" placeholder="Celular"/>
+  </div>
+  <div>
+      <label>CPF:</label>
+      <input [(ngModel)]="editCPF" placeholder="CPF"/>
+  </div>
+  <div>
+      <label>RG:</label>
+      <input [(ngModel)]="editRG" placeholder="RG"/>
+  </div>
+  <div>
+      <label>Matricula:</label>
+      <input [(ngModel)]="editMatricula" placeholder="Matricula"/>
+  </div>
+  <div>
+      <label>ATC:</label>
+      <input [(ngModel)]="editATC" placeholder="ATC"/>
+  </div>
+  <div>
+      <label>Tipo:</label>
+      <input [(ngModel)]="editTipo" placeholder="Tpo"/>
+  </div>
+  <div>
+      <label>CRP:</label>
+      <input [(ngModel)]="editCRP" placeholder="CRP"/>
+  </div>
+  <div>
+      <label>CRM:</label>
+      <input [(ngModel)]="editCRM" placeholder="CRM"/>
+  </div>
+  <div>
+      <label>Instituição de Formação:</label>
+      <input [(ngModel)]="editInstFormacao" placeholder="Insituição de Formação"/>
+  </div>
+  <div>
+      <label>Terapeuta Associado:</label>
+      <input [(ngModel)]="editTerapeutaAssociado" placeholder="Terapeuta Associado"/>
+  </div>
+  <div>
+      <label>Data  da Certificacao:</label>
+      <input [(ngModel)]="editDtCertificacao" placeholder="Data da Certificacao"/>
+  </div>
+  <div>
+      <label>Autoriza divulgação do contato:</label>
+      <input [(ngModel)]="editDivulgarContato" placeholder="Divulgar Contato"/>
+  </div>
+  <div>
+      <label>Contato para divulgação:</label>
+      <input [(ngModel)]="editTipoContato" placeholder="Tipo Contato"/>
+  </div>
+  <div>
+      <label>Diretoria:</label>
+      <input [(ngModel)]="editDiretoria" placeholder="Diretoria" />
+  </div>
+  <div>
+      <label>CONFI:</label>
+      <input [(ngModel)]="editConfi" placeholder="Confi" />
+  </div>
+  <div>
+      <label>CEP:</label>
+      <input [(ngModel)]="editCEP" placeholder="CEP" />
+  </div>
+  <div>
+      <label>Endereço:</label>
+      <input [(ngModel)]="editEndereco" placeholder="Endereço" />
+  </div>
+  <div>
+      <label>Nº:</label>
+      <input [(ngModel)]="editNumero" placeholder="Nº" />
+  </div>
+  <div>
+      <label>Complemento:</label>
+      <input [(ngModel)]="editComplemento" placeholder="Complemento" />
+  </div>
+  <div>
+      <label>Bairro:</label>
+      <input [(ngModel)]="editBairro" placeholder="Bairro" />
+  </div>
+  <div>
+      <label>Cidade:</label>
+      <input [(ngModel)]="editCidade" placeholder="Cidade" />
+  </div>
+  <div>
+      <label>Estado:</label>
+      <input [(ngModel)]="editEstado" placeholder="UF" />
+  </div>
+  <div>
+      <label>Ativo:</label>
+      <input [(ngModel)]="editAtivo" placeholder="Ativo" />
+  </div>
+  <p>
+      <button (click)="gotoAssociados()">Retornar</button>
+      <button (click)="save()">Salvar</button>
+      <button (click)="cancel()">Cancelar</button>
+   </p>
+</div>
