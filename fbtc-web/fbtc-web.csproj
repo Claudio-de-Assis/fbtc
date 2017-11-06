@@ -81,6 +81,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="EntityLayer\EntityLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\shared\animations.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\header\header.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\mock\mock-associados.ts" />

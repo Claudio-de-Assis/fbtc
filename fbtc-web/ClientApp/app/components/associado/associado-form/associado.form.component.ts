@@ -58,8 +58,7 @@ export class AssociadoFormComponent implements OnInit
     /** Called by Angular after AssociadoForm component initialized */
     ngOnInit() {
         this.associado$ = this.route.paramMap
-            .switchMap((params: ParamMap) =>
-                this.service.getAssociadoById(params.get('selectedId')));
+            .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get('id'))); 
 
         /*this.route.data.subscribe((data: { associado: Associado }) => {
             this.editNome = data.associado.Nome;

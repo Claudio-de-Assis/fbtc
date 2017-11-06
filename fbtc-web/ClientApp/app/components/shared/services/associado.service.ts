@@ -24,7 +24,9 @@ export class AssociadoService {
         return Promise.resolve(ASSOCIADOS);
     }
 
-    getAssociadoById(id: number | string) {
+    //getAssociadoById(id: number | string) {
+
+    getAssociadoById(id: string) {
         return this.getListAssociados()
             .map(associados => associados.find(associado => associado.AssociadoId === +id));
 
