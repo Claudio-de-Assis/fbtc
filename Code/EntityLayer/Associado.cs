@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace EntityLayer
 {
     public class Associado
+
     {
         public virtual int AssociadoId { get; set; }
         public virtual Pessoa Pessoa { get; set; }
