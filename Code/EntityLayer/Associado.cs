@@ -10,7 +10,7 @@ namespace EntityLayer
     {
         public virtual int AssociadoId { get; set; }
         public virtual Pessoa Pessoa { get; set; }
-        public virtual ATC ATC { get; set; }
+        public virtual int AtcID { get; set; }
         public virtual TipoPublico TipoPublicoId { get; set; }
         public virtual string Cpf { get; set; }
         public virtual string Rg { get; set; }

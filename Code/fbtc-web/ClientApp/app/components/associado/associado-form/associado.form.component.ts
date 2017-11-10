@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AssociadoService } from '../../shared/services/associado.service';
 import { Associado } from '../../shared/model/associado';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'associado-form',
@@ -14,74 +15,24 @@ import { Associado } from '../../shared/model/associado';
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit
 {
-    private selectedId: any;
+    constructor(private http: Http) {
+    }
 
-    associado$: Observable<Associado>;
+    getListAssociados() {
+        return this.http.get('api/associado/GetAll')
+            .map(r => r.json() as Associado[])
+            .toPromise();
+    }
 
-    associado: Associado;
 
-    editNome: string;
-    editDtNascimento: Date;
-    editEMail: string;
-    editSexo: string;
-    editCelular: string;
-    editCPF: string;
-    editRG: string;
-    editMatricula: string;
-    editATC: string;
-    editTipo: string;
-    editCRP: string;
-    editCRM: string;
-    editInstFormacao: string;
-    editTerapeutaAssociado: boolean;
-    editDtCertificacao: boolean;
-    editDivulgarContato: boolean;
-    editTipoContato: string;
-    editDiretoria: boolean;
-    editConfi: boolean;
-    editCEP: string;
-    editEndereco: string;
-    editNumero: string;
-    editComplemento: string;
-    editBairro: string;
-    editCidade: string;
-    editEstado: string;
-    editAtivo: boolean;
+    getAssociadoById(id: string) {
+        return this.http.get(`api/associado/Get/${id}`)
+            .map(r => r.json() as Associado[])
+            .toPromise();
+    }
 
-    /** AssociadoFrm ctor */
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private service: AssociadoService
-    ) { }
-
-    /** Called by Angular after AssociadoForm component initialized */
     ngOnInit() {
-        this.associado$ = this.route.paramMap
-            .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get('id'))); 
-
-        /*this.route.data.subscribe((data: { associado: Associado }) => {
-            this.editNome = data.associado.Nome;
-            this.editDtNascimento = data.associado.DtNascimento;
-        });*/
+        return this.getListAssociados();
     }
-
-    gotoAssociados() {
-        let associadoId = this.associado ? this.associado.AssociadoId : null;
-        // Pass along the Associado id if available
-        // so that the AssociadoList component can select that Associado.
-        // Include a junk 'foo' property for fun.
-        this.router.navigate(['/associados', { id: associadoId, foo: 'foo' }]);
-    }
-
-    save() {
-        this.associado.Nome = this.editNome;
-        this.associado.DtNascimento = this.editDtNascimento;
-        this.gotoAssociados();
-
-    }
-
-    cancel() {
-        this.gotoAssociados();
-    }
+    
 }

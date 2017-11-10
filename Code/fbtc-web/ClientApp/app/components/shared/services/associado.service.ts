@@ -6,33 +6,26 @@ import 'rxjs/Rx';
 import { Associado } from "../model/associado";
 import { PessoaEA } from "../model/pessoaEA";
 import { Observable } from "rxjs/Observable";
-import { ASSOCIADOS } from '../mock/mock-associados';
+//import { ASSOCIADOS } from '../mock/mock-associados';
 
 
 @Injectable()
 export class AssociadoService {
 
-    associado$: Observable<Associado[]>;
-    associado: Associado;
-    
-    constructor() {
+
+    constructor(private http: Http) {
     } 
 
-    getListAssociados() { return Observable.of(ASSOCIADOS); }
-
-    getAssociados(): Promise<Associado[]> {
-        return Promise.resolve(ASSOCIADOS);
+    getListAssociados() {
+        return this.http.get('api/associado/GetAll')
+            .map(r => r.json() as Associado[])
+            .toPromise();
     }
 
-    //getAssociadoById(id: number | string) {
 
     getAssociadoById(id: string) {
-        return this.getListAssociados()
-            .map(associados => associados.find(associado => associado.AssociadoId === +id));
-
-        //usando a API do EasyAgendamento para teste de conexão do serviço:
-        //return this.http.get('http://localhost:54709/api/Pessoa/${id}')
-          //  .map(response => response.json() as PessoaEA)
-            //.toPromise();
+        return this.http.get(`api/associado/Get/${id}`)
+            .map(r => r.json() as Associado[])
+            .toPromise();
     }
 }

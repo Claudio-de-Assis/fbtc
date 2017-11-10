@@ -14,8 +14,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 })
 /** AssociadoList component*/
-export class AssociadoListComponent implements OnInit
-{
+export class AssociadoListComponent implements OnInit {
     title: string = 'Listagem de associados';
     subTitle: string = 'Selecione um associado:';
 
@@ -23,10 +22,9 @@ export class AssociadoListComponent implements OnInit
 
     associados: Associado[];
     selectedAssociado: Associado;
-        
+
     private selectedId: any;
-    
-    /** AssociadoList ctor */
+
     constructor(
         private service: AssociadoService,
         private router: Router,
@@ -34,15 +32,11 @@ export class AssociadoListComponent implements OnInit
     ) { }
 
     getAssociados(): void {
-        this.service.getAssociados().then(associados => this.associados = associados);
+        this.service.getListAssociados().then(associados => this.associados = associados);
     }
-    
+
     /** Called by Angular after AssociadoList component initialized */
     ngOnInit() {
-        this.associado$ = this.route.paramMap.switchMap((params: ParamMap) => {
-            this.selectedId = params.get('AssociadoId');
-            return this.service.getAssociados();
-        });
         //return this.getAssociados();
     }
 
