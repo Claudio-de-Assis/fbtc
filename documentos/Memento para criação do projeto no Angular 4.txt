@@ -1,0 +1,7 @@
+Criando um projeto Angular
+
+através do console CMD do Windows:
+
+passo 1: Criar o projeto:
+--> na raiz da pasta os ficam todos os projeto, digitar: ng new "nome do projeto"
+

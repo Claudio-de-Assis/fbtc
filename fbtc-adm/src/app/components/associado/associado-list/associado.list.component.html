@@ -1,0 +1,55 @@
+<div id="base">
+    <div id="Central">
+        <div id="HeaderCentral">
+            <h3>{{ title }}</h3>
+        </div>
+        <div id="BodyCentral">
+            <div id="LineBodyCentral">
+                <div id="L1C1">
+                    Nome:<br>
+                    <input [(ngModel)]="editNome" placeholder="Nome" size="70px" maxlength="100" required/>
+                </div>
+                <div id="L1C2">
+                    CPF:<br>
+                    <input [(ngModel)]="editCPF" placeholder="CPF" size="15px" maxlength="15"/>
+                </div>
+                <div id="L2C1">
+                    E-Mail:<br>
+                    <input [(ngModel)]="editEMail" placeholder="E-Mail" size="70px" maxlength="100" type="email" required/>
+                </div>
+                <div id="L2C2">
+                    Sexo:<br>
+                    <select required
+                        [(ngModel)]="editSexo" name="Sexo" #sexo="ngModel">
+                        <option *ngFor="let sexo of lstSexo" [value]="sexo">{{sexo}}</option>
+                    </select>
+                </div>
+                <div id="L2C3">
+                    ATC:<br>
+                    <select required
+                        [(ngModel)]="editATC" name="ATC" #atc="ngModel">
+                        <option *ngFor="let ATC of lstAtc" [value]="ATC">{{ATC}}</option>
+                    </select>
+                </div>                        
+                <div id="L3C1">
+                    CRP:<br>
+                    <input [(ngModel)]="editCRP" placeholder="CRP" size="15px" maxlength="15"/>
+                </div> 
+                <div id="L4C1">
+                        <button (click)="gotoBuscarAssociado()">Pesquisar</button>
+                        <button (click)="gotoNovoAssociado()">Novo</button>
+                </div>
+                <div id="L5C1">
+                    <ul class="associados">
+                        <li *ngFor="let associado of associado$ | async"
+                            [class.selected]="associado.AssociadoId === selectedId">
+                            <a [routerLink]="['/Associado', associado.AssociadoId]">
+                                <span class="badge">{{ associado.AssociadoId }}</span>{{ associado.Nome }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>            
+    </div>
+</div>

@@ -1,7 +1,7 @@
 ﻿export class Endereco {
     EnderecoId: number;
     PessoaId: number;
-    Endereco: string;
+    Logradouro: string;
     Numero: string;
     Complemento: string;
     Bairro: string;

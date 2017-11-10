@@ -14,5 +14,7 @@ export class Associado extends Pessoa {
     Certificado: boolean;
     DtCertificacao: Date;
     DivulgarContato: boolean;
-    TipoFormacao: string;
+    TipoFormaContato: string;
+    IntegraDiretoria: boolean;
+    IntegraConfi: boolean;
 }

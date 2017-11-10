@@ -8,5 +8,8 @@ namespace EntityLayer
 {
     public class TipoPublico
     {
+        public virtual int TipoPessoaId { get; set; }
+        public virtual string Nome { get; set; }
+        public virtual bool Ativo { get; set; }
     }
 }
