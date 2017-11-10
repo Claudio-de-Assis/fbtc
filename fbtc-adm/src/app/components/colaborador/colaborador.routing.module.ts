@@ -18,4 +18,6 @@ const colaboradorRoutes: Routes = [
     ]
 })
 
-export class ColaboradorRoutingModule{}
+export class ColaboradorRoutingModule {
+
+}

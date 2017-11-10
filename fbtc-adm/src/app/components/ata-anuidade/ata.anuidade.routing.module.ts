@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
 @NgModule({})
-export class AtaAnuidadeRoutingModule
-{
+export class AtaAnuidadeRoutingModule {
 }

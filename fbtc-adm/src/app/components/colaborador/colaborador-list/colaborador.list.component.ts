@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'colaborador-list',
+  selector: 'app-colaborador-list',
   templateUrl: './colaborador.list.component.html',
   styleUrls: ['./colaborador.list.component.css']
 })

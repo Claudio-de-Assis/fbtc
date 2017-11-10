@@ -7,28 +7,27 @@ import { AssociadoService } from '../../shared/services/associado.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
-    selector: 'associado-list',
+    selector: 'app-associado-list',
     templateUrl: './associado.list.component.html',
     styleUrls: ['./associado.list.component.css'],
     providers: [AssociadoService]
 
 })
 /** AssociadoList component*/
-export class AssociadoListComponent implements OnInit
-{
-    lstSexo = ['Masculino','Feminino'];
+export class AssociadoListComponent implements OnInit {
+
+    lstSexo = ['Masculino', 'Feminino'];
     lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
 
-    title: string = 'Consulta de Associados';
+    title = 'Consulta de Associados';
 
     associado$: Observable<Associado[]>;
 
     associados: Associado[];
-    
-    private selectedAssociado : Associado;
+    private selectedAssociado: Associado;
 
     private selectedId: number;
-    
+
     /** AssociadoList ctor */
     constructor(
         private service: AssociadoService,
@@ -39,7 +38,7 @@ export class AssociadoListComponent implements OnInit
     getAssociados(): void {
         this.service.getAssociados().then(associados => this.associados = associados);
     }
-    
+
     /** Called by Angular after AssociadoList component initialized */
     ngOnInit() {
         this.associado$ = this.route.paramMap.switchMap((params: ParamMap) => {
@@ -53,10 +52,8 @@ export class AssociadoListComponent implements OnInit
     }
 
     gotoNovoAssociado() {
-        this.router.navigate(['/Associado',0]);
+        this.router.navigate(['/Associado', 0]);
     }
 
-    gotoBuscarAssociado() {
-        
-    }
+    gotoBuscarAssociado() { }
 }

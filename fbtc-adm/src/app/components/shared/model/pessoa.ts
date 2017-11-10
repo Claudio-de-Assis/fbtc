@@ -1,4 +1,4 @@
-import { Endereco } from "./endereco";
+import { Endereco } from './endereco';
 
 export class Pessoa {
     PessoaId: number;
@@ -11,6 +11,4 @@ export class Pessoa {
     PasswordHash: string;
     DtCadastro: Date;
     Ativo: Boolean;
-
-    //Enderecos: Endereco[];
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
 @NgModule({})
-export class EventoRoutingModule
-{
+export class EventoRoutingModule {
 }

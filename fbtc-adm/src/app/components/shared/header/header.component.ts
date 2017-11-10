@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 
 @Component({
-    selector: 'shared-header',
-    templateUrl: './header.component.html' 
+    selector: 'app-shared-header',
+    templateUrl: './header.component.html',
 })
 
 export class HeaderComponent {

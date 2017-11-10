@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ata-anuidade-list',
+  selector: 'app-ata-anuidade-list',
   templateUrl: './ata.anuidade.list.component.html',
   styleUrls: ['./ata.anuidade.list.component.css']
 })

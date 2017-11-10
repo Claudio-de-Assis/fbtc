@@ -7,32 +7,31 @@ import { AssociadoService } from '../../shared/services/associado.service';
 import { Associado } from '../../shared/model/associado';
 
 @Component({
-    selector: 'associado-form',
+    selector: 'app-associado-form',
     templateUrl: './associado.form.component.html',
     styleUrls: ['./associado.form.component.css']
 })
 /** AssociadoForm component*/
-export class AssociadoFormComponent implements OnInit
-{
-    lstSexo = ['Masculino','Feminino'];
+export class AssociadoFormComponent implements OnInit {
+
+    lstSexo = ['Masculino', 'Feminino'];
     lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
-    lstTipoContato=['E-Mail','Celular','Endereço','Todos'];
-    lstTipoPublico=['Profissional - Associado','Estudante de Pós - Associado','Estudante - Associado'];
-    lstSimNao=['Sim','Não'];
+    lstTipoContato= ['E-Mail', 'Celular', 'Endereço', 'Todos'];
+    lstTipoPublico= ['Profissional - Associado', 'Estudante de Pós - Associado', 'Estudante - Associado'];
+    lstSimNao= ['Sim', 'Não'];
 
-    
     private selectedId: any;
-    
-    title: string = 'Dados do Associado - Edição';
 
-    @Input() associado2 : Associado;
+    title: 'Dados do Associado - Edição';
+
+    @Input() associado2: Associado;
 
     associado$: Observable<Associado>;
 
     associado: Associado;
-    
+
     editAssociadoId: number = 0;
-    editNome: string = "";
+    editNome: string = '';
     editDtNascimento: Date;
     editEMail: string;
     editSexo: string = '';
@@ -71,10 +70,10 @@ export class AssociadoFormComponent implements OnInit
     /** Called by Angular after AssociadoForm component initialized */
     ngOnInit() {
         this.associado$ = this.route.paramMap
-            .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get('id'))); 
-           
-            this.associado$.subscribe((associado: Associado)=>{this.associado=associado});
-            
+            .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get('id')));
+
+            this.associado$.subscribe((associado: Associado) => {this.associado = associado});
+
             this.editAssociadoId = this.associado.AssociadoId;
             this.editNome = this.associado.Nome;
             this.editDtNascimento = this.associado.DtNascimento;
@@ -88,21 +87,21 @@ export class AssociadoFormComponent implements OnInit
             this.editTipoId = this.associado.TipoPublicoId;
             this.editCRP = this.associado.Crp;
             this.editCRM = this.associado.Crm;
-            this.editNomeInstFormacao = this.associado.NomeInsFormacao
+            this.editNomeInstFormacao = this.associado.NomeInsFormacao;
             this.editDtCadastro = this.associado.DtCadastro;
             this.editCertificado = this.associado.Certificado;
             this.editDtCertificacao = this.associado.DtCertificacao;
             this.editDivulgarContato = this.associado.DivulgarContato;
             this.editTipoFormaContato = this.associado.TipoFormaContato;
-            this.editIntegraDiretoria = this.associado.IntegraDiretoria
+            this.editIntegraDiretoria = this.associado.IntegraDiretoria;
             this.editIntegraConfi = this.associado.IntegraConfi;
-            this.editCEP = "";
-            this.editEndereco = "";
-            this.editNumero = "";
-            this.editComplemento = "";
-            this.editBairro = "";
-            this.editCidade = "";
-            this.editEstado = "";
+            this.editCEP = '';
+            this.editEndereco = '';
+            this.editNumero = '';
+            this.editComplemento = '';
+            this.editBairro = '';
+            this.editCidade = '';
+            this.editEstado = '';
             this.editAtivo = true;
     }
 
@@ -116,7 +115,6 @@ export class AssociadoFormComponent implements OnInit
 
     save() {
         this.gotoAssociados();
-
     }
 
     excluir() {

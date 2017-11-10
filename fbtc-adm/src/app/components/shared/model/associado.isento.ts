@@ -1,4 +1,4 @@
-export class AssociadoIsento{
+export class AssociadoIsento {
     AssociadoIsentoId: number;
     DtCadastro: Date;
     AtaIsencaoId: number;
