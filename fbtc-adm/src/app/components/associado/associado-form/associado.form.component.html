@@ -1,0 +1,190 @@
+<div id="base">
+    <div id="Central">
+        <div id="HeaderCentral">
+        <h3>{{ title }}</h3>
+        </div>
+        <div id="BodyCentral">
+            <div id="LineBodyCentral">
+                <div id="L1C1">
+                    Nome:<br>
+                    <input [(ngModel)]="editNome" placeholder="Nome" size="70px" maxlength="100" required/>
+                </div>
+                <div id="L1C2">
+                    Data de Nascimento:<br>
+                    <input [(ngModel)]="editDtNascimento" placeholder="Data de Nascimento" size="13px" maxlength="10"/>
+                </div>
+                <div id="L1C3">
+                   <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
+                </div>
+                </div>
+            <div id="LineBodyCentral">
+                <div id="L2C1">
+                    E-Mail:<br>
+                    <input [(ngModel)]="editEMail" placeholder="E-Mail" size="70px" maxlength="100" type="email" required/>
+                </div>
+                <div id="L2C2">
+                    Sexo:<br>
+                    <select required
+                        [(ngModel)]="editSexo" name="Sexo" #sexo="ngModel">
+                        <option *ngFor="let sexo of lstSexo" [value]="sexo">{{sexo}}</option>
+                    </select>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+               <div id="L3C1">
+                    Celular:<br>
+                    <input [(ngModel)]="editCelular" placeholder="Celular" size="15px" maxlength="15" required/>
+                </div>
+                <div id="L3C2">
+                    CPF:<br>
+                    <input [(ngModel)]="editCPF" placeholder="CPF" size="15px" maxlength="15"/>
+                </div>
+                <div id="L3C3">
+                    RG:<br>
+                    <input [(ngModel)]="editRG" placeholder="RG" size="15px" maxlength="15"/>
+                </div>
+                <div id="L3C4">
+                    Matricula:<br>
+                    <input [(ngModel)]="editMatricula" placeholder="Matricula" size="15px"/>
+                </div>
+                <div id="L3C5">
+                    <button (click)="reenviarSenha()">Reenviar Senha</button>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L4C1">
+                    ATC:<br>
+                    <select required
+                    [(ngModel)]="editATC" name="ATC" #atc="ngModel">
+                    <option *ngFor="let ATC of lstAtc" [value]="ATC">{{ATC}}</option>
+                </select>
+            </div>
+                <div id="L4C2">
+                    Tipo:<br>
+                    <select required
+                    [(ngModel)]="editTipoId" name="TipoPublico" #tipoPublico="ngModel">
+                    <option *ngFor="let editTipoId of lstTipoPublico" [value]="editTipoId">{{editTipoId}}</option>
+                </select>
+                </div>
+                <div id="L4C3">
+                    CRP:<br>
+                    <input [(ngModel)]="editCRP" placeholder="CRP" size="15px" maxlength="15"/>
+                </div>
+                <div id="L4C4">
+                    CRM:<br>
+                    <input [(ngModel)]="editCRM" placeholder="CRM" size="15px" maxlength="15"/>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L5C1">
+                    Instituição de Formação:<br>
+                    <input [(ngModel)]="editNomeInstFormacao" placeholder="Insituição de Formação" size="70px" maxlength="100"/>
+                </div>
+                <div id="L5C2">
+                    Data Cadastro:<br>
+                    <input [(ngModel)]="editDtCadastro" placeholder="Data Cadastro" size="15px" maxlength="10"/>
+                </div>
+                <div id="L5C3">
+                        
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L6C1">
+                    Terapeuta Certificado:<br>
+                    <select required
+                    [(ngModel)]="editCertificado" name="Certificado" #certificado="ngModel">
+                    <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+                </select>
+                </div>
+                <div id="L6C2">
+                    Data  da Certificacao:<br>
+                    <input [(ngModel)]="editDtCertificacao" placeholder="Data da Certificacao" size="15px" maxlength="10" type="datetime"/>
+                </div>
+                <div id="L6C3">
+                    Autoriza divulgação do contato:<br>
+                    <select required
+                    [(ngModel)]="editDivulgarContato" name="DivulgarContato" #divulgarContato="ngModel">
+                    <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+                </select>
+                </div>
+                <div id="L6C4">
+                    Contato para divulgação:<br>
+                    <select required
+                    [(ngModel)]="editTipoFormaContato" name="TipoFormaContato" #tipoFormaContato="ngModel">
+                    <option *ngFor="let tipoFormaContato of lstTipoContato" [value]="tipoFormaContato">{{tipoFormaContato}}</option>
+                </select>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L7C1">
+                    CEP:<br>
+                    <input [(ngModel)]="editCEP" placeholder="CEP" size="15px" maxlength="9"/>
+                </div>
+                <div id="L7C2">
+                    Diretoria:<br>
+                    <select required
+                    [(ngModel)]="editIntegraDiretoria" name="Diretoria" #diretoria="ngModel">
+                    <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+                </select>
+                </div>
+                <div id="L7C3">
+                    CONFI:<br>
+                    <select required
+                    [(ngModel)]="editIntegraConfi" name="Confi" #confi="ngModel">
+                    <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+                </select>
+                </div>
+                <div id="L7C4">
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L8C1">
+                    Logradouro:<br>
+                    <input [(ngModel)]="editLogradouro" placeholder="Logradouro" size="70px" maxlength="100"/>
+                </div>
+                <div id="L8C2">
+                    Nº:<br>
+                    <input [(ngModel)]="editNumero" placeholder="Nº" size="5px" maxlength="10"/>
+                </div>
+                <div id="L8C3">
+                    Complemento:<br>
+                    <input [(ngModel)]="editComplemento" placeholder="Complemento" size="20px" maxlength="100"/>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L9C1">
+                    Bairro:<br>
+                    <input [(ngModel)]="editBairro" placeholder="Bairro" size="20px" maxlength="100"/>
+                </div>
+                <div id="L9C2">
+                    Cidade:<br>
+                    <input [(ngModel)]="editCidade" placeholder="Cidade" size="20px" maxlength="100"/>
+                </div>
+                <div id="L9C3">
+                    Estado:<br>
+                    <input [(ngModel)]="editEstado" placeholder="UF" size="5px" maxlength="2"/>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L10C1">
+                    Ativo:<br>
+                    <select required
+                    [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
+                    <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+                </select>
+                </div>
+                <div id="L10C2">
+    
+                </div>
+            </div>
+        </div>
+        <div id="FooterCentral">
+            <div id="FT1C1">
+               <button (click)="gotoAssociados()">Retornar</button>
+               <button (click)="save()">Salvar</button>
+               <button (click)="excluir()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+</div>

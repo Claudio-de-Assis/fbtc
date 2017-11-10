@@ -1,0 +1,11 @@
+C:\C-Projetos\fbtc\fbtc-web\bin\Debug\netcoreapp2.0\fbtc-web.deps.json
+C:\C-Projetos\fbtc\fbtc-web\bin\Debug\netcoreapp2.0\fbtc-web.runtimeconfig.json
+C:\C-Projetos\fbtc\fbtc-web\bin\Debug\netcoreapp2.0\fbtc-web.runtimeconfig.dev.json
+C:\C-Projetos\fbtc\fbtc-web\bin\Debug\netcoreapp2.0\fbtc-web.dll
+C:\C-Projetos\fbtc\fbtc-web\bin\Debug\netcoreapp2.0\fbtc-web.pdb
+C:\C-Projetos\fbtc\fbtc-web\obj\Debug\netcoreapp2.0\fbtc-web.csprojResolveAssemblyReference.cache
+C:\C-Projetos\fbtc\fbtc-web\obj\Debug\netcoreapp2.0\fbtc-web.csproj.CoreCompileInputs.cache
+C:\C-Projetos\fbtc\fbtc-web\obj\Debug\netcoreapp2.0\fbtc-web.AssemblyInfoInputs.cache
+C:\C-Projetos\fbtc\fbtc-web\obj\Debug\netcoreapp2.0\fbtc-web.AssemblyInfo.cs
+C:\C-Projetos\fbtc\fbtc-web\obj\Debug\netcoreapp2.0\fbtc-web.dll
+C:\C-Projetos\fbtc\fbtc-web\obj\Debug\netcoreapp2.0\fbtc-web.pdb
