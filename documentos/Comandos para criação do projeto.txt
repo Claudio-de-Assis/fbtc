@@ -387,3 +387,5 @@ added 806 packages in 209.723s
 C:\C-Projetos\fbtc\fbtc-web>start fbtc-web.csproj
 
 C:\C-Projetos\fbtc\fbtc-web>
+
+30

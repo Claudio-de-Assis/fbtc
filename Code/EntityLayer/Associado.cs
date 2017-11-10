@@ -22,7 +22,9 @@ namespace EntityLayer
         public virtual bool Certificado { get; set; }
         public virtual DateTime DtCertificacao { get; set; }
         public virtual bool DivulgarContato { get; set; }
-        public virtual string TipoFormacao { get; set; }
+        public virtual string TipoFormaContato { get; set; }
+        public virtual bool IntegraDiretoria { get; set; }
+        public virtual bool IntegraConfi { get; set; }
 
     }
 }
