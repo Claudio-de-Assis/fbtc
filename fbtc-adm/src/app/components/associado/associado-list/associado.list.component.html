@@ -40,14 +40,34 @@
                         <button (click)="gotoNovoAssociado()">Novo</button>
                 </div>
                 <div id="L5C1">
+                    <fieldset> 
+                        <legend>Listagem de Associados</legend>
+                        <div id="Lst">
+                        <div id="LstHeader">
+                            <div id="LstCol1">Nome</div><div id="LstCol2">E-Mail</div><div id="LstCol3">Telefone</div><div id="LstCol4">CPF</div><div id="LstCol5">Tipo Associado</div>
+                        </div>
+                        <div id="LstCenter">       
                     <ul class="associados">
                         <li *ngFor="let associado of associado$ | async"
                             [class.selected]="associado.AssociadoId === selectedId">
                             <a [routerLink]="['/Associado', associado.AssociadoId]">
-                                <span class="badge">{{ associado.AssociadoId }}</span>{{ associado.Nome }}
+                                <div id="LstCol1c"><span class="badge">{{ associado.AssociadoId}}</span>{{ associado.Nome}}</div>
+                                <div id="LstCol2c">{{associado.EMail}}</div>
+                                <div id="LstCol3c">{{associado.NrCelular}}</div>
+                                <div id="LstCol4c">{{associado.Cpf}}</div>
+                                <div id="LstCol5c">{{associado.TipoPublicoId}}</div>
                             </a>
                         </li>
                     </ul>
+                        </div>
+                        <div id="LstFooter">&nbsp;
+                                <button (click)="gotoPrimeiraPagina()">|<<</button>
+                                <button (click)="gotoPaginaAnterio()"><<</button>
+                                <button (click)="gotoProximaPagina()">>></button>
+                                <button (click)="gotoUltimaPagina()">>>|</button>
+                            </div>
+                    </div>
+                    </fieldset>
                 </div>
             </div>
         </div>            
