@@ -18,4 +18,9 @@ export class Associado extends Pessoa {
     TipoFormaContato: string;
     IntegraDiretoria: boolean;
     IntegraConfi: boolean;
+    NrTelDivulgacao: string;
+    ComprovanteAfiliacaoAtc: string;
+    Profissao: string;
+    Titulacao: string;
+
 }

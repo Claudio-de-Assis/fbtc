@@ -18,6 +18,8 @@ export class AssociadoListComponent implements OnInit {
 
     lstSexo = ['Masculino', 'Feminino'];
     lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
+    /* Tipos Aceitos: Psicólogo: 7, Médico: 8*/
+    lstProfissao= ['Médico', 'Psicólogo'];
 
     title = 'Consulta de Associados';
 

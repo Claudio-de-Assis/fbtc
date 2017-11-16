@@ -1,3 +1,52 @@
-<p>
-  colaborador-form works!
-</p>
+<div id="base">
+  <div id="Central">
+      <div id="HeaderCentral">
+      <h3>{{ title }}</h3>
+      </div>
+      <div id="BodyCentral">
+          <div id="LineBodyCentral">
+              <div id="L1C1">
+                  Nome:<br>
+                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
+              </div>
+              <div id="L1C2">
+                  Perfil:<br>
+                  <select required
+                    [(ngModel)]="editPerfil" name="Perfil" #sexo="ngModel">
+                    <option *ngFor="let perfil of lstPerfil" [value]="perfil">{{perfil}}</option>
+                </select>
+              </div>
+          </div>
+          <div id="LineBodyCentral">
+              <div id="L2C1">
+                  E-Mail:<br>
+                  <input [(ngModel)]="editEMail" size="70px" maxlength="100" type="email" required/>
+              </div>
+              <div id="L2C2">
+                Celular:<br>
+                <input [(ngModel)]="editCelular" size="15px" maxlength="15" required/>
+            </div>
+          </div>
+          <div id="LineBodyCentral">
+             <div id="L3C1">
+              Ativo:<br>
+              <select required
+                [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
+                <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+              </select>
+          </div>
+            <div id="L3C2">
+              <button (click)="reenviarSenha()">Reenviar Senha</button>
+            </div>
+          </div>
+      </div>
+      <div id="FooterCentral">
+          <div id="FT1C1">
+             <button (click)="gotoColaboradores()">Retornar</button>
+             <button (click)="save()">Salvar</button>
+             <button (click)="excluir()">Excluir</button>
+          </div>
+      </div>
+  </div>
+
+</div>

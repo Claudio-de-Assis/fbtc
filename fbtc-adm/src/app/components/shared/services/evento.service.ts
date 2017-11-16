@@ -1,22 +1,35 @@
-import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
-import { Associado } from '../model/associado';
-import { Colaborador } from '../model/colaborador';
+import { Evento } from './../model/evento';
+import { EVENTOS } from './../mock/mock-evento';
 
 @Injectable()
 export class EventoService {
-    constructor(private http: Http) {
 
+    eventos$: Observable<Evento[]>;
+    evento: Evento;
+    resultado: string;
+
+/*  constructor(private http: Http) {*/
+    constructor() {
     }
 
-    getById(id: number) {
+    getListEventos() { return Observable.of(EVENTOS); }
 
-        // usando a API do EasyAgendamento para teste de conexão do serviço:
-        //        return this.http.get('http://localhost:54709/api/Pessoa/${id}')
-        //          .map(response => response.json() as PessoaEA)
-        //        .toPromise();
+    getEventos(): Promise<Evento[]> {
+        return Promise.resolve(EVENTOS);
+    }
 
+    getEventoById(id: number | string) {
+        return this.getListEventos()
+            .map(eventos => eventos.find(evento => evento.EventoId === +id));
+    }
+
+    SaveEvento (evento: Evento) {
+        this.resultado = 'Sucesso';
+        return this.resultado;
     }
 }

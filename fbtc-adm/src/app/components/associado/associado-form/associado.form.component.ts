@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
@@ -20,37 +20,47 @@ export class AssociadoFormComponent implements OnInit {
     lstTipoPublico= ['Profissional - Associado', 'Estudante de Pós - Associado', 'Estudante - Associado'];
     lstSimNao= ['Sim', 'Não'];
 
+    title: "Dados do Associado - Edição";
+
+    /* Tipos Aceitos: Psicólogo: 7, Médico: 8*/
+    lstProfissao= ['Médico', 'Psicólogo'];
+
+    /*Graduado: 1, Especialista: 2,Mestre: 3,Doutor: 4,Pós-Doutor: 5*/
+    lstTitulacao= ['Graduado', 'Especialista', 'Mestre', 'Doutor', 'Pós-Doutor'];
+
     private selectedId: any;
 
-    title: 'Dados do Associado - Edição';
-
-    @Input() associado2: Associado;
+    // @Input() associado2: Associado;
 
     associado$: Observable<Associado>;
 
     associado: Associado;
 
-    editAssociadoId: number = 0;
-    editNome: string = '';
+    editAssociadoId: number;
+    editNome: string;
     editDtNascimento: Date;
     editEMail: string;
-    editSexo: string = '';
+    editSexo: string;
     editCelular: string;
     editCPF: string;
     editRG: string;
     editMatricula: string;
-    editATC: number = 0;
-    editTipoId: number = 0;
+    editATC: number;
+    editTipoId: number;
     editCRP: string;
     editCRM: string;
     editNomeInstFormacao: string;
     editDtCadastro: Date;
-    editCertificado: boolean = false;
+    editCertificado: boolean;
     editDtCertificacao: Date;
-    editDivulgarContato: boolean = false;
-    editTipoFormaContato: string = '';
-    editIntegraDiretoria: boolean = true;
-    editIntegraConfi: boolean = true;
+    editDivulgarContato: boolean;
+    editTipoFormaContato: string;
+    editIntegraDiretoria: boolean;
+    editIntegraConfi: boolean;
+    editNrTelDivilgacao: string;
+    editComprovanteAfiliacaoAtc: string;
+    editProfissao: string;
+    editTitulacao: string;
     editCEP: string;
     editEndereco: string;
     editNumero: string;
@@ -58,7 +68,7 @@ export class AssociadoFormComponent implements OnInit {
     editBairro: string;
     editCidade: string;
     editEstado: string;
-    editAtivo: boolean = true;
+    editAtivo: boolean;
 
     /** AssociadoFrm ctor */
     constructor(
@@ -74,27 +84,31 @@ export class AssociadoFormComponent implements OnInit {
 
             this.associado$.subscribe((associado: Associado) => {this.associado = associado});
 
-            this.editAssociadoId = this.associado.AssociadoId;
-            this.editNome = this.associado.Nome;
-            this.editDtNascimento = this.associado.DtNascimento;
-            this.editEMail = this.associado.EMail;
-            this.editSexo = this.associado.Sexo;
-            this.editCelular = this.associado.NrCelular;
-            this.editCPF = this.associado.Cpf;
-            this.editRG = this.associado.Rg;
-            this.editMatricula = this.associado.NrMatricula;
-            this.editATC = this.associado.AtcId;
-            this.editTipoId = this.associado.TipoPublicoId;
-            this.editCRP = this.associado.Crp;
-            this.editCRM = this.associado.Crm;
-            this.editNomeInstFormacao = this.associado.NomeInsFormacao;
-            this.editDtCadastro = this.associado.DtCadastro;
-            this.editCertificado = this.associado.Certificado;
-            this.editDtCertificacao = this.associado.DtCertificacao;
-            this.editDivulgarContato = this.associado.DivulgarContato;
-            this.editTipoFormaContato = this.associado.TipoFormaContato;
-            this.editIntegraDiretoria = this.associado.IntegraDiretoria;
-            this.editIntegraConfi = this.associado.IntegraConfi;
+            this.editAssociadoId = this.associado ? this.associado.AssociadoId : 0;
+            this.editNome = this.associado ?  this.associado.Nome : '';
+            this.editDtNascimento = this.associado ?  this.associado.DtNascimento : null;
+            this.editEMail = this.associado ?  this.associado.EMail : '';
+            this.editSexo = this.associado ?  this.associado.Sexo : '';
+            this.editCelular = this.associado ?  this.associado.NrCelular : '';
+            this.editCPF = this.associado ?  this.associado.Cpf : '';
+            this.editRG = this.associado ?  this.associado.Rg : '';
+            this.editMatricula = this.associado ?  this.associado.NrMatricula : '';
+            this.editATC = this.associado ?  this.associado.AtcId : 0;
+            this.editTipoId = this.associado ?  this.associado.TipoPublicoId  : 0;
+            this.editCRP = this.associado ?  this.associado.Crp : '';
+            this.editCRM = this.associado ?  this.associado.Crm : '';
+            this.editNomeInstFormacao = this.associado ?  this.associado.NomeInsFormacao : '';
+            this.editDtCadastro = this.associado ?  this.associado.DtCadastro : null;
+            this.editCertificado = this.associado ?  this.associado.Certificado : true;
+            this.editDtCertificacao = this.associado ?  this.associado.DtCertificacao : null;
+            this.editDivulgarContato = this.associado ?  this.associado.DivulgarContato : false;
+            this.editTipoFormaContato = this.associado ?  this.associado.TipoFormaContato  : '';
+            this.editIntegraDiretoria = this.associado ?  this.associado.IntegraDiretoria : false;
+            this.editIntegraConfi = this.associado ?  this.associado.IntegraConfi : false ;
+            this.editNrTelDivilgacao = this.associado ? this.associado.NrTelDivulgacao : '';
+            this.editComprovanteAfiliacaoAtc = this.associado ? this.associado.ComprovanteAfiliacaoAtc : '';
+            this.editProfissao = this.associado ? this.associado.Profissao : '';
+            this.editTitulacao = this.associado ? this.associado.Titulacao : '';
             this.editCEP = '';
             this.editEndereco = '';
             this.editNumero = '';

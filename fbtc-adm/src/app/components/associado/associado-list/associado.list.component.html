@@ -35,6 +35,18 @@
                     CRP:<br>
                     <input [(ngModel)]="editCRP" placeholder="CRP" size="15px" maxlength="15"/>
                 </div> 
+                <div id="L3C2">
+                    CRM:<br>
+                    <input [(ngModel)]="editCRP" placeholder="CRP" size="15px" maxlength="15"/>
+                </div> 
+                <div id="L3C3">
+                    Profissão:<br>
+                    <select required
+                    [(ngModel)]="editATCProfissao" name="profissao" #profissao="ngModel">
+                    <option *ngFor="let PROFISSAO of lstProfissao" [value]="PROFISSAO">{{ PROFISSAO }}</option>
+                </select>
+            </div> 
+
                 <div id="L4C1">
                         <button (click)="gotoBuscarAssociado()">Pesquisar</button>
                         <button (click)="gotoNovoAssociado()">Novo</button>

@@ -7,6 +7,7 @@ import { ColaboradorFormComponent } from '../colaborador/colaborador-form/colabo
 const colaboradorRoutes: Routes = [
     { path: 'Colaborador', component: ColaboradorListComponent },
     { path: 'Colaborador/:id', component: ColaboradorFormComponent },
+    { path: 'ColaboradorNovo', component: ColaboradorFormComponent },
 ];
 
 @NgModule({
