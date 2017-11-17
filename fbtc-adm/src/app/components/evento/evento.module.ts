@@ -6,6 +6,7 @@ import { EventoService } from './../shared/services/evento.service';
 import { TipoPublicoService } from './../shared/services/tipo-publico.service';
 import { EventoListComponent } from './evento-list/evento.list.component';
 import { EventoFormComponent } from './evento-form/evento.form.component';
+import { EventoPreviewComponent } from './evento-preview/evento-preview.component';
 import { EventoRoutingModule } from './evento.routing.module';
 
 @NgModule({
@@ -16,11 +17,13 @@ import { EventoRoutingModule } from './evento.routing.module';
   ],
   declarations: [
     EventoListComponent,
-    EventoFormComponent
+    EventoFormComponent,
+    EventoPreviewComponent
   ],
   exports: [
     EventoListComponent,
-    EventoFormComponent
+    EventoFormComponent,
+    EventoPreviewComponent
   ],
   providers: [
     EventoService,

@@ -23,7 +23,7 @@ export class IsencaoEventoFormComponent implements OnInit {
 
   isencao: Isencao;
 
-  editIsecaoId: number;
+  editIsencaoId: number;
   editAnuidadeId: number;
   editEventoId: number;
   editDescricao: string;
@@ -46,7 +46,7 @@ export class IsencaoEventoFormComponent implements OnInit {
 
     this.isencao$.subscribe((isencao: Isencao) => {this.isencao = isencao});
 
-    this.editIsecaoId = this.isencao ? this.isencao.IsencaoId : 0;
+    this.editIsencaoId = this.isencao ? this.isencao.IsencaoId : 0;
     this.editAnuidadeId = this.isencao ? this.isencao.AnuidadeId : 0;
     this.editEventoId = this.isencao ? this.isencao.EventoId : 0;
     this.editDescricao = this.isencao ? this.isencao.Descricao : '';

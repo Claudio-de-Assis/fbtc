@@ -29,7 +29,12 @@ export class EventoService {
     }
 
     SaveEvento (evento: Evento) {
-        this.resultado = 'Sucesso';
+        this.resultado = 'Registro salvo com Sucesso';
+        return this.resultado;
+    }
+
+    DeleteEvento (id: number | string) {
+        this.resultado = 'Registro excluído com Sucesso';
         return this.resultado;
     }
 }

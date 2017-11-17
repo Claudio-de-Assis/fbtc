@@ -15,7 +15,7 @@ import { EventoService } from './../../shared/services/evento.service';
 export class EventoListComponent implements OnInit {
 
   lstAno = [2018, 2017, 2016];
-  lstTipoEvento = ['Certificação', 'Congresso', 'Workshop Internacional', 'Workshop Nacional'];
+  lstTipoEvento = ['Congresso Brasileiro', 'Workshop Internacional'];
 
   title = 'Consulta de Eventos';
 
@@ -35,13 +35,6 @@ export class EventoListComponent implements OnInit {
     this.service.getEventos().then(eventos => this.eventos = eventos);
   }
 
-  ngOnInit() {
-      this.evento$ = this.route.paramMap.switchMap((params: ParamMap) => {
-        this.selectedId = +params.get('Id');
-        return this.service.getEventos();
-    });
-  }
-
   onSelect(evento: Evento): void {
     this.selectedEvento = evento;
   }
@@ -51,4 +44,11 @@ export class EventoListComponent implements OnInit {
   }
 
   gotoBuscarEvento() { }
+
+  ngOnInit() {
+    this.evento$ = this.route.paramMap.switchMap((params: ParamMap) => {
+      this.selectedId = +params.get('Id');
+      return this.service.getEventos();
+    });
+  }
 }

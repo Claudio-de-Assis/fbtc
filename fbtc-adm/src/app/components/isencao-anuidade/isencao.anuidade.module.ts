@@ -7,18 +7,18 @@ import { IsencaoAnuidadeService } from './../shared/services/isencao-anuidade.se
 import { IsencaoAnuidadeFormComponent } from './isencao-anuidade-form/isencao.anuidade.form.component';
 import { IsencaoAnuidadeListComponent } from './isencao-anuidade-list/isencao.anuidade.list.component';
 import { IsencaoAnuidadeRoutingModule } from './isencao.anuidade.routing.module';
-// import { AssociadoIsencaoListComponent } from './../associado/associado-isencao-list/associado-isencao-list.component';
+import { AssociadoIsencaoModule } from './../associado-isencao/associado-isencao.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    AssociadoIsencaoModule,
     IsencaoAnuidadeRoutingModule,
   ],
   declarations: [
     IsencaoAnuidadeFormComponent,
     IsencaoAnuidadeListComponent,
-    // AssociadoIsencaoListComponent
   ],
     exports: [
     IsencaoAnuidadeFormComponent,

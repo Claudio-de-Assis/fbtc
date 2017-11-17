@@ -25,6 +25,12 @@ export class AssociadoIsencaoListComponent implements OnInit {
 
   private selectedId: number;
 
+  editAssociadoId: number;
+  editNome: string;
+  editCPF: string;
+  editCRP: string;
+  editCRM: string;
+
   /** AssociadoList ctor */
   constructor(
       private service: AssociadoService,
@@ -49,5 +55,6 @@ export class AssociadoIsencaoListComponent implements OnInit {
   }
 
   gotoBuscarAssociado() { }
+  
 
 }

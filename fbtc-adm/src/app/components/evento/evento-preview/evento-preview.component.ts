@@ -9,17 +9,13 @@ import { Evento } from '../../shared/model/evento';
 import { EventoService } from '../../shared/services/evento.service';
 
 @Component({
-  selector: 'app-evento-form',
-  templateUrl: './evento.form.component.html',
-  styleUrls: ['./evento.form.component.css']
+  selector: 'app-evento-preview',
+  templateUrl: './evento-preview.component.html',
+  styleUrls: ['./evento-preview.component.css']
 })
-export class EventoFormComponent implements OnInit {
+export class EventoPreviewComponent implements OnInit {
 
-  lstAno = [2018, 2017, 2016];
-  lstTipoEvento = ['Congresso Brasileiro', 'Workshop Internacional'];
-  lstSimNao= ['Sim', 'Não'];
-
-  title: 'Dados do Evento';
+  title: 'Dados do Evento - Preview';
 
   private selectedId: any;
 
@@ -42,8 +38,6 @@ export class EventoFormComponent implements OnInit {
   editAtivo: boolean;
   editNomeFoto: string;
 
-  msgService: string;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -51,28 +45,8 @@ export class EventoFormComponent implements OnInit {
     private service: EventoService,
   ) { }
 
-  getTiposPublicos(): void {
-    this.serviceTP.getTiposPublicos().then(tiposPublicos => this.tiposPublicos = tiposPublicos);
-  }
-
-  gotoEventos() {
-    let eventoId = this.evento ? this.evento.EventoId : null;
-    this.router.navigate(['/Evento', { id: eventoId, foo: 'foo' }]);
-  }
-
-  gotoSaveEvento() {
-    alert(this.service.SaveEvento(this.evento));
-  }
-
-  gotoDeleteEvento() {
-    if (confirm('Confirma a exclusão do registro?')) {
-      alert(this.service.DeleteEvento(this.editEventoId));
-      this.gotoEventos();
-    }
-  }
-
-  gotoPreviewAnuncio() {
-    this.router.navigate(['/EventoPreview', this.editEventoId ]);
+  gotoEvento() {
+    this.router.navigate(['/Evento', this.editEventoId]);
   }
 
   ngOnInit() {
