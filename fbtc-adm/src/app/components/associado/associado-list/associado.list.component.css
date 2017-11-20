@@ -7,7 +7,7 @@
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
-    width: 15em;
+    width: 60em;
 }
 
 .associados li {
@@ -73,7 +73,7 @@
 #BodyCentral{
     position:relative;
     width: 100%;
-    height: 555px;
+    height: 630px;
     float: left;
     border-bottom: solid 1px;
     border-top: solid 1px;
@@ -110,7 +110,16 @@
     padding: 3px;
     vertical-align: left;
 }
-#L3C1,#L4C1{
+#L3C1,#L3C2,#L3C3{
+    position: relative;
+    width: 200;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+
+#L4C1{
     position: relative;
     width: 100%;
     height: 50px;
@@ -124,4 +133,96 @@
     height: 315px;
     float: left;
     padding: 3px;
+}
+
+#ListC1{
+    width: 200px;
+    position: relative;
+    float: left;
+}
+#Lst{
+    width: 100%;
+    position: relative;
+    float: left;
+    border: solid 1px;
+}
+
+#LstHeader{
+    width: 100%;
+    height: 20px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    float: left;
+    background-color: #CFD8DC;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#LstCenter{
+    width: 100%;
+    position: relative;
+    float: left;
+}
+#LstFooter{
+    width: 100%;
+    height: 25px;
+    vertical-align: middle;
+    position: relative;
+    float: left;
+    background-color: #CFD8DC ;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#LstCol1{
+    width: 220px;
+    position: relative;
+    float: left;
+}
+
+#LstCol2{
+    width: 230px;
+    position: relative;
+    float: left;
+}
+#LstCol3{
+    width: 130px;
+    position: relative;
+    float: left;
+}
+#LstCol4{
+    width: 150px;
+    position: relative;
+    float: left;
+}
+#LstCol5{
+    width: 120px;
+    position: relative;
+    float: left;
+}
+#LstCol1c{
+    width: 240px;
+    position: relative;
+    float: left;
+}
+
+#LstCol2c{
+    width: 200px;
+    position: relative;
+    float: left;
+}
+#LstCol3c{
+    width: 140px;
+    position: relative;
+    float: left;
+}
+#LstCol4c{
+    width: 170px;
+    position: relative;
+    float: left;
+}
+#LstCol5c{
+    width: 120px;
+    position: relative;
+    float: left;
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
 @NgModule({})
-export class RecebimentoAnuidadeRoutingModule
-{
+export class RecebimentoAnuidadeRoutingModule {
 }

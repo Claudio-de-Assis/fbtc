@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { Http } from "@angular/http";
+import { Http } from '@angular/http';
 import 'rxjs/Rx';
 
-import { Associado } from "../model/associado";
-import { PessoaEA } from "../model/pessoaEA";
-import { Observable } from "rxjs/Observable";
+import { Associado } from '../model/associado';
+import { PessoaEA } from '../model/pessoaEA';
+import { Observable } from 'rxjs/Observable';
 import { ASSOCIADOS } from '../mock/mock-associados';
 
 
@@ -14,17 +14,15 @@ export class AssociadoService {
 
     associado$: Observable<Associado[]>;
     associado: Associado;
-    
+
     constructor() {
-    } 
+    }
 
     getListAssociados() { return Observable.of(ASSOCIADOS); }
 
     getAssociados(): Promise<Associado[]> {
         return Promise.resolve(ASSOCIADOS);
     }
-
-    //getAssociadoById(id: number | string) {
 
     getAssociadoById(id: number | string) {
         return this.getListAssociados()

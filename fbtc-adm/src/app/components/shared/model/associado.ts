@@ -1,14 +1,14 @@
-import { Pessoa } from "./pessoa";
+import { Pessoa } from './pessoa';
 
 export class Associado extends Pessoa {
-    
+
     AssociadoId: number;
     PessoaId: number;
     AtcId: number;
     TipoPublicoId: number;
     Cpf: string;
     Rg: string;
-    NrMatricula: string
+    NrMatricula: string;
     Crp: string;
     Crm: string;
     NomeInsFormacao: string;
@@ -18,4 +18,9 @@ export class Associado extends Pessoa {
     TipoFormaContato: string;
     IntegraDiretoria: boolean;
     IntegraConfi: boolean;
+    NrTelDivulgacao: string;
+    ComprovanteAfiliacaoAtc: string;
+    Profissao: string;
+    Titulacao: string;
+
 }

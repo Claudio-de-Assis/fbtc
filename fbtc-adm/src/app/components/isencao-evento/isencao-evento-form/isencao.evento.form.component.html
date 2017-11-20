@@ -1,0 +1,42 @@
+<div id="base">
+        <div id="Central">
+            <div id="HeaderCentral">
+                <h3>{{ title }}</h3>
+            </div>
+            <div id="BodyCentral">
+                <div id="LineBodyCentral">
+                  <div id="L1C1">
+                     Nome:<br>
+                     <input [(ngModel)]="editDescricao" size="70px" maxlength="100" required/>
+                  </div>
+                  <div id="L1C2">
+                    Data da ata:<br>
+                    <input [(ngModel)]="editDtAta" size="20px" maxlength="100" required type="Date"/>
+                  </div>  
+                  <div id="L1C3">
+                        Ano da Isenção:<br>
+                        <select required
+                          [(ngModel)]="editAno" name=ano #sexo="ngModel">
+                          <option *ngFor="let ano of lstAno" [value]="ano">{{ano}}</option>
+                      </select>
+                  </div>
+               </div>
+               <div id="LineBodyCentral">
+                    <div id="L2C1">
+                            Evento:<br>
+                            <input [(ngModel)]="editTitulo" size="70px" maxlength="100" required/>
+                    </div>
+               </div>                    
+               <div id="LineBodyApp">
+                   <app-associado-isencao-list></app-associado-isencao-list>
+               </div>
+           </div>
+           <div id="FooterCentral">
+                <div id="FT1C1">
+                   <button (click)="gotoEventos()">Retornar</button>
+                   <button (click)="save()">Salvar</button>
+                   <button (click)="excluir()">Excluir</button>
+                </div>
+           </div>
+        </div>
+      </div>

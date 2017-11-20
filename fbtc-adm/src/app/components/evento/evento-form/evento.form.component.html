@@ -1,3 +1,103 @@
-<p>
-  evento-form works!
-</p>
+<div id="base">
+  <div id="Central">
+      <div id="HeaderCentral">
+      <h3>{{ title }}Dados do Evento</h3>
+      </div>
+      <div id="BodyCentral">
+          <div id="LineBodyCentral">
+              <div id="L1C1">
+                  Titulo:<br>
+                  <input [(ngModel)]="editTitulo" size="70px" maxlength="100" required/>
+              </div>
+              <div id="L1C2">
+                  Código:<br>
+                  <input [(ngModel)]="editCodigo" size="13px" maxlength="10"/>
+              </div>
+              <div id="L1C3">
+                 <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
+              </div>
+          </div>
+          <div id="LineBodyCentral">
+              <div id="L2C1">
+                  Data de Início:<br>
+                  <input [(ngModel)]="editDtInicio" size="15px" maxlength="10" type="Date" required/>
+              </div>
+              <div id="L2C2">
+                  Data de Término:<br>
+                  <input [(ngModel)]="editDtTermino" size="15px" maxlength="10" type="Date" required/>
+              </div>
+              <div id="L2C3">
+                Término Inscrições:<br>
+                <input [(ngModel)]="editDtTerminoInscricao" size="15px" maxlength="10" type="Date" required/>
+              </div>
+              <div id="L2C4">
+                Ano:<br>
+                <select required
+                    [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
+                    <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
+                </select>
+             </div>
+             <div id="L2C5">
+                Tipo Evento:<br>
+                <select required
+                    [(ngModel)]="editTipoEvento" name="TipoEvento" #tipoEvento="ngModel">
+                    <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
+                </select>
+             </div>
+          </div>
+          <div id="LineBodyCentral">
+              <div id="L4C1">
+                  Descrição:<br>
+                  <textarea [(ngModel)]="editDescricao" rows="15" cols="137"></textarea>
+              </div>
+          </div>
+          <div id="LineBodyCentral">
+              <div id="L5C1">
+                <fieldset> 
+                    <legend>Faixas de Preços</legend>
+                    <div id="Lst">
+                        <div id="LstHeader">
+                         <div id="LstCol1">Tipo de Público</div><div id="LstCol2">Valor</div><div id="LstCol3">Ativo</div>
+                        </div>
+                    <div id="LstCenter">       
+                        <ul class="associados">
+                            <li *ngFor="let tipoPublico of tipoPublico$ | async">
+                                <div id="LstCol1c"><span class="badge">{{ tipoPublico.TipoPublicoId }}</span>{{ tipoPublico.Nome }}</div>
+                                <div id="LstCol2c"><input [(ngModel)]="editValor" size="15px" maxlength="10" required/></div>
+                                <div id="LstCol3c"><input type="checkbox"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </fieldset>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+              <div id="L6C1">
+                  Aceita Isenção por ata de reunião:<br>
+                  <select required
+                    [(ngModel)]="editAceitaIsencaoAta" name="aceitaIsencaoAta" #aceitaIsencaoAta="ngModel">
+                    <option *ngFor="let aceitaIsencaoAta of lstSimNao" [value]="aceitaIsencaoAta">{{ aceitaIsencaoAta }}</option>
+                  </select>
+              </div>
+              <div id="L6C2">
+                Aceita Isenção por ata de reunião:<br>
+                <select required
+                  [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
+                  <option *ngFor="let ativo of lstSimNao" [value]="ativo">{{ ativo }}</option>
+                </select>
+            </div>
+            <div id="L6C3">
+                <button (click)="gotoPreviewAnuncio()">Preview do Anúncio</button>
+            </div>
+        </div>
+      </div>
+      <div id="FooterCentral">
+          <div id="FT1C1">
+             <button (click)="gotoPreviewAnuncio()">Retornar</button>
+             <button (click)="gotoSaveEvento()">Salvar</button>
+             <button (click)="gotoDeleteEvento()">Excluir</button>
+            </div>
+      </div>
+  </div>
+</div>

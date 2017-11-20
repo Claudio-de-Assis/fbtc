@@ -1,0 +1,221 @@
+.selected {
+    background-color: #CFD8DC !important;
+    color: white;
+}
+
+.associados {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 60em;
+}
+
+.associados li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+}
+
+.associados li.selected:hover {
+    background-color: #BBD8DC !important;
+    color: white;
+}
+
+.associados li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+}
+
+.associados .text {
+    position: relative;
+    top: -3px;
+}
+
+.associados .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #607D8B;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+}
+
+#base{
+    width: 1000px;
+    height: 700px;
+    padding: 10px;
+}
+
+#Central{
+    position:relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+#HeaderCentral{
+    position:relative;
+    width: 100%;
+    height: 50px;
+    float: left;
+}
+#BodyCentral{
+    position:relative;
+    width: 100%;
+    height: 630px;
+    float: left;
+    border-bottom: solid 1px;
+    border-top: solid 1px;
+}
+#FooterCentral{
+    position:relative;
+    width: 100%;
+    height: 30px;
+    clear: both;
+    padding-top: 5px;
+}
+#L1C1,#L2C1 {
+    position: relative;
+    width: 600px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+#L1C2{
+    position: relative;
+    width: 250px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+
+#L2C2,#L2C3{
+    position: relative;
+    width: 125px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: left;
+}
+#L3C1,#L4C1{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+#L5C1{
+    position: relative;
+    width: 100%;
+    height: 315px;
+    float: left;
+    padding: 3px;
+}
+
+#ListC1{
+    width: 200px;
+    position: relative;
+    float: left;
+}
+#Lst{
+    width: 100%;
+    position: relative;
+    float: left;
+    border: solid 1px;
+}
+
+#LstHeader{
+    width: 100%;
+    height: 20px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    float: left;
+    background-color: #CFD8DC;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#LstCenter{
+    width: 100%;
+    position: relative;
+    float: left;
+}
+#LstFooter{
+    width: 100%;
+    height: 25px;
+    vertical-align: middle;
+    position: relative;
+    float: left;
+    background-color: #CFD8DC ;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#LstCol1{
+    width: 520px;
+    position: relative;
+    float: left;
+}
+
+#LstCol2{
+    width: 230px;
+    position: relative;
+    float: left;
+}
+#LstCol3{
+    width: 130px;
+    position: relative;
+    float: left;
+}
+#LstCol4{
+    width: 150px;
+    position: relative;
+    float: left;
+}
+#LstCol5{
+    width: 120px;
+    position: relative;
+    float: left;
+}
+#LstCol1c{
+    width: 528px;
+    position: relative;
+    float: left;
+}
+
+#LstCol2c{
+    width: 200px;
+    position: relative;
+    float: left;
+    text-align: center;
+}
+#LstCol3c{
+    width: 140px;
+    position: relative;
+    float: left;
+    text-align: center;
+}
+#LstCol4c{
+    width: 170px;
+    position: relative;
+    float: left;
+}
+#LstCol5c{
+    width: 120px;
+    position: relative;
+    float: left;
+}

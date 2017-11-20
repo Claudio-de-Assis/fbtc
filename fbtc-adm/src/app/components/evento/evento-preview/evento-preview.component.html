@@ -1,0 +1,87 @@
+<div id="base">
+  <div id="Central">
+      <div id="HeaderCentral">
+          <h3>{{ editTitulo }} - Preview</h3>
+      </div>
+      <div id="BodyCentral">
+          <div id="LineBodyCentral">
+              <div id="L1C1">
+                <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
+              </div>
+              <div id="L1C2">
+                <h5>Workshop internacional....</h5>
+              </div>
+          </div>
+          <div id="LineBodyCentral">
+              <div id="L2C1">
+                Código: {{ editCodigo }}
+            </div>
+          </div>
+          <div id="LineBodyCentral">
+              <div id="L3C1">
+                Workshop
+              </div>
+              <div id="L3C2">
+                de.....Ate....
+              </div>
+              <div id="L3C3">
+                <button (click)="gotoAdquirir()">Adquirir</button>
+              </div>
+            </div>
+            <div id="LineBodyCentral">
+              <div id="L4C1">
+                Congresso
+              </div>
+              <div id="L4C2">
+                de.....Ate....
+              </div>
+            </div>
+            <div id="LineBodyCentral">
+              <div id="L5C1">
+                Investimento:
+              </div>
+            </div>
+            <div id="LineBodyCentral">
+                <div id="L6C1">
+                    <div id="Lst">
+                        <div id="LstHeader">
+                         <div id="LstCol1">Tipo de Público</div><div id="LstCol2">Valor</div>
+                        </div>
+                    <div id="LstCenter">       
+                        <ul class="associados">
+                            <li *ngFor="let tipoPublico of tipoPublico$ | async">
+                                <div id="LstCol1c"><input type="radio"></div>  
+                                <div id="LstCol2c">{{ tipoPublico.Nome }}</div>
+                                <div id="LstCol3c">R$ 100,00</div>
+                                <div id="LstCol1c1">{{ tipoPublico.DescricaoValor }}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="LineBodyCentral">
+              <div id="L7C1">
+                  <fieldset> 
+                      <legend>Descrição do Evento</legend>
+                      <div id="DescEvento">
+                          O que é Lorem Ipsum?
+                          Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de
+                           impressos, e vem sendo utilizado desde o século XVI, quando um impressor
+                            desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de 
+                            modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao 
+                            salto para a editoração eletrônica, permanecendo essencialmente inalterado. 
+                            Se popularizou na década de 60, quando a Letraset lançou decalques contendo 
+                            passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a 
+                            softwares de editoração eletrônica como Aldus PageMaker.
+                      </div>
+                  </fieldset>
+              </div>
+          </div>
+      </div>
+      <div id="FooterCentral">
+          <div id="FT1C1">
+             <button (click)="gotoEvento()">Retornar</button>
+            </div>
+      </div>            
+  </div>
+</div>

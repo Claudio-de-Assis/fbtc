@@ -1,3 +1,63 @@
-<p>
-  colaborador-list works!
-</p>
+<div id="base">
+  <div id="Central">
+      <div id="HeaderCentral">
+          <h3>{{ title }}</h3>
+      </div>
+      <div id="BodyCentral">
+          <div id="LineBodyCentral">
+              <div id="L1C1">
+                  Nome:<br>
+                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
+              </div>
+              <div id="L1C2">
+                  Perfil:<br>
+                  <select required
+                  [(ngModel)]="editPerfil" name="Perfil" #sexo="ngModel">
+                  <option *ngFor="let perfil of lstPerfil" [value]="perfil">{{perfil}}</option>
+              </select>
+            </div>
+              <div id="L1C3">
+                Status:<br>
+                <select required
+                    [(ngModel)]="editStatus" name="Status" #sexo="ngModel">
+                    <option *ngFor="let status of lstStatus" [value]="status">{{status}}</option>
+                </select>
+            </div>
+              <div id="L2C1">
+                      <button (click)="gotoBuscarColaborador()">Pesquisar</button>
+                      <button (click)="gotoNovoColaborador()">Novo</button>
+              </div>
+              <div id="L5C1">
+                  <fieldset> 
+                      <legend>Listagem de Usuários</legend>
+                      <div id="Lst">
+                      <div id="LstHeader">
+                          <div id="LstCol1">Nome</div><div id="LstCol2">E-Mail</div><div id="LstCol3">Celular</div><div id="LstCol4">Perfil</div><div id="LstCol5">Status</div>
+                      </div>
+                      <div id="LstCenter">       
+                  <ul class="associados">
+                      <li *ngFor="let colaborador of colaborador$ | async"
+                          [class.selected]="colaborador.ColaboradorId === selectedId">
+                          <a [routerLink]="['/Colaborador', colaborador.ColaboradorId]">
+                              <div id="LstCol1c"><span class="badge">{{ colaborador.ColaboradorId}}</span>{{ colaborador.Nome}}</div>
+                              <div id="LstCol2c">{{colaborador.EMail}}</div>
+                              <div id="LstCol3c">{{colaborador.NrCelular}}</div>
+                              <div id="LstCol4c">{{colaborador.TipoPerfil}}</div>
+                              <div id="LstCol5c">{{colaborador.Ativo}}</div>
+                          </a>
+                      </li>
+                  </ul>
+                      </div>
+                      <div id="LstFooter">&nbsp;
+                              <button (click)="gotoPrimeiraPagina()">|<<</button>
+                              <button (click)="gotoPaginaAnterio()"><<</button>
+                              <button (click)="gotoProximaPagina()">>></button>
+                              <button (click)="gotoUltimaPagina()">>>|</button>
+                          </div>
+                  </div>
+                  </fieldset>
+              </div>
+          </div>
+      </div>            
+  </div>
+</div>

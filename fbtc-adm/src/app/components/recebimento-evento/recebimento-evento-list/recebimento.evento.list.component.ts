@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'recebimento-evento-list',
+  selector: 'app-recebimento-evento-list',
   templateUrl: './recebimento.evento.list.component.html',
   styleUrls: ['./recebimento.evento.list.component.css']
 })

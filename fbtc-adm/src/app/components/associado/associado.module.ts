@@ -12,7 +12,7 @@ import { AssociadoRoutingModule } from './associado.routing.module';
       CommonModule,
       FormsModule,
       AssociadoRoutingModule,
-      //BrowserAnimationsModule
+      // BrowserAnimationsModule
   ],
   declarations: [
       AssociadoFormComponent,

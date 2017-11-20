@@ -1,22 +1,36 @@
-import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
-import { Colaborador } from "../model/colaborador";
+import { Colaborador } from '../model/colaborador';
+import { COLABORADORES } from '../mock/mock-colaborador';
 
 @Injectable()
 export class ColaboradorService {
-    constructor(private http: Http) {
 
+    colaborador$: Observable<Colaborador[]>;
+    colaborador: Colaborador;
+    resultado: string;
 
+    /* constructor(private http: Http) {}*/
+    constructor() {
     }
 
-    getById(id: number) {
+    getListColaboradores() { return Observable.of(COLABORADORES); }
 
-        //usando a API do EasyAgendamento para teste de conexão do serviço:
-        //        return this.http.get('http://localhost:54709/api/Pessoa/${id}')
-        //          .map(response => response.json() as PessoaEA)
-        //        .toPromise();
+    getColaboradores(): Promise<Colaborador[]> {
+        return Promise.resolve(COLABORADORES);
+    }
 
+    getColaboradorById(id: number | string) {
+        return this.getListColaboradores()
+            .map(colaboradores => colaboradores.find(colaborador => colaborador.ColaboradorId === +id));
+    }
+
+    SaveColaborador (colaborador: Colaborador) {
+
+        this.resultado = 'Sucesso';
+        return this.resultado;
     }
 }

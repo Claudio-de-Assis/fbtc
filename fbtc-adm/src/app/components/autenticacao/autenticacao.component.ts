@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'autenticacao',
+  selector: 'app-autenticacao',
   templateUrl: './autenticacao.component.html',
   styleUrls: ['./autenticacao.component.css']
 })

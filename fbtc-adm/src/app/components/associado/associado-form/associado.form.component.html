@@ -1,17 +1,17 @@
 <div id="base">
     <div id="Central">
         <div id="HeaderCentral">
-        <h3>{{ title }}</h3>
+            <h3>{{ title }}Dados do Associado - Edição***</h3>
         </div>
         <div id="BodyCentral">
             <div id="LineBodyCentral">
                 <div id="L1C1">
                     Nome:<br>
-                    <input [(ngModel)]="editNome" placeholder="Nome" size="70px" maxlength="100" required/>
+                    <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
                 </div>
                 <div id="L1C2">
                     Data de Nascimento:<br>
-                    <input [(ngModel)]="editDtNascimento" placeholder="Data de Nascimento" size="13px" maxlength="10"/>
+                    <input [(ngModel)]="editDtNascimento" type="Date" size="13px" maxlength="10"/>
                 </div>
                 <div id="L1C3">
                    <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
@@ -20,7 +20,7 @@
             <div id="LineBodyCentral">
                 <div id="L2C1">
                     E-Mail:<br>
-                    <input [(ngModel)]="editEMail" placeholder="E-Mail" size="70px" maxlength="100" type="email" required/>
+                    <input [(ngModel)]="editEMail" size="70px" maxlength="100" type="email" required/>
                 </div>
                 <div id="L2C2">
                     Sexo:<br>
@@ -33,22 +33,23 @@
             <div id="LineBodyCentral">
                <div id="L3C1">
                     Celular:<br>
-                    <input [(ngModel)]="editCelular" placeholder="Celular" size="15px" maxlength="15" required/>
+                    <input [(ngModel)]="editCelular" type="tel" size="15px" maxlength="15" required/>
                 </div>
                 <div id="L3C2">
                     CPF:<br>
-                    <input [(ngModel)]="editCPF" placeholder="CPF" size="15px" maxlength="15"/>
+                    <input [(ngModel)]="editCPF" size="15px" maxlength="15"/>
                 </div>
                 <div id="L3C3">
                     RG:<br>
-                    <input [(ngModel)]="editRG" placeholder="RG" size="15px" maxlength="15"/>
+                    <input [(ngModel)]="editRG" size="15px" maxlength="15"/>
                 </div>
                 <div id="L3C4">
                     Matricula:<br>
-                    <input [(ngModel)]="editMatricula" placeholder="Matricula" size="15px"/>
+                    <input [(ngModel)]="editMatricula" size="15px"/>
                 </div>
                 <div id="L3C5">
-                    <button (click)="reenviarSenha()">Reenviar Senha</button>
+                    Telefone Divulgação:<br>
+                    <input [(ngModel)]="editTelDivulgacao" size="15px"/>
                 </div>
             </div>
             <div id="LineBodyCentral">
@@ -174,7 +175,15 @@
                 </select>
                 </div>
                 <div id="L10C2">
-    
+                    Adimplente:<br>
+                    <select required
+                    [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
+                    <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+                </select>
+                </div>
+
+                <div id="L10C3">
+                    <button (click)="reenviarSenha()">Reenviar Senha</button>
                 </div>
             </div>
         </div>
