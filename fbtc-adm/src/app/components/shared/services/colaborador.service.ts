@@ -17,11 +17,11 @@ export class ColaboradorService {
     constructor() {
     }
 
-    getListColaboradores() { return Observable.of(COLABORADORES); }
+     getListColaboradores() { return Observable.of(COLABORADORES); }
 
-    getColaboradores(): Promise<Colaborador[]> {
+     getColaboradores(): Promise<Colaborador[]> {
         return Promise.resolve(COLABORADORES);
-    }
+     }
 
     getColaboradorById(id: number | string) {
         return this.getListColaboradores()

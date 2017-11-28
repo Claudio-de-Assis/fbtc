@@ -47,10 +47,10 @@ export class ColaboradorFormComponent implements OnInit {
         this.colaborador$.subscribe((colaborador: Colaborador) => {this.colaborador = colaborador});
 
         this.editColaboradorId = this.colaborador ? this.colaborador.ColaboradorId : 0;
-        this.editNome = this.colaborador ? this.colaborador.Nome : '';
+        this.editNome = this.colaborador ? this.colaborador.nome : '';
         this.editTipoPerfil = this.colaborador ? this.colaborador.TipoPerfil : null;
-        this.editEMail = this.colaborador ? this.colaborador.EMail : '';
-        this.editCelular = this.colaborador ? this.colaborador.NrCelular : '';
+        this.editEMail = this.colaborador ? this.colaborador.eMail : '';
+        this.editCelular = this.colaborador ? this.colaborador.nrCelular : '';
         this.editAtivo = this.colaborador ? true : false;
      }
 

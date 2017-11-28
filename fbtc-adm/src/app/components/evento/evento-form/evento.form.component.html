@@ -74,14 +74,14 @@
             </div>
             <div id="LineBodyCentral">
               <div id="L6C1">
-                  Aceita Isenção por ata de reunião:<br>
+                  Aceita Isenção?:<br>
                   <select required
                     [(ngModel)]="editAceitaIsencaoAta" name="aceitaIsencaoAta" #aceitaIsencaoAta="ngModel">
                     <option *ngFor="let aceitaIsencaoAta of lstSimNao" [value]="aceitaIsencaoAta">{{ aceitaIsencaoAta }}</option>
                   </select>
               </div>
               <div id="L6C2">
-                Aceita Isenção por ata de reunião:<br>
+                Anúncio Ativo?:<br>
                 <select required
                   [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
                   <option *ngFor="let ativo of lstSimNao" [value]="ativo">{{ ativo }}</option>

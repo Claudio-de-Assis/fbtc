@@ -39,11 +39,11 @@
                       <li *ngFor="let colaborador of colaborador$ | async"
                           [class.selected]="colaborador.ColaboradorId === selectedId">
                           <a [routerLink]="['/Colaborador', colaborador.ColaboradorId]">
-                              <div id="LstCol1c"><span class="badge">{{ colaborador.ColaboradorId}}</span>{{ colaborador.Nome}}</div>
-                              <div id="LstCol2c">{{colaborador.EMail}}</div>
-                              <div id="LstCol3c">{{colaborador.NrCelular}}</div>
+                              <div id="LstCol1c"><span class="badge">{{ colaborador.ColaboradorId}}</span>{{ colaborador.nome}}</div>
+                              <div id="LstCol2c">{{colaborador.eMail}}</div>
+                              <div id="LstCol3c">{{colaborador.nrCelular}}</div>
                               <div id="LstCol4c">{{colaborador.TipoPerfil}}</div>
-                              <div id="LstCol5c">{{colaborador.Ativo}}</div>
+                              <div id="LstCol5c">{{colaborador.ativo}}</div>
                           </a>
                       </li>
                   </ul>

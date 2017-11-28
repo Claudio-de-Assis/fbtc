@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Associado } from '../../shared/model/associado';
 import { AssociadoService } from '../../shared/services/associado.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
     selector: 'app-associado-list',
     templateUrl: './associado.list.component.html',
     styleUrls: ['./associado.list.component.css'],
     providers: [AssociadoService]
-
 })
 /** AssociadoList component*/
 export class AssociadoListComponent implements OnInit {
 
+ /* Tipos Aceitos: Psicólogo: 7, Médico: 8 */
     lstSexo = ['Masculino', 'Feminino'];
     lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
-    /* Tipos Aceitos: Psicólogo: 7, Médico: 8*/
     lstProfissao= ['Médico', 'Psicólogo'];
 
     title = 'Consulta de Associados';
 
-    associado$: Observable<Associado[]>;
-
     associados: Associado[];
-    private selectedAssociado: Associado;
+    // associado$: Observable<Associado[]>;
 
-    private selectedId: number;
+     private selectedAssociado: Associado;
+    // private selectedId: number;
 
     /** AssociadoList ctor */
     constructor(
@@ -38,15 +36,12 @@ export class AssociadoListComponent implements OnInit {
     ) { }
 
     getAssociados(): void {
-        this.service.getAssociados().then(associados => this.associados = associados);
+        this.service.getAssociados().subscribe(associados => this.associados = associados);
     }
 
     /** Called by Angular after AssociadoList component initialized */
-    ngOnInit() {
-        this.associado$ = this.route.paramMap.switchMap((params: ParamMap) => {
-            this.selectedId = +params.get('Id');
-            return this.service.getAssociados();
-        });
+    ngOnInit(): void {
+        this.getAssociados();
     }
 
     onSelect(associado: Associado): void {

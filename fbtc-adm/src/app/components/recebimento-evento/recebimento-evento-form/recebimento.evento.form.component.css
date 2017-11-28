@@ -1,0 +1,108 @@
+#base{
+    width: 1000px;
+    height: 700px;
+    padding: 10px;
+}
+
+#Central{
+    position:relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+#HeaderCentral{
+    position:relative;
+    width: 100%;
+    height: 50px;
+    float: left;
+}
+#BodyCentral{
+    position:relative;
+    width: 100%;
+    height: 446px;
+    float: left;
+    border-bottom: solid 1px;
+    border-top: solid 1px;
+}
+#FooterCentral{
+    position:relative;
+    width: 100%;
+    height: 30px;
+    clear: both;
+    padding-top: 5px;
+}
+
+#L1C1,#L2C1,#L0C1 {
+    position: relative;
+    width: 480px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+
+#L0C2 {
+    position: relative;
+    width: 320px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+
+
+#L1C2,#L1C3,#L1C4,
+#L2C2,#L2C3,#L2C4 {
+    position: relative;
+    width: 160px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+    vertical-align: bottom;
+}
+#L3C1,#L3C3,
+#L3C4,#L3C5,#L3C6 {
+    position: relative;
+    width: 160px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+}
+#L3C2 {
+    position: relative;
+    width: 148px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+}
+#L4C1,#L4C2,#L4C3,#L4C4 {
+    position: relative;
+    width: 225px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+}
+#L5C1 {
+    position: relative;
+    width: 600px;
+    height: 180px;
+    float: left;
+    padding: 3px;
+}
+
+#L6C1 {
+    position: relative;
+    width: 600px;
+    height: 25px;
+    float: left;
+    padding: 3px;
+}
+
+#FT1C1 {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+}
+

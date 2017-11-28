@@ -1,74 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { AssociadoService } from '../../shared/services/associado.service';
 import { Associado } from '../../shared/model/associado';
+import { debug } from 'util';
 
 @Component({
     selector: 'app-associado-form',
     templateUrl: './associado.form.component.html',
-    styleUrls: ['./associado.form.component.css']
+    styleUrls: ['./associado.form.component.css'],
+    providers: [AssociadoService]
 })
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit {
 
-    lstSexo = ['Masculino', 'Feminino'];
-    lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
-    lstTipoContato= ['E-Mail', 'Celular', 'Endereço', 'Todos'];
-    lstTipoPublico= ['Profissional - Associado', 'Estudante de Pós - Associado', 'Estudante - Associado'];
-    lstSimNao= ['Sim', 'Não'];
+    @Input() associado: Associado;
 
-    title: "Dados do Associado - Edição";
+    optSexo = [
+        {name: 'M', value: 'M'},
+        {name: 'F', value: 'F'}
+    ];
 
-    /* Tipos Aceitos: Psicólogo: 7, Médico: 8*/
-    lstProfissao= ['Médico', 'Psicólogo'];
+    optATC = [
+        {name: 'Rio de Janeiro', value: '1'},
+        {name: 'Minas Gerais', value: '2'},
+        {name: 'Alagoas', value: '3'}
+    ];
 
-    /*Graduado: 1, Especialista: 2,Mestre: 3,Doutor: 4,Pós-Doutor: 5*/
-    lstTitulacao= ['Graduado', 'Especialista', 'Mestre', 'Doutor', 'Pós-Doutor'];
+    optTipoFormaContato = [
+        {name: 'E-Mail', value: 1},
+        {name: 'Celular', value: 2},
+        {name: 'Endereço', value: 3},
+        {name: 'Todos', value: 4}
+    ];
+
+    optTipoProfissao = [
+        {name: 'Psicólogo', value: '7'},
+        {name: 'Médico', value: '8'}
+    ];
+
+    optTipoTitulação = [
+        {name: 'Graduado', value: '1'},
+        {name: 'Especialista', value: '2'},
+        {name: 'Mestre', value: '3'},
+        {name: 'Doutor', value: '4'},
+        {name: 'Pós-Doutor', value: '5'}
+    ];
+
+    optTipoPublico = [
+        {name: 'Profissional - Associado', value: '2'},
+        {name: 'Estudante de Pós - Associado', value: '5'},
+        {name: 'Estudante - Associado', value: '8'}
+    ];
+
+    optBoolean = [
+        {name: 'Sim', value: 'true'},
+        {name: 'Não', value: 'false'}
+    ];
+
+    title = 'Dados do Associado - Edição';
 
     private selectedId: any;
-
-    // @Input() associado2: Associado;
-
-    associado$: Observable<Associado>;
-
-    associado: Associado;
-
-    editAssociadoId: number;
-    editNome: string;
-    editDtNascimento: Date;
-    editEMail: string;
-    editSexo: string;
-    editCelular: string;
-    editCPF: string;
-    editRG: string;
-    editMatricula: string;
-    editATC: number;
-    editTipoId: number;
-    editCRP: string;
-    editCRM: string;
-    editNomeInstFormacao: string;
-    editDtCadastro: Date;
-    editCertificado: boolean;
-    editDtCertificacao: Date;
-    editDivulgarContato: boolean;
-    editTipoFormaContato: string;
-    editIntegraDiretoria: boolean;
-    editIntegraConfi: boolean;
-    editNrTelDivilgacao: string;
-    editComprovanteAfiliacaoAtc: string;
-    editProfissao: string;
-    editTitulacao: string;
-    editCEP: string;
-    editEndereco: string;
-    editNumero: string;
-    editComplemento: string;
-    editBairro: string;
-    editCidade: string;
-    editEstado: string;
-    editAtivo: boolean;
 
     /** AssociadoFrm ctor */
     constructor(
@@ -77,50 +71,31 @@ export class AssociadoFormComponent implements OnInit {
         private service: AssociadoService
     ) { }
 
+    getAssociadoById(id: number): void {
+
+        this.service.getById(id)
+            .subscribe(associado => this.associado = associado);
+    }
+
+    setAssociado(): void {
+
+        this.service.setAssociado()
+            .subscribe(associado => this.associado = associado);
+    }
+
     /** Called by Angular after AssociadoForm component initialized */
-    ngOnInit() {
-        this.associado$ = this.route.paramMap
-            .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get('id')));
+    ngOnInit(): void {
 
-            this.associado$.subscribe((associado: Associado) => {this.associado = associado});
-
-            this.editAssociadoId = this.associado ? this.associado.AssociadoId : 0;
-            this.editNome = this.associado ?  this.associado.Nome : '';
-            this.editDtNascimento = this.associado ?  this.associado.DtNascimento : null;
-            this.editEMail = this.associado ?  this.associado.EMail : '';
-            this.editSexo = this.associado ?  this.associado.Sexo : '';
-            this.editCelular = this.associado ?  this.associado.NrCelular : '';
-            this.editCPF = this.associado ?  this.associado.Cpf : '';
-            this.editRG = this.associado ?  this.associado.Rg : '';
-            this.editMatricula = this.associado ?  this.associado.NrMatricula : '';
-            this.editATC = this.associado ?  this.associado.AtcId : 0;
-            this.editTipoId = this.associado ?  this.associado.TipoPublicoId  : 0;
-            this.editCRP = this.associado ?  this.associado.Crp : '';
-            this.editCRM = this.associado ?  this.associado.Crm : '';
-            this.editNomeInstFormacao = this.associado ?  this.associado.NomeInsFormacao : '';
-            this.editDtCadastro = this.associado ?  this.associado.DtCadastro : null;
-            this.editCertificado = this.associado ?  this.associado.Certificado : true;
-            this.editDtCertificacao = this.associado ?  this.associado.DtCertificacao : null;
-            this.editDivulgarContato = this.associado ?  this.associado.DivulgarContato : false;
-            this.editTipoFormaContato = this.associado ?  this.associado.TipoFormaContato  : '';
-            this.editIntegraDiretoria = this.associado ?  this.associado.IntegraDiretoria : false;
-            this.editIntegraConfi = this.associado ?  this.associado.IntegraConfi : false ;
-            this.editNrTelDivilgacao = this.associado ? this.associado.NrTelDivulgacao : '';
-            this.editComprovanteAfiliacaoAtc = this.associado ? this.associado.ComprovanteAfiliacaoAtc : '';
-            this.editProfissao = this.associado ? this.associado.Profissao : '';
-            this.editTitulacao = this.associado ? this.associado.Titulacao : '';
-            this.editCEP = '';
-            this.editEndereco = '';
-            this.editNumero = '';
-            this.editComplemento = '';
-            this.editBairro = '';
-            this.editCidade = '';
-            this.editEstado = '';
-            this.editAtivo = true;
+        const id = +this.route.snapshot.paramMap.get('id');
+        if (id > 0) {
+            this.getAssociadoById(id);
+        } else {
+            this.setAssociado();
+        }
     }
 
     gotoAssociados() {
-        let associadoId = this.associado ? this.associado.AssociadoId : null;
+        let associadoId = this.associado ? this.associado.associadoId : null;
         // Pass along the Associado id if available
         // so that the AssociadoList component can select that Associado.
         // Include a junk 'foo' property for fun.
@@ -128,7 +103,8 @@ export class AssociadoFormComponent implements OnInit {
     }
 
     save() {
-        this.gotoAssociados();
+        this.service.addAssociado(this.associado)
+            .subscribe(() => this.gotoAssociados());
     }
 
     excluir() {

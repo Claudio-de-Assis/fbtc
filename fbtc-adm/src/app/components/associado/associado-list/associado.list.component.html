@@ -7,15 +7,15 @@
             <div id="LineBodyCentral">
                 <div id="L1C1">
                     Nome:<br>
-                    <input [(ngModel)]="editNome" placeholder="Nome" size="70px" maxlength="100" required/>
+                    <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
                 </div>
                 <div id="L1C2">
                     CPF:<br>
-                    <input [(ngModel)]="editCPF" placeholder="CPF" size="15px" maxlength="15"/>
+                    <input [(ngModel)]="editCPF" size="15px" maxlength="15"/>
                 </div>
                 <div id="L2C1">
                     E-Mail:<br>
-                    <input [(ngModel)]="editEMail" placeholder="E-Mail" size="70px" maxlength="100" type="email" required/>
+                    <input [(ngModel)]="editEMail" size="70px" maxlength="100" type="email" required/>
                 </div>
                 <div id="L2C2">
                     Sexo:<br>
@@ -33,11 +33,11 @@
                 </div>                        
                 <div id="L3C1">
                     CRP:<br>
-                    <input [(ngModel)]="editCRP" placeholder="CRP" size="15px" maxlength="15"/>
+                    <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
                 </div> 
                 <div id="L3C2">
                     CRM:<br>
-                    <input [(ngModel)]="editCRP" placeholder="CRP" size="15px" maxlength="15"/>
+                    <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
                 </div> 
                 <div id="L3C3">
                     Profissão:<br>
@@ -60,14 +60,14 @@
                         </div>
                         <div id="LstCenter">       
                     <ul class="associados">
-                        <li *ngFor="let associado of associado$ | async"
-                            [class.selected]="associado.AssociadoId === selectedId">
-                            <a [routerLink]="['/Associado', associado.AssociadoId]">
-                                <div id="LstCol1c"><span class="badge">{{ associado.AssociadoId}}</span>{{ associado.Nome}}</div>
-                                <div id="LstCol2c">{{associado.EMail}}</div>
-                                <div id="LstCol3c">{{associado.NrCelular}}</div>
-                                <div id="LstCol4c">{{associado.Cpf}}</div>
-                                <div id="LstCol5c">{{associado.TipoPublicoId}}</div>
+                        <li *ngFor="let associado of associados"
+                            [class.selected]="associado.associadoId === selectedId">
+                            <a [routerLink]="['/Associado', associado.associadoId]">
+                                <div id="LstCol1c"><span class="badge">{{ associado.associadoId }}</span>{{ associado.nome }}</div>
+                                <div id="LstCol2c">{{associado.eMail}}</div>
+                                <div id="LstCol3c">{{associado.nrCelular}}</div>
+                                <div id="LstCol4c">{{associado.cpf}}</div>
+                                <div id="LstCol5c">{{associado.tipoPublicoId}}</div>
                             </a>
                         </li>
                     </ul>

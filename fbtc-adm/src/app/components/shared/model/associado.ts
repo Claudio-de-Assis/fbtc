@@ -1,26 +1,23 @@
 import { Pessoa } from './pessoa';
 
 export class Associado extends Pessoa {
-
-    AssociadoId: number;
-    PessoaId: number;
-    AtcId: number;
-    TipoPublicoId: number;
-    Cpf: string;
-    Rg: string;
-    NrMatricula: string;
-    Crp: string;
-    Crm: string;
-    NomeInsFormacao: string;
-    Certificado: boolean;
-    DtCertificacao: Date;
-    DivulgarContato: boolean;
-    TipoFormaContato: string;
-    IntegraDiretoria: boolean;
-    IntegraConfi: boolean;
-    NrTelDivulgacao: string;
-    ComprovanteAfiliacaoAtc: string;
-    Profissao: string;
-    Titulacao: string;
-
+    associadoId: number;
+    atcId: number;
+    tipoPublicoId: number;
+    cpf: string;
+    rg: string;
+    nrMatricula: string;
+    crp: string;
+    crm: string;
+    nomeInstFormacao: string;
+    certificado: boolean;
+    dtCertificacao: Date;
+    divulgarContato: boolean;
+    tipoFormaContato: string;
+    integraDiretoria: boolean;
+    integraConfi: boolean;
+    nrTelDivulgacao: string;
+    comprovanteAfiliacaoAtc: string;
+    tipoProfissao: string;
+    tipoTitulacao: string;
 }

@@ -39,7 +39,7 @@ export class AssociadoIsencaoListComponent implements OnInit {
   ) { }
 
   getAssociados(): void {
-      this.service.getAssociados().then(associados => this.associados = associados);
+      this.service.getAssociados().subscribe(associados => this.associados = associados);
   }
 
   /** Called by Angular after AssociadoList component initialized */
