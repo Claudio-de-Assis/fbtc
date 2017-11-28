@@ -1,0 +1,6 @@
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Fbtc.Domain.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Fbtc.Domain.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csproj.CoreCompileInputs.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csprojResolveAssemblyReference.cache
