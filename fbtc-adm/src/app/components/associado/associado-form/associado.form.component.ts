@@ -4,25 +4,40 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { AssociadoService } from '../../shared/services/associado.service';
+import { CepCorreiosService } from './../../shared/services/cep-correios.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { Associado } from '../../shared/model/associado';
+// import { EnderecoCep } from '../../shared/model/endereco-cep';
 import { debug } from 'util';
+import { TipoPublico } from '../../shared/model/tipo-publico';
 
 @Component({
     selector: 'app-associado-form',
     templateUrl: './associado.form.component.html',
     styleUrls: ['./associado.form.component.css'],
-    providers: [AssociadoService]
+    providers: [AssociadoService, CepCorreiosService]
 })
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit {
 
     @Input() associado: Associado;
+   /* @Input() cepCorreios: CepCorreios = {
+        bairro: '',
+        cidade: '',
+        logradouro: '',
+        estado_info: {area_km2: '', codigo_ibge: '', nome: '' },
+        cep: '',
+        cidade_info: {area_km2: '', codigo_ibge: ''},
+        estado: '' };*/
+
+    tiposPublicos: TipoPublico[];
 
     optSexo = [
-        {name: 'M', value: 'M'},
-        {name: 'F', value: 'F'}
+        {name: 'Masculino', value: 'M'},
+        {name: 'Feminino', value: 'F'}
     ];
 
+    // retirar essa option:
     optATC = [
         {name: 'Rio de Janeiro', value: '1'},
         {name: 'Minas Gerais', value: '2'},
@@ -41,18 +56,12 @@ export class AssociadoFormComponent implements OnInit {
         {name: 'Médico', value: '8'}
     ];
 
-    optTipoTitulação = [
+    optTipoTitulacao = [
         {name: 'Graduado', value: '1'},
         {name: 'Especialista', value: '2'},
         {name: 'Mestre', value: '3'},
         {name: 'Doutor', value: '4'},
         {name: 'Pós-Doutor', value: '5'}
-    ];
-
-    optTipoPublico = [
-        {name: 'Profissional - Associado', value: '2'},
-        {name: 'Estudante de Pós - Associado', value: '5'},
-        {name: 'Estudante - Associado', value: '8'}
     ];
 
     optBoolean = [
@@ -66,9 +75,11 @@ export class AssociadoFormComponent implements OnInit {
 
     /** AssociadoFrm ctor */
     constructor(
-        private route: ActivatedRoute,
+        private service: AssociadoService,
+        private serviceTP: TipoPublicoService,
         private router: Router,
-        private service: AssociadoService
+        private route: ActivatedRoute,
+        private serviceCEP: CepCorreiosService
     ) { }
 
     getAssociadoById(id: number): void {
@@ -85,6 +96,8 @@ export class AssociadoFormComponent implements OnInit {
 
     /** Called by Angular after AssociadoForm component initialized */
     ngOnInit(): void {
+
+        this.getTiposPublicos();
 
         const id = +this.route.snapshot.paramMap.get('id');
         if (id > 0) {
@@ -103,11 +116,31 @@ export class AssociadoFormComponent implements OnInit {
     }
 
     save() {
+
         this.service.addAssociado(this.associado)
             .subscribe(() => this.gotoAssociados());
     }
 
     excluir() {
+
         this.gotoAssociados();
+    }
+
+    getTiposPublicos(): void {
+
+        this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    }
+
+    getEnderecoByCep(): void {
+
+        this.associado.enderecoPessoa.logradouro = '';
+        this.associado.enderecoPessoa.numero = '';
+        this.associado.enderecoPessoa.complemento = '';
+        this.associado.enderecoPessoa.bairro = '';
+        this.associado.enderecoPessoa.cidade = '';
+        this.associado.enderecoPessoa.estado = '';
+
+        this.serviceCEP.getByCep(this.associado.enderecoPessoa.cep)
+            .subscribe(endereco => this.associado.enderecoPessoa = endereco);
     }
 }

@@ -1,7 +1,10 @@
+import { Endereco } from './endereco';
 
 export class Pessoa {
     pessoaId: number;
     nome: string;
+    cpf: string;
+    rg: string;
     eMail: string;
     nomeFoto: string;
     sexo: string;
@@ -11,4 +14,5 @@ export class Pessoa {
     dtCadastro: Date;
     ativo: Boolean;
 
+    enderecoPessoa: Endereco;
 }

@@ -166,13 +166,13 @@
 }
 
 #LstCol1{
-    width: 590px;
+    width: 520px;
     position: relative;
     float: left;
 }
 
 #LstCol2{
-    width: 50px;
+    width: 300px;
     position: relative;
     float: left;
 }
@@ -182,7 +182,7 @@
     float: left;
 }
 #LstCol4{
-    width: 150px;
+    width: 1px;
     position: relative;
     float: left;
 }
@@ -192,23 +192,23 @@
     float: left;
 }
 #LstCol1c{
-    width: 600px;
+    width: 520px;
     position: relative;
     float: left;
 }
 
 #LstCol2c{
-    width: 40px;
+    width: 300px;
     position: relative;
     float: left;
 }
 #LstCol3c{
-    width: 115px;
+    width: 100px;
     position: relative;
     float: left;
 }
 #LstCol4c{
-    width: 170px;
+    width: 1px;
     position: relative;
     float: left;
 }

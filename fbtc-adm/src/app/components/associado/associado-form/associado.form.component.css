@@ -33,7 +33,7 @@
 }
 #L1C1,#L2C1 {
     position: relative;
-    width: 600px;
+    width: 540px;
     height: 50px;
     float: left;
     padding: 3px;
@@ -71,18 +71,28 @@
 }
 #L5C1 {
     position: relative;
-    width: 600px;
+    width: 540px;
     height: 50px;
     float: left;
     padding: 3px;
 }
 #L5C2 {
     position: relative;
-    width: 200px;
+    width: 150px;
     height: 50px;
     float: left;
     padding: 3px;
 }
+
+#L5C3,#L5C4 {
+    position: relative;
+    width: 130px;
+    height: 50px;
+    float: left;
+    padding: 3px;
+}
+
+
 #L6C1,#L6C2,#L6C3,#L6C4 {
     position: relative;
     width: 225px;

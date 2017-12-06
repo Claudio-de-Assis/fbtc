@@ -1,4 +1,4 @@
-import { TipoPublico } from '../model/tipo.publico';
+import { TipoPublico } from '../model/tipo-publico';
 
 export const TIPOSPUBLICOS: TipoPublico[] = [
     {TipoPublicoId: 1, Nome: 'Profissional - Associado',

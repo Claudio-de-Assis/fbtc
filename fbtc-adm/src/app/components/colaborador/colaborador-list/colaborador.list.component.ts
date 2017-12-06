@@ -18,12 +18,9 @@ export class ColaboradorListComponent implements OnInit {
 
   title = 'Consulta de Usários';
 
-  colaborador$: Observable<Colaborador[]>;
-
   colaboradores: Colaborador[];
-  private selectedColaborador: Colaborador;
 
-  private selectedId: number;
+  private selectedColaborador: Colaborador;
 
   constructor(
     private service: ColaboradorService,
@@ -32,14 +29,11 @@ export class ColaboradorListComponent implements OnInit {
   ) { }
 
   getColaboradores(): void {
-    this.service.getColaboradores().then(colaboradores => this.colaboradores = colaboradores);
+    this.service.getColaboradores().subscribe(colaboradores => this.colaboradores = colaboradores);
 }
 
   ngOnInit() {
-      this.colaborador$ = this.route.paramMap.switchMap((params: ParamMap) => {
-        this.selectedId = +params.get('Id');
-        return this.service.getColaboradores();
-    });
+    this.getColaboradores();
   }
 
   onSelect(colaborador: Colaborador): void {
@@ -47,7 +41,7 @@ export class ColaboradorListComponent implements OnInit {
 }
 
   gotoNovoColaborador() {
-      this.router.navigate(['/ColaboradorNovo']);
+      this.router.navigate(['/Colaborador', 0]);
   }
 
   gotoBuscarColaborador() { }

@@ -1,48 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
-import { TipoPublico } from './../../shared/model/tipo.publico';
 import { Evento } from '../../shared/model/evento';
 import { EventoService } from '../../shared/services/evento.service';
+import { TipoPublico } from './../../shared/model/tipo-publico';
 
 @Component({
   selector: 'app-evento-form',
   templateUrl: './evento.form.component.html',
-  styleUrls: ['./evento.form.component.css']
+  styleUrls: ['./evento.form.component.css'],
+  providers: [TipoPublicoService]
 })
 export class EventoFormComponent implements OnInit {
 
-  lstAno = [2018, 2017, 2016];
-  lstTipoEvento = ['Congresso Brasileiro', 'Workshop Internacional'];
-  lstSimNao= ['Sim', 'Não'];
+  @Input() evento: Evento;
 
-  title: 'Dados do Evento';
+  lstAno = [2018, 2017, 2016];
+
+  optTiposEventos = [
+    {name: 'Workshop internacional e Congresso', value: '1'},
+    {name: 'Workshop Internacional', value: '2'},
+    {name: 'Workshop Nacional', value: '3'},
+    {name: 'Congresso Brasileiro', value: '4'},
+    {name: 'Certificação', value: '5'}
+  ];
+
+  optBoolean = [
+    {name: 'Sim', value: 'true'},
+    {name: 'Não', value: 'false'}
+  ];
+
+  title = 'Dados do Evento';
 
   private selectedId: any;
 
   evento$: Observable<Evento>;
-  evento: Evento;
 
-  tipoPublico$: Observable<TipoPublico[]>;
   tiposPublicos: TipoPublico[];
-  tipoPublico: TipoPublico;
-
-  editEventoId: number;
-  editTitulo: string;
-  editDescricao: string;
-  editCodigo: string;
-  editDtInicio: Date;
-  editDtTermino: Date;
-  editDtTerminoInscricao: Date;
-  editTipoEvento: string;
-  editAceitaIsencaoAta: boolean;
-  editAtivo: boolean;
-  editNomeFoto: string;
-
-  msgService: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,49 +48,50 @@ export class EventoFormComponent implements OnInit {
     private service: EventoService,
   ) { }
 
+  getEventoById(id: number): void {
+
+      this.service.getById(id)
+          .subscribe(evento => this.evento = evento);
+  }
+  setEvento(): void {
+
+      this.service.setEvento()
+          .subscribe(evento => this.evento = evento);
+  }
+
   getTiposPublicos(): void {
-    this.serviceTP.getTiposPublicos().then(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
   }
 
   gotoEventos() {
-    let eventoId = this.evento ? this.evento.EventoId : null;
+    let eventoId = this.evento ? this.evento.eventoId : null;
     this.router.navigate(['/Evento', { id: eventoId, foo: 'foo' }]);
   }
 
   gotoSaveEvento() {
-    alert(this.service.SaveEvento(this.evento));
+    this.service.addEvento(this.evento)
+    .subscribe(() => this.gotoEventos());
   }
 
-  gotoDeleteEvento() {
+  /*gotoDeleteEvento() {
     if (confirm('Confirma a exclusão do registro?')) {
       alert(this.service.DeleteEvento(this.editEventoId));
       this.gotoEventos();
     }
-  }
+  }*/
 
   gotoPreviewAnuncio() {
-    this.router.navigate(['/EventoPreview', this.editEventoId ]);
+    this.router.navigate(['/EventoPreview', +this.route.snapshot.paramMap.get('id') ]);
   }
 
   ngOnInit() {
-    this.evento$ = this.route.paramMap
-      .switchMap((params: ParamMap) => this.service.getEventoById(params.get('id')));
+    this.getTiposPublicos();
 
-    this.evento$.subscribe((evento: Evento) => {this.evento = evento});
-
-    this.editEventoId = this.evento ? this.evento.EventoId : 0;
-    this.editTitulo = this.evento ? this.evento.Titulo : '';
-    this.editDescricao = this.evento ? this.evento.Descricao : '';
-    this.editCodigo = this.evento ? this.evento.Codigo : '';
-    this.editDtInicio = this.evento ? this.evento.DtInicio : null;
-    this.editDtTermino = this.evento ? this.evento.DtTermino : null;
-    this.editDtTerminoInscricao = this.evento ? this.evento.DtTerminoInscricao : null;
-    this.editTipoEvento = this.evento ? this.evento.TipoEvento : '';
-    this.editAceitaIsencaoAta = this.evento ? this.evento.AceitaIsencaoAta : true;
-    this.editAtivo = this.evento ? this.evento.Ativo : true;
-    this.editNomeFoto = this.evento ? this.evento.NomeFoto : '';
-
-    this.tipoPublico$ = this.route.paramMap
-    .switchMap((params: ParamMap) => this.serviceTP.getTiposPublicos());
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (id > 0) {
+        this.getEventoById(id);
+    } else {
+        this.setEvento();
+    }
   }
 }

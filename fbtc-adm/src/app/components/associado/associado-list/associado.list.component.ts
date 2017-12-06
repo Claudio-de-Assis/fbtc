@@ -1,3 +1,4 @@
+import { TipoPublico } from './../../shared/model/tipo-publico';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -5,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Associado } from '../../shared/model/associado';
 import { AssociadoService } from '../../shared/services/associado.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
 @Component({
     selector: 'app-associado-list',
@@ -23,14 +25,14 @@ export class AssociadoListComponent implements OnInit {
     title = 'Consulta de Associados';
 
     associados: Associado[];
-    // associado$: Observable<Associado[]>;
+    tiposPublicos: TipoPublico[];
 
-     private selectedAssociado: Associado;
-    // private selectedId: number;
+    private selectedAssociado: Associado;
 
     /** AssociadoList ctor */
     constructor(
         private service: AssociadoService,
+        private serviceTP: TipoPublicoService,
         private router: Router,
         private route: ActivatedRoute
     ) { }
@@ -41,6 +43,8 @@ export class AssociadoListComponent implements OnInit {
 
     /** Called by Angular after AssociadoList component initialized */
     ngOnInit(): void {
+        this.getTiposPublicos();
+
         this.getAssociados();
     }
 
@@ -53,4 +57,8 @@ export class AssociadoListComponent implements OnInit {
     }
 
     gotoBuscarAssociado() { }
+
+    getTiposPublicos(): void {
+        this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    }
 }

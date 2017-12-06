@@ -1,5 +1,5 @@
-export class PagamentoFbtc {
-    PagamentoFbtc: number;
+export class Recebimento {
+    recebimentoId: number;
     AssociadoId: number;
     ValorEventoPublicoId: number;
     ObjetivoPagamento: string;

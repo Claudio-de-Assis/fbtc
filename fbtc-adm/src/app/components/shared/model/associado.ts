@@ -4,8 +4,6 @@ export class Associado extends Pessoa {
     associadoId: number;
     atcId: number;
     tipoPublicoId: number;
-    cpf: string;
-    rg: string;
     nrMatricula: string;
     crp: string;
     crm: string;

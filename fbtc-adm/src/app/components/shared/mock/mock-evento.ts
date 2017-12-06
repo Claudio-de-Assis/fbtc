@@ -1,36 +1,29 @@
 import { Evento } from '../model/Evento';
 
 export const EVENTOS: Evento[] = [
-    {EventoId: 1, Titulo: 'Tratamento Cognitivo Comportamental para o Transtorno de Ansiedade',
-        Descricao: 'Workshop internacional do dia....', Codigo: '6CSNKQQN2', DtInicio: new Date('2018-04-19'),
-        DtTermino: new Date('2018-04-22'), DtTerminoInscricao: new Date('2018-04-22'), TipoEvento: '1',
-         AceitaIsencaoAta: true, Ativo: true, NomeFoto: 'NO-FOTO.PNG' },
+    {eventoId: 1, titulo: 'Tratamento Cognitivo Comportamental para o Transtorno de Ansiedade',
+        descricao: 'Workshop internacional do dia....', codigo: '6CSNKQQN2', dtInicio: new Date('2018-04-19'),
+        dtTermino: new Date('2018-04-22'), dtTerminoInscricao: new Date('2018-04-22'), tipoEvento: '1',
+         aceitaIsencaoAta: true, ativo: true, nomeFoto: 'NO-FOTO.PNG' },
 
-    {EventoId: 2, Titulo: 'Tratamento Cognitivo Comportamental',
-        Descricao: 'Workshop Tratamento Cognitivo Comportamental....', Codigo: 'XPTOKQQN2', DtInicio: new Date('2017-03-03'),
-        DtTermino: new Date('2017-03-05'), DtTerminoInscricao: new Date('2017-03-05'), TipoEvento: '2',
-        AceitaIsencaoAta: true, Ativo: true, NomeFoto: 'NO-FOTO.PNG' },
+    {eventoId: 2, titulo: 'Tratamento Cognitivo Comportamental',
+        descricao: 'Workshop Tratamento Cognitivo Comportamental....', codigo: 'XPTOKQQN2', dtInicio: new Date('2017-03-03'),
+        dtTermino: new Date('2017-03-05'), dtTerminoInscricao: new Date('2017-03-05'), tipoEvento: '2',
+        aceitaIsencaoAta: true, ativo: true, nomeFoto: 'NO-FOTO.PNG' },
 
-    {EventoId: 3, Titulo: 'Tratamento para o Transtorno de Ansiedade',
-        Descricao: 'Workshop Tratamento para o Transtorno de Ansiedade....', Codigo: 'ERDGRDFG3', DtInicio: new Date('2016-02-03'),
-        DtTermino: new Date('2016-02-03'), DtTerminoInscricao: new Date('2016-02-03'),
-        TipoEvento: '3', AceitaIsencaoAta: true, Ativo: true, NomeFoto: 'NO-FOTO.PNG' },
+    {eventoId: 3, titulo: 'Tratamento para o Transtorno de Ansiedade',
+        descricao: 'Workshop Tratamento para o Transtorno de Ansiedade....', codigo: 'ERDGRDFG3', dtInicio: new Date('2016-02-03'),
+        dtTermino: new Date('2016-02-03'), dtTerminoInscricao: new Date('2016-02-03'),
+        tipoEvento: '3', aceitaIsencaoAta: true, ativo: true, nomeFoto: 'NO-FOTO.PNG' },
 
-    {EventoId: 4, Titulo: 'Tratamento de Ansiedade',
-        Descricao: 'Workshop Tratamento de Ansiedade....', Codigo: 'EREWERDRT1', DtInicio: new Date('2015-12-01'),
-        DtTermino: new Date('2015-12-03'), DtTerminoInscricao: new Date('2015-12-03'), TipoEvento: '4',
-        AceitaIsencaoAta: true, Ativo: true, NomeFoto: 'NO-FOTO.PNG' },
+    {eventoId: 4, titulo: 'Tratamento de Ansiedade',
+        descricao: 'Workshop Tratamento de Ansiedade....', codigo: 'EREWERDRT1', dtInicio: new Date('2015-12-01'),
+        dtTermino: new Date('2015-12-03'), dtTerminoInscricao: new Date('2015-12-03'), tipoEvento: '4',
+        aceitaIsencaoAta: true, ativo: true, nomeFoto: 'NO-FOTO.PNG' },
 
-    {EventoId: 5, Titulo: 'Tratamento Cognitivo',
-        Descricao: 'Workshop Tratamento Cognitivo....', Codigo: 'SXDCDFCV9', DtInicio: new Date('2014-04-19'),
-        DtTermino: new Date('2014-04-22'), DtTerminoInscricao: new Date('2014-04-22'), TipoEvento: '5',
-        AceitaIsencaoAta: true, Ativo: true, NomeFoto: 'NO-FOTO.PNG' },
+    {eventoId: 5, titulo: 'Tratamento Cognitivo',
+        descricao: 'Workshop Tratamento Cognitivo....', codigo: 'SXDCDFCV9', dtInicio: new Date('2014-04-19'),
+        dtTermino: new Date('2014-04-22'), dtTerminoInscricao: new Date('2014-04-22'), tipoEvento: '5',
+        aceitaIsencaoAta: true, ativo: true, nomeFoto: 'NO-FOTO.PNG' },
 ];
 
-/*
-    Workshop internacional e Congresso: 1
-    Workshop Internacional: 2
-    Workshop Nacional: 3
-    Congresso: 4
-    Certificação: 5
-*/

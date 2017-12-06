@@ -32,23 +32,20 @@ export class EventoListComponent implements OnInit {
   ) { }
 
   getEventos(): void {
-    this.service.getEventos().then(eventos => this.eventos = eventos);
-  }
+    this.service.getEventos().subscribe(eventos => this.eventos = eventos);
+}
+
+ngOnInit() {
+  this.getEventos();
+}
 
   onSelect(evento: Evento): void {
     this.selectedEvento = evento;
   }
 
   gotoNovoEvento() {
-      this.router.navigate(['/EventoNovo']);
+      this.router.navigate(['/Evento', 0]);
   }
 
-  gotoBuscarEvento() { }
-
-  ngOnInit() {
-    this.evento$ = this.route.paramMap.switchMap((params: ParamMap) => {
-      this.selectedId = +params.get('Id');
-      return this.service.getEventos();
-    });
-  }
+  gotoBuscareventos() { }
 }

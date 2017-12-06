@@ -1,13 +1,13 @@
 export class Evento {
-    EventoId: number;
-    Titulo: string;
-    Descricao: string;
-    Codigo: string;
-    DtInicio: Date;
-    DtTermino: Date;
-    DtTerminoInscricao: Date;
-    TipoEvento: string;
-    AceitaIsencaoAta: boolean;
-    Ativo: boolean;
-    NomeFoto: string;
+    eventoId: number;
+    titulo: string;
+    descricao: string;
+    codigo: string;
+    dtInicio: Date;
+    dtTermino: Date;
+    dtTerminoInscricao: Date;
+    tipoEvento: string;
+    aceitaIsencaoAta: boolean;
+    ativo: boolean;
+    nomeFoto: string;
 }

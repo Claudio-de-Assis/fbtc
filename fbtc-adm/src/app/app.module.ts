@@ -1,10 +1,10 @@
-import { MessageService } from './message.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MessageService } from './message.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
@@ -17,6 +17,10 @@ import { IsencaoAnuidadeModule } from './components/isencao-anuidade/isencao.anu
 import { IsencaoEventoModule } from './components/isencao-evento/isencao.evento.module';
 import { EventoModule } from './components/evento/evento.module';
 import { MessagesComponent } from './messages/messages.component';
+import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
+import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
+import { AtcRoute } from './components/shared/webapi-routes/atc.route';
+import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 
 @NgModule({
   imports: [
@@ -40,7 +44,11 @@ import { MessagesComponent } from './messages/messages.component';
   ],
   providers: [
     UserService,
-    MessageService
+    MessageService,
+    IsencaoRoute,
+    RecebimentoRoute,
+    AtcRoute,
+    EventoRoute,
   ],
   bootstrap: [AppComponent]
 })

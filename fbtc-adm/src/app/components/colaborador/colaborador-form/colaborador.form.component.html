@@ -7,34 +7,34 @@
           <div id="LineBodyCentral">
               <div id="L1C1">
                   Nome:<br>
-                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
+                  <input [(ngModel)]="colaborador.nome" size="70px" maxlength="100" required/>
               </div>
               <div id="L1C2">
                   Perfil:<br>
                   <select required
-                    [(ngModel)]="editPerfil" name="Perfil" #sexo="ngModel">
-                    <option *ngFor="let perfil of lstPerfil" [value]="perfil">{{perfil}}</option>
+                    [(ngModel)]="colaborador.tipoPerfil" name="Perfil" #sexo="ngModel">
+                    <option *ngFor="let op of optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
                 </select>
               </div>
           </div>
           <div id="LineBodyCentral">
               <div id="L2C1">
                   E-Mail:<br>
-                  <input [(ngModel)]="editEMail" size="70px" maxlength="100" type="email" required/>
+                  <input [(ngModel)]="colaborador.eMail" size="70px" maxlength="100" type="email" required/>
               </div>
               <div id="L2C2">
                 Celular:<br>
-                <input [(ngModel)]="editCelular" size="15px" maxlength="15" required/>
+                <input [(ngModel)]="colaborador.nrCelular" size="15px" maxlength="15" required/>
             </div>
           </div>
           <div id="LineBodyCentral">
              <div id="L3C1">
               Ativo:<br>
               <select required
-                [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
-                <option *ngFor="let option of lstSimNao" [value]="option">{{option}}</option>
+              [(ngModel)]="colaborador.ativo" name="Ativo">
+              <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
               </select>
-          </div>
+            </div>
             <div id="L3C2">
               <button (click)="reenviarSenha()">Reenviar Senha</button>
             </div>

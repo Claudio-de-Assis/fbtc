@@ -3,9 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-// import { RecebimentoEventoListComponent } from './components/recebimento-evento/recebimento-evento-list/recebimento.evento.list.component';
-// import { IsencaoAnuidadeListComponent } from './components/isencao-anuidade/isencao-anuidade-list/isencao.anuidade.list.component';
-
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 //    { path: 'RecebimentoEvento', component: RecebimentoEventoListComponent },

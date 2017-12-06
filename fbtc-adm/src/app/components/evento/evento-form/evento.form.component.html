@@ -1,17 +1,17 @@
 <div id="base">
   <div id="Central">
       <div id="HeaderCentral">
-      <h3>{{ title }}Dados do Evento</h3>
+      <h3>{{ title }}</h3>
       </div>
       <div id="BodyCentral">
           <div id="LineBodyCentral">
               <div id="L1C1">
                   Titulo:<br>
-                  <input [(ngModel)]="editTitulo" size="70px" maxlength="100" required/>
+                  <input [(ngModel)]="evento.titulo" size="70px" maxlength="100" required/>
               </div>
               <div id="L1C2">
                   Código:<br>
-                  <input [(ngModel)]="editCodigo" size="13px" maxlength="10"/>
+                  <input [(ngModel)]="evento.codigo" size="13px" maxlength="10"/>
               </div>
               <div id="L1C3">
                  <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
@@ -20,15 +20,15 @@
           <div id="LineBodyCentral">
               <div id="L2C1">
                   Data de Início:<br>
-                  <input [(ngModel)]="editDtInicio" size="15px" maxlength="10" type="Date" required/>
+                  <input [(ngModel)]="evento.dtInicio" size="15px" maxlength="10" type="Date" required/>
               </div>
               <div id="L2C2">
                   Data de Término:<br>
-                  <input [(ngModel)]="editDtTermino" size="15px" maxlength="10" type="Date" required/>
+                  <input [(ngModel)]="evento.dtTermino" size="15px" maxlength="10" type="Date" required/>
               </div>
               <div id="L2C3">
                 Término Inscrições:<br>
-                <input [(ngModel)]="editDtTerminoInscricao" size="15px" maxlength="10" type="Date" required/>
+                <input [(ngModel)]="evento.dtTerminoInscricao" size="15px" maxlength="10" type="Date" required/>
               </div>
               <div id="L2C4">
                 Ano:<br>
@@ -40,15 +40,15 @@
              <div id="L2C5">
                 Tipo Evento:<br>
                 <select required
-                    [(ngModel)]="editTipoEvento" name="TipoEvento" #tipoEvento="ngModel">
-                    <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
+                [(ngModel)]="evento.tipoEvento" name="tipoEvento">
+                <option *ngFor="let op of optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
                 </select>
              </div>
           </div>
           <div id="LineBodyCentral">
               <div id="L4C1">
                   Descrição:<br>
-                  <textarea [(ngModel)]="editDescricao" rows="15" cols="137"></textarea>
+                  <textarea [(ngModel)]="evento.descricao" rows="15" cols="137"></textarea>
               </div>
           </div>
           <div id="LineBodyCentral">
@@ -61,8 +61,8 @@
                         </div>
                     <div id="LstCenter">       
                         <ul class="associados">
-                            <li *ngFor="let tipoPublico of tipoPublico$ | async">
-                                <div id="LstCol1c"><span class="badge">{{ tipoPublico.TipoPublicoId }}</span>{{ tipoPublico.Nome }}</div>
+                            <li *ngFor="let tipoPublico of tiposPublicos">
+                                <div id="LstCol1c"><span class="badge">{{ tipoPublico.tipoPublicoId }}</span>{{ tipoPublico.nome }}</div>
                                 <div id="LstCol2c"><input [(ngModel)]="editValor" size="15px" maxlength="10" required/></div>
                                 <div id="LstCol3c"><input type="checkbox"></div>
                             </li>
@@ -76,15 +76,15 @@
               <div id="L6C1">
                   Aceita Isenção?:<br>
                   <select required
-                    [(ngModel)]="editAceitaIsencaoAta" name="aceitaIsencaoAta" #aceitaIsencaoAta="ngModel">
-                    <option *ngFor="let aceitaIsencaoAta of lstSimNao" [value]="aceitaIsencaoAta">{{ aceitaIsencaoAta }}</option>
+                  [(ngModel)]="evento.aceitaIsencaoAta" name="aceitaIsencaoAta">
+                  <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
                   </select>
               </div>
               <div id="L6C2">
                 Anúncio Ativo?:<br>
                 <select required
-                  [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
-                  <option *ngFor="let ativo of lstSimNao" [value]="ativo">{{ ativo }}</option>
+                  [(ngModel)]="evento.ativo" name="Ativo">
+                  <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
                 </select>
             </div>
             <div id="L6C3">

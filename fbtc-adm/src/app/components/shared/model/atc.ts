@@ -1,14 +1,14 @@
 export class Atc {
-    AtcId: number;
-    Nome: string;
-    Uf: string;
-    NomePres: string;
-    NomeVPres: string;
-    NomePSec: string;
-    NomeSSec: string;
-    NomePTes: string;
-    NomeSTes: string;
-    Site: string;
-    SiteDiretoria: string;
-    Ativo: boolean;
+    atcId: number;
+    nome: string;
+    uf: string;
+    nomePres: string;
+    nomeVPres: string;
+    nomePSec: string;
+    nomeSSec: string;
+    nomePTes: string;
+    nomeSTes: string;
+    site: string;
+    siteDiretoria: string;
+    ativo: boolean;
 }

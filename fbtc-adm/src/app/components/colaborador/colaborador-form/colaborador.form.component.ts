@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
@@ -14,23 +14,22 @@ import { Colaborador } from './../../shared/model/colaborador';
 /** ColaboradorFrm component*/
 export class ColaboradorFormComponent implements OnInit {
 
-    lstPerfil = ['Gestor do Site', 'Secretaria', 'Financeiro'];
-    lstSimNao= ['Sim', 'Não'];
+    @Input() colaborador: Colaborador;
+
+    optTipoPerfil = [
+        {name: 'Gestor do Site', value: '1'},
+        {name: 'Secretário', value: '2'},
+        {name: 'Financeiro', value: '3'}
+    ];
+
+    optBoolean = [
+        {name: 'Sim', value: 'true'},
+        {name: 'Não', value: 'false'}
+    ];
 
     private selectedId: any;
 
     title = 'Dados do Usuário - Edição';
-
-    colaborador$: Observable<Colaborador>;
-
-    colaborador: Colaborador;
-
-    editColaboradorId: number;
-    editNome: string;
-    editTipoPerfil: string;
-    editEMail: string;
-    editCelular: string;
-    editAtivo: boolean;
 
     /** ColaboradorForm ctor */
     constructor(
@@ -39,29 +38,39 @@ export class ColaboradorFormComponent implements OnInit {
         private service: ColaboradorService
     ) { }
 
+    getColaboradorById(id: number): void {
+
+        this.service.getById(id)
+            .subscribe(colaborador => this.colaborador = colaborador);
+    }
+
+    setColaborador(): void {
+
+        this.service.setColaborador()
+            .subscribe(colaborador => this.colaborador = colaborador);
+    }
+
     /** Called by Angular after ColaboradorForm component initialized */
-    ngOnInit() {
-        this.colaborador$ = this.route.paramMap
-        .switchMap((params: ParamMap) => this.service.getColaboradorById(params.get('id')));
+    ngOnInit(): void {
 
-        this.colaborador$.subscribe((colaborador: Colaborador) => {this.colaborador = colaborador});
+        const id = +this.route.snapshot.paramMap.get('id');
+        if (id > 0) {
+            this.getColaboradorById(id);
+        } else {
+            this.setColaborador();
+        }
 
-        this.editColaboradorId = this.colaborador ? this.colaborador.ColaboradorId : 0;
-        this.editNome = this.colaborador ? this.colaborador.nome : '';
-        this.editTipoPerfil = this.colaborador ? this.colaborador.TipoPerfil : null;
-        this.editEMail = this.colaborador ? this.colaborador.eMail : '';
-        this.editCelular = this.colaborador ? this.colaborador.nrCelular : '';
-        this.editAtivo = this.colaborador ? true : false;
-     }
+    }
 
      gotoColaboradores() {
-        let colaboradorId = this.colaborador ? this.colaborador.ColaboradorId : null;
+
+        let colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
         this.router.navigate(['/Colaborador', { id: colaboradorId, foo: 'foo' }]);
     }
 
     save() {
-        this.gotoColaboradores();
-    }
+        this.service.addColaborador(this.colaborador)
+        .subscribe(() => this.gotoColaboradores());    }
 
     excluir() {
         this.gotoColaboradores();

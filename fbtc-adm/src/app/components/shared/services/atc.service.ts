@@ -6,53 +6,53 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { AssociadoRoute } from './../webApi-routes/associado.route';
+import { AtcRoute } from './../webApi-routes/atc.route';
 import { MessageService } from './../../../message.service';
-import { Associado } from '../model/associado';
+import { Atc } from '../model/atc';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class AssociadoService {
+export class AtcService {
 
-    associado: Associado;
-    associado$: Observable<Associado>;
+    atc: Atc;
+    atc$: Observable<Atc>;
 
     constructor(
         private http: HttpClient,
-        private apiRoute: AssociadoRoute,
+        private apiRoute: AtcRoute,
         private messageService: MessageService) { }
 
-    getAssociados(): Observable<Associado[]> {
-        return this.http.get<Associado[]>(this.apiRoute.getAll())
+    getAtcs(): Observable<Atc[]> {
+        return this.http.get<Atc[]>(this.apiRoute.getAll())
             .pipe(
-                tap(associados => this.log('Fetched Associado')),
-                catchError(this.handleError('getAssociados()', []))
+                tap(atc => this.log('Fetched Atc')),
+                catchError(this.handleError('getAtcs()', []))
         );
     }
 
-    getById(id: number): Observable<Associado> {
-        return this.http.get<Associado>(this.apiRoute.getById(id)).pipe(
-            tap(_ => this.log(`fetched associado id=${id}`)),
-            catchError(this.handleError<Associado>(`getAssociado id=${id}`))
+    getById(id: number): Observable<Atc> {
+        return this.http.get<Atc>(this.apiRoute.getById(id)).pipe(
+            tap(_ => this.log(`fetched atc id=${id}`)),
+            catchError(this.handleError<Atc>(`getAtc id=${id}`))
           );
     }
 
-    setAssociado(): Observable<Associado> {
-        return this.http.get<Associado>(this.apiRoute.setAssociado()).pipe(
-            tap(_ => this.log(`fetched associado id=${0}`)),
-            catchError(this.handleError<Associado>(`getAssociado id=${0}`))
+    setAtc(): Observable<Atc> {
+        return this.http.get<Atc>(this.apiRoute.setAtc()).pipe(
+            tap(_ => this.log(`fetched atc id=${0}`)),
+            catchError(this.handleError<Atc>(`getAtc id=${0}`))
         );
     }
 
     //////// Save methods //////////
     /** POST: add a new Associado to the server */
-    addAssociado (associado: Associado): Observable<Associado> {
-        return this.http.post<Associado>(this.apiRoute.postAssociado(), associado, httpOptions).pipe(
-          tap((associado: Associado) => this.log(`added associado w/ id=${associado.associadoId}`)),
-          catchError(this.handleError<Associado>('addAssociado'))
+    addAtc (atc: Atc): Observable<Atc> {
+        return this.http.post<Atc>(this.apiRoute.postAtc(), atc, httpOptions).pipe(
+          tap((atc: Atc) => this.log(`added atc w/ id=${atc.atcId}`)),
+          catchError(this.handleError<Atc>('addAtc'))
         );
     }
 
@@ -79,20 +79,20 @@ export class AssociadoService {
 
     /** Log a AssociadoService message with the MessageService */
     private log(message: string) {
-        this.messageService.add('AssociadoService: ' + message);
+        this.messageService.add('AtcService: ' + message);
     }
 
     /** GET Associado by id. Return `undefined` when id not found */
-    getAssociadoNo404<Data>(id: number): Observable<Associado> {
+    getAtcNo404<Data>(id: number): Observable<Atc> {
 
-        return this.http.get<Associado[]>(this.apiRoute.getById(id))
+        return this.http.get<Atc[]>(this.apiRoute.getById(id))
         .pipe(
-            map(associados => associados[0]), // returns a {0|1} element array
+            map(atc => atc[0]), // returns a {0|1} element array
             tap(h => {
                 const outcome = h ? `fetched` : `did not find`;
-                this.log(`${outcome} associado id=${id}`);
+                this.log(`${outcome} atc id=${id}`);
             }),
-            catchError(this.handleError<Associado>(`getAssociado id=${id}`))
+            catchError(this.handleError<Atc>(`getAtc id=${id}`))
         );
     }
 

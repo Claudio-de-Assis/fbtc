@@ -1,4 +1,3 @@
-import { MessagesComponent } from './../../messages/messages.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,13 +7,17 @@ import { AssociadoListComponent } from './associado-list/associado.list.componen
 import { AssociadoFormComponent } from './associado-form/associado.form.component';
 import { AssociadoRoutingModule } from './associado.routing.module';
 import { AssociadoRoute } from '../shared/webApi-routes/associado.route';
+import { SharedModule } from '../shared/shared.module';
+import { CepCorreiosService } from '../shared/services/cep-correios.service';
+import { MessagesComponent } from './../../messages/messages.component';
+import { CepCorreiosRoute } from '../shared/webApi-routes/cep-correios.route';
 
 @NgModule({
   imports: [
       CommonModule,
       FormsModule,
       AssociadoRoutingModule,
-      // BrowserAnimationsModule
+      SharedModule
   ],
   declarations: [
       AssociadoFormComponent,
@@ -26,7 +29,9 @@ import { AssociadoRoute } from '../shared/webApi-routes/associado.route';
   ],
   providers: [
       AssociadoService,
-      AssociadoRoute
+      AssociadoRoute,
+      CepCorreiosService,
+      CepCorreiosRoute
   ]
 })
 export class AssociadoModule { }

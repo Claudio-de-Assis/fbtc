@@ -36,14 +36,14 @@
                       </div>
                       <div id="LstCenter">       
                   <ul class="associados">
-                      <li *ngFor="let colaborador of colaborador$ | async"
+                      <li *ngFor="let colaborador of colaboradores"
                           [class.selected]="colaborador.ColaboradorId === selectedId">
-                          <a [routerLink]="['/Colaborador', colaborador.ColaboradorId]">
-                              <div id="LstCol1c"><span class="badge">{{ colaborador.ColaboradorId}}</span>{{ colaborador.nome}}</div>
+                          <a [routerLink]="['/Colaborador', colaborador.colaboradorId]">
+                              <div id="LstCol1c"><span class="badge">{{ colaborador.colaboradorId}}</span>{{ colaborador.nome}}</div>
                               <div id="LstCol2c">{{colaborador.eMail}}</div>
                               <div id="LstCol3c">{{colaborador.nrCelular}}</div>
-                              <div id="LstCol4c">{{colaborador.TipoPerfil}}</div>
-                              <div id="LstCol5c">{{colaborador.ativo}}</div>
+                              <div id="LstCol4c">{{colaborador.tipoPerfil | tipoPerfil }}</div>
+                              <div id="LstCol5c">{{colaborador.ativo | booMessage }}</div>
                           </a>
                       </li>
                   </ul>

@@ -6,39 +6,41 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { TipoPublicoRoute } from './../webApi-routes/tipo-publico.route';
+import { CepCorreiosRoute } from './../webApi-routes/cep-correios.route';
 import { MessageService } from './../../../message.service';
-import { TipoPublico } from './../model/tipo-publico';
+// import { CepCorreios } from './../model/cep-correios';
+import { Endereco } from '../model/endereco';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class TipoPublicoService {
+export class CepCorreiosService {
 
-    tipoPublico: TipoPublico;
-    tipoPublico$: Observable<TipoPublico>;
+   // cepCorreios$: Observable<CepCorreios>;
+    endereco: Endereco;
+
+   /* cepCorreios: CepCorreios = {
+        bairro: '',
+        cidade: '',
+        logradouro: '',
+        estado_info: {area_km2: '', codigo_ibge: '', nome: '' },
+        cep: '',
+        cidade_info: {area_km2: '', codigo_ibge: ''},
+        estado: '' };*/
 
     constructor(
         private http: HttpClient,
-        private apiRoute: TipoPublicoRoute,
+        private apiRoute: CepCorreiosRoute,
         private messageService: MessageService) { }
 
-    getTiposPublicos(): Observable<TipoPublico[]> {
-        return this.http.get<TipoPublico[]>(this.apiRoute.getAll())
-            .pipe(
-                tap(tiposPublicos => this.log('Fetched TipoPublico')),
-                catchError(this.handleError('getTiposPublicos()', []))
+    getByCep(cep: string): Observable<Endereco> {
+        return this.http.get<Endereco>(this.apiRoute.getByCep(cep)).pipe(
+            tap(_ => this.log(`fetched CepCorreios CEP=${cep}`)),
+            catchError(this.handleError<Endereco>(`getByCep id=${cep}`))
         );
-    }
-
-    getById(id: number): Observable<TipoPublico> {
-        return this.http.get<TipoPublico>(this.apiRoute.getById(id)).pipe(
-            tap(_ => this.log(`fetched tipoPublico id=${id}`)),
-            catchError(this.handleError<TipoPublico>(`getTipoPublico id=${id}`))
-        );
-    }
+   }
 
     /**
     * Handle Http operation that failed.
@@ -63,21 +65,20 @@ export class TipoPublicoService {
 
     /** Log a AssociadoService message with the MessageService */
     private log(message: string) {
-        this.messageService.add('TipoPublicoService: ' + message);
+        this.messageService.add('cepCorreiosService: ' + message);
     }
 
     /** GET Associado by id. Return `undefined` when id not found */
-    getTipoPublicoNo404<Data>(id: number): Observable<TipoPublico> {
-        // const url = `${this.apiRoute.getById(id)}${id}`;
+    getAtcNo404<Data>(cep: string): Observable<Endereco> {
 
-        return this.http.get<TipoPublico[]>(this.apiRoute.getById(id))
+        return this.http.get<Endereco[]>(this.apiRoute.getByCep(cep))
         .pipe(
-            map(tiposPublicos => tiposPublicos[0]), // returns a {0|1} element array
+            map(cepCorreios => cepCorreios[0]), // returns a {0|1} element array
             tap(h => {
                 const outcome = h ? `fetched` : `did not find`;
-                this.log(`${outcome} tipoPublico id=${id}`);
+                this.log(`${outcome} CepCorreios cep=${cep}`);
             }),
-            catchError(this.handleError<TipoPublico>(`getTipoPublico id=${id}`))
+            catchError(this.handleError<Endereco>(`getByCep cep=${cep}`))
         );
     }
 }
