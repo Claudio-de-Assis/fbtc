@@ -110,6 +110,13 @@
   <ItemGroup>
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Persistencia\AdoNet\AssociadoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\AtcRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\ColaboradorRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\EnderecoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\EventoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\IsencaoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\RecebimentoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\TipoPublicoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

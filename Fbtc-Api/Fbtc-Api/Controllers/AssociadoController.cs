@@ -39,8 +39,14 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-
+                if (ex.GetType().Name == "InvalidOperationException")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
                 tsc.SetResult(response);
 
                 return tsc.Task;
@@ -69,8 +75,14 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-
+                if (ex.GetType().Name == "InvalidOperationException")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
                 tsc.SetResult(response);
 
                 return tsc.Task;
@@ -97,8 +109,14 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-
+                if (ex.GetType().Name == "InvalidOperationException")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
                 tsc.SetResult(response);
 
                 return tsc.Task;
@@ -106,10 +124,10 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
-        [Route("FindByFilters/{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao}")]
+        [Route("FindByFilters/{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao},{tipoPublicoId}")]
         [HttpGet]
         public Task<HttpResponseMessage> FindByFilters(string nome, string cpf,
-            string sexo, string atcId, string crp, string tipoProfissao)
+            string sexo, string atcId, string crp, string tipoProfissao, string tipoPublicoId)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -117,7 +135,7 @@ namespace Fbtc.Api.Controllers
             try
             {
                 var resultado = _associadoApplication.FindByFilters(nome, cpf, 
-                    sexo, Convert.ToInt16(atcId), crp, tipoProfissao);
+                    sexo, Convert.ToInt16(atcId), crp, tipoProfissao, Convert.ToInt32(tipoPublicoId));
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 
@@ -127,8 +145,14 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-
+                if (ex.GetType().Name == "InvalidOperationException")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
                 tsc.SetResult(response);
 
                 return tsc.Task;
@@ -158,8 +182,14 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-
+                if (ex.GetType().Name == "InvalidOperationException")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
                 tsc.SetResult(response);
 
                 return tsc.Task;

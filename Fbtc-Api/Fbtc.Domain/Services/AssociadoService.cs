@@ -21,9 +21,11 @@ namespace Fbtc.Domain.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, int atcId, string crp, string tipoProfissao)
+        public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, int atcId, 
+            string crp, string tipoProfissao, int tipoPublicoId)
         {
-            return _associadoRepository.FindByFilters(nome, cpf, sexo, atcId, crp, tipoProfissao);
+            return _associadoRepository.FindByFilters(nome, cpf, sexo, atcId, crp, 
+                tipoProfissao, tipoPublicoId);
         }
 
         public IEnumerable<Associado> GetAll()

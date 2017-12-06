@@ -26,41 +26,54 @@ namespace Fbtc.Application.Services
 
         public Associado SetAssociado() {
 
-            Associado _a = new Associado();
-
-            _a.PessoaId = 0;
-            _a.Nome = "";
-            _a.EMail = "";
-            _a.NomeFoto = "";
-            _a.Sexo = "";
-            // _a.DtNascimento;
-            _a.NrCelular = "";
-            _a.PasswordHash = "";
-            _a.Ativo = true;
-            _a.PessoaId = 0;
-            _a.ATCId = 0;
-            _a.TipoPublicoId = 0;
-            _a.Cpf = "";
-            _a.Rg = "";
-            _a.NrMatricula = "";
-            _a.Crp = "";
-            _a.Crm = "";
-            _a.NomeInstFormacao = "";
-            _a.Certificado = false;
-            // _a.DtCertificacao;
-            _a.DivulgarContato = false;
-            _a.TipoFormaContato = "";
-            _a.IntegraDiretoria = false;
-            _a.IntegraConfi = false;
-            _a.NrTelDivulgacao = "";
-            _a.ComprovanteAfiliacaoAtc = "";
-            _a.TipoProfissao = "";
-            _a.TipoTitulacao = "";
-
+            Associado _a = new Associado() {
+                PessoaId = 0,
+                Nome = "",
+                EMail = "",
+                NomeFoto = "",
+                Sexo = "",
+                DtNascimento = null,
+                NrCelular = "",
+                PasswordHash = "",
+                Ativo = true,
+                DtCadastro = null,
+                ATCId = 0,
+                TipoPublicoId = 0,
+                Cpf = "",
+                Rg = "",
+                NrMatricula = "",
+                Crp = "",
+                Crm = "",
+                NomeInstFormacao = "",
+                Certificado = false,
+                DtCertificacao = null,
+                DivulgarContato = false,
+                TipoFormaContato = "",
+                IntegraDiretoria = false,
+                IntegraConfi = false,
+                NrTelDivulgacao = "",
+                ComprovanteAfiliacaoAtc = "",
+                TipoProfissao = "",
+                TipoTitulacao = "",
+                EnderecoPessoa = new Endereco()
+                {
+                    PessoaId = 0,
+                    EnderecoId = 0,
+                    Logradouro = "",
+                    Numero = "",
+                    Complemento = "",
+                    Bairro = "",
+                    Cidade = "",
+                    Estado = "",
+                    Cep = "",
+                    TipoEndereco = ""
+                }
+            };
             return _a;
         }
 
-        public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, int atcId, string crp, string tipoProfissao)
+        public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, 
+            int atcId, string crp, string tipoProfissao, int tipoPublicoId)
         {
             string _nome, _cpf, _sexo, _crp, _tipoProfissao;
 
@@ -70,7 +83,8 @@ namespace Fbtc.Application.Services
             _crp = crp == "0" ? "" : crp;
             _tipoProfissao = tipoProfissao == "0" ? "" : tipoProfissao;
 
-            return _associadoService.FindByFilters(_nome, _cpf, _sexo, atcId, _crp, _tipoProfissao);
+            return _associadoService.FindByFilters(_nome, _cpf, _sexo, atcId, _crp, 
+                _tipoProfissao, tipoPublicoId);
         }
 
         public IEnumerable<Associado> GetAll()
@@ -92,37 +106,53 @@ namespace Fbtc.Application.Services
                 RaiseException.IfEqualsZero(a.TipoPublicoId, "Tipo de Publico não informado")
             );
 
-            Associado _a = new Associado();
+            Associado _a = new Associado() {
+                PessoaId = a.PessoaId,
+                Nome = Functions.AjustaTamanhoString(a.Nome, 100),
+                EMail = Functions.AjustaTamanhoString(a.EMail, 100),
+                NomeFoto = Functions.AjustaTamanhoString(a.NomeFoto, 32),
+                Sexo = a.Sexo,
+                DtNascimento = a.DtNascimento,
+                NrCelular = Functions.AjustaTamanhoString(a.NrCelular, 15),
+                PasswordHash = Functions.AjustaTamanhoString(a.PasswordHash, 100),
+                Ativo = a.Ativo,
+                ATCId = a.ATCId,
+                TipoPublicoId = a.TipoPublicoId,
+                Cpf = Functions.AjustaTamanhoString(a.Cpf, 15),
+                Rg = Functions.AjustaTamanhoString(a.Rg, 15),
+                NrMatricula = Functions.AjustaTamanhoString(a.NrMatricula, 15),
+                Crp = Functions.AjustaTamanhoString(a.Crp, 15),
+                Crm = Functions.AjustaTamanhoString(a.Crm, 15),
+                NomeInstFormacao = Functions.AjustaTamanhoString(a.NomeInstFormacao, 100),
+                Certificado = a.Certificado,
+                DtCertificacao = a.DtCertificacao,
+                DivulgarContato = a.DivulgarContato,
+                TipoFormaContato = a.TipoFormaContato,
+                IntegraDiretoria = a.IntegraDiretoria,
+                IntegraConfi = a.IntegraConfi,
+                NrTelDivulgacao = Functions.AjustaTamanhoString(a.NrTelDivulgacao, 15),
+                ComprovanteAfiliacaoAtc = Functions.AjustaTamanhoString(a.ComprovanteAfiliacaoAtc, 100),
+                TipoProfissao = a.TipoProfissao,
+                TipoTitulacao = a.TipoTitulacao,
+            };
 
-            _a.PessoaId = a.PessoaId;
-            _a.Nome = Functions.AjustaTamanhoString(a.Nome, 100);
-            _a.EMail = Functions.AjustaTamanhoString(a.EMail, 100);
-            _a.NomeFoto = Functions.AjustaTamanhoString(a.NomeFoto, 32);
-            _a.Sexo = a.Sexo;
-            _a.DtNascimento = a.DtNascimento;
-            _a.NrCelular = Functions.AjustaTamanhoString(a.NrCelular, 15);
-            _a.PasswordHash = Functions.AjustaTamanhoString(a.PasswordHash, 100);
-            _a.Ativo = a.Ativo;
-            _a.PessoaId = a.PessoaId;
-            _a.ATCId = a.ATCId;
-            _a.TipoPublicoId = a.TipoPublicoId;
-            _a.Cpf = Functions.AjustaTamanhoString(a.Cpf, 15);
-            _a.Rg = Functions.AjustaTamanhoString(a.Rg, 15);
-            _a.NrMatricula = Functions.AjustaTamanhoString(a.NrMatricula, 15);
-            _a.Crp = Functions.AjustaTamanhoString(a.Crp, 15);
-            _a.Crm = Functions.AjustaTamanhoString(a.Crm, 15);
-            _a.NomeInstFormacao = Functions.AjustaTamanhoString(a.NomeInstFormacao, 100);
-            _a.Certificado = a.Certificado;
-            _a.DtCertificacao = a.DtCertificacao;
-            _a.DivulgarContato = a.DivulgarContato;
-            _a.TipoFormaContato = a.TipoFormaContato;
-            _a.IntegraDiretoria = a.IntegraDiretoria;
-            _a.IntegraConfi = a.IntegraConfi;
-            _a.NrTelDivulgacao = Functions.AjustaTamanhoString(a.NrTelDivulgacao, 15);
-            _a.ComprovanteAfiliacaoAtc = Functions.AjustaTamanhoString(a.ComprovanteAfiliacaoAtc, 100);
-            _a.TipoProfissao = a.TipoProfissao;
-            _a.TipoTitulacao = a.TipoTitulacao;
-            
+            if (!string.IsNullOrWhiteSpace(a.EnderecoPessoa.Cep))
+            {
+                _a.EnderecoPessoa = new Endereco()
+                {
+                    PessoaId = a.EnderecoPessoa.PessoaId,
+                    EnderecoId = a.EnderecoPessoa.EnderecoId,
+                    Cep = Functions.AjustaTamanhoString(a.EnderecoPessoa.Cep, 10),
+                    Logradouro = Functions.AjustaTamanhoString(a.EnderecoPessoa.Logradouro, 100),
+                    Numero = Functions.AjustaTamanhoString(a.EnderecoPessoa.Numero, 10),
+                    Complemento = Functions.AjustaTamanhoString(a.EnderecoPessoa.Complemento, 100),
+                    Bairro = Functions.AjustaTamanhoString(a.EnderecoPessoa.Bairro, 100),
+                    Cidade = Functions.AjustaTamanhoString(a.EnderecoPessoa.Cidade, 100),
+                    Estado = Functions.AjustaTamanhoString(a.EnderecoPessoa.Estado, 2),
+                    TipoEndereco = Functions.AjustaTamanhoString(a.EnderecoPessoa.TipoEndereco, 1)
+                };
+            }
+
             try
             {
                 if (_a.PessoaId == 0)
@@ -138,16 +168,6 @@ namespace Fbtc.Application.Services
             {
                 throw ex;
             }
-        }
-
-        public string Insert(Associado associado)
-        {
-            return _associadoService.Insert(associado);
-        }
-
-        public string Update(int id, Associado associado)
-        {
-            return _associadoService.Update(id, associado);
         }
     }
 }

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="FBTC_ConnectionString-Web.config Connection String" description="FBTC_ConnectionString A Cadeia de Conexão usada em web.config pelo aplicativo para acessar o banco de dados." defaultValue="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FBTC-Dsv;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\C-Projetos\\fbtc\\Fbtc-Api\\Fbtc-Api\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FBTC_ConnectionString']/@connectionString" />
+  </parameter>
+</parameters>
