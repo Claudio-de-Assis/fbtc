@@ -1,7 +1,7 @@
-USE [FBTC-Prod]
+USE [FBTC-Dsv]
 GO
 
-/****** Objeto: Table [dbo].[AD_ATC] Data do Script: 22/11/2017 15:36:22 ******/
+/****** Objeto: Table [dbo].[AD_ATC] Data do Script: 05/12/2017 09:23:51 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[AD_ATC] (
     [Site]          VARCHAR (100) NULL,
     [SiteDiretoria] VARCHAR (100) NULL,
     [Ativo]         BIT           NOT NULL,
-	[Codigo]		INT,	
+    [Codigo]        INT           NULL
 );
 
 
@@ -29,9 +29,11 @@ GO
 CREATE NONCLUSTERED INDEX [IX_AD_ATC_AtcId]
     ON [dbo].[AD_ATC]([AtcId] ASC);
 
+
 GO
 ALTER TABLE [dbo].[AD_ATC]
-    ADD CONSTRAINT [PK_AD_ATC] PRIMARY KEY CLUSTERED ([AtcId] ASC);	
+    ADD CONSTRAINT [PK_AD_ATC] PRIMARY KEY CLUSTERED ([AtcId] ASC);
+
 
 GO
 ALTER TABLE [dbo].[AD_ATC]

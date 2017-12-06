@@ -1,7 +1,7 @@
-USE [FBTC-PRD]
+USE [FBTC-Dsv]
 GO
 
-/****** Objeto: Table [dbo].[AD_Associado] Data do Script: 24/11/2017 13:49:15 ******/
+/****** Objeto: Table [dbo].[AD_Associado] Data do Script: 05/12/2017 09:25:50 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,8 +13,6 @@ CREATE TABLE [dbo].[AD_Associado] (
     [PessoaId]                INT            NOT NULL,
     [AtcId]                   INT            NULL,
     [TipoPublicoId]           INT            NOT NULL,
-    [CPF]                     VARCHAR (12)   NULL,
-    [RG]                      VARCHAR (15)   NULL,
     [NrMatricula]             VARCHAR (15)   NULL,
     [CRP]                     NVARCHAR (15)  NULL,
     [CRM]                     NVARCHAR (15)  NULL,
@@ -59,17 +57,17 @@ ALTER TABLE [dbo].[AD_Associado]
 
 GO
 ALTER TABLE [dbo].[AD_Associado]
-    ADD CONSTRAINT [CK_AD_Associado_TipoProfissao] CHECK ([TipoProfissao]='7' OR [TipoProfissao]='8');
-
-
-GO
-ALTER TABLE [dbo].[AD_Associado]
-    ADD CONSTRAINT [CK_AD_Associado_TipoTitulacao] CHECK ([TipoTitulacao]='1' OR [TipoTitulacao]='2' OR [TipoTitulacao]='3' OR [TipoTitulacao]='4' OR [TipoTitulacao]='5');
-
-
-GO
-ALTER TABLE [dbo].[AD_Associado]
     ADD CONSTRAINT [CK_AD_Associado_Certificado] CHECK ([Certificado]='0' OR [Certificado]='1');
+
+
+GO
+ALTER TABLE [dbo].[AD_Associado]
+    ADD CONSTRAINT [CK_AD_Associado_DivulgarContato] CHECK ([DivulgarContato]='0' OR [DivulgarContato]='1' OR [DivulgarContato]='');
+
+
+GO
+ALTER TABLE [dbo].[AD_Associado]
+    ADD CONSTRAINT [CK_AD_Associado_TipoFormaContato] CHECK ([TipoFormaContato] IS NULL OR [TipoFormaContato]='1' OR [TipoFormaContato]='2' OR [TipoFormaContato]='3' OR [TipoFormaContato]='4' OR [TipoFormaContato]='0' OR [TipoFormaContato]='');
 
 
 GO
@@ -79,16 +77,16 @@ ALTER TABLE [dbo].[AD_Associado]
 
 GO
 ALTER TABLE [dbo].[AD_Associado]
+    ADD CONSTRAINT [CK_AD_Associado_TipoProfissao] CHECK ([TipoProfissao]='7' OR [TipoProfissao]='8' OR [TipoProfissao]='0' OR [TipoProfissao]='');
+
+
+GO
+ALTER TABLE [dbo].[AD_Associado]
     ADD CONSTRAINT [CK_AD_Associado_IntegraDiretoria] CHECK ([IntegraDiretoria]='0' OR [IntegraDiretoria]='1');
 
 
 GO
 ALTER TABLE [dbo].[AD_Associado]
-    ADD CONSTRAINT [CK_AD_Associado_TipoFormaContato] CHECK ([TipoFormaContato] IS NULL OR [TipoFormaContato]='1' OR [TipoFormaContato]='2' OR [TipoFormaContato]='3' OR [TipoFormaContato]='4');
-
-
-GO
-ALTER TABLE [dbo].[AD_Associado]
-    ADD CONSTRAINT [CK_AD_Associado_DivulgarContato] CHECK ([DivulgarContato]='0' OR [DivulgarContato]='1');
+    ADD CONSTRAINT [CK_AD_Associado_TipoTitulacao] CHECK ([TipoTitulacao]='1' OR [TipoTitulacao]='2' OR [TipoTitulacao]='3' OR [TipoTitulacao]='4' OR [TipoTitulacao]='5' OR [TipoTitulacao]='0' OR [TipoTitulacao]='');
 
 

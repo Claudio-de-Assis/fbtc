@@ -1,7 +1,7 @@
-USE [FBTC-Prod]
+USE [FBTC-Dsv]
 GO
 
-/****** Objeto: Table [dbo].[AD_Valor_Evento_Publico] Data do Script: 22/11/2017 15:56:40 ******/
+/****** Objeto: Table [dbo].[AD_Valor_Evento_Publico] Data do Script: 05/12/2017 09:24:57 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,9 +20,11 @@ GO
 CREATE NONCLUSTERED INDEX [IX_AD_Valor_Evento_Publico_ValorEventoPublicoId]
     ON [dbo].[AD_Valor_Evento_Publico]([ValorEventoPublicoId] ASC);
 
+
 GO
 ALTER TABLE [dbo].[AD_Valor_Evento_Publico]
     ADD CONSTRAINT [PK_AD_Valor_Evento_Publico] PRIMARY KEY CLUSTERED ([ValorEventoPublicoId] ASC);
+
 
 GO
 ALTER TABLE [dbo].[AD_Valor_Evento_Publico]

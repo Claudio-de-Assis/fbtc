@@ -1,7 +1,7 @@
 USE [FBTC-Dsv]
 GO
 
-/****** Objeto: Table [dbo].[AD_Pessoa] Data do Script: 24/11/2017 13:52:56 ******/
+/****** Objeto: Table [dbo].[AD_Pessoa] Data do Script: 05/12/2017 09:24:35 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,6 +11,8 @@ GO
 CREATE TABLE [dbo].[AD_Pessoa] (
     [PessoaId]     INT           IDENTITY (1, 1) NOT NULL,
     [Nome]         VARCHAR (100) NOT NULL,
+    [CPF]          VARCHAR (15)  NULL,
+    [RG]           VARCHAR (15)  NULL,
     [EMail]        VARCHAR (100) NOT NULL,
     [NomeFoto]     VARCHAR (32)  NULL,
     [Sexo]         CHAR (1)      NULL,

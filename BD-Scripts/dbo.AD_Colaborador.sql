@@ -1,7 +1,7 @@
 USE [FBTC-Dsv]
 GO
 
-/****** Objeto: Table [dbo].[AD_Colaborador] Data do Script: 22/11/2017 16:58:49 ******/
+/****** Objeto: Table [dbo].[AD_Colaborador] Data do Script: 05/12/2017 09:24:07 ******/
 SET ANSI_NULLS ON
 GO
 
