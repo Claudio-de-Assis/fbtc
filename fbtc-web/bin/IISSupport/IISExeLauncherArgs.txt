@@ -1,8 +1,0 @@
--p C:\Program Files\dotnet\dotnet.exe
--pidFile C:\C-Projetos\fbtc\fbtc-web\bin\IISSupport\pidfile.txt
--wd C:\C-Projetos\fbtc\fbtc-web
--a exec "C:\C-Projetos\fbtc\fbtc-web\bin\Debug\netcoreapp2.0\fbtc-web.dll"
--pipe d4375d96-3a32-41c3-adcb-fd792bb0a40b
--pr fbtc-web
--owningPid 11880
--env ASPNETCORE_CONTENTROOT=C:\C-Projetos\fbtc\fbtc-web|ASPNETCORE_HOSTINGSTARTUPASSEMBLIES=Microsoft.AspNetCore.ApplicationInsights.HostingStartup|ASPNETCORE_preventHostingStartup=True|ASPNETCORE_ENVIRONMENT=Development|COMPLUS_ForceENC=1|
