@@ -6,10 +6,13 @@ import { Observable } from 'rxjs/Observable';
 import { AssociadoService } from '../../shared/services/associado.service';
 import { CepCorreiosService } from './../../shared/services/cep-correios.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { AtcService } from './../../shared/services/atc.service';
+
 import { Associado } from '../../shared/model/associado';
-// import { EnderecoCep } from '../../shared/model/endereco-cep';
-import { debug } from 'util';
 import { TipoPublico } from '../../shared/model/tipo-publico';
+import { Atc } from './../../shared/model/atc';
+
+import { debug } from 'util';
 
 @Component({
     selector: 'app-associado-form',
@@ -21,16 +24,10 @@ import { TipoPublico } from '../../shared/model/tipo-publico';
 export class AssociadoFormComponent implements OnInit {
 
     @Input() associado: Associado;
-   /* @Input() cepCorreios: CepCorreios = {
-        bairro: '',
-        cidade: '',
-        logradouro: '',
-        estado_info: {area_km2: '', codigo_ibge: '', nome: '' },
-        cep: '',
-        cidade_info: {area_km2: '', codigo_ibge: ''},
-        estado: '' };*/
 
     tiposPublicos: TipoPublico[];
+    atcs: Atc[];
+
 
     optSexo = [
         {name: 'Masculino', value: 'M'},
@@ -79,7 +76,8 @@ export class AssociadoFormComponent implements OnInit {
         private serviceTP: TipoPublicoService,
         private router: Router,
         private route: ActivatedRoute,
-        private serviceCEP: CepCorreiosService
+        private serviceCEP: CepCorreiosService,
+    //    private serviceAtc: AtcService
     ) { }
 
     getAssociadoById(id: number): void {
@@ -130,6 +128,12 @@ export class AssociadoFormComponent implements OnInit {
 
         this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
     }
+
+    getAtcs(): void {
+
+      //  this.serviceAtc.getAtcs().subscribe(atcs => this.atcs = atcs);
+    }
+
 
     getEnderecoByCep(): void {
 

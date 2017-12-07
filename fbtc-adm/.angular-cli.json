@@ -21,7 +21,13 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "./content/vendor/jquery/jquery.min.js",
+        "./content/vendor/bootstrap/js/bootstrap.min.js",
+        "./content/vendor/metisMenu/metisMenu.min.js",
+        "./content/dist/js/sb-admin-2.js",
+        "./content/dist/js/fbtc-adm.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

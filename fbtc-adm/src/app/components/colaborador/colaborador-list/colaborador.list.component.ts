@@ -14,9 +14,17 @@ import { ColaboradorService } from '../../shared/services/colaborador.service';
 export class ColaboradorListComponent implements OnInit {
 
   lstPerfil = ['Gestor do Site', 'Secretaria', 'Financeiro'];
-  lstStatus = ['Todos', 'Sim', 'Não'];
 
-  title = 'Consulta de Usários';
+  optBoolean = [
+    {name: 'Todos', value: null},
+    {name: 'Sim', value: true},
+    {name: 'Não', value: false}
+  ];
+
+  title = 'Consulta de Colaborador';
+
+  editAtivo: string = '';
+
 
   colaboradores: Colaborador[];
 
@@ -45,4 +53,8 @@ export class ColaboradorListComponent implements OnInit {
   }
 
   gotoBuscarColaborador() { }
+
+  excluir() {
+    // this.gotoColaboradores();
+}
 }

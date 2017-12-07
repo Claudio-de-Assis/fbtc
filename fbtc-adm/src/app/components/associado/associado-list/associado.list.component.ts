@@ -7,6 +7,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Associado } from '../../shared/model/associado';
 import { AssociadoService } from '../../shared/services/associado.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { Atc } from '../../shared/model/atc';
+import { AtcService } from '../../shared/services/atc.service';
 
 @Component({
     selector: 'app-associado-list',
@@ -18,14 +20,29 @@ import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 export class AssociadoListComponent implements OnInit {
 
  /* Tipos Aceitos: Psicólogo: 7, Médico: 8 */
-    lstSexo = ['Masculino', 'Feminino'];
-    lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
-    lstProfissao= ['Médico', 'Psicólogo'];
+    // lstSexo = ['Masculino', 'Feminino'];
+    // lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
+    // lstProfissao= ['Médico', 'Psicólogo'];
+
+
+    optSexo = [
+        {name: 'Masculino', value: 'M'},
+        {name: 'Feminino', value: 'F'}
+    ];
+
+    optTipoProfissao = [
+        {name: 'Psicólogo', value: '7'},
+        {name: 'Médico', value: '8'}
+    ];
+
+
+
 
     title = 'Consulta de Associados';
 
     associados: Associado[];
     tiposPublicos: TipoPublico[];
+    atcs: Atc[];
 
     private selectedAssociado: Associado;
 
@@ -34,11 +51,16 @@ export class AssociadoListComponent implements OnInit {
         private service: AssociadoService,
         private serviceTP: TipoPublicoService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        // private serviceAtc: AtcService
     ) { }
 
     getAssociados(): void {
         this.service.getAssociados().subscribe(associados => this.associados = associados);
+    }
+
+    getAtcs(): void {
+    //    this.serviceAtc.getAtcs.subscribe(atcs => this.atcs = atcs);
     }
 
     /** Called by Angular after AssociadoList component initialized */
@@ -46,6 +68,8 @@ export class AssociadoListComponent implements OnInit {
         this.getTiposPublicos();
 
         this.getAssociados();
+
+        this.getAtcs();
     }
 
     onSelect(associado: Associado): void {

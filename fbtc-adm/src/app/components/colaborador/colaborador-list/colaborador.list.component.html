@@ -1,63 +1,109 @@
-<div id="base">
-  <div id="Central">
-      <div id="HeaderCentral">
-          <h3>{{ title }}</h3>
-      </div>
-      <div id="BodyCentral">
-          <div id="LineBodyCentral">
-              <div id="L1C1">
-                  Nome:<br>
-                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
-              </div>
-              <div id="L1C2">
-                  Perfil:<br>
-                  <select required
-                  [(ngModel)]="editPerfil" name="Perfil" #sexo="ngModel">
-                  <option *ngFor="let perfil of lstPerfil" [value]="perfil">{{perfil}}</option>
-              </select>
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro
             </div>
-              <div id="L1C3">
-                Status:<br>
-                <select required
-                    [(ngModel)]="editStatus" name="Status" #sexo="ngModel">
-                    <option *ngFor="let status of lstStatus" [value]="status">{{status}}</option>
-                </select>
+            <div class="panel-body">
+                <div class="row">
+                    <form role="form">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Nome:</label>
+                                <input [(ngModel)]="editNome" class="form-control" maxlength="100" required/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Perfil:</label>                          
+                                        <select required [(ngModel)]="editPerfil" name="Perfil"  class="form-control">
+                                            <option *ngFor="let perfil of lstPerfil" [value]="perfil">{{perfil}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Status:</label><br>
+                                        <div>
+                                            <label required class="radion-inline" *ngFor="let op of optBoolean; let idx = index">
+                                                <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-              <div id="L2C1">
-                      <button (click)="gotoBuscarColaborador()">Pesquisar</button>
-                      <button (click)="gotoNovoColaborador()">Novo</button>
-              </div>
-              <div id="L5C1">
-                  <fieldset> 
-                      <legend>Listagem de Usuários</legend>
-                      <div id="Lst">
-                      <div id="LstHeader">
-                          <div id="LstCol1">Nome</div><div id="LstCol2">E-Mail</div><div id="LstCol3">Celular</div><div id="LstCol4">Perfil</div><div id="LstCol5">Status</div>
-                      </div>
-                      <div id="LstCenter">       
-                  <ul class="associados">
-                      <li *ngFor="let colaborador of colaboradores"
-                          [class.selected]="colaborador.ColaboradorId === selectedId">
-                          <a [routerLink]="['/Colaborador', colaborador.colaboradorId]">
-                              <div id="LstCol1c"><span class="badge">{{ colaborador.colaboradorId}}</span>{{ colaborador.nome}}</div>
-                              <div id="LstCol2c">{{colaborador.eMail}}</div>
-                              <div id="LstCol3c">{{colaborador.nrCelular}}</div>
-                              <div id="LstCol4c">{{colaborador.tipoPerfil | tipoPerfil }}</div>
-                              <div id="LstCol5c">{{colaborador.ativo | booMessage }}</div>
-                          </a>
-                      </li>
-                  </ul>
-                      </div>
-                      <div id="LstFooter">&nbsp;
-                              <button (click)="gotoPrimeiraPagina()">|<<</button>
-                              <button (click)="gotoPaginaAnterio()"><<</button>
-                              <button (click)="gotoProximaPagina()">>></button>
-                              <button (click)="gotoUltimaPagina()">>>|</button>
-                          </div>
-                  </div>
-                  </fieldset>
-              </div>
-          </div>
-      </div>            
-  </div>
+            <div class="panel-footer text-right">
+                <button class="btn btn-primary" (click)="gotoBuscarColaborador()">Pesquisar</button>
+                <button class="btn btn-default" (click)="gotoNovoColaborador()">Novo</button>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Resultado do Filtro</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-Mail</th>
+                                <th>Celular</th>
+                                <th>Perfil</th>
+                                <th>Status</th>
+                                <th>A&ccedil;&otilde;es</th>
+                            </tr>
+                        </thead>
+                        <tbody class="associados">
+                            <tr *ngFor="let colaborador of colaboradores"
+                                [class.selected]="colaborador.colaboradorId === selectedId">
+                                <td>{{ colaborador.ColaboradorId}} {{ colaborador.nome}}</td>
+                                <td>{{colaborador.eMail}}</td>
+                                <td>{{colaborador.nrCelular}}</td>
+                                <td>{{colaborador.tipoPerfil | tipoPerfil }}</td>
+                                <td>{{colaborador.ativo | booMessage }}</td>
+                                <td>
+                                    <a [routerLink]="['/Colaborador', colaborador.colaboradorId]"><i class="fa fa-pencil text-primary" (click)="gotoPrimeiraPagina()"></i></a>
+                                    <i class="fa fa-trash text-danger" data-toggle="modal" data-target="#myModal"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-center">
+                    <div class="btn-group">
+                        <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                        <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                        <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                        <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Model da mensagem de exclusão -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Confirmação de Exclusão</h4>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir <strong>Rodolpho Silva</strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger">Confirmar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

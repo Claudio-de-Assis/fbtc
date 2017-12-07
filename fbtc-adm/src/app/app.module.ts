@@ -19,7 +19,7 @@ import { EventoModule } from './components/evento/evento.module';
 import { MessagesComponent } from './messages/messages.component';
 import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
-import { AtcRoute } from './components/shared/webapi-routes/atc.route';
+// import { AtcRoute } from './components/shared/webapi-routes/atc.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 
 @NgModule({
@@ -47,7 +47,7 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
     MessageService,
     IsencaoRoute,
     RecebimentoRoute,
-    AtcRoute,
+    // AtcRoute,
     EventoRoute,
   ],
   bootstrap: [AppComponent]

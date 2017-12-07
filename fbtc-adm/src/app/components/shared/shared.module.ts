@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 
 import { BooMessagePipe } from './pipes/boolean-viewer.pipe';
 import { TipoPerfilPipe } from './pipes/tipo-perfil.pipe';
-import { FindNameInTipoPublico } from './pipes/find-name-in-tipo-publico.pipe';
 import { TipoEventoPipe } from './pipes/tipo-evento.pipe';
+import { FindNameInTipoPublicoPipe } from './pipes/find-name-in-tipo-publico.pipe';
+// import { AtcRoute } from './webapi-routes/atc.route';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { TipoEventoPipe } from './pipes/tipo-evento.pipe';
   ],
   declarations: [
     BooMessagePipe,
-    FindNameInTipoPublico,
+    FindNameInTipoPublicoPipe,
     TipoPerfilPipe,
     TipoEventoPipe
     // CommonModule
@@ -21,9 +22,13 @@ import { TipoEventoPipe } from './pipes/tipo-evento.pipe';
   ],
   exports: [
     BooMessagePipe,
-    FindNameInTipoPublico,
+    FindNameInTipoPublicoPipe,
     TipoPerfilPipe,
     TipoEventoPipe
+  ],
+  providers: [
+   // AtcRoute
+
   ]
 })
 export class SharedModule { }

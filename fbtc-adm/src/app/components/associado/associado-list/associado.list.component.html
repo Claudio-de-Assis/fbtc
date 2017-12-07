@@ -1,87 +1,126 @@
-<div id="base">
-    <div id="Central">
-        <div id="HeaderCentral">
-            <h3>{{ title }}</h3>
-        </div>
-        <div id="BodyCentral">
-            <div id="LineBodyCentral">
-                <div id="L1C1">
-                    Nome:<br>
-                    <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Filtro
                 </div>
-                <div id="L1C2">
-                    CPF:<br>
-                    <input [(ngModel)]="editCPF" size="15px" maxlength="15"/>
-                </div>
-                <div id="L2C1">
-                    E-Mail:<br>
-                    <input [(ngModel)]="editEMail" size="70px" maxlength="100" type="email" required/>
-                </div>
-                <div id="L2C2">
-                    Sexo:<br>
-                    <select required
-                        [(ngModel)]="editSexo" name="Sexo" #sexo="ngModel">
-                        <option *ngFor="let sexo of lstSexo" [value]="sexo">{{sexo}}</option>
-                    </select>
-                </div>
-                <div id="L2C3">
-                    ATC:<br>
-                    <select required
-                        [(ngModel)]="editATC" name="ATC" #atc="ngModel">
-                        <option *ngFor="let ATC of lstAtc" [value]="ATC">{{ATC}}</option>
-                    </select>
-                </div>                        
-                <div id="L3C1">
-                    CRP:<br>
-                    <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
-                </div> 
-                <div id="L3C2">
-                    CRM:<br>
-                    <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
-                </div> 
-                <div id="L3C3">
-                    Profissão:<br>
-                    <select required
-                    [(ngModel)]="editATCProfissao" name="profissao" #profissao="ngModel">
-                    <option *ngFor="let PROFISSAO of lstProfissao" [value]="PROFISSAO">{{ PROFISSAO }}</option>
-                </select>
-            </div> 
-
-                <div id="L4C1">
-                        <button (click)="gotoBuscarAssociado()">Pesquisar</button>
-                        <button (click)="gotoNovoAssociado()">Novo</button>
-                </div>
-                <div id="L5C1">
-                    <fieldset> 
-                        <legend>Listagem de Associados</legend>
-                        <div id="Lst">
-                        <div id="LstHeader">
-                            <div id="LstCol1">Nome</div><div id="LstCol2">E-Mail</div><div id="LstCol3">Telefone</div><div id="LstCol4">CPF</div><div id="LstCol5">Tipo Associado</div>
-                        </div>
-                        <div id="LstCenter">       
-                    <ul class="associados">
-                        <li *ngFor="let associado of associados"
-                            [class.selected]="associado.associadoId === selectedId">
-                            <a [routerLink]="['/Associado', associado.associadoId]">
-                                <div id="LstCol1c"><span class="badge">{{ associado.associadoId }}</span>{{ associado.nome }}</div>
-                                <div id="LstCol2c">{{associado.eMail}}</div>
-                                <div id="LstCol3c">{{associado.nrCelular}}</div>
-                                <div id="LstCol4c">{{associado.cpf}}</div>
-                                <div id="LstCol5c">{{associado.tipoPublicoId}}</div>
-                            </a>
-                        </li>
-                    </ul>
-                        </div>
-                        <div id="LstFooter">&nbsp;
-                                <button (click)="gotoPrimeiraPagina()">|<<</button>
-                                <button (click)="gotoPaginaAnterio()"><<</button>
-                                <button (click)="gotoProximaPagina()">>></button>
-                                <button (click)="gotoUltimaPagina()">>>|</button>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Nome:</label>
+                                <input [(ngModel)]="editNome" class="form-control" maxlength="100" required/>
                             </div>
+                            <div class="form-group">
+                                <label>E-mail:</label>
+                                <input [(ngModel)]="editEMail" 
+                                    maxlength="100" type="email" required
+                                    class="form-control" 
+                                    placeholder="E-mail" />
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>CRP:</label>
+                                        <input [(ngModel)]="editCRP" class="form-control" maxlength="15"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>CRM:</label>
+                                        <input [(ngModel)]="editCRP" class="form-control" maxlength="15"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>CPF:</label>
+                                <input [(ngModel)]="editCPF" class="form-control" maxlength="15" placeholder="000.000.000-00" />
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Sexo:</label><br>
+                                        <select required
+                                            [(ngModel)]="editSexo" name="Sexo" #sexo="ngModel" class="form-control">
+                                            <option *ngFor="let sexo of lstSexo" [value]="sexo">{{sexo}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>ATC:</label>
+                                        <select required
+                                            [(ngModel)]="editATC" name="ATC" #atc="ngModel" class="form-control">
+                                            <option *ngFor="let ATC of lstAtc" [value]="ATC">{{ATC}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label>Profissão</label>
+                                <select required
+                                    [(ngModel)]="editATCProfissao" name="profissao" #profissao="ngModel" class="form-control">
+                                    <option *ngFor="let PROFISSAO of lstProfissao" [value]="PROFISSAO">{{ PROFISSAO }}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    </fieldset>
+                </div>
+                <div class="panel-footer text-right">
+                    <div class="row ">
+                        <div class="col-lg-12">    
+                            <button type="submit" class="btn btn-primary " (click)="gotoBuscarAssociado()">Pesquisar</button>
+                            <button type="reset" class="btn btn-default" (click)="gotoNovoAssociado()">Novo</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>            
-    </div>
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Resultado do Filtro
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>E-Mail</th>
+                                        <th>Telefone</th>
+                                        <th>CPF</th>
+                                        <th>Tipo Associado</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="associados">
+                                    <tr *ngFor="let associado of associados"
+                                        [class.selected]="associado.associadoId === selectedId">
+                                        <td>{{ associado.nome }}</td>
+                                        <td>{{associado.eMail}}</td>
+                                        <td>{{associado.nrCelular}}</td>
+                                        <td>{{associado.cpf}}</td>
+                                        <td>{{associado.tipoPublicoId | findNameInTipoPublico : tiposPublicos}}</td>
+                                        <td>
+                                            <a [routerLink]="['/Associado', associado.associadoId]"><i class="fa fa-pencil text-default"></i></a>
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                    <div class="panel-footer text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                            <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                            <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                            <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+        </div>
 </div>

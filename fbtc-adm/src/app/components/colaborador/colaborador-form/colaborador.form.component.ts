@@ -23,13 +23,14 @@ export class ColaboradorFormComponent implements OnInit {
     ];
 
     optBoolean = [
-        {name: 'Sim', value: 'true'},
-        {name: 'Não', value: 'false'}
+        {name: 'Sim', value: true},
+        {name: 'Não', value: false}
     ];
 
     private selectedId: any;
 
-    title = 'Dados do Usuário - Edição';
+    title = 'Colaborador';
+    badget = '';
 
     /** ColaboradorForm ctor */
     constructor(
@@ -55,8 +56,10 @@ export class ColaboradorFormComponent implements OnInit {
 
         const id = +this.route.snapshot.paramMap.get('id');
         if (id > 0) {
+            this.badget = 'Edição';
             this.getColaboradorById(id);
         } else {
+            this.badget = 'Novo';
             this.setColaborador();
         }
 

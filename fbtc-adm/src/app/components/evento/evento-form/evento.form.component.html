@@ -1,103 +1,145 @@
-<div id="base">
-  <div id="Central">
-      <div id="HeaderCentral">
-      <h3>{{ title }}</h3>
-      </div>
-      <div id="BodyCentral">
-          <div id="LineBodyCentral">
-              <div id="L1C1">
-                  Titulo:<br>
-                  <input [(ngModel)]="evento.titulo" size="70px" maxlength="100" required/>
-              </div>
-              <div id="L1C2">
-                  Código:<br>
-                  <input [(ngModel)]="evento.codigo" size="13px" maxlength="10"/>
-              </div>
-              <div id="L1C3">
-                 <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
-              </div>
-          </div>
-          <div id="LineBodyCentral">
-              <div id="L2C1">
-                  Data de Início:<br>
-                  <input [(ngModel)]="evento.dtInicio" size="15px" maxlength="10" type="Date" required/>
-              </div>
-              <div id="L2C2">
-                  Data de Término:<br>
-                  <input [(ngModel)]="evento.dtTermino" size="15px" maxlength="10" type="Date" required/>
-              </div>
-              <div id="L2C3">
-                Término Inscrições:<br>
-                <input [(ngModel)]="evento.dtTerminoInscricao" size="15px" maxlength="10" type="Date" required/>
-              </div>
-              <div id="L2C4">
-                Ano:<br>
-                <select required
-                    [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
-                    <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
-                </select>
-             </div>
-             <div id="L2C5">
-                Tipo Evento:<br>
-                <select required
-                [(ngModel)]="evento.tipoEvento" name="tipoEvento">
-                <option *ngFor="let op of optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-             </div>
-          </div>
-          <div id="LineBodyCentral">
-              <div id="L4C1">
-                  Descrição:<br>
-                  <textarea [(ngModel)]="evento.descricao" rows="15" cols="137"></textarea>
-              </div>
-          </div>
-          <div id="LineBodyCentral">
-              <div id="L5C1">
-                <fieldset> 
-                    <legend>Faixas de Preços</legend>
-                    <div id="Lst">
-                        <div id="LstHeader">
-                         <div id="LstCol1">Tipo de Público</div><div id="LstCol2">Valor</div><div id="LstCol3">Ativo</div>
+<h1 class="page-header">Cadastro de Evento</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados do evento</div>
+            <div class="panel-body">
+                <div class="row">
+                    <form role="form">
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <label>Titulo:</label>
+                                        <input [(ngModel)]="editTitulo" class="form-control" maxlength="100" required/>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>Ano:</label>
+                                        <select required class="form-control"
+                                            [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
+                                            <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label> Data de Início:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input [(ngModel)]="editDtInicio" class="form-control" maxlength="10" type="Date" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Data de Término:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input [(ngModel)]="editDtTermino" class="form-control" maxlength="10" type="Date" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Término Inscrições:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input [(ngModel)]="editDtTerminoInscricao" class="form-control" size="15px" maxlength="10" type="Date" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    <div id="LstCenter">       
-                        <ul class="associados">
-                            <li *ngFor="let tipoPublico of tiposPublicos">
-                                <div id="LstCol1c"><span class="badge">{{ tipoPublico.tipoPublicoId }}</span>{{ tipoPublico.nome }}</div>
-                                <div id="LstCol2c"><input [(ngModel)]="editValor" size="15px" maxlength="10" required/></div>
-                                <div id="LstCol3c"><input type="checkbox"></div>
-                            </li>
-                        </ul>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>C&oacute;digo:</label>
+                                            <input [(ngModel)]="editCodigo" class="form-control" maxlength="10"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tipo Evento:</label>
+                                            <select required class="form-control" 
+                                                [(ngModel)]="editTipoEvento" name="TipoEvento" #tipoEvento="ngModel">
+                                                <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Imagem do evento:</label><br>
+                                        <img class="imagemEvento" src="../assets/no-foto.png" alt="Não disponível" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">   
+                        <label>Descrição:</label>
+                        <textarea [(ngModel)]="editDescricao" class="form-control" rows="15"></textarea> 
                     </div>
                 </div>
-                </fieldset>
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-              <div id="L6C1">
-                  Aceita Isenção?:<br>
-                  <select required
-                  [(ngModel)]="evento.aceitaIsencaoAta" name="aceitaIsencaoAta">
-                  <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                  </select>
-              </div>
-              <div id="L6C2">
-                Anúncio Ativo?:<br>
-                <select required
-                  [(ngModel)]="evento.ativo" name="Ativo">
-                  <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-            </div>
-            <div id="L6C3">
-                <button (click)="gotoPreviewAnuncio()">Preview do Anúncio</button>
             </div>
         </div>
-      </div>
-      <div id="FooterCentral">
-          <div id="FT1C1">
-             <button (click)="gotoPreviewAnuncio()">Retornar</button>
-             <button (click)="gotoSaveEvento()">Salvar</button>
-             <button (click)="gotoDeleteEvento()">Excluir</button>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Faixa de Pre&ccedil;os
             </div>
-      </div>
-  </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Público</th>
+                                <th>Valor</th>
+                                <th>Ativo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tipoPublico of tipoPublico$ | async">
+                                <td><span class="badge">{{ tipoPublico.TipoPublicoId }}</span>{{ tipoPublico.Nome }}</td>
+                                <td><input [(ngModel)]="editValor" size="15px" maxlength="10" required/></td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Extra</div>
+            <div class="panel-body">
+                <div class="row">
+                    <form>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Aceita Isenção?</label>
+                                <select required class="form-control"
+                                    [(ngModel)]="editAceitaIsencaoAta" name="aceitaIsencaoAta" #aceitaIsencaoAta="ngModel">
+                                    <option *ngFor="let aceitaIsencaoAta of lstSimNao" [value]="aceitaIsencaoAta">{{ aceitaIsencaoAta }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Anúncio Ativo?</label>         
+                                <select required class="form-control"
+                                    [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
+                                    <option *ngFor="let ativo of lstSimNao" [value]="ativo">{{ ativo }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <button class="btn btn-default" (click)="gotoPreviewAnuncio()"><i class="fa fa-eye"></i> Preview do Anúncio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-default" (click)="gotoPreviewAnuncio()"><i class="fa fa-back"></i>Retornar</button>
+                <button class="btn btn-default" (click)="gotoSaveEvento()">Salvar</button>
+                <button class="btn btn-default" (click)="gotoDeleteEvento()">Excluir</button>
+            </div>
+        </div>
+    </div>
 </div>

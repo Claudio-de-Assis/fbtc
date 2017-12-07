@@ -1,16 +1,16 @@
 import { TipoPublico } from '../model/tipo-publico';
 
 export const TIPOSPUBLICOS: TipoPublico[] = [
-    {TipoPublicoId: 1, Nome: 'Profissional - Associado',
-        DescricaoValor: 'Valores para profissionais associados...', Ativo: true},
-    {TipoPublicoId: 2, Nome: 'Profissional - Não Associado',
-        DescricaoValor: 'Valores para profissionais não associados...', Ativo: true},
-    {TipoPublicoId: 3, Nome: 'Estudante de Pós - Associado',
-        DescricaoValor: 'Valores para estudantes de Pós associados...', Ativo: true},
-    {TipoPublicoId: 4, Nome: 'Estudante de Pós - Não Associado',
-        DescricaoValor: 'Valores para estudantes de Pós não associados...', Ativo: true},
-    {TipoPublicoId: 5, Nome: 'Estudante - Associado',
-        DescricaoValor: 'Valores para estudantes associados...', Ativo: true},
-    {TipoPublicoId: 6, Nome: 'Estudante - Não Associado',
-        DescricaoValor: 'Valores para estudantes não associados...', Ativo: true},
+    {tipoPublicoId: 1, nome: 'Profissional - Associado',
+        descricaoValor: 'Valores para profissionais associados...', ativo: true},
+    {tipoPublicoId: 2, nome: 'Profissional - Não Associado',
+        descricaoValor: 'Valores para profissionais não associados...', ativo: true},
+    {tipoPublicoId: 3, nome: 'Estudante de Pós - Associado',
+        descricaoValor: 'Valores para estudantes de Pós associados...', ativo: true},
+    {tipoPublicoId: 4, nome: 'Estudante de Pós - Não Associado',
+        descricaoValor: 'Valores para estudantes de Pós não associados...', ativo: true},
+    {tipoPublicoId: 5, nome: 'Estudante - Associado',
+        descricaoValor: 'Valores para estudantes associados...', ativo: true},
+    {tipoPublicoId: 6, nome: 'Estudante - Não Associado',
+        descricaoValor: 'Valores para estudantes não associados...', ativo: true},
 ];

@@ -1,63 +1,90 @@
-<div id="base">
-  <div id="Central">
-      <div id="HeaderCentral">
-          <h3>{{ title }}</h3>
-      </div>
-      <div id="BodyCentral">
-          <div id="LineBodyCentral">
-              <div id="L1C1">
-                  Nome:<br>
-                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
-              </div>
-              <div id="L1C2">
-                  Ano:<br>
-                  <select required
-                  [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
-                  <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
-              </select>
+<h1 class="page-header">{{ title }} <span class="badge badge-default">New</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro
             </div>
-              <div id="L1C3">
-                Tipo de evento:<br>
-                <select required
-                    [(ngModel)]="editTipoEvento" name="TipoEvento" #sexo="ngModel">
-                    <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
-                </select>
+            <div class="panel-body">
+                <div class="row">
+                    <form role="form">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Nome:</label>
+                                <input [(ngModel)]="editNome" class="form-control" maxlength="100" required/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Ano:</label>
+                                        <select required class="form-control"
+                                            [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
+                                            <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Tipo de evento:</label>
+                                        <select required class="form-control"
+                                            [(ngModel)]="editTipoEvento" name="TipoEvento" #sexo="ngModel">
+                                            <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-              <div id="L2C1">
-                      <button (click)="gotoBuscarEvento()">Pesquisar</button>
-                      <button (click)="gotoNovoEvento()">Novo</button>
-              </div>
-              <div id="L5C1">
-                  <fieldset> 
-                      <legend>Listagem de Eventos</legend>
-                      <div id="Lst">
-                      <div id="LstHeader">
-                          <div id="LstCol1">Nome</div><div id="LstCol2">Tipo</div><div id="LstCol3">Início</div><div id="LstCol4"></div><div id="LstCol5"></div>
-                      </div>
-                      <div id="LstCenter">       
-                  <ul class="associados">
-                      <li *ngFor="let evento of eventos"
-                          [class.selected]="evento.eventoId === selectedId">
-                          <a [routerLink]="['/Evento', evento.eventoId]">
-                              <div id="LstCol1c">{{ evento.titulo }}</div>
-                              <div id="LstCol2c">{{ evento.tipoEvento  | tipoEvento }}</div>
-                              <div id="LstCol3c">{{ evento.dtInicio | date: 'dd/MM/yyyy' }}</div>
-                              <div id="LstCol4c"></div>
-                              <div id="LstCol5c"></div>
-                          </a>
-                      </li>
-                  </ul>
-                      </div>
-                      <div id="LstFooter">&nbsp;
-                              <button (click)="gotoPrimeiraPagina()">|<<</button>
-                              <button (click)="gotoPaginaAnterio()"><<</button>
-                              <button (click)="gotoProximaPagina()">>></button>
-                              <button (click)="gotoUltimaPagina()">>>|</button>
-                          </div>
-                  </div>
-                  </fieldset>
-              </div>
-          </div>
-      </div>            
-  </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <button class="btn btn-primary" (click)="gotoBuscarEvento()">Pesquisar</button>
+                        <button class="btn btn-default" (click)="gotoNovoEvento()">Novo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Listagem de Eventos</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>Tipo</td>
+                                    <td>Início</td>
+                                    <td>Código</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let evento of evento$ | async">
+                                    <td><span class="badge badge-primary">{{ evento.EventoId }}</span> {{ evento.Titulo }}</td>
+                                    <td>{{ evento.TipoEvento }}</td>
+                                    <td>{{ evento.DtInicio | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ evento.Codigo }}</td>    
+                                    <td>
+                                        <a [routerLink]="['/Evento', evento.EventoId]"><i class="fa fa-eye text-info"></i></a>&nbsp;
+                                        <a [routerLink]="['/Evento', evento.EventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                        <a [routerLink]="['/Evento', evento.EventoId]"><i class="fa fa-trash text-danger"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,16 +1,16 @@
 <app-shared-header></app-shared-header>
-<div>
-  <div class='container'>
-      <nav>
-          <a routerLink="/Associado" routerLinkActtive="active">Associados</a>
-          <a routerLink="/Colaborador" routerLinkActtive="active">Colaboradores</a>
-          <a routerLink="/Evento" routerLinkActtive="active">Eventos</a>
-          <a routerLink="/RecebimentoAnuidade" routerLinkActtive="active">Recebimento de Anuidades</a>
-          <a routerLink="/RecebimentoEvento" routerLinkActtive="active">Recebimento de Eventos</a>
-          <a routerLink="/IsencaoAnuidade" routerLinkActtive="active">Isencao para Anuidades</a>
-          <a routerLink="/IsencaoEvento" routerLinkActtive="active">Isencao para Eventos</a>
-      </nav>
-  </div>
-  <router-outlet></router-outlet>
-  <app-messages></app-messages>
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <router-outlet></router-outlet>
+                <app-messages></app-messages>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
 </div>
+<!-- /#page-wrapper -->
