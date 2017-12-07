@@ -39,9 +39,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -75,9 +76,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -109,9 +111,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -145,9 +148,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -182,9 +186,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {

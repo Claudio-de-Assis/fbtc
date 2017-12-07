@@ -40,9 +40,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -64,7 +65,7 @@ namespace Fbtc.Api.Controllers
 
             try
             {
-                if (id == 0) throw new Exception("Id não informado!");
+                if (id == 0) throw new  InvalidOperationException("Id não informado!");
 
                 var resultado = _colaboradorApplication.GetColaboradorById(id);
 
@@ -76,9 +77,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -97,6 +99,7 @@ namespace Fbtc.Api.Controllers
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            
 
             try
             {
@@ -110,9 +113,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -146,9 +150,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
@@ -171,7 +176,7 @@ namespace Fbtc.Api.Controllers
 
             try
             {
-                if (colaborador == null) throw new ArgumentNullException("O objeto 'Colaborador' está nulo!");
+                if (colaborador == null) throw new InvalidOperationException("O objeto 'Colaborador' está nulo!");
 
                 resultado = _colaboradorApplication.Save(colaborador);
 
@@ -183,9 +188,10 @@ namespace Fbtc.Api.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "InvalidOperationException")
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
                 }
                 else
                 {
