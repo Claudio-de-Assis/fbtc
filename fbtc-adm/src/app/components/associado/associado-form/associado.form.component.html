@@ -1,215 +1,277 @@
-<div id="base">
-    <div id="Central">
-        <div id="HeaderCentral">
-            <h3>{{ title }}</h3>
-        </div>
-        <div id="BodyCentral">
-            <div id="LineBodyCentral">
-                <div id="L1C1">
-                    Nome:<br>
-                    <input [(ngModel)]="associado.nome" size="70px" maxlength="100" required/>
-                    <!--<input [(ngModel)]="associado.enderecoPessoa.enderecoId" type="hidden"/>
-                    <input [(ngModel)]="associado.pessoaId" type="hidden"/>
-                    <input [(ngModel)]="associado.associadoId" type="hidden"/>-->
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" [(ngModel)]="associado.nome" class="form-control" maxlength="100" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inpEmail">E-Mail::</label>
+                            <input id="inpEmail" [(ngModel)]="associado.eMail" class="form-control" maxlength="100" type="email" required/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDataNascimento">Data de Nascimento:</label>
+                            <input id="inpDataNascimento" [(ngModel)]="associado.dtNascimento" type="Date" class="form-control" maxlength="10"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="sltSexo">Sexo::</label>
+                            <select id="sltSexo" required [(ngModel)]="associado.sexo" name="sexo" class="form-control">
+                                <option *ngFor="let op of optSexo" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="imgFoto">Foto do Associado:</label><br>
+                            <img id="imgFoto" src="../assets/no-foto.png" alt="Não disponível" width="87px">
+                        </div>
+                    </div>
                 </div>
-                <div id="L1C2">
-                    Data de Nascimento:<br>
-                    <input [(ngModel)]="associado.dtNascimento" type="Date" size="13px" maxlength="10"/>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpCPF">CPF:</label>
+                            <input id="inpCPF" [(ngModel)]="associado.cpf" class="form-control" 
+                                maxlength="15" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Formato correto: 000.000.000-00"
+                                data-mask="000.000.000-00" data-mask-reverse="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpRG">RG:</label>
+                            <input id="inpRG" [(ngModel)]="associado.rg" class="form-control" maxlength="15"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpMatricula">Matricula:</label>
+                            <input id="inpMatricula" [(ngModel)]="associado.nrMatricula" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpCelular">Celular:</label>
+                            <input id="inpCelular" [(ngModel)]="associado.nrCelular" type="tel" class="form-control" maxlength="15" required/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpTelDivulgacao">Telefone Divulgação:</label>
+                            <input id="inpTelDivulgacao" [(ngModel)]="associado.nrTelDivulgacao" class="form-control" data-mask="000.000.000-00"/>
+                        </div>
+                    </div>
                 </div>
-                <div id="L1C3">
-                   <img src="../assets/no-foto.png" alt="Não disponível" width="87px">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="sltATC">ATC:</label>
+                            <select id="sltATC" class="form-control" required
+                                [(ngModel)]="associado.atcId" name="ATC">
+                                <option *ngFor="let op of optATC" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="sltTipo">Tipo:</label>
+                            <select id="sltTipo" class="form-control" required
+                                [(ngModel)]="associado.tipoPublicoId" name="TipoPublico">
+                                <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpCRP">CRP:</label>
+                            <input id="inpCRP" class="form-control" [(ngModel)]="associado.crp" maxlength="15"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpCRM">CRM:</label>
+                            <input id="inpCRM" class="form-control" [(ngModel)]="associado.crm" maxlength="15"/>
+                        </div>    
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="inpInstFormacao">Instituição de Formação:</label>
+                            <input id="inpInstFormacao" class="form-control" [(ngModel)]="associado.nomeInstFormacao" maxlength="100"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpDataCadastro"> Data Cadastro:</label>
+                            <input id="inpDataCadastro" class="form-control" [(ngModel)]="associado.dtCadastro" type="Date" size="15px" maxlength="10" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpTitulacao">Titulação:</label>
+                            <select id="inpTitulacao" class="form-control" required
+                                [(ngModel)]="associado.tipoTitulacao" name="Titulacao">
+                                <option *ngFor="let op of optTipoTitulacao" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpProfissao">Profissão:</label>
+                            <select id="inpProfissao" class="form-control" required
+                                [(ngModel)]="associado.tipoProfissao" name="Profissao">
+                                <option *ngFor="let op of optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            <div id="LineBodyCentral">
-                <div id="L2C1">
-                    E-Mail:<br>
-                    <input [(ngModel)]="associado.eMail" size="70px" maxlength="100" type="email" required/>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Terapeuta Certificado:</label>
+                            <div>
+                                <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                    <input type="radio" [(ngModel)]="associado.certificado" name="certificado" id="rdbCertificado" 
+                                    [checked]="op.value === associado.certificado" [value]="op.value"> {{ op.name }} &nbsp;</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Data  da Certifica&ccedil;&atilde;o:</label>
+                        <input [(ngModel)]="associado.dtCertificacao" type="Date" class="form-control" maxlength="10"/>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Autoriza divulgação do contato:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                <input type="radio" [(ngModel)]="associado.divulgarContato" name="divulgarContato" id="rdbDivulgarContato" 
+                                [checked]="op.value === associado.divulgarContato" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Contato para divulgação:</label><br>
+                            <label required class="checkbox-inline" *ngFor="let op of optTipoFormaContato" >
+                                <input type="checkbox" [(ngModel)]="associado.tipoFormaContato" name="tipoFormaContato" id="rdbTipoFormaContato"
+                                [checked]="op.value === associado.tipoFormaContato" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
                 </div>
-                <div id="L2C2">
-                    Sexo:<br>
-                    <select required
-                        [(ngModel)]="associado.sexo" name="sexo">
-                       <option *ngFor="let op of optSexo" value="{{ op.value }}">{{ op.name }}</option>
-                    </select>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Diretoria:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                <input type="radio" [(ngModel)]="associado.integraDiretoria" name="Diretoria" id="rdbDiretoria" 
+                                [checked]="op.value === associado.integraDiretoria" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>CONFI:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                <input type="radio" [(ngModel)]="associado.integraConfi" name="Confi" id="rdbConfi" 
+                                [checked]="op.value === associado.integraConfi" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Ativo:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                    <input type="radio" [(ngModel)]="associado.ativo" name="ativo" id="rdbAtivo" 
+                                    [checked]="op.value === associado.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Adimplente:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                    <input type="radio" [(ngModel)]="associado.adimplente" name="adimplente" id="rdbAdimplente" 
+                                    [checked]="op.value === associado.adimplente" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="well">
+                            <h3>Dados de Endereço:</h3>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>CEP:</label>
+                                        <div class="input-group">
+                                            <input id="inpCEP" class="form-control" [(ngModel)]="associado.enderecoPessoa.cep" maxlength="9"/>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" (click)="getEnderecoByCep()" title="Buscar Cep"><i class="fa fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label for="inpLogradouro">Logradouro:</label>
+                                        <input id="inpLogradouro" class="form-control" [(ngModel)]="associado.enderecoPessoa.logradouro" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label for="inpNumero">Nº:</label>
+                                        <input id="inpNumero" class="form-control" [(ngModel)]="associado.enderecoPessoa.numero" maxlength="10"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="inpComplemento">Complemento:</label>
+                                        <input id="inpComplemento" class="form-control" [(ngModel)]="associado.enderecoPessoa.complemento" maxlength="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Bairro:</label>
+                                        <input class="form-control" [(ngModel)]="associado.enderecoPessoa.bairro" size="20px" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Cidade:</label>
+                                        <input class="form-control" [(ngModel)]="associado.enderecoPessoa.cidade" size="20px" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Estado:</label>
+                                        <input class="form-control" [(ngModel)]="associado.enderecoPessoa.estado" size="5px" maxlength="2"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="LineBodyCentral">
-               <div id="L3C1">
-                    Celular:<br>
-                    <input [(ngModel)]="associado.nrCelular" type="tel" size="15px" maxlength="15" required/>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-success" (click)="reenviarSenha()">Reenviar Senha</button>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                            <button class="btn btn-primary" (click)="save()">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoAssociados()">Cancelar</button>
+                    </div>
                 </div>
-                <div id="L3C2">
-                    CPF:<br>
-                    <input [(ngModel)]="associado.cpf" size="15px" maxlength="15"/>
-                </div>
-                <div id="L3C3">
-                    RG:<br>
-                    <input [(ngModel)]="associado.rg" size="15px" maxlength="15"/>
-                </div>
-                <div id="L3C4">
-                    Matricula:<br>
-                    <input [(ngModel)]="associado.nrMatricula" size="15px"/>
-                </div>
-                <div id="L3C5">
-                    Telefone Divulgação:<br>
-                    <input [(ngModel)]="associado.nrTelDivulgacao" size="15px"/>
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L4C1">
-                    ATC:<br>
-                    <select required
-                    [(ngModel)]="associado.atcId" name="ATC">
-                    <option *ngFor="let op of optATC" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-            </div>
-                <div id="L4C2">
-                    Tipo:<br>
-                    <select required
-                    [(ngModel)]="associado.tipoPublicoId" name="TipoPublico">
-                    <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
-                </select>
-                </div>
-                <div id="L4C3">
-                    CRP:<br>
-                    <input [(ngModel)]="associado.crp" size="15px" maxlength="15"/>
-                </div>
-                <div id="L4C4">
-                    CRM:<br>
-                    <input [(ngModel)]="associado.crm" size="15px" maxlength="15"/>
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L5C1">
-                    Instituição de Formação:<br>
-                    <input [(ngModel)]="associado.nomeInstFormacao" size="70px" maxlength="100"/>
-                </div>
-                <div id="L5C2">
-                    Data Cadastro:<br>
-                    <input [(ngModel)]="associado.dtCadastro" type="Date" size="15px" maxlength="10" readonly>
-                </div>
-                <div id="L5C3">
-                    Titulação:<br>
-                    <select required
-                    [(ngModel)]="associado.tipoTitulacao" name="Titulacao">
-                    <option *ngFor="let op of optTipoTitulacao" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-                <div id="L5C4">
-                    Profissão:<br>
-                    <select required
-                    [(ngModel)]="associado.tipoProfissao" name="Profissao">
-                    <option *ngFor="let op of optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L6C1">
-                    Terapeuta Certificado:<br>
-                    <select required
-                    [(ngModel)]="associado.certificado" name="Certificado">
-                    <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-                <div id="L6C2">
-                    Data  da Certificacao:<br>
-                    <input [(ngModel)]="associado.dtCertificacao" type="Date" size="15px" maxlength="10"/>
-                </div>
-                <div id="L6C3">
-                    Autoriza divulgação do contato:<br>
-                    <select required
-                    [(ngModel)]="associado.divulgarContato" name="DivulgarContato">
-                    <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-                <div id="L6C4">
-                    Contato para divulgação:<br>
-                    <select required
-                    [(ngModel)]="associado.tipoFormaContato" name="TipoFormaContato">
-                    <option *ngFor="let op of optTipoFormaContato" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L7C1">
-                    CEP:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.cep" size="15px" maxlength="9"/>
-                </div>
-                <div id="L7C2">
-                    Diretoria:<br>
-                    <select required
-                    [(ngModel)]="associado.integraDiretoria" name="Diretoria">
-                    <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-                <div id="L7C3">
-                    CONFI:<br>
-                    <select required
-                    [(ngModel)]="associado.integraConfi" name="Confi">
-                    <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-                <div id="L7C4">
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L8C1">
-                    Logradouro:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.logradouro" size="70px" maxlength="100"/>
-                </div>
-                <div id="L8C2">
-                    Nº:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.numero" size="5px" maxlength="10"/>
-                </div>
-                <div id="L8C3">
-                    Complemento:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.complemento" size="20px" maxlength="100"/>
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L9C1">
-                    Bairro:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.bairro" size="20px" maxlength="100"/>
-                </div>
-                <div id="L9C2">
-                    Cidade:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.cidade" size="20px" maxlength="100"/>
-                </div>
-                <div id="L9C3">
-                    Estado:<br>
-                    <input [(ngModel)]="associado.enderecoPessoa.estado" size="5px" maxlength="2"/>
-                </div>
-            </div>
-            <div id="LineBodyCentral">
-                <div id="L10C1">
-                    Ativo:<br>
-                    <select required
-                    [(ngModel)]="associado.ativo" name="Ativo">
-                    <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-                <div id="L10C2">
-                    Adimplente:<br>
-                    <select required
-                    [(ngModel)]="editAdimplente" name="adimplente">
-                    <option *ngFor="let op of optBoolean" value="{{ op.value }}">{{ op.name }}</option>
-                </select>
-                </div>
-
-                <div id="L10C3">
-                    <button (click)="reenviarSenha()">Reenviar Senha</button>
-                </div>
-            </div>
-        </div>
-        <div id="FooterCentral">
-            <div id="FT1C1">
-               <button (click)="gotoAssociados()">Retornar</button>
-               <button (click)="save()">Salvar</button>
-               <button (click)="excluir()">Excluir</button>
-               <button (click)="getEnderecoByCep()">Validar CEP</button>
             </div>
         </div>
     </div>
-
 </div>

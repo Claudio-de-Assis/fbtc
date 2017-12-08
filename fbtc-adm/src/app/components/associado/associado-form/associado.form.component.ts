@@ -28,7 +28,6 @@ export class AssociadoFormComponent implements OnInit {
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
 
-
     optSexo = [
         {name: 'Masculino', value: 'M'},
         {name: 'Feminino', value: 'F'}
@@ -62,11 +61,12 @@ export class AssociadoFormComponent implements OnInit {
     ];
 
     optBoolean = [
-        {name: 'Sim', value: 'true'},
-        {name: 'Não', value: 'false'}
+        {name: 'Sim', value: true},
+        {name: 'Não', value: false}
     ];
 
-    title = 'Dados do Associado - Edição';
+    title = 'Associado';
+    badge = '';
 
     private selectedId: any;
 
@@ -99,8 +99,10 @@ export class AssociadoFormComponent implements OnInit {
 
         const id = +this.route.snapshot.paramMap.get('id');
         if (id > 0) {
+            this.badge = "Edição";
             this.getAssociadoById(id);
         } else {
+            this.badge = "Novo";
             this.setAssociado();
         }
     }
