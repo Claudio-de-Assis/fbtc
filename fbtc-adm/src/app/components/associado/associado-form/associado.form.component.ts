@@ -25,6 +25,11 @@ export class AssociadoFormComponent implements OnInit {
 
     @Input() associado: Associado;
 
+    title = 'Associado';
+    badge = '';
+
+    private selectedId: any;
+
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
 
@@ -65,11 +70,6 @@ export class AssociadoFormComponent implements OnInit {
         {name: 'Não', value: false}
     ];
 
-    title = 'Associado';
-    badge = '';
-
-    private selectedId: any;
-
     /** AssociadoFrm ctor */
     constructor(
         private service: AssociadoService,
@@ -99,10 +99,10 @@ export class AssociadoFormComponent implements OnInit {
 
         const id = +this.route.snapshot.paramMap.get('id');
         if (id > 0) {
-            this.badge = "Edição";
+            this.badge = '"Edição';
             this.getAssociadoById(id);
         } else {
-            this.badge = "Novo";
+            this.badge = 'Novo';
             this.setAssociado();
         }
     }

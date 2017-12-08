@@ -3,9 +3,10 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
-import { Evento } from '../../shared/model/evento';
 import { EventoService } from '../../shared/services/evento.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+
+import { Evento } from '../../shared/model/evento';
 import { TipoPublico } from './../../shared/model/tipo-publico';
 
 @Component({
@@ -18,28 +19,22 @@ export class EventoFormComponent implements OnInit {
 
   @Input() evento: Evento;
 
-  lstAno = [2018, 2017, 2016];
-
-  optTiposEventos = [
-    {name: 'Workshop internacional e Congresso', value: '1'},
-    {name: 'Workshop Internacional', value: '2'},
-    {name: 'Workshop Nacional', value: '3'},
-    {name: 'Congresso Brasileiro', value: '4'},
-    {name: 'Certificação', value: '5'}
-  ];
-
-  optBoolean = [
-    {name: 'Sim', value: 'true'},
-    {name: 'Não', value: 'false'}
-  ];
-
-  title = 'Dados do Evento';
+  title = 'Evento';
+  badge = '';
 
   private selectedId: any;
 
-  evento$: Observable<Evento>;
-
   tiposPublicos: TipoPublico[];
+
+  optTiposEventos = [
+    {name: 'Workshop Internacional', value: '2'},
+    {name: 'Congresso Brasileiro', value: '4'},
+  ];
+
+  optBoolean = [
+    {name: 'Sim', value: true},
+    {name: 'Não', value: false}
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +48,7 @@ export class EventoFormComponent implements OnInit {
       this.service.getById(id)
           .subscribe(evento => this.evento = evento);
   }
+
   setEvento(): void {
 
       this.service.setEvento()
@@ -89,9 +85,11 @@ export class EventoFormComponent implements OnInit {
 
     const id = +this.route.snapshot.paramMap.get('id');
     if (id > 0) {
-        this.getEventoById(id);
+      this.badge = 'Edição';
+      this.getEventoById(id);
     } else {
-        this.setEvento();
+      this.badge = 'Novo';
+      this.setEvento();
     }
   }
 }

@@ -2,23 +2,18 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Dados do evento</div>
+            <div class="panel-heading">{{ title }}</div>
             <div class="panel-body">
                 <div class="row">
-                    <form role="form">
                         <div class="col-lg-7">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-10">
                                         <label>Titulo:</label>
-                                        <input [(ngModel)]="editTitulo" class="form-control" maxlength="100" required/>
+                                        <input [(ngModel)]="evento.titulo" class="form-control" maxlength="100" required/>
                                     </div>
                                     <div class="col-lg-2">
-                                        <label>Ano:</label>
-                                        <select required class="form-control"
-                                            [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
-                                            <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
-                                        </select>
+                                        <label>&nbsp;</label>
                                     </div>
                                 </div>
                             </div>
@@ -28,21 +23,22 @@
                                         <label> Data de Início:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <input [(ngModel)]="editDtInicio" class="form-control" maxlength="10" type="Date" required/>
+                                            <input [(ngModel)]="evento.dtInicio" class="form-control" maxlength="10" type="Date" required/>
                                         </div>
                                     </div>
+                                    {{ evento.dtInicio }}
                                     <div class="col-lg-4">
                                         <label>Data de Término:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <input [(ngModel)]="editDtTermino" class="form-control" maxlength="10" type="Date" required/>
+                                            <input [(ngModel)]="evento.dtTermino" class="form-control" maxlength="10" type="Date" required/>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Término Inscrições:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <input [(ngModel)]="editDtTerminoInscricao" class="form-control" size="15px" maxlength="10" type="Date" required/>
+                                            <input [(ngModel)]="evento.dtTerminoInscricao" class="form-control" size="15px" maxlength="10" type="Date" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -54,13 +50,12 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>C&oacute;digo:</label>
-                                            <input [(ngModel)]="editCodigo" class="form-control" maxlength="10"/>
+                                            <input [(ngModel)]="evento.codigo" class="form-control" maxlength="10"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Tipo Evento:</label>
-                                            <select required class="form-control" 
-                                                [(ngModel)]="editTipoEvento" name="TipoEvento" #tipoEvento="ngModel">
-                                                <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
+                                            <select id="sltTipoEvento" required [(ngModel)]="evento.tipoEvento" name="tipoEvento" class="form-control">
+                                                <option *ngFor="let op of optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -71,12 +66,11 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">   
                         <label>Descrição:</label>
-                        <textarea [(ngModel)]="editDescricao" class="form-control" rows="15"></textarea> 
+                        <textarea [(ngModel)]="evento.descricao" class="form-control" rows="15"></textarea> 
                     </div>
                 </div>
             </div>
@@ -96,9 +90,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let tipoPublico of tipoPublico$ | async">
-                                <td><span class="badge">{{ tipoPublico.TipoPublicoId }}</span>{{ tipoPublico.Nome }}</td>
-                                <td><input [(ngModel)]="editValor" size="15px" maxlength="10" required/></td>
+                            <tr *ngFor="let tipoPublico of tiposPublicos">
+                                <td>{{ tipoPublico.nome }}</td>
+                                <td><input [(ngModel)]="evento.tipoPublico" size="15px" maxlength="10" required/></td>
                                 <td><input type="checkbox"></td>
                             </tr>
                         </tbody>
@@ -110,29 +104,25 @@
             <div class="panel-heading">Extra</div>
             <div class="panel-body">
                 <div class="row">
-                    <form>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label>Aceita Isenção?</label>
-                                <select required class="form-control"
-                                    [(ngModel)]="editAceitaIsencaoAta" name="aceitaIsencaoAta" #aceitaIsencaoAta="ngModel">
-                                    <option *ngFor="let aceitaIsencaoAta of lstSimNao" [value]="aceitaIsencaoAta">{{ aceitaIsencaoAta }}</option>
-                                </select>
+                                <label>Aceita Isenção?</label><br>
+                                <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                    <input type="radio" [(ngModel)]="evento.aceitaIsencaoAta" name="AceitaIsencao" id="rdbAtivo" 
+                                    [checked]="op.value === evento.aceitaIsencaoAta" [value]="op.value"> {{ op.name }} &nbsp; </label>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label>Anúncio Ativo?</label>         
-                                <select required class="form-control"
-                                    [(ngModel)]="editAtivo" name="Ativo" #ativo="ngModel">
-                                    <option *ngFor="let ativo of lstSimNao" [value]="ativo">{{ ativo }}</option>
-                                </select>
+                                <label>Anúncio Ativo?</label><br>   
+                                <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                    <input type="radio" [(ngModel)]="evento.ativo" name="ativo" id="rdbAtivo" 
+                                    [checked]="op.value === evento.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <button class="btn btn-default" (click)="gotoPreviewAnuncio()"><i class="fa fa-eye"></i> Preview do Anúncio</button>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="panel-footer">

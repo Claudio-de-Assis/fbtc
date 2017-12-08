@@ -3,9 +3,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Evento } from '../../shared/model/evento';
 import { EventoService } from './../../shared/services/evento.service';
 
+import { Evento } from '../../shared/model/evento';
 
 @Component({
   selector: 'app-evento-list',
@@ -14,16 +14,22 @@ import { EventoService } from './../../shared/services/evento.service';
 })
 export class EventoListComponent implements OnInit {
 
-  lstAno = [2018, 2017, 2016];
-  lstTipoEvento = ['Congresso Brasileiro', 'Workshop Internacional'];
-
   title = 'Consulta de Eventos';
 
-  evento$: Observable<Evento[]>;
-  eventos: Evento[];
   private selectedEvento: Evento;
 
-  private selectedId: number;
+  editTipoEvento: string = '0';
+  editAno: string = '';
+  editNome: string = '';
+
+  eventos: Evento[];
+
+  lstAno = [2018, 2017, 2016];
+
+  optTiposEventos = [
+    {name: 'Workshop Internacional', value: '2'},
+    {name: 'Congresso Brasileiro', value: '4'},
+  ];
 
   constructor(
     private service: EventoService,
@@ -33,11 +39,11 @@ export class EventoListComponent implements OnInit {
 
   getEventos(): void {
     this.service.getEventos().subscribe(eventos => this.eventos = eventos);
-}
+  }
 
-ngOnInit() {
-  this.getEventos();
-}
+  ngOnInit() {
+    this.getEventos();
+  }
 
   onSelect(evento: Evento): void {
     this.selectedEvento = evento;

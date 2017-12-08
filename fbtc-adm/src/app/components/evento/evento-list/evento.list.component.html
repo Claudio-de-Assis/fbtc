@@ -7,7 +7,6 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <form role="form">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome:</label>
@@ -26,15 +25,14 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Tipo de evento:</label>
-                                        <select required class="form-control"
-                                            [(ngModel)]="editTipoEvento" name="TipoEvento" #sexo="ngModel">
-                                            <option *ngFor="let tipoEvento of lstTipoEvento" [value]="tipoEvento">{{ tipoEvento }}</option>
+                                        <select id="sltTipoEvento" class="form-control" required
+                                            [(ngModel)]="editTipoEvento" name="TipoEvento">
+                                            <option *ngFor="let op of optTipoEventos" value="{{ op.value }}">{{ op.name }}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="panel-footer">
@@ -58,19 +56,19 @@
                                     <td>Tipo</td>
                                     <td>Início</td>
                                     <td>Código</td>
-                                    <td></td>
+                                    <td>Ações</td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr *ngFor="let evento of evento$ | async">
-                                    <td><span class="badge badge-primary">{{ evento.EventoId }}</span> {{ evento.Titulo }}</td>
-                                    <td>{{ evento.TipoEvento }}</td>
-                                    <td>{{ evento.DtInicio | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ evento.Codigo }}</td>    
+                            <tbody class="eventos">
+                                <tr *ngFor="let evento of eventos"
+                                    [class.selected]="evento.eventoId === selectedId">
+                                    <td>{{ evento.titulo }}</td>
+                                    <td>{{ evento.tipoEvento | tipoEvento }}</td>
+                                    <td>{{ evento.dtInicio | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ evento.codigo }}</td>    
                                     <td>
-                                        <a [routerLink]="['/Evento', evento.EventoId]"><i class="fa fa-eye text-info"></i></a>&nbsp;
-                                        <a [routerLink]="['/Evento', evento.EventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
-                                        <a [routerLink]="['/Evento', evento.EventoId]"><i class="fa fa-trash text-danger"></i></a>
+                                        <a [routerLink]="['/Evento', evento.eventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                        <i class="fa fa-trash text-danger"></i>
                                     </td>
                                 </tr>
                             </tbody>
