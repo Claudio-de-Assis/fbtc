@@ -100,6 +100,30 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             // Obtém os dados do banco de dados:
             IEnumerable<Recebimento> _collection = GetCollection<Recebimento>(cmd)?.ToList();
 
+            if(_collection != null && _collection.Count() > 0)
+            {
+                AssociadoRepository _associadoRep = new AssociadoRepository();
+
+                Associado _associado = new Associado();
+
+                List<Recebimento> _recebimentos = new List<Recebimento>();
+
+                foreach (var rec in _collection)
+                {
+                    var assoc = _associadoRep.GetAssociadoById(rec.AssociadoId);
+
+                    if (assoc != null)
+                    {
+                        rec.Associado = assoc;
+                        _recebimentos.Add(rec);
+                    }
+                }
+
+                if (_recebimentos.Count() > 0)
+                {
+                    _collection = _recebimentos;
+                }
+            }
             return _collection;
         }
 
@@ -164,6 +188,22 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             // Obtém os dados do banco de dados:
             Recebimento _recebimento = GetCollection<Recebimento>(cmd)?.First();
 
+            // Obtendo uma Associado:
+            if (_recebimento != null)
+            {
+                AssociadoRepository _associadoRep = new AssociadoRepository();
+
+                var assoc = _associadoRep.GetAssociadoById(_recebimento.AssociadoId);
+
+                if (assoc != null)
+                {
+                    _recebimento.Associado = assoc;
+                }
+                else
+                {
+                    throw new ArgumentNullException("Atenção: Não foi encontrado Associado vinculado do recebimento");
+                }
+            }
             return _recebimento;
         }
 
@@ -320,60 +360,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                 try
                 {
-                    string _atributos = "";
-
                     // Inserindo os dados na tabela:
-                    if (r.AssociadoId != null) {
-                        _atributos = _atributos + ", AssociadoId = @AssociadoId ";
-                        command.Parameters.AddWithValue("AssociadoId", r.AssociadoId);
-                    }
-
-                    if (r.AssociadoIsentoId != null) {
-                        _atributos = _atributos + ", AssociadoIsentoId = @AssociadoIsentoId ";
-                        command.Parameters.AddWithValue("AssociadoIsentoId", r.AssociadoIsentoId);
-                    }
-
-                    if (r.ValorAnuidadePublicoId != null) {
-                        _atributos = _atributos + ", ValorAnuidadePublicoId = @ValorAnuidadePublicoId ";
-                        command.Parameters.AddWithValue("ValorAnuidadePublicoId", r.ValorAnuidadePublicoId);
-                    }
-
-                    if (r.ValorEventoPublicoId != null) {
-                        _atributos = _atributos + ", ValorEventoPublicoId = @ValorAnuidadePublicoId ";
-                        command.Parameters.AddWithValue("ValorAnuidadePublicoId", r.ValorAnuidadePublicoId);
-                    }
-
-                    if (r.DtNotificacao != null) {
-                        _atributos = _atributos + ", DtNotificacao = @DtNotificacao ";
-                        command.Parameters.AddWithValue("DtNotificacao", r.DtNotificacao);
-                    }
-
-                    if (r.DtPagamento != null) {
-                        _atributos = _atributos + ", DtPagamento = @DtPagamento ";
-                        command.Parameters.AddWithValue("DtPagamento", r.DtPagamento);
-                    }
-
-                    if (r.DtVencimento != null) {
-                        _atributos = _atributos + ", DtVencimento = @DtVencimento ";
-                        command.Parameters.AddWithValue("DtVencimento", r.DtVencimento);
-                    }
-
+       
                     command.CommandText = "" +
-                        "Update dbo.AD_Recebimento  Set ObjetivoPagamento = @ObjetivoPagamento, " +
-                        "   StatusPagamento = @StatusPagamento, FormaPagamento = @FormaPagamento, " +
-                        "   NrDocCobranca = @NrDocCobranca, ValorPago = @ValorPago, " +
-                        "   Observacao = @Observacao, TokenPagamento = @TokenPagamento, Ativo = @Ativo " +
-                        "   " + _atributos + 
+                        "Update dbo.AD_Recebimento  Set Observacao = @Observacao " +
                         "WHERE RecebimentoId = @id ";
 
-                    command.Parameters.AddWithValue("ObjetivoPagamento", r.ObjetivoPagamento);
-                    command.Parameters.AddWithValue("StatusPagamento", r.StatusPagamento);
-                    command.Parameters.AddWithValue("FormaPagamento", r.FormaPagamento);
-                    command.Parameters.AddWithValue("NrDocCobranca", r.NrDocCobranca);
-                    command.Parameters.AddWithValue("ValorPago", r.ValorPago);
                     command.Parameters.AddWithValue("Observacao", r.Observacao);
-                    command.Parameters.AddWithValue("TokenPagamento", r.TokenPagamento);
-                    command.Parameters.AddWithValue("Ativo", r.Ativo);
                     command.Parameters.AddWithValue("id", id);
 
                     int i = command.ExecuteNonQuery();

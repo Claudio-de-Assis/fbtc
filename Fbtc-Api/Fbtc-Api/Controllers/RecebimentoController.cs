@@ -179,7 +179,7 @@ namespace Fbtc.Api.Controllers
 
             try
             {
-                if (recebimento == null) throw new ArgumentNullException("O objeto 'Recebimento' está nulo!");
+                if (recebimento == null) throw new ArgumentNullException("Objeto Nulo");
 
                 resultado = _recebimentoApplication.Save(recebimento);
 

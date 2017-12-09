@@ -66,10 +66,10 @@ namespace Fbtc.Application.Services
 
         public string Save(Recebimento r)
         {
-            /*
+            
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
-               RaiseException.IfNullOrEmpty(r.Observacao, "Observação não informada")
-            );*/
+               RaiseException.IfEqualsZero(r.RecebimentoId, "Identificação do recebimento inválida")
+            );
 
             Recebimento _r = new Recebimento()
             {
@@ -83,7 +83,7 @@ namespace Fbtc.Application.Services
                 DtPagamento = r.DtPagamento,
                 DtNotificacao = r.DtNotificacao,
                 StatusPagamento = r.StatusPagamento,
-                NrDocCobranca = Functions.AjustaTamanhoString(r.NrDocCobranca, 100),
+                NrDocCobranca = r.NrDocCobranca,
                 ValorPago = r.ValorPago,
                 Observacao = Functions.AjustaTamanhoString(r.Observacao, 500),
                 TokenPagamento = r.TokenPagamento,
@@ -93,14 +93,7 @@ namespace Fbtc.Application.Services
 
             try
             {
-                if (_r.RecebimentoId == 0)
-                {
-                    return _recebimentoService.Insert(_r);
-                }
-                else
-                {
-                    return _recebimentoService.Update(r.RecebimentoId, _r);
-                }
+                return _recebimentoService.Update(r.RecebimentoId, _r);
             }
             catch (Exception ex)
             {
@@ -112,7 +105,7 @@ namespace Fbtc.Application.Services
         {
             Recebimento r = new Recebimento() {
                 RecebimentoId = 0,
-                AssociadoId = null,
+                AssociadoId = 0,
                 ValorEventoPublicoId = null,
                 ValorAnuidadePublicoId = null,
                 AssociadoIsentoId = null,

@@ -9,7 +9,7 @@ namespace Fbtc.Domain.Entities
     public class Recebimento
     {
         public int RecebimentoId { get; set; }
-        public int? AssociadoId { get; set; }
+        public int AssociadoId { get; set; }
         public int? AssociadoIsentoId { get; set; }
         public int? ValorAnuidadePublicoId { get; set; }
         public int? ValorEventoPublicoId { get; set; }
@@ -26,5 +26,6 @@ namespace Fbtc.Domain.Entities
         public DateTime DtCadastro { get; set; }
         public bool Ativo { get; set; }
 
+        public Associado Associado { get; set; }
     }
 }
