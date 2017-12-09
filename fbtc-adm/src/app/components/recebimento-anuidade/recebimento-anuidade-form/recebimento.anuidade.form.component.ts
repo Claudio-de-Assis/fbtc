@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-import { AssociadoService } from '../../shared/services/associado.service';
-import { Associado } from '../../shared/model/associado';
-import { Data } from '@angular/router/src/config';
+import { RecebimentoAnuidadeService } from './../../shared/services/recebimento-anuidade.service';
+import { Recebimento } from './../../shared/model/recebimento';
 
 @Component({
   selector: 'app-recebimento-anuidade-form',
@@ -14,78 +13,56 @@ import { Data } from '@angular/router/src/config';
 })
 export class RecebimentoAnuidadeFormComponent implements OnInit {
 
-  private selectedId: any;
-
-  associado$: Observable<Associado>;
-  associado: Associado;
-
-  editAssociadoId: number;
-  editNome: string;
-  editCPF: string;
-  editCRP: string;
-  editCRM: string;
-  editAno: number;
-  editMes: string;
-  editStatus: string;
-  editAtivo: string;
-  editEMail: string;
-  editCelular: string;
-  editDtVencimento: Data;
-  editDtPagamento: Date;
-  editStatusPagto: string;
-  editFormaPagto: string;
-  editNrDocCobranca: string;
-  editValorDevido: number;
-  editDtNotificacao: Data;
-  editObservacao: string;
+  @Input() recebimento: Recebimento;
 
   title = 'Dados de pagamento de anuidade do associado';
+  badget = '';
+
+  private selectedId: any;
 
   constructor(
-    private route: ActivatedRoute,
+    private service: RecebimentoAnuidadeService,
     private router: Router,
-    private service: AssociadoService
+    private route: ActivatedRoute
 ) { }
 
-  gotoRecebimentoAnuidade() {
-    let associadoId = this.associado ? this.associado.associadoId : null;
-    // Pass along the Associado id if available
-    // so that the AssociadoList component can select that Associado.
-    // Include a junk 'foo' property for fun.
-    this.router.navigate(['/RecebimentoAnuidade', { id: associadoId, foo: 'foo' }]);
+  getRecebimentoById(id: number): void {
+
+    this.service.getById(id)
+          .subscribe(recebimento => this.recebimento = recebimento);
   }
 
-  gotoSave() {
+  save() {
+    this.service.addRecebimentoAnuidade(this.recebimento)
+    .subscribe(() => this.gotoRecebimentoAnuidade());    }
+
+/*  gotoSave() {
     alert('Registro salvo com sucesso');
     this.gotoRecebimentoAnuidade();
-  }
+  }*/
 
   gotoNotificarAssociado() {
+
     if (confirm('Deseja notificar o Associado?')) {
       alert('Notificação enviada com sucesso');
     }
   }
 
+  gotoRecebimentoAnuidade() {
+
+    let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
+    this.router.navigate(['/RecebimentoAnuidade', { id: recebimentoId, foo: 'foo' }]);
+  }
+
   ngOnInit() {
-    // this.associado$ = this.route.paramMap
-    //    .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get('id')));
 
-        this.associado$.subscribe((associado: Associado) => {this.associado = associado});
-
-        this.editAssociadoId = this.associado ? this.associado.associadoId : 0;
-        this.editNome = this.associado ?  this.associado.nome : '';
-        this.editEMail = this.associado ?  this.associado.eMail : '';
-        this.editCelular = this.associado ?  this.associado.nrCelular : '';
-        this.editCPF = this.associado ?  this.associado.cpf : '';
-        this.editCRP = this.associado ?  this.associado.crp : '';
-        this.editCRM = this.associado ?  this.associado.crm : '';
-
-        this.editStatusPagto = 'Adimplente';
-        this.editDtPagamento = new Date('2017-01-01');
-        this.editDtVencimento = new Date('2017-01-01');
-        this.editAtivo = 'Sim';
-        this.editFormaPagto = 'PagSeguro';
-        this.editNrDocCobranca = '123456789';
-        this.editValorDevido = 180.00;
+    const id = +this.route.snapshot.paramMap.get('id');
+      if (id > 0) {
+          this.badget = 'Edição';
+          this.getRecebimentoById(id);
+    } else {
+      alert('Não foi encontrato recebimento para o Id Informado');
+      this.gotoRecebimentoAnuidade();
+    }
   }
 }

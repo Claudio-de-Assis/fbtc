@@ -35,7 +35,7 @@ export class RecebimentoRoute {
     }
 
     // [Route("Recebimento")]
-    postIsencao(): string {
+    postRecebimento(): string {
         return AppSettings.API_ENDPOINT + this.url + 'Recebimento';
     }
 

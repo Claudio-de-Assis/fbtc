@@ -1,19 +1,23 @@
+import { Associado } from './associado';
+
 export class Recebimento {
     recebimentoId: number;
-    AssociadoId: number;
-    ValorEventoPublicoId: number;
-    ObjetivoPagamento: string;
-    DtCadastro: Date;
-    DtVencimento: Date;
-    DtPagamento: Date;
-    DtNotificacao: Date;
-    StatusPagto: string;
-    FormaPagto: string;
-    NrDocCobranca: string;
-    ValorPago: number;
-    Observacao: string;
-    TokenPagamento: string;
-    Ativo: boolean;
-    AssociadoIsentoId: number;
-    ValorAnuidadePublicoId: number;
+    associadoId: number;
+    associadoIsentoId: number;
+    valorAnuidadePublicoId: number;
+    valorEventoPublicoId: number;
+    objetivoPagamento: string;
+    dtVencimento: Date;
+    dtPagamento: Date;
+    dtNotificacao: Date;
+    statusPagto: string;
+    formaPagto: string;
+    nrDocCobranca: string;
+    valorPago: number;
+    observacao: string;
+    tokenPagamento: string;
+    dtCadastro: Date;
+    ativo: boolean;
+
+    associado: Associado;
 }

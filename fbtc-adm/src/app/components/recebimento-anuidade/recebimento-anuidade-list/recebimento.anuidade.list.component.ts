@@ -3,78 +3,81 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { AssociadoService } from './../../shared/services/associado.service';
-import { Associado } from '../../shared/model/associado';
-import { Data } from '@angular/router/src/config';
+import { RecebimentoAnuidadeService } from './../../shared/services/recebimento-anuidade.service';
+// import { AssociadoService } from './../../shared/services/associado.service';
+import { Recebimento } from './../../shared/model/recebimento';
+// import { Associado } from '../../shared/model/associado';
 
 @Component({
   selector: 'app-recebimento-anuidade-list',
   templateUrl: './recebimento.anuidade.list.component.html',
-  styleUrls: ['./recebimento.anuidade.list.component.css'],
-  providers: [AssociadoService]
+  styleUrls: ['./recebimento.anuidade.list.component.css']
 })
 export class RecebimentoAnuidadeListComponent implements OnInit {
+
+  title = 'Consulta de Pagamento de Anuidades';
+
+  private selectedId: number;
+
+  // private selectedAssociado: Associado;
+  private selectedRecebimento: Recebimento;
+
+  editNome: string = '';
+  editCPF: string = '';
+  editCRP: string = '';
+  editCRM: string = '';
+  editAno: number = 0;
+  editMes: string = '';
+  editStatus: string = '';
+  editAtivo: string = '';
+  editDtVencimento: Date = null;
+  editDtPagto: Date = null;
+
+  // cassociados: Associado[];
+  recebimentos: Recebimento[];
 
   lstAno = [2018, 2017, 2016, 2015];
   lstMes = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   lstStatus = ['Adimplente', 'Inadimplente'];
-  lstAtivo = ['Sim', 'Não'];
 
-  editNome: string;
-  editCPF: string;
-  editCRP: string;
-  editCRM: string;
-  editAno: number;
-  editMes: string;
-  editStatus: string;
-  editAtivo: string;
-
-  editDtVencimento: Data;
-  editDtPagto: Data;
-
-  title = 'Consulta de Pagamento de Anuidades';
-
-  associado$: Observable<Associado[]>;
-
-  associados: Associado[];
-  private selectedAssociado: Associado;
-
-  private selectedId: number;
+  optBoolean = [
+    {name: 'Todos', value: null},
+    {name: 'Sim', value: true},
+    {name: 'Não', value: false}
+  ];
 
   /** AssociadoList ctor */
   constructor(
-      private service: AssociadoService,
+      private service: RecebimentoAnuidadeService,
+//    private serviceAssoc: AssociadoService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
 
-  getAssociados(): void {
-    this.service.getAssociados().subscribe(associados => this.associados = associados);
-  }
+  /*getAssociados(): void {
 
-  onSelect(associado: Associado): void {
-    this.selectedAssociado = associado;
-  }
-
-  /*
-  gotoNovoAssociado() {
-    this.router.navigate(['/Associado', 0]);
+    this.serviceAssoc.getAssociados().subscribe(associados => this.associados = associados);
   }*/
+
+  getRecebimentos(objRec): void {
+
+    this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
+  }
+
+  onSelect(recebimento: Recebimento): void {
+    this.selectedRecebimento = recebimento;
+  }
 
   gotoBuscarAssociado() { }
 
+  gotoBuscarRecebimento() { }
+
   /** Called by Angular after AssociadoList component initialized */
   ngOnInit() {
-    this.associado$ = this.route.paramMap.switchMap((params: ParamMap) => {
-        this.selectedId = +params.get('Id');
-        return this.service.getAssociados();
-    });
 
-    this.editDtPagto = new Date('01-01-2017');
-    this.editDtVencimento = new Date('01-01-2017');
-    this.editStatus = 'Adimplente';
-    this.editAtivo = 'Sim';
-    this.editAno = 2017;
-    this.editMes = '11';
+    // this.getAssociados();
+
+    const objRecebimento = '2'; // 2: Anuidade.
+    this.getRecebimentos(objRecebimento);
   }
 }

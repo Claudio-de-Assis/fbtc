@@ -16,6 +16,11 @@ export class ColaboradorFormComponent implements OnInit {
 
     @Input() colaborador: Colaborador;
 
+    title = 'Colaborador';
+    badget = '';
+
+    private selectedId: any;
+
     optTipoPerfil = [
         {name: 'Gestor do Site', value: '1'},
         {name: 'Secretário', value: '2'},
@@ -26,11 +31,6 @@ export class ColaboradorFormComponent implements OnInit {
         {name: 'Sim', value: true},
         {name: 'Não', value: false}
     ];
-
-    private selectedId: any;
-
-    title = 'Colaborador';
-    badget = '';
 
     /** ColaboradorForm ctor */
     constructor(
@@ -51,6 +51,20 @@ export class ColaboradorFormComponent implements OnInit {
             .subscribe(colaborador => this.colaborador = colaborador);
     }
 
+    save() {
+        this.service.addColaborador(this.colaborador)
+        .subscribe(() => this.gotoColaboradores());    }
+
+    /*excluir() {
+        this.gotoColaboradores();
+    }*/
+
+    gotoColaboradores() {
+
+        let colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
+        this.router.navigate(['/Colaborador', { id: colaboradorId, foo: 'foo' }]);
+    }
+
     /** Called by Angular after ColaboradorForm component initialized */
     ngOnInit(): void {
 
@@ -62,20 +76,5 @@ export class ColaboradorFormComponent implements OnInit {
             this.badget = 'Novo';
             this.setColaborador();
         }
-
-    }
-
-     gotoColaboradores() {
-
-        let colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
-        this.router.navigate(['/Colaborador', { id: colaboradorId, foo: 'foo' }]);
-    }
-
-    save() {
-        this.service.addColaborador(this.colaborador)
-        .subscribe(() => this.gotoColaboradores());    }
-
-    excluir() {
-        this.gotoColaboradores();
     }
 }

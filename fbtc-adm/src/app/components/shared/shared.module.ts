@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
 
 import { BooMessagePipe } from './pipes/boolean-viewer.pipe';
 import { TipoPerfilPipe } from './pipes/tipo-perfil.pipe';
 import { TipoEventoPipe } from './pipes/tipo-evento.pipe';
 import { FindNameInTipoPublicoPipe } from './pipes/find-name-in-tipo-publico.pipe';
-// import { AtcRoute } from './webapi-routes/atc.route';
+import { StatusPagamentoPipe } from './pipes/status-pagamento-pipe';
+import { ObjetivoPagamentoPipe } from './pipes/objetivo-pagamento.pipe';
+import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
 
 @NgModule({
   imports: [
@@ -16,15 +17,19 @@ import { FindNameInTipoPublicoPipe } from './pipes/find-name-in-tipo-publico.pip
     BooMessagePipe,
     FindNameInTipoPublicoPipe,
     TipoPerfilPipe,
-    TipoEventoPipe
-    // CommonModule
-    // FormsModule
+    TipoEventoPipe,
+    ObjetivoPagamentoPipe,
+    StatusPagamentoPipe,
+    FormaPagamentoPipe
   ],
   exports: [
     BooMessagePipe,
     FindNameInTipoPublicoPipe,
     TipoPerfilPipe,
-    TipoEventoPipe
+    TipoEventoPipe,
+    ObjetivoPagamentoPipe,
+    StatusPagamentoPipe,
+    FormaPagamentoPipe
   ],
   providers: [
    // AtcRoute
