@@ -19,32 +19,35 @@
             </div>
               <div id="L1C4">
                 CRM:<br>
-                <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
+                <input [(ngModel)]="editCRM" size="15px" maxlength="15"/>
             </div>
         </div>
         <div id="LineBodyCentral">
             <div id="L2C1">
                 Status:<br>
-                {{ recebimento.statusPagamento | statusPagamento }}
+                <select id="sltStatusPagamento" 
+                    [(ngModel)]="editStatusPagamento" name="statusPagamento">
+                    <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
+               </select>
               </div> 
             <div id="L2C2">
                   Ano:<br>
                   <select required
-                      [(ngModel)]="editAno" name="Ano" #ano="ngModel">
-                      <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
+                      [(ngModel)]="editAno" name="Ano">
+                      <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
                   </select>
               </div>                        
               <div id="L2C3">
                 Mês:<br>
                 <select required
-                    [(ngModel)]="editMes" name="Mes" #mes="ngModel">
-                    <option *ngFor="let mes of lstMes" [value]="mes">{{ mes }}</option>
+                    [(ngModel)]="editMes" name="Mes">
+                    <option *ngFor="let mes of _util.lstMes" [value]="mes">{{ mes }}</option>
                 </select>
             </div> 
             <div class="col-lg-6">
                 <label>Status:</label><br>
                 <div>
-                    <label required class="radion-inline" *ngFor="let op of optBoolean; let idx = index">
+                    <label required class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
                         <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
                     </label>
                 </div>
@@ -52,7 +55,7 @@
         </div>
         <div id="LineBodyCentral">
               <div id="L4C1">
-                      <button (click)="gotoBuscarAssociado()">Pesquisar</button>
+                      <button (click)="gotoBuscarRecebimento()">Pesquisar</button>
               </div>
             </div>
             <div id="LineBodyCentral">
@@ -78,7 +81,7 @@
                               <div id="LstCol3c">{{ recebimento.objetivoPagamento | objetivoPagamento }}</div>
                               <div id="LstCol4c">{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</div>
                               <div id="LstCol5c">{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</div>
-                              <div id="LstCol6c">{{ recebimento.statusPagamento | statusPagamento }}</div>
+                              <div id="LstCol6c">{{ recebimento.statusPagamento |  statusPagamento }}</div>
                           </a>
                       </li>
                   </ul>

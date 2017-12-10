@@ -18,16 +18,16 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Ano:</label>
-                                        <select required class="form-control"
-                                            [(ngModel)]="editAno" name="Ano" #sexo="ngModel">
-                                            <option *ngFor="let ano of lstAno" [value]="ano">{{ ano }}</option>
+                                        <select id="sltAno" class="form-control"
+                                            [(ngModel)]="editAno" name="Ano">
+                                            <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Tipo de evento:</label>
-                                        <select id="sltTipoEvento" class="form-control" required
+                                        <select id="sltTipoEvento" class="form-control"
                                             [(ngModel)]="editTipoEvento" name="TipoEvento">
-                                            <option *ngFor="let op of optTipoEventos" value="{{ op.value }}">{{ op.name }}</option>
+                                            <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
                                         </select>
                                     </div>
                                 </div>

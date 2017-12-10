@@ -7,6 +7,8 @@ import { EventoService } from './../../shared/services/evento.service';
 
 import { Evento } from '../../shared/model/evento';
 
+import { Util } from '../../shared/util/util';
+
 @Component({
   selector: 'app-evento-list',
   templateUrl: './evento.list.component.html',
@@ -24,12 +26,7 @@ export class EventoListComponent implements OnInit {
 
   eventos: Evento[];
 
-  lstAno = [2018, 2017, 2016];
-
-  optTiposEventos = [
-    {name: 'Workshop Internacional', value: '2'},
-    {name: 'Congresso Brasileiro', value: '4'},
-  ];
+  _util = Util;
 
   constructor(
     private service: EventoService,

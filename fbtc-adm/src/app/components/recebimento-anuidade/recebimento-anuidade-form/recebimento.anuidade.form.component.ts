@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-import { RecebimentoAnuidadeService } from './../../shared/services/recebimento-anuidade.service';
+import { RecebimentoService } from '../../shared/services/recebimento.service';
 import { Recebimento } from './../../shared/model/recebimento';
 
 @Component({
@@ -16,12 +16,11 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
   @Input() recebimento: Recebimento;
 
   title = 'Dados de pagamento de anuidade do associado';
-  badget = '';
 
   private selectedId: any;
 
   constructor(
-    private service: RecebimentoAnuidadeService,
+    private service: RecebimentoService,
     private router: Router,
     private route: ActivatedRoute
 ) { }
@@ -32,14 +31,18 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
           .subscribe(recebimento => this.recebimento = recebimento);
   }
 
-  save() {
-    this.service.addRecebimentoAnuidade(this.recebimento)
-    .subscribe(() => this.gotoRecebimentoAnuidade());    }
+  gotoSave() {
 
-/*  gotoSave() {
-    alert('Registro salvo com sucesso');
-    this.gotoRecebimentoAnuidade();
-  }*/
+      this.service.addRecebimento(this.recebimento)
+      .subscribe(() =>  this.gotoShowPopUp());
+  }
+
+  gotoShowPopUp() {
+
+    // Colocar a chamada para a implementação do PopUp modal de aviso:
+    alert('Registro salvo com sucesso!');
+  }
+
 
   gotoNotificarAssociado() {
 
@@ -58,7 +61,6 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
     const id = +this.route.snapshot.paramMap.get('id');
       if (id > 0) {
-          this.badget = 'Edição';
           this.getRecebimentoById(id);
     } else {
       alert('Não foi encontrato recebimento para o Id Informado');

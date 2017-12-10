@@ -13,6 +13,7 @@ import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from './../../shared/model/atc';
 
 import { debug } from 'util';
+import { Util } from './../../shared/util/util';
 
 @Component({
     selector: 'app-associado-form',
@@ -28,47 +29,12 @@ export class AssociadoFormComponent implements OnInit {
     title = 'Associado';
     badge = '';
 
+    _util = Util;
+
     private selectedId: any;
 
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
-
-    optSexo = [
-        {name: 'Masculino', value: 'M'},
-        {name: 'Feminino', value: 'F'}
-    ];
-
-    // retirar essa option:
-    optATC = [
-        {name: 'Rio de Janeiro', value: '1'},
-        {name: 'Minas Gerais', value: '2'},
-        {name: 'Alagoas', value: '3'}
-    ];
-
-    optTipoFormaContato = [
-        {name: 'E-Mail', value: 1},
-        {name: 'Celular', value: 2},
-        {name: 'Endereço', value: 3},
-        {name: 'Todos', value: 4}
-    ];
-
-    optTipoProfissao = [
-        {name: 'Psicólogo', value: '7'},
-        {name: 'Médico', value: '8'}
-    ];
-
-    optTipoTitulacao = [
-        {name: 'Graduado', value: '1'},
-        {name: 'Especialista', value: '2'},
-        {name: 'Mestre', value: '3'},
-        {name: 'Doutor', value: '4'},
-        {name: 'Pós-Doutor', value: '5'}
-    ];
-
-    optBoolean = [
-        {name: 'Sim', value: true},
-        {name: 'Não', value: false}
-    ];
 
     /** AssociadoFrm ctor */
     constructor(
@@ -77,7 +43,7 @@ export class AssociadoFormComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private serviceCEP: CepCorreiosService,
-    //    private serviceAtc: AtcService
+        private serviceAtc: AtcService
     ) { }
 
     getAssociadoById(id: number): void {
@@ -92,21 +58,6 @@ export class AssociadoFormComponent implements OnInit {
             .subscribe(associado => this.associado = associado);
     }
 
-    /** Called by Angular after AssociadoForm component initialized */
-    ngOnInit(): void {
-
-        this.getTiposPublicos();
-
-        const id = +this.route.snapshot.paramMap.get('id');
-        if (id > 0) {
-            this.badge = '"Edição';
-            this.getAssociadoById(id);
-        } else {
-            this.badge = 'Novo';
-            this.setAssociado();
-        }
-    }
-
     gotoAssociados() {
         let associadoId = this.associado ? this.associado.associadoId : null;
         // Pass along the Associado id if available
@@ -118,7 +69,13 @@ export class AssociadoFormComponent implements OnInit {
     save() {
 
         this.service.addAssociado(this.associado)
-            .subscribe(() => this.gotoAssociados());
+        .subscribe(() =>  this.gotoShowPopUp());
+    }
+
+    gotoShowPopUp() {
+
+      // Colocar a chamada para a implementação do PopUp modal de aviso:
+      alert('Registro salvo com sucesso!');
     }
 
     excluir() {
@@ -133,9 +90,8 @@ export class AssociadoFormComponent implements OnInit {
 
     getAtcs(): void {
 
-      //  this.serviceAtc.getAtcs().subscribe(atcs => this.atcs = atcs);
+        this.serviceAtc.getAtcs().subscribe(atcs => this.atcs = atcs);
     }
-
 
     getEnderecoByCep(): void {
 
@@ -148,5 +104,22 @@ export class AssociadoFormComponent implements OnInit {
 
         this.serviceCEP.getByCep(this.associado.enderecoPessoa.cep)
             .subscribe(endereco => this.associado.enderecoPessoa = endereco);
+    }
+
+    /** Called by Angular after AssociadoForm component initialized */
+    ngOnInit(): void {
+
+        this.getAtcs();
+
+        this.getTiposPublicos();
+
+        const id = +this.route.snapshot.paramMap.get('id');
+        if (id > 0) {
+            this.badge = '"Edição';
+            this.getAssociadoById(id);
+        } else {
+            this.badge = 'Novo';
+            this.setAssociado();
+        }
     }
 }

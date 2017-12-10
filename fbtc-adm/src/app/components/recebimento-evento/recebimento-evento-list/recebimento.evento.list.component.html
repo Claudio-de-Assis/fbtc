@@ -25,25 +25,26 @@
         <div id="LineBodyCentral">
             <div id="L2C1">
                 Evento:<br>
-                <select required
-                [(ngModel)]="editEvento" name="Evento" #evento="ngModel">
-                <option *ngFor="let evento of lstEventos" [value]="evento">{{ evento }}</option>
-            </select>
-          </div> 
+                <select id="sltTipoEvento" 
+                    [(ngModel)]="editTipoEvento" name="TipoEvento">
+                    <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
+                </select>
+
+            </div> 
           <div id="L2C2">
             Tipo de Público:<br>
-            <select required
-            [(ngModel)]="editTipoPublico" name="TipoPublico" #tipoPublico="ngModel">
-            <option *ngFor="let tipoPublico of lstTipoPublico" [value]="tipoPublico">{{ tipoPublico }}</option>
-        </select>
-          </div>                        
+            <select id="sltTipo" 
+                [(ngModel)]="editTipoPublico" name="TipoPublico">
+                <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
+            </select>
+            </div>                        
           <div id="L2C3">
                 Status:<br>
-                <select required
-                [(ngModel)]="editStatus" name="Status" #status="ngModel">
-                <option *ngFor="let status of lstStatus" [value]="status">{{ status }}</option>
-            </select>
-              </div>                        
+                <select id="sltStatusPagamento" 
+                [(ngModel)]="editStatusPagamento" name="statusPagamento">
+                <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
+           </select>
+          </div>                        
         </div>
         <div id="LineBodyCentral">
               <div id="L4C1">
@@ -58,20 +59,26 @@
                       <legend>Listagem de Associados</legend>
                       <div id="Lst">
                       <div id="LstHeader">
-                          <div id="LstCol1">Nome</div><div id="LstCol2">Evento</div><div id="LstCol3">Tipo de Público</div><div id="LstCol4">Vencimento</div><div id="LstCol5">Pagamento</div>
+                          <div id="LstCol1">Associado</div>
+                          <div id="LstCol2">CPF</div>
+                          <div id="LstCol3">Objetivo</div>
+                          <div id="LstCol4">Vencimento</div>
+                          <div id="LstCol5">Pagamento</div>
+                          <div id="LstCol6">Status</div>
                       </div>
                       <div id="LstCenter">       
                   <ul class="associados">
-                      <li *ngFor="let associado of associado$ | async"
-                          [class.selected]="associado.AssociadoId === selectedId">
-                          <a [routerLink]="['/RecebimentoEvento', associado.AssociadoId]">
-                              <div id="LstCol1c"><span class="badge">{{ associado.AssociadoId}}</span>{{ associado.Nome}}</div>
-                              <div id="LstCol2c">{{ editEvento }}</div>
-                              <div id="LstCol3c">{{ editTipoPublico }}</div>
-                              <div id="LstCol4c">{{ editDtVencimento | date:'dd/MM/yyyy' }}</div>
-                              <div id="LstCol5c">{{ editDtPagto | date:'dd/MM/yyyy' }}</div>
-                          </a>
-                      </li>
+                      <li *ngFor="let recebimento of recebimentos"
+                      [class.selected]="recebimento.recebimentoId === selectedId">
+                      <a [routerLink]="['/RecebimentoEvento', recebimento.recebimentoId]">
+                          <div id="LstCol1c">{{ recebimento.associado.nome }}</div>
+                          <div id="LstCol2c">{{ recebimento.associado.cpf }}</div>
+                          <div id="LstCol3c">{{ recebimento.objetivoPagamento | objetivoPagamento }}</div>
+                          <div id="LstCol4c">{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</div>
+                          <div id="LstCol5c">{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</div>
+                          <div id="LstCol6c">{{ recebimento.statusPagamento |  statusPagamento }}</div>
+                      </a>
+                  </li>
                   </ul>
                       </div>
                       <div id="LstFooter">&nbsp;

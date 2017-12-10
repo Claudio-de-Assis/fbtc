@@ -7,92 +7,93 @@
         <div id="LineBodyCentral">
             <div id="L0C1">
                 Evento:<br>
-                <input [(ngModel)]="editNomeEvento" size="60px" maxlength="100" readonly/>
+                Nome do evento.....
             </div>
             <div id="L0C2">
                 Tipo de público:<br>
-                <input [(ngModel)]="editTipoPublico" size="30px" maxlength="15" readonly/>
+                {{ recebimento.associado.tipoPublicoId | findNameInTipoPublico: tiposPublicos }}
             </div>
         </div>
         <div id="LineBodyCentral">
               <div id="L1C1">
                   Nome:<br>
-                  <input [(ngModel)]="editNome" size="60px" maxlength="100" readonly/>
+                  {{ recebimento.associado.nome }}
               </div>
               <div id="L1C2">
                   CPF:<br>
-                  <input [(ngModel)]="editCPF" size="15px" maxlength="15" readonly/>
+                  {{ recebimento.associado.cpf }}
               </div>
               <div id="L1C3">
                 CRP:<br>
-                <input [(ngModel)]="editCRP" size="15px" maxlength="15" readonly/>
+                {{ recebimento.associado.crp }}
             </div>
             <div id="L1C4">
                 CRM:<br>
-                <input [(ngModel)]="editCRM" size="15px" maxlength="15" readonly/>
+                {{ recebimento.associado.crm }}
             </div>
           </div>
           <div id="LineBodyCentral">
             <div id="L2C1">
                 E-Mail:<br>
-                <input [(ngModel)]="editEMail" size="60px" maxlength="100" type="email" readonly/>
+                {{ recebimento.associado.eMail }}
             </div>
             <div id="L2C2">
                 Status Pagamento:<br>
-                <input [(ngModel)]="editStatusPagto" size="15px" maxlength="10" readonly/>
+                {{ recebimento.statusPagamento | statusPagamento}}
               </div>
               <div id="L2C3">
                   Vencimento:<br>
-                  <input [(ngModel)]="editDtVencimento" size="15px" readonly/>
+                  {{ recebimento.dtVencimento }}
               </div>
               <div id="L2C4">
                 Pagamento:<br>
-                <input [(ngModel)]="editDtPagamento" size="15px" readonly/>
+                {{ recebimento.associado.dtPagamento }}
             </div>
           </div>
           <div id="LineBodyCentral">
              <div id="L3C1">
                   Celular:<br>
-                  <input [(ngModel)]="editCelular" type="tel" size="15px" maxlength="15" readonly/>
+                  {{ recebimento.associado.nrCelular }}
               </div>
               <div id="L3C2">
                     Ativo:<br>
-                    <input [(ngModel)]="editAtivo" size="5px" maxlength="3" readonly/>
+                    {{ recebimento.associado.ativo | booMessage }}
               </div>
               <div id="L3C3">
                     Forma de pagamento:<br>
-                    <input [(ngModel)]="editFormaPagto" size="15px" maxlength="30" readonly/>
+                    {{ recebimento.associado.formaPagamento | formaPagamento }}
                </div>
               <div id="L3C4">
                     Nº Doc Cobrança:<br>
-                   <input [(ngModel)]="editNrDocCobranca" size="15px" maxlength="30" readonly/>
+                    {{ recebimento.nrDocCobranca }}
                </div>
              <div id="L3C5">
                     Valor devido:<br>
-                    <input [(ngModel)]="editValorDevido" size="15px" maxlength="15" readonly/>
+                    {{ recebimento.associado.valorDevido }}
             </div>
             <div id="L3C6">
                     Data de notificação:<br>
-                    <input [(ngModel)]="editDtNotificacao" size="15px" maxlength="15" type="date" readonly/>
+                    {{ recebimento.associado.dtNotificacao }}
                 </div>
         </div>
           <div id="LineBodyCentral">
               <div id="L5C1">
                   Observação:<br>
-                  <textarea [(ngModel)]="editObservacao" rows="10" cols="134"></textarea>
+                  <textarea [(ngModel)]="recebimento.observacao" rows="10" cols="134"></textarea>
               </div>
           </div>
           <div id="LineBodyCentral">
               <div id="L6C1">
-                    <button (click)="gotoNotificarAssociado()">Notificar Associado</button>
+
             </div>
           </div>
       </div>
       <div id="FooterCentral">
           <div id="FT1C1">
-             <button (click)="gotoRecebimentoAnuidade()">Retornar</button>
-             <button (click)="gotoSave()">Salvar</button>
-          </div>
+            <button (click)="gotoRecebimentoAnuidade()">Retornar</button>
+            <button (click)="gotoSave()">Salvar</button>
+            <button (click)="gotoNotificarAssociado()">Notificar Associado</button>
+         </div>
       </div>
   </div>
 </div>

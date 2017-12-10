@@ -6,6 +6,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Colaborador } from './../../shared/model/colaborador';
 import { ColaboradorService } from '../../shared/services/colaborador.service';
 
+import { Util } from './../../shared/util/util';
+
 @Component({
   selector: 'app-colaborador-list',
   templateUrl: './colaborador.list.component.html',
@@ -13,18 +15,11 @@ import { ColaboradorService } from '../../shared/services/colaborador.service';
 })
 export class ColaboradorListComponent implements OnInit {
 
-  lstPerfil = ['Gestor do Site', 'Secretaria', 'Financeiro'];
-
-  optBoolean = [
-    {name: 'Todos', value: null},
-    {name: 'Sim', value: true},
-    {name: 'Não', value: false}
-  ];
-
   title = 'Consulta de Colaborador';
 
   editAtivo: string = '';
 
+  _util = Util;
 
   colaboradores: Colaborador[];
 

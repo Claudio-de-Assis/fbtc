@@ -6,12 +6,14 @@ import { AssociadoService } from './../shared/services/associado.service';
 import { RecebimentoEventoListComponent } from './recebimento-evento-list/recebimento.evento.list.component';
 import { RecebimentoEventoFormComponent } from './recebimento-evento-form/recebimento.evento.form.component';
 import { RecebimentoEventoRoutingModule } from './recebimento.evento.routing.module';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RecebimentoEventoRoutingModule
+    RecebimentoEventoRoutingModule,
+    SharedModule
   ],
   declarations: [
     RecebimentoEventoListComponent,

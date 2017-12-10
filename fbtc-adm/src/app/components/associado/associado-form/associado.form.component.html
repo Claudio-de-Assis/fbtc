@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="sltSexo">Sexo:</label>
                             <select id="sltSexo" required [(ngModel)]="associado.sexo" name="sexo" class="form-control">
-                                <option *ngFor="let op of optSexo" value="{{ op.value }}">{{ op.name }}</option>
+                                <option *ngFor="let op of _util.optSexo" value="{{ op.value }}">{{ op.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                             <label for="sltATC">ATC:</label>
                             <select id="sltATC" class="form-control" required
                                 [(ngModel)]="associado.atcId" name="ATC">
-                                <option *ngFor="let op of optATC" value="{{ op.value }}">{{ op.name }}</option>
+                                <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
                             </select>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                             <label for="inpTitulacao">Titulação:</label>
                             <select id="inpTitulacao" class="form-control" required
                                 [(ngModel)]="associado.tipoTitulacao" name="Titulacao">
-                                <option *ngFor="let op of optTipoTitulacao" value="{{ op.value }}">{{ op.name }}</option>
+                                <option *ngFor="let op of _util.optTipoTitulacao" value="{{ op.value }}">{{ op.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             <label for="inpProfissao">Profissão:</label>
                             <select id="inpProfissao" class="form-control" required
                                 [(ngModel)]="associado.tipoProfissao" name="Profissao">
-                                <option *ngFor="let op of optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
+                                <option *ngFor="let op of _util.optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -135,22 +135,22 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Terapeuta Certificado:</label>
+                            <label>Certificado?:</label>
                             <div>
-                                <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                     <input type="radio" [(ngModel)]="associado.certificado" name="certificado" id="rdbCertificado" 
                                     [checked]="op.value === associado.certificado" [value]="op.value"> {{ op.name }} &nbsp;</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <label>Data  da Certifica&ccedil;&atilde;o:</label>
+                        <label>Data:</label>
                         <input [(ngModel)]="associado.dtCertificacao" type="Date" class="form-control" maxlength="10"/>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Autoriza divulgação do contato:</label><br>
-                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                            <label>Divulgação do contato?:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                 <input type="radio" [(ngModel)]="associado.divulgarContato" name="divulgarContato" id="rdbDivulgarContato" 
                                 [checked]="op.value === associado.divulgarContato" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>
@@ -158,7 +158,7 @@
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label>Contato para divulgação:</label><br>
-                            <label required class="checkbox-inline" *ngFor="let op of optTipoFormaContato" >
+                            <label required class="checkbox-inline" *ngFor="let op of _util.optTipoFormaContato" >
                                 <input type="checkbox" [(ngModel)]="associado.tipoFormaContato" name="tipoFormaContato" id="rdbTipoFormaContato"
                                 [checked]="op.value === associado.tipoFormaContato" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>
@@ -168,7 +168,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Diretoria:</label><br>
-                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                 <input type="radio" [(ngModel)]="associado.integraDiretoria" name="Diretoria" id="rdbDiretoria" 
                                 [checked]="op.value === associado.integraDiretoria" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>
@@ -176,7 +176,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>CONFI:</label><br>
-                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                 <input type="radio" [(ngModel)]="associado.integraConfi" name="Confi" id="rdbConfi" 
                                 [checked]="op.value === associado.integraConfi" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>
@@ -184,7 +184,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Ativo:</label><br>
-                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                     <input type="radio" [(ngModel)]="associado.ativo" name="ativo" id="rdbAtivo" 
                                     [checked]="op.value === associado.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>
@@ -192,7 +192,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Adimplente:</label><br>
-                            <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                     <input type="radio" [(ngModel)]="associado.adimplente" name="adimplente" id="rdbAdimplente" 
                                     [checked]="op.value === associado.adimplente" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>

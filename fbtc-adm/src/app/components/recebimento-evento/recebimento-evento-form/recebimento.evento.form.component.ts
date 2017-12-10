@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { RecebimentoService } from './../../shared/services/recebimento.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-import { AssociadoService } from '../../shared/services/associado.service';
-import { Associado } from '../../shared/model/associado';
 import { Data } from '@angular/router/src/config';
+import { Recebimento } from '../../shared/model/recebimento';
+import { TipoPublico } from '../../shared/model/tipo-publico';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
 @Component({
   selector: 'app-recebimento-evento-form',
@@ -14,87 +16,67 @@ import { Data } from '@angular/router/src/config';
 })
 export class RecebimentoEventoFormComponent implements OnInit {
 
-  private selectedId: any;
-
-  associado$: Observable<Associado>;
-  associado: Associado;
-
-  editAssociadoId: number;
-  editNome: string;
-  editCPF: string;
-  editCRP: string;
-  editCRM: string;
-  editAno: number;
-  editMes: string;
-  editStatus: string;
-  editAtivo: string;
-  editEMail: string;
-  editCelular: string;
-  editDtVencimento: Data;
-  editDtPagamento: Date;
-  editStatusPagto: string;
-  editFormaPagto: string;
-  editNrDocCobranca: string;
-  editValorDevido: number;
-  editDtNotificacao: Data;
-  editObservacao: string;
-
-  editNomeEvento: string;
-  editTipoPublico: string;
-
+  @Input() recebimento: Recebimento;
 
   title = 'Dados de pagamento de evento do associado';
 
+  private selectedId: any;
+
+  tiposPublicos: TipoPublico[];
+
   constructor(
-    private route: ActivatedRoute,
+    private service: RecebimentoService,
+    private serviceTP: TipoPublicoService,
     private router: Router,
-    private service: AssociadoService
+    private route: ActivatedRoute
   ) { }
 
-  gotoRecebimentoAnuidade() {
-    let associadoId = this.associado ? this.associado.associadoId : null;
-    // Pass along the Associado id if available
-    // so that the AssociadoList component can select that Associado.
-    // Include a junk 'foo' property for fun.
-    this.router.navigate(['/RecebimentoEvento', { id: associadoId, foo: 'foo' }]);
+  getRecebimentoById(id: number): void {
+
+    this.service.getById(id)
+          .subscribe(recebimento => this.recebimento = recebimento);
   }
 
   gotoSave() {
-    alert('Registro salvo com sucesso');
-    this.gotoRecebimentoAnuidade();
+
+    this.service.addRecebimento(this.recebimento)
+    .subscribe(() =>  this.gotoShowPopUp());
+  }
+
+  gotoShowPopUp() {
+
+    // Colocar a chamada para a implementação do PopUp modal de aviso:
+    alert('Registro salvo com sucesso!');
   }
 
   gotoNotificarAssociado() {
+
     if (confirm('Deseja notificar o Associado?')) {
       alert('Notificação enviada com sucesso');
     }
   }
 
+  gotoRecebimentoAnuidade() {
+
+    let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
+    this.router.navigate(['/RecebimentoEvento', { id: recebimentoId, foo: 'foo' }]);
+  }
+
+  getTiposPublicos(): void {
+
+    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+  }
+
   ngOnInit() {
-    // this.associado$ = this.route.paramMap
-     //   .switchMap((params: ParamMap) => this.service.getAssociadoById(params.get(id)));
 
-        this.associado$.subscribe((associado: Associado) => {this.associado = associado});
+    this.getTiposPublicos();
 
-        this.editAssociadoId = this.associado ? this.associado.associadoId : 0;
-        this.editNome = this.associado ?  this.associado.nome : '';
-        this.editEMail = this.associado ?  this.associado.eMail : '';
-        this.editCelular = this.associado ?  this.associado.nrCelular : '';
-        this.editCPF = this.associado ?  this.associado.cpf : '';
-        this.editCRP = this.associado ?  this.associado.crp : '';
-        this.editCRM = this.associado ?  this.associado.crm : '';
-
-        this.editStatusPagto = 'Adimplente';
-        this.editDtPagamento = new Date('2017-01-01');
-        this.editDtVencimento = new Date('2017-01-01');
-        this.editAtivo = 'Sim';
-        this.editFormaPagto = 'PagSeguro';
-        this.editNrDocCobranca = '123456789';
-        this.editValorDevido = 180.00;
-        this.editObservacao = 'Cliente .....';
-
-
-        this.editNomeEvento = 'Workshop Internacional....';
-        this.editTipoPublico = 'Profissional - Associado';
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (id > 0) {
+        this.getRecebimentoById(id);
+    } else {
+      alert('Não foi encontrato recebimento para o Id Informado');
+      this.gotoRecebimentoAnuidade();
+    }
   }
 }

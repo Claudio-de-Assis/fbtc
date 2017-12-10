@@ -181,7 +181,7 @@
     padding-bottom: 5px;
 }
 #LstCol1{
-    width: 360px;
+    width: 300px;
     position: relative;
     float: left;
 }
@@ -206,12 +206,12 @@
     float: left;
 }
 #LstCol6{
-    width: 40px;
+    width: 100px;
     position: relative;
     float: left;
 }
 #LstCol1c{
-    width: 360px;
+    width: 300px;
     position: relative;
     float: left;
 }
@@ -236,7 +236,7 @@
     float: left;
 }
 #LstCol6c{
-    width: 40px;
+    width: 100px;
     position: relative;
     float: left;
 }

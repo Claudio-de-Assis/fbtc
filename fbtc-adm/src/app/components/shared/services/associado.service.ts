@@ -51,7 +51,7 @@ export class AssociadoService {
     /** POST: add a new Associado to the server */
     addAssociado (associado: Associado): Observable<Associado> {
         return this.http.post<Associado>(this.apiRoute.postAssociado(), associado, httpOptions).pipe(
-          tap((associado: Associado) => this.log(`added associado w/ id=${associado.associadoId}`)),
+          tap((_associado: Associado) => this.log(`added associado w/ id=${associado.associadoId}`)),
           catchError(this.handleError<Associado>('addAssociado'))
         );
     }

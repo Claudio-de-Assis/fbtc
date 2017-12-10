@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AssociadoService } from './../shared/services/associado.service';
-import { RecebimentoAnuidadeService } from './../shared/services/recebimento-anuidade.service';
+import { RecebimentoService } from './../shared/services/recebimento.service';
 
 import { RecebimentoAnuidadeFormComponent } from './recebimento-anuidade-form/recebimento.anuidade.form.component';
 import { RecebimentoAnuidadeListComponent } from './recebimento-anuidade-list/recebimento.anuidade.list.component';
@@ -27,7 +27,7 @@ import { RecebimentoAnuidadeRoutingModule } from './recebimento.anuidade.routing
   ],
   providers: [
     AssociadoService,
-    RecebimentoAnuidadeService
+    RecebimentoService
   ]
 })
 export class RecebimentoAnuidadeModule { }

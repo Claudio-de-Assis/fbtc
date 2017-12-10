@@ -9,6 +9,8 @@ import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { Evento } from '../../shared/model/evento';
 import { TipoPublico } from './../../shared/model/tipo-publico';
 
+import { Util } from './../../shared/util/util';
+
 @Component({
   selector: 'app-evento-form',
   templateUrl: './evento.form.component.html',
@@ -22,19 +24,16 @@ export class EventoFormComponent implements OnInit {
   title = 'Evento';
   badge = '';
 
-  private selectedId: any;
-
-  tiposPublicos: TipoPublico[];
+  _util = Util;
 
   optTiposEventos = [
     {name: 'Workshop Internacional', value: '2'},
     {name: 'Congresso Brasileiro', value: '4'},
   ];
 
-  optBoolean = [
-    {name: 'Sim', value: true},
-    {name: 'Não', value: false}
-  ];
+  private selectedId: any;
+
+  tiposPublicos: TipoPublico[];
 
   constructor(
     private route: ActivatedRoute,
@@ -56,17 +55,26 @@ export class EventoFormComponent implements OnInit {
   }
 
   getTiposPublicos(): void {
+
     this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
   }
 
   gotoEventos() {
+
     let eventoId = this.evento ? this.evento.eventoId : null;
     this.router.navigate(['/Evento', { id: eventoId, foo: 'foo' }]);
   }
 
   gotoSaveEvento() {
+
     this.service.addEvento(this.evento)
-    .subscribe(() => this.gotoEventos());
+    .subscribe(() =>  this.gotoShowPopUp());
+  }
+
+  gotoShowPopUp() {
+
+    // Colocar a chamada para a implementação do PopUp modal de aviso:
+    alert('Registro salvo com sucesso!');
   }
 
   /*gotoDeleteEvento() {
@@ -77,10 +85,12 @@ export class EventoFormComponent implements OnInit {
   }*/
 
   gotoPreviewAnuncio() {
+
     this.router.navigate(['/EventoPreview', +this.route.snapshot.paramMap.get('id') ]);
   }
 
   ngOnInit() {
+
     this.getTiposPublicos();
 
     const id = +this.route.snapshot.paramMap.get('id');

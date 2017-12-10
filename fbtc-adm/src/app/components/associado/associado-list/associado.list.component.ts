@@ -10,6 +10,7 @@ import { AtcService } from '../../shared/services/atc.service';
 import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from './../../shared/model/tipo-publico';
 import { Atc } from '../../shared/model/atc';
+import { Util } from '../../shared/util/util';
 
 @Component({
     selector: 'app-associado-list',
@@ -17,6 +18,7 @@ import { Atc } from '../../shared/model/atc';
     styleUrls: ['./associado.list.component.css'],
     providers: [AssociadoService]
 })
+
 /** AssociadoList component*/
 export class AssociadoListComponent implements OnInit {
 
@@ -24,19 +26,11 @@ export class AssociadoListComponent implements OnInit {
 
     private selectedAssociado: Associado;
 
+    _util = Util;
+
     associados: Associado[];
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
-
-    optSexo = [
-        {name: 'Masculino', value: 'M'},
-        {name: 'Feminino', value: 'F'}
-    ];
-
-    optTipoProfissao = [
-        {name: 'Psicólogo', value: '7'},
-        {name: 'Médico', value: '8'}
-    ];
 
     /** AssociadoList ctor */
     constructor(
@@ -44,19 +38,21 @@ export class AssociadoListComponent implements OnInit {
         private serviceTP: TipoPublicoService,
         private router: Router,
         private route: ActivatedRoute,
-        // private serviceAtc: AtcService
+        private serviceAtc: AtcService
     ) { }
 
     getAssociados(): void {
+
         this.service.getAssociados().subscribe(associados => this.associados = associados);
     }
 
     getAtcs(): void {
-    //    this.serviceAtc.getAtcs.subscribe(atcs => this.atcs = atcs);
+
+        this.serviceAtc.getAtcs().subscribe(atcs => this.atcs = atcs);
     }
 
-    /** Called by Angular after AssociadoList component initialized */
     ngOnInit(): void {
+
         this.getTiposPublicos();
 
         this.getAssociados();
@@ -65,16 +61,19 @@ export class AssociadoListComponent implements OnInit {
     }
 
     onSelect(associado: Associado): void {
+
         this.selectedAssociado = associado;
     }
 
     gotoNovoAssociado() {
+
         this.router.navigate(['/Associado', 0]);
     }
 
     gotoBuscarAssociado() { }
 
     getTiposPublicos(): void {
+
         this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
     }
 }

@@ -43,16 +43,16 @@
                                         <label>Sexo:</label><br>
                                         <select required
                                             [(ngModel)]="editSexo" name="Sexo" #sexo="ngModel" class="form-control">
-                                            <option *ngFor="let sexo of lstSexo" [value]="sexo">{{sexo}}</option>
+                                            <option *ngFor="let op of _util.optSexo" value="{{ op.value }}">{{ op.name }}</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>ATC:</label>
-                                        <select required
-                                            [(ngModel)]="editATC" name="ATC" #atc="ngModel" class="form-control">
-                                            <option *ngFor="let ATC of lstAtc" [value]="ATC">{{ATC}}</option>
+                                        <select id="sltATC" class="form-control" 
+                                            [(ngModel)]="editAtcId" name="ATC">
+                                            <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
                                         </select>
-                                    </div>
+                                  </div>
                                 </div>
                                 
                             </div>
@@ -60,7 +60,7 @@
                                 <label>Profissão</label>
                                 <select required
                                     [(ngModel)]="editATCProfissao" name="profissao" #profissao="ngModel" class="form-control">
-                                    <option *ngFor="let PROFISSAO of lstProfissao" [value]="PROFISSAO">{{ PROFISSAO }}</option>
+                                    <option *ngFor="let op of _util.optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
                                 </select>
                             </div>
                         </div>

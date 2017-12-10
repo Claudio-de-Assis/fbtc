@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <label>Status:</label>
                                 <div>
-                                    <label required class="radion-inline" *ngFor="let op of optBoolean, let idx = index" >
+                                    <label required class="radion-inline" *ngFor="let op of _util.optBoolean, let idx = index" >
                                         <input type="radio" [(ngModel)]="colaborador.ativo" name="rdaAtivo" id="rdAtivo" [checked]="op.value === colaborador.ativo" [value]="op.value"> {{ op.name }} &nbsp;
                                     </label>
                                 </div>
@@ -29,7 +29,7 @@
                                 <label>Perfil:</label>
                                 <select required class="form-control"
                                     [(ngModel)]="colaborador.tipoPerfil" name="Perfil" >
-                                    <option *ngFor="let op of optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
+                                    <option *ngFor="let op of _util.optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
                                 </select>
                             </div>
                             <div class="form-group">

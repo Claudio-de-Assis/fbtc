@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { ColaboradorService } from '../../shared/services/colaborador.service';
 import { Colaborador } from './../../shared/model/colaborador';
 
+import { Util } from './../../shared/util/util';
+
 @Component({
     selector: 'app-colaborador-form',
     templateUrl: './colaborador.form.component.html',
@@ -21,18 +23,8 @@ export class ColaboradorFormComponent implements OnInit {
 
     private selectedId: any;
 
-    optTipoPerfil = [
-        {name: 'Gestor do Site', value: '1'},
-        {name: 'Secretário', value: '2'},
-        {name: 'Financeiro', value: '3'}
-    ];
+    _util = Util;
 
-    optBoolean = [
-        {name: 'Sim', value: true},
-        {name: 'Não', value: false}
-    ];
-
-    /** ColaboradorForm ctor */
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -53,7 +45,14 @@ export class ColaboradorFormComponent implements OnInit {
 
     save() {
         this.service.addColaborador(this.colaborador)
-        .subscribe(() => this.gotoColaboradores());    }
+        .subscribe(() =>  this.gotoShowPopUp());
+    }
+
+    gotoShowPopUp() {
+
+      // Colocar a chamada para a implementação do PopUp modal de aviso:
+      alert('Registro salvo com sucesso!');
+    }
 
     /*excluir() {
         this.gotoColaboradores();

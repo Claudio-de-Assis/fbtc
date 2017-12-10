@@ -15,7 +15,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class RecebimentoAnuidadeService {
+export class RecebimentoService {
 
     recebimento: Recebimento;
     recebimento$: Observable<Recebimento>;
@@ -26,6 +26,7 @@ export class RecebimentoAnuidadeService {
         private messageService: MessageService) { }
 
     getAll(objetivoPagamento: string): Observable<Recebimento[]> {
+
         return this.http.get<Recebimento[]>(this.apiRoute.getAll(objetivoPagamento))
             .pipe(
                 tap(recebimentos => this.log('Fetched Recebimentos')),
@@ -34,6 +35,7 @@ export class RecebimentoAnuidadeService {
     }
 
     getById(id: number): Observable<Recebimento> {
+
         return this.http.get<Recebimento>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched recebimento id=${id}`)),
             catchError(this.handleError<Recebimento>(`getById id=${id}`))
@@ -41,6 +43,7 @@ export class RecebimentoAnuidadeService {
     }
 
     getByPessoaId(objetivoPagamento: string, id: number): Observable<Recebimento[]> {
+
         return this.http.get<Recebimento[]>(this.apiRoute.getByPessoaId(objetivoPagamento, id))
             .pipe(
                 tap(recebimentos => this.log('Fetched Recebimentos')),
@@ -49,20 +52,17 @@ export class RecebimentoAnuidadeService {
     }
 
     setRecebimento(objetivoPagamento: string): Observable<Recebimento> {
+
         return this.http.get<Recebimento>(this.apiRoute.setRecebimento(objetivoPagamento)).pipe(
             tap(_ => this.log(`fetched recebimento id=${0}`)),
             catchError(this.handleError<Recebimento>(`setRecebimento id=${0}`))
         );
     }
 
-    //////// Save methods //////////
-    /** POST: add a new Associado to the server */
-    addRecebimentoAnuidade (recebimento: Recebimento): Observable<Recebimento> {
-
-        recebimento.associado = null;
+    addRecebimento (recebimento: Recebimento): Observable<Recebimento> {
 
         return this.http.post<Recebimento>(this.apiRoute.postRecebimento(), recebimento, httpOptions).pipe(
-            tap((recebimento: Recebimento) => this.log(`added recebimento w/ id=${recebimento.recebimentoId}`)),
+            tap((_recebimento: Recebimento) => this.log(`added recebimento w/ id=${recebimento.recebimentoId}`)),
             catchError(this.handleError<Recebimento>('addRecebimento'))
         );
     }
@@ -74,6 +74,7 @@ export class RecebimentoAnuidadeService {
     * @param result - optional value to return as the observable result
     */
     private handleError<T> (operation = 'operation', result?: T) {
+
         return (error: any): Observable<T> => {
 
         // TODO: send the error to remote logging infrastructure

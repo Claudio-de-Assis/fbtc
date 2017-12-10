@@ -27,9 +27,9 @@ export class AtcService {
 
     getAtcs(): Observable<Atc[]> {
         return this.http.get<Atc[]>(this.apiRoute.getAll())
-            .pipe(
-                tap(atc => this.log('Fetched Atc')),
-                catchError(this.handleError('getAtcs()', []))
+        .pipe(
+            tap(atcs => this.log('Fetched Atc')),
+            catchError(this.handleError('getAtcs()', []))
         );
     }
 
@@ -51,7 +51,7 @@ export class AtcService {
     /** POST: add a new Associado to the server */
     addAtc (atc: Atc): Observable<Atc> {
         return this.http.post<Atc>(this.apiRoute.postAtc(), atc, httpOptions).pipe(
-          tap((atc: Atc) => this.log(`added atc w/ id=${atc.atcId}`)),
+          tap((_atc: Atc) => this.log(`added atc w/ id=${atc.atcId}`)),
           catchError(this.handleError<Atc>('addAtc'))
         );
     }

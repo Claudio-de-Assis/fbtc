@@ -33,7 +33,6 @@ import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
   ],
   providers: [
    // AtcRoute
-
   ]
 })
 export class SharedModule { }

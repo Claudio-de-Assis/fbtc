@@ -54,7 +54,7 @@
                                         <div class="form-group">
                                             <label>Tipo Evento:</label>
                                             <select id="sltTipoEvento" required [(ngModel)]="evento.tipoEvento" name="tipoEvento" class="form-control">
-                                                <option *ngFor="let op of optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
+                                                <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Aceita Isenção?</label><br>
-                                <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                     <input type="radio" [(ngModel)]="evento.aceitaIsencaoAta" name="AceitaIsencao" id="rdbAtivo" 
                                     [checked]="op.value === evento.aceitaIsencaoAta" [value]="op.value"> {{ op.name }} &nbsp; </label>
                             </div>
@@ -114,7 +114,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Anúncio Ativo?</label><br>   
-                                <label required class="radion-inline" *ngFor="let op of optBoolean" >
+                                <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                     <input type="radio" [(ngModel)]="evento.ativo" name="ativo" id="rdbAtivo" 
                                     [checked]="op.value === evento.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
                             </div>

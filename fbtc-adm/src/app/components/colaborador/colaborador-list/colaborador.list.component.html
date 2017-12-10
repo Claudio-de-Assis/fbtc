@@ -7,7 +7,6 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <form role="form">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome:</label>
@@ -19,14 +18,15 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label>Perfil:</label>                          
-                                        <select required [(ngModel)]="editPerfil" name="Perfil"  class="form-control">
-                                            <option *ngFor="let perfil of lstPerfil" [value]="perfil">{{perfil}}</option>
-                                        </select>
+                                        <select id="sltPerfil" class="form-control" name="Perfil"
+                                        [(ngModel)]="editPerfil" name="Perfil" >
+                                        <option *ngFor="let op of _util.optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
+                                    </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Status:</label><br>
                                         <div>
-                                            <label required class="radion-inline" *ngFor="let op of optBoolean; let idx = index">
+                                            <label required class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
                                                 <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
                                             </label>
                                         </div>
@@ -34,7 +34,6 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="panel-footer text-right">

@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { RecebimentoAnuidadeService } from './../../shared/services/recebimento-anuidade.service';
-// import { AssociadoService } from './../../shared/services/associado.service';
+import { RecebimentoService } from './../../shared/services/recebimento.service';
 import { Recebimento } from './../../shared/model/recebimento';
-// import { Associado } from '../../shared/model/associado';
+
+import { Util } from './../../shared/util/util';
 
 @Component({
   selector: 'app-recebimento-anuidade-list',
@@ -22,42 +22,26 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   // private selectedAssociado: Associado;
   private selectedRecebimento: Recebimento;
 
-  editNome: string = '';
-  editCPF: string = '';
-  editCRP: string = '';
-  editCRM: string = '';
-  editAno: number = 0;
-  editMes: string = '';
-  editStatus: string = '';
-  editAtivo: string = '';
-  editDtVencimento: Date = null;
-  editDtPagto: Date = null;
+  editNome: string;
+  editCPF: string;
+  editCRP: string;
+  editCRM: string;
+  editAno: number;
+  editMes: string;
+  editStatus: string;
+  editAtivo: string;
+  editDtVencimento: Date;
+  editDtPagto: Date;
 
-  // cassociados: Associado[];
   recebimentos: Recebimento[];
 
-  lstAno = [2018, 2017, 2016, 2015];
-  lstMes = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-  lstStatus = ['Adimplente', 'Inadimplente'];
+  _util = Util;
 
-  optBoolean = [
-    {name: 'Todos', value: null},
-    {name: 'Sim', value: true},
-    {name: 'Não', value: false}
-  ];
-
-  /** AssociadoList ctor */
   constructor(
-      private service: RecebimentoAnuidadeService,
-//    private serviceAssoc: AssociadoService,
+      private service: RecebimentoService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
-
-  /*getAssociados(): void {
-
-    this.serviceAssoc.getAssociados().subscribe(associados => this.associados = associados);
-  }*/
 
   getRecebimentos(objRec): void {
 
@@ -68,16 +52,13 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this.selectedRecebimento = recebimento;
   }
 
-  gotoBuscarAssociado() { }
-
   gotoBuscarRecebimento() { }
 
   /** Called by Angular after AssociadoList component initialized */
   ngOnInit() {
 
-    // this.getAssociados();
-
-    const objRecebimento = '2'; // 2: Anuidade.
+    // 2: Anuidade.
+    const objRecebimento = '2';
     this.getRecebimentos(objRecebimento);
   }
 }

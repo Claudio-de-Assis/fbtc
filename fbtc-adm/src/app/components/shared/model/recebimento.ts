@@ -10,8 +10,8 @@ export class Recebimento {
     dtVencimento: Date;
     dtPagamento: Date;
     dtNotificacao: Date;
-    statusPagto: string;
-    formaPagto: string;
+    statusPagamento: string;
+    formaPagamento: string;
     nrDocCobranca: string;
     valorPago: number;
     observacao: string;

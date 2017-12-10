@@ -7,6 +7,13 @@ import { AssociadoService } from './../../shared/services/associado.service';
 import { Associado } from '../../shared/model/associado';
 import { Data } from '@angular/router/src/config';
 
+import { Recebimento } from './../../shared/model/recebimento';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { TipoPublico } from '../../shared/model/tipo-publico';
+import { RecebimentoService } from '../../shared/services/recebimento.service';
+
+import { Util } from '../../shared/util/util';
+
 @Component({
   selector: 'app-recebimento-evento-list',
   templateUrl: './recebimento.evento.list.component.html',
@@ -15,10 +22,20 @@ import { Data } from '@angular/router/src/config';
 })
 export class RecebimentoEventoListComponent implements OnInit {
 
-  lstStatus = ['Adimplente', 'Inadimplente'];
-  lstEventos = ['Workshop internacinal....', 'Congresso BRasileiro....'];
-  lstTipoPublico = ['Profissional - Associado', 'Profissional - Não Associado', 'Estudante de Pós - Associado',
-    'Estudante de Pós - Não Associado', 'Estudante - Associado', 'Estudante - Não Associado'];
+  title = 'Consulta de pagamento de eventos';
+
+/*  lstTipoPublico = ['Profissional - Associado', 'Profissional - Não Associado', 'Estudante de Pós - Associado',
+    'Estudante de Pós - Não Associado', 'Estudante - Associado', 'Estudante - Não Associado'];*/
+
+  _util = Util;
+
+  private selectedId: number;
+
+  private selectedRecebimento: Recebimento;
+
+  tiposPublicos: TipoPublico[];
+
+  recebimentos: Recebimento[];
 
   editNome: string;
   editCPF: string;
@@ -31,49 +48,38 @@ export class RecebimentoEventoListComponent implements OnInit {
   editDtVencimento: Data;
   editDtPagto: Data;
 
-  title = 'Consulta de Pagamento de eventos';
-
-  associado$: Observable<Associado[]>;
-
-  associados: Associado[];
-  private selectedAssociado: Associado;
-
-  private selectedId: number;
-
   /** AssociadoList ctor */
   constructor(
-      private service: AssociadoService,
+      private service: RecebimentoService,
+      private serviceTP: TipoPublicoService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
 
-  getAssociados(): void {
-    this.service.getAssociados().subscribe(associados => this.associados = associados);
-  }
-
-  onSelect(associado: Associado): void {
-    this.selectedAssociado = associado;
-  }
-
   gotoImprimirLista() {}
 
-  /*
-  gotoNovoAssociado() {
-    this.router.navigate(['/Associado', 0]);
-  }*/
+  getRecebimentos(objRec): void {
 
-  gotoBuscarAssociado() { }
+    this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
+  }
+
+  onSelect(recebimento: Recebimento): void {
+    this.selectedRecebimento = recebimento;
+  }
+
+  gotoBuscarRecebimento() { }
+
+  getTiposPublicos(): void {
+
+    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+  }
 
   ngOnInit() {
-    this.associado$ = this.route.paramMap.switchMap((params: ParamMap) => {
-        this.selectedId = +params.get('Id');
-        return this.service.getAssociados();
-    });
 
-    this.editDtPagto = new Date('01-01-2017');
-    this.editDtVencimento = new Date('01-01-2017');
-    this.editStatus = 'Adimplente';
-    this.editEvento = 'Workshop Internacional...';
-    this.editTipoPublico = 'Profissional - Associado';
+    this.getTiposPublicos();
+
+    // 1: Eventos.
+    const objRecebimento = '1';
+    this.getRecebimentos(objRecebimento);
   }
 }

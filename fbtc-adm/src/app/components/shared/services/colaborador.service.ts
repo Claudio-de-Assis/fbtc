@@ -51,7 +51,7 @@ export class ColaboradorService {
     /** POST: add a new Colaborador to the server */
     addColaborador (colaborador: Colaborador): Observable<Colaborador> {
         return this.http.post<Colaborador>(this.apiRoute.postColaborador(), colaborador, httpOptions).pipe(
-            tap((colaborador: Colaborador) => this.log(`added Colaborador w/ id=${colaborador.colaboradorId}`)),
+            tap((_colaborador: Colaborador) => this.log(`added Colaborador w/ id=${colaborador.colaboradorId}`)),
             catchError(this.handleError<Colaborador>('addColaborador'))
         );
     }

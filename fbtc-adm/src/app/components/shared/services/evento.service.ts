@@ -51,7 +51,7 @@ export class EventoService {
     /** POST: add a new Colaborador to the server */
     addEvento (evento: Evento): Observable<Evento> {
         return this.http.post<Evento>(this.apiRoute.postEvento(), evento, httpOptions).pipe(
-            tap((evento: Evento) => this.log(`added Evento w/ id=${evento.eventoId}`)),
+            tap((_evento: Evento) => this.log(`added Evento w/ id=${evento.eventoId}`)),
             catchError(this.handleError<Evento>('addEvento'))
         );
     }
