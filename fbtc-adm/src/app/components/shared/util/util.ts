@@ -66,5 +66,4 @@ export class Util {
         {name: 'Doutor', value: '4'},
         {name: 'Pós-Doutor', value: '5'}
     ];
-
 }

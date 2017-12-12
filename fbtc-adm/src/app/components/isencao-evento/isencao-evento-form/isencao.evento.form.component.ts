@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
+import { IsencaoService } from '../../shared/services/isencao.service';
+import { EventoService } from './../../shared/services/evento.service';
+
 import { Isencao } from '../../shared/model/isencao';
-import { IsencaoEventoService } from '../../shared/services/isencao-evento.service';
+import { Evento } from '../../shared/model/evento';
+
+import { Util } from '../../shared/util/util';
 
 @Component({
   selector: 'app-isencao-evento-form',
@@ -13,59 +18,70 @@ import { IsencaoEventoService } from '../../shared/services/isencao-evento.servi
 })
 export class IsencaoEventoFormComponent implements OnInit {
 
-  lstAno = ['2018', '2017', '2016', '2015'];
+  @Input() isencao: Isencao = { isencaoId: 0, anuidadeId: 0, eventoId : 0,
+    descricao: '', dtAta: null, anoEvento: 0 , tipoIsencao: '1', ativo: true};
+
+  title = 'Conceder Isenção de Evento';
+  badge = '';
+
+  eventos: Evento[];
 
   private selectedId: any;
 
-  title = 'Conceder Isenção de Evento';
+  isencaos: Observable<Isencao>;
 
-  isencao$: Observable<Isencao>;
-
-  isencao: Isencao;
-
-  editIsencaoId: number;
-  editAnuidadeId: number;
-  editEventoId: number;
-  editDescricao: string;
-  editDtAta: Date;
-  editAnoEvento: number;
-  editTipoIsencao: string;
-  editAtivo: boolean;
-
-  editTitulo: string;
+  _util = Util;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: IsencaoEventoService
+    private serviceEvento: EventoService,
+    private service: IsencaoService
   ) { }
 
-  ngOnInit() {
-    this.isencao$ = this.route.paramMap
-    .switchMap((params: ParamMap) => this.service.getIsencaoEventoById(params.get('id')));
+  gotoIsencaoEventos() {
 
-    this.isencao$.subscribe((isencao: Isencao) => {this.isencao = isencao});
-
-    this.editIsencaoId = this.isencao ? this.isencao.IsencaoId : 0;
-    this.editAnuidadeId = this.isencao ? this.isencao.AnuidadeId : 0;
-    this.editEventoId = this.isencao ? this.isencao.EventoId : 0;
-    this.editDescricao = this.isencao ? this.isencao.Descricao : '';
-    this.editDtAta = this.isencao ? this.isencao.DtAta : null;
-    this.editAnoEvento = this.isencao ? this.isencao.AnoEvento : 0;
-    this.editTipoIsencao = this.isencao ? this.isencao.TipoIsencao : '';
-    this.editAtivo = this.isencao ? this.isencao.Ativo : false;
-
-    this.editTitulo = 'Evento .....';
-  }
-
-  gotoEventos() {
-    let eventoId = this.isencao ? this.isencao.IsencaoId : null;
+    let eventoId = this.isencao ? this.isencao.isencaoId : null;
     this.router.navigate(['/IsencaoEvento', { id: eventoId, foo: 'foo' }]);
   }
-  save() {
-      this.gotoEventos();
+
+  getIsencaoById(id: number): void {
+
+    this.service.getById(id).subscribe(isencao => this.isencao = isencao);
   }
-  excluir() {
-      this.gotoEventos();
+
+  setIsencao(tipoIsencao: string): void {
+
+    this.service.setIsencao(tipoIsencao).subscribe(isencao => this.isencao = isencao);
+  }
+
+  save() {
+
+    this.service.addIsencao(this.isencao).subscribe(() =>  this.gotoShowPopUp());
+  }
+
+  gotoShowPopUp() {
+    // Colocar a chamada para a implementação do PopUp modal de aviso:
+    alert('Registro salvo com sucesso!');
+  }
+
+
+  getEventos(): void {
+
+    this.serviceEvento.getEventos().subscribe(eventos => this.eventos = eventos);
+  }
+
+  ngOnInit() {
+
+    this.getEventos();
+
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (id > 0) {
+        this.badge = '"Edição';
+        this.getIsencaoById(id);
+    } else {
+        this.badge = 'Novo';
+        // this.setIsencao('1');
+    }
   }
 }

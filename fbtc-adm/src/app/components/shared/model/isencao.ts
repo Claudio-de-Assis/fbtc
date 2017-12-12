@@ -1,10 +1,10 @@
 export class Isencao {
-    IsencaoId: number;
-    AnuidadeId: number;
-    EventoId: number;
-    Descricao: string;
-    DtAta: Date;
-    AnoEvento: number;
-    TipoIsencao: string;
-    Ativo: boolean;
+    isencaoId: number;
+    anuidadeId: number;
+    eventoId: number;
+    descricao: string;
+    dtAta: Date;
+    anoEvento: number;
+    tipoIsencao: string;
+    ativo: boolean;
 }

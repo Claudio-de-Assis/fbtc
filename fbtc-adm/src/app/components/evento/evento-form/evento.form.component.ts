@@ -19,17 +19,15 @@ import { Util } from './../../shared/util/util';
 })
 export class EventoFormComponent implements OnInit {
 
-  @Input() evento: Evento;
+  @Input() evento: Evento = { eventoId: 0, titulo: '', descricao: '', codigo: '', dtInicio: null,
+            dtTermino: null, dtTerminoInscricao: null, tipoEvento: '', aceitaIsencaoAta: false,
+            ativo: true, nomeFoto: ''
+  };
 
   title = 'Evento';
   badge = '';
 
   _util = Util;
-
-  optTiposEventos = [
-    {name: 'Workshop Internacional', value: '2'},
-    {name: 'Congresso Brasileiro', value: '4'},
-  ];
 
   private selectedId: any;
 
@@ -99,7 +97,7 @@ export class EventoFormComponent implements OnInit {
       this.getEventoById(id);
     } else {
       this.badge = 'Novo';
-      this.setEvento();
+      // this.setEvento();
     }
   }
 }

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IsencaoEventoService } from './../shared/services/isencao-evento.service';
+import { IsencaoService } from './../shared/services/isencao.service';
 import { IsencaoEventoFormComponent } from './isencao-evento-form/isencao.evento.form.component';
 import { IsencaoEventoListComponent } from './isencao-evento-list/isencao.evento.list.component';
 import { IsencaoEventoRoutingModule } from './isencao.evento.routing.module';
@@ -25,7 +25,7 @@ import { AssociadoIsencaoModule } from './../associado-isencao/associado-isencao
     IsencaoEventoListComponent
   ],
   providers: [
-    IsencaoEventoService
+    IsencaoService
   ]
 })
 export class IsencaoEventoModule { }

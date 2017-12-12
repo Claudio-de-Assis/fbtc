@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Data } from '@angular/router/src/config';
 
 import { AssociadoService } from './../../shared/services/associado.service';
 import { Associado } from '../../shared/model/associado';
-import { Data } from '@angular/router/src/config';
 
 import { Recebimento } from './../../shared/model/recebimento';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
@@ -23,9 +23,6 @@ import { Util } from '../../shared/util/util';
 export class RecebimentoEventoListComponent implements OnInit {
 
   title = 'Consulta de pagamento de eventos';
-
-/*  lstTipoPublico = ['Profissional - Associado', 'Profissional - Não Associado', 'Estudante de Pós - Associado',
-    'Estudante de Pós - Não Associado', 'Estudante - Associado', 'Estudante - Não Associado'];*/
 
   _util = Util;
 
@@ -58,7 +55,7 @@ export class RecebimentoEventoListComponent implements OnInit {
 
   gotoImprimirLista() {}
 
-  getRecebimentos(objRec): void {
+  getRecebimentos(objRec: string): void {
 
     this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
   }

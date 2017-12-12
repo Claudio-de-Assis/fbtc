@@ -6,5 +6,4 @@ export class EnderecoCep {
     cep: string;
     cidade_info: { area_km2: string, codigo_ibge: string };
     estado: string;
-    
 }

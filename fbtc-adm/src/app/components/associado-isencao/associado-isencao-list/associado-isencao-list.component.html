@@ -21,18 +21,18 @@
               <div id="LineBodyCentral">
         <div id="L2C1">
           ATC de origem:<br>
-          <select required
-            [(ngModel)]="editATC" name="ATC" #atc="ngModel">
-            <option *ngFor="let ATC of lstAtc" [value]="ATC">{{ATC}}</option>
-          </select>
+            <select id="sltATC" 
+                [(ngModel)]="editAtcId" name="ATC">
+                <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
+            </select>
         </div>
         <div id="L2C2">
           Tipo de associado:<br>
-          <select required
-            [(ngModel)]="editTipoId" name="TipoPublico" #tipoPublico="ngModel">
-            <option *ngFor="let editTipoId of lstTipoPublico" [value]="editTipoId">{{editTipoId}}</option>
-          </select>
-        </div>
+            <select id="sltTipo" 
+                [(ngModel)]="editTipoPublico" name="TipoPublico">
+                <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
+            </select>
+            </div>
                   <div id="L2C3">
                       CRM:<br>
                       <input [(ngModel)]="editCRM" size="15px" maxlength="15"/>
@@ -50,15 +50,19 @@
                           <legend>Listagem de Associados</legend>
                           <div id="Lst">
                               <div id="LstHeader">
-                                  <div id="LstCol1">Nome</div><div id="LstCol2">CPF</div><div id="LstCol3">CRP</div><div id="LstCol4">CRM</div><div id="LstCol5">Isento</div>
+                                  <div id="LstCol1">Nome</div>
+                                  <div id="LstCol2">CPF</div>
+                                  <div id="LstCol3">CRP</div>
+                                  <div id="LstCol4">CRM</div>
+                                  <div id="LstCol5">Isento</div>
                               </div>
                               <div id="LstCenter">       
                                   <ul class="associados">
-                                      <li *ngFor="let associado of associado$ | async">
-                                              <div id="LstCol1c"><span class="badge">{{ associado.AssociadoId }}</span>{{ associado.Nome }}</div>
-                                              <div id="LstCol2c">{{ associado.Cpf }}</div>
-                                              <div id="LstCol3c">{{ associado.Crp }}</div>
-                                              <div id="LstCol4c">{{ associado.Crm }}</div>
+                                      <li *ngFor="let associado of associados">
+                                              <div id="LstCol1c">&nbsp;{{ associado.nome }}</div>
+                                              <div id="LstCol2c">&nbsp;{{ associado.cpf }}</div>
+                                              <div id="LstCol3c">&nbsp;{{ associado.crp }}</div>
+                                              <div id="LstCol4c">&nbsp;{{ associado.crm }}</div>
                                               <div id="LstCol5c"><input type="checkbox" checked></div>
                                       </li>
                                   </ul>

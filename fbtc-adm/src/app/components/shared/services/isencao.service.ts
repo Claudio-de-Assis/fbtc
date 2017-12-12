@@ -7,63 +7,65 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { MessageService } from '../../../message.service';
-import { RecebimentoRoute } from './../webapi-routes/recebimento.route';
-import { Recebimento } from './../model/recebimento';
+import { Isencao } from '../model/isencao';
+import { IsencaoRoute } from '../webapi-routes/isencao.route';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class RecebimentoService {
+export class IsencaoService {
 
-    recebimento: Recebimento;
-    recebimento$: Observable<Recebimento>;
+    Isencao: Isencao;
+    Isencao$: Observable<Isencao>;
 
     constructor(
         private http: HttpClient,
-        private apiRoute: RecebimentoRoute,
+        private apiRoute: IsencaoRoute,
         private messageService: MessageService) { }
 
-    getAll(objetivoPagamento: string): Observable<Recebimento[]> {
+    getAll(objetivoIsencao: string): Observable<Isencao[]> {
 
-        return this.http.get<Recebimento[]>(this.apiRoute.getAll(objetivoPagamento))
+        return this.http.get<Isencao[]>(this.apiRoute.getAll(objetivoIsencao))
             .pipe(
-                tap(recebimentos => this.log('Fetched Recebimentos')),
+                tap(isencoes => this.log('Fetched Isencoes')),
                 catchError(this.handleError('getAll()', []))
         );
     }
 
-    getById(id: number): Observable<Recebimento> {
+    getById(id: number): Observable<Isencao> {
 
-        return this.http.get<Recebimento>(this.apiRoute.getById(id)).pipe(
-            tap(_ => this.log(`fetched recebimento id=${id}`)),
-            catchError(this.handleError<Recebimento>(`getById id=${id}`))
+        return this.http.get<Isencao>(this.apiRoute.getById(id)).pipe(
+            tap(_ => this.log(`fetched isencao id=${id}`)),
+            catchError(this.handleError<Isencao>(`getById id=${id}`))
         );
     }
 
-    getByPessoaId(objetivoPagamento: string, id: number): Observable<Recebimento[]> {
+    /*
+    getByPessoaId(objetivoIsencao: string, id: number): Observable<Isencao[]> {
 
-        return this.http.get<Recebimento[]>(this.apiRoute.getByPessoaId(objetivoPagamento, id))
+        return this.http.get<Isencao[]>(this.apiRoute.getByPessoaId(objetivoIsencao, id))
             .pipe(
-                tap(recebimentos => this.log('Fetched Recebimentos')),
+                tap(isencoes => this.log('Fetched Isencoes')),
                 catchError(this.handleError('getByPessoaId()', []))
         );
     }
+    */
 
-    setRecebimento(objetivoPagamento: string): Observable<Recebimento> {
+    setIsencao(objetivoIsencao: string): Observable<Isencao> {
 
-        return this.http.get<Recebimento>(this.apiRoute.setRecebimento(objetivoPagamento)).pipe(
-            tap(_ => this.log(`fetched recebimento id=${0}`)),
-            catchError(this.handleError<Recebimento>(`setRecebimento id=${0}`))
+        return this.http.get<Isencao>(this.apiRoute.setIsencao(objetivoIsencao)).pipe(
+            tap(_ => this.log(`fetched isencao id=${0}`)),
+            catchError(this.handleError<Isencao>(`setIsencao id=${0}`))
         );
     }
 
-    addRecebimento (recebimento: Recebimento): Observable<Recebimento> {
+    addIsencao (isencao: Isencao): Observable<Isencao> {
 
-        return this.http.post<Recebimento>(this.apiRoute.postRecebimento(), recebimento, httpOptions).pipe(
-            tap((_recebimento: Recebimento) => this.log(`added recebimento w/ id=${recebimento.recebimentoId}`)),
-            catchError(this.handleError<Recebimento>('addRecebimento'))
+        return this.http.post<Isencao>(this.apiRoute.postIsencao(), isencao, httpOptions).pipe(
+            tap((_isencao: Isencao) => this.log(`added isencao w/ id=${isencao.isencaoId}`)),
+            catchError(this.handleError<Isencao>('addIsencao'))
         );
     }
 
@@ -91,20 +93,20 @@ export class RecebimentoService {
 
     /** Log a AssociadoService message with the MessageService */
     private log(message: string) {
-        this.messageService.add('RecebimentoService: ' + message);
+        this.messageService.add('IsencaoService: ' + message);
     }
 
     /** GET Associado by id. Return `undefined` when id not found */
-    getRecebimentoNo404<Data>(id: number): Observable<Recebimento> {
+    getIsencaoNo404<Data>(id: number): Observable<Isencao> {
 
-        return this.http.get<Recebimento[]>(this.apiRoute.getById(id))
+        return this.http.get<Isencao[]>(this.apiRoute.getById(id))
         .pipe(
-            map(recebimentos => recebimentos[0]), // returns a {0|1} element array
+            map(isencoes => isencoes[0]), // returns a {0|1} element array
             tap(h => {
                 const outcome = h ? `fetched` : `did not find`;
-                this.log(`${outcome} recebimento id=${id}`);
+                this.log(`${outcome} isencao id=${id}`);
             }),
-            catchError(this.handleError<Recebimento>(`getRecebimento id=${id}`))
+            catchError(this.handleError<Isencao>(`getIsencao id=${id}`))
         );
     }
 

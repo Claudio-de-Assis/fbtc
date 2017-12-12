@@ -24,7 +24,17 @@ import { Util } from './../../shared/util/util';
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit {
 
-    @Input() associado: Associado;
+    @Input() associado: Associado = { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
+            crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
+            tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
+            comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
+            pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
+            sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
+            dtCadastro: null, ativo: true,
+            enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',
+                bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
+                cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
+    };
 
     title = 'Associado';
     badge = '';
@@ -34,6 +44,7 @@ export class AssociadoFormComponent implements OnInit {
     private selectedId: any;
 
     tiposPublicos: TipoPublico[];
+
     atcs: Atc[];
 
     /** AssociadoFrm ctor */
@@ -59,10 +70,8 @@ export class AssociadoFormComponent implements OnInit {
     }
 
     gotoAssociados() {
+
         let associadoId = this.associado ? this.associado.associadoId : null;
-        // Pass along the Associado id if available
-        // so that the AssociadoList component can select that Associado.
-        // Include a junk 'foo' property for fun.
         this.router.navigate(['/Associado', { id: associadoId, foo: 'foo' }]);
     }
 
@@ -115,11 +124,11 @@ export class AssociadoFormComponent implements OnInit {
 
         const id = +this.route.snapshot.paramMap.get('id');
         if (id > 0) {
-            this.badge = '"Edição';
+            this.badge = 'Edição';
             this.getAssociadoById(id);
         } else {
             this.badge = 'Novo';
-            this.setAssociado();
+            // this.setAssociado();
         }
     }
 }

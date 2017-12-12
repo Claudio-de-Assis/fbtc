@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
+import { AssociadoService } from '../../shared/services/associado.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { AtcService } from '../../shared/services/atc.service';
 
 import { Associado } from '../../shared/model/associado';
-import { AssociadoService } from '../../shared/services/associado.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { TipoPublico } from '../../shared/model/tipo-publico';
+import { Atc } from '../../shared/model/atc';
+
+import { Util } from './../../shared/util/util';
 
 @Component({
   selector: 'app-associado-isencao-list',
@@ -13,48 +20,60 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class AssociadoIsencaoListComponent implements OnInit {
 
-  lstAtc = ['Rio de Janeiro', 'Alagoas', 'São Paulo'];
-  lstTipoPublico= ['Profissional - Associado', 'Estudante de Pós - Associado', 'Estudante - Associado'];
+    title = 'Pesquisa de Associados';
 
-  title = 'Pesquisa de Associados';
+    _util = Util;
 
-  associado$: Observable<Associado[]>;
+    private selectedAssociado: Associado;
 
-  associados: Associado[];
-  private selectedAssociado: Associado;
+    associados: Associado[];
 
-  private selectedId: number;
+    tiposPublicos: TipoPublico[];
 
-  editAssociadoId: number;
-  editNome: string;
-  editCPF: string;
-  editCRP: string;
-  editCRM: string;
+    atcs: Atc[];
 
-  /** AssociadoList ctor */
-  constructor(
-      private service: AssociadoService,
-      private router: Router,
-      private route: ActivatedRoute
-  ) { }
+    editAssociadoId: number;
+    editNome: string;
+    editCPF: string;
+    editCRP: string;
+    editCRM: string;
 
-  getAssociados(): void {
-      this.service.getAssociados().subscribe(associados => this.associados = associados);
-  }
+    constructor(
+        private service: AssociadoService,
+        private serviceTP: TipoPublicoService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private serviceAtc: AtcService
+    ) { }
 
-  /** Called by Angular after AssociadoList component initialized */
-  ngOnInit() {
-      this.associado$ = this.route.paramMap.switchMap((params: ParamMap) => {
-          this.selectedId = +params.get('Id');
-          return this.service.getAssociados();
-      });
-  }
+    getAssociados(): void {
 
-  onSelect(associado: Associado): void {
-      this.selectedAssociado = associado;
-  }
+        this.service.getAssociados().subscribe(associados => this.associados = associados);
+    }
 
-  gotoBuscarAssociado() { }
-  
+    getAtcs(): void {
 
+        this.serviceAtc.getAtcs().subscribe(atcs => this.atcs = atcs);
+    }
+
+    getTiposPublicos(): void {
+
+        this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    }
+
+    onSelect(associado: Associado): void {
+
+        this.selectedAssociado = associado;
+    }
+
+    gotoBuscarAssociado() { }
+
+    ngOnInit() {
+
+        this.getTiposPublicos();
+
+        this.getAtcs();
+
+        this.getAssociados();
+    }
 }

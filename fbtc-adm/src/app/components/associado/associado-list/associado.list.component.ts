@@ -51,13 +51,9 @@ export class AssociadoListComponent implements OnInit {
         this.serviceAtc.getAtcs().subscribe(atcs => this.atcs = atcs);
     }
 
-    ngOnInit(): void {
+    getTiposPublicos(): void {
 
-        this.getTiposPublicos();
-
-        this.getAssociados();
-
-        this.getAtcs();
+        this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
     }
 
     onSelect(associado: Associado): void {
@@ -72,8 +68,12 @@ export class AssociadoListComponent implements OnInit {
 
     gotoBuscarAssociado() { }
 
-    getTiposPublicos(): void {
+    ngOnInit(): void {
 
-        this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+        this.getTiposPublicos();
+
+        this.getAssociados();
+
+        this.getAtcs();
     }
 }

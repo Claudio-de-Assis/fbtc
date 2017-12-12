@@ -13,7 +13,21 @@ import { Recebimento } from './../../shared/model/recebimento';
 })
 export class RecebimentoAnuidadeFormComponent implements OnInit {
 
-  @Input() recebimento: Recebimento;
+  @Input() recebimento: Recebimento = { recebimentoId: 0, associadoId: 0, associadoIsentoId: 0, valorAnuidadePublicoId: 0,
+    valorEventoPublicoId: 0, objetivoPagamento: '', dtVencimento: null, dtPagamento: null, dtNotificacao: null,
+    statusPagamento: '', formaPagamento: '', nrDocCobranca: '', valorPago: 0, observacao: '', tokenPagamento: '',
+    dtCadastro: null, ativo: true,
+      associado: { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
+        crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
+        tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
+        comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
+        pessoaId: 0, nome: 'ssss', cpf: '', rg: '', eMail: '', nomeFoto: '',
+        sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
+        dtCadastro: null, ativo: true,
+          enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',
+          bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
+          cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}}
+  };
 
   title = 'Dados de pagamento de anuidade do associado';
 

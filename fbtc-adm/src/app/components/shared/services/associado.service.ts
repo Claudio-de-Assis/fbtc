@@ -26,6 +26,7 @@ export class AssociadoService {
         private messageService: MessageService) { }
 
     getAssociados(): Observable<Associado[]> {
+
         return this.http.get<Associado[]>(this.apiRoute.getAll())
             .pipe(
                 tap(associados => this.log('Fetched Associado')),
@@ -34,6 +35,7 @@ export class AssociadoService {
     }
 
     getById(id: number): Observable<Associado> {
+
         return this.http.get<Associado>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched associado id=${id}`)),
             catchError(this.handleError<Associado>(`getAssociado id=${id}`))

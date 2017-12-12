@@ -26,6 +26,7 @@ export class EventoService {
         private messageService: MessageService) { }
 
     getEventos(): Observable<Evento[]> {
+
         return this.http.get<Evento[]>(this.apiRoute.getAll())
             .pipe(
                 tap(eventos => this.log('Fetched evento')),
@@ -34,6 +35,7 @@ export class EventoService {
     }
 
     getById(id: number): Observable<Evento> {
+
         return this.http.get<Evento>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched Evento id=${id}`)),
             catchError(this.handleError<Evento>(`getEvento id=${id}`))
@@ -41,6 +43,7 @@ export class EventoService {
     }
 
     setEvento(): Observable<Evento> {
+
         return this.http.get<Evento>(this.apiRoute.setEvento()).pipe(
             tap(_ => this.log(`fetched Evento id=${0}`)),
             catchError(this.handleError<Evento>(`getEvento id=${0}`))
@@ -50,6 +53,7 @@ export class EventoService {
     //////// Save methods //////////
     /** POST: add a new Colaborador to the server */
     addEvento (evento: Evento): Observable<Evento> {
+
         return this.http.post<Evento>(this.apiRoute.postEvento(), evento, httpOptions).pipe(
             tap((_evento: Evento) => this.log(`added Evento w/ id=${evento.eventoId}`)),
             catchError(this.handleError<Evento>('addEvento'))

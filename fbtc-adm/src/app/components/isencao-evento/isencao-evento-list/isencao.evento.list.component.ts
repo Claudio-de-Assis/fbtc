@@ -1,10 +1,19 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Data } from '@angular/router/src/config';
 
+// import { EventoService } from './../../shared/services/evento.service';
+import { IsencaoService } from '../../shared/services/isencao.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+
+// import { Evento } from './../../shared/model/evento';
 import { Isencao } from './../../shared/model/isencao';
-import { IsencaoEventoService } from '../../shared/services/isencao-evento.service';
+import { TipoPublico } from '../../shared/model/tipo-publico';
+
+import { Util } from './../../shared/util/util';
 
 @Component({
   selector: 'app-isencao-evento-list',
@@ -13,45 +22,77 @@ import { IsencaoEventoService } from '../../shared/services/isencao-evento.servi
 })
 export class IsencaoEventoListComponent implements OnInit {
 
-  lstAno = ['2018', '2017', '2016', '2015'];
+  title = 'Consulta de Isenção de Evento';
 
-  lstEvento = ['Tratamento Cognitivo Comportamental para Transtorno...',
-    'Evento XPTO Anual para Debate...', 'Evento Anual para Elicitação...'];
+  _util = Util;
 
-    title = 'Consulta de Isenção de Evento';
+  isencoes: Isencao[];
 
-    isencao$: Observable<Isencao[]>;
+  private selectedId: number;
 
-    isencoes: Isencao[];
-    private selectedIsencao: Isencao;
+  private selectedIsencao: Isencao;
 
-    private selectedId: number;
+  tiposPublicos: TipoPublico[];
 
-    constructor(
-      private service: IsencaoEventoService,
-      private router: Router,
-      private route: ActivatedRoute
-    ) { }
+  // eventos: Evento[];
 
-    getIsecoes(): void {
-      this.service.getIsencoesEventos().then(isencoes => this.isencoes = isencoes);
+  editNome: string;
+  editCPF: string;
+  editCRP: string;
+  editCRM: string;
+  editEvento: string;
+  editStatus: string;
+  editTipoPublico: string;
+
+  editDtVencimento: Data;
+  editDtPagto: Data;
+
+  constructor(
+    private service: IsencaoService,
+    private serviceTP: TipoPublicoService,
+    // private serviceEvento: EventoService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  gotoImprimirLista() {}
+
+  getIsencoes(objIsen): void {
+
+    this.service.getAll(objIsen).subscribe(isencoes => this.isencoes = isencoes);
   }
 
-    ngOnInit() {
-        this.isencao$ = this.route.paramMap.switchMap((params: ParamMap) => {
-          this.selectedId = +params.get('Id');
-          return this.service.getIsencoesEventos();
-      });
-    }
-
-    onSelect(isencao: Isencao): void {
-      this.selectedIsencao = isencao;
+  onSelect(isencao: Isencao): void {
+    this.selectedIsencao = isencao;
   }
 
-    gotoNovaIsencao() {
-        this.router.navigate(['/IsencaoEventoNova']);
-    }
+  gotoBuscarIsencao() { }
 
-    gotoBuscarIsencao() { }
+  gotoNovaIsencao() {
 
+    this.router.navigate(['/IsencaoEvento', 0]);
+  }
+
+  /*
+  getEventos(): void {
+
+    this.serviceEvento.getEventos().subscribe(eventos => this.eventos = eventos);
+  }
+  */
+
+  getTiposPublicos(): void {
+
+    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+  }
+
+  ngOnInit() {
+
+    this.getTiposPublicos();
+
+    // this.getEventos();
+
+    // 1: Eventos.
+    const objIsencao = '1';
+    this.getIsencoes(objIsencao);
+  }
 }

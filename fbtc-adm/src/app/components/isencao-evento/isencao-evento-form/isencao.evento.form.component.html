@@ -7,24 +7,28 @@
                 <div id="LineBodyCentral">
                   <div id="L1C1">
                      Nome:<br>
-                     <input [(ngModel)]="editDescricao" size="70px" maxlength="100" required/>
+                     <input [(ngModel)]="isencao.descricao" size="70px" maxlength="100" required/>
                   </div>
                   <div id="L1C2">
                     Data da ata:<br>
-                    <input [(ngModel)]="editDtAta" size="20px" maxlength="100" required type="Date"/>
+                    <input [(ngModel)]="isencao.dtAta" size="20px" required type="Date"/>
                   </div>  
                   <div id="L1C3">
                         Ano da Isenção:<br>
                         <select required
-                          [(ngModel)]="editAno" name=ano #sexo="ngModel">
-                          <option *ngFor="let ano of lstAno" [value]="ano">{{ano}}</option>
+                          [(ngModel)]="isencao.anoEvento" name="anoEvento" >
+                          <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
                       </select>
                   </div>
                </div>
                <div id="LineBodyCentral">
                     <div id="L2C1">
                             Evento:<br>
-                            <input [(ngModel)]="editTitulo" size="70px" maxlength="100" required/>
+
+                         <select id="sltEvento" 
+                            [(ngModel)]="isencao.eventoId" name="eventoId">
+                            <option *ngFor="let op of eventos" value="{{ op.eventoId }}">{{ op.titulo }}</option>
+                        </select>
                     </div>
                </div>                    
                <div id="LineBodyApp">

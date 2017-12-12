@@ -16,7 +16,14 @@ import { Util } from './../../shared/util/util';
 /** ColaboradorFrm component*/
 export class ColaboradorFormComponent implements OnInit {
 
-    @Input() colaborador: Colaborador;
+    @Input() colaborador: Colaborador = { colaboradorId: 0, tipoPerfil: '',
+        pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
+        sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
+        dtCadastro: null, ativo: true,
+        enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',
+            bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
+            cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
+    };
 
     title = 'Colaborador';
     badget = '';
@@ -58,6 +65,12 @@ export class ColaboradorFormComponent implements OnInit {
         this.gotoColaboradores();
     }*/
 
+    reenviarSenha() {
+
+        alert('Senha reenviada com sucesso!');
+    }
+
+
     gotoColaboradores() {
 
         let colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
@@ -73,7 +86,7 @@ export class ColaboradorFormComponent implements OnInit {
             this.getColaboradorById(id);
         } else {
             this.badget = 'Novo';
-            this.setColaborador();
+            // this.setColaborador();
         }
     }
 }

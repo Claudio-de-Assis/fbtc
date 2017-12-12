@@ -7,18 +7,18 @@
           <div id="LineBodyCentral">
               <div id="L1C1">
                   Nome do Associado:<br>
-                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
+                  <input [(ngModel)]="editNome" size="70px" maxlength="100" />
               </div>
               <div id="L1C2">
                   Ano da Isenção:<br>
-                  <select required
-                  [(ngModel)]="editAno" name="AnoIsencao" #sexo="ngModel">
-                  <option *ngFor="let ano of lstAno" [value]="ano">{{ano}}</option>
+                  <select 
+                  [(ngModel)]="editAno" name="AnoIsencao">
+                  <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
               </select>
             </div>
             <div id="L2C1">
                 Identificação da Isencao:<br>
-                <input [(ngModel)]="editDescricao" size="70px" maxlength="100" required/>
+                <input [(ngModel)]="editDescricao" size="70px" maxlength="100" />
              </div>
              <div id="L3C1">
               <button (click)="gotoBuscarIsencao()">Pesquisar</button>
@@ -30,18 +30,18 @@
                       <legend>Listagem de Isenções</legend>
                       <div id="Lst">
                       <div id="LstHeader">
-                          <div id="LstCol1">Identificação da Isenção</div><div id="LstCol2">Ano</div><div id="LstCol3">Quant. Isentos</div><div id="LstCol4"></div><div id="LstCol5"></div>
+                          <div id="LstCol1">Identificação da Isenção</div>
+                          <div id="LstCol2">Ano</div>
+                          <div id="LstCol3">Quant. Isentos</div>
                       </div>
                       <div id="LstCenter">       
                   <ul class="associados">
-                      <li *ngFor="let isencao of isencao$ | async"
+                      <li *ngFor="let isencao of isencoes"
                           [class.selected]="isencao.isencaoId === selectedId">
-                          <a [routerLink]="['/IsencaoAnuidade', isencao.IsencaoId]">
-                              <div id="LstCol1c"><span class="badge">{{ isencao.IsencaoId}}</span>{{ isencao.Descricao}}</div>
-                              <div id="LstCol2c">{{isencao.AnoEvento}}</div>
+                          <a [routerLink]="['/IsencaoAnuidade', isencao.isencaoId]">
+                              <div id="LstCol1c">{{ isencao.descricao }} </div>
+                              <div id="LstCol2c">{{ isencao.anoEvento }}</div>
                               <div id="LstCol3c">20</div>
-                              <div id="LstCol4c"></div>
-                              <div id="LstCol5c"></div>
                           </a>
                       </li>
                   </ul>
