@@ -127,18 +127,32 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
-        [Route("FindByFilters/{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao},{tipoPublicoId}")]
+        [Route("FindByFilters/{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao},{tipoPublicoId},{estado}," +
+            "{cidade},{ativo}")]
         [HttpGet]
         public Task<HttpResponseMessage> FindByFilters(string nome, string cpf,
-            string sexo, string atcId, string crp, string tipoProfissao, string tipoPublicoId)
+            string sexo, string atcId, string crp, string tipoProfissao, string tipoPublicoId, string estado,
+            string cidade, string ativo)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
 
             try
             {
+                bool? _ativo = null;
+
+                if (ativo != null)
+                {
+                    if (ativo.Equals("true"))
+                        _ativo = true;
+
+                    if (ativo.Equals("false"))
+                        _ativo = false;
+                }
+                
                 var resultado = _associadoApplication.FindByFilters(nome, cpf, 
-                    sexo, Convert.ToInt16(atcId), crp, tipoProfissao, Convert.ToInt32(tipoPublicoId));
+                    sexo, Convert.ToInt16(atcId), crp, tipoProfissao, Convert.ToInt32(tipoPublicoId),
+                    estado, cidade, _ativo);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

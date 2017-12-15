@@ -29,6 +29,11 @@ namespace Fbtc.Application.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<EstadoEnderecoCepDAO> GetAllNomesEstados()
+        {
+            return _enderecoService.GetAllNomesEstados();
+        }
+
         public IEnumerable<Endereco> GetByPessoaId(int id)
         {
             return _enderecoService.GetByPessoaId(id);
@@ -37,6 +42,11 @@ namespace Fbtc.Application.Services
         public Endereco GetEnderecoById(int id)
         {
             return _enderecoService.GetEnderecoById(id);
+        }
+
+        public IEnumerable<CidadeEnderecoCepDAO> GetNomesCidadesByEstado(string nomeEstado)
+        {
+            return _enderecoService.GetNomesCidadesByEstado(nomeEstado);
         }
 
         public string Save(Endereco e)

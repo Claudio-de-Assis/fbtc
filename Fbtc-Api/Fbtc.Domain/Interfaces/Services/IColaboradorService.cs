@@ -15,6 +15,6 @@ namespace Fbtc.Domain.Interfaces.Services
 
         string Update(int id, Colaborador colaborador);
 
-        IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool ativo);
+        IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo);
     }
 }

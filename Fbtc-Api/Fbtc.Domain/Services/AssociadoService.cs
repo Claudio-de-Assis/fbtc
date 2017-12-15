@@ -22,10 +22,10 @@ namespace Fbtc.Domain.Services
         }
 
         public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, int atcId, 
-            string crp, string tipoProfissao, int tipoPublicoId)
+            string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
             return _associadoRepository.FindByFilters(nome, cpf, sexo, atcId, crp, 
-                tipoProfissao, tipoPublicoId);
+                tipoProfissao, tipoPublicoId, estado, cidade, ativo);
         }
 
         public IEnumerable<Associado> GetAll()

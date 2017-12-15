@@ -16,6 +16,7 @@ namespace Fbtc.Domain.Interfaces.Services
         string Update(int id, Associado associado);
         
         IEnumerable<Associado> FindByFilters(string nome, string cpf,  
-            string sexo, int atcId, string crp, string tipoProfissao, int tipoPublico);
+            string sexo, int atcId, string crp, string tipoProfissao, 
+            int tipoPublico, string estado, string cidade, bool? ativo);
     }
 }

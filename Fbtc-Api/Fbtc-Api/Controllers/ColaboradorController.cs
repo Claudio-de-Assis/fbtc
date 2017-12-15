@@ -132,15 +132,25 @@ namespace Fbtc.Api.Controllers
         [Route("FindByFilters/{nome},{tipoPerfil},{ativo}")]
         [HttpGet]
         public Task<HttpResponseMessage> FindByFilters(string nome, string tipoPerfil,
-            bool ativo)
+            string ativo)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
 
             try
             {
+                bool? _ativo = null;
+
+                if (ativo != null) {
+                    if (ativo.Equals("true"))
+                        _ativo = true;
+
+                    if (ativo.Equals("false"))
+                        _ativo = false;
+                }
+
                 var resultado = _colaboradorApplication.FindByFilters(nome, tipoPerfil,
-                    ativo);
+                    _ativo);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

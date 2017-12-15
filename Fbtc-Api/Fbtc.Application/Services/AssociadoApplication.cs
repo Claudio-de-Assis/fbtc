@@ -73,18 +73,20 @@ namespace Fbtc.Application.Services
         }
 
         public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, 
-            int atcId, string crp, string tipoProfissao, int tipoPublicoId)
+            int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
-            string _nome, _cpf, _sexo, _crp, _tipoProfissao;
+            string _nome, _cpf, _sexo, _crp, _tipoProfissao, _estado, _cidade;
 
             _nome = nome == "0" ? "" : nome;
             _cpf = cpf == "0" ? "" : cpf;
             _sexo = sexo == "0" ? "" : sexo;
             _crp = crp == "0" ? "" : crp;
             _tipoProfissao = tipoProfissao == "0" ? "" : tipoProfissao;
+            _estado = estado == "0" ? "" : estado;
+            _cidade = cidade == "0" ? "" : cidade;
 
             return _associadoService.FindByFilters(_nome, _cpf, _sexo, atcId, _crp, 
-                _tipoProfissao, tipoPublicoId);
+                _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
         }
 
         public IEnumerable<Associado> GetAll()

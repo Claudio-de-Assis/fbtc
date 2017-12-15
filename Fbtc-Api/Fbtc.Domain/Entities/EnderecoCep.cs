@@ -29,4 +29,19 @@ namespace Fbtc.Domain.Entities
         public string Area_Km2 { get; set; }
         public string Codigo_Ibge { get; set; }
     }
+
+    
+    // *********************************************
+    // Classes DAO realativas ao objeto EnderecoCEP:
+    // *********************************************
+
+    public class EstadoEnderecoCepDAO
+    {
+        public string NomeEstado { get; set; }
+    }
+    
+    public class CidadeEnderecoCepDAO
+    {
+        public string NomeCidade { get; set; }
+    }
 }

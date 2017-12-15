@@ -16,5 +16,9 @@ namespace Fbtc.Application.Interfaces
         string DeleteByPessoaId(int id);
 
         string Save(Endereco endereco);
+
+        IEnumerable<EstadoEnderecoCepDAO> GetAllNomesEstados();
+
+        IEnumerable<CidadeEnderecoCepDAO> GetNomesCidadesByEstado(string nomeEstado);
     }
 }

@@ -124,6 +124,7 @@
     <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\AtcController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
+    <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\IsencaoController.cs" />
     <Compile Include="Controllers\RecebimentoController.cs" />

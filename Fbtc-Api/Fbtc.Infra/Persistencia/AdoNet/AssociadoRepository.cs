@@ -29,7 +29,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         }
 
         public IEnumerable<Associado> FindByFilters(string nome, string cpf,  
-            string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId)
+            string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
@@ -39,8 +39,12 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
-                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE P.PessoaId > 0 ";
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId ";
+
+            if (!string.IsNullOrEmpty(estado) || !string.IsNullOrEmpty(cidade))
+                query = query + "INNER JOIN dbo.AD_Endereco E ON P.PessoaId = E.PessoaId ";
+
+            query = query + "WHERE P.PessoaId > 0 ";
 
             if (!string.IsNullOrEmpty(nome))
                 query = query + $" AND P.Nome Like '%{nome}%' ";
@@ -62,6 +66,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             if (tipoPublicoId != 0)
                 query = query + $" AND A.TipoPublicoId = {tipoPublicoId} ";
+
+            if (!string.IsNullOrEmpty(estado))
+                query = query + $" AND E.Estado = {estado} ";
+
+            if (!string.IsNullOrEmpty(cidade))
+                query = query + $" AND E.Cidade = {cidade} ";
+
+            if (ativo != null)
+                query = query + $" AND P.Ativo = '{ativo}' ";
 
             query = query + " ORDER BY P.Nome ";
 

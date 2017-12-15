@@ -27,7 +27,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool ativo)
+        public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo)
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
@@ -42,7 +42,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             if (!string.IsNullOrEmpty(tipoPerfil))
                 query = query + $" AND C.TipoPerfil = '{tipoPerfil}' ";
 
-            query = query + $" AND P.Ativo = {ativo} ";
+            if (ativo != null)
+                query = query + $" AND P.Ativo = '{ativo}' ";
+
+            query = query + " ORDER BY P.Nome ";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);

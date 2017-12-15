@@ -21,7 +21,7 @@ namespace Fbtc.Domain.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool ativo)
+        public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo)
         {
             return _colaboradorRepository.FindByFilters(nome, tipoPerfil, ativo);
         }
