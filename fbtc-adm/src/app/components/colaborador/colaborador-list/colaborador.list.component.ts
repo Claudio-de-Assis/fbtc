@@ -15,15 +15,21 @@ import { Util } from './../../shared/util/util';
 })
 export class ColaboradorListComponent implements OnInit {
 
-  title = 'Consulta de Colaborador';
+  title = 'Consulta de integrante da equipe';
 
-  editAtivo: string = '';
+  editAtivo: boolean = true;
+  editNome: string = '';
+  editTipoPerfil: string = '0';
+  _nome: string = '0';
+  _ativo: string = '2';
 
   _util = Util;
 
   colaboradores: Colaborador[];
 
   private selectedColaborador: Colaborador;
+
+  submitted = false;
 
   constructor(
     private service: ColaboradorService,
@@ -32,24 +38,54 @@ export class ColaboradorListComponent implements OnInit {
   ) { }
 
   getColaboradores(): void {
-    this.service.getColaboradores().subscribe(colaboradores => this.colaboradores = colaboradores);
-}
-
-  ngOnInit() {
-    this.getColaboradores();
+    this.service.getColaboradores()
+      .subscribe(colaboradores => this.colaboradores = colaboradores);
   }
 
   onSelect(colaborador: Colaborador): void {
+
     this.selectedColaborador = colaborador;
 }
 
   gotoNovoColaborador() {
+
       this.router.navigate(['/Colaborador', 0]);
   }
 
-  gotoBuscarColaborador() { }
+  gotoBuscarColaborador(): void {
 
+    if (this.editNome.trim() !== '') {
+      this._nome = this.editNome.trim();
+    }
+
+    if (this.editAtivo !== null) {
+      if (this.editAtivo) {
+        this._ativo = 'true';
+      } else {
+        this._ativo = 'false';
+      }
+    }
+
+    this.service.getByFilters(this._nome, this.editTipoPerfil, this._ativo)
+      .subscribe(colaboradores => this.colaboradores = colaboradores);
+
+    this.submitted = false;
+    this._nome = '0';
+    this._ativo = '2';
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.gotoBuscarColaborador();
+  }
+
+  ngOnInit() {
+
+    this.getColaboradores();
+  }
+
+  /*
   excluir() {
     // this.gotoColaboradores();
-}
+  }*/
 }

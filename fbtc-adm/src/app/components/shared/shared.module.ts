@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 import { BooMessagePipe } from './pipes/boolean-viewer.pipe';
@@ -30,9 +31,10 @@ import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
     FormaPagamentoPipe
+
   ],
   providers: [
-   // AtcRoute
+
   ]
 })
 export class SharedModule { }

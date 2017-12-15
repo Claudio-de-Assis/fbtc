@@ -24,7 +24,7 @@ export class ColaboradorRoute {
 
     // Deve-se informar "0" quando não houver valor válido para o filtro.
     // [Route("FindByFilters/{nome},{tipoPerfil},{ativo}")]
-    getFindByFilters(nome: string, tipoPerfil: string, ativo: boolean): string {
+    getFindByFilters(nome: string, tipoPerfil: string, ativo: string): string {
         return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${nome},${tipoPerfil},${ativo}`;
     }
 

@@ -6,7 +6,7 @@ export class Util {
     // public static lstPerfil = ['Gestor do Site', 'Secretaria', 'Financeiro'];
 
     public static optTipoPerfil = [
-        {name: 'Gestor do Site', value: '1'},
+        {name: 'Gestor', value: '1'},
         {name: 'Secretário', value: '2'},
         {name: 'Financeiro', value: '3'}
     ];
@@ -41,11 +41,11 @@ export class Util {
         {name: 'Feminino', value: 'F'}
     ];
 
-    public static optATC = [
+    /*public static optATC = [
         {name: 'Rio de Janeiro', value: '1'},
         {name: 'Minas Gerais', value: '2'},
         {name: 'Alagoas', value: '3'}
-    ];
+    ];*/
 
     public static optTipoFormaContato = [
         {name: 'E-Mail', value: 1},
@@ -55,6 +55,7 @@ export class Util {
     ];
 
     public static optTipoProfissao = [
+        {name: 'Outros', value: '1'},
         {name: 'Psicólogo', value: '7'},
         {name: 'Médico', value: '8'}
     ];

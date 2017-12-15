@@ -24,7 +24,7 @@ import { Util } from './../../shared/util/util';
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit {
 
-    @Input() associado: Associado = { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
+    @Input() associado: Associado = { associadoId: 0, atcId: null, tipoPublicoId: null, nrMatricula: '', crp: '',
             crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
             tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
@@ -36,7 +36,7 @@ export class AssociadoFormComponent implements OnInit {
                 cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
     };
 
-    title = 'Associado';
+    title = 'Usuário'; // Associado
     badge = '';
 
     _util = Util;
@@ -44,8 +44,9 @@ export class AssociadoFormComponent implements OnInit {
     private selectedId: any;
 
     tiposPublicos: TipoPublico[];
-
     atcs: Atc[];
+
+    submitted = false;
 
     /** AssociadoFrm ctor */
     constructor(
@@ -113,6 +114,12 @@ export class AssociadoFormComponent implements OnInit {
 
         this.serviceCEP.getByCep(this.associado.enderecoPessoa.cep)
             .subscribe(endereco => this.associado.enderecoPessoa = endereco);
+    }
+
+    onSubmit() {
+
+        this.submitted = true;
+        this.save();
     }
 
     /** Called by Angular after AssociadoForm component initialized */

@@ -2,39 +2,68 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
+        <form (ngSubmit)="onSubmit()" #colaboradorForm="ngForm">
             <div class="panel-heading">Dados</div>
             <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group has-error">
+                            <div class="form-group">
                                 <label for="inpNome">Nome:</label>
-                                <input id="inpNome" [(ngModel)]="colaborador.nome" class="form-control" maxlength="100" required validator="" />
-                                <p style="display:none;" class="help-block">* Nome é obrigatório</p>
+                                <input id="inpNome" name="nome" class="form-control" type="text" 
+                                    required minlength="4" maxlength="100" 
+                                    [(ngModel)]="colaborador.nome" #nome="ngModel"/>
+
+                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="nome.errors.required">* O Nome é obrigatório.</div>
+                                    <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 4 letras.</div>
+                                </div>    
                             </div>
                             <div class="form-group">
-                                <label>E-Mail:</label>
-                                <input [(ngModel)]="colaborador.eMail" class="form-control" maxlength="100" type="email" required/>
+                                <label for="inpEMail">E-Mail:</label>
+                                <input id="inpEMail" name="eMail" class="form-control" type="email"
+                                    required minlength="4" maxlength="100"
+                                    [(ngModel)]="colaborador.eMail"  #eMail="ngModel"/>
+
+                                <div *ngIf="eMail.invalid && (eMail.dirty || eMail.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="eMail.errors.required">* O E-Mail é obrigatório.</div>
+                                    <div *ngIf="nome.errors.minlength">* O E-Mail deve ter pelo menos 4 letras.</div>
+                                </div>    
                             </div>
                             <div class="form-group">
-                                <label>Status:</label>
+                                <label for="chkAtivo">Status:</label>
                                 <div>
                                     <label required class="radion-inline" *ngFor="let op of _util.optBoolean, let idx = index" >
-                                        <input type="radio" [(ngModel)]="colaborador.ativo" name="rdaAtivo" id="rdAtivo" [checked]="op.value === colaborador.ativo" [value]="op.value"> {{ op.name }} &nbsp;
+                                        <input id="chkAtivo" type="radio" [(ngModel)]="colaborador.ativo" name="rdaAtivo" id="rdAtivo" [checked]="op.value === colaborador.ativo" [value]="op.value" #ativo="ngModel"> {{ op.name }} &nbsp;
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Perfil:</label>
-                                <select required class="form-control"
-                                    [(ngModel)]="colaborador.tipoPerfil" name="Perfil" >
+                                <label for="sltTipoPerfil">Perfil:</label>
+                                <select id="sltTipoPerfil" name="tipoPerfil" class="form-control"
+                                    required [(ngModel)]="colaborador.tipoPerfil" #tipoPerfil="ngModel">
                                     <option *ngFor="let op of _util.optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
                                 </select>
+                                <div *ngIf="tipoPerfil.tipoPerfil && (tipoPerfil.dirty || tipoPerfil.touched)"
+                                    class="alert alert-danger">    
+                                    <div *ngIf="tipoPerfil.errors.required">* O Perfil é obrigatório.</div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label>Celular:</label>
-                                <input [(ngModel)]="colaborador.nrCelular" class="form-control" maxlength="15" required/>
+                                <label for="inpNrCelular">Celular:</label>
+                           
+                                <input id="inpNrCelular" name="nrCelular" class="form-control" type="text"
+                                    required  minlength="10" maxlength="11"
+                                    [(ngModel)]="colaborador.nrCelular"  #nrCelular="ngModel"/>
+
+                                <div *ngIf="nrCelular.invalid && (nrCelular.dirty || nrCelular.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="nrCelular.errors.required">* O Nº do celular é obrigatório.</div>
+                                    <div *ngIf="nrCelular.errors.minlength">* O Nº do celular deve ter pelo menos 10 algarismos.</div>
+                                </div>    
                             </div>
                         </div>
                     </div>
@@ -45,11 +74,12 @@
                         <button class="btn btn-success" (click)="reenviarSenha()">Reenviar Senha</button>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <button class="btn btn-primary" (click)="save()">Salvar</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!colaboradorForm.form.valid">Salvar</button>
                         <button class="btn btn-default" (click)="gotoColaboradores()">Retornar</button>
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>

@@ -40,6 +40,14 @@ export class ColaboradorService {
         );
     }
 
+    getByFilters(nome: string, tipoPerfil: string, ativo: string): Observable<Colaborador[]> {
+        return this.http.get<Colaborador[]>(this.apiRoute.getFindByFilters(nome, tipoPerfil, ativo))
+            .pipe(
+                tap(colaboradores => this.log(`fetched Colaborador Filter nome=${nome}, tipoPerfil=${tipoPerfil}, Ativo=${ativo}`)),
+                catchError(this.handleError(`getByFilters nome=${nome}, tipoPerfil=${tipoPerfil}, Ativo=${ativo}`, []))
+        );
+    }
+
     setColaborador(): Observable<Colaborador> {
         return this.http.get<Colaborador>(this.apiRoute.setColaborador()).pipe(
             tap(_ => this.log(`fetched Colaborador id=${0}`)),

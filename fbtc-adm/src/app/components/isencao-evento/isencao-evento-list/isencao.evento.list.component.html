@@ -7,11 +7,11 @@
           <div id="LineBodyCentral">
               <div id="L1C1">
                   Nome do Associado:<br>
-                  <input [(ngModel)]="editNome" size="70px" maxlength="100" required/>
+                  <input [(ngModel)]="editNome" size="70px" maxlength="100" />
               </div>
               <div id="L1C2">
                   Ano da Isenção:<br>
-                  <select required
+                  <select 
                   [(ngModel)]="editAno" name="AnoIsencao">
                   <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
               </select>

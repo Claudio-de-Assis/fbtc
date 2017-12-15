@@ -7,7 +7,7 @@ export class TipoPerfilPipe implements PipeTransform {
     }
     private getTipoPerfil(id: string): string {
         if (id === '1' ) {
-            return 'Gestor do Site';
+            return 'Gestor';
         } else if  (id === '2' ) {
             return 'Secretário';
         } else if (id === '3') {

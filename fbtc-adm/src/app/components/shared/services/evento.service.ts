@@ -50,6 +50,17 @@ export class EventoService {
         );
     }
 
+    getByFilters(nome: string, ano: number, tipoEvento: string): Observable<Evento[]> {
+
+        alert(this.apiRoute.getFindByFilters(nome, ano, tipoEvento));
+
+        return this.http.get<Evento[]>(this.apiRoute.getFindByFilters(nome, ano, tipoEvento))
+            .pipe(
+                tap(eventos => this.log(`fetched Eventos Filter nome=${nome}, ano=${ano}, tipoPerfil=${tipoEvento}`)),
+                catchError(this.handleError(`getByFilters nome=${nome}, ano=${ano}, Ativo=${tipoEvento}`, []))
+        );
+    }
+
     //////// Save methods //////////
     /** POST: add a new Colaborador to the server */
     addEvento (evento: Evento): Observable<Evento> {

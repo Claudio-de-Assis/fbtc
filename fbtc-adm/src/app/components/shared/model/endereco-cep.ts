@@ -7,3 +7,11 @@ export class EnderecoCep {
     cidade_info: { area_km2: string, codigo_ibge: string };
     estado: string;
 }
+
+export class EstadoEnderecoCepDAO {
+    nomeEstado: string;
+}
+
+export class CidadeEnderecoCepDAO {
+    nomeCidade: string;
+}

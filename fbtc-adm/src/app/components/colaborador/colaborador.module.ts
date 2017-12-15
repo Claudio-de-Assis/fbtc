@@ -1,5 +1,6 @@
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { ColaboradorService } from './../shared/services/colaborador.service';
@@ -13,10 +14,12 @@ import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
   imports: [
+      BrowserModule,
       CommonModule,
       FormsModule,
       ColaboradorRoutingModule,
-      SharedModule
+      SharedModule,
+      ReactiveFormsModule
   ],
   declarations: [
       ColaboradorFormComponent,
@@ -33,4 +36,5 @@ import { SharedModule } from './../shared/shared.module';
       TipoPublicoRoute
   ]
 })
+
 export class ColaboradorModule { }

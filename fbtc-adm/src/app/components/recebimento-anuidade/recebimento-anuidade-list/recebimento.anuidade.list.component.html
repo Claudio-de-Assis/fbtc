@@ -32,14 +32,14 @@
               </div> 
             <div id="L2C2">
                   Ano:<br>
-                  <select required
+                  <select 
                       [(ngModel)]="editAno" name="Ano">
                       <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
                   </select>
               </div>                        
               <div id="L2C3">
                 Mês:<br>
-                <select required
+                <select 
                     [(ngModel)]="editMes" name="Mes">
                     <option *ngFor="let mes of _util.lstMes" [value]="mes">{{ mes }}</option>
                 </select>
@@ -47,7 +47,7 @@
             <div class="col-lg-6">
                 <label>Status:</label><br>
                 <div>
-                    <label required class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
+                    <label class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
                         <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
                     </label>
                 </div>

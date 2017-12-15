@@ -8,11 +8,13 @@ export class AssociadoRoute {
 
     // [Route("GetAll")]
     getAll(): string {
+
         return AppSettings.API_ENDPOINT + this.url + 'GetAll';
     }
 
     // [Route("{id:int}")]
     getById(id: number): string {
+
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
@@ -27,6 +29,7 @@ export class AssociadoRoute {
 
     // [Route("Associado")]
     postAssociado(): string {
+
         return AppSettings.API_ENDPOINT + this.url + 'Associado';
     }
 

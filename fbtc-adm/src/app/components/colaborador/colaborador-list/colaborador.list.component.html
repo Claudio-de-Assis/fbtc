@@ -2,6 +2,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
+        <form (ngSubmit)="onSubmit()" #colaboradorForm="ngForm">
             <div class="panel-heading">
                 Filtro
             </div>
@@ -10,7 +11,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome:</label>
-                                <input [(ngModel)]="editNome" class="form-control" maxlength="100" required/>
+                                <input id="inpNome" name="nome" class="form-control" type="text"
+                                    minlength="2"  maxlength="100"
+                                    [(ngModel)]="editNome"  #nome="ngModel"/>
+                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 4 letras.</div>
+                                </div>  
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -19,7 +26,7 @@
                                     <div class="col-lg-6">
                                         <label>Perfil:</label>                          
                                         <select id="sltPerfil" class="form-control" name="Perfil"
-                                        [(ngModel)]="editPerfil" name="Perfil" >
+                                        [(ngModel)]="editTipoPerfil" name="tipoPerfil" >
                                         <option *ngFor="let op of _util.optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
                                     </select>
                                     </div>
@@ -27,7 +34,7 @@
                                         <label>Status:</label><br>
                                         <div>
                                             <label required class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
-                                                <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
+                                                <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
                                             </label>
                                         </div>
                                     </div>
@@ -37,9 +44,10 @@
                 </div>
             </div>
             <div class="panel-footer text-right">
-                <button class="btn btn-primary" (click)="gotoBuscarColaborador()">Pesquisar</button>
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
                 <button class="btn btn-default" (click)="gotoNovoColaborador()">Novo</button>
             </div>
+        </form>
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">Resultado do Filtro</div>
@@ -52,7 +60,7 @@
                                 <th>E-Mail</th>
                                 <th>Celular</th>
                                 <th>Perfil</th>
-                                <th>Status</th>
+                                <th>Ativo</th>
                                 <th>A&ccedil;&otilde;es</th>
                             </tr>
                         </thead>

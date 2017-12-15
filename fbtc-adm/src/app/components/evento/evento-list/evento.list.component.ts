@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+import {FormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
 import { EventoService } from './../../shared/services/evento.service';
 
@@ -18,15 +22,21 @@ export class EventoListComponent implements OnInit {
 
   title = 'Consulta de Eventos';
 
+  editNome: string = '';
+  editAno: number = null
+  editTipoEvento: string = '';
+
   private selectedEvento: Evento;
 
-  editTipoEvento: string = '0';
-  editAno: string = '';
-  editNome: string = '';
+  _nome: string = '0';
+  _ano: number = 0;
+  _tipoEvento: string = '0';
 
   eventos: Evento[];
 
   _util = Util;
+
+  submitted = false;
 
   constructor(
     private service: EventoService,
@@ -36,6 +46,12 @@ export class EventoListComponent implements OnInit {
 
   getEventos(): void {
     this.service.getEventos().subscribe(eventos => this.eventos = eventos);
+  }
+
+  onSubmit() {
+
+    this.submitted = true;
+    this.gotoBuscareventos();
   }
 
   ngOnInit() {
@@ -50,5 +66,24 @@ export class EventoListComponent implements OnInit {
       this.router.navigate(['/Evento', 0]);
   }
 
-  gotoBuscareventos() { }
+  gotoBuscareventos() {
+
+    if (this.editNome.trim() !== '') {
+      this._nome = this.editNome.trim();
+    }
+    if (this.editAno !== null) {
+        this._ano = this.editAno;
+    }
+    if (this.editTipoEvento !== '') {
+        this._tipoEvento = this.editTipoEvento;
+    }
+
+    this.service.getByFilters(this._nome, this._ano, this._tipoEvento)
+        .subscribe(eventos => this.eventos = eventos);
+
+    this.submitted = false;
+    this._nome = '0';
+    this._ano = 0;
+    this._tipoEvento = '0';
+  }
 }

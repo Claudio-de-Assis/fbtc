@@ -2,35 +2,58 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
+        <form (ngSubmit)="onSubmit()" #associadoForm="ngForm">
             <div class="panel-heading">{{ title }}</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="form-group">
                             <label for="inpNome">Nome:</label>
-                            <input id="inpNome" [(ngModel)]="associado.nome" class="form-control" maxlength="100" required/>
+                            <input id="inpNome" name="nome" class="form-control" type="text"
+                                required minlength="4" maxlength="100" 
+                                [(ngModel)]="associado.nome"  #nome="ngModel"/>
+                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="nome.errors.required">* O Nome é obrigatório.</div>
+                                <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 4 letras.</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="inpEmail">E-Mail:</label>
-                            <input id="inpEmail" [(ngModel)]="associado.eMail" class="form-control" maxlength="100" type="email" required/>
+                            <input id="inpEmail" name="email" class="form-control" type="email"
+                                required minlength="4" maxlength="100" 
+                                [(ngModel)]="associado.eMail" #eMail="ngModel"/>
+                            <div *ngIf="eMail.invalid && (eMail.dirty || eMail.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="eMail.errors.required">* O E-Mail é obrigatório.</div>
+                                <div *ngIf="eMail.errors.minlength">* O E-Mail deve ter pelo menos 4 letras.</div>
+                            </div> 
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="inpDataNascimento">Data de Nascimento:</label>
-                            <input id="inpDataNascimento" [(ngModel)]="associado.dtNascimento" type="Date" class="form-control" maxlength="10"/>
+                            <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="Date"
+                                maxlength="10"
+                                [(ngModel)]="associado.dtNascimento" #dataNascimento="ngModel"/>
                         </div>
                         <div class="form-group">
                             <label for="sltSexo">Sexo:</label>
-                            <select id="sltSexo" required [(ngModel)]="associado.sexo" name="sexo" class="form-control">
+                            <select id="sltSexo" name="sexo" class="form-control" 
+                                required 
+                                [(ngModel)]="associado.sexo" #sexo="ngModel">
                                 <option *ngFor="let op of _util.optSexo" value="{{ op.value }}">{{ op.name }}</option>
                             </select>
+                            <div *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="sexo.errors.required">* O Sexo deve ser informado.</div>
+                            </div>    
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="imgFoto">Foto do Associado:</label><br>
-                            <img id="imgFoto" src="../assets/no-foto.png" alt="Não disponível" width="87px">
+                            <label for="imgFoto">&nbsp;</label><br>
+                            <img id="imgFoto" name="foto" src="../assets/no-foto.png" alt="Não disponível" width="87px">
                         </div>
                     </div>
                 </div>
@@ -38,33 +61,51 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="inpCPF">CPF:</label>
-                            <input id="inpCPF" [(ngModel)]="associado.cpf" class="form-control" 
+                            <input id="inpCPF" name="cpf" class="form-control" type="text"
                                 maxlength="15" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Formato correto: 000.000.000-00"
-                                data-mask="000.000.000-00" data-mask-reverse="true"/>
+                                data-mask="000.000.000-00" data-mask-reverse="true"
+                                [(ngModel)]="associado.cpf" #cpf="ngModel"/>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="inpRG">RG:</label>
-                            <input id="inpRG" [(ngModel)]="associado.rg" class="form-control" maxlength="15"/>
+                            <input id="inpRG" name="rg" class="form-control" type="number"
+                                maxlength="15"
+                                [(ngModel)]="associado.rg"  #rg="ngModel"/>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="inpMatricula">Matricula:</label>
-                            <input id="inpMatricula" [(ngModel)]="associado.nrMatricula" class="form-control"/>
+                            <input id="inpMatricula" name="matricula" class="form-control" type="number"
+                                maxlength="15"
+                                [(ngModel)]="associado.nrMatricula" #matricula="ngModel"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpCelular">Celular:</label>
-                            <input id="inpCelular" [(ngModel)]="associado.nrCelular" type="tel" class="form-control" maxlength="15" required/>
+                            <label for="inpNrelular">Celular:</label>
+                            <input id="inpNrCelular" name="nrCelular" class="form-control" type="number"
+                                required  minlength="10" maxlength="11" 
+                                [(ngModel)]="associado.nrCelular" #nrCelular="ngModel"/>
+                            <div *ngIf="nrCelular.invalid && (nrCelular.dirty || nrCelular.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="nrCelular.errors.required">* O Nº do celular é obrigatório.</div>
+                                <div *ngIf="nrCelular.errors.minlength">* O Nº do celular deve ter pelo menos 10 algarismos.</div>
+                            </div> 
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpTelDivulgacao">Telefone Divulgação:</label>
-                            <input id="inpTelDivulgacao" [(ngModel)]="associado.nrTelDivulgacao" class="form-control" data-mask="000.000.000-00"/>
+                            <label for="inpNrTelDivulgacao">Telefone Divulgação:</label>
+                            <input id="inpNrTelDivulgacao" name="nrTelDivulgacao" class="form-control" type="number"
+                                minlength="10" maxlength="11"     
+                                [(ngModel)]="associado.nrTelDivulgacao" #nrTelDivulgacao="ngModel"/>
+                                <div *ngIf="nrTelDivulgacao.invalid && (nrTelDivulgacao.dirty || nrTelDivulgacao.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="nrTelDivulgacao.errors.minlength">* O Nº do telefone deve ter pelo menos 10 algarismos.</div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -72,61 +113,84 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="sltATC">ATC:</label>
-                            <select id="sltATC" class="form-control" required
-                                [(ngModel)]="associado.atcId" name="ATC">
+                            <select id="sltATC"  name="ATC" class="form-control" 
+                                required    
+                                [(ngModel)]="associado.atcId" #atcId="ngModel">
                                 <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
                             </select>
+                            <div *ngIf="atcId.invalid && (atcId.dirty || atcId.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="atcId.errors.required">* Informe a Atc do associado.</div>
+                            </div>    
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="sltTipo">Tipo:</label>
-                            <select id="sltTipo" class="form-control" required
-                                [(ngModel)]="associado.tipoPublicoId" name="TipoPublico">
+                            <select id="sltTipoPublico" name="TipoPublico" class="form-control" 
+                                required
+                                [(ngModel)]="associado.tipoPublicoId" #tipoPublico="ngModel">
                                 <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
                             </select>
+                            <div *ngIf="tipoPublico.invalid && (tipoPublico.dirty || tipoPublico.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="tipoPublico.errors.required">* Informe o Tipo do associado.</div>
+                            </div>    
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="inpCRP">CRP:</label>
-                            <input id="inpCRP" class="form-control" [(ngModel)]="associado.crp" maxlength="15"/>
+                            <input id="inpCRP" name="crp" class="form-control" type="number"
+                                maxlength="15"
+                                [(ngModel)]="associado.crp" #crp="ngModel"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="inpCRM">CRM:</label>
-                            <input id="inpCRM" class="form-control" [(ngModel)]="associado.crm" maxlength="15"/>
+                            <input id="inpCRM" name="crm" class="form-control" type="number"
+                                maxlength="15"
+                                [(ngModel)]="associado.crm" #crm="ngModel"/>
                         </div>    
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="inpInstFormacao">Instituição de Formação:</label>
-                            <input id="inpInstFormacao" class="form-control" [(ngModel)]="associado.nomeInstFormacao" maxlength="100"/>
+                            <label for="inpNomeInstFormacao">Instituição de Formação:</label>
+                            <input id="inpNomeInstFormacao" name="nomeInstFormacao" class="form-control" type="text"
+                                maxlength="100"
+                                [(ngModel)]="associado.nomeInstFormacao" #nomeInstFormacao="ngModel"/>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="inpDataCadastro"> Data Cadastro:</label>
-                            <input id="inpDataCadastro" class="form-control" [(ngModel)]="associado.dtCadastro" type="Date" size="15px" maxlength="10" readonly>
+                            <input id="inpDataCadastro" name="dataCadastro" class="form-control" type="text"
+                                 readonly
+                                [(ngModel)]="associado.dtCadastro" />
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpTitulacao">Titulação:</label>
-                            <select id="inpTitulacao" class="form-control" required
-                                [(ngModel)]="associado.tipoTitulacao" name="Titulacao">
+                            <label for="inpTipoTitulacao">Titulação:</label>
+                            <select id="inpTipoTitulacao" name="tipoTitulacao" class="form-control" 
+                                required    
+                                [(ngModel)]="associado.tipoTitulacao" #tipoTitulacao="ngModel">
                                 <option *ngFor="let op of _util.optTipoTitulacao" value="{{ op.value }}">{{ op.name }}</option>
                             </select>
+                            <div *ngIf="tipoTitulacao.invalid && (tipoTitulacao.dirty || tipoTitulacao.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="tipoTitulacao.errors.required">* Informe a titulação do associado.</div>
+                            </div>    
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpProfissao">Profissão:</label>
-                            <select id="inpProfissao" class="form-control" required
-                                [(ngModel)]="associado.tipoProfissao" name="Profissao">
+                            <label for="inpTipoProfissao">Profissão:</label>
+                            <select id="inpTipoProfissao" name="TipoProfissao" class="form-control"
+                                [(ngModel)]="associado.tipoProfissao" #tipoProfissao="ngModel">
                                 <option *ngFor="let op of _util.optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
                             </select>
                         </div>
@@ -144,8 +208,10 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <label>Data:</label>
-                        <input [(ngModel)]="associado.dtCertificacao" type="Date" class="form-control" maxlength="10"/>
+                        <label for="inpDtCertificacao">Data:</label>
+                        <input id="inpDtCertificacao" name="dtCertificacao" class="form-control" type="Date"
+                            maxlength="10"    
+                            [(ngModel)]="associado.dtCertificacao"  #dtCertificacao="ngModel"/>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
@@ -205,9 +271,11 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>CEP:</label>
+                                        <label for="inpCEP">CEP:</label>
                                         <div class="input-group">
-                                            <input id="inpCEP" class="form-control" [(ngModel)]="associado.enderecoPessoa.cep" maxlength="9"/>
+                                            <input id="inpCEP" name="cep" class="form-control" type="text"
+                                                maxlength="9"    
+                                                [(ngModel)]="associado.enderecoPessoa.cep" #cep="ngModel"/>
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button" (click)="getEnderecoByCep()" title="Buscar Cep"><i class="fa fa-search"></i></button>
                                             </span>
@@ -219,13 +287,17 @@
                                 <div class="col-lg-10">
                                     <div class="form-group">
                                         <label for="inpLogradouro">Logradouro:</label>
-                                        <input id="inpLogradouro" class="form-control" [(ngModel)]="associado.enderecoPessoa.logradouro" maxlength="100"/>
+                                        <input id="inpLogradouro" name="logradouro" class="form-control" type="text"
+                                            maxlength="100" readonly    
+                                            [(ngModel)]="associado.enderecoPessoa.logradouro" #logradouro="ngModel"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label for="inpNumero">Nº:</label>
-                                        <input id="inpNumero" class="form-control" [(ngModel)]="associado.enderecoPessoa.numero" maxlength="10"/>
+                                        <input id="inpNumero" name="numero"class="form-control" type="text"
+                                            maxlength="10"
+                                            [(ngModel)]="associado.enderecoPessoa.numero" #numero="ngModel"/>
                                     </div>
                                 </div>
                             </div>
@@ -233,27 +305,35 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="inpComplemento">Complemento:</label>
-                                        <input id="inpComplemento" class="form-control" [(ngModel)]="associado.enderecoPessoa.complemento" maxlength="100"/>
+                                        <input id="inpComplemento" name="complemento" class="form-control" type="text"
+                                            maxlength="100"
+                                            [(ngModel)]="associado.enderecoPessoa.complemento" #complemento="ngModel"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Bairro:</label>
-                                        <input class="form-control" [(ngModel)]="associado.enderecoPessoa.bairro" size="20px" maxlength="100"/>
+                                        <label for="inpBairro">Bairro:</label>
+                                        <input id="inpBairro" name="bairro" class="form-control" type="text"
+                                            size="20px" maxlength="100" readonly
+                                            [(ngModel)]="associado.enderecoPessoa.bairro" #bairro="ngModel"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Cidade:</label>
-                                        <input class="form-control" [(ngModel)]="associado.enderecoPessoa.cidade" size="20px" maxlength="100"/>
+                                        <label for="inpCidade">Cidade:</label>
+                                        <input id="inpCidade" name="cidade" class="form-control" type="text"
+                                            size="20px" maxlength="100" readonly   
+                                            [(ngModel)]="associado.enderecoPessoa.cidade" #cidade="ngModel"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Estado:</label>
-                                        <input class="form-control" [(ngModel)]="associado.enderecoPessoa.estado" size="5px" maxlength="2"/>
+                                        <label for="inpEstado">Estado:</label>
+                                        <input id="inpEstado" name="cidade" class="form-control" type="text"
+                                            size="5px" maxlength="2" readonly    
+                                            [(ngModel)]="associado.enderecoPessoa.estado" #estado="ngModel"/>
                                     </div>
                                 </div>
                             </div>
@@ -267,11 +347,12 @@
                         <button class="btn btn-success" (click)="reenviarSenha()">Reenviar Senha</button>
                     </div>
                     <div class="col-lg-6 text-right">
-                            <button class="btn btn-primary" (click)="save()">Salvar</button>
-                        <button class="btn btn-default" (click)="gotoAssociados()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!associadoForm.form.valid">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoAssociados()">Retornar</button>
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>

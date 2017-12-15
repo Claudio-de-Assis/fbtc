@@ -17,8 +17,8 @@ const httpOptions = {
 @Injectable()
 export class AtcService {
 
-    atc: Atc;
-    atc$: Observable<Atc>;
+    // atc: Atc;
+    // atc$: Observable<Atc>;
 
     constructor(
         private http: HttpClient,

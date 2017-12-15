@@ -1,6 +1,7 @@
 <h1 class="page-header">Cadastro de Evento</h1>
 <div class="row">
     <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #eventoForm="ngForm">
         <div class="panel panel-default">
             <div class="panel-heading">{{ title }}</div>
             <div class="panel-body">
@@ -9,8 +10,16 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-10">
-                                        <label>Titulo:</label>
-                                        <input [(ngModel)]="evento.titulo" class="form-control" maxlength="100" required/>
+                                        <label for="inpTitulo">Titulo:</label>
+                                        <input id="inpTitulo" name="titulo" class="form-control" type="text"
+                                            required minlength="5" maxlength="100" 
+                                            [(ngModel)]="evento.titulo" #titulo="ngModel"/>
+
+                                        <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="titulo.errors.required">* O Título é obrigatório.</div>
+                                            <div *ngIf="titulo.errors.minlength">* O Título deve ter pelo menos 5 letras.</div>
+                                        </div>    
                                     </div>
                                     <div class="col-lg-2">
                                         <label>&nbsp;</label>
@@ -20,24 +29,43 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <label> Data de Início:</label>
+                                        <label for="inpDtInicio">Data de Início:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <input [(ngModel)]="evento.dtInicio" class="form-control" maxlength="10" type="Date" required/>
+                                            <input id="inpDtInicio" name="dtInicio" class="form-control" type="date" 
+                                                required maxlength="10"
+                                                [(ngModel)]="evento.dtInicio" #dtInicio="ngModel"/>
+                                            <div *ngIf="dtInicio.invalid && (dtInicio.dirty || dtInicio.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="dtInicio.errors.required">* A data de início é obrigatória.</div>
+                                            </div>    
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Data de Término:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <input [(ngModel)]="evento.dtTermino" class="form-control" maxlength="10" type="Date" required/>
+                                            <input id="inpDtTerminio" name="dataTerminio" class="form-control" type="Date"
+                                                required maxlength="10"
+                                                [(ngModel)]="evento.dtTermino" #dtTerminio="ngModel"/>
+                                            <div *ngIf="dtTerminio.invalid && (dtTerminio.dirty || dtTerminio.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="dtTerminio.errors.required">* A data de término é obrigatória.</div>
+                                            </div>    
+
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <label>Término Inscrições:</label>
+                                        <label for="inpDtTerminioIncricao">Término Inscrições:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <input [(ngModel)]="evento.dtTerminoInscricao" class="form-control" size="15px" maxlength="10" type="Date" required/>
+                                            <input id="inpDtTerminioIncricao" name="dtTerminioIncricao" class="form-control" type="Date"
+                                                required size="15px" maxlength="10"    
+                                                [(ngModel)]="evento.dtTerminoInscricao" #dtTermIncr="ngModel" />
+                                            <div *ngIf="dtTermIncr.invalid && (dtTermIncr.dirty || dtTermIncr.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="dtTermIncr.errors.required">* A data de término da incrição é obrigatória.</div>
+                                            </div>    
                                         </div>
                                     </div>
                                 </div>
@@ -48,14 +76,20 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>C&oacute;digo:</label>
-                                            <input [(ngModel)]="evento.codigo" class="form-control" maxlength="10"/>
+                                            <label for="inpcodigo">C&oacute;digo:</label>
+                                            <input id="inpCodigo" nome= "codigo" class="form-control"
+                                                maxlength="10"    
+                                                [(ngModel)]="evento.codigo"  #codigo="ngModel"/>
                                         </div>
                                         <div class="form-group">
-                                            <label>Tipo Evento:</label>
-                                            <select id="sltTipoEvento" required [(ngModel)]="evento.tipoEvento" name="tipoEvento" class="form-control">
+                                            <label for="sltTipoEvento">Tipo Evento:</label>
+                                            <select id="sltTipoEvento" required [(ngModel)]="evento.tipoEvento" name="tipoEvento" class="form-control" #tipoEvento="ngModel">
                                                 <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
                                             </select>
+                                            <div *ngIf="tipoEvento.invalid && (tipoEvento.dirty || tipoEvento.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="tipoEvento.errors.required">* O tipo de evento é obrigatório.</div>
+                                            </div>    
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -69,7 +103,14 @@
                 <div class="row">
                     <div class="col-lg-12">   
                         <label>Descrição:</label>
-                        <textarea [(ngModel)]="evento.descricao" class="form-control" rows="15"></textarea> 
+                        <textarea [(ngModel)]="evento.descricao" class="form-control" rows="15" required #descrivao="ngModel"></textarea>
+                        
+                        <div *ngIf="descrivao.invalid && (descrivao.dirty || descrivao.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="descrivao.errors.required">* O Título é obrigatório.</div>
+                        <div *ngIf="descrivao.errors.minlength">* O Título deve ter pelo menos 5 letras.</div>
+                    </div>    
+
                     </div>
                 </div>
             </div>
@@ -89,10 +130,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let tipoPublico of tiposPublicos">
+                            <tr *ngFor="let tipoPublico of tiposPublicos; let idx = index" >
                                 <td>{{ tipoPublico.nome }}</td>
-                                <td><input [(ngModel)]="evento.tipoPublico" size="15px" maxlength="10" required/></td>
-                                <td><input type="checkbox"></td>
+                                <td><input id="tipoPublico.tipoPublicoId" name="tipoPublico.tipoPublicoId" class="form-control" [(ngModel)]="evento.tipoPublico" size="15px" maxlength="10" required /></td>
+                                <td><input type="checkbox" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -130,5 +171,6 @@
                 <button class="btn btn-default" (click)="gotoDeleteEvento()">Excluir</button>
             </div>
         </div>
+    </form>
     </div>
 </div>

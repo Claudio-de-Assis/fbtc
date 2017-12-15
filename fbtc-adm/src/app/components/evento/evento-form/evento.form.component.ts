@@ -3,6 +3,10 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
+import {FormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+
 import { EventoService } from '../../shared/services/evento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
