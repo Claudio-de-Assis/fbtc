@@ -9,6 +9,8 @@ namespace Fbtc.Application.Interfaces
 
         Evento GetEventoById(int id);
 
+        Evento GetEventoByRecebimentoId(int id);
+
         Evento SetEvento();
 
         string DeleteById(int id);

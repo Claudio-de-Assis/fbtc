@@ -9,6 +9,8 @@ namespace Fbtc.Domain.Interfaces.Services
 
         Evento GetEventoById(int id);
 
+        Evento GetEventoByRecebimentoId(int id);
+
         string DeleteById(int id);
 
         string Insert(Evento evento);

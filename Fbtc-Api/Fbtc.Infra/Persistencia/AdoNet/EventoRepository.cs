@@ -220,5 +220,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
             return _msg;
         }
+
+        public Evento GetEventoByRecebimentoId(int id)
+        {
+            query = @"SELECT E.EventoId, E.Titulo, E.Descricao, E.Codigo, E.DtInicio, E.DtTermino, 
+                        E.DtTerminoInscricao, E.TipoEvento, E.AceitaIsencaoAta, E.Ativo, E.NomeFoto 
+                    FROM dbo.AD_Evento E
+                    INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON E.EventoId = VEP.EventoId
+                    INNER JOIN dbo.AD_Recebimento R ON VEP.ValorEventoPublicoId = R.ValorEventoPublicoId
+                    WHERE R.RecebimentoId = " + id + "";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            Evento evento = GetCollection<Evento>(cmd)?.First();
+
+            return evento;
+        }
     }
 }

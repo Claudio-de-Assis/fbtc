@@ -92,6 +92,43 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
+        [Route("Recebimento/{id:int}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> GetByRecebimentoId(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (id == 0) throw new Exception("Id não informado!");
+
+                var resultado = _eventoApplication.GetEventoByRecebimentoId(id);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
         [Route("SetEvento")]
         [HttpGet]
         public Task<HttpResponseMessage> SetAssociado()
