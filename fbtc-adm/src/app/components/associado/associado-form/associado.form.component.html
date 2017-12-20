@@ -1,9 +1,9 @@
 <h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default">
         <form (ngSubmit)="onSubmit()" #associadoForm="ngForm">
-            <div class="panel-heading">{{ title }}</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-7">
@@ -35,7 +35,7 @@
                             <label for="inpDataNascimento">Data de Nascimento:</label>
                             <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="Date"
                                 maxlength="10"
-                                [(ngModel)]="associado.dtNascimento" #dataNascimento="ngModel"/>
+                                [ngModel]="associado.dtNascimento | date:'dd/MM/yyyy'" (ngModelChange)="associado.dtNascimento"  #dataNascimento="ngModel"/>
                         </div>
                         <div class="form-group">
                             <label for="sltSexo">Sexo:</label>
@@ -169,7 +169,7 @@
                             <label for="inpDataCadastro"> Data Cadastro:</label>
                             <input id="inpDataCadastro" name="dataCadastro" class="form-control" type="text"
                                  readonly
-                                [(ngModel)]="associado.dtCadastro" />
+                                value="{{ associado.dtCadastro | date:'dd/MM/yyyy'}}" />
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -331,7 +331,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="inpEstado">Estado:</label>
-                                        <input id="inpEstado" name="cidade" class="form-control" type="text"
+                                        <input id="inpEstado" name="estado" class="form-control" type="text"
                                             size="5px" maxlength="2" readonly    
                                             [(ngModel)]="associado.enderecoPessoa.estado" #estado="ngModel"/>
                                     </div>
@@ -352,7 +352,7 @@
                     </div>
                 </div>
             </div>
-        </form>
         </div>
+    </form>
     </div>
 </div>

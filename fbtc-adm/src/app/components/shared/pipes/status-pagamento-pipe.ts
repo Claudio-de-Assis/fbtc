@@ -6,11 +6,11 @@ export class StatusPagamentoPipe implements PipeTransform {
         return this.getTipoStatus(id);
     }
     private getTipoStatus(id: string): string {
-        if (id === '0') {
+        if (id === '1') {
             return 'Inadimplente';
-        } else if (id === '1') {
-            return 'Adimplente';
         } else if (id === '2') {
+            return 'Adimplente';
+        } else if (id === '3') {
             return 'Isento';
         } else {
             return 'Indefinido';

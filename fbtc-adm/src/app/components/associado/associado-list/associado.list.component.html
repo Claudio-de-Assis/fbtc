@@ -1,11 +1,9 @@
 <h1 class="page-header">{{ title }}</h1>
 <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
             <form (ngSubmit)="onSubmit()" #associadoForm="ngForm">
-                <div class="panel-heading">
-                    Filtro
-                </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Filtro</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
@@ -14,33 +12,10 @@
                                 <input id="inpNome" name="nome" class="form-control" type="text"
                                     minlength="2"  maxlength="100"
                                     [(ngModel)]="editNome"  #nome="ngModel"/>
-                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
-                                </div>  
-                            </div>
-                            <div class="form-group">
-                                <label for="sltTipoPublico">Público:</label>
-                                <select id="sltTipoPublico" name="tipoPublico" class="form-control" 
-                                    [(ngModel)]="editTipoPublicoId" name="TipoPublico" #tipoPublico="ngModel">
-                                    <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="inpCpf">CPF:</label>
-                                        <input id="inpCpf" name="Cpf" class="form-control" type="number"
-                                            maxlength="15"
-                                            [(ngModel)]="editCpf" placeholder="000.000.000-00" #cpf="ngModel"/>
-                                        </div>
-                                    <div class="col-lg-6">
-                                        <label for="inpCrp">CRP:</label>
-                                        <input id="inpCrp" name="Crp" class="form-control" type="number"
-                                            maxlength="15"
-                                            [(ngModel)]="editCrp" #crp="ngModel"/>
+                                    <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -51,55 +26,90 @@
                                     <option *ngFor="let op of _util.optTipoProfissao" value="{{ op.value }}">{{ op.name }}</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="sltSexo">Sexo:</label><br>
-                                        <select id="sltSexo" name="sexo" class="form-control"
-                                            [(ngModel)]="editSexo" #sexo="ngModel">
-                                            <option *ngFor="let op of _util.optSexo" value="{{ op.value }}">{{ op.name }}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="sltATC">ATC:</label>
-                                        <select id="sltATC" name="atc" class="form-control" 
-                                            [(ngModel)]="editAtcId" #atc="ngModel">
-                                            <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <label for="sltEstado">Estado:</label>
-                                        <select id="sltEstado" name="estado" class="form-control" 
-                                            [(ngModel)]="editEstado" #estado="ngModel" (ngModelChange)="gotoGetCidades()">
-                                            <option *ngFor="let op of estados" value="{{ op.estado }}">{{ op.estado }}</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <label for="sltCidade">Cidade:</label>
-                                        <select id="sltCidade" name="cidade" class="form-control" 
-                                            [(ngModel)]="editCidade" #cidade="ngModel" >
-                                            <option *ngFor="let op of cidades" value="{{ op.cidade }}">{{ op.cidade }}</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <label>Status:</label><br>
-                                        <div>
-                                            <label required class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
-                                                <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
-                                            </label>
-                                        </div>
-                                    </div>
-                                  
+                        </div>
+                    </div>                            
+                    <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="sltTipoPublico">Público:</label>
+                                    <select id="sltTipoPublico" name="tipoPublico" class="form-control" 
+                                        [(ngModel)]="editTipoPublicoId" name="TipoPublico" #tipoPublico="ngModel">
+                                        <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>&nbsp;</label>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="sltSexo">Sexo:</label><br>
+                                    <select id="sltSexo" name="sexo" class="form-control"
+                                        [(ngModel)]="editSexo" #sexo="ngModel">
+                                        <option *ngFor="let op of _util.optSexo" value="{{ op.value }}">{{ op.name }}</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="sltATC">ATC:</label>
+                                    <select id="sltATC" name="atc" class="form-control" 
+                                        [(ngModel)]="editAtcId" #atc="ngModel">
+                                        <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>                            
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="inpCpf">CPF:</label>
+                                    <input id="inpCpf" name="Cpf" class="form-control" type="number"
+                                        maxlength="15"
+                                        [(ngModel)]="editCpf" placeholder="000.000.000-00" #cpf="ngModel"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="inpCrp">CRP:</label>
+                                    <input id="inpCrp" name="Crp" class="form-control" type="number"
+                                        maxlength="15"
+                                        [(ngModel)]="editCrp" #crp="ngModel"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="sltEstado">Estado:</label>
+                                    <select id="sltEstado" name="estado" class="form-control" 
+                                        [(ngModel)]="editEstado" #estado="ngModel" (ngModelChange)="gotoGetCidades()">
+                                        <option *ngFor="let op of estados" value="{{ op.estado }}">{{ op.estado }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="sltCidade">Cidade:</label>
+                                    <select id="sltCidade" name="cidade" class="form-control" 
+                                        [(ngModel)]="editCidade" #cidade="ngModel" >
+                                        <option *ngFor="let op of cidades" value="{{ op.cidade }}">{{ op.cidade }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>                            
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <!--Vazio-->
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Status:</label><br>
+                                    <div>
+                                        <label required class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
+                                            <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                            
                 </div>
                 <div class="panel-footer text-right">
                     <div class="row ">
@@ -109,11 +119,11 @@
                         </div>
                     </div>
                 </div>
-            </form>
             </div>
-            <div class="panel panel-primary">
+        </form>
+        <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Resultado do Filtro
+                        Resultado da Consulta
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

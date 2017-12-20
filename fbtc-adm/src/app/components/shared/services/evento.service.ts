@@ -38,7 +38,15 @@ export class EventoService {
 
         return this.http.get<Evento>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched Evento id=${id}`)),
-            catchError(this.handleError<Evento>(`getEvento id=${id}`))
+            catchError(this.handleError<Evento>(`getById id=${id}`))
+        );
+    }
+
+    getByRecebimentoId(id: number): Observable<Evento> {
+
+        return this.http.get<Evento>(this.apiRoute.getByRecebimentoId(id)).pipe(
+            tap(_ => this.log(`fetched Evento id=${id}`)),
+            catchError(this.handleError<Evento>(`getByRecebimentoId id=${id}`))
         );
     }
 

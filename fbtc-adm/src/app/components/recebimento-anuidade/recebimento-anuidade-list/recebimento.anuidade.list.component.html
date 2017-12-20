@@ -1,115 +1,140 @@
-<div id="base">
-  <div id="Central">
-      <div id="HeaderCentral">
-          <h3>{{ title }}</h3>
-      </div>
-      <div id="BodyCentral">
-      <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
-         <div id="LineBodyCentral">
-              <div id="L1C1">
-                    <label for="inpNome">Nome:</label><br>
-                    <input id="inpNome" name="nome" class="form-control" type="text"
-                        minlength="2"  maxlength="100"
-                        [(ngModel)]="editNome"  #nome="ngModel"/>
-                    <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
-                        class="alert alert-danger">
-                        <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
-                    </div> 
-              </div>
-              <div id="L1C2">
-                    <label for="inpCpf">Cpf:</label><br>
-                    <input id="inpCpf" name="cpf" class="form-control" type="text"
-                        maxlength="15" size="15px" 
-                        [(ngModel)]="editCpf"  #cpf="ngModel"/>
-              </div>
-              <div id="L1C3">
-                    <label for="inpCrp">Crp:</label><br>
-                    <input id="inpCrp" name="crp" class="form-control" type="text"
-                        maxlength="15" size="15px" 
-                        [(ngModel)]="editCrp"  #crp="ngModel"/>
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" name="nome" class="form-control" type="text"
+                                minlength="2"  maxlength="100"
+                                [(ngModel)]="editNome"  #nome="ngModel"/>
+                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpCpf">Cpf:</label>
+                            <input id="inpCpf" name="cpf" class="form-control" type="text"
+                                maxlength="15" size="15px" 
+                                [(ngModel)]="editCpf"  #cpf="ngModel"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpCrp">Crp:</label>
+                            <input id="inpCrp" name="crp" class="form-control" type="text"
+                                maxlength="15" size="15px" 
+                                [(ngModel)]="editCrp"  #crp="ngModel"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpCrm">Crm:</label>
+                            <input id="inpCrm" name="crm" class="form-control" type="text"
+                                maxlength="15" size="15px" 
+                                [(ngModel)]="editCrm"  #crm="ngModel"/>
+                        </div>
+                    </div>
                 </div>
-              <div id="L1C4">
-                    <label for="inpCrm">Crm:</label><br>
-                    <input id="inpCrm" name="crm" class="form-control" type="text"
-                        maxlength="15" size="15px" 
-                        [(ngModel)]="editCrm"  #crm="ngModel"/>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Situação:</label>
+                            <select id="sltStatusPagamento" class="form-control" 
+                            [(ngModel)]="editStatusPagamento" name="statusPagamento">
+                                <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Ano:</label>
+                            <select class="form-control"
+                                [(ngModel)]="editAno" name="Ano">
+                                <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Mês:</label>
+                            <select  class="form-control"
+                                [(ngModel)]="editMes" name="Mes">
+                                <option *ngFor="let mes of _util.lstMes" [value]="mes">{{ mes }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Status:</label>
+                            <div>
+                                <label class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
+                                    <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-        </div>
-        <div id="LineBodyCentral">
-            <div id="L2C1">
-                    <label for="sltStatusPagamento">StatusPagamento:</label><br>
-                    <select id="sltStatusPagamento" name="statusPagamento"
-                    [(ngModel)]="editStatusPagamento" #statusPagamento="ngModel">
-                    <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
-               </select>
-              </div> 
-            <div id="L2C2">
-                    <label for="sltAno">Ano:</label><br>
-                    <select id="sltAno" name="ano" 
-                        [(ngModel)]="editAno" #ano="ngModel">
-                        <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
-                    </select>
-              </div>                        
-              <div id="L2C3">
-                    <label for="sltMes">Ano:</label><br>
-                    <select id="sltMes" name="mes" 
-                        [(ngModel)]="editMes" #mes="ngModel">
-                        <option *ngFor="let ano of _util.lstMes" [value]="ano">{{ ano }}</option>
-                    </select>
-            </div> 
-            <div class="col-lg-6">
-                <label>Status:</label><br>
-                <div>
-                    <label class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
-                        <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
-                    </label>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="LineBodyCentral">
-              <div id="L4C1">
-                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </form>
+        <!-- PAINEL RESULTADO DA BUSCA -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">Listagem de Recebimentos</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Associado</td>
+                                    <td>CPF</td>
+                                    <td>Objetivo</td>
+                                    <td>Vencimento</td>
+                                    <td>Pagamento</td>
+                                    <td>Situação</td>
+                                    <td>Ações</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let recebimento of recebimentos"
+                                    [class.selected]="recebimento.recebimentoId === selectedId">
+                                    <td>{{ recebimento.associado.nome }}</td>
+                                    <td>{{ recebimento.associado.cpf }}</td>
+                                    <td>{{ recebimento.objetivoPagamento | objetivoPagamento }}</td>
+                                    <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.statusPagamento |  statusPagamento }}</td>
+                                    <td>
+                                        <a [routerLink]="['/RecebimentoAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                    <button (click)="gotoPrimeiraPagina()" class="btn btn-default"><i class="fa fa-angle-double-left"></i></button>
+                    <button (click)="gotoPaginaAnterio()" class="btn btn-default"><i class="fa fa-angle-left"></i></button>
+                    <button (click)="gotoProximaPagina()" class="btn btn-default"><i class="fa fa-angle-right"></i></button>
+                    <button (click)="gotoUltimaPagina()" class="btn btn-default"><i class="fa fa-angle-double-right"></i></button>
                 </div>
             </div>
-            <div id="LineBodyCentral">
-              <div id="L5C1">
-                  <fieldset> 
-                      <legend>Listagem de Recebimentos</legend>
-                      <div id="Lst">
-                      <div id="LstHeader">
-                          <div id="LstCol1">Associado</div>
-                          <div id="LstCol2">CPF</div>
-                          <div id="LstCol3">Objetivo</div>
-                          <div id="LstCol4">Vencimento</div>
-                          <div id="LstCol5">Pagamento</div>
-                          <div id="LstCol5">Status</div>
-                      </div>
-                      <div id="LstCenter">       
-                  <ul class="recebimentos">
-                      <li *ngFor="let recebimento of recebimentos"
-                          [class.selected]="recebimento.recebimentoId === selectedId">
-                          <a [routerLink]="['/RecebimentoAnuidade', recebimento.recebimentoId]">
-                              <div id="LstCol1c">{{ recebimento.associado.nome }}</div>
-                              <div id="LstCol2c">{{ recebimento.associado.cpf }}</div>
-                              <div id="LstCol3c">{{ recebimento.objetivoPagamento | objetivoPagamento }}</div>
-                              <div id="LstCol4c">{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</div>
-                              <div id="LstCol5c">{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</div>
-                              <div id="LstCol6c">{{ recebimento.statusPagamento |  statusPagamento }}</div>
-                          </a>
-                      </li>
-                  </ul>
-                      </div>
-                      <div id="LstFooter">&nbsp;
-                              <button (click)="gotoPrimeiraPagina()">|<<</button>
-                              <button (click)="gotoPaginaAnterio()"><<</button>
-                              <button (click)="gotoProximaPagina()">>></button>
-                              <button (click)="gotoUltimaPagina()">>>|</button>
-                          </div>
-                  </div>
-                  </fieldset>
-              </div>
-          </div>
-          </form>
-      </div>            
-  </div>
+        </div>
+    </div>
 </div>

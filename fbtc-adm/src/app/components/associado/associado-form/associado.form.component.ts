@@ -80,6 +80,8 @@ export class AssociadoFormComponent implements OnInit {
 
         this.service.addAssociado(this.associado)
         .subscribe(() =>  this.gotoShowPopUp());
+
+        this.submitted = false;
     }
 
     gotoShowPopUp() {

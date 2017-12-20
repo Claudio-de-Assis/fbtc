@@ -33,6 +33,8 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
   private selectedId: any;
 
+  submitted = false;
+
   constructor(
     private service: RecebimentoService,
     private router: Router,
@@ -49,6 +51,13 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
       this.service.addRecebimento(this.recebimento)
       .subscribe(() =>  this.gotoShowPopUp());
+
+      this.submitted = false;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.gotoSave();
   }
 
   gotoShowPopUp() {

@@ -16,6 +16,10 @@ export class EventoRoute {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
+    getByRecebimentoId(id: number): string {
+        return AppSettings.API_ENDPOINT + this.url + 'Recebimento/' + id;
+    }
+
     // [Route("SetEvento")]
     setEvento(): string {
         return AppSettings.API_ENDPOINT + this.url + 'SetEvento';

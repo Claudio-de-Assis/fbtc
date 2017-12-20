@@ -13,7 +13,7 @@ export class FormaPagamentoPipe implements PipeTransform {
         } else if (id === '3') {
             return 'Cartão de Crédito';
         } else {
-            return 'Indefinido';
+            return 'Não informado';
         }
     }
 }

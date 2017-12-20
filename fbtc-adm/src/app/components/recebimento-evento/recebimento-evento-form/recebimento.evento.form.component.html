@@ -1,99 +1,137 @@
-<div id="base">
-  <div id="Central">
-      <div id="HeaderCentral">
-          <h3>{{ title }}</h3>
-      </div>
-      <div id="BodyCentral">
-        <div id="LineBodyCentral">
-            <div id="L0C1">
-                Evento:<br>
-                Nome do evento.....
-            </div>
-            <div id="L0C2">
-                Tipo de público:<br>
-                {{ recebimento.associado.tipoPublicoId | findNameInTipoPublico: tiposPublicos }}
-            </div>
-        </div>
-        <div id="LineBodyCentral">
-              <div id="L1C1">
-                  Nome:<br>
-                  {{ recebimento.associado.nome }}
-              </div>
-              <div id="L1C2">
-                  CPF:<br>
-                  {{ recebimento.associado.cpf }}
-              </div>
-              <div id="L1C3">
-                CRP:<br>
-                {{ recebimento.associado.crp }}
-            </div>
-            <div id="L1C4">
-                CRM:<br>
-                {{ recebimento.associado.crm }}
-            </div>
-          </div>
-          <div id="LineBodyCentral">
-            <div id="L2C1">
-                E-Mail:<br>
-                {{ recebimento.associado.eMail }}
-            </div>
-            <div id="L2C2">
-                Status Pagamento:<br>
-                {{ recebimento.statusPagamento | statusPagamento}}
-              </div>
-              <div id="L2C3">
-                  Vencimento:<br>
-                  {{ recebimento.dtVencimento }}
-              </div>
-              <div id="L2C4">
-                Pagamento:<br>
-                {{ recebimento.associado.dtPagamento }}
-            </div>
-          </div>
-          <div id="LineBodyCentral">
-             <div id="L3C1">
-                  Celular:<br>
-                  {{ recebimento.associado.nrCelular }}
-              </div>
-              <div id="L3C2">
-                    Ativo:<br>
-                    {{ recebimento.associado.ativo | booMessage }}
-              </div>
-              <div id="L3C3">
-                    Forma de pagamento:<br>
-                    {{ recebimento.associado.formaPagamento | formaPagamento }}
-               </div>
-              <div id="L3C4">
-                    Nº Doc Cobrança:<br>
-                    {{ recebimento.nrDocCobranca }}
-               </div>
-             <div id="L3C5">
-                    Valor devido:<br>
-                    {{ recebimento.associado.valorDevido }}
-            </div>
-            <div id="L3C6">
-                    Data de notificação:<br>
-                    {{ recebimento.associado.dtNotificacao }}
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Evento:</label>
+                            <input class="form-control" value="{{ evento.titulo }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Tipo de público:</label>
+                            <input class="form-control" value="{{ recebimento.associado.tipoPublicoId | findNameInTipoPublico: tiposPublicos }}" disabled>
+                        </div>
+                    </div>
                 </div>
-        </div>
-          <div id="LineBodyCentral">
-              <div id="L5C1">
-                  Observação:<br>
-                  <textarea [(ngModel)]="recebimento.observacao" rows="10" cols="134" required></textarea>
-              </div>
-          </div>
-          <div id="LineBodyCentral">
-              <div id="L6C1">
-
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input class="form-control" value="{{ recebimento.associado.nome }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>CPF:</label>
+                            <input class="form-control" value="{{ recebimento.associado.cpf }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>CRP:</label>
+                            <input class="form-control" value="{{ recebimento.associado.crp }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>CRM:</label>
+                            <input class="form-control" value="{{ recebimento.associado.crm }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>E-Mail:</label>
+                            <input class="form-control" value="{{ recebimento.associado.eMail }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Status Pagamento:</label>
+                            <input class="form-control" value="{{ recebimento.statusPagamento | statusPagamento}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Vencimento:</label>
+                            <input class="form-control" value="{{ recebimento.dtVencimento | date: 'dd/MM/yyyy' }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Pagamento:</label>
+                            <input class="form-control" value="{{ recebimento.associado.dtPagamento }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Celular:</label>
+                            <input class="form-control" value="{{ recebimento.associado.nrCelular }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Ativo:</label>
+                            <input class="form-control" value="{{ recebimento.associado.ativo | booMessage }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Forma Pagamento</label>
+                            <input class="form-control" value="{{ recebimento.associado.formaPagamento | formaPagamento }} " disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Nº Doc Cobrança:</label>
+                            <input class="form-control" value="{{ recebimento.nrDocCobranca }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Valor devido:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.associado.valorDevido }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Data Notificação:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.associado.dtNotificacao }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                                <label for="areaObservacao">Observação:</label>
+                                <textarea id="areaObservacao" name="observavao" class="form-control" 
+                                    rows="10" cols="134" maxlength="500"
+                                    [(ngModel)]="recebimento.observacao" #observacacao="ngModel"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-      </div>
-      <div id="FooterCentral">
-          <div id="FT1C1">
-            <button (click)="gotoRecebimentoAnuidade()">Retornar</button>
-            <button (click)="gotoSave()">Salvar</button>
-            <button (click)="gotoNotificarAssociado()">Notificar Associado</button>
-         </div>
-      </div>
-  </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-success" (click)="gotoNotificarAssociado()">Notificar Associado</button>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!recebimentoForm.form.valid">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoRecebimentoAnuidade()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
 </div>

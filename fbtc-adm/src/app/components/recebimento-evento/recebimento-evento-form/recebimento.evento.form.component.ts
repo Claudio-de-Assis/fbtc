@@ -1,13 +1,17 @@
-import { RecebimentoService } from './../../shared/services/recebimento.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { Data } from '@angular/router/src/config';
+
+import { RecebimentoService } from './../../shared/services/recebimento.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { EventoService } from '../../shared/services/evento.service';
+
 import { Recebimento } from '../../shared/model/recebimento';
 import { TipoPublico } from '../../shared/model/tipo-publico';
-import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { Evento } from './../../shared/model/evento';
 
 @Component({
   selector: 'app-recebimento-evento-form',
@@ -32,15 +36,21 @@ export class RecebimentoEventoFormComponent implements OnInit {
               cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}}
   };
 
+  @Input() evento: Evento = new Evento();
+
   title = 'Dados de pagamento de evento';
 
   private selectedId: any;
 
   tiposPublicos: TipoPublico[];
+  eventos: Evento[];
+
+  submitted = false;
 
   constructor(
     private service: RecebimentoService,
     private serviceTP: TipoPublicoService,
+    private serviceEvento: EventoService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -49,12 +59,19 @@ export class RecebimentoEventoFormComponent implements OnInit {
 
     this.service.getById(id)
           .subscribe(recebimento => this.recebimento = recebimento);
+
+    this.submitted = false;
   }
 
   gotoSave() {
 
     this.service.addRecebimento(this.recebimento)
     .subscribe(() =>  this.gotoShowPopUp());
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.gotoSave();
   }
 
   gotoShowPopUp() {
@@ -81,6 +98,12 @@ export class RecebimentoEventoFormComponent implements OnInit {
     this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
   }
 
+  getEventoByRecebimentoId(id: number): void {
+
+    this.serviceEvento.getByRecebimentoId(id)
+          .subscribe(evento => this.evento = evento);
+  }
+
   ngOnInit() {
 
     this.getTiposPublicos();
@@ -88,6 +111,7 @@ export class RecebimentoEventoFormComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     if (id > 0) {
         this.getRecebimentoById(id);
+        this.getEventoByRecebimentoId(id);
     } else {
       alert('Não foi encontrato recebimento para o Id Informado');
       this.gotoRecebimentoAnuidade();
