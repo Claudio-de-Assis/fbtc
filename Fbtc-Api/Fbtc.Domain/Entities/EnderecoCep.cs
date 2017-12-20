@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Fbtc.Domain.Entities
 {
     public class EnderecoCep
@@ -34,14 +29,15 @@ namespace Fbtc.Domain.Entities
     // *********************************************
     // Classes DAO realativas ao objeto EnderecoCEP:
     // *********************************************
-
-    public class EstadoEnderecoCepDAO
+    
+    public class EstadoEnderecoCepDao
     {
-        public string NomeEstado { get; set; }
+        public string Estado { get; set; }
     }
     
-    public class CidadeEnderecoCepDAO
+    
+    public class CidadeEnderecoCepDao
     {
-        public string NomeCidade { get; set; }
+        public string Cidade { get; set; }
     }
 }

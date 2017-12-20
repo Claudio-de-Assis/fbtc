@@ -131,10 +131,10 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
-        [Route("FindByFilters/{objetivoPagamento},{nome},{cpf},{crp},{crm},{status},{ano},{mes},{ativo},{eventoId},{tipoPublicoId}")]
+        [Route("FindByFilters/{objetivoPagamento},{nome},{cpf},{crp},{crm},{statusPagamento},{ano},{mes},{ativo},{tipoEvento},{tipoPublicoId}")]
         [HttpGet]
         public Task<HttpResponseMessage> FindByFilters(string objetivoPagamento, string nome, string cpf,
-            string crp, string crm, string status, string ano, string mes, bool ativo, string eventoId, string tipoPublicoId)
+            string crp, string crm, string statusPagamento, string ano, string mes, bool? ativo, string tipoEvento, string tipoPublicoId)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -142,8 +142,8 @@ namespace Fbtc.Api.Controllers
             try
             {
                 var resultado = _recebimentoApplication.FindByFilters(objetivoPagamento, nome, cpf,
-                    crp, crm, status ,Convert.ToInt16(ano), Convert.ToInt16(mes), 
-                    ativo, Convert.ToInt32(eventoId), Convert.ToInt32(tipoPublicoId));
+                    crp, crm, statusPagamento ,Convert.ToInt16(ano), Convert.ToInt16(mes), 
+                    ativo, tipoEvento, Convert.ToInt32(tipoPublicoId));
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

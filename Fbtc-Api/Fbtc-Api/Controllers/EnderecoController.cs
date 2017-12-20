@@ -90,9 +90,5 @@ namespace Fbtc.Api.Controllers
                 return tsc.Task;
             }
         }
-
-
-
-
     }
 }

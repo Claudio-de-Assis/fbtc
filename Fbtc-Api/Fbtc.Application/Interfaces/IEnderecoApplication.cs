@@ -17,8 +17,8 @@ namespace Fbtc.Application.Interfaces
 
         string Save(Endereco endereco);
 
-        IEnumerable<EstadoEnderecoCepDAO> GetAllNomesEstados();
+        IEnumerable<EstadoEnderecoCepDao> GetAllNomesEstados();
 
-        IEnumerable<CidadeEnderecoCepDAO> GetNomesCidadesByEstado(string nomeEstado);
+        IEnumerable<CidadeEnderecoCepDao> GetNomesCidadesByEstado(string nomeEstado);
     }
 }

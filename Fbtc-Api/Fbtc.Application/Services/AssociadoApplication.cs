@@ -85,6 +85,12 @@ namespace Fbtc.Application.Services
             _estado = estado == "0" ? "" : estado;
             _cidade = cidade == "0" ? "" : cidade;
 
+            if (_nome.IndexOf("%20") > 0)
+                _nome = _nome.Replace("%20", " ");
+            
+            if (_cidade.IndexOf("%20") > 0)
+                _cidade = _cidade.Replace("%20", " ");
+            
             return _associadoService.FindByFilters(_nome, _cpf, _sexo, atcId, _crp, 
                 _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
         }

@@ -38,7 +38,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 query = query + $" AND Titulo Like '%{titulo}%' ";
 
             if (ano != 0)
-                query = query + $" AND ano = {ano} ";
+                query = query + $" AND year(DtInicio) = {ano} ";
 
             if (!string.IsNullOrEmpty(tipoEvento))
                 query = query + $" AND TipoEvento = '{tipoEvento}' ";

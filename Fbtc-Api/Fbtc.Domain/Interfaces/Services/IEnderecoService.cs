@@ -17,8 +17,8 @@ namespace Fbtc.Domain.Interfaces.Services
 
         string Update(int id, Endereco endereco);
 
-        IEnumerable<EstadoEnderecoCepDAO> GetAllNomesEstados();
+        IEnumerable<EstadoEnderecoCepDao> GetAllNomesEstados();
 
-        IEnumerable<CidadeEnderecoCepDAO> GetNomesCidadesByEstado(string nomeEstado);
+        IEnumerable<CidadeEnderecoCepDao> GetNomesCidadesByEstado(string nomeEstado);
     }
 }

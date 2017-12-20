@@ -16,8 +16,8 @@ namespace Fbtc.Application.Interfaces
         string Save(Recebimento recebimento);
 
         IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool ativo, 
-            int eventoId, int tipoPublicoId);
+            string crp, string crm, string status, int ano, int mes, bool? ativo, 
+            string tipoEvento, int tipoPublicoId);
 
         // Tipo 1: Anuidade; Tipo 2: Evento
         IEnumerable<Recebimento> GetRecebimentoByPessoaId(string objetivoPagamento, int id);

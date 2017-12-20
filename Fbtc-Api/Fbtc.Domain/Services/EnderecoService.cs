@@ -26,7 +26,7 @@ namespace Fbtc.Domain.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<EstadoEnderecoCepDAO> GetAllNomesEstados()
+        public IEnumerable<EstadoEnderecoCepDao> GetAllNomesEstados()
         {
             return _enderecoRepository.GetAllNomesEstados();
         }
@@ -41,7 +41,7 @@ namespace Fbtc.Domain.Services
             return _enderecoRepository.GetEnderecoById(id);
         }
 
-        public IEnumerable<CidadeEnderecoCepDAO> GetNomesCidadesByEstado(string nomeEstado)
+        public IEnumerable<CidadeEnderecoCepDao> GetNomesCidadesByEstado(string nomeEstado)
         {
             return _enderecoRepository.GetNomesCidadesByEstado(nomeEstado);
         }

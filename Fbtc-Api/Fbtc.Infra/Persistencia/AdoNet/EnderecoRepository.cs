@@ -188,7 +188,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _msg;
         }
 
-        public IEnumerable<EstadoEnderecoCepDAO> GetAllNomesEstados()
+        public IEnumerable<EstadoEnderecoCepDao> GetAllNomesEstados()
         {
             query = @"SELECT Distinct Estado 
                     FROM dbo.AD_Endereco  
@@ -198,22 +198,22 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            IEnumerable<EstadoEnderecoCepDAO> _collection = GetCollection<EstadoEnderecoCepDAO>(cmd)?.ToList();
+            IEnumerable<EstadoEnderecoCepDao> _collection = GetCollection<EstadoEnderecoCepDao>(cmd)?.ToList();
 
             return _collection;
         }
 
-        public IEnumerable<CidadeEnderecoCepDAO> GetNomesCidadesByEstado(string nomeEstado)
+        public IEnumerable<CidadeEnderecoCepDao> GetNomesCidadesByEstado(string nomeEstado)
         {
             query = @"SELECT Distinct Cidade 
                     FROM dbo.AD_Endereco 
-                    WHERE Estado = "+ nomeEstado + " ORDER BY Cidade";
+                    WHERE Estado = '"+ nomeEstado + "' ORDER BY Cidade";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            IEnumerable<CidadeEnderecoCepDAO> _collection = GetCollection<CidadeEnderecoCepDAO>(cmd)?.ToList();
+            IEnumerable<CidadeEnderecoCepDao> _collection = GetCollection<CidadeEnderecoCepDao>(cmd)?.ToList();
 
             return _collection;
         }

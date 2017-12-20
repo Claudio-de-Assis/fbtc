@@ -25,18 +25,19 @@ namespace Fbtc.Application.Services
         }
 
         public IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool ativo, int eventoId, int tipoPublicoId)
+            string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
         {
-            string _nome, _cpf, _crp, _crm, _status;
+            string _nome, _cpf, _crp, _crm, _status, _tipoEvento;
 
             _nome = nome == "0" ? "" : nome;
             _cpf = cpf == "0" ? "" : cpf;
             _crp = crp == "0" ? "" : crp;
             _crm = crm == "0" ? "" : crm;
             _status = status == "0" ? "" : status;
+            _tipoEvento = tipoEvento == "0" ? "" : tipoEvento;
 
             return _recebimentoService.FindByFilters(objetivoPagamento, _nome, _cpf, _crp, _crm, _status,
-                ano, mes , ativo, eventoId, tipoPublicoId);
+                ano, mes , ativo, _tipoEvento, tipoPublicoId);
         }
 
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)

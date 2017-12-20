@@ -68,10 +68,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 query = query + $" AND A.TipoPublicoId = {tipoPublicoId} ";
 
             if (!string.IsNullOrEmpty(estado))
-                query = query + $" AND E.Estado = {estado} ";
+                query = query + $" AND E.Estado = '{estado}' ";
 
             if (!string.IsNullOrEmpty(cidade))
-                query = query + $" AND E.Cidade = {cidade} ";
+                query = query + $" AND E.Cidade = '{cidade}' ";
 
             if (ativo != null)
                 query = query + $" AND P.Ativo = '{ativo}' ";

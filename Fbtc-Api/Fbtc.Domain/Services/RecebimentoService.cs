@@ -21,11 +21,12 @@ namespace Fbtc.Domain.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf, string crp, string crm, 
-            string status, int ano, int mes, bool ativo, int eventoId, int tipoPublicoId)
+        public IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf, 
+            string crp, string crm, string status, int ano, int mes, bool? ativo, 
+            string tipoEvento, int tipoPublicoId)
         {
-            return _recebimentoRepository.FindByFilters(objetivoPagamento, nome, cpf, crp, crm, 
-                status, ano, mes, ativo, eventoId, tipoPublicoId);
+            return _recebimentoRepository.FindByFilters(objetivoPagamento, nome, cpf, crp, crm,
+                status, ano, mes, ativo, tipoEvento, tipoPublicoId);
         }
 
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)

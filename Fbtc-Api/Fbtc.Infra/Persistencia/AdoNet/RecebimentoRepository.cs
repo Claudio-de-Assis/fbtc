@@ -28,7 +28,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         }
 
         public IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf, string crp, 
-            string crm, string status, int ano, int mes, bool ativo, int eventoId, int tipoPublicoId)
+            string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
         {
             query = @"SELECT R.RecebimentoId, R.AssociadoId, R.ValorEventoPublicoId, R.ValorAnuidadePublicoId, 
                         R.AssociadoIsentoId, R.ObjetivoPagamento, R.DtCadastro, R.DtVencimento, R.DtPagamento, 
@@ -38,8 +38,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         INNER JOIN dbo.AD_Associado A ON R.AssociadoId = A.AssociadoId 
                         INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId ";
 
-            if (eventoId != 0)
-                query = query + " " +
+//            if (!string.IsNullOrEmpty(tipoEvento) || (ano > 0 & objetivoPagamento.Equals("1")))
+            if (objetivoPagamento.Equals("1")) // Evento
+                    query = query + " " +
                     "INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON R.ValorEventoPublicoId = VEP.ValorEventoPublicoId " +
                     "INNER JOIN dbo.AD_Evento E ON VEP.EventoId = E.EventoId ";
 
@@ -61,7 +62,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 query = query + $" AND R.StatusPagamento = '{status}' ";
 
             if (ano != 0)
-                query = query + $" AND Year(R.DtVencimento) = {ano} ";
+            {
+                if(objetivoPagamento.Equals("1")) // Evento
+                    query = query + $" AND Year(E.DtInicio) = {ano} ";
+
+                if (objetivoPagamento.Equals("2")) // Anuidade
+                    query = query + $" AND Year(R.DtVencimento) = {ano} ";
+            }
 
             if (mes != 0)
                 query = query + $" AND Month(R.DtVencimento) = {mes} ";
@@ -69,10 +76,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             if (tipoPublicoId != 0)
                 query = query + $" AND A.TipoPublicoId = {tipoPublicoId} ";
 
-            if (eventoId != 0)
-                query = query + $" AND E.EventoId = {eventoId} ";
+            if (!string.IsNullOrEmpty(tipoEvento))
+                query = query + $" AND E.TipoEvento = '{tipoEvento}' ";
 
-            query = query + $" AND R.Ativo = '{ativo}'  Order by P.Nome "; 
+            if (ativo != null)
+                query = query + $" AND R.Ativo = '{ativo}' ";
+
+            query = query + " Order by P.Nome "; 
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
@@ -80,6 +90,30 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             // Obtém os dados do banco de dados:
             IEnumerable<Recebimento> _collection = GetCollection<Recebimento>(cmd)?.ToList();
 
+            if (_collection != null && _collection.Count() > 0)
+            {
+                AssociadoRepository _associadoRep = new AssociadoRepository();
+
+                Associado _associado = new Associado();
+
+                List<Recebimento> _recebimentos = new List<Recebimento>();
+
+                foreach (var rec in _collection)
+                {
+                    var assoc = _associadoRep.GetAssociadoById(rec.AssociadoId);
+
+                    if (assoc != null)
+                    {
+                        rec.Associado = assoc;
+                        _recebimentos.Add(rec);
+                    }
+                }
+
+                if (_recebimentos.Count() > 0)
+                {
+                    _collection = _recebimentos;
+                }
+            }
             return _collection;
         }
 
