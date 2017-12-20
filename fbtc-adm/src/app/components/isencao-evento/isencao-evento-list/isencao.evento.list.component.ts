@@ -5,11 +5,9 @@ import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Data } from '@angular/router/src/config';
 
-// import { EventoService } from './../../shared/services/evento.service';
 import { IsencaoService } from '../../shared/services/isencao.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
-// import { Evento } from './../../shared/model/evento';
 import { Isencao } from './../../shared/model/isencao';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 
@@ -34,14 +32,12 @@ export class IsencaoEventoListComponent implements OnInit {
 
   tiposPublicos: TipoPublico[];
 
-  // eventos: Evento[];
-
   editNome: string;
   editCPF: string;
   editCRP: string;
   editCRM: string;
   editEvento: string;
-  editStatus: string;
+  editStatusPagamento: string;
   editTipoPublico: string;
 
   editDtVencimento: Data;
@@ -50,7 +46,6 @@ export class IsencaoEventoListComponent implements OnInit {
   constructor(
     private service: IsencaoService,
     private serviceTP: TipoPublicoService,
-    // private serviceEvento: EventoService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -66,19 +61,10 @@ export class IsencaoEventoListComponent implements OnInit {
     this.selectedIsencao = isencao;
   }
 
-  gotoBuscarIsencao() { }
-
   gotoNovaIsencao() {
 
     this.router.navigate(['/IsencaoEvento', 0]);
   }
-
-  /*
-  getEventos(): void {
-
-    this.serviceEvento.getEventos().subscribe(eventos => this.eventos = eventos);
-  }
-  */
 
   getTiposPublicos(): void {
 
@@ -88,8 +74,6 @@ export class IsencaoEventoListComponent implements OnInit {
   ngOnInit() {
 
     this.getTiposPublicos();
-
-    // this.getEventos();
 
     // 1: Eventos.
     const objIsencao = '1';

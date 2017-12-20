@@ -4,59 +4,72 @@
           <h3>{{ title }}</h3>
       </div>
       <div id="BodyCentral">
-          <div id="LineBodyCentral">
+      <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
+         <div id="LineBodyCentral">
               <div id="L1C1">
-                  Nome:<br>
-                  <input [(ngModel)]="editNome" size="60px" maxlength="100" />
+                    <label for="inpNome">Nome:</label><br>
+                    <input id="inpNome" name="nome" class="form-control" type="text"
+                        minlength="2"  maxlength="100"
+                        [(ngModel)]="editNome"  #nome="ngModel"/>
+                    <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                    </div> 
               </div>
               <div id="L1C2">
-                  CPF:<br>
-                  <input [(ngModel)]="editCPF" size="15px" maxlength="15"/>
+                    <label for="inpCpf">Cpf:</label><br>
+                    <input id="inpCpf" name="cpf" class="form-control" type="text"
+                        maxlength="15" size="15px" 
+                        [(ngModel)]="editCpf"  #cpf="ngModel"/>
               </div>
               <div id="L1C3">
-                CRP:<br>
-                <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
-            </div>
+                    <label for="inpCrp">Crp:</label><br>
+                    <input id="inpCrp" name="crp" class="form-control" type="text"
+                        maxlength="15" size="15px" 
+                        [(ngModel)]="editCrp"  #crp="ngModel"/>
+                </div>
               <div id="L1C4">
-                CRM:<br>
-                <input [(ngModel)]="editCRM" size="15px" maxlength="15"/>
-            </div>
+                    <label for="inpCrm">Crm:</label><br>
+                    <input id="inpCrm" name="crm" class="form-control" type="text"
+                        maxlength="15" size="15px" 
+                        [(ngModel)]="editCrm"  #crm="ngModel"/>
+                </div>
         </div>
         <div id="LineBodyCentral">
             <div id="L2C1">
-                Status:<br>
-                <select id="sltStatusPagamento" 
-                    [(ngModel)]="editStatusPagamento" name="statusPagamento">
+                    <label for="sltStatusPagamento">StatusPagamento:</label><br>
+                    <select id="sltStatusPagamento" name="statusPagamento"
+                    [(ngModel)]="editStatusPagamento" #statusPagamento="ngModel">
                     <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
                </select>
               </div> 
             <div id="L2C2">
-                  Ano:<br>
-                  <select 
-                      [(ngModel)]="editAno" name="Ano">
-                      <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
-                  </select>
+                    <label for="sltAno">Ano:</label><br>
+                    <select id="sltAno" name="ano" 
+                        [(ngModel)]="editAno" #ano="ngModel">
+                        <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                    </select>
               </div>                        
               <div id="L2C3">
-                Mês:<br>
-                <select 
-                    [(ngModel)]="editMes" name="Mes">
-                    <option *ngFor="let mes of _util.lstMes" [value]="mes">{{ mes }}</option>
-                </select>
+                    <label for="sltMes">Ano:</label><br>
+                    <select id="sltMes" name="mes" 
+                        [(ngModel)]="editMes" #mes="ngModel">
+                        <option *ngFor="let ano of _util.lstMes" [value]="ano">{{ ano }}</option>
+                    </select>
             </div> 
             <div class="col-lg-6">
                 <label>Status:</label><br>
                 <div>
                     <label class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
-                        <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
+                        <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
                     </label>
                 </div>
             </div>
         </div>
         <div id="LineBodyCentral">
               <div id="L4C1">
-                      <button (click)="gotoBuscarRecebimento()">Pesquisar</button>
-              </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                </div>
             </div>
             <div id="LineBodyCentral">
               <div id="L5C1">
@@ -96,6 +109,7 @@
                   </fieldset>
               </div>
           </div>
+          </form>
       </div>            
   </div>
 </div>

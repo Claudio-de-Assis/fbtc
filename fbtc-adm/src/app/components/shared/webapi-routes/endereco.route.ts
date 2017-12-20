@@ -13,6 +13,6 @@ export class EnderecoRoute {
 
     // [Route("GetCidade/{estado}")]
     getGetCidadesByEstado(estado: string): string {
-        return AppSettings.API_ENDPOINT + this.url + 'GetAllEstados/' + estado;
+        return AppSettings.API_ENDPOINT + this.url + 'GetCidade/' + estado;
     }
 }

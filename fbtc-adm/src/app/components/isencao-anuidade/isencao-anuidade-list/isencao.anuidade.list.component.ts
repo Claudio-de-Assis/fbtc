@@ -28,6 +28,10 @@ export class IsencaoAnuidadeListComponent implements OnInit {
 
   tiposPublicos: TipoPublico[];
 
+ 
+
+
+
   constructor(
     private service: IsencaoService,
     private serviceTP: TipoPublicoService,

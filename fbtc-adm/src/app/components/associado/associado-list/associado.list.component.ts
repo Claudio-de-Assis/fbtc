@@ -11,7 +11,7 @@ import { AtcService } from '../../shared/services/atc.service';
 import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from './../../shared/model/tipo-publico';
 import { Atc } from '../../shared/model/atc';
-import { EstadoEnderecoCepDAO, CidadeEnderecoCepDAO } from '../../shared/model/endereco-cep';
+import { EstadoEnderecoCepDao, CidadeEnderecoCepDao } from '../../shared/model/endereco-cep';
 
 import { Util } from '../../shared/util/util';
 
@@ -34,8 +34,8 @@ export class AssociadoListComponent implements OnInit {
     editCrp: string = '';
     editTipoProfissao: string = '0';
     editTipoPublicoId: number = 0;
-    editEstado: string = '';
-    editCidade: string = '';
+    editEstado: string = '0';
+    editCidade: string = '0';
     editAtivo: boolean = true;
 
     _nome: string = '0';
@@ -50,8 +50,8 @@ export class AssociadoListComponent implements OnInit {
     associados: Associado[];
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
-    estados: EstadoEnderecoCepDAO[];
-    cidades: CidadeEnderecoCepDAO[];
+    estados: EstadoEnderecoCepDao[];
+    cidades: CidadeEnderecoCepDao[];
 
     private selectedAssociado: Associado;
 
@@ -64,17 +64,20 @@ export class AssociadoListComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private serviceAtc: AtcService,
-        // private serviceEnd: EnderecoService
+        private serviceEnd: EnderecoService
     ) { }
 
     getEstados(): void {
 
-        // this.serviceEnd.getAllEstados().subscribe(estados => this.estados = estados);
+        this.serviceEnd.getAllEstados().subscribe(estados => this.estados = estados);
     }
 
-    getCidadeByEstados(): void {
+    gotoGetCidades() {
 
-        // this.serviceEnd.getGetCidadesByEstado(this.editEstado).subscribe(cidades => this.cidades = cidades);
+        if (this.editEstado !== '') {
+            // alert(this.editEstado);
+            this.serviceEnd.getGetCidadesByEstado(this.editEstado).subscribe(cidades => this.cidades = cidades);
+        }
     }
 
     getAssociados(): void {
@@ -118,15 +121,24 @@ export class AssociadoListComponent implements OnInit {
         if (this.editCrp !== '') {
             this._crp = this.editCrp;
         }
+        if (this.editAtivo !== null) {
+            if (this.editAtivo) {
+              this._ativo = 'true';
+            } else {
+              this._ativo = 'false';
+            }
+          }
+
 
         this.service.getByFilters(this._nome, this._cpf, this.editSexo, this.editAtcId,
-                this._crp, this.editTipoProfissao, this.editTipoPublicoId)
+                this._crp, this.editTipoProfissao, this.editTipoPublicoId, this.editEstado, this.editCidade, this._ativo)
             .subscribe(associados => this.associados = associados);
 
           this.submitted = false;
           this._nome = '0';
           this._cpf = '0';
           this._crp = '0';
+          this._ativo = '2';
     }
 
     ngOnInit(): void {

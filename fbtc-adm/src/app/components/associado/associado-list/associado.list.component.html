@@ -40,8 +40,6 @@
                                             maxlength="15"
                                             [(ngModel)]="editCrp" #crp="ngModel"/>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -73,16 +71,16 @@
                                     <div class="col-lg-6">
                                         <label for="sltEstado">Estado:</label>
                                         <select id="sltEstado" name="estado" class="form-control" 
-                                            [(ngModel)]="editEstado" #estado="ngModel">
-                                            <option *ngFor="let op of estados" value="{{ op.nomeEstado }}">{{ op.nomeEstado }}</option>
+                                            [(ngModel)]="editEstado" #estado="ngModel" (ngModelChange)="gotoGetCidades()">
+                                            <option *ngFor="let op of estados" value="{{ op.estado }}">{{ op.estado }}</option>
                                         </select>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <label for="sltCidade">Cidade:</label>
                                         <select id="sltCidade" name="cidade" class="form-control" 
-                                            [(ngModel)]="editCidade" #cidade="ngModel">
-                                            <option *ngFor="let op of cidades" value="{{ op.nomeCidade }}">{{ op.nomeCidade }}</option>
+                                            [(ngModel)]="editCidade" #cidade="ngModel" >
+                                            <option *ngFor="let op of cidades" value="{{ op.cidade }}">{{ op.cidade }}</option>
                                         </select>
                                     </div>
 

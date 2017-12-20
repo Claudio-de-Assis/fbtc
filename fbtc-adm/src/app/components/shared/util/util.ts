@@ -26,9 +26,9 @@ export class Util {
     ];
 
     public static optStatusAdimplencia = [
-        {name: 'Inadimplente', value: '0'},
-        {name: 'Adimplente', value: '1'},
-        {name: 'Isento', value: '2'}
+        {name: 'Inadimplente', value: '1'},
+        {name: 'Adimplente', value: '2'},
+        {name: 'Isento', value: '3'}
     ];
 
     public static optTiposEventos = [

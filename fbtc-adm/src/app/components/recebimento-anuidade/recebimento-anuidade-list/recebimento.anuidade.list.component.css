@@ -88,7 +88,7 @@
 #L1C1 {
     position: relative;
     width: 480px;
-    height: 50px;
+    height: 70px;
     float: left;
     padding: 3px;
     vertical-align: bottom;
@@ -96,7 +96,7 @@
 #L1C2,#L1C3,#L1C4 {
     position: relative;
     width: 160px;
-    height: 50px;
+    height: 70px;
     float: left;
     padding: 3px;
     vertical-align: bottom;
@@ -105,7 +105,7 @@
 #L2C1{
     position: relative;
     width: 160px;
-    height: 50px;
+    height: 70px;
     float: left;
     padding: 3px;
     vertical-align: left;
@@ -114,7 +114,7 @@
 #L2C2,#L2C3,#L2C4{
     position: relative;
     width: 60px;
-    height: 50px;
+    height: 70px;
     float: left;
     padding: 3px;
     vertical-align: left;
@@ -122,7 +122,7 @@
 #L3C1,#L3C2,#L3C3{
     position: relative;
     width: 200;
-    height: 50px;
+    height: 70px;
     float: left;
     padding: 3px;
     vertical-align: bottom;
@@ -131,14 +131,14 @@
 #L4C1{
     position: relative;
     width: 100%;
-    height: 50px;
+    height: 70px;
     float: left;
     padding: 3px;
     vertical-align: bottom;
 }
 #L5C1{
     position: relative;
-    width: 100%;
+    width: 107%;
     height: 315px;
     float: left;
     padding: 3px;

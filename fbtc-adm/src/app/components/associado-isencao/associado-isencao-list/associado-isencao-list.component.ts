@@ -1,4 +1,4 @@
-import { CidadeEnderecoCepDAO, EstadoEnderecoCepDAO } from './../../shared/model/endereco-cep';
+import { CidadeEnderecoCepDao, EstadoEnderecoCepDao } from './../../shared/model/endereco-cep';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -31,8 +31,8 @@ export class AssociadoIsencaoListComponent implements OnInit {
     associados: Associado[];
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
-    estadoEnderecoCepDAO: EstadoEnderecoCepDAO[];
-    cidadeEnderecoCepDAO: CidadeEnderecoCepDAO[];
+    estadoEnderecoCepDAO: EstadoEnderecoCepDao[];
+    cidadeEnderecoCepDAO: CidadeEnderecoCepDao[];
 
     editNome: string;
     editCPF: string;

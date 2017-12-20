@@ -1,3 +1,4 @@
+import { EnderecoRoute } from './../webapi-routes/endereco.route';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -6,9 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { EnderecoRoute } from './../webApi-routes/endereco.route';
 import { MessageService } from './../../../message.service';
-import { EstadoEnderecoCepDAO, CidadeEnderecoCepDAO, EnderecoCep } from './../model/endereco-cep';
+import { EstadoEnderecoCepDao, CidadeEnderecoCepDao, EnderecoCep } from './../model/endereco-cep';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,27 +17,21 @@ const httpOptions = {
 @Injectable()
 export class EnderecoService {
 
-    // estadoEnderecoCepDAO: EstadoEnderecoCepDAO;
-    // estadoEnderecoCepDAO$: Observable<EstadoEnderecoCepDAO>;
-
-    // cidadeEnderecoCepDAO: CidadeEnderecoCepDAO;
-    // cidadeEnderecoCepDAO$: Observable<CidadeEnderecoCepDAO>;
-
     constructor(
         private http: HttpClient,
         private apiRoute: EnderecoRoute,
         private messageService: MessageService) { }
 
-    getAllEstados(): Observable<EstadoEnderecoCepDAO[]> {
-        return this.http.get<EstadoEnderecoCepDAO[]>(this.apiRoute.getAllEstados())
+    getAllEstados(): Observable<EstadoEnderecoCepDao[]> {
+        return this.http.get<EstadoEnderecoCepDao[]>(this.apiRoute.getAllEstados())
         .pipe(
             tap(estados => this.log('Fetched Endereço')),
             catchError(this.handleError('getAllEstados()', []))
         );
     }
 
-    getGetCidadesByEstado(estado: string): Observable<CidadeEnderecoCepDAO[]> {
-        return this.http.get<CidadeEnderecoCepDAO[]>(this.apiRoute.getGetCidadesByEstado(estado))
+    getGetCidadesByEstado(estado: string): Observable<CidadeEnderecoCepDao[]> {
+        return this.http.get<CidadeEnderecoCepDao[]>(this.apiRoute.getGetCidadesByEstado(estado))
         .pipe(
             tap(estados => this.log('Fetched Endereço')),
             catchError(this.handleError('getGetCidadesByEstado()', []))

@@ -26,12 +26,12 @@ export class RecebimentoRoute {
     // objetivoPagamento: 1: Evento; 2: Anuidade
     // Deve-se informar "0" quando não houver valor válido para o filtro. Os atributos
     // 'objetivoPagamento', 'Ativo' são obrigatórios.
-    // [Route("FindByFilters/{objetivoPagamento},{nome},{cpf},{crp},{crm},{status},{ano},{mes},{ativo},{eventoId},{tipoPublicoId}")]
+    // [Route("FindByFilters/{objetivoPagamento},{nome},{cpf},{crp},{crm},{status},{ano},{mes},{ativo},{tipoEvento},{tipoPublicoId}")]
     getFindByFilters(objetivoPagamento: string, nome: string, cpf: string, crp: string, crm: string,
-        status: string, ano: number, mes: number, ativo: boolean, eventoId: number, tipoPublicoId: number): string {
+        statusPagamento: string, ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): string {
 
-        return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${objetivoPagamento},${nome},${cpf},${crp},${crm},
-        ${status},${ano},${mes},${ativo},${eventoId},${tipoPublicoId}`;
+        return AppSettings.API_ENDPOINT + this.url +
+        `FindByFilters/${objetivoPagamento},${nome},${cpf},${crp},${crm},${statusPagamento},${ano},${mes},${ativo},${tipoEvento},${tipoPublicoId}`;
     }
 
     // [Route("Recebimento")]

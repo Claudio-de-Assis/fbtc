@@ -61,32 +61,17 @@ export class AssociadoService {
 
     //  nome: string, cpf: string, sexo: string, atcId: number, crp: string, tipoProfissao: string, tipoPublicoId: number
     getByFilters(nome: string, cpf: string, sexo: string, atcId: number,
-        crp: string, tipoProfissao: string, tipoPublicoId: number): Observable<Associado[]> {
-        return this.http.get<Associado[]>(this.apiRoute.getFindByFilters(nome, cpf, sexo, atcId, crp, tipoProfissao, tipoPublicoId))
+        crp: string, tipoProfissao: string, tipoPublicoId: number, estado: string, cidade: string, ativo: string): Observable<Associado[]> {
+            return this.http.get<Associado[]>(this.apiRoute.getFindByFilters(nome, cpf, sexo, atcId, crp, tipoProfissao, tipoPublicoId, estado, cidade, ativo))
             .pipe(
                 tap(associados => this.log(`fetched Associado Filter nome=${nome}, cpf=${cpf}, sexo=${sexo}, atcId=${atcId},
-                    crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}`)),
+                    crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
+                    cidade=${cidade}, ativo=${ativo}`)),
                 catchError(this.handleError(`getByFilters nome=${nome}, cpf=${cpf}, sexo=${sexo}, atcId=${atcId},
-                    crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}`, []))
+                    crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
+                     cidade=${cidade}, ativo=${ativo}`, []))
         );
     }
-
-
-
-/**
- *     editNome: string = '';
-    editEmail: string = '';
-    editCrp: string = '';
-    editCrm: string = '';
-    editCpf: string = '';
-    editSexo: string = '';
-    editAtcId: number = 0;
-    editTipoProfissao: string = '0';
- * 
- * 
- */
-
-
 
     /**
     * Handle Http operation that failed.

@@ -8,10 +8,10 @@ export class EnderecoCep {
     estado: string;
 }
 
-export class EstadoEnderecoCepDAO {
-    nomeEstado: string;
+export class EstadoEnderecoCepDao {
+    estado: string;
 }
 
-export class CidadeEnderecoCepDAO {
-    nomeCidade: string;
+export class CidadeEnderecoCepDao {
+    cidade: string;
 }

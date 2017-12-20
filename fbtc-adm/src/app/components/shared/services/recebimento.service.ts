@@ -67,6 +67,22 @@ export class RecebimentoService {
         );
     }
 
+    getByFilters(objetivoPagamento: string, nome: string, cpf: string, crp: string, crm: string, statusPagamento: string,
+        ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): Observable<Recebimento[]> {
+            return this.http.get<Recebimento[]>(this.apiRoute
+                .getFindByFilters(objetivoPagamento, nome, cpf, crp, crm, statusPagamento, ano, mes, ativo, tipoEvento,
+                    tipoPublicoId))
+                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter objetivoPagamento=${objetivoPagamento},
+                    nome=${nome}, cpf=${cpf}, crp=${crp},crp=${crm}, statusPagamento=${statusPagamento},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`)),
+                catchError(this.handleError(`getByFilters objetivoPagamento=${objetivoPagamento},
+                    nome=${nome}, cpf=${cpf}, crp=${crp},crp=${crm}, status=${status},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`, []))
+        );
+    }
+
+
+
     /**
     * Handle Http operation that failed.
     * Let the app continue.
@@ -93,45 +109,4 @@ export class RecebimentoService {
     private log(message: string) {
         this.messageService.add('RecebimentoService: ' + message);
     }
-
-    /** GET Associado by id. Return `undefined` when id not found */
-    getRecebimentoNo404<Data>(id: number): Observable<Recebimento> {
-
-        return this.http.get<Recebimento[]>(this.apiRoute.getById(id))
-        .pipe(
-            map(recebimentos => recebimentos[0]), // returns a {0|1} element array
-            tap(h => {
-                const outcome = h ? `fetched` : `did not find`;
-                this.log(`${outcome} recebimento id=${id}`);
-            }),
-            catchError(this.handleError<Recebimento>(`getRecebimento id=${id}`))
-        );
-    }
-
-    /* GET heroes whose name contains search term */
-    /*
-    searchAssociados(term: string): Observable<Associado[]> {
-        if (!term.trim()) {
-        // if not search term, return empty hero array.
-            return of([]);
-        }
-        return this.http.get<Associado[]>(`api/Associado/?name=${term}`).pipe(
-        tap(_ => this.log(`found Associado matching "${term}"`)),
-        catchError(this.handleError<Associado[]>('searchAssociados', []))
-        );
-    }
-    */
-
-    /** DELETE: delete the Associado from the server */
-    /*
-    deleteAssociado (associado: Associado | number): Observable<Associado> {
-        const id = typeof associado === 'number' ? associado : associado.associadoId;
-        const url = `${this.associadoUrl}/${id}`;
-
-        return this.http.delete<Associado>(url, httpOptions).pipe(
-            tap(_ => this.log(`deleted Associado id=${id}`)),
-            catchError(this.handleError<Associado>('deleteAssociado'))
-        );
-    }
-    */
 }
