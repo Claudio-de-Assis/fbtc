@@ -112,7 +112,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public Associado GetAssociadoById(int id)
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 

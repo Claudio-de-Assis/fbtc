@@ -91,6 +91,30 @@ namespace Fbtc.Application.Services
             }
         }
 
+        public string SaveValoresEvento(IEnumerable<TipoPublicoValorDao> tiposPublicosValoresDao)
+        {
+            string msg = "";
+            try
+            {
+                foreach (var vtp in tiposPublicosValoresDao)
+                {
+                    if (vtp.ValorEventoPublicoId == 0)
+                    {
+                        msg = _eventoService.InsertValorEvento(vtp);
+                    }
+                    else
+                    {
+                        msg = _eventoService.UpdateValorEvento(vtp.ValorEventoPublicoId, vtp);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return msg;
+        }
+
         public Evento SetEvento()
         {
             Evento e = new Evento() {
@@ -106,7 +130,6 @@ namespace Fbtc.Application.Services
                 Ativo = true,
                 NomeFoto = ""
             };
-
             return e;
         }
     }

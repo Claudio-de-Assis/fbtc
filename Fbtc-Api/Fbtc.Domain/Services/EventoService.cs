@@ -46,9 +46,19 @@ namespace Fbtc.Domain.Services
             return _eventoRepository.Insert(evento);
         }
 
+        public string InsertValorEvento(TipoPublicoValorDao tipoPublicoValorDao)
+        {
+            return _eventoRepository.InsertValorEvento(tipoPublicoValorDao);
+        }
+
         public string Update(int id, Evento evento)
         {
             return _eventoRepository.Update(id, evento);
+        }
+
+        public string UpdateValorEvento(int id, TipoPublicoValorDao tipoPublicoValorDao)
+        {
+            return _eventoRepository.UpdateValorEvento(id, tipoPublicoValorDao);
         }
     }
 

@@ -6,6 +6,7 @@ using System;
 
 using Fbtc.Application.Interfaces;
 using Fbtc.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Fbtc.Api.Controllers
 {
@@ -214,6 +215,44 @@ namespace Fbtc.Api.Controllers
                 if (evento == null) throw new ArgumentNullException("O objeto 'Evento' está nulo!");
 
                 resultado = _eventoApplication.Save(evento);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+        
+        // [Authorize]
+        [Route("ValoresEvento")]
+        [HttpPost]
+        public Task<HttpResponseMessage> ValoresEventos(IEnumerable<TipoPublicoValorDao> tiposPublicosValoresDao)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            string resultado = "false";
+
+            try
+            {
+                if (tiposPublicosValoresDao == null) throw new ArgumentNullException("O objeto 'tiposPublicosValoresDao' está nulo!");
+
+                resultado = _eventoApplication.SaveValoresEvento(tiposPublicosValoresDao);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

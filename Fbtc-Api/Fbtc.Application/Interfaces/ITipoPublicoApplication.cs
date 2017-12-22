@@ -8,5 +8,7 @@ namespace Fbtc.Application.Interfaces
         IEnumerable<TipoPublico> GetAll();
 
         TipoPublico GetTipoPublicoById(int id);
+
+        IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id);
     }
 }

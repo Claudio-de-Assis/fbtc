@@ -25,5 +25,10 @@ namespace Fbtc.Domain.Services
         {
             return _tipoPublicoRepository.GetTipoPublicoById(id);
         }
+
+        public IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id)
+        {
+            return _tipoPublicoRepository.GetTipoPublicoValorByEventoId(id);
+        }
     }
 }

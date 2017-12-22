@@ -15,7 +15,11 @@ namespace Fbtc.Domain.Interfaces.Services
 
         string Insert(Evento evento);
 
+        string InsertValorEvento(TipoPublicoValorDao tipoPublicoValorDao);
+
         string Update(int id, Evento evento);
+
+        string UpdateValorEvento(int id, TipoPublicoValorDao tipoPublicoValorDao);
 
         IEnumerable<Evento> FindByFilters(string titulo, int ano,
             string tipoEvento);

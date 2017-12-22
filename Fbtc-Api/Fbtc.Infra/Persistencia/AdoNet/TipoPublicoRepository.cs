@@ -51,5 +51,30 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             return tipo;
         }
+
+        public IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id)
+        {
+            query = @"SELECT TP.TipoPublicoId, TP.Nome, TP.DescricaoValor, TP.Ordem, TP.Ativo, 
+		            ISNULL((SELECT VEP.ValorEventoPublicoId FROM
+                        dbo.AD_Valor_Evento_Publico VEP
+                        WHERE VEP.EventoId = " + id + @" AND VEP.TipoPublicoId = TP.TipoPublicoId),0) as ValorEventoPublicoId, " + id + @" AS EventoId,  
+                    ISNULL((SELECT VEP.Valor FROM
+                        dbo.AD_Valor_Evento_Publico VEP
+                        WHERE VEP.EventoId = " + id + @" AND VEP.TipoPublicoId = TP.TipoPublicoId),0) as Valor,
+		            ISNULL((SELECT VEP.Ativo FROM
+                        dbo.AD_Valor_Evento_Publico VEP
+                        WHERE VEP.EventoId = " + id + @" AND VEP.TipoPublicoId = TP.TipoPublicoId),0) as ValorAtivo
+                    FROM dbo.AD_Tipo_Publico TP
+                    WHERE TP.Ativo = 1
+                    ORDER By TP.Ordem";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<TipoPublicoValorDao> tipoCollection = GetCollection<TipoPublicoValorDao>(cmd)?.ToList();
+
+            return tipoCollection;
+        }
     }
 }

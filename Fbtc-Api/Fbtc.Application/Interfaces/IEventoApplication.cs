@@ -17,6 +17,8 @@ namespace Fbtc.Application.Interfaces
 
         string Save(Evento evento);
 
+        string SaveValoresEvento(IEnumerable<TipoPublicoValorDao> tiposPublicosValoresDao);
+
         IEnumerable<Evento> FindByFilters(string titulo, int ano,
             string tipoEvento);
     }
