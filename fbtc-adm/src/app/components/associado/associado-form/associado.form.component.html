@@ -33,9 +33,11 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="inpDataNascimento">Data de Nascimento:</label>
-                            <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="Date"
-                                maxlength="10"
-                                [ngModel]="associado.dtNascimento | date:'dd/MM/yyyy'" (ngModelChange)="associado.dtNascimento"  #dataNascimento="ngModel"/>
+                            <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="date"
+                                [ngModel]="associado.dtNascimento | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtNascimento = $event"  #dataNascimento="ngModel" />
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="sltSexo">Sexo:</label>
@@ -207,15 +209,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <label for="inpDtCertificacao">Data Cert.:</label>
-                        <input id="inpDtCertificacao" name="dtCertificacao" class="form-control" type="Date"
-                            maxlength="10"    
-                            [(ngModel)]="associado.dtCertificacao"  #dtCertificacao="ngModel"/>
-                    </div>
                     <div class="col-lg-3">
+                        <label for="inpDtCertificacao">Data Certificação:</label>
+                        <input id="inpDtCertificacao" name="inpDtCertificacao" class="form-control" type="date"
+                        [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificaca=$event" #dtCertificacao="ngModel"/>
+                    </div>
+                    <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Divulgação do contato?:</label><br>
+                            <label>Divulg. contato?:</label><br>
                             <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                 <input type="radio" [(ngModel)]="associado.divulgarContato" name="divulgarContato" id="rdbDivulgarContato" 
                                 [checked]="op.value === associado.divulgarContato" [value]="op.value"> {{ op.name }} &nbsp; </label>

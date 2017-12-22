@@ -15,4 +15,9 @@ export class TipoPublicoRoute {
     getById(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
+
+    //  [Route("Evento/{id:int}")]
+    getByEventoId(id: number): string {
+        return AppSettings.API_ENDPOINT + this.url + 'Evento/' + id;
+    }
 }

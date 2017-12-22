@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
+
 import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -11,7 +12,7 @@ import { EventoService } from '../../shared/services/evento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
 import { Evento } from '../../shared/model/evento';
-import { TipoPublico } from './../../shared/model/tipo-publico';
+import { TipoPublicoValorDao } from './../../shared/model/tipo-publico';
 
 import { Util } from './../../shared/util/util';
 
@@ -25,7 +26,7 @@ export class EventoFormComponent implements OnInit {
 
   @Input() evento: Evento = { eventoId: 0, titulo: '', descricao: '', codigo: '', dtInicio: null,
             dtTermino: null, dtTerminoInscricao: null, tipoEvento: '', aceitaIsencaoAta: false,
-            ativo: true, nomeFoto: ''
+            ativo: false, nomeFoto: ''
   };
 
   title = 'Evento';
@@ -35,7 +36,9 @@ export class EventoFormComponent implements OnInit {
 
   private selectedId: any;
 
-  tiposPublicos: TipoPublico[];
+  @Input() tiposPublicosValoresDao: TipoPublicoValorDao[];
+
+  submitted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,9 +59,10 @@ export class EventoFormComponent implements OnInit {
           .subscribe(evento => this.evento = evento);
   }
 
-  getTiposPublicos(): void {
+  getTiposPublicos(id: number): void {
 
-    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    this.serviceTP.getTiposPublicoByEventoId(id).
+      subscribe(tiposPublicosValoresDao => this.tiposPublicosValoresDao = tiposPublicosValoresDao);
   }
 
   gotoEventos() {
@@ -67,11 +71,30 @@ export class EventoFormComponent implements OnInit {
     this.router.navigate(['/Evento', { id: eventoId, foo: 'foo' }]);
   }
 
-  gotoSaveEvento() {
+  SaveEvento() {
 
     this.service.addEvento(this.evento)
-    .subscribe(() =>  this.gotoShowPopUp());
+    .subscribe(() =>  this.SaveValoresEvento());
   }
+
+  SaveValoresEvento() {
+
+    if (this.evento.eventoId !== 0 ) {
+      this.service.addValoresEvento(this.tiposPublicosValoresDao)
+      .subscribe(() =>  this.gotoShowPopUp());
+    } else {
+      this.gotoShowPopUp();
+      this.gotoEventos();
+    }
+    this.submitted = false;
+  }
+
+  onSubmit() {
+
+      this.submitted = true;
+      this.SaveEvento();
+  }
+
 
   gotoShowPopUp() {
 
@@ -93,15 +116,15 @@ export class EventoFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getTiposPublicos();
-
     const id = +this.route.snapshot.paramMap.get('id');
+
+
     if (id > 0) {
       this.badge = 'Edição';
       this.getEventoById(id);
+      this.getTiposPublicos(id);
     } else {
       this.badge = 'Novo';
-      // this.setEvento();
     }
   }
 }

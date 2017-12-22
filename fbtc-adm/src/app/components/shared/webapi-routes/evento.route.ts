@@ -35,4 +35,9 @@ export class EventoRoute {
     postEvento(): string {
         return AppSettings.API_ENDPOINT + this.url + 'Evento';
     }
+
+        // [Route("Evento")]
+    postValoresEvento(): string {
+        return AppSettings.API_ENDPOINT + this.url + 'ValoresEvento';
+    }
 }

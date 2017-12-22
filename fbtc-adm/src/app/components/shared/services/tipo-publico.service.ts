@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 
 import { TipoPublicoRoute } from './../webApi-routes/tipo-publico.route';
 import { MessageService } from './../../../message.service';
-import { TipoPublico } from './../model/tipo-publico';
+import { TipoPublico, TipoPublicoValorDao } from './../model/tipo-publico';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -37,6 +37,14 @@ export class TipoPublicoService {
         return this.http.get<TipoPublico>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched tipoPublico id=${id}`)),
             catchError(this.handleError<TipoPublico>(`getTipoPublico id=${id}`))
+        );
+    }
+
+    getTiposPublicoByEventoId(id: number): Observable<TipoPublicoValorDao[]> {
+        return this.http.get<TipoPublicoValorDao[]>(this.apiRoute.getByEventoId(id))
+            .pipe(
+                tap(tiposPublicos => this.log('Fetched TipoPublicoValorDao')),
+                catchError(this.handleError('getTiposPublicoByEventoId()', []))
         );
     }
 

@@ -9,6 +9,7 @@ import 'rxjs/Rx';
 import { MessageService } from './../../../message.service';
 import { Evento } from './../model/evento';
 import { EventoRoute } from './../webapi-routes/evento.route';
+import { TipoPublicoValorDao } from '../model/tipo-publico';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -60,8 +61,6 @@ export class EventoService {
 
     getByFilters(nome: string, ano: number, tipoEvento: string): Observable<Evento[]> {
 
-        alert(this.apiRoute.getFindByFilters(nome, ano, tipoEvento));
-
         return this.http.get<Evento[]>(this.apiRoute.getFindByFilters(nome, ano, tipoEvento))
             .pipe(
                 tap(eventos => this.log(`fetched Eventos Filter nome=${nome}, ano=${ano}, tipoPerfil=${tipoEvento}`)),
@@ -70,7 +69,6 @@ export class EventoService {
     }
 
     //////// Save methods //////////
-    /** POST: add a new Colaborador to the server */
     addEvento (evento: Evento): Observable<Evento> {
 
         return this.http.post<Evento>(this.apiRoute.postEvento(), evento, httpOptions).pipe(
@@ -79,6 +77,14 @@ export class EventoService {
         );
     }
 
+        //////// Save methods //////////
+    addValoresEvento (tiposPublicosValoresDao: TipoPublicoValorDao[]): Observable<TipoPublicoValorDao[]> {
+
+        return this.http.post<TipoPublicoValorDao[]>(this.apiRoute.postValoresEvento(), tiposPublicosValoresDao, httpOptions).pipe(
+            tap((_valorEvento: TipoPublicoValorDao[]) => this.log(`added ValoresEventos w/`)),
+            catchError(this.handleError<TipoPublicoValorDao[]>('addValoresEvento'))
+        );
+    }
     /**
     * Handle Http operation that failed.
     * Let the app continue.

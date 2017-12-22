@@ -31,7 +31,6 @@ import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
     FormaPagamentoPipe
-
   ],
   providers: [
 
