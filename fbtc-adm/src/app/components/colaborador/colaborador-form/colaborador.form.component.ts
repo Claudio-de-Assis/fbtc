@@ -36,6 +36,9 @@ export class ColaboradorFormComponent implements OnInit {
 
     _util = Util;
 
+    @Input() editMessagem: string = '';
+    @Input() editShowPopup: boolean = false;
+
     submitted = false;
 
     constructor(
@@ -66,6 +69,8 @@ export class ColaboradorFormComponent implements OnInit {
 
     gotoShowPopUp() {
 
+      this.editMessagem = 'Registro salvo com sucesso!';
+      this.editShowPopup = true;
       // Colocar a chamada para a implementação do PopUp modal de aviso:
       alert('Registro salvo com sucesso!');
     }

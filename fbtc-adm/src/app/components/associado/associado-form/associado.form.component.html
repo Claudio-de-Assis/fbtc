@@ -53,10 +53,15 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="imgFoto">&nbsp;</label><br>
-                            <img id="imgFoto" name="foto" src="../assets/no-foto.png" alt="Não disponível" width="87px">
-                        </div>
+                        <app-file-upload
+                            targetId= "{{ editAssociadoId }}"
+                            projectId="FBTC" 
+                            sectionId="AS" 
+                            maxFiles="1" 
+                            maxSize="2" 
+                            fileExt="JPG, GIF, PNG" 
+                            (uploadStatus)="refreshImages($event)" >
+                        </app-file-upload>
                     </div>
                 </div>
                 <div class="row">

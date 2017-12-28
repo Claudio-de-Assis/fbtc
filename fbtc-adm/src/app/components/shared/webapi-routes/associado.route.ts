@@ -18,6 +18,13 @@ export class AssociadoRoute {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
+    // [Route("{id:int}")]
+    getNomeFotoById(id: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url + 'NomeFoto/' + id;
+    }
+
+
     // Deve-se informar "0" quando não houver valor válido para o filtro.
     // [Route("FindByFilters/{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao},{tipoPublicoId}")]
     getFindByFilters(nome: string, cpf: string, sexo: string, atcId: number,

@@ -80,7 +80,6 @@ export class ColaboradorListComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getColaboradores();
   }
 

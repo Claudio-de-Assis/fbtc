@@ -43,6 +43,13 @@ export class EventoService {
         );
     }
 
+    getNomeImagemById(id: number): Observable<string> {
+        return this.http.get<string>(this.apiRoute.getNomeFotoById(id)).pipe(
+            tap(_ => this.log(`fetched evento id=${id}`)),
+            catchError(this.handleError<string>(`getNomeImagemById id=${id}`))
+        );
+    }
+
     getByRecebimentoId(id: number): Observable<Evento> {
 
         return this.http.get<Evento>(this.apiRoute.getByRecebimentoId(id)).pipe(

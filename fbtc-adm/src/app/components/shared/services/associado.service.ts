@@ -34,6 +34,13 @@ export class AssociadoService {
         );
     }
 
+    getNomeImagemById(id: number): Observable<string> {
+        return this.http.get<string>(this.apiRoute.getNomeFotoById(id)).pipe(
+            tap(_ => this.log(`fetched associado id=${id}`)),
+            catchError(this.handleError<string>(`getNomeImagemById id=${id}`))
+        );
+    }
+
     getById(id: number): Observable<Associado> {
         return this.http.get<Associado>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched associado id=${id}`)),

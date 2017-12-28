@@ -1,5 +1,4 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +27,6 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
   imports: [
     CommonModule,
     FormsModule,
-    BrowserModule,
     HttpClientModule,
     AssociadoModule,
     ColaboradorModule,
@@ -52,6 +50,7 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
     EventoRoute,
     { provide: LOCALE_ID, useValue: 'PT-BR' }
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

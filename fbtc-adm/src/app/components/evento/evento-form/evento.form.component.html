@@ -93,8 +93,17 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label>&nbsp;</label><br>
-                                        <img class="imagemEvento" src="../assets/no-foto.png" alt="Não disponível" >
+                                        <!--<label>&nbsp;</label><br>
+                                        <img class="imagemEvento" src="../assets/no-foto.png" alt="Não disponível" >-->
+                                        <app-file-upload
+                                            targetId= "{{ editEventoId }}"
+                                            projectId="FBTC" 
+                                            sectionId="EV" 
+                                            maxFiles="1" 
+                                            maxSize="2" 
+                                            fileExt="JPG, GIF, PNG" 
+                                            (uploadStatus)="refreshImages($event)" >
+                                        </app-file-upload>
                                     </div>
                                 </div>
                             </div>

@@ -94,23 +94,7 @@
         </div>
     </div>
 </div>
-<!--Model da mensagem de exclusão -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Confirmação de Exclusão</h4>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja excluir <strong>Rodolpho Silva</strong>?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger">Confirmar</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+<app-alert-message
+    message="Tem certeza que deseja excluir Rodolpho Silva?"
+    showPopup= "true">
+</app-alert-message>

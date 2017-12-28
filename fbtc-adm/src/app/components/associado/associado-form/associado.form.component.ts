@@ -7,19 +7,21 @@ import { AssociadoService } from '../../shared/services/associado.service';
 import { CepCorreiosService } from './../../shared/services/cep-correios.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { AtcService } from './../../shared/services/atc.service';
+import { ValueShareService } from './../../shared/services/value-share.service';
 
 import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from './../../shared/model/atc';
 
-import { debug } from 'util';
+// import { debug } from 'util';
 import { Util } from './../../shared/util/util';
+import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
 
 @Component({
     selector: 'app-associado-form',
     templateUrl: './associado.form.component.html',
     styleUrls: ['./associado.form.component.css'],
-    providers: [AssociadoService, CepCorreiosService]
+    providers: [AssociadoService, CepCorreiosService, ValueShareService]
 })
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit {
@@ -28,7 +30,7 @@ export class AssociadoFormComponent implements OnInit {
             crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
             tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
-            pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
+            pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '_no-foto.png',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
             dtCadastro: null, ativo: true,
             enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',
@@ -40,6 +42,10 @@ export class AssociadoFormComponent implements OnInit {
     badge = '';
 
     _util = Util;
+    _nomeFotoPadrao: string = '_no-foto.png';
+    _nomeFoto: string = '_no-foto.png';
+
+    editAssociadoId: number = 0;
 
     private selectedId: any;
 
@@ -48,6 +54,8 @@ export class AssociadoFormComponent implements OnInit {
 
     submitted = false;
 
+    history: string[] = [];
+
     /** AssociadoFrm ctor */
     constructor(
         private service: AssociadoService,
@@ -55,8 +63,15 @@ export class AssociadoFormComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private serviceCEP: CepCorreiosService,
-        private serviceAtc: AtcService
-    ) { }
+        private serviceAtc: AtcService,
+        private apiRoute: FileUploadRoute,
+        private valueShareService: ValueShareService
+    ) {
+        valueShareService.valueStringInformada$.subscribe(
+            nomeFoto => {
+                this.history.push(nomeFoto);
+            });
+    }
 
     getAssociadoById(id: number): void {
 
@@ -78,6 +93,13 @@ export class AssociadoFormComponent implements OnInit {
 
     save() {
 
+        this._nomeFoto = this.history[0];
+
+        if (this._nomeFoto === undefined) {
+            this._nomeFoto = this._nomeFotoPadrao;
+        }
+
+        this.associado.nomeFoto = this._nomeFoto;
         this.service.addAssociado(this.associado)
         .subscribe(() =>  this.gotoShowPopUp());
 
@@ -131,13 +153,20 @@ export class AssociadoFormComponent implements OnInit {
 
         this.getTiposPublicos();
 
-        const id = +this.route.snapshot.paramMap.get('id');
-        if (id > 0) {
+        this.editAssociadoId = +this.route.snapshot.paramMap.get('id');
+
+        if (this.editAssociadoId > 0) {
             this.badge = 'Edição';
-            this.getAssociadoById(id);
+            this.getAssociadoById(this.editAssociadoId);
+
         } else {
             this.badge = 'Novo';
-            // this.setAssociado();
+        }
+    }
+
+    refreshImages(status) {
+        if (status) {
+          console.log( 'Upload realizado com sucesso!');
         }
     }
 }

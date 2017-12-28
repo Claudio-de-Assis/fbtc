@@ -10,9 +10,12 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { EventoService } from '../../shared/services/evento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
+import { ValueShareService } from './../../shared/services/value-share.service';
 
 import { Evento } from '../../shared/model/evento';
 import { TipoPublicoValorDao } from './../../shared/model/tipo-publico';
+
+import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
 
 import { Util } from './../../shared/util/util';
 
@@ -20,19 +23,23 @@ import { Util } from './../../shared/util/util';
   selector: 'app-evento-form',
   templateUrl: './evento.form.component.html',
   styleUrls: ['./evento.form.component.css'],
-  providers: [TipoPublicoService]
+  providers: [TipoPublicoService, ValueShareService]
 })
 export class EventoFormComponent implements OnInit {
 
   @Input() evento: Evento = { eventoId: 0, titulo: '', descricao: '', codigo: '', dtInicio: null,
             dtTermino: null, dtTerminoInscricao: null, tipoEvento: '', aceitaIsencaoAta: false,
-            ativo: false, nomeFoto: ''
+            ativo: false, nomeFoto: '_no-foto-evento.png'
   };
 
   title = 'Evento';
   badge = '';
 
   _util = Util;
+  _nomeFotoPadrao: string = '_no-foto-evento.png';
+  _nomeFoto: string = '_no-foto-evento.png';
+
+  editEventoId: number = 0;
 
   private selectedId: any;
 
@@ -40,12 +47,21 @@ export class EventoFormComponent implements OnInit {
 
   submitted = false;
 
+  history: string[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private serviceTP: TipoPublicoService,
     private service: EventoService,
-  ) { }
+    private apiRoute: FileUploadRoute,
+    private valueShareService: ValueShareService
+  ) {
+    valueShareService.valueStringInformada$.subscribe(
+      nomeFoto => {
+          this.history.push(nomeFoto);
+      });
+   }
 
   getEventoById(id: number): void {
 
@@ -73,6 +89,13 @@ export class EventoFormComponent implements OnInit {
 
   SaveEvento() {
 
+    this._nomeFoto = this.history[0];
+
+    if (this._nomeFoto === undefined) {
+        this._nomeFoto = this._nomeFotoPadrao;
+    }
+
+    this.evento.nomeFoto = this._nomeFoto;
     this.service.addEvento(this.evento)
     .subscribe(() =>  this.SaveValoresEvento());
   }
@@ -95,7 +118,6 @@ export class EventoFormComponent implements OnInit {
       this.SaveEvento();
   }
 
-
   gotoShowPopUp() {
 
     // Colocar a chamada para a implementação do PopUp modal de aviso:
@@ -116,15 +138,23 @@ export class EventoFormComponent implements OnInit {
 
   ngOnInit() {
 
-    const id = +this.route.snapshot.paramMap.get('id');
+    this.editEventoId = +this.route.snapshot.paramMap.get('id');
 
-
-    if (id > 0) {
+    if (this.editEventoId > 0) {
       this.badge = 'Edição';
-      this.getEventoById(id);
-      this.getTiposPublicos(id);
+      this.getEventoById(this.editEventoId);
+      this.getTiposPublicos(this.editEventoId);
+
     } else {
       this.badge = 'Novo';
+
+    }
+
+  }
+
+  refreshImages(status) {
+    if (status) {
+      console.log( 'Upload realizado com sucesso!');
     }
   }
 }

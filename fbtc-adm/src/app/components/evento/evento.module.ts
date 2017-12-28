@@ -1,20 +1,29 @@
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EventoService } from './../shared/services/evento.service';
 import { EventoListComponent } from './evento-list/evento.list.component';
 import { EventoFormComponent } from './evento-form/evento.form.component';
 import { EventoPreviewComponent } from './evento-preview/evento-preview.component';
+
+import { EventoService } from './../shared/services/evento.service';
+
 import { EventoRoutingModule } from './evento.routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { FileUploadModule } from './../shared/upload/file-upload.module';
+
+import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     EventoRoutingModule,
-    SharedModule
+    SharedModule,
+    FileUploadModule,
+    HttpModule
   ],
   declarations: [
     EventoListComponent,
@@ -27,7 +36,8 @@ import { SharedModule } from '../shared/shared.module';
     EventoPreviewComponent
   ],
   providers: [
-    EventoService
+    EventoService,
+    FileUploadRoute
   ]
 })
 export class EventoModule { }
