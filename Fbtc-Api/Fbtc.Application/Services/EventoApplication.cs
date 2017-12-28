@@ -49,6 +49,11 @@ namespace Fbtc.Application.Services
             return _eventoService.GetEventoByRecebimentoId(id);
         }
 
+        public string GetNomeFotoByEventoId(int id)
+        {
+            return _eventoService.GetNomeFotoByEventoId(id);
+        }
+
         public string Save(Evento e)
         {
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(

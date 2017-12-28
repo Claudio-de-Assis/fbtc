@@ -18,5 +18,7 @@ namespace Fbtc.Domain.Interfaces.Services
         IEnumerable<Associado> FindByFilters(string nome, string cpf,  
             string sexo, int atcId, string crp, string tipoProfissao, 
             int tipoPublico, string estado, string cidade, bool? ativo);
+
+        string GetNomeFotoByAssociadoId(int id);
     }
 }

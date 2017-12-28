@@ -41,6 +41,11 @@ namespace Fbtc.Domain.Services
             return _eventoRepository.GetEventoByRecebimentoId(id);
         }
 
+        public string GetNomeFotoByEventoId(int id)
+        {
+            return _eventoRepository.GetNomeFotoByEventoId(id);
+        }
+
         public string Insert(Evento evento)
         {
             return _eventoRepository.Insert(evento);

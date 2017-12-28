@@ -352,5 +352,29 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
             return _msg;
         }
+
+        public string GetNomeFotoByEventoId(int id)
+        {
+            String NomeFoto = "_no-foto.png";
+
+            query = @"SELECT EventoId, Titulo, Descricao, Codigo, DtInicio, DtTermino, 
+                        DtTerminoInscricao, TipoEvento, AceitaIsencaoAta, Ativo, NomeFoto 
+                    FROM dbo.AD_Evento 
+                    WHERE EventoId = " + id + "";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            Evento evento = GetCollection<Evento>(cmd)?.First();
+
+            // Obtendo o nome da foto:
+            if (evento != null)
+            {
+                NomeFoto = evento.NomeFoto;
+            }
+
+            return NomeFoto;
+        }
     }
 }

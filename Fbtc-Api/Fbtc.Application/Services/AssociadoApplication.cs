@@ -177,5 +177,10 @@ namespace Fbtc.Application.Services
                 throw ex;
             }
         }
+
+        public string GetNomeFotoByAssociadoId(int id)
+        {
+            return _associadoService.GetNomeFotoByAssociadoId(id);
+        }
     }
 }

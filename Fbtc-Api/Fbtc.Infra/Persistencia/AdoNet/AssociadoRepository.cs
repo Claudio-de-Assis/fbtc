@@ -398,5 +398,36 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
             return _msg;
         }
+
+        public string GetNomeFotoByAssociadoId(int id)
+        {
+            String NomeFoto = "_no-foto.png";
+
+            query = @"SELECT P.NomeFoto, P.Sexo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
+                        A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
+                        A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
+                        A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
+                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
+                    FROM dbo.AD_Associado A 
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
+                    WHERE AssociadoId = " + id + "";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            Associado associado = GetCollection<Associado>(cmd)?.First();
+
+            // Obtendo o nome da foto:
+            if (associado != null)
+            {
+                NomeFoto = associado.NomeFoto;
+            }
+
+            return NomeFoto;
+        }
     }
 }
+

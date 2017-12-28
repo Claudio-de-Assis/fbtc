@@ -126,6 +126,7 @@
     <Compile Include="Controllers\ColaboradorController.cs" />
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\IsencaoController.cs" />
     <Compile Include="Controllers\RecebimentoController.cs" />
     <Compile Include="Controllers\TipoPublicoController.cs" />
@@ -148,6 +149,9 @@
       <Project>{c04482c7-14d9-470d-a623-3b57fb71db4f}</Project>
       <Name>Fbtc.Ioc</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

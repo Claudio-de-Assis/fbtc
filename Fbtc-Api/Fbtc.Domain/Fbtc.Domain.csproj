@@ -49,6 +49,7 @@
     <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\EnderecoCep.cs" />
     <Compile Include="Entities\Evento.cs" />
+    <Compile Include="Entities\FileImage.cs" />
     <Compile Include="Entities\Isencao.cs" />
     <Compile Include="Entities\Recebimento.cs" />
     <Compile Include="Entities\ParametroAdimplencia.cs" />

@@ -21,5 +21,7 @@ namespace Fbtc.Application.Interfaces
 
         IEnumerable<Evento> FindByFilters(string titulo, int ano,
             string tipoEvento);
+
+        string GetNomeFotoByEventoId(int id);
     }
 }
