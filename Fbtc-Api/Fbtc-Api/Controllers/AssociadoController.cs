@@ -215,6 +215,57 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
+        [Route("FindIsentoByFilters/{isencaoId},{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao},{tipoPublicoId},{estado}," +
+            "{cidade},{ativo}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> FindIsentoByFilters(int isencaoId, string nome, string cpf,
+            string sexo, string atcId, string crp, string tipoProfissao, string tipoPublicoId, string estado,
+            string cidade, string ativo)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                bool? _ativo = null;
+
+                if (ativo != null)
+                {
+                    if (ativo.Equals("true"))
+                        _ativo = true;
+
+                    if (ativo.Equals("false"))
+                        _ativo = false;
+                }
+
+                var resultado = _associadoApplication.FindIsentoByFilters(isencaoId, nome, cpf,
+                    sexo, Convert.ToInt16(atcId), crp, tipoProfissao, Convert.ToInt32(tipoPublicoId),
+                    estado, cidade, _ativo);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
         [Route("Associado")]
         [HttpPost]
         public Task<HttpResponseMessage> Post(Associado associado)
@@ -251,5 +302,44 @@ namespace Fbtc.Api.Controllers
                 return tsc.Task;
             }
         }
+
+        // [Authorize]
+        [Route("AssociadoIsento")]
+        [HttpPost]
+        public Task<HttpResponseMessage> PostIsento(AssociadoIsentoDao associadoIsentoDao)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            string resultado = "false";
+
+            try
+            {
+                if (associadoIsentoDao == null) throw new ArgumentNullException("O objeto 'AssociadoIsentoDao' está nulo!");
+
+                resultado = _associadoApplication.SaveIsento(associadoIsentoDao);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
     }
 }

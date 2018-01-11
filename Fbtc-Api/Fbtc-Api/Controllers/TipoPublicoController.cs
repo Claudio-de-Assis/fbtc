@@ -55,6 +55,44 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
+        [Route("GetByTipoAssociacao/{associado}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> GetByTipoAssociacao(bool? associado)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (associado == null) throw new Exception("Tipo de Associação não informada!");
+
+                var resultado = _tipoPublicoApplication.GetByTipoAssociacao(associado);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+
+        // [Authorize]
         [Route("{id:int}")]
         [HttpGet]
         public Task<HttpResponseMessage> GetById(int id)

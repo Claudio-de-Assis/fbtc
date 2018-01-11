@@ -7,6 +7,8 @@ namespace Fbtc.Domain.Interfaces.Repositories
     {
         IEnumerable<TipoPublico> GetAll();
 
+        IEnumerable<TipoPublico> GetByTipoAssociacao(bool associado);
+
         TipoPublico GetTipoPublicoById(int id);
 
         IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id);

@@ -24,6 +24,13 @@ namespace Fbtc.Application.Services
             return _tipoPublicoService.GetAll();
         }
 
+        public IEnumerable<TipoPublico> GetByTipoAssociacao(bool? associado)
+        {
+            if (associado == null) throw new Exception("Tipo de Associação não informada!");
+
+            return _tipoPublicoService.GetByTipoAssociacao(associado == true ? true : false);
+        }
+
         public TipoPublico GetTipoPublicoById(int id)
         {
             return _tipoPublicoService.GetTipoPublicoById(id);

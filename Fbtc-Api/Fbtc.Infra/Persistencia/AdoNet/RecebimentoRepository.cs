@@ -24,27 +24,181 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public string DeleteById(int id)
         {
-            throw new NotImplementedException();
+            string _msg = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("DeleteRecebimento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "" +
+                        "DELETE " +
+                        "From dbo.AD_Recebimento " +
+                        "WHERE RecebimentoId = @RecebimentoId ";
+
+                    command.Parameters.AddWithValue("@RecebimentoId", id);
+
+                    int i = command.ExecuteNonQuery();
+
+                    _msg = i > 0 ? "Exclusão realizada com sucesso" : "Exclusão NÃO realizada com sucesso";
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
+
         }
 
-        public IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf, string crp, 
-            string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
+        IEnumerable<RecebimentoAssociadoDao> IRecebimentoRepository.FindByEventoIdFilters(int eventoId, string nome, string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
         {
-            query = @"SELECT R.RecebimentoId, R.AssociadoId, R.ValorEventoPublicoId, R.ValorAnuidadePublicoId, 
-                        R.AssociadoIsentoId, R.ObjetivoPagamento, R.DtCadastro, R.DtVencimento, R.DtPagamento, 
-                        R.DtNotificacao, R.StatusPagamento, R.FormaPagamento, R.NrDocCobranca, R.ValorPago, 
-                        R.Observacao, R.TokenPagamento, R.Ativo 
-                    FROM dbo.AD_Recebimento R 
-                        INNER JOIN dbo.AD_Associado A ON R.AssociadoId = A.AssociadoId 
-                        INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId ";
+            throw new NotImplementedException();
+        }
+        
+        public IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf, string crp, 
+            string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+        {
+            query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, 
+                        StatusPagamento, DtVencimento, DtPagamento, AtivoRec,
+	                    IsencaoId, TipoPublicoId FROM (
+                    SELECT	A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPagamento, RE.DtVencimento, RE.DtPagamento, RE.Ativo as AtivoRec,
+	                    null as IsencaoId, TP.TipoPublicoId
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Valor_Anuidade_Publico VAP ON RE.ValorAnuidadePublicoId = VAP.ValorAnuidadePublicoId
+                    INNER JOIN dbo.AD_Anuidade AN ON VAP.AnuidadeId = AN.AnuidadeId
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 2
+	                    AND RE.AssociadoIsentoId is null				
 
-//            if (!string.IsNullOrEmpty(tipoEvento) || (ano > 0 & objetivoPagamento.Equals("1")))
-            if (objetivoPagamento.Equals("1")) // Evento
-                    query = query + " " +
-                    "INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON R.ValorEventoPublicoId = VEP.ValorEventoPublicoId " +
-                    "INNER JOIN dbo.AD_Evento E ON VEP.EventoId = E.EventoId ";
+                    UNION
 
-            query = query + " WHERE R.ObjetivoPagamento = '" + objetivoPagamento + "' ";
+                    SELECT	DISTINCT A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPagamento, RE.DtVencimento, RE.DtPagamento, RE.Ativo as AtivoRec,
+	                    I.IsencaoId, TP.TipoPublicoId
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Associado_Isento AI ON RE.AssociadoIsentoId = AI.AssociadoIsentoId
+                    INNER JOIN dbo.AD_Isencao I ON AI.IsencaoId = I.IsencaoId
+                    INNER JOIN dbo.AD_Anuidade AN ON I.AnuidadeId = AN.AnuidadeId
+
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 2
+	                    AND RE.AssociadoIsentoId is not null) AS TAB
+                    WHERE AssociadoId is not null ";
+            
+
+            if (!string.IsNullOrEmpty(nome))
+                query = query + $" AND Nome Like '%{nome}%' ";
+
+            if (!string.IsNullOrEmpty(cpf))
+                query = query + $" AND CPF = '{cpf}' ";
+
+            if (!string.IsNullOrEmpty(crp))
+                query = query + $" AND CRP = '{crp}' ";
+
+            if (!string.IsNullOrEmpty(crm))
+                query = query + $" AND CRM = '{crm}' ";
+
+            if (!string.IsNullOrEmpty(status))
+                query = query + $" AND StatusPagamento = '{status}' ";
+
+            if (ano != 0)
+                query = query + $" AND Year(DtVencimento) = {ano} ";
+
+            if (mes != 0)
+                query = query + $" AND Month(DtVencimento) = {mes} ";
+
+            if (tipoPublicoId != 0)
+                query = query + $" AND TipoPublicoId = {tipoPublicoId} ";
+
+            if (ativo != null)
+                query = query + $" AND AtivoRec = '{ativo}' ";
+
+            query = query + " Order by Nome, Anuidade "; 
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<RecebimentoAssociadoDao> _collection = GetCollection<RecebimentoAssociadoDao>(cmd)?.ToList();
+         
+            return _collection;
+        }
+ 
+        public IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome, string cpf,
+            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+        {
+            query = @"SELECT A.AssociadoId, '' as Titulo, 
+                        (   SELECT Anu.Codigo FROM dbo.AD_Anuidade Anu WHERE Anu.AnuidadeId = " + anuidadeId + @") as Anuidade, 
+	                    P.Nome, P.CPF, TP.Nome as NomeTP, 
+                        IsNull((    SELECT R2.RecebimentoId FROM dbo.AD_Recebimento R2
+                                    INNER JOIN dbo.AD_Valor_Anuidade_Publico V1 
+                                        ON R2.ValorAnuidadePublicoId = V1.ValorAnuidadePublicoId
+                                    WHERE R2.AssociadoId = A.AssociadoId
+                                        AND R2.ObjetivoPagamento = '2'
+                                        AND V1.AnuidadeId = " + anuidadeId + @"),0) as RecebimentoId,
+                	    IsNull((    SELECT R1.StatusPagamento FROM dbo.AD_Recebimento R1
+                                    INNER JOIN dbo.AD_Valor_Anuidade_Publico V1 ON R1.ValorAnuidadePublicoId = V1.ValorAnuidadePublicoId
+                                    WHERE R1.AssociadoId = A.AssociadoId
+                                        AND R1.ObjetivoPagamento = '2'
+                                        AND V1.AnuidadeId = " + anuidadeId + @"),9) as StatusPagamento,
+		                (   SELECT R3.DtVencimento FROM dbo.AD_Recebimento R3
+                            INNER JOIN dbo.AD_Valor_Anuidade_Publico V1 
+                                ON R3.ValorAnuidadePublicoId = V1.ValorAnuidadePublicoId
+                            WHERE R3.AssociadoId = A.AssociadoId
+                                AND R3.ObjetivoPagamento = '2'
+                                AND V1.AnuidadeId = " + anuidadeId + @") as DtVencimento,
+            		    (   SELECT R4.DtPagamento FROM dbo.AD_Recebimento R4
+                            INNER JOIN dbo.AD_Valor_Anuidade_Publico V1 
+                                ON R4.ValorAnuidadePublicoId = V1.ValorAnuidadePublicoId
+                            WHERE R4.AssociadoId = A.AssociadoId
+                                AND R4.ObjetivoPagamento = '2'
+                                AND V1.AnuidadeId = " + anuidadeId + @") as DtPagamento,
+            		    (   SELECT R5.Ativo FROM dbo.AD_Recebimento R5
+                            INNER JOIN dbo.AD_Valor_Anuidade_Publico V1 
+                                ON R5.ValorAnuidadePublicoId = V1.ValorAnuidadePublicoId
+                            WHERE R5.AssociadoId = A.AssociadoId
+                                AND R5.ObjetivoPagamento = '2'
+                                AND V1.AnuidadeId = " + anuidadeId + @") as AtivoRec,
+	                    IsNull((    SELECT I.IsencaoId FROM dbo.AD_Isencao I 
+                                    INNER JOIN dbo.AD_Associado_Isento AI 
+                                        ON I.IsencaoId = AI.IsencaoId
+                                    WHERE I.AnuidadeId =  = " + anuidadeId + @" 
+                                        AND AI.AssociadoId = A.AssociadoId),0) as IsencaoId
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P 
+                        ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP 
+                        ON A.TipoPublicoId = TP.TipoPublicoId
+                    WHERE TP.Associado = 'true' ";
 
             if (!string.IsNullOrEmpty(nome))
                 query = query + $" AND P.Nome Like '%{nome}%' ";
@@ -62,13 +216,172 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 query = query + $" AND R.StatusPagamento = '{status}' ";
 
             if (ano != 0)
-            {
-                if(objetivoPagamento.Equals("1")) // Evento
-                    query = query + $" AND Year(E.DtInicio) = {ano} ";
+                query = query + $" AND Year(RE.DtVencimento) = {ano} ";
 
-                if (objetivoPagamento.Equals("2")) // Anuidade
-                    query = query + $" AND Year(R.DtVencimento) = {ano} ";
-            }
+            if (mes != 0)
+                query = query + $" AND Month(RE.DtVencimento) = {mes} ";
+
+            if (tipoPublicoId != 0)
+                query = query + $" AND A.TipoPublicoId = {tipoPublicoId} ";
+
+            if (ativo != null)
+                query = query + $" AND P.Ativo = '{ativo}' ";
+
+            query = query + " Order by P.Nome ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<RecebimentoAssociadoDao> _collection = GetCollection<RecebimentoAssociadoDao>(cmd)?.ToList();
+
+            return _collection;
+        }
+
+        public IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
+        {
+            query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, StatusPagamento, DtVencimento, DtPagamento, AtivoRec,
+	                    IsencaoId, DtInicio, TipoPublicoId, TipoEvento  FROM (
+                    SELECT	A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPagamento, RE.DtVencimento, RE.DtPagamento, RE.Ativo as AtivoRec,
+	                    null as IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON RE.ValorEventoPublicoId = VEP.ValorEventoPublicoId
+                    INNER JOIN dbo.AD_Evento EV ON VEP.EventoId = EV.EventoId
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 1
+	                    AND RE.AssociadoIsentoId is null				
+
+                    UNION
+
+                    SELECT	DISTINCT A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPagamento, RE.DtVencimento, RE.DtPagamento, RE.Ativo as AtivoRec,
+	                    I.IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Associado_Isento AI ON RE.AssociadoIsentoId = AI.AssociadoIsentoId
+                    INNER JOIN dbo.AD_Isencao I ON AI.IsencaoId = I.IsencaoId
+                    INNER JOIN dbo.AD_Evento EV ON I.EventoId = EV.EventoId
+
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 1
+	                    AND RE.AssociadoIsentoId is not null) AS TAB
+                    WHERE AssociadoId is not null ";
+
+            if (!string.IsNullOrEmpty(nome))
+                query = query + $" AND Nome Like '%{nome}%' ";
+
+            if (!string.IsNullOrEmpty(cpf))
+                query = query + $" AND CPF = '{cpf}' ";
+
+            if (!string.IsNullOrEmpty(crp))
+                query = query + $" AND CRP = '{crp}' ";
+
+            if (!string.IsNullOrEmpty(crm))
+                query = query + $" AND CRM = '{crm}' ";
+
+            if (!string.IsNullOrEmpty(status))
+                query = query + $" AND StatusPagamento = '{status}' ";
+
+            if (ano != 0)
+                query = query + $" AND Year(DtInicio) = {ano} ";
+
+            //if (mes != 0)
+            //    query = query + $" AND Month(DtVencimento) = {mes} ";
+
+            if (tipoPublicoId != 0)
+                query = query + $" AND TipoPublicoId = {tipoPublicoId} ";
+
+            if (!string.IsNullOrEmpty(tipoEvento))
+                query = query + $" AND TipoEvento = '{tipoEvento}' ";
+
+            if (ativo != null)
+                query = query + $" AND AtivoRec = '{ativo}' ";
+
+            query = query + " Order by Nome, Titulo ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<RecebimentoAssociadoDao> _collection = GetCollection<RecebimentoAssociadoDao>(cmd)?.ToList();
+
+            return _collection;
+        }
+        
+        IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf,
+            string crp, string crm, string status, int ano, int mes, bool? ativo,
+            string tipoEvento, int tipoPublicoId)
+        {
+            query = @"SELECT A.AssociadoId, 
+                        (SELECT EVE.Titulo FROM dbo.AD_Evento EVE WHERE EVE.EventoId = 3) as Titulo,
+	                    null as Anuidade, P.Nome, P.CPF, TP.Nome as NomeTP, 
+                        IsNull((    SELECT R2.RecebimentoId 
+                                    FROM dbo.AD_Recebimento R2
+                                    INNER JOIN dbo.AD_Valor_Evento_Publico V1 
+                                        ON R2.ValorEventoPublicoId = V1.ValorEventoPublicoId
+                                    WHERE R2.AssociadoId = A.AssociadoId
+                                        AND R2.ObjetivoPagamento = '1'
+                                        AND V1.EventoId = "+ eventoId + @"),0) as RecebimentoId,
+                        IsNull((    SELECT R1.StatusPagamento FROM dbo.AD_Recebimento R1
+                                    INNER JOIN dbo.AD_Valor_Evento_Publico V1 
+                                        ON R1.ValorEventoPublicoId = V1.ValorEventoPublicoId
+                                    WHERE R1.AssociadoId = A.AssociadoId
+                                        AND R1.ObjetivoPagamento = '1'
+                                        AND V1.EventoId = " + eventoId + @"),9) as StatusPagamento,
+		                (   SELECT R3.DtVencimento 
+                            FROM dbo.AD_Recebimento R3
+                            INNER JOIN dbo.AD_Valor_Evento_Publico V1 
+                                ON R3.ValorEventoPublicoId = V1.ValorEventoPublicoId
+                            WHERE R3.AssociadoId = A.AssociadoId
+                                AND R3.ObjetivoPagamento = '1'
+                                AND V1.EventoId = " + eventoId + @") as DtVencimento,
+            		    (   SELECT R4.DtPagamento 
+                            FROM dbo.AD_Recebimento R4
+                            INNER JOIN dbo.AD_Valor_Evento_Publico V1 
+                                ON R4.ValorEventoPublicoId = V1.ValorEventoPublicoId
+                            WHERE R4.AssociadoId = A.AssociadoId
+                                AND R4.ObjetivoPagamento = '1'
+                                AND V1.EventoId = " + eventoId + @") as DtPagamento,
+            		    (   SELECT R5.Ativo FROM dbo.AD_Recebimento R5
+                            INNER JOIN dbo.AD_Valor_Evento_Publico V1 
+                                ON R5.ValorEventoPublicoId = V1.ValorEventoPublicoId
+                            WHERE R5.AssociadoId = A.AssociadoId
+                                AND R5.ObjetivoPagamento = '1'
+                                AND V1.EventoId = " + eventoId + @") as AtivoRec,
+	                    IsNull((    SELECT I.IsencaoId 
+                                    FROM dbo.AD_Isencao I 
+                                    INNER JOIN dbo.AD_Associado_Isento AI 
+                                        ON I.IsencaoId = AI.IsencaoId
+                                    WHERE I.EventoId = " + eventoId + @" 
+                                        AND AI.AssociadoId = A.AssociadoId),0) as IsencaoId
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    WHERE P.AssociadoId != 0 ";
+
+            if (!string.IsNullOrEmpty(nome))
+                query = query + $" AND P.Nome Like '%{nome}%' ";
+
+            if (!string.IsNullOrEmpty(cpf))
+                query = query + $" AND P.CPF = '{cpf}' ";
+
+            if (!string.IsNullOrEmpty(crp))
+                query = query + $" AND A.CRP = '{crp}' ";
+
+            if (!string.IsNullOrEmpty(crm))
+                query = query + $" AND A.CRM = '{crm}' ";
+
+            if (!string.IsNullOrEmpty(status))
+                query = query + $" AND RE.StatusPagamento = '{status}' ";
+
+            if (ano != 0)
+                query = query + $" AND Year(E.DtInicio) = {ano} ";
 
             if (mes != 0)
                 query = query + $" AND Month(R.DtVencimento) = {mes} ";
@@ -77,43 +390,19 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 query = query + $" AND A.TipoPublicoId = {tipoPublicoId} ";
 
             if (!string.IsNullOrEmpty(tipoEvento))
-                query = query + $" AND E.TipoEvento = '{tipoEvento}' ";
+                query = query + $" AND EV.TipoEvento = '{tipoEvento}' ";
 
             if (ativo != null)
-                query = query + $" AND R.Ativo = '{ativo}' ";
+                query = query + $" AND P.Ativo = '{ativo}' ";
 
-            query = query + " Order by P.Nome "; 
+            query = query + " Order by P.Nome ";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            IEnumerable<Recebimento> _collection = GetCollection<Recebimento>(cmd)?.ToList();
+            IEnumerable<RecebimentoAssociadoDao> _collection = GetCollection<RecebimentoAssociadoDao>(cmd)?.ToList();
 
-            if (_collection != null && _collection.Count() > 0)
-            {
-                AssociadoRepository _associadoRep = new AssociadoRepository();
-
-                Associado _associado = new Associado();
-
-                List<Recebimento> _recebimentos = new List<Recebimento>();
-
-                foreach (var rec in _collection)
-                {
-                    var assoc = _associadoRep.GetAssociadoById(rec.AssociadoId);
-
-                    if (assoc != null)
-                    {
-                        rec.Associado = assoc;
-                        _recebimentos.Add(rec);
-                    }
-                }
-
-                if (_recebimentos.Count() > 0)
-                {
-                    _collection = _recebimentos;
-                }
-            }
             return _collection;
         }
 
@@ -413,6 +702,139 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 catch (Exception ex)
                 {
                     // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
+        }
+
+        public string InsertIsento(int associadoId, int associadoIsentoId, string ojetivoPagamento, string tipoIsencao)
+        {
+            bool _resultado = false;
+            string _msg = "";
+            Int32 id = 0;
+
+            string _obs, _valorPago, _tokenPagamento, _nrDocCobranca, _statusPagamento;
+            DateTime _date = DateTime.Now;
+
+            if (tipoIsencao.Equals("1"))
+            {
+                _obs = "Isento do pagamento do evento";
+            }
+            else
+            {
+                _obs = "Isento do pagamento da anuidade";
+            }
+            _valorPago = "0";
+            _tokenPagamento = "N/A";
+            _nrDocCobranca = "N/A";
+            _statusPagamento = "3"; //Isento
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("IncluirRecebimentoIsento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "" +
+                        "INSERT into dbo.AD_Recebimento (AssociadoId, ObjetivoPagamento, " +
+                        "   DtVencimento, DtPagamento, StatusPagamento, NrDocCobranca, ValorPago, " +
+                        "   Observacao, TokenPagamento, AssociadoIsentoId , Ativo, DtCadastro) " +
+                        "VALUES(@AssociadoId, @ObjetivoPagamento, " +
+                        "   @DtVencimento, @DtPagamento, @StatusPagamento, @NrDocCobranca, @ValorPago, " +
+                        "   @Observacao, @TokenPagamento, @AssociadoIsentoId , @Ativo, @DtCadastro) " +
+                        "SELECT CAST(scope_identity() AS int) ";
+
+                    command.Parameters.AddWithValue("AssociadoId", associadoId);
+                    command.Parameters.AddWithValue("ObjetivoPagamento", tipoIsencao);
+                    command.Parameters.AddWithValue("DtVencimento", _date);
+                    command.Parameters.AddWithValue("DtPagamento", _date);
+                    command.Parameters.AddWithValue("StatusPagamento", _statusPagamento);
+                    command.Parameters.AddWithValue("NrDocCobranca", _nrDocCobranca);
+                    command.Parameters.AddWithValue("ValorPago", _valorPago);
+                    command.Parameters.AddWithValue("Observacao", _obs);
+                    command.Parameters.AddWithValue("TokenPagamento", _tokenPagamento);
+                    command.Parameters.AddWithValue("AssociadoIsentoId", associadoIsentoId);
+                    command.Parameters.AddWithValue("Ativo", true);
+                    command.Parameters.AddWithValue("DtCadastro", _date);
+
+                    id = (Int32)command.ExecuteScalar();
+                    _resultado = id > 0;
+
+                    _msg = _resultado ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
+        }
+
+        public string DeleteByAssociadoIsentoId(int id)
+        {
+            string _msg = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("DeleteRecebimentoIsento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "" +
+                        "DELETE " +
+                        "From dbo.AD_Recebimento " +
+                        "WHERE AssociadoIsentoId = @AssociadoIsentoId ";
+
+                    command.Parameters.AddWithValue("@AssociadoIsentoId", id);
+
+                    int i = command.ExecuteNonQuery();
+
+                    _msg = i > 0 ? "SUCESSO" : "FALHA";
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
                     try
                     {
                         transaction.Rollback();

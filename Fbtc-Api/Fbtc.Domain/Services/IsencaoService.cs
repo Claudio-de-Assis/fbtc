@@ -26,6 +26,11 @@ namespace Fbtc.Domain.Services
             return _isencaoRepository.FindByFilters(tipoIsencao, nomeAssociado, descricao, ano, eventoId );
         }
 
+        public IEnumerable<IsencaoDao> FindIsencaoByFilters(string tipoIsencao, string nomeAssociado, int ano, string identificacao, string tipoEvento)
+        {
+            return _isencaoRepository.FindIsencaoByFilters(tipoIsencao, nomeAssociado, ano, identificacao, tipoEvento);
+        }
+
         public IEnumerable<Isencao> GetAll(string tipoIsencao)
         {
             return _isencaoRepository.GetAll(tipoIsencao);

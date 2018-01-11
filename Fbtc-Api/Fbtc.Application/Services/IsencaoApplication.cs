@@ -35,6 +35,16 @@ namespace Fbtc.Application.Services
             return _isencaoService.FindByFilters(tipoIsencao, _nomeAssociado, _descricao, ano, eventoId);
         }
 
+        public IEnumerable<IsencaoDao> FindIsencaoByFilters(string tipoIsencao, string nomeAssociado, int ano, string identificacao, string tipoEvento)
+        {
+            string _nomeAssociado, _identificacao;
+
+            _nomeAssociado = nomeAssociado == "0" ? "" : nomeAssociado;
+            _identificacao = identificacao == "0" ? "" : identificacao;
+
+            return _isencaoService.FindIsencaoByFilters(tipoIsencao, _nomeAssociado, ano, _identificacao, tipoEvento);
+        }
+
         public IEnumerable<Isencao> GetAll(string tipoIsencao)
         {
             return _isencaoService.GetAll(tipoIsencao);
@@ -50,6 +60,7 @@ namespace Fbtc.Application.Services
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
                 RaiseException.IfNullOrEmpty(i.Descricao, "Descrição não informada"),
                 RaiseException.IfTrue(i.DtAta == DateTime.MinValue, "Data não informada"),
+                RaiseException.IfNull(i.DtAta, "Data não informada - Nula"),
                 RaiseException.IfTrue(i.AnoEvento == 0, "Ano da Isencão não informada")
             );
 

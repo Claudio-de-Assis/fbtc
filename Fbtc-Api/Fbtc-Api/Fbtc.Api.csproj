@@ -116,11 +116,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UploadedFiles\_evento.jpg" />
+    <Content Include="UploadedFiles\_no-foto-evento.jpg" />
+    <Content Include="UploadedFiles\_no-foto.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AnuidadeController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\AtcController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
@@ -150,9 +154,7 @@
       <Name>Fbtc.Ioc</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UploadedFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

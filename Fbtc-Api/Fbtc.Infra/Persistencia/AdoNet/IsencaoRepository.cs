@@ -29,7 +29,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<Isencao> FindByFilters(string tipoIsencao, string nomeAssociado, string descricao, int ano, int eventoId)
         {
-            query = @"SELECT I.IsencaoId, I.AnuidadeId, I.EventoId, 
+            query = @"SELECT Distinct I.IsencaoId, I.AnuidadeId, I.EventoId, 
                         I.Descricao, I.DtAta, I.AnoEvento, I.TipoIsencao, I.Ativo 
                     FROM dbo.AD_Isencao I 
                     LEFT JOIN dbo.AD_Associado_Isento AI ON I.IsencaoId = AI.IsencaoId
@@ -237,6 +237,43 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 connection.Close();
             }
             return _msg;
+        }
+
+        public IEnumerable<IsencaoDao> FindIsencaoByFilters(string tipoIsencao, string nomeAssociado, int ano, string identificacao, string tipoEvento)
+        {
+            query = @"SELECT Distinct I.IsencaoId, I.Descricao, I.AnoEvento AS AnoIsencao, 
+                        (SELECT Count(A.AssociadoIsentoId) Qtd from dbo.AD_Associado_Isento A WHERE A.IsencaoId = I.IsencaoId) QuantIsentos
+                    FROM dbo.AD_Isencao I
+                    LEFT JOIN dbo.AD_Associado_Isento AI ON I.IsencaoId = AI.IsencaoId
+                    LEFT JOIN dbo.AD_Associado A ON AI.AssociadoId = A.AssociadoId
+                    LEFT JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId ";
+
+            if (tipoIsencao.Equals("1"))
+                query = query + " INNER JOIN dbo.AD_Evento E ON I.EventoId = E.EventoId ";
+
+            query = query + " WHERE I.TipoIsencao = '" + tipoIsencao + "' "; 
+            
+            if (!string.IsNullOrEmpty(nomeAssociado))
+                query = query + $" AND P.Nome Like '%{nomeAssociado}%' ";
+
+            if (!string.IsNullOrEmpty(identificacao))
+                query = query + $" AND I.Descricao like '%{identificacao}%' ";
+
+            if (ano != 0)
+                query = query + $" AND I.AnoEvento = '{ano}' ";
+             
+            if (tipoIsencao.Equals("1") & !tipoEvento.Equals("0"))
+                query = query + $" AND E.TipoEvento = '{tipoEvento}' ";
+
+            query = query + " ORDER BY I.Descricao ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<IsencaoDao> _collection = GetCollection<IsencaoDao>(cmd)?.ToList();
+
+            return _collection;
         }
     }
 }

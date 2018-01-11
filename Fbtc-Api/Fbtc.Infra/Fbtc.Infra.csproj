@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Persistencia\AdoNet\AnuidadeRepository.cs" />
     <Compile Include="Persistencia\AdoNet\AssociadoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\AtcRepository.cs" />
     <Compile Include="Persistencia\AdoNet\ColaboradorRepository.cs" />
@@ -120,6 +121,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fbtc.Application\Fbtc.Application.csproj">
+      <Project>{69088668-8210-4B41-9FAA-C7C1FF861E41}</Project>
+      <Name>Fbtc.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fbtc.Domain\Fbtc.Domain.csproj">
       <Project>{136C9911-9347-4DB3-9E8B-FB1F06300E23}</Project>
       <Name>Fbtc.Domain</Name>

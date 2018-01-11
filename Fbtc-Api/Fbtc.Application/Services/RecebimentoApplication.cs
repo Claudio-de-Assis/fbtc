@@ -24,7 +24,51 @@ namespace Fbtc.Application.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Recebimento> FindByFilters(string objetivoPagamento, string nome, string cpf,
+        public IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+        {
+            string _nome, _cpf, _crp, _crm, _status;
+
+            _nome = nome == "0" ? "" : nome;
+            _cpf = cpf == "0" ? "" : cpf;
+            _crp = crp == "0" ? "" : crp;
+            _crm = crm == "0" ? "" : crm;
+            _status = status == "0" ? "" : status;
+
+            return _recebimentoService.FindAnuidadeByFilters(_nome, _cpf, _crp, _crm, _status,
+                ano, mes, ativo, tipoPublicoId);
+        }
+
+        public IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome, string cpf, 
+            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+        {
+            string _nome, _cpf, _crp, _crm, _status;
+
+            _nome = nome == "0" ? "" : nome;
+            _cpf = cpf == "0" ? "" : cpf;
+            _crp = crp == "0" ? "" : crp;
+            _crm = crm == "0" ? "" : crm;
+            _status = status == "0" ? "" : status;
+
+            return _recebimentoService.FindByAnuidadeIdFilters(anuidadeId, _nome, _cpf, _crp, _crm, _status,
+                ano, mes, ativo, tipoPublicoId);
+        }
+
+        public IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
+        {
+            string _nome, _cpf, _crp, _crm, _status, _tipoEvento;
+
+            _nome = nome == "0" ? "" : nome;
+            _cpf = cpf == "0" ? "" : cpf;
+            _crp = crp == "0" ? "" : crp;
+            _crm = crm == "0" ? "" : crm;
+            _status = status == "0" ? "" : status;
+            _tipoEvento = tipoEvento == "0" ? "" : tipoEvento;
+
+            return _recebimentoService.FindEventoByFilters(_nome, _cpf, _crp, _crm, _status,
+                ano, mes, ativo, _tipoEvento, tipoPublicoId);
+        }
+
+        public IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf, 
             string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
         {
             string _nome, _cpf, _crp, _crm, _status, _tipoEvento;
@@ -36,8 +80,8 @@ namespace Fbtc.Application.Services
             _status = status == "0" ? "" : status;
             _tipoEvento = tipoEvento == "0" ? "" : tipoEvento;
 
-            return _recebimentoService.FindByFilters(objetivoPagamento, _nome, _cpf, _crp, _crm, _status,
-                ano, mes , ativo, _tipoEvento, tipoPublicoId);
+            return _recebimentoService.FindByEventoIdFilters(eventoId, _nome, _cpf, _crp, _crm, _status,
+                ano, mes, ativo, _tipoEvento, tipoPublicoId);
         }
 
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)
@@ -123,6 +167,21 @@ namespace Fbtc.Application.Services
                 FormaPagamento = ""
             };
             return r;
+        }
+
+        public string SaveIsento(Recebimento recebimento)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string InsertIsento(int associadoId, int associadoIsentoId, string ojetivoPagamento, string tipoIsencao)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string DeleteByAssociadoIsentoId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

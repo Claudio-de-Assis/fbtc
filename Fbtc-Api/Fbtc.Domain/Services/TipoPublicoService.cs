@@ -21,6 +21,11 @@ namespace Fbtc.Domain.Services
             return _tipoPublicoRepository.GetAll();
         }
 
+        public IEnumerable<TipoPublico> GetByTipoAssociacao(bool associado)
+        {
+            return _tipoPublicoRepository.GetByTipoAssociacao(associado);
+        }
+
         public TipoPublico GetTipoPublicoById(int id)
         {
             return _tipoPublicoRepository.GetTipoPublicoById(id);

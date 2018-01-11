@@ -25,6 +25,7 @@ namespace Fbtc.Ioc
             container.Register<IEnderecoApplication, EnderecoApplication>(Lifestyle.Scoped);
             container.Register<IRecebimentoApplication, RecebimentoApplication>(Lifestyle.Scoped);
             container.Register<IIsencaoApplication, IsencaoApplication>(Lifestyle.Scoped);
+            container.Register<IAnuidadeApplication, AnuidadeApplication>(Lifestyle.Scoped);
 
             // Servicços de domínio:
             container.Register<IAssociadoService, AssociadoService>(Lifestyle.Scoped);
@@ -35,6 +36,7 @@ namespace Fbtc.Ioc
             container.Register<IEnderecoService, EnderecoService>(Lifestyle.Scoped);
             container.Register<IRecebimentoService, RecebimentoService>(Lifestyle.Scoped);
             container.Register<IIsencaoService, IsencaoService>(Lifestyle.Scoped);
+            container.Register<IAnuidadeService, AnuidadeService>(Lifestyle.Scoped);
 
             // Infra Repositórios:
             container.Register<IAssociadoRepository, AssociadoRepository>(Lifestyle.Scoped);
@@ -45,6 +47,7 @@ namespace Fbtc.Ioc
             container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);
             container.Register<IRecebimentoRepository, RecebimentoRepository>(Lifestyle.Scoped);
             container.Register<IIsencaoRepository, IsencaoRepository>(Lifestyle.Scoped);
+            container.Register<IAnuidadeRepository, AnuidadeRepository>(Lifestyle.Scoped);
         }
     }
 }

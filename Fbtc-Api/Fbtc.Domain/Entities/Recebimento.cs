@@ -24,4 +24,21 @@ namespace Fbtc.Domain.Entities
 
         public Associado Associado { get; set; }
     }
+
+
+    public class RecebimentoAssociadoDao
+    {
+        public int AssociadoId { get; set; }
+        public string Titulo { get; set; }
+        public int? Anuidade { get; set; }
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public string NomeTP { get; set; }
+        public int RecebimentoId { get; set; }
+        public string StatusPagamento { get; set; }
+        public DateTime? DtVencimento { get; set; }
+        public DateTime? DtPagamento { get; set; }
+        public bool AtivoRec { get; set; }
+        public int IsencaoIdId { get; set; }
+    }
 }

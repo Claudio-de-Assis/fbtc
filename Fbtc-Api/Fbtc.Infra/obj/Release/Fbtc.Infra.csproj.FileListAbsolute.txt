@@ -32,3 +32,5 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Release\Fbtc.Infra.csprojResolveAssem
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Release\Fbtc.Infra.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Release\Fbtc.Infra.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Release\Fbtc.Infra.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Release\Fbtc.Application.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Release\Fbtc.Application.pdb

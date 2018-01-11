@@ -29,7 +29,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<Evento> FindByFilters(string titulo, int ano, string tipoEvento)
         {
-            query = @"SELECT EventoId, Titulo, Descricao, Codigo, DtInicio, DtTermino, 
+            query = @"SELECT Distinct EventoId, Titulo, Descricao, Codigo, DtInicio, DtTermino, 
                         DtTerminoInscricao, TipoEvento, AceitaIsencaoAta, Ativo, NomeFoto 
                     FROM dbo.AD_Evento 
                     WHERE EventoId > 0 ";
@@ -224,12 +224,32 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public Evento GetEventoByRecebimentoId(int id)
         {
-            query = @"SELECT E.EventoId, E.Titulo, E.Descricao, E.Codigo, E.DtInicio, E.DtTermino, 
-                        E.DtTerminoInscricao, E.TipoEvento, E.AceitaIsencaoAta, E.Ativo, E.NomeFoto 
+            query = @"SELECT EventoId, titulo, Descricao, Codigo, DtInicio, DtTermino, 
+                           DtTerminoInscricao, TipoEvento, AceitaIsencaoAta, Ativo, NomeFoto 
+                    FROM
+                    (
+
+                    SELECT E.EventoId, E.Titulo, E.Descricao, E.Codigo, E.DtInicio, E.DtTermino, 
+                    E.DtTerminoInscricao, E.TipoEvento, E.AceitaIsencaoAta, E.Ativo, E.NomeFoto 
                     FROM dbo.AD_Evento E
                     INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON E.EventoId = VEP.EventoId
                     INNER JOIN dbo.AD_Recebimento R ON VEP.ValorEventoPublicoId = R.ValorEventoPublicoId
-                    WHERE R.RecebimentoId = " + id + "";
+                    WHERE R.RecebimentoId = " + id + @"
+                    AND R.ObjetivoPagamento = 1
+                    AND R.ValorEventoPublicoId is Not null and R.AssociadoIsentoId is null
+
+                    UNION
+
+                    SELECT E.EventoId, E.Titulo, E.Descricao, E.Codigo, E.DtInicio, E.DtTermino, 
+                        E.DtTerminoInscricao, E.TipoEvento, E.AceitaIsencaoAta, E.Ativo, E.NomeFoto 
+	                    FROM dbo.AD_Evento E
+	                    INNER JOIN dbo.AD_Isencao I ON E.EventoId = I.EventoId
+	                    INNER JOIN dbo.AD_Associado_Isento AI ON I.IsencaoId = AI.IsencaoId
+	                    INNER JOIN dbo.AD_Recebimento R ON AI.AssociadoIsentoId = R.AssociadoIsentoId
+	                    WHERE R.RecebimentoId = " + id + @"
+	                    AND R.ObjetivoPagamento =  1
+	                    AND R.ValorEventoPublicoId is null and R.AssociadoIsentoId is not null
+	                    ) as tab";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);

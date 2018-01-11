@@ -10,7 +10,6 @@ using Fbtc.Domain.Interfaces.Repositories;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
 
-
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
     public class AssociadoRepository : AbstractRepository, IAssociadoRepository
@@ -31,7 +30,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public IEnumerable<Associado> FindByFilters(string nome, string cpf,  
             string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
-            query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+            query = @"SELECT Distinct P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
@@ -83,6 +82,62 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             // Obtém os dados do banco de dados:
             IEnumerable<Associado> _collection = GetCollection<Associado>(cmd)?.ToList();
+
+            return _collection;
+        }
+
+        public IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
+            string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
+        {
+            query = @"SELECT AssociadoIsentoId, IsencaoId, AssociadoId, Nome, Cpf, Crp, AtcId, TipoPublicoId, Ativo from 
+                        (   SELECT  0 as AssociadoIsentoId, 0 as IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp, A.AtcId, A.TipoPublicoId, P.Ativo 
+                            FROM dbo.AD_Associado A 
+                            INNER JOIN  dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId 
+                            WHERE A.AssociadoId not in (SELECT AI2.AssociadoId FROM dbo.AD_Associado_Isento AI2 WHERE AI2.IsencaoId = " + isencaoId  + ") ";
+            query = query + @"UNION 
+                            SELECT  AI.AssociadoIsentoId, AI.IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp,  A.AtcId, A.TipoPublicoId, P.Ativo 
+                            FROM dbo.AD_Associado A 
+                            INNER JOIN  dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId 
+                            LEFT JOIN dbo.AD_Associado_Isento AI ON A.AssociadoId = AI.AssociadoId 
+                            WHERE AI.IsencaoId =  " + isencaoId + " ) AS TAB WHERE AssociadoId IS NOT NULL ";
+            
+            if (!string.IsNullOrEmpty(nome))
+                query = query + $" AND Nome Like '%{nome}%' ";
+
+            if (!string.IsNullOrEmpty(cpf))
+                query = query + $" AND CPF = '{cpf}' ";
+
+            /* if (!string.IsNullOrEmpty(sexo))
+                query = query + $" AND Sexo = '{sexo}' ";*/
+
+            if (atcId != 0)
+                query = query + $" AND AtcId = {atcId} ";
+
+            if (!string.IsNullOrEmpty(crp))
+                query = query + $" AND CRP = '{crp}' ";
+
+            /*if (!string.IsNullOrEmpty(tipoProfissao))
+                query = query + $" AND A.TipoProfissao = '{tipoProfissao}' ";*/
+
+            if (tipoPublicoId != 0)
+                query = query + $" AND TipoPublicoId = {tipoPublicoId} ";
+
+            /*if (!string.IsNullOrEmpty(estado))
+                query = query + $" AND Estado = '{estado}' ";*/
+
+            /*if (!string.IsNullOrEmpty(cidade))
+                query = query + $" AND Cidade = '{cidade}' ";*/
+
+            if (ativo != null)
+                query = query + $" AND Ativo = '{ativo}' ";
+
+            query = query + " ORDER BY Nome ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<AssociadoIsentoDao> _collection = GetCollection<AssociadoIsentoDao>(cmd)?.ToList();
 
             return _collection;
         }
@@ -427,6 +482,127 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
 
             return NomeFoto;
+        }
+
+        public string InsertIsento(AssociadoIsentoDao a)
+        {
+            RecebimentoRepository recebimentoRep = new RecebimentoRepository();
+
+            string _msg = "";
+            Int32 id = 0;
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("IncluirAssociadoIsento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "" +
+                        "INSERT into dbo.AD_Associado_Isento (IsencaoId, AssociadoId) " +
+                        "VALUES(@IsencaoId, @AssociadoId) " +
+                        "SELECT CAST(scope_identity() AS int) ";
+
+                    command.Parameters.AddWithValue("IsencaoId", a.IsencaoId);
+                    command.Parameters.AddWithValue("AssociadoId", a.AssociadoId);
+                    command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
+
+                    id = (Int32)command.ExecuteScalar();
+
+                    transaction.Commit();
+
+                    if (id > 0)
+                    {
+                        string res = recebimentoRep.InsertIsento(a.AssociadoId, id, a.TipoIsencao, a.TipoIsencao);
+                    }
+
+                    _msg = id > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+              
+                }
+                catch (Exception ex)
+                {
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
+        }
+
+        public string DeleteIsentoByAssociadoIsentoId(int AssociadoIsentoId)
+        {
+            string _msg = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("DeleteAssociadoIsento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    RecebimentoRepository recebimentoRep = new RecebimentoRepository();
+
+                    string _result = recebimentoRep.DeleteByAssociadoIsentoId(AssociadoIsentoId);
+
+                    if (_result.Equals("SUCESSO"))
+                    {
+                        command.CommandText = "" +
+                            "DELETE " +
+                            "From dbo.AD_Associado_Isento " +
+                            "WHERE AssociadoIsentoId = @AssociadoIsentoId ";
+
+                        command.Parameters.AddWithValue("@AssociadoIsentoId", AssociadoIsentoId);
+
+                        int i = command.ExecuteNonQuery();
+
+                        _msg = i > 0 ? "Exclusão realizada com sucesso" : "Exclusão NÃO realizada com sucesso";
+
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        _msg = "Exclusão NÃO realizada com sucesso";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
         }
     }
 }

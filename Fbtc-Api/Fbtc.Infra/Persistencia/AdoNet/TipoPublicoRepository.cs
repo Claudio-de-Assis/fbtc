@@ -24,7 +24,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<TipoPublico> GetAll()
         {
-            query = @"SELECT TipoPublicoId, Nome, Ativo, Ordem 
+            query = @"SELECT TipoPublicoId, 
+                    Nome, Ativo, Ordem, Associado 
                     FROM dbo.AD_TIPO_PUBLICO 
                     ORDER BY Ordem";
 
@@ -37,9 +38,24 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return TipoCollection;
         }
 
+        public IEnumerable<TipoPublico> GetByTipoAssociacao(bool associado)
+        {
+            query = @"SELECT TipoPublicoId, LEFT(Nome,CHARINDEX(' -', Nome)) as Nome, Ativo, Ordem, Associado 
+                    FROM dbo.AD_TIPO_PUBLICO 
+                    WHERE Associado = '" + associado + "' ORDER BY Ordem";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<TipoPublico> TipoCollection = GetCollection<TipoPublico>(cmd)?.ToList();
+
+            return TipoCollection;
+        }
+
         public TipoPublico GetTipoPublicoById(int id)
         {
-            query = @"SELECT TipoPublicoId, Nome, Ativo, Ordem 
+            query = @"SELECT TipoPublicoId, Nome, Ativo, Ordem, Associado 
                     FROM dbo.AD_TIPO_PUBLICO 
                     WHERE TipoPublicoId = " + id + "";
 
@@ -54,7 +70,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id)
         {
-            query = @"SELECT TP.TipoPublicoId, TP.Nome, TP.DescricaoValor, TP.Ordem, TP.Ativo, 
+            query = @"SELECT TP.TipoPublicoId, TP.Nome, TP.DescricaoValor, TP.Ordem, TP.Ativo, TP.Associado, 
 		            ISNULL((SELECT VEP.ValorEventoPublicoId FROM
                         dbo.AD_Valor_Evento_Publico VEP
                         WHERE VEP.EventoId = " + id + @" AND VEP.TipoPublicoId = TP.TipoPublicoId),0) as ValorEventoPublicoId, " + id + @" AS EventoId,  

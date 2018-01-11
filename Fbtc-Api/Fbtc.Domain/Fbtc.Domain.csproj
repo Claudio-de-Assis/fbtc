@@ -57,6 +57,7 @@
     <Compile Include="Entities\TipoPublico.cs" />
     <Compile Include="Entities\ValorAnuidadePublico.cs" />
     <Compile Include="Entities\ValorEventoPublico.cs" />
+    <Compile Include="Interfaces\Repositories\IAnuidadeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAssociadoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAtcRepository.cs" />
     <Compile Include="Interfaces\Repositories\IColaboradorRepository.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Interfaces\Repositories\IIsencaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRecebimentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoPublicoRepository.cs" />
+    <Compile Include="Interfaces\Services\IAnuidadeService.cs" />
     <Compile Include="Interfaces\Services\IAssociadoService.cs" />
     <Compile Include="Interfaces\Services\IAtcService.cs" />
     <Compile Include="Interfaces\Services\IColaboradorService.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Interfaces\Services\IRecebimentoService.cs" />
     <Compile Include="Interfaces\Services\ITipoPublicoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AnuidadeService.cs" />
     <Compile Include="Services\AssociadoService.cs" />
     <Compile Include="Services\AtcService.cs" />
     <Compile Include="Services\ColaboradorService.cs" />

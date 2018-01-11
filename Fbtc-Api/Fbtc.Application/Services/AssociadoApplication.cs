@@ -95,6 +95,29 @@ namespace Fbtc.Application.Services
                 _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
         }
 
+        public IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf, string sexo,
+            int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
+        {
+            string _nome, _cpf, _sexo, _crp, _tipoProfissao, _estado, _cidade;
+
+            _nome = nome == "0" ? "" : nome;
+            _cpf = cpf == "0" ? "" : cpf;
+            _sexo = sexo == "0" ? "" : sexo;
+            _crp = crp == "0" ? "" : crp;
+            _tipoProfissao = tipoProfissao == "0" ? "" : tipoProfissao;
+            _estado = estado == "0" ? "" : estado;
+            _cidade = cidade == "0" ? "" : cidade;
+
+            if (_nome.IndexOf("%20") > 0)
+                _nome = _nome.Replace("%20", " ");
+
+            if (_cidade.IndexOf("%20") > 0)
+                _cidade = _cidade.Replace("%20", " ");
+
+            return _associadoService.FindIsentoByFilters(isencaoId, _nome, _cpf, _sexo, atcId, _crp,
+                _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
+        }
+
         public IEnumerable<Associado> GetAll()
         {
             return _associadoService.GetAll();
@@ -170,6 +193,33 @@ namespace Fbtc.Application.Services
                 else
                 {
                     return _associadoService.Update(a.PessoaId, _a);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string SaveIsento(AssociadoIsentoDao a)
+        {
+            ArgumentsValidator.RaiseExceptionOfInvalidArguments(
+                RaiseException.IfTrue(a.IsencaoId == 0, "IsencaoId não informada"),
+                RaiseException.IfNull(a.IsencaoId, "IsencaoId está nula"),
+
+                RaiseException.IfTrue(a.AssociadoId == 0, "AssociadoId não informado"),
+                RaiseException.IfNull(a.AssociadoId, "AssociadoId está nulo")
+            );
+
+            try
+            {
+                if (a.AssociadoIsentoId == 0)
+                {
+                    return _associadoService.InsertIsento(a);
+                }
+                else
+                {
+                    return _associadoService.DeleteIsentoByAssociadoIsentoId(a.AssociadoIsentoId);
                 }
             }
             catch (Exception ex)

@@ -7,6 +7,7 @@ namespace Fbtc.Domain.Entities
         public string Nome { get; set; }
         public bool Ativo { get; set; }
         public int Ordem { get; set; }
+        public bool Associado { get; set; }
     }
     
     // Classe DAO usada para apresentar os valores no Cadastro de Eventos

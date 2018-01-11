@@ -13,4 +13,12 @@ namespace Fbtc.Domain.Entities
         public string TipoIsencao { get; set; }
         public bool Ativo { get; set; }
     }
+
+    public class IsencaoDao
+    {
+        public int IsencaoId { get; set; }
+        public string Descricao { get; set; }
+        public int AnoIsencao { get; set; }
+        public int QuantIsentos { get; set; }
+    }
 }

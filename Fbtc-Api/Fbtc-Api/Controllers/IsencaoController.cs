@@ -91,7 +91,6 @@ namespace Fbtc.Api.Controllers
 
                 return tsc.Task;
             }
-            
         }
 
         // [Authorize]
@@ -146,6 +145,45 @@ namespace Fbtc.Api.Controllers
 
                 var resultado = _isencaoApplication.FindByFilters(tipoIsencao, nomeAssociado, descricao,
                     Convert.ToInt16(ano), eventoId);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
+        [Route("FindIsencaoByFilters/{tipoIsencao},{nomeAssociado},{ano},{identificacao},{tipoEvento}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> FindIsencaoByFilters(string tipoIsencao, string nomeAssociado,
+            int ano, string identificacao, string tipoEvento)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (tipoIsencao == "" | tipoIsencao == "0") throw new Exception("tipoIsencao não informado!");
+
+                var resultado = _isencaoApplication.FindIsencaoByFilters(tipoIsencao, nomeAssociado, 
+                    Convert.ToInt16(ano), identificacao, tipoEvento);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\Functions.cs" />
+    <Compile Include="Interfaces\IAnuidadeApplication.cs" />
     <Compile Include="Interfaces\IAssociadoApplication.cs" />
     <Compile Include="Interfaces\IAtcApplication.cs" />
     <Compile Include="Interfaces\IColaboradorApplication.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Interfaces\IRecebimentoApplication.cs" />
     <Compile Include="Interfaces\ITipoPublicoApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AnuidadeApplication.cs" />
     <Compile Include="Services\AssociadoApplication.cs" />
     <Compile Include="Services\AtcApplication.cs" />
     <Compile Include="Services\ColaboradorApplication.cs" />

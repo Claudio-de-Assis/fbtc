@@ -29,7 +29,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo)
         {
-            query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+            query = @"SELECT Distinct P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
                         C.ColaboradorId, C.TipoPerfil  
                     FROM dbo.AD_Colaborador C 

@@ -15,8 +15,14 @@ namespace Fbtc.Application.Interfaces
 
         string Save(Associado associado);
 
+        string SaveIsento(AssociadoIsentoDao associadoIsentoDao);
+
         IEnumerable<Associado> FindByFilters(string nome, string cpf, 
             string sexo, int atcId, string crp, string tipoProfissao, 
+            int tipoPublico, string estado, string cidade, bool? ativo);
+
+        IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
+            string sexo, int atcId, string crp, string tipoProfissao,
             int tipoPublico, string estado, string cidade, bool? ativo);
 
         string GetNomeFotoByAssociadoId(int id);
