@@ -8,3 +8,10 @@ export class Isencao {
     tipoIsencao: string;
     ativo: boolean;
 }
+
+export class IsencaoDao {
+    isencaoId: number;
+    descricao: string;
+    anoIsencao: number;
+    quantIsentos: number;
+}

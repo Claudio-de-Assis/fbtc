@@ -27,11 +27,40 @@ export class RecebimentoRoute {
     // Deve-se informar "0" quando não houver valor válido para o filtro. Os atributos
     // 'objetivoPagamento', 'Ativo' são obrigatórios.
     // [Route("FindByFilters/{objetivoPagamento},{nome},{cpf},{crp},{crm},{status},{ano},{mes},{ativo},{tipoEvento},{tipoPublicoId}")]
-    getFindByFilters(objetivoPagamento: string, nome: string, cpf: string, crp: string, crm: string,
+    // getFindByFilters(objetivoPagamento: string, nome: string, cpf: string, crp: string, crm: string,
+    //    statusPagamento: string, ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): string {
+    //
+    //    return AppSettings.API_ENDPOINT + this.url +
+    //    `FindByFilters/${objetivoPagamento},${nome},${cpf},${crp},${crm},
+    // ${statusPagamento},${ano},${mes},${ativo},${tipoEvento},${tipoPublicoId}`;
+    // }
+
+    getFindAnuidadeByFilters(nome: string, cpf: string, crp: string, crm: string,
+        statusPagamento: string, ano: number, mes: number, ativo: string, tipoPublicoId: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url +
+        `FindAnuidadeByFilters/${nome},${cpf},${crp},${crm},${statusPagamento},${ano},${mes},${ativo},${tipoPublicoId}`;
+    }
+
+    FindByAnuidadeIdFilters(anuidadeId: number, nome: string, cpf: string, crp: string, crm: string,
+        statusPagamento: string, ano: number, mes: number, ativo: string, tipoPublicoId: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url +
+        `FindByAnuidadeIdFilters/${anuidadeId},${nome},${cpf},${crp},${crm},${statusPagamento},${ano},${mes},${ativo},${tipoPublicoId}`;
+    }
+
+    getFindEventoByFilters(nome: string, cpf: string, crp: string, crm: string,
         statusPagamento: string, ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): string {
 
         return AppSettings.API_ENDPOINT + this.url +
-        `FindByFilters/${objetivoPagamento},${nome},${cpf},${crp},${crm},${statusPagamento},${ano},${mes},${ativo},${tipoEvento},${tipoPublicoId}`;
+        `FindEventoByFilters/${nome},${cpf},${crp},${crm},${statusPagamento},${ano},${mes},${ativo},${tipoEvento},${tipoPublicoId}`;
+    }
+
+    getFindByEventoIdFilters(eventoId: number, nome: string, cpf: string, crp: string, crm: string,
+        statusPagamento: string, ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url +
+        `FindByEventoIdFilters/${eventoId},${nome},${cpf},${crp},${crm},${statusPagamento},${ano},${mes},${ativo},${tipoEvento},${tipoPublicoId}`;
     }
 
     // [Route("Recebimento")]

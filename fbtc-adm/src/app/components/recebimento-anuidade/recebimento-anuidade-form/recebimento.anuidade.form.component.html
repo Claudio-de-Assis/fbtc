@@ -53,7 +53,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Data Pagamento:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.dtPagamento | date:'dd/MM/yyyy' }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Forma Pagamento</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.formaPagamento | formaPagamento }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.formaPagamento | formaPagamento }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -85,13 +85,13 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Valor pago:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.valorPago }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.valorPago }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Data Notificação:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.dtNotificacao  | date:'dd/MM/yyyy' }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.dtNotificacao  | date:'dd/MM/yyyy' }}" disabled>
                         </div>
                     </div>
                 </div>

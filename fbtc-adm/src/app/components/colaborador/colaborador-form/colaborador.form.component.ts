@@ -12,6 +12,8 @@ import { Colaborador } from './../../shared/model/colaborador';
 
 import { Util } from './../../shared/util/util';
 
+// import { CustomAlertsModule } from '../../shared/custom-alerts/custom-alerts.module';
+
 @Component({
     selector: 'app-colaborador-form',
     templateUrl: './colaborador.form.component.html',

@@ -34,10 +34,25 @@ export class AssociadoRoute {
         + this.url + `FindByFilters/${nome},${cpf},${sexo},${atcId},${crp},${tipoProfissao},${tipoPublicoId},${estado},${cidade},${ativo}`;
     }
 
+    // Deve-se informar "0" quando não houver valor válido para o filtro.
+    // [Route("FindByFilters/{nome},{cpf},{sexo},{atcId},{crp},{tipoprofissao},{tipoPublicoId}")]
+    getFindIsentoByFilters(isencaoId: number, nome: string, cpf: string, sexo: string, atcId: number,
+        crp: string, tipoProfissao: string, tipoPublicoId: number, estado: string, cidade: string, ativo: string): string {
+
+       return AppSettings.API_ENDPOINT
+       + this.url +`FindIsentoByFilters/${isencaoId},${nome},${cpf},${sexo},${atcId},${crp},${tipoProfissao},${tipoPublicoId},${estado},${cidade},${ativo}`;
+   }
+
     // [Route("Associado")]
     postAssociado(): string {
 
         return AppSettings.API_ENDPOINT + this.url + 'Associado';
+    }
+
+    // [Route("AssociadoIsento")]
+    postAssociadoIsento(): string {
+
+        return AppSettings.API_ENDPOINT + this.url + 'AssociadoIsento';
     }
 
     // [Route("SetAssociado")]

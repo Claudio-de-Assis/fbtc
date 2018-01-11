@@ -75,7 +75,6 @@ export class AssociadoListComponent implements OnInit {
     gotoGetCidades() {
 
         if (this.editEstado !== '') {
-            // alert(this.editEstado);
             this.serviceEnd.getGetCidadesByEstado(this.editEstado).subscribe(cidades => this.cidades = cidades);
         }
     }
@@ -128,7 +127,6 @@ export class AssociadoListComponent implements OnInit {
               this._ativo = 'false';
             }
           }
-
 
         this.service.getByFilters(this._nome, this._cpf, this.editSexo, this.editAtcId,
                 this._crp, this.editTipoProfissao, this.editTipoPublicoId, this.editEstado, this.editCidade, this._ativo)

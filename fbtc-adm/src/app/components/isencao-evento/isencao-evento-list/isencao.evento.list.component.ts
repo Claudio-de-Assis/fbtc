@@ -8,7 +8,7 @@ import { Data } from '@angular/router/src/config';
 import { IsencaoService } from '../../shared/services/isencao.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
-import { Isencao } from './../../shared/model/isencao';
+import { Isencao, IsencaoDao } from './../../shared/model/isencao';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 
 import { Util } from './../../shared/util/util';
@@ -24,7 +24,7 @@ export class IsencaoEventoListComponent implements OnInit {
 
   _util = Util;
 
-  isencoes: Isencao[];
+  isencoes: IsencaoDao[];
 
   private selectedId: number;
 
@@ -32,16 +32,15 @@ export class IsencaoEventoListComponent implements OnInit {
 
   tiposPublicos: TipoPublico[];
 
-  editNome: string;
-  editCPF: string;
-  editCRP: string;
-  editCRM: string;
-  editEvento: string;
-  editStatusPagamento: string;
-  editTipoPublico: string;
+  editNome: string = '';
+  editAnoIsencao: number = 0;
+  editIdentificacao: string = '';
+  editTipoEvento: string = '0';
 
-  editDtVencimento: Data;
-  editDtPagto: Data;
+  _nome: string = '0';
+  _anoIsencao: number = 0;
+  _identificacao: string = '0';
+  _tipoIsencao: string = '1'; // Anuidade:2 Evento: 1
 
   constructor(
     private service: IsencaoService,
@@ -50,15 +49,43 @@ export class IsencaoEventoListComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  gotoImprimirLista() {}
+  submitted = false;
 
-  getIsencoes(objIsen): void {
-
-    this.service.getAll(objIsen).subscribe(isencoes => this.isencoes = isencoes);
+  onSubmit() {
+    this.submitted = true;
+    this.gotoBuscarIsencao();
   }
+
+  gotoImprimirLista() {}
 
   onSelect(isencao: Isencao): void {
     this.selectedIsencao = isencao;
+  }
+
+  gotoBuscarIsencao() {
+
+    if (this.editNome.trim() !== '') {
+      this._nome = this.editNome.trim();
+    }
+    if (this.editIdentificacao.trim() !== '') {
+      this._identificacao = this.editIdentificacao.trim();
+    }
+
+    this.service.getIsencaoByFilters(this._tipoIsencao, this._nome, this.editAnoIsencao, this._identificacao, this.editTipoEvento)
+      .subscribe(isencoes => this.isencoes = isencoes);
+
+      this.editNome = '';
+      this.editAnoIsencao = 0;
+      this.editIdentificacao = '';
+      this.editTipoEvento = '0';
+      this._nome = '0';
+      this._identificacao = '0';
+      this._anoIsencao = 0;
+  }
+
+  getIsencoes(objIsen): void {
+
+    // this.service.getAll(objIsen).subscribe(isencoes => this.isencoes = isencoes);
   }
 
   gotoNovaIsencao() {
@@ -74,9 +101,6 @@ export class IsencaoEventoListComponent implements OnInit {
   ngOnInit() {
 
     this.getTiposPublicos();
-
-    // 1: Eventos.
-    const objIsencao = '1';
-    this.getIsencoes(objIsencao);
+    this.gotoBuscarIsencao();
   }
 }

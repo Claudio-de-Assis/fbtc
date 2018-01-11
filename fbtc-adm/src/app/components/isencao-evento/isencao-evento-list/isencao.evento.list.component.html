@@ -1,66 +1,97 @@
-<div id="base">
-  <div id="Central">
-      <div id="HeaderCentral">
-          <h3>{{ title }}</h3>
-      </div>
-      <div id="BodyCentral">
-          <div id="LineBodyCentral">
-              <div id="L1C1">
-                  Nome do Associado:<br>
-                  <input [(ngModel)]="editNome" size="70px" maxlength="100" />
-              </div>
-              <div id="L1C2">
-                  Ano da Isenção:<br>
-                  <select 
-                  [(ngModel)]="editAno" name="AnoIsencao">
-                  <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
-              </select>
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <form (ngSubmit)="onSubmit()" #associadoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                            <label for="inpNome">Nome do Associado:</label>
+                            <input id="inpNome" name="nome" class="form-control" type="text"
+                            minlength="2" maxlength="100"
+                            [(ngModel)]="editNome" #nome="ngModel"/>
+                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                class="alert alert-danger">
+                            <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label for="sltAnoIsencao">Ano da Isenção:</label>
+                                <select id="sltAnoIsencao" name="anoIsencao" class="form-control"
+                                [(ngModel)]="editAnoIsencao" #anoIsencao="ngModel">
+                                    <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
+                                </select>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label for="inpIdentificacao">Identificação da Isencao:</label>
+                                <input id="inpIdentificacao" name="identificacao" class="form-control" type="text"
+                                maxlength="60"
+                                [(ngModel)]="editIdentificacao" #identificacao="ngModel"/>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Tipos de Eventos:</label>
+                            <select id="sltTipoEvento" [(ngModel)]="editTipoEvento" name="tipoEvento" class="form-control">
+                                <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="L2C1">
-                Identificação da Isenção:<br>
-                <input [(ngModel)]="editDescricao" size="70px" maxlength="100" />
-             </div>
-             <div id="L2C2">
-              Eventos:<br>
-              <select id="sltTipoEvento" [(ngModel)]="editTipoEvento" name="tipoEvento">
-                <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
-            </select>
-       </div>
-             <div id="L3C1">
-              <button (click)="gotoBuscarIsencao()">Pesquisar</button>
-              <button (click)="gotoNovaIsencao()">Nova</button>
-         </div>
-            <div id="L5C1">
-                  <fieldset> 
-                      <legend>Listagem de Isenções</legend>
-                      <div id="Lst">
-                      <div id="LstHeader">
-                          <div id="LstCol1">Identificação da Isenção</div>
-                          <div id="LstCol2">Ano</div>
-                          <div id="LstCol3">Quant. Isentos</div>
-                      </div>
-                      <div id="LstCenter">       
-                  <ul class="associados">
-                      <li *ngFor="let isencao of isencoes"
-                          [class.selected]="isencao.isencaoId === selectedId">
-                          <a [routerLink]="['/IsencaoEvento', isencao.isencaoId]">
-                              <div id="LstCol1c">{{ isencao.descricao }}</div>
-                              <div id="LstCol2c">{{ isencao.anoEvento }}</div>
-                              <div id="LstCol3c">20</div>
-                          </a>
-                      </li>
-                  </ul>
-                      </div>
-                      <div id="LstFooter">&nbsp;
-                              <button (click)="gotoPrimeiraPagina()">|<<</button>
-                              <button (click)="gotoPaginaAnterio()"><<</button>
-                              <button (click)="gotoProximaPagina()">>></button>
-                              <button (click)="gotoUltimaPagina()">>>|</button>
-                          </div>
-                  </div>
-                  </fieldset>
-              </div>
-          </div>
-      </div>            
-  </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <button class="btn btn-primary" (click)="gotoBuscarIsencao()">Pesquisar</button>
+                        <button class="btn btn-default" (click)="gotoNovaIsencao()">Nova</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <!-- PAINEL RESULTADO DA BUSCA -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">Listagem de Isenções</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Identificação da Isenção</th>
+                                    <th>Ano</th>
+                                    <th>Isentos</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let isencaoDao of isencoes"
+                                    [class.selected]="isencaoDao.isencaoId === selectedId">
+                                        <td>{{ isencaoDao.descricao }}</td>
+                                        <td>{{ isencaoDao.anoIsencao }}</td>
+                                        <td>{{ isencaoDao.quantIsentos }}</td>
+                                        <td>
+                                            <a [routerLink]="['/IsencaoEvento', isencaoDao.isencaoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

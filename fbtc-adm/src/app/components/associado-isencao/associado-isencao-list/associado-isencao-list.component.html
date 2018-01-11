@@ -1,83 +1,122 @@
-<div id="base">
-  <div id="Central">
-    <div id="HeaderCentral">
-      <h3>{{ title }}</h3>
-    </div>
-    <div id="BodyCentral">
-              <div id="LineBodyCentral">
-        <div id="L1C1">
-          Nome:<br>
-          <input [(ngModel)]="editNome" size="60px" maxlength="100" />
-        </div>
-        <div id="L1C2">
-          CPF:<br>
-          <input [(ngModel)]="editCPF" size="15px" maxlength="15"/>
-        </div>
-        <div id="L1C3">
-          CRP:<br>
-          <input [(ngModel)]="editCRP" size="15px" maxlength="15"/>
-                  </div> 
-              </div>    
-              <div id="LineBodyCentral">
-        <div id="L2C1">
-          ATC de origem:<br>
-            <select id="sltATC" 
-                [(ngModel)]="editAtcId" name="ATC">
-                <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
-            </select>
-        </div>
-        <div id="L2C2">
-          Tipo de associado:<br>
-            <select id="sltTipo" 
-                [(ngModel)]="editTipoPublico" name="TipoPublico">
-                <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
-            </select>
+<h2 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h2>
+<div class="row">
+    <div class="col-lg-12">
+        <form (ngSubmit)="onSubmit()" #associadoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                                <label for="inpNome">Nome:</label>
+                                <input id="inpNome" name="nome" class="form-control" type="text"
+                                    minlength="2"  maxlength="100"
+                                    [(ngModel)]="editNome"  #nome="ngModel"/>
+                                    <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label for="inpCpf">CPF:</label>
+                                <input id="inpCpf" name="Cpf" class="form-control" type="number"
+                                    maxlength="15"
+                                    [(ngModel)]="editCpf" placeholder="000.000.000-00" #cpf="ngModel"/>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label for="inpCrp">CRP:</label>
+                                <input id="inpCrp" name="Crp" class="form-control" type="number"
+                                    maxlength="15"
+                                    [(ngModel)]="editCrp" #crp="ngModel"/>
+                    </div>
+                    </div>
+                    <!--
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label for="inpCrm">CRM:</label>
+                                <input id="inpCrm" name="Crm" class="form-control" type="number"
+                                    maxlength="15"
+                                    [(ngModel)]="editCrm" #crm="ngModel"/>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label for="sltATC">ATC de origem:</label>
+                                <select id="sltATC" name="atc" class="form-control" 
+                                    [(ngModel)]="editAtcId" #atc="ngModel">
+                                    <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
+                                </select>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <label for="sltTipoPublico">Público:</label>
+                                <select id="sltTipoPublico" name="tipoPublico" class="form-control" 
+                                    [(ngModel)]="editTipoPublicoId" name="TipoPublico" #tipoPublico="ngModel">
+                                    <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
+                                </select>
+                    </div>
+                    </div>
+                </div>
             </div>
-                  <div id="L2C3">
-                      CRM:<br>
-                      <input [(ngModel)]="editCRM" size="15px" maxlength="15"/>
-                  </div>                        
-              </div>
-              <div id="LineBodyCentral">
-                  <div id="L3C1">
-                      <button (click)="gotoBuscarAssociado()">Pesquisar</button>
-                      <hr>
-                  </div>
-              </div>
-              <div id="LineBodyCentral">
-                  <div id="L4C1">
-                      <fieldset> 
-                          <legend>Listagem de Associados</legend>
-                          <div id="Lst">
-                              <div id="LstHeader">
-                                  <div id="LstCol1">Nome</div>
-                                  <div id="LstCol2">CPF</div>
-                                  <div id="LstCol3">CRP</div>
-                                  <div id="LstCol4">CRM</div>
-                                  <div id="LstCol5">Isento</div>
-                              </div>
-                              <div id="LstCenter">       
-                                  <ul class="associados">
-                                      <li *ngFor="let associado of associados">
-                                              <div id="LstCol1c">&nbsp;{{ associado.nome }}</div>
-                                              <div id="LstCol2c">&nbsp;{{ associado.cpf }}</div>
-                                              <div id="LstCol3c">&nbsp;{{ associado.crp }}</div>
-                                              <div id="LstCol4c">&nbsp;{{ associado.crm }}</div>
-                                              <div id="LstCol5c"><input type="checkbox" checked></div>
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div id="LstFooter">&nbsp;
-                                  <button (click)="gotoPrimeiraPagina()">|<<</button>
-                                  <button (click)="gotoPaginaAnterio()"><<</button>
-                                  <button (click)="gotoProximaPagina()">>></button>
-                                  <button (click)="gotoUltimaPagina()">>>|</button>
-                              </div>
-                      </div>
-                      </fieldset>
-                  </div>
-              </div>    
-    </div>            
-  </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <div class="panel panel-primary">
+                <div class="panel-heading">Listagem de Associados</div>
+                <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>CRP</th>
+                                        <th>Isento</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let associado of associados">
+                                        <td>&nbsp;{{ associado.nome }}</td>
+                                        <td>&nbsp;{{ associado.cpf }}</td>
+                                        <td>&nbsp;{{ associado.crp }}</td>
+                                        <td>
+                                            <i class="fa fa-square-o text-info" *ngIf="associado.associadoIsentoId === 0"></i><!-- CLAUDIO - Usar um ou outro de acordo com, se o usuário está ou não isento. -->
+                                            <i class="fa fa-check-square text-success " *ngIf="associado.associadoIsentoId !== 0"></i>
+                                        </td>
+                                        <td>
+                                            <a (click)="gotoSavaIsencaoAssociado(associado.associadoId,associado.associadoIsentoId)" title="Isentar" *ngIf="associado.associadoIsentoId === 0"><i class="fa fa-check text-success"></i></a>
+                                            <a (click)="gotoSavaIsencaoAssociado(associado.associadoId,associado.associadoIsentoId)" title="Retirar Isenção" *ngIf="associado.associadoIsentoId !== 0"><i class="fa fa-close text-danger"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <div class="btn-group">
+                        <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                        <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                        <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                        <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+    </div>
 </div>
-        

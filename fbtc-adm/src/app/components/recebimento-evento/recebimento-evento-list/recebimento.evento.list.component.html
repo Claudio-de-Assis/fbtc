@@ -18,28 +18,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpCpf">Cpf:</label>
-                            <input id="inpCpf" name="cpf" class="form-control" type="text"
-                                maxlength="15" size="15px" 
-                                [(ngModel)]="editCpf"  #cpf="ngModel"/>
+                            <label for="sltTipoPublico">Tipo de Público:</label>
+                            <select id="sltTipoPublico" name="tipoPublico" class="form-control"
+                                [(ngModel)]="editTipoPublicoId" #tipoPublico="ngModel">
+                                <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpCrp">Crp:</label>
-                            <input id="inpCrp" name="crp" class="form-control" type="text"
-                                maxlength="15" size="15px" 
-                                [(ngModel)]="editCrp"  #crp="ngModel"/>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="inpCrm">Crm:</label>
-                            <input id="inpCrm" name="crm" class="form-control" type="text"
-                                maxlength="15" size="15px" 
-                                [(ngModel)]="editCrm"  #crm="ngModel"/>
+                            <label for="sltStatusPagamento">Status do Situação:</label>
+                            <select id="sltStatusPagamento" name="statusPagamento" class="form-control"
+                                [(ngModel)]="editStatusPagamento" #statusPagamento="ngModel">
+                                <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -53,7 +47,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label for="sltAno">Ano:</label>
                             <select id="sltAno" name="ano" class="form-control"
@@ -64,20 +58,12 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="sltTipoPublico">Tipo Publico:</label>
-                            <select id="sltTipoPublico" name="tipoPublico" class="form-control"
-                                [(ngModel)]="editTipoPublicoId" #tipoPublico="ngModel">
-                                <option *ngFor="let op of tiposPublicos" value="{{ op.tipoPublicoId }}">{{ op.nome }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="sltStatusPagamento">Situação:</label>
-                            <select id="sltStatusPagamento" name="statusPagamento" class="form-control"
-                                [(ngModel)]="editStatusPagamento" #statusPagamento="ngModel">
-                                <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
-                            </select>
+                            <label>Recebimento Ativo?:</label>
+                            <div>
+                                <label class="radion-inline" *ngFor="let op of _util.optBooleanFull; let idx = index">
+                                    <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 0"> {{ op.name }} &nbsp;
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +74,8 @@
                         <button class="btn btn-success" (click)="gotoImprimirLista()">Imprimir Lista</button>
                     </div>
                     <div class="col-lg-6 text-right">
-                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                        <button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
                 </div>
             </div>
@@ -101,27 +88,28 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <td>Associado</td>
-                                    <td>CPF</td>
-                                    <td>Objetivo</td>
-                                    <td>Vencimento</td>
-                                    <td>Pagamento</td>
-                                    <td>Status</td>
+                                    <td>Nome</td>
+                                    <td>Vínculo</td>
+                                    <td>Evento</td>
+                                    <!--<td>Vencimento</td>
+                                    <td>Pagamento</td>-->
+                                    <td>Situação</td>
                                     <td>Ações</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let recebimento of recebimentos"
                                     [class.selected]="recebimento.recebimentoId === selectedId">
-                                    <td>{{ recebimento.associado.nome }}</td>
-                                    <td>{{ recebimento.associado.cpf }}</td>
-                                    <td>{{ recebimento.objetivoPagamento | objetivoPagamento }}</td>
-                                    <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
-                                    <td>{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.nome }}</td>
+                                    <td>{{ recebimento.nomeTP }}</td>
+                                    <td>{{ recebimento.titulo }}</td>
+                                    <!--<td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</td>-->
                                     <td>{{ recebimento.statusPagamento |  statusPagamento }}</td>
                                     <td>
                                         <a [routerLink]="['/RecebimentoEvento', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
-                                        <a href="javascript: alert('excluir'); return false;"><i class="fa fa-trash text-danger"></i></a>
+                                        <!--<a href="javascript: alert('excluir'); return false;"><i class="fa fa-trash text-danger"></i></a>-->
+                                        <i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>
                                     </td>
                                 </tr>
                             </tbody>

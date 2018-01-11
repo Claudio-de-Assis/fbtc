@@ -67,7 +67,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Pagamento:</label>
-                            <input class="form-control" value="{{ recebimento.associado.dtPagamento }}" disabled>
+                            <input class="form-control" value="{{ recebimento.dtPagamento  | date: 'dd/MM/yyyy'}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Forma Pagamento</label>
-                            <input class="form-control" value="{{ recebimento.associado.formaPagamento | formaPagamento }} " disabled>
+                            <input class="form-control" value="{{ recebimento.formaPagamento | formaPagamento }} " disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -99,13 +99,13 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Valor devido:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.valorDevido }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.valorDevido }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Data Notificação:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.dtNotificacao }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.dtNotificacao }}" disabled>
                         </div>
                     </div>
                 </div>

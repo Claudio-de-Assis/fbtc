@@ -21,3 +21,20 @@ export class Recebimento {
 
     associado: Associado;
 }
+
+export class RecebimentoAssociadoDao {
+
+    associadoId: number;
+    titulo: string;
+    anuidade: number;
+    nome: string;
+    cpf: string;
+    nomeTP: string;
+    recebimentoId: number;
+    statusPagamento: string;
+    dtVencimento: Date;
+    dtPagamento: Date;
+    ativoRec: boolean;
+    isencaoIdId: number;
+}
+

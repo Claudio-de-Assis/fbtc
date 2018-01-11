@@ -28,7 +28,7 @@ export class RecebimentoEventoFormComponent implements OnInit {
             crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
             tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
-            pessoaId: 0, nome: 'ssss', cpf: '', rg: '', eMail: '', nomeFoto: '',
+            pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
             dtCadastro: null, ativo: true,
               enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',

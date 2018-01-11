@@ -3,6 +3,7 @@ export class TipoPublico {
     nome: string;
     descricaoValor: string;
     ativo: boolean;
+    associado: boolean;
 }
 
 export class TipoPublicoValorDao extends TipoPublico {

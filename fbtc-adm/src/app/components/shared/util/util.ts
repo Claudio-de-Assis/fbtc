@@ -41,12 +41,6 @@ export class Util {
         {name: 'Feminino', value: 'F'}
     ];
 
-    /*public static optATC = [
-        {name: 'Rio de Janeiro', value: '1'},
-        {name: 'Minas Gerais', value: '2'},
-        {name: 'Alagoas', value: '3'}
-    ];*/
-
     public static optTipoFormaContato = [
         {name: 'E-Mail', value: 1},
         {name: 'Celular', value: 2},

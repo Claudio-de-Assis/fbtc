@@ -8,7 +8,7 @@ import { RecebimentoService } from '../../shared/services/recebimento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
 import { TipoPublico } from '../../shared/model/tipo-publico';
-import { Recebimento } from './../../shared/model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from './../../shared/model/recebimento';
 
 import { Util } from '../../shared/util/util';
 
@@ -29,7 +29,7 @@ export class RecebimentoEventoListComponent implements OnInit {
 
   tiposPublicos: TipoPublico[];
 
-  recebimentos: Recebimento[];
+  recebimentos: RecebimentoAssociadoDao[];
 
   editNome: string = '';
   editCpf: string = '';
@@ -64,10 +64,10 @@ export class RecebimentoEventoListComponent implements OnInit {
 
   gotoImprimirLista() {}
 
-  getRecebimentos(objRec: string): void {
+  // getRecebimentos(objRec: string): void {
 
-    this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
-  }
+  //  this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
+  // }
 
   onSelect(recebimento: Recebimento): void {
     this.selectedRecebimento = recebimento;
@@ -77,6 +77,12 @@ export class RecebimentoEventoListComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.gotoBuscarRecebimento();
+  }
+
+
+  gotoGerarNovaCobranca(){
+
+    console.log('Gerando nova cobrança....');
   }
 
   gotoBuscarRecebimento(): void {
@@ -113,7 +119,7 @@ export class RecebimentoEventoListComponent implements OnInit {
       }
     }
 
-    this.service.getByFilters(this._objetivoPagamento, this._nome, this._cpf, this._crp,  this._crm,
+    this.service.getEventoByFilters(this._nome, this._cpf, this._crp,  this._crm,
           this._statusPagamento, this._ano, this._mes, this._ativo, this._tipoEvento, this.editTipoPublicoId)
         .subscribe(recebimentos => this.recebimentos = recebimentos);
 
@@ -139,9 +145,6 @@ export class RecebimentoEventoListComponent implements OnInit {
   ngOnInit() {
 
     this.getTiposPublicos();
-
-    // 1: Eventos.
-    const objRecebimento = '1';
-    this.getRecebimentos(objRecebimento);
+    this.gotoBuscarRecebimento();
   }
 }

@@ -1,46 +1,108 @@
-<div id="base">
-        <div id="Central">
-            <div id="HeaderCentral">
-                <h3>{{ title }}</h3>
-            </div>
-            <div id="BodyCentral">
-                <div id="LineBodyCentral">
-                  <div id="L1C1">
-                     Nome:<br>
-                     <input [(ngModel)]="isencao.descricao" size="70px" maxlength="100" required/>
-                  </div>
-                  <div id="L1C2">
-                    Data da ata:<br>
-                    <input [(ngModel)]="isencao.dtAta" size="20px" required type="Date"/>
-                  </div>  
-                  <div id="L1C3">
-                        Ano da Isenção:<br>
-                        <select required
-                          [(ngModel)]="isencao.anoEvento" name="anoEvento" >
-                          <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
-                      </select>
-                  </div>
-               </div>
-               <div id="LineBodyCentral">
-                    <div id="L2C1">
-                            Evento:<br>
-
-                         <select id="sltEvento" 
-                            [(ngModel)]="isencao.eventoId" name="eventoId">
-                            <option *ngFor="let op of eventos" value="{{ op.eventoId }}">{{ op.titulo }}</option>
-                        </select>
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <form (ngSubmit)="onSubmit()" #isencaoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- ACCORDION - INICIO -->
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="">Dados da Isenção</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="inpNome">Nome:</label>
+                                                    <input id="inpNome" name="nome" class="form-control" type="text"
+                                                        minlength="4" maxlength="100" required
+                                                        [(ngModel)]="isencao.descricao"  #nome="ngModel"/>
+                                                        <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="alert alert-danger">
+                                                            <div *ngIf="nome.errors.required">* O Nome é obrigatório.</div>
+                                                            <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 4 letras.</div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                    <label for="inpDtInicio">Data da Ata:</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                        <input id="inpDtAta" name="dtAta" class="form-control" type="date" 
+                                                            required maxlength="10"
+                                                            [ngModel]="isencao.dtAta | date:'yyyy-MM-dd'" (ngModelChange)="isencao.dtAta = $event"  #dtAta="ngModel"/>
+                                                        <div *ngIf="dtAta.invalid && (dtAta.dirty || dtAta.touched)"
+                                                            class="alert alert-danger">
+                                                            <div *ngIf="dtAta.errors.required">* A data é obrigatória.</div>
+                                                        </div>    
+                                                    </div>
+            
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="sltAnoEvento">Ano da Isenção:</label>
+                                                    <select id="sltAnoEvento" name="anoEvento" [(ngModel)]="isencao.anoEvento" class="form-control" #anoEvento="ngModel" required>
+                                                        <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ano}}</option>
+                                                    </select>
+                                                    <div *ngIf="anoEvento.invalid && (anoEvento.dirty || anoEvento.touched)" class="alert alert-danger">
+                                                        <div *ngIf="anoEvento.errors.required">* O ano deve ser informado.</div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="sltEvento">Evento:</label>
+                                                    <select id="sltEvento" name="evento" [(ngModel)]="isencao.eventoId"  class="form-control" #evento="ngModel" required>
+                                                        <option *ngFor="let op of eventos" value="{{ op.eventoId }}">{{ op.titulo }}</option>
+                                                    </select>
+                                                    <div *ngIf="evento.invalid && (evento.dirty || evento.touched)" class="alert alert-danger">
+                                                            <div *ngIf="evento.errors.required">* O evento deve ser informado.</div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default" *ngIf="isEdicaoIsencao">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">Lista de Associados com isenção</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <app-associado-isencao-list
+                                        [isencaoId] = "_isencaoId"
+                                        [tipoIsencao] = "_tipoIsencao"
+                                        >
+                                        </app-associado-isencao-list>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION - FIM -->
                     </div>
-               </div>                    
-               <div id="LineBodyApp">
-                   <app-associado-isencao-list></app-associado-isencao-list>
-               </div>
-           </div>
-           <div id="FooterCentral">
-                <div id="FT1C1">
-                   <button (click)="gotoEventos()">Retornar</button>
-                   <button (click)="save()">Salvar</button>
-                   <button (click)="excluir()">Excluir</button>
                 </div>
-           </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!isencaoForm.form.valid">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoIsencaoEventos()">Retornar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        </form>    
+    </div>
+</div>
+

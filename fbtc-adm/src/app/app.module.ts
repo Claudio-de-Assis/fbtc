@@ -18,10 +18,12 @@ import { AssociadoModule } from './components/associado/associado.module';
 import { IsencaoAnuidadeModule } from './components/isencao-anuidade/isencao.anuidade.module';
 import { IsencaoEventoModule } from './components/isencao-evento/isencao.evento.module';
 import { EventoModule } from './components/evento/evento.module';
+import { AnuidadeRoute } from './components/shared/webapi-routes/anuidade.route';
 
 import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
+import { AnuidadeModule } from './components/anuidade/anuidade.module';
 
 @NgModule({
   imports: [
@@ -33,9 +35,10 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
     IsencaoAnuidadeModule,
     IsencaoEventoModule,
     EventoModule,
+    AnuidadeModule,
     RecebimentoAnuidadeModule,
     RecebimentoEventoModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,
@@ -48,9 +51,12 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
     IsencaoRoute,
     RecebimentoRoute,
     EventoRoute,
+    AnuidadeRoute,
     { provide: LOCALE_ID, useValue: 'PT-BR' }
   ],
-  exports: [],
+  exports: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,7 +15,10 @@ import { SharedModule } from './../shared/shared.module';
 import { ColaboradorRoute } from '../shared/webApi-routes/colaborador.route';
 import { TipoPublicoRoute } from '../shared/webApi-routes/tipo-publico.route';
 import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
-import { AlertMessageModule } from '../shared/modal/alert/alert-message/alert-message.module';
+
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { CustomAlertsModule } from '../shared/custom-alerts/custom-alerts.module';
+// import { AlertConfigService } from '../shared/services/alert-config.service';
 
 @NgModule({
   imports: [
@@ -25,11 +28,12 @@ import { AlertMessageModule } from '../shared/modal/alert/alert-message/alert-me
       ColaboradorRoutingModule,
       SharedModule,
       ReactiveFormsModule,
-      AlertMessageModule
+//      NgbModule.forRoot(),
+//      CustomAlertsModule
   ],
   declarations: [
       ColaboradorFormComponent,
-      ColaboradorListComponent
+      ColaboradorListComponent,
   ],
   exports: [
       ColaboradorFormComponent,
@@ -40,7 +44,8 @@ import { AlertMessageModule } from '../shared/modal/alert/alert-message/alert-me
       ColaboradorRoute,
       TipoPublicoService,
       TipoPublicoRoute,
-      FileUploadRoute
+      FileUploadRoute,
+//      AlertConfigService,
   ]
 })
 

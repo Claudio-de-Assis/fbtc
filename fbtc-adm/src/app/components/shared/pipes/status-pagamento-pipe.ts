@@ -12,6 +12,8 @@ export class StatusPagamentoPipe implements PipeTransform {
             return 'Adimplente';
         } else if (id === '3') {
             return 'Isento';
+        } else if (id === '9') {
+            return 'Não gerou pagamento';
         } else {
             return 'Indefinido';
         }

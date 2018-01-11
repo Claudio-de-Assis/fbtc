@@ -104,9 +104,9 @@ export class EventoFormComponent implements OnInit {
 
     if (this.evento.eventoId !== 0 ) {
       this.service.addValoresEvento(this.tiposPublicosValoresDao)
-      .subscribe(() =>  this.gotoShowPopUp());
+      .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
     } else {
-      this.gotoShowPopUp();
+      this.gotoShowPopUp('Registro salvo com sucesso!');
       this.gotoEventos();
     }
     this.submitted = false;
@@ -118,10 +118,10 @@ export class EventoFormComponent implements OnInit {
       this.SaveEvento();
   }
 
-  gotoShowPopUp() {
+  gotoShowPopUp(msg: string) {
 
     // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert('Registro salvo com sucesso!');
+    alert(msg);
   }
 
   /*gotoDeleteEvento() {

@@ -31,9 +31,13 @@ export class IsencaoRoute {
         return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${tipoIsencao},${nomeAssociado},${descricao},${ano},${eventoId}`;
     }
 
+    getFindIsencaoByFilters(tipoIsencao: string, nomeAssociado: string, anoIsencao: number, identificacao: string, tipoEvento: string): string {
+        return AppSettings.API_ENDPOINT + this.url + `FindIsencaoByFilters/${tipoIsencao},${nomeAssociado},${anoIsencao},${identificacao},${tipoEvento}`;
+    }
+
     // TipoIsenção: 1: Evento; 2: Anuidade
     // [Route("Isencao")]
     postIsencao(): string {
-        return AppSettings.API_ENDPOINT + this.url + 'Atc';
+        return AppSettings.API_ENDPOINT + this.url + 'Isencao';
     }
 }

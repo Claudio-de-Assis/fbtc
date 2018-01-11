@@ -18,19 +18,25 @@ import { Util } from '../../shared/util/util';
 })
 export class IsencaoEventoFormComponent implements OnInit {
 
-  @Input() isencao: Isencao = { isencaoId: 0, anuidadeId: 0, eventoId : 0,
-    descricao: '', dtAta: null, anoEvento: 0 , tipoIsencao: '1', ativo: true};
+  @Input() isencao: Isencao = { isencaoId: 0, anuidadeId: null, eventoId : null,
+    descricao: '', dtAta: null, anoEvento: null , tipoIsencao: '1', ativo: true};
 
   title = 'Conceder Isenção de Evento';
   badge = '';
+  isEdicaoIsencao: boolean = false;
 
   eventos: Evento[];
 
+  _isencaoId: number;
+  _tipoIsencao: string;
+
   private selectedId: any;
 
-  isencaos: Observable<Isencao>;
+  // isencaos: Observable<Isencao>;
 
   _util = Util;
+
+  submitted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,16 +61,37 @@ export class IsencaoEventoFormComponent implements OnInit {
     this.service.setIsencao(tipoIsencao).subscribe(isencao => this.isencao = isencao);
   }
 
-  save() {
+  onSubmit() {
 
-    this.service.addIsencao(this.isencao).subscribe(() =>  this.gotoShowPopUp());
+    this.submitted = true;
+    this.saveIsencao();
   }
 
-  gotoShowPopUp() {
+  saveIsencao() {
+
+    this.service.addIsencao(this.isencao).subscribe(() =>  this.savaAssociadosIsentos());
+  }
+
+  savaAssociadosIsentos() {
+
+    if (this.isencao.isencaoId !== 0 ) {
+
+      // Colocar aqui a chamada para salvar os associados isentos: Ex:
+      // this.service.addValoresEvento(this.tiposPublicosValoresDao)
+      // .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
+      this.gotoShowPopUp('Registro salvo com sucesso!');
+
+    } else {
+      this.gotoShowPopUp('Registro salvo com sucesso!');
+      this.gotoIsencaoEventos();
+    }
+  }
+
+  gotoShowPopUp(msg: string) {
+
     // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert('Registro salvo com sucesso!');
+    alert(msg);
   }
-
 
   getEventos(): void {
 
@@ -73,15 +100,19 @@ export class IsencaoEventoFormComponent implements OnInit {
 
   ngOnInit() {
 
+    this._tipoIsencao = '1';
+
     this.getEventos();
 
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (id > 0) {
-        this.badge = '"Edição';
-        this.getIsencaoById(id);
+    this._isencaoId = +this.route.snapshot.paramMap.get('id');
+
+    if (this._isencaoId > 0) {
+      this.isEdicaoIsencao = true;
+      this.badge = '"Edição';
+        this.getIsencaoById(this._isencaoId);
     } else {
-        this.badge = 'Novo';
-        // this.setIsencao('1');
+      this.isEdicaoIsencao = false;
+      this.badge = 'Novo';
     }
   }
 }

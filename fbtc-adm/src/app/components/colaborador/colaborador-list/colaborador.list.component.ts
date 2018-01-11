@@ -8,6 +8,8 @@ import { ColaboradorService } from '../../shared/services/colaborador.service';
 
 import { Util } from './../../shared/util/util';
 
+// import { CustomAlertsModule } from '../../shared/custom-alerts/custom-alerts.module';
+
 @Component({
   selector: 'app-colaborador-list',
   templateUrl: './colaborador.list.component.html',
@@ -35,6 +37,7 @@ export class ColaboradorListComponent implements OnInit {
     private service: ColaboradorService,
     private router: Router,
     private route: ActivatedRoute
+
   ) { }
 
   getColaboradores(): void {

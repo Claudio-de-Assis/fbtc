@@ -21,7 +21,7 @@ import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
     TipoEventoPipe,
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
-    FormaPagamentoPipe,
+    FormaPagamentoPipe
   ],
   exports: [
     BooMessagePipe,

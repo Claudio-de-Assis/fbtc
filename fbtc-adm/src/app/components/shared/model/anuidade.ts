@@ -1,5 +1,7 @@
 export class Anuidade {
-    Anuidade: number;
-    DtCadastro: Date;
-    Codigo: number;
+
+    anuidadeId: number;
+    codigo: number;
+    dtCadastro: Date;
+    ativo: boolean;
 }

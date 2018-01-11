@@ -34,9 +34,9 @@
                         <div class="form-group">
                             <label for="inpDataNascimento">Data de Nascimento:</label>
                             <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                            <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="date"
-                                [ngModel]="associado.dtNascimento | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtNascimento = $event"  #dataNascimento="ngModel" />
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="date"
+                                    [ngModel]="associado.dtNascimento | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtNascimento = $event"  #dataNascimento="ngModel" />
                             </div>
                         </div>
                         <div class="form-group">

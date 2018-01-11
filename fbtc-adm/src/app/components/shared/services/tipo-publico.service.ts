@@ -33,6 +33,14 @@ export class TipoPublicoService {
         );
     }
 
+    getByTipoAssociacao(tipoAssociacao: boolean): Observable<TipoPublico[]> {
+        return this.http.get<TipoPublico[]>(this.apiRoute.getByTipoAssociacao(tipoAssociacao))
+            .pipe(
+                tap(tiposPublicos => this.log('Fetched TipoPublico')),
+                catchError(this.handleError('getByTipoAssociacao()', []))
+        );
+    }
+
     getById(id: number): Observable<TipoPublico> {
         return this.http.get<TipoPublico>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched tipoPublico id=${id}`)),

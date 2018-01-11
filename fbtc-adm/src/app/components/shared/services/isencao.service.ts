@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { MessageService } from '../../../message.service';
-import { Isencao } from '../model/isencao';
+import { Isencao, IsencaoDao } from '../model/isencao';
 import { IsencaoRoute } from '../webapi-routes/isencao.route';
 
 const httpOptions = {
@@ -39,6 +39,16 @@ export class IsencaoService {
         return this.http.get<Isencao>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched isencao id=${id}`)),
             catchError(this.handleError<Isencao>(`getById id=${id}`))
+        );
+    }
+
+    getIsencaoByFilters(tipoIsencao: string, nomeAssociado: string, anoIsencao: number, identificacao: string, tipoEvento: string): Observable<IsencaoDao[]> {
+            return this.http.get<IsencaoDao[]>(this.apiRoute.getFindIsencaoByFilters(tipoIsencao, nomeAssociado, anoIsencao, identificacao, tipoEvento))
+            .pipe(
+                tap(Isencoes => this.log(`fetched Isencao Filter tipoIsencao=${tipoIsencao},
+                nome=${nomeAssociado}, AnoIsencao=${anoIsencao}, identificacao=${identificacao}, tipoEvento=${tipoEvento}`)),
+                catchError(this.handleError(`getByFilters tipoIsencao=${tipoIsencao},
+                nome=${nomeAssociado}, AnoIsencao=${anoIsencao}, identificacao=${identificacao}, tipoEvento=${tipoEvento}`, []))
         );
     }
 

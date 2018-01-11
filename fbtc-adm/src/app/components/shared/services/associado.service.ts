@@ -9,6 +9,8 @@ import 'rxjs/Rx';
 import { MessageService } from './../../../message.service';
 import { AssociadoRoute } from './../webApi-routes/associado.route';
 import { Associado } from '../model/associado';
+import { AssociadoIsentoDao } from '../model/associado-isento';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -64,8 +66,15 @@ export class AssociadoService {
         );
     }
 
+    //////// Save methods //////////
+    /** POST: add a new Associado to the server */
+    saveAssociadoIsento (associadoIsentoDao: AssociadoIsentoDao): Observable<AssociadoIsentoDao> {
+        return this.http.post<AssociadoIsentoDao>(this.apiRoute.postAssociadoIsento(), associadoIsentoDao, httpOptions).pipe(
+          tap((_associadoIsentoDao: AssociadoIsentoDao) => this.log(`saved associadoIsentoDao w/ eventoId=${associadoIsentoDao.isencaoId}`)),
+          catchError(this.handleError<AssociadoIsentoDao>('saveAssociadoIsentoDao'))
+        );
+    }
 
-    //  nome: string, cpf: string, sexo: string, atcId: number, crp: string, tipoProfissao: string, tipoPublicoId: number
     getByFilters(nome: string, cpf: string, sexo: string, atcId: number,
         crp: string, tipoProfissao: string, tipoPublicoId: number, estado: string, cidade: string, ativo: string): Observable<Associado[]> {
             return this.http.get<Associado[]>(this.apiRoute.getFindByFilters(nome, cpf, sexo, atcId, crp, tipoProfissao, tipoPublicoId, estado, cidade, ativo))
@@ -74,6 +83,21 @@ export class AssociadoService {
                     crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
                     cidade=${cidade}, ativo=${ativo}`)),
                 catchError(this.handleError(`getByFilters nome=${nome}, cpf=${cpf}, sexo=${sexo}, atcId=${atcId},
+                    crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
+                     cidade=${cidade}, ativo=${ativo}`, []))
+        );
+    }
+
+
+    //  nome: string, cpf: string, sexo: string, atcId: number, crp: string, tipoProfissao: string, tipoPublicoId: number
+    getIsentoByFilters(isencaoId: number, nome: string, cpf: string, sexo: string, atcId: number,
+        crp: string, tipoProfissao: string, tipoPublicoId: number, estado: string, cidade: string, ativo: string): Observable<AssociadoIsentoDao[]> {
+            return this.http.get<AssociadoIsentoDao[]>(this.apiRoute.getFindIsentoByFilters(isencaoId, nome, cpf, sexo, atcId, crp, tipoProfissao, tipoPublicoId, estado, cidade, ativo))
+            .pipe(
+                tap(associadosIsentosDao => this.log(`fetched AssociadoIsentoDao Filter isencaoId=${isencaoId}, nome=${nome}, cpf=${cpf}, sexo=${sexo}, atcId=${atcId},
+                    crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
+                    cidade=${cidade}, ativo=${ativo}`)),
+                catchError(this.handleError(`getByFilters isencaoId=${isencaoId}, nome=${nome}, cpf=${cpf}, sexo=${sexo}, atcId=${atcId},
                     crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
                      cidade=${cidade}, ativo=${ativo}`, []))
         );

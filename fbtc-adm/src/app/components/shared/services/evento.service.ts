@@ -8,8 +8,9 @@ import 'rxjs/Rx';
 
 import { MessageService } from './../../../message.service';
 import { Evento } from './../model/evento';
-import { EventoRoute } from './../webapi-routes/evento.route';
 import { TipoPublicoValorDao } from '../model/tipo-publico';
+
+import { EventoRoute } from './../webapi-routes/evento.route';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

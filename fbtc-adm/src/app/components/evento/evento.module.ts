@@ -15,7 +15,6 @@ import { FileUploadModule } from './../shared/upload/file-upload.module';
 
 import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
 
-
 @NgModule({
   imports: [
     CommonModule,

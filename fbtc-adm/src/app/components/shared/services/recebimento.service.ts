@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 
 import { MessageService } from '../../../message.service';
 import { RecebimentoRoute } from './../webapi-routes/recebimento.route';
-import { Recebimento } from './../model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from './../model/recebimento';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -67,21 +67,61 @@ export class RecebimentoService {
         );
     }
 
-    getByFilters(objetivoPagamento: string, nome: string, cpf: string, crp: string, crm: string, statusPagamento: string,
-        ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): Observable<Recebimento[]> {
-            return this.http.get<Recebimento[]>(this.apiRoute
-                .getFindByFilters(objetivoPagamento, nome, cpf, crp, crm, statusPagamento, ano, mes, ativo, tipoEvento,
+    getAnuidadeByFilters(nome: string, cpf: string, crp: string, crm: string, statusPagamento: string,
+        ano: number, mes: number, ativo: string, tipoPublicoId: number): Observable<RecebimentoAssociadoDao[]> {
+            return this.http.get<RecebimentoAssociadoDao[]>(this.apiRoute
+                .getFindAnuidadeByFilters(nome, cpf, crp, crm, statusPagamento, ano, mes, ativo,
                     tipoPublicoId))
-                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter objetivoPagamento=${objetivoPagamento},
-                    nome=${nome}, cpf=${cpf}, crp=${crp},crp=${crm}, statusPagamento=${statusPagamento},
-                    ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`)),
-                catchError(this.handleError(`getByFilters objetivoPagamento=${objetivoPagamento},
-                    nome=${nome}, cpf=${cpf}, crp=${crp},crp=${crm}, status=${status},
-                    ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`, []))
+                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter nome=${nome}, cpf=${cpf},
+                    crp=${crp},crp=${crm}, statusPagamento=${statusPagamento},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoPublicoId=${tipoPublicoId}`)),
+                catchError(this.handleError(`getAnuidadeByFilters nome=${nome}, cpf=${cpf}, crp=${crp},
+                    crp=${crm}, status=${status},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoPublicoId=${tipoPublicoId}`, []))
         );
     }
 
+    getByAnuidadeIdFilters(anuidadeId: number, nome: string, cpf: string, crp: string, crm: string, statusPagamento: string,
+        ano: number, mes: number, ativo: string, tipoPublicoId: number): Observable<RecebimentoAssociadoDao[]> {
+            return this.http.get<RecebimentoAssociadoDao[]>(this.apiRoute
+                .FindByAnuidadeIdFilters(anuidadeId, nome, cpf, crp, crm, statusPagamento, ano, mes, ativo,
+                    tipoPublicoId))
+                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter anuidadeId=${anuidadeId},
+                    nome=${nome}, cpf=${cpf}, crp=${crp},crp=${crm}, statusPagamento=${statusPagamento},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoPublicoId=${tipoPublicoId}`)),
+                catchError(this.handleError(`getByAnuidadeIdFilters anuidadeId=${anuidadeId},
+                    nome=${nome}, cpf=${cpf}, crp=${crp},crp=${crm}, status=${status},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoPublicoId=${tipoPublicoId}`, []))
+        );
+    }
 
+    getEventoByFilters(nome: string, cpf: string, crp: string, crm: string, statusPagamento: string,
+        ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): Observable<RecebimentoAssociadoDao[]> {
+            return this.http.get<RecebimentoAssociadoDao[]>(this.apiRoute
+                .getFindEventoByFilters(nome, cpf, crp, crm, statusPagamento, ano, mes, ativo, tipoEvento,
+                    tipoPublicoId))
+                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter nome=${nome}, cpf=${cpf}, crp=${crp},
+                    crp=${crm}, statusPagamento=${statusPagamento},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`)),
+                catchError(this.handleError(`getEventoByFilters nome=${nome}, cpf=${cpf}, crp=${crp},
+                crp=${crm},status=${status},
+                ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`, []))
+        );
+    }
+
+    getByEventoIdFilters(eventoId: number, nome: string, cpf: string, crp: string, crm: string, statusPagamento: string,
+        ano: number, mes: number, ativo: string, tipoEvento: string, tipoPublicoId: number): Observable<RecebimentoAssociadoDao[]> {
+            return this.http.get<RecebimentoAssociadoDao[]>(this.apiRoute
+                .getFindByEventoIdFilters(eventoId, nome, cpf, crp, crm, statusPagamento, ano, mes, ativo, tipoEvento,
+                    tipoPublicoId))
+                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter eventoId=${eventoId},nome=${nome}, cpf=${cpf},
+                    crp=${crp},crp=${crm}, statusPagamento=${statusPagamento},
+                    ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`)),
+                catchError(this.handleError(`getByEventoIdFilters eventoId=${eventoId},nome=${nome}, cpf=${cpf}, crp=${crp},
+                crp=${crm},status=${status},
+                ano=${ano},mes=${mes},ativo=${ativo}, tipoEvento=${tipoEvento}, tipoPublicoId=${tipoPublicoId}`, []))
+        );
+    }
 
     /**
     * Handle Http operation that failed.

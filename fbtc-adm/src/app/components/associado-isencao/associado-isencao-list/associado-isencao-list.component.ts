@@ -1,5 +1,5 @@
-import { CidadeEnderecoCepDao, EstadoEnderecoCepDao } from './../../shared/model/endereco-cep';
-import { Component, OnInit } from '@angular/core';
+import { AssociadoIsento } from './../../shared/model/associado-isento';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -12,6 +12,8 @@ import { EnderecoService } from './../../shared/services/endereco.service';
 import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from '../../shared/model/atc';
+import { CidadeEnderecoCepDao, EstadoEnderecoCepDao } from './../../shared/model/endereco-cep';
+import { AssociadoIsentoDao } from '../../shared/model/associado-isento';
 
 import { Util } from './../../shared/util/util';
 
@@ -24,23 +26,31 @@ export class AssociadoIsencaoListComponent implements OnInit {
 
     title = 'Pesquisa de Usários'; // Associados
 
+    @Input() isencaoId: number;
+    @Input() tipoIsencao: string;
+
     _util = Util;
 
-    private selectedAssociado: Associado;
+    private selectedAssociado: AssociadoIsento;
 
-    associados: Associado[];
+    associados: AssociadoIsentoDao[];
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
     estadoEnderecoCepDAO: EstadoEnderecoCepDao[];
     cidadeEnderecoCepDAO: CidadeEnderecoCepDao[];
 
-    editNome: string;
-    editCPF: string;
-    editCRP: string;
-    editCRM: string;
-    editEstado: string;
-    editCidade: string;
-    editAtivo:boolean = true;
+    _associadoIsentoDao = new AssociadoIsentoDao();
+
+    editNome: string = '';
+    editCpf: string = '';
+    editSexo: string = '0';
+    editAtcId: number = 0;
+    editCrp: string = '';
+    editTipoProfissao: string = '0';
+    editTipoPublicoId: number = 0;
+    editEstado: string = '0';
+    editCidade: string = '0';
+    editAtivo: boolean = true;
 
     _nome: string = '0';
     _cpf: string = '0';
@@ -50,6 +60,7 @@ export class AssociadoIsencaoListComponent implements OnInit {
     _ativo: string = '2';
 
     submitted = false;
+    isBusy = false;
 
     constructor(
         private service: AssociadoService,
@@ -59,11 +70,6 @@ export class AssociadoIsencaoListComponent implements OnInit {
         private serviceAtc: AtcService,
         private serviceEnd: EnderecoService
     ) { }
-
-    getAssociados(): void {
-
-        this.service.getAssociados().subscribe(associados => this.associados = associados);
-    }
 
     getAtcs(): void {
 
@@ -75,12 +81,73 @@ export class AssociadoIsencaoListComponent implements OnInit {
         this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
     }
 
-    onSelect(associado: Associado): void {
-
-        this.selectedAssociado = associado;
+    onSubmit() {
+        this.submitted = true;
+        this.gotoBuscarAssociado();
     }
 
-    gotoBuscarAssociado() { }
+    gotoBuscarAssociado(): void {
+
+        if (this.editNome.trim() !== '') {
+            this._nome = this.editNome.trim();
+        }
+        if (this.editCpf !== '') {
+            this._cpf = this.editCpf;
+        }
+        if (this.editCrp !== '') {
+            this._crp = this.editCrp;
+        }
+        if (this.editAtivo !== null) {
+            if (this.editAtivo) {
+              this._ativo = 'true';
+            } else {
+              this._ativo = 'false';
+            }
+        }
+
+        this.service.getIsentoByFilters(this.isencaoId, this._nome, this._cpf, this.editSexo, this.editAtcId,
+                this._crp, this.editTipoProfissao, this.editTipoPublicoId, this.editEstado, this.editCidade, this._ativo)
+            .subscribe(associados => this.associados = associados);
+
+          this.submitted = false;
+          // this._nome = '0';
+          // this._cpf = '0';
+          // this._crp = '0';
+          this._ativo = '2';
+    }
+
+    gotoSavaIsencaoAssociado(associadoId: number, associadoIsentoId: number) {
+
+        if (this.isBusy) {
+
+            this.gotoShowPopUp('Aguarde....');
+        } else {
+
+            this.isBusy = true;
+
+            this._associadoIsentoDao.associadoId = associadoId;
+            this._associadoIsentoDao.associadoIsentoId =  associadoIsentoId;
+            this._associadoIsentoDao.isencaoId = this.isencaoId;
+            this._associadoIsentoDao.atcId = 0;
+            this._associadoIsentoDao.ativo = false;
+            this._associadoIsentoDao.cpf = '';
+            this._associadoIsentoDao.crp = '';
+            this._associadoIsentoDao.nome = '';
+            this._associadoIsentoDao.tipoPublicoId = 0;
+            this._associadoIsentoDao.tipoIsencao = this.tipoIsencao;
+
+            this.service.saveAssociadoIsento(this._associadoIsentoDao)
+            .subscribe(() =>  this.gotoBuscarAssociado());
+
+            this.isBusy = false;
+        }
+    }
+
+    gotoShowPopUp(msg: string) {
+
+        // Colocar a chamada para a implementação do PopUp modal de aviso:
+        alert(msg);
+      }
 
     ngOnInit() {
 
@@ -88,6 +155,6 @@ export class AssociadoIsencaoListComponent implements OnInit {
 
         this.getAtcs();
 
-        this.getAssociados();
+        this.gotoBuscarAssociado();
     }
 }

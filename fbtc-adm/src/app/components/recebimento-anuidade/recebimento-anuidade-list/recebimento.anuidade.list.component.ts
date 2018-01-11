@@ -1,3 +1,4 @@
+import { TipoPublicoService } from './../../shared/services/tipo-publico.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -6,7 +7,8 @@ import { Data } from '@angular/router/src/config';
 
 import { RecebimentoService } from './../../shared/services/recebimento.service';
 
-import { Recebimento } from './../../shared/model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from './../../shared/model/recebimento';
+import { TipoPublico } from '../../shared/model/tipo-publico';
 
 import { Util } from './../../shared/util/util';
 
@@ -25,7 +27,9 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
 
   private selectedRecebimento: Recebimento;
 
-  recebimentos: Recebimento[];
+  recebimentos: RecebimentoAssociadoDao[];
+
+  tiposPublicos: TipoPublico[];
 
   editNome: string = '';
   editCpf: string = '';
@@ -46,21 +50,17 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   _ano: number = 0;
   _mes: number = 0;
   _ativo: string = '2';
-  _tipoEvento: string = '0';
   _tipoPublicoId: number = 0;
+  _isAssociado: boolean = true;
 
   submitted = false;
 
   constructor(
       private service: RecebimentoService,
+      private serviceTP: TipoPublicoService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
-
-  getRecebimentos(objRec): void {
-
-    this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
-  }
 
   onSelect(recebimento: Recebimento): void {
     this.selectedRecebimento = recebimento;
@@ -69,6 +69,11 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.gotoBuscarRecebimento();
+  }
+
+  gotoGerarNovaCobranca() {
+
+    console.log('Gerando nova conbrança...');
   }
 
   gotoBuscarRecebimento(): void {
@@ -108,8 +113,8 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
       }
     }
 
-    this.service.getByFilters(this._objetivoPagamento, this._nome, this._cpf, this._crp,  this._crm,
-          this._statusPagamento, this._ano, this._mes, this._ativo, this._tipoEvento, this.editTipoPublicoId)
+    this.service.getAnuidadeByFilters(this._nome, this._cpf, this._crp,  this._crm,
+          this._statusPagamento, this._ano, this._mes, this._ativo, this.editTipoPublicoId)
         .subscribe(recebimentos => this.recebimentos = recebimentos);
 
     this.submitted = false;
@@ -122,15 +127,17 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this._ano = 0;
     this._mes = 0;
     this._ativo = '2';
-    this._tipoEvento = '0';
     this._tipoPublicoId = 0;
   }
 
-  /** Called by Angular after AssociadoList component initialized */
+  getTiposPublicos(): void {
+
+    this.serviceTP.getByTipoAssociacao(this._isAssociado).subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+  }
+
   ngOnInit() {
 
-    // 2: Anuidade.
-    const objRecebimento = '2';
-    this.getRecebimentos(objRecebimento);
+    this.getTiposPublicos();
+    this.gotoBuscarRecebimento();
   }
 }

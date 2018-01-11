@@ -13,7 +13,6 @@ import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from './../../shared/model/atc';
 
-// import { debug } from 'util';
 import { Util } from './../../shared/util/util';
 import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
 
@@ -101,15 +100,15 @@ export class AssociadoFormComponent implements OnInit {
 
         this.associado.nomeFoto = this._nomeFoto;
         this.service.addAssociado(this.associado)
-        .subscribe(() =>  this.gotoShowPopUp());
+        .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
 
         this.submitted = false;
     }
 
-    gotoShowPopUp() {
+    gotoShowPopUp(msg: string) {
 
       // Colocar a chamada para a implementação do PopUp modal de aviso:
-      alert('Registro salvo com sucesso!');
+      alert(msg);
     }
 
     excluir() {
