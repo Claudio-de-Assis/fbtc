@@ -1,10 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <osdmAllTables:Tables xmlns:osdmAllTables="http://oracle.com/datamodeler/reports/tables">
-   <osdmAllTables:ReportCaption>FBTC-Modelo_de_Dados-20171215</osdmAllTables:ReportCaption>
+   <osdmAllTables:ReportCaption>FBTC - 01/08/2018</osdmAllTables:ReportCaption>
    <osdmAllTables:CompanyName>FBTC</osdmAllTables:CompanyName>
    <osdmAllTables:UsePageBreaks>true</osdmAllTables:UsePageBreaks>
    <osdmAllTables:DesignName>FBTC - v2</osdmAllTables:DesignName>
-   <osdmAllTables:VersionDate>18.12.2017 01:27:58</osdmAllTables:VersionDate>
+   <osdmAllTables:VersionDate>08.01.2018 11:11:31</osdmAllTables:VersionDate>
    <osdmAllTables:ModelName>Relational_1</osdmAllTables:ModelName>
    <osdmAllTables:TablesCollection>
       <osdmAllTables:TableDetails>
@@ -15,7 +15,7 @@
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>3</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -62,6 +62,19 @@
                <osdmAllTables:Security/>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
          </osdmAllTables:ColumnsCollection>
          <osdmAllTables:ColumnsCommentsCollection>
             <osdmAllTables:ColumnCommentsDetails>
@@ -81,6 +94,15 @@
 
 Ex:
 2015, 2016, 2017, (2017 + 1).....</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o registro está ativo
+
+Valores aceitos:
+Ativo: 1
+Inativo: 0</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -2289,10 +2311,6 @@ Não: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:Abbreviation/>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
-         <osdmAllTables:DescriptionNotes>
-            <osdmAllTables:Description/>
-            <osdmAllTables:Notes/>
-         </osdmAllTables:DescriptionNotes>
          <osdmAllTables:QuantitativeInfoCollection>
             <osdmAllTables:NumberOfColumns>17</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
@@ -2529,7 +2547,6 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>RecebimentoId</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Identificador do registro na tabela</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
@@ -2566,7 +2583,6 @@ Valores aceitos
 Inadimplente: 1
 Adimplente: 2
 Isento: 3</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>9</osdmAllTables:ColumnCommentsSequence>
@@ -2676,8 +2692,12 @@ Não: 0
          <osdmAllTables:Abbreviation/>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:DescriptionNotes>
+            <osdmAllTables:Description/>
+            <osdmAllTables:Notes/>
+         </osdmAllTables:DescriptionNotes>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>6</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -2737,12 +2757,39 @@ Não: 0
                <osdmAllTables:Security/>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Associado</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>6</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ordem</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>SMALLINT</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
          </osdmAllTables:ColumnsCollection>
          <osdmAllTables:ColumnsCommentsCollection>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>TipoPublicoId</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Identificador do registro</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
@@ -2752,7 +2799,7 @@ Não: 0
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>DescricaoValor</osdmAllTables:ColumnCommentsName>
-               <osdmAllTables:ColumnDescription>Descrição do valor que ser aplica ao tipo de público</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnDescription>Descrição do valor(do evento ou da anuidade) que ser aplica ao tipo de público</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
@@ -2762,6 +2809,21 @@ Não: 0
 valores aceitos: 
 Sim: 1
 Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Associado</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se a o Tipo de publico é um tipo associado.
+
+Valores aceitos
+Associado: 1
+Não associado: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>6</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ordem</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Indica a ordem de classificação do tipo de público</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -2943,7 +3005,7 @@ Não: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>5</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -3003,6 +3065,19 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:Security/>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
          </osdmAllTables:ColumnsCollection>
          <osdmAllTables:ColumnsCommentsCollection>
             <osdmAllTables:ColumnCommentsDetails>
@@ -3014,6 +3089,15 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>Valor</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Valor do evento de acordo com tipo de público</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o valor está ativo
+
+valores aceitos: 
+Sim: 1
+Não: 0</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
