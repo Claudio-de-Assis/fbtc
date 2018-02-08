@@ -21,9 +21,19 @@ namespace Fbtc.Domain.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Atc> FindByFilters(int atcId)
+        {
+            return _atcRepository.FindByFilters(atcId);
+        }
+
         public IEnumerable<Atc> GetAll()
         {
             return _atcRepository.GetAll();
+        }
+
+        public IEnumerable<AtcDao> GetAllLst()
+        {
+            return _atcRepository.GetAllLst();
         }
 
         public Atc GetAtcById(int id)

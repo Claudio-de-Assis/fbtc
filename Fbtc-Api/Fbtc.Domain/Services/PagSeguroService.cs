@@ -1,0 +1,44 @@
+﻿using Fbtc.Domain.Entities;
+using Fbtc.Domain.Interfaces.Repositories;
+using Fbtc.Domain.Interfaces.Services;
+using System;
+using System.Threading.Tasks;
+
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.IO;
+
+namespace Fbtc.Domain.Services
+{
+    public class PagSeguroService : IPagSeguroService
+    {
+        private readonly IPagSeguroRepository _pagSeguroRepository;
+
+        public PagSeguroService(IPagSeguroRepository pagSeguroRepository)
+        {
+            _pagSeguroRepository = pagSeguroRepository;
+        }
+
+        /*
+        public string GetNotificationCode(string notificationCode)
+        {
+            return _pagSeguroRepository.GetNotificationCode(notificationCode);
+        }*/
+
+        public string NotificationTransacao(string notificationCode, string notificationType)
+        {
+            return _pagSeguroRepository.NotificationTransacao(notificationCode, notificationType);
+        }
+
+        public string UpdateRecebimentoPagSeguro(TransacaoPagSeguro transacaoPagSeguro)
+        {
+            return _pagSeguroRepository.UpdateRecebimentoPagSeguro(transacaoPagSeguro);
+        }
+
+        public int UpdateRecebimentosPeriodoPagSeguro(TransactionSearchResult transactionSearchResult)
+        {
+            return _pagSeguroRepository.UpdateRecebimentosPeriodoPagSeguro(transactionSearchResult);
+        }
+    }
+}

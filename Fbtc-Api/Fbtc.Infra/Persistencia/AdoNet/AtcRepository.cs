@@ -189,5 +189,41 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
             return _msg;
         }
+
+        public IEnumerable<AtcDao> GetAllLst()
+        {
+            query = @"SELECT AtcId, Nome
+                    FROM dbo.AD_ATC 
+                    Where Ativo = '1' 
+                    ORDER BY Nome";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<AtcDao> AtcCollection = GetCollection<AtcDao>(cmd)?.ToList();
+
+            return AtcCollection;
+        }
+
+
+        public IEnumerable<Atc> FindByFilters(int atcId)
+        {
+            query = @"SELECT AtcId, Nome, UF, NomePres, NomeVPres, NomePSec, NomeSSec,
+                        NomePTes, NomeSTes, Site, SiteDiretoria, Ativo, Codigo
+                    FROM dbo.AD_ATC
+                    WHERE AtcId > 0 ";
+
+            if (atcId != 0)
+                query = query + $" AND AtcId = {atcId} ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<Atc> _collection = GetCollection<Atc>(cmd)?.ToList();
+
+            return _collection;
+        }
     }
 }

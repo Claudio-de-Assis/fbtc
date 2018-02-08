@@ -4,6 +4,7 @@ using Fbtc.Domain.Interfaces.Repositories;
 using Fbtc.Domain.Interfaces.Services;
 using Fbtc.Domain.Services;
 using Fbtc.Infra.Persistencia.AdoNet;
+using Fbtc.Infra.Persistencia.PagSeguro;
 using SimpleInjector;
 
 namespace Fbtc.Ioc
@@ -26,6 +27,8 @@ namespace Fbtc.Ioc
             container.Register<IRecebimentoApplication, RecebimentoApplication>(Lifestyle.Scoped);
             container.Register<IIsencaoApplication, IsencaoApplication>(Lifestyle.Scoped);
             container.Register<IAnuidadeApplication, AnuidadeApplication>(Lifestyle.Scoped);
+            container.Register<IPagSeguroApplication, PagSeguroApplication>(Lifestyle.Scoped);
+
 
             // Servicços de domínio:
             container.Register<IAssociadoService, AssociadoService>(Lifestyle.Scoped);
@@ -37,6 +40,7 @@ namespace Fbtc.Ioc
             container.Register<IRecebimentoService, RecebimentoService>(Lifestyle.Scoped);
             container.Register<IIsencaoService, IsencaoService>(Lifestyle.Scoped);
             container.Register<IAnuidadeService, AnuidadeService>(Lifestyle.Scoped);
+            container.Register<IPagSeguroService, PagSeguroService>(Lifestyle.Scoped);
 
             // Infra Repositórios:
             container.Register<IAssociadoRepository, AssociadoRepository>(Lifestyle.Scoped);
@@ -48,6 +52,7 @@ namespace Fbtc.Ioc
             container.Register<IRecebimentoRepository, RecebimentoRepository>(Lifestyle.Scoped);
             container.Register<IIsencaoRepository, IsencaoRepository>(Lifestyle.Scoped);
             container.Register<IAnuidadeRepository, AnuidadeRepository>(Lifestyle.Scoped);
+            container.Register<IPagSeguroRepository, PagSeguroRepository>(Lifestyle.Scoped);
         }
     }
 }

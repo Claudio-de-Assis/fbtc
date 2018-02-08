@@ -7,6 +7,8 @@ namespace Fbtc.Application.Interfaces
     {
         IEnumerable<Atc> GetAll();
 
+        IEnumerable<AtcDao> GetAllLst();
+
         Atc GetAtcById(int id);
 
         Atc SetAtc();
@@ -14,5 +16,8 @@ namespace Fbtc.Application.Interfaces
         string DeleteById(int id);
 
         string Save(Atc atc);
+
+        IEnumerable<Atc> FindByFilters(int atcId);
+
     }
 }

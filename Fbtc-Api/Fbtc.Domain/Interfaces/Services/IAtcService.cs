@@ -7,6 +7,8 @@ namespace Fbtc.Domain.Interfaces.Services
     {
         IEnumerable<Atc> GetAll();
 
+        IEnumerable<AtcDao> GetAllLst();
+
         Atc GetAtcById(int id);
 
         string DeleteById(int id);
@@ -14,5 +16,7 @@ namespace Fbtc.Domain.Interfaces.Services
         string Insert(Atc atc);
 
         string Update(int id, Atc atc);
+
+        IEnumerable<Atc> FindByFilters(int atcId);
     }
 }

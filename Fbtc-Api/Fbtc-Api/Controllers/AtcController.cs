@@ -54,6 +54,42 @@ namespace Fbtc.Api.Controllers
             }
         }
 
+
+        // [Authorize]
+        [Route("GetAllLst")]
+        [HttpGet]
+        public Task<HttpResponseMessage> GetAllLst()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                var resultado = _atcApplication.GetAllLst();
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
         // [Authorize]
         [Route("{id:int}")]
         [HttpGet]
@@ -140,6 +176,41 @@ namespace Fbtc.Api.Controllers
                 if (atc == null) throw new ArgumentNullException("O objeto 'Atc' está nulo!");
 
                 resultado = _atcApplication.Save(atc);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
+        [Route("FindByFilters/{atcId}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> FindByFilters(int atcId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                var resultado = _atcApplication.FindByFilters(atcId);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

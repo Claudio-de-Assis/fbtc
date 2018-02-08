@@ -1,6 +1,9 @@
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.csprojResolveAssemblyReference.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Infra.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Infra.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Infra.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Application.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Microsoft.Extensions.PlatformAbstractions.dll
@@ -24,13 +27,11 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\System.Reflection.TypeExtension
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\System.Security.Cryptography.Algorithms.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\System.Security.Cryptography.Primitives.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\System.Threading.Thread.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Application.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Domain.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Domain.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Microsoft.Extensions.PlatformAbstractions.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Newtonsoft.Json.xml
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.csprojResolveAssemblyReference.cache
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Application.dll
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Fbtc.Application.pdb

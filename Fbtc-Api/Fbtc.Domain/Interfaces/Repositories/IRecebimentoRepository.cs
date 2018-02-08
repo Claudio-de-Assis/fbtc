@@ -1,4 +1,5 @@
 ﻿using Fbtc.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Fbtc.Domain.Interfaces.Repositories
@@ -19,19 +20,22 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         string DeleteByAssociadoIsentoId(int id);
 
+        string UpdateRecebimentoPagSeguro(string code, string reference, int type,
+            int status, string lasteventdate, int TypePaymentoMethod, int CodePaymentoMethod, decimal NetAmountPS);
+        
 
         IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf,
-           string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId);
+           string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 
         IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo,
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
             string tipoEvento, int tipoPublicoId);
 
         IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId);
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 
         IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo,
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
             string tipoEvento, int tipoPublicoId);
 
         // Tipo 1: Anuidade; Tipo 2: Evento

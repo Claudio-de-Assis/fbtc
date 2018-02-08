@@ -1,6 +1,14 @@
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csproj.App.config
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csproj.CoreCompileInputs.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Fbtc.Domain.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Fbtc.Domain.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csproj.CoreCompileInputs.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Newtonsoft.Json.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\System.Net.Http.Extensions.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\System.Net.Http.Primitives.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\Newtonsoft.Json.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\System.Net.Http.Extensions.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csprojResolveAssemblyReference.cache

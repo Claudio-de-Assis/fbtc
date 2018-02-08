@@ -20,17 +20,17 @@ namespace Fbtc.Application.Interfaces
         string DeleteByAssociadoIsentoId(int id);
 
         IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId);
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 
         IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo,
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
             string tipoEvento, int tipoPublicoId);
         
         IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId);
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 
         IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf,
-            string crp, string crm, string status, int ano, int mes, bool? ativo,
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
             string tipoEvento, int tipoPublicoId);
 
         // Tipo 1: Anuidade; Tipo 2: Evento

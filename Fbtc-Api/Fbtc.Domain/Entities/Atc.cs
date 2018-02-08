@@ -17,4 +17,10 @@ namespace Fbtc.Domain.Entities
         public bool Ativo { get; set; }
         public int Codigo { get; set; }
     }
+
+    public class AtcDao
+    {
+        public int AtcId { get; set; }
+        public string Nome { get; set; }
+    }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Interfaces\IEnderecoApplication.cs" />
     <Compile Include="Interfaces\IEventoApplication.cs" />
     <Compile Include="Interfaces\IIsencaoApplication.cs" />
+    <Compile Include="Interfaces\IPagSeguroApplication.cs" />
     <Compile Include="Interfaces\IRecebimentoApplication.cs" />
     <Compile Include="Interfaces\ITipoPublicoApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Services\EnderecoApplication.cs" />
     <Compile Include="Services\EventoApplication.cs" />
     <Compile Include="Services\IsencaoApplication.cs" />
+    <Compile Include="Services\PagSeguroApplication.cs" />
     <Compile Include="Services\RecebimentoApplication.cs" />
     <Compile Include="Services\TipoPublicoApplication.cs" />
   </ItemGroup>

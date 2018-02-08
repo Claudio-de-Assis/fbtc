@@ -24,63 +24,72 @@ namespace Fbtc.Application.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+        public IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf, 
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId)
         {
-            string _nome, _cpf, _crp, _crm, _status;
+            string _nome, _cpf, _crp, _crm;
+            int _statusPS;
 
             _nome = nome == "0" ? "" : nome;
             _cpf = cpf == "0" ? "" : cpf;
             _crp = crp == "0" ? "" : crp;
             _crm = crm == "0" ? "" : crm;
-            _status = status == "0" ? "" : status;
+            _statusPS = statusPS;
 
-            return _recebimentoService.FindAnuidadeByFilters(_nome, _cpf, _crp, _crm, _status,
+            return _recebimentoService.FindAnuidadeByFilters(_nome, _cpf, _crp, _crm, _statusPS,
                 ano, mes, ativo, tipoPublicoId);
         }
 
-        public IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome, string cpf, 
-            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+        public IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome,
+            string cpf, string crp, string crm, int statusPS, int ano, int mes,
+            bool? ativo, int tipoPublicoId)
         {
-            string _nome, _cpf, _crp, _crm, _status;
+            string _nome, _cpf, _crp, _crm;
+            int _statusPS;
 
             _nome = nome == "0" ? "" : nome;
             _cpf = cpf == "0" ? "" : cpf;
             _crp = crp == "0" ? "" : crp;
             _crm = crm == "0" ? "" : crm;
-            _status = status == "0" ? "" : status;
+            _statusPS = statusPS;
 
-            return _recebimentoService.FindByAnuidadeIdFilters(anuidadeId, _nome, _cpf, _crp, _crm, _status,
-                ano, mes, ativo, tipoPublicoId);
+            return _recebimentoService.FindByAnuidadeIdFilters(anuidadeId, _nome, _cpf, _crp, _crm, 
+                _statusPS, ano, mes, ativo, tipoPublicoId);
         }
 
-        public IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
+        public IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf, 
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, string tipoEvento,
+            int tipoPublicoId)
         {
-            string _nome, _cpf, _crp, _crm, _status, _tipoEvento;
+            string _nome, _cpf, _crp, _crm, _tipoEvento;
+            int _statusPS;
 
             _nome = nome == "0" ? "" : nome;
             _cpf = cpf == "0" ? "" : cpf;
             _crp = crp == "0" ? "" : crp;
             _crm = crm == "0" ? "" : crm;
-            _status = status == "0" ? "" : status;
+            _statusPS = statusPS;
             _tipoEvento = tipoEvento == "0" ? "" : tipoEvento;
 
-            return _recebimentoService.FindEventoByFilters(_nome, _cpf, _crp, _crm, _status,
+            return _recebimentoService.FindEventoByFilters(_nome, _cpf, _crp, _crm, _statusPS,
                 ano, mes, ativo, _tipoEvento, tipoPublicoId);
         }
 
-        public IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf, 
-            string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
+        public IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, 
+            string cpf, string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
+            string tipoEvento, int tipoPublicoId)
         {
-            string _nome, _cpf, _crp, _crm, _status, _tipoEvento;
+            string _nome, _cpf, _crp, _crm, _tipoEvento;
+            int _statusPS;
 
             _nome = nome == "0" ? "" : nome;
             _cpf = cpf == "0" ? "" : cpf;
             _crp = crp == "0" ? "" : crp;
             _crm = crm == "0" ? "" : crm;
-            _status = status == "0" ? "" : status;
+            _statusPS = statusPS;
             _tipoEvento = tipoEvento == "0" ? "" : tipoEvento;
 
-            return _recebimentoService.FindByEventoIdFilters(eventoId, _nome, _cpf, _crp, _crm, _status,
+            return _recebimentoService.FindByEventoIdFilters(eventoId, _nome, _cpf, _crp, _crm, _statusPS,
                 ano, mes, ativo, _tipoEvento, tipoPublicoId);
         }
 
@@ -124,16 +133,17 @@ namespace Fbtc.Application.Services
                 ValorAnuidadePublicoId = r.ValorAnuidadePublicoId,
                 AssociadoIsentoId = r.AssociadoIsentoId,
                 ObjetivoPagamento = r.ObjetivoPagamento,
-                DtVencimento = r.DtVencimento,
-                DtPagamento = r.DtPagamento,
+                CodePaymentMethodPS = r.CodePaymentMethodPS,
+                CodePS = r.CodePS,
+                LastEventDatePS = r.LastEventDatePS,
+                NetAmountPS = r.NetAmountPS,
+                ReferencePS = r.ReferencePS,
+                StatusPS = r.StatusPS,
+                TypePaymentMethodPS = r.TypePaymentMethodPS,
+                TypePS = r.TypePS,
                 DtNotificacao = r.DtNotificacao,
-                StatusPagamento = r.StatusPagamento,
-                NrDocCobranca = r.NrDocCobranca,
-                ValorPago = r.ValorPago,
                 Observacao = Functions.AjustaTamanhoString(r.Observacao, 500),
-                TokenPagamento = r.TokenPagamento,
                 Ativo = r.Ativo,
-                FormaPagamento = r.FormaPagamento
             };
 
             try
@@ -155,16 +165,17 @@ namespace Fbtc.Application.Services
                 ValorAnuidadePublicoId = null,
                 AssociadoIsentoId = null,
                 ObjetivoPagamento = objetivoPagamento,
-                DtVencimento = null,
-                DtPagamento = null,
+                CodePaymentMethodPS = null,
+                CodePS = null,
+                LastEventDatePS = null,
+                NetAmountPS = 0,
+                ReferencePS = null,
+                StatusPS = null,
+                TypePaymentMethodPS = null,
+                TypePS = null,
                 DtNotificacao = null,
-                StatusPagamento = "",
-                NrDocCobranca = "",
-                ValorPago = 0,
                 Observacao = "",
-                TokenPagamento = "",
-                Ativo = true,
-                FormaPagamento = ""
+                Ativo = true
             };
             return r;
         }

@@ -27,32 +27,32 @@ namespace Fbtc.Domain.Services
         }
 
         public IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf, 
-            string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId)
         {
             return _recebimentoRepository.FindAnuidadeByFilters(nome, cpf, crp, crm,
-                status, ano, mes, ativo, tipoPublicoId);
+                statusPS, ano, mes, ativo, tipoPublicoId);
         }
 
         public IEnumerable<RecebimentoAssociadoDao> FindByAnuidadeIdFilters(int anuidadeId, string nome, 
-            string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, int tipoPublicoId)
+            string cpf, string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId)
         {
             return _recebimentoRepository.FindByAnuidadeIdFilters(anuidadeId, nome, cpf, crp, crm,
-                status, ano, mes, ativo, tipoPublicoId);
+                statusPS, ano, mes, ativo, tipoPublicoId);
         }
 
         public IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, 
-            string cpf, string crp, string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, 
+            string cpf, string crp, string crm, int statusPS, int ano, int mes, bool? ativo, string tipoEvento, 
             int tipoPublicoId)
         {
             return _recebimentoRepository.FindByEventoIdFilters(eventoId, nome, cpf, crp, crm,
-                status, ano, mes, ativo, tipoEvento, tipoPublicoId);
+                statusPS, ano, mes, ativo, tipoEvento, tipoPublicoId);
         }
 
         public IEnumerable<RecebimentoAssociadoDao> FindEventoByFilters(string nome, string cpf, string crp, 
-            string crm, string status, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
+            string crm, int statusPS, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
         {
             return _recebimentoRepository.FindEventoByFilters(nome, cpf, crp, crm,
-                status, ano, mes, ativo, tipoEvento, tipoPublicoId);
+                statusPS, ano, mes, ativo, tipoEvento, tipoPublicoId);
         }
 
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)

@@ -1,12 +1,7 @@
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.csproj.CoreCompileInputs.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Ioc.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Ioc.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Ioc.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\SimpleInjector.dll
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\SimpleInjector.xml
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.csprojResolveAssemblyReference.cache
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.csproj.CoreCompileInputs.cache
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.dll
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Ioc.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Application.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Infra.dll
@@ -14,6 +9,7 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\FirebirdSql.Data.FirebirdClient.d
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Microsoft.Extensions.PlatformAbstractions.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\MySql.Data.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\prmToolkit.AccessMultipleDatabaseWithAdoNet.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\SimpleInjector.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\System.Collections.NonGeneric.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\System.ComponentModel.Primitives.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\System.ComponentModel.TypeConverter.dll
@@ -34,8 +30,13 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\prmToolkit.Validation.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Newtonsoft.Json.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Application.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Domain.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Domain.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Infra.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Fbtc.Infra.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Microsoft.Extensions.PlatformAbstractions.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\SimpleInjector.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Newtonsoft.Json.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.csprojResolveAssemblyReference.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.pdb
