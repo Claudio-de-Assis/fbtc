@@ -1,4 +1,3 @@
-import { TipoPublicoService } from './../../shared/services/tipo-publico.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -6,11 +5,14 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Data } from '@angular/router/src/config';
 
 import { RecebimentoService } from './../../shared/services/recebimento.service';
+import { TipoPublicoService } from './../../shared/services/tipo-publico.service';
+import { PagSeguroService } from '../../shared/services/pagSeguro.service';
 
 import { Recebimento, RecebimentoAssociadoDao } from './../../shared/model/recebimento';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 
 import { Util } from './../../shared/util/util';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-recebimento-anuidade-list',
@@ -30,6 +32,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   recebimentos: RecebimentoAssociadoDao[];
 
   tiposPublicos: TipoPublico[];
+  mensagemSincronizacao: string;
 
   editNome: string = '';
   editCpf: string = '';
@@ -37,7 +40,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   editCrm: string = '';
   editAno: number = 0;
   editMes: number = 0;
-  editStatusPagamento: string = '0';
+  editStatusPS: number = 99;
   editAtivo: boolean = true;
   editTipoPublicoId: number = 0;
 
@@ -46,7 +49,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   _cpf: string = '0';
   _crp: string = '0';
   _crm: string = '0';
-  _statusPagamento: string = '0';
+  _statusPS: number = 99;
   _ano: number = 0;
   _mes: number = 0;
   _ativo: string = '2';
@@ -58,6 +61,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   constructor(
       private service: RecebimentoService,
       private serviceTP: TipoPublicoService,
+      private servicePS: PagSeguroService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
@@ -93,8 +97,8 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     if (this.editCrm !== '') {
       this._crm = this.editCrm;
     }
-    if (this.editStatusPagamento !== '0') {
-      this._statusPagamento = this.editStatusPagamento;
+    if (this.editStatusPS !== 99) {
+      this._statusPS = this.editStatusPS;
     }
     /*if (this.editTipoEvento !== '0') {
       this._tipoEvento = this.editTipoEvento;
@@ -114,7 +118,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     }
 
     this.service.getAnuidadeByFilters(this._nome, this._cpf, this._crp,  this._crm,
-          this._statusPagamento, this._ano, this._mes, this._ativo, this.editTipoPublicoId)
+          this._statusPS, this._ano, this._mes, this._ativo, this.editTipoPublicoId)
         .subscribe(recebimentos => this.recebimentos = recebimentos);
 
     this.submitted = false;
@@ -123,7 +127,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this._crp = '0';
 
     this._crm = '0';
-    this._statusPagamento = '0';
+    this._statusPS = 99;
     this._ano = 0;
     this._mes = 0;
     this._ativo = '2';
@@ -133,6 +137,10 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   getTiposPublicos(): void {
 
     this.serviceTP.getByTipoAssociacao(this._isAssociado).subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+  }
+
+  gotoSicronizarComPagSeguro(): void {
+    this.servicePS.postSincronizarRecebimentos().subscribe(mensagemSincronizacao => this.mensagemSincronizacao = mensagemSincronizacao);
   }
 
   ngOnInit() {

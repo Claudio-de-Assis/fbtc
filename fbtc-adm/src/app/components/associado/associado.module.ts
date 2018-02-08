@@ -6,13 +6,11 @@ import { CommonModule } from '@angular/common';
 
 import { AssociadoService } from './../shared/services/associado.service';
 import { CepCorreiosService } from '../shared/services/cep-correios.service';
-import { AtcService } from './../shared/services/atc.service';
 import { EnderecoService } from '../shared/services/endereco.service';
 
 import { AssociadoRoute } from '../shared/webApi-routes/associado.route';
 import { CepCorreiosRoute } from '../shared/webApi-routes/cep-correios.route';
 import { EnderecoRoute } from './../shared/webapi-routes/endereco.route';
-import { AtcRoute } from '../shared/webApi-routes/atc.route';
 
 import { AssociadoListComponent } from './associado-list/associado.list.component';
 import { AssociadoFormComponent } from './associado-form/associado.form.component';
@@ -23,6 +21,8 @@ import { AssociadoRoutingModule } from './associado.routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FileUploadModule } from '../shared/upload/file-upload.module';
 import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
+import { AtcRoute } from '../shared/webApi-routes/atc.route';
+import { AtcService } from '../shared/services/atc.service';
 
 @NgModule({
   imports: [
@@ -46,10 +46,10 @@ import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
       AssociadoRoute,
       CepCorreiosService,
       CepCorreiosRoute,
-      AtcService,
-      AtcRoute,
       EnderecoService,
       EnderecoRoute,
+      AtcRoute,
+      AtcService,
       FileUploadRoute
   ]
 })

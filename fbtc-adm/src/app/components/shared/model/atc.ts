@@ -12,3 +12,8 @@ export class Atc {
     siteDiretoria: string;
     ativo: boolean;
 }
+
+export class AtcDao {
+    atcId: number;
+    nome: string;
+}

@@ -23,7 +23,7 @@ export class EventoListComponent implements OnInit {
   title = 'Consulta de Eventos';
 
   editNome: string = '';
-  editAno: number = null
+  editAno: number = null;
   editTipoEvento: string = '';
 
   private selectedEvento: Evento;

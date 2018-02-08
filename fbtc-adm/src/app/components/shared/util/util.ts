@@ -12,7 +12,7 @@ export class Util {
     ];
 
     public static lstMes = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-    public static lstStatus = ['Adimplente', 'Inadimplente'];
+    // public static lstStatus = ['Adimplente', 'Inadimplente'];
 
     public static optBooleanFull = [
         {name: 'Todos', value: null},
@@ -26,9 +26,16 @@ export class Util {
     ];
 
     public static optStatusAdimplencia = [
-        {name: 'Inadimplente', value: '1'},
-        {name: 'Adimplente', value: '2'},
-        {name: 'Isento', value: '3'}
+        {name: 'Isento', value: '0'},
+        {name: 'Aguardando pagamento', value: '1'},
+        {name: 'Em análise', value: '2'},
+        {name: 'Paga', value: '3'},
+        {name: 'Disponível', value: '4'},
+        {name: 'Em disputa', value: '5'},
+        {name: 'Devolvida', value: '6'},
+        {name: 'Cancelada', value: '7'},
+        {name: 'Debitado', value: '8'},
+        {name: 'Retenção temporária', value: '9'}
     ];
 
     public static optTiposEventos = [

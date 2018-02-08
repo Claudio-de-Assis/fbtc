@@ -1,0 +1,72 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">New</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #atcForm="ngForm">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                              <label for="sltAtc">ATC:</label>
+                              <select id="sltAtc" name="Atc" class="form-control"
+                                  [(ngModel)]="editAtcId" #ano="ngModel">
+                                  <option *ngFor="let op of atcDaos" value="{{ op.atcId }}">{{ op.nome }}</option>
+                              </select> 
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                        </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                            <button class="btn btn-default" (click)="gotoNovaAtc()">Nova</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="panel panel-primary">
+            <div class="panel-heading">Listagem de Eventos</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>UF</td>
+                                    <td>Presidente</td>
+                                    <td>Ações</td>
+                                </tr>
+                            </thead>
+                            <tbody class="Atcs">
+                                <tr *ngFor="let atc of atcs"
+                                    [class.selected]="atc.atcId === selectedId">
+                                    <td>{{ atc.nome }}</td>
+                                    <td>{{ atc.uf }}</td>
+                                    <td>{{ atc.nomePres }}</td>
+                                    <td>
+                                        <a [routerLink]="['/Atc', atc.atcId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

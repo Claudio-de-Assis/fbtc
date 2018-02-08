@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { AssociadoService } from './../shared/services/associado.service';
 import { RecebimentoService } from './../shared/services/recebimento.service';
+import { PagSeguroService } from '../shared/services/pagSeguro.service';
 
 import { RecebimentoAnuidadeFormComponent } from './recebimento-anuidade-form/recebimento.anuidade.form.component';
 import { RecebimentoAnuidadeListComponent } from './recebimento-anuidade-list/recebimento.anuidade.list.component';
@@ -27,7 +28,8 @@ import { RecebimentoAnuidadeRoutingModule } from './recebimento.anuidade.routing
   ],
   providers: [
     AssociadoService,
-    RecebimentoService
+    RecebimentoService,
+    PagSeguroService
   ]
 })
 export class RecebimentoAnuidadeModule { }

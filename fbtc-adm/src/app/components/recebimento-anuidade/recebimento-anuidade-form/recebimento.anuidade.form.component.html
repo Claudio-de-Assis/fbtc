@@ -20,46 +20,6 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>CRP:</label>
-                            <input class="form-control" value="{{ recebimento.associado.crp }}" disabled>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label>CRM:</label>
-                            <input class="form-control" value="{{ recebimento.associado.crm }}" disabled>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>E-mail:</label>
-                            <input type="email" class="form-control" value="{{ recebimento.associado.eMail }}" disabled>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label>Situação:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.statusPagamento | statusPagamento}}" disabled>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label>Data Vencimento:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.dtVencimento  | date:'dd/MM/yyyy' }}" disabled>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label>Data Pagamento:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}" disabled>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="form-group">
                             <label>Celular:</label>
                             <input type="text" class="form-control" value="{{ recebimento.associado.nrCelular }}" disabled>
                         </div>
@@ -70,22 +30,44 @@
                             <input type="text" class="form-control" value="{{ recebimento.associado.ativo | booMessage }}" disabled>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Forma Pagamento</label>
-                            <input type="text" class="form-control" value="{{ recebimento.formaPagamento | formaPagamento }}" disabled>
+                            <label>E-mail:</label>
+                            <input type="email" class="form-control" value="{{ recebimento.associado.eMail }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Situação:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.statusPS | statusPagamento}}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
+                            <label>Data do status:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
                             <label>Nº Doc Cobrança:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.nrDocCobranca }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.codePS }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Forma Pagamento</label>
+                            <input type="text" class="form-control" value="{{ recebimento.typePaymentMethodPS | formaPagamento }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Valor pago:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.valorPago }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimento.netAmountPS  | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -99,9 +81,9 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="areaObservacao">Observação:</label>
-                            <textarea id="areaObservacao" name="observavao" class="form-control" 
+                            <textarea id="areaObservacao" name="observacao" class="form-control" 
                             rows="10" cols="134" maxlength="500"
-                            [(ngModel)]="recebimento.observacao" #observacacao="ngModel"></textarea>
+                            [(ngModel)]="recebimento.observacao" #observacao="ngModel"></textarea>
                         </div>
                     </div>
                 </div>

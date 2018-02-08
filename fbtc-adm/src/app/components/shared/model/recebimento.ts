@@ -7,15 +7,16 @@ export class Recebimento {
     valorAnuidadePublicoId: number;
     valorEventoPublicoId: number;
     objetivoPagamento: string;
-    dtVencimento: Date;
-    dtPagamento: Date;
     dtNotificacao: Date;
-    statusPagamento: string;
-    formaPagamento: string;
-    nrDocCobranca: string;
-    valorPago: number;
     observacao: string;
-    tokenPagamento: string;
+    codePS: string;
+    referencePS: string;
+    typePS: number;
+    statusPS: number;
+    lastEventDatePS: Date;
+    typePaymentMethodPS: number;
+    codePaymentMethodPS: number;
+    netAmountPS: number;
     dtCadastro: Date;
     ativo: boolean;
 
@@ -23,7 +24,6 @@ export class Recebimento {
 }
 
 export class RecebimentoAssociadoDao {
-
     associadoId: number;
     titulo: string;
     anuidade: number;
@@ -31,10 +31,8 @@ export class RecebimentoAssociadoDao {
     cpf: string;
     nomeTP: string;
     recebimentoId: number;
-    statusPagamento: string;
-    dtVencimento: Date;
-    dtPagamento: Date;
+    statusPS: number;
+    lastEventDatePS: Date;
     ativoRec: boolean;
     isencaoIdId: number;
 }
-

@@ -29,9 +29,9 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="sltStatusPagamento">Status do Situação:</label>
-                            <select id="sltStatusPagamento" name="statusPagamento" class="form-control"
-                                [(ngModel)]="editStatusPagamento" #statusPagamento="ngModel">
+                            <label for="sltStatusPS">Status do Situação:</label>
+                            <select id="sltStatusPS" name="statusPS" class="form-control"
+                                [(ngModel)]="editStatusPS" #statusPagamento="ngModel">
                                 <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
                             </select>
                         </div>
@@ -74,6 +74,7 @@
                         <button class="btn btn-success" (click)="gotoImprimirLista()">Imprimir Lista</button>
                     </div>
                     <div class="col-lg-6 text-right">
+                        <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincroniza o sistema 30 dias">Sincronizar com PagSeguro</button>
                         <button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
@@ -82,7 +83,7 @@
         </div>
         </form>
         <div class="panel panel-primary">
-            <div class="panel-heading">Listagem de Inscritos</div>
+            <div class="panel-heading">Listagem de Inscritos{{ mensagemSincronizacao }}</div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -105,7 +106,7 @@
                                     <td>{{ recebimento.titulo }}</td>
                                     <!--<td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</td>-->
-                                    <td>{{ recebimento.statusPagamento |  statusPagamento }}</td>
+                                    <td>{{ recebimento.statusPS |  statusPagamento }}</td>
                                     <td>
                                         <a [routerLink]="['/RecebimentoEvento', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
                                         <!--<a href="javascript: alert('excluir'); return false;"><i class="fa fa-trash text-danger"></i></a>-->

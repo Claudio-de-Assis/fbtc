@@ -11,6 +11,17 @@ export class AtcRoute {
         return AppSettings.API_ENDPOINT + this.url + 'GetAll';
     }
 
+    // [Route("GetAllLst")]
+    getAllLst(): string {
+        return AppSettings.API_ENDPOINT + this.url + 'GetAllLst';
+    }
+
+    // Deve-se informar "0" quando não houver valor válido para o filtro.
+    // [Route("FindByFilters/{atcId}")]
+    getFindByFilters(atcId: number): string {
+        return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${atcId}`;
+    }
+
     // [Route("{id:int}")]
     getById(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + id;

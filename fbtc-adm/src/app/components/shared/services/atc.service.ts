@@ -6,9 +6,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { AtcRoute } from './../webApi-routes/atc.route';
 import { MessageService } from './../../../message.service';
-import { Atc } from '../model/atc';
+import { Atc, AtcDao } from '../model/atc';
+import { AtcRoute } from '../webApi-routes/atc.route';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,11 +22,28 @@ export class AtcService {
         private apiRoute: AtcRoute,
         private messageService: MessageService) { }
 
-    getAtcs(): Observable<Atc[]> {
+        getByFilters(atcId: number): Observable<Atc[]> {
+
+            return this.http.get<Atc[]>(this.apiRoute.getFindByFilters(atcId))
+                .pipe(
+                    tap(atcs => this.log(`fetched Atcs Filter atc=${atcId}`)),
+                    catchError(this.handleError(`getByFilters atcs=${atcId}`, []))
+            );
+        }
+
+        getAtcs(): Observable<Atc[]> {
         return this.http.get<Atc[]>(this.apiRoute.getAll())
         .pipe(
             tap(atcs => this.log('Fetched Atc')),
             catchError(this.handleError('getAtcs()', []))
+        );
+    }
+
+    getAtcsLst(): Observable<AtcDao[]> {
+        return this.http.get<AtcDao[]>(this.apiRoute.getAllLst())
+        .pipe(
+            tap(atcs => this.log('Fetched AtcLst')),
+            catchError(this.handleError('getAtcsLst()', []))
         );
     }
 

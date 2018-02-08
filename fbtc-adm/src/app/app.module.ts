@@ -18,12 +18,15 @@ import { AssociadoModule } from './components/associado/associado.module';
 import { IsencaoAnuidadeModule } from './components/isencao-anuidade/isencao.anuidade.module';
 import { IsencaoEventoModule } from './components/isencao-evento/isencao.evento.module';
 import { EventoModule } from './components/evento/evento.module';
-import { AnuidadeRoute } from './components/shared/webapi-routes/anuidade.route';
+import { AnuidadeModule } from './components/anuidade/anuidade.module';
 
+import { AnuidadeRoute } from './components/shared/webapi-routes/anuidade.route';
 import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
-import { AnuidadeModule } from './components/anuidade/anuidade.module';
+import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
+// import { AtcRoute } from './components/shared/webApi-routes/atc.route';
+import { AtcModule } from './components/atc/atc.module';
 
 @NgModule({
   imports: [
@@ -38,6 +41,7 @@ import { AnuidadeModule } from './components/anuidade/anuidade.module';
     AnuidadeModule,
     RecebimentoAnuidadeModule,
     RecebimentoEventoModule,
+    AtcModule,
     AppRoutingModule,
   ],
   declarations: [
@@ -52,6 +56,8 @@ import { AnuidadeModule } from './components/anuidade/anuidade.module';
     RecebimentoRoute,
     EventoRoute,
     AnuidadeRoute,
+    PagSeguroRoute,
+    // AtcRoute,
     { provide: LOCALE_ID, useValue: 'PT-BR' }
   ],
   exports: [

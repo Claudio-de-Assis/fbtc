@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label>Status do pagamento:</label>
                             <select id="sltStatusPagamento" class="form-control" 
-                            [(ngModel)]="editStatusPagamento" name="statusPagamento">
+                            [(ngModel)]="editStatusPS" name="statusPS">
                                 <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
                             </select>
                         </div>
@@ -71,6 +71,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-12 text-right">
+                        <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincroniza o sistema 30 dias">Sincronizar com PagSeguro</button>
                         <button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
@@ -80,7 +81,7 @@
         </form>
         <!-- PAINEL RESULTADO DA BUSCA -->
         <div class="panel panel-primary">
-            <div class="panel-heading">Listagem de recebimentos de anuidades</div>
+            <div class="panel-heading">Listagem de recebimentos de anuidades{{ mensagemSincronizacao }}</div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -89,8 +90,7 @@
                                     <td>Associado</td>
                                     <td>CPF</td>
                                     <td>Anuidade</td>
-                                    <td>Vencimento</td>
-                                    <td>Pagamento</td>
+                                    <td>Data</td>
                                     <td>Situação</td>
                                     <td>Ações</td>
                                 </tr>
@@ -101,9 +101,8 @@
                                     <td>{{ recebimento.nome }}</td>
                                     <td>{{ recebimento.cpf }}</td>
                                     <td>{{ recebimento.anuidade }}</td>
-                                    <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
-                                    <td>{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</td>
-                                    <td>{{ recebimento.statusPagamento |  statusPagamento }}</td>
+                                    <td>{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.statusPS |  statusPagamento }}</td>
                                     <td>
                                         <a [routerLink]="['/RecebimentoAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
                                         <i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>

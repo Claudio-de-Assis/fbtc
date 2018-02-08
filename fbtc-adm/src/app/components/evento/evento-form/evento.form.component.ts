@@ -29,15 +29,15 @@ export class EventoFormComponent implements OnInit {
 
   @Input() evento: Evento = { eventoId: 0, titulo: '', descricao: '', codigo: '', dtInicio: null,
             dtTermino: null, dtTerminoInscricao: null, tipoEvento: '', aceitaIsencaoAta: false,
-            ativo: false, nomeFoto: '_no-foto-evento.png'
+            ativo: false, nomeFoto: '_no-foto-evento.jpg'
   };
 
   title = 'Evento';
   badge = '';
 
   _util = Util;
-  _nomeFotoPadrao: string = '_no-foto-evento.png';
-  _nomeFoto: string = '_no-foto-evento.png';
+  _nomeFotoPadrao: string = '_no-foto-evento.jpg';
+  _nomeFoto: string = '_no-foto-evento.jpg';
 
   editEventoId: number = 0;
 
