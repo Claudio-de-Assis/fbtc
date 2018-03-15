@@ -1,0 +1,127 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #relatorioForm="ngForm">
+     
+      <div class="panel panel-default">
+        <!--
+            <div class="panel-heading">
+                Filtro
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="sltUF">UF:</label>
+                                <select id="sltUF" name="UF" class="form-control"
+                                    [(ngModel)]="editSiglaUF" #uf="ngModel">
+                                    <option *ngFor="let op of unidadesFederacao" value="{{ op.siglaUF }}">{{ op.siglaUF }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                        </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                            <button class="btn btn-default" (click)="gotoNovaAtc()">Nova</button>
+                    </div>
+                </div>
+            </div>
+          -->
+          <div class="panel-heading">
+              Registros:
+            </div>
+              <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <td>UF</td>
+                                      <td>Profissional. </td>
+                                      <td>Profissional N.A.</td>
+                                      <td>Estudante Pós.</td>
+                                      <td>Estudante Pós N.A.</td>
+                                      <td>Estudante</td>
+                                      <td>Estudante N.A.</td>
+                                  </tr>
+                              </thead>
+                              <tbody class="RptAssociadosEstadosDAO">
+                                  <tr *ngFor="let rptAssociadosEstadosDAO of rptAssociadosEstadosDAOs">
+                                      <td>{{ rptAssociadosEstadosDAO.nomeUF }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.profissionalAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.profissionalNaoAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudantePosAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudantePosNaoAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudanteAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudanteNaoAssociado }}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                        </div>
+              </div>
+              <div class="panel-footer text-center">
+                 <div class="btn-group">
+                  <!--    
+                  <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                      <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                      <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                      <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                  -->
+                      <button type="submit" class="btn btn-primary">Atualizar</button>&nbsp;
+                      <button class="btn btn-default" (click)="gotoImprimir()">Imprimir</button>
+                    </div>
+              </div>
+        </div>
+    </form>
+    <!--
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+            Listagem de Eventos
+          </div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <td>UF</td>
+                                      <td>Profissional. </td>
+                                      <td>Profissional N.A.</td>
+                                      <td>Estudante Pós.</td>
+                                      <td>Estudante Pós N.A.</td>
+                                      <td>Estudante</td>
+                                      <td>Estudante N.A.</td>
+                                  </tr>
+                              </thead>
+                              <tbody class="RptAssociadosEstadosDAO">
+                                  <tr *ngFor="let rptAssociadosEstadosDAO of rptAssociadosEstadosDAOs">
+                                      <td>{{ rptAssociadosEstadosDAO.nomeUF }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.profissionalAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.profissionalNaoAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudantePosAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudantePosNaoAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudanteAssociado }}</td>
+                                      <td>{{ rptAssociadosEstadosDAO.estudanteNaoAssociado }}</td>
+                                  </tr>
+                              </tbody>                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+
+                    <button type="submit" class="btn btn-primary">Atualizar</button>&nbsp;
+                    <button class="btn btn-default" (click)="gotoImprimir()">Imprimir</button>
+
+                  </div>
+            </div>
+        </div>
+      -->
+    </div>
+</div>

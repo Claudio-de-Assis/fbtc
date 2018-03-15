@@ -1,0 +1,83 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #relatorioForm="ngForm">
+     
+      <div class="panel panel-default">
+
+          <div class="panel-heading">
+              Registros:
+            </div>
+              <div class="panel-body">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <td>Ano</td>
+                                      <td>Valor Previsto</td>
+                                      <td>Valor Realizado</td>
+                                      <td>Nº de Isentos</td>
+                                      <td>Objetivo</td>
+                                  </tr>
+                              </thead>
+                              <tbody class="RptReceitaAnualDAO">
+                                  <tr *ngFor="let rptReceitaAnualDAO of rptReceitaAnualDAOs">
+                                      <td>{{ rptReceitaAnualDAO.ano }}</td>
+                                      <td>{{ rptReceitaAnualDAO.valorPrevisto | currency:'BRL':'symbol':'1.2-2':'pt-br' }}</td>
+                                      <td>{{ rptReceitaAnualDAO.valorRealizado | currency:'BRL':'symbol':'1.2-2':'pt-br' }}</td>
+                                      <td>{{ rptReceitaAnualDAO.qtdIsentos }}</td>
+                                      <td>{{ rptReceitaAnualDAO.nomeObjetivoPagamento }}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                        </div>
+              </div>
+              <div class="panel-footer text-center">
+                 <div class="btn-group">
+                  <!--    
+                  <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                      <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                      <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                      <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                  -->
+                      <button type="submit" class="btn btn-primary">Atualizar</button>&nbsp;
+                      <button class="btn btn-default" (click)="gotoImprimir()">Imprimir</button>
+                    </div>
+              </div>
+        </div>
+    </form>
+    <!--
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+            Listagem de Eventos
+          </div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Tipo de Associação</td>
+                                    <td>Quant</td>
+                                </tr>
+                            </thead>
+                            <tbody class="RptTotalAssociadosDAO">
+                                <tr *ngFor="let rptTotalAssociadosDAO of rptTotalAssociadosDAOs">
+                                    <td>{{ rptTotalAssociadosDAO.nomeTipoAssociado }}</td>
+                                    <td>{{ rptTotalAssociadosDAO.qtd }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                </div>
+            </div>
+        </div>
+      -->
+    </div>
+</div>

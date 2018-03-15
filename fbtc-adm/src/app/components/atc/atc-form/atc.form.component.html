@@ -1,3 +1,171 @@
-<p>
-  atc-form works!
-</p>
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #atcForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="inpNome">Nome:</label>
+                          <input id="inpNome" name="nome" class="form-control" type="text" 
+                              required minlength="4" maxlength="100" 
+                              [(ngModel)]="atc.nome" #nome="ngModel"/>
+  
+                          <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                              class="alert alert-danger">
+                              <div *ngIf="nome.errors.required">* O Nome é obrigatório.</div>
+                              <div *ngIf="nome.errors.minlength">* O Nome deve ter pelo menos 4 letras.</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="sltUF">UF:</label>
+                          <select id="sltUF" name="UF" class="form-control"
+                            required    
+                            [(ngModel)]="atc.uf" #uf="ngModel">
+                              <option *ngFor="let op of unidadesFederacao" value="{{ op.siglaUF }}">{{ op.siglaUF }}</option>
+                          </select>
+                          <div *ngIf="uf.invalid && (uf.dirty || uf.touched)"
+                              class="alert alert-danger">
+                              <div *ngIf="uf.errors.required">* Informe a UF.</div>
+                          </div>  
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Ativo:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
+                                    <input type="radio" [(ngModel)]="atc.ativo" name="ativo" id="rdbAtivo" 
+                                    [checked]="op.value === atc.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                          </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="inpNomePres">Presidente:</label>
+                          <input id="inpNomePres" name="nomePres" class="form-control" type="text" 
+                              required minlength="4" maxlength="100" 
+                              [(ngModel)]="atc.nomePres" #nomePres="ngModel"/>
+    
+                          <div *ngIf="nomePres.invalid && (nomePres.dirty || nomePres.touched)"
+                              class="alert alert-danger">
+                              <div *ngIf="nomePres.errors.required">* O Nome do Presidente é obrigatório.</div>
+                              <div *ngIf="nomePres.errors.minlength">* O Nome do Presidente deve ter pelo menos 4 letras.</div>
+                          </div>   
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="inpNomeVPres">Vice Presidente:</label>
+                          <input id="inpNomeVPres" name="nomeVPres" class="form-control" type="text" 
+                              minlength="4" maxlength="100" 
+                              [(ngModel)]="atc.nomeVPres" #nomeVPres="ngModel"/>
+                             <div *ngIf="nomeVPres.invalid && (nomeVPres.dirty || nomeVPres.touched)"
+                                class="alert alert-danger">
+                              <div *ngIf="nomeVPres.errors.minlength">* O Nome do Vice Presidente deve ter pelo menos 4 letras.</div>
+                          </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="inpNomePSec">Primeiro Secretário:</label>
+                          <input id="inpNomePSec" name="nomePSec" class="form-control" type="text" 
+                              minlength="4" maxlength="100" 
+                              [(ngModel)]="atc.nomePSec" #nomePSec="ngModel"/>
+    
+                          <div *ngIf="nomePSec.invalid && (nomePSec.dirty || nomePSec.touched)"
+                              class="alert alert-danger">
+                              <div *ngIf="nomePSec.errors.minlength">* O Nome do Primeiro Secretário deve ter pelo menos 4 letras.</div>
+                          </div>   
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="inpNomeSSec">Segundo Secretário:</label>
+                          <input id="inpNomeSSec" name="nomeSSec" class="form-control" type="text" 
+                              minlength="4" maxlength="100" 
+                              [(ngModel)]="atc.nomeSSec" #nomeSSec="ngModel"/>
+        
+                          <div *ngIf="nomeSSec.invalid && (nomeSSec.dirty || nomeSSec.touched)"
+                              class="alert alert-danger">
+                              <div *ngIf="nomeSSec.errors.minlength">* O Nome do Segundo Secretário deve ter pelo menos 4 letras.</div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="inpNomePTes">Primeiro Tesoureiro:</label>
+                        <input id="inpNomePTes" name="nomePTes" class="form-control" type="text" 
+                             minlength="4" maxlength="100" 
+                            [(ngModel)]="atc.nomePTes" #nomePTes="ngModel"/>
+                        <div *ngIf="nomePTes.invalid && (nomePTes.dirty || nomePTes.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="nomePTes.errors.minlength">* O Nome do Primeiro Tesoureiro deve ter pelo menos 4 letras.</div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="inpNomeSTes">Segundo Tesoureiro:</label>
+                        <input id="inpNomeSTes" name="nomeSTes" class="form-control" type="text" 
+                             minlength="4" maxlength="100" 
+                            [(ngModel)]="atc.nomeSTes" #nomeSTes="ngModel"/>
+                            <div *ngIf="nomeSTes.invalid && (nomeSTes.dirty || nomeSTes.touched)"
+                              class="alert alert-danger">
+                            <div *ngIf="nomeSTes.errors.minlength">* O Nome do Segundo Tesoureiro deve ter pelo menos 4 letras.</div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="inpSite">Site:</label>
+                      <input id="inpSite" name="site" class="form-control" type="text" 
+                          minlength="4" maxlength="100" 
+                          [(ngModel)]="atc.site" #site="ngModel"/>
+                      <div *ngIf="site.invalid && (site.dirty || site.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="site.errors.minlength">* O Endereço do Site deve ter pelo menos 4 letras.</div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="inpSiteDiretoria">Site da Diretoria:</label>
+                      <input id="inpSiteDiretoria" name="siteDiretoria" class="form-control" type="text" 
+                           minlength="4" maxlength="100" 
+                          [(ngModel)]="atc.siteDiretoria" #siteDiretoria="ngModel"/>
+    
+                      <div *ngIf="siteDiretoria.invalid && (siteDiretoria.dirty || siteDiretoria.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="siteDiretoria.errors.minlength">* O Endereço do Site da Diretoria deve ter pelo menos 4 letras.</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!atcForm.form.valid">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoAtcs()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

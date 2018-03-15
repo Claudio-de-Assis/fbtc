@@ -7,9 +7,11 @@ import { AtcListComponent } from './atc-list/atc.list.component';
 import { AtcFormComponent } from './atc-form/atc.form.component';
 
 import { AtcService } from './../shared/services/atc.service';
+import { UnidadeFederacaoService } from '../shared/services/unidade-federacao.service';
 
 import { SharedModule } from '../shared/shared.module';
 import { AtcRoutingModule } from './atc.routing.module';
+import { UnidadeFederacaoRoute } from '../shared/webapi-routes/unidade-federacao.route';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { AtcRoutingModule } from './atc.routing.module';
     AtcListComponent
   ],
   providers: [
-    AtcService
+    AtcService,
+    UnidadeFederacaoService,
+    UnidadeFederacaoRoute
   ]
 
 })

@@ -1,3 +1,4 @@
+import { RelatoriosRoute } from './components/shared/webapi-routes/relatorios.route';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -19,14 +20,14 @@ import { IsencaoAnuidadeModule } from './components/isencao-anuidade/isencao.anu
 import { IsencaoEventoModule } from './components/isencao-evento/isencao.evento.module';
 import { EventoModule } from './components/evento/evento.module';
 import { AnuidadeModule } from './components/anuidade/anuidade.module';
+import { RelatoriosModule } from './components/relatorios/relatorios.module';
+import { AtcModule } from './components/atc/atc.module';
 
 import { AnuidadeRoute } from './components/shared/webapi-routes/anuidade.route';
 import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
-// import { AtcRoute } from './components/shared/webApi-routes/atc.route';
-import { AtcModule } from './components/atc/atc.module';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { AtcModule } from './components/atc/atc.module';
     RecebimentoAnuidadeModule,
     RecebimentoEventoModule,
     AtcModule,
+    RelatoriosModule,
     AppRoutingModule,
   ],
   declarations: [
@@ -57,6 +59,7 @@ import { AtcModule } from './components/atc/atc.module';
     EventoRoute,
     AnuidadeRoute,
     PagSeguroRoute,
+    RelatoriosRoute,
     // AtcRoute,
     { provide: LOCALE_ID, useValue: 'PT-BR' }
   ],

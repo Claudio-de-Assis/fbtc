@@ -1,4 +1,4 @@
-<h1 class="page-header">{{ title }} <span class="badge badge-default">New</span></h1>
+<h1 class="page-header">{{ title }}</h1>
 <div class="row">
     <div class="col-lg-12">
     <form (ngSubmit)="onSubmit()" #atcForm="ngForm">
@@ -10,11 +10,11 @@
                 <div class="row">
                         <div class="col-lg-3">
                             <div class="form-group">
-                              <label for="sltAtc">ATC:</label>
-                              <select id="sltAtc" name="Atc" class="form-control"
-                                  [(ngModel)]="editAtcId" #ano="ngModel">
-                                  <option *ngFor="let op of atcDaos" value="{{ op.atcId }}">{{ op.nome }}</option>
-                              </select> 
+                                <label for="sltUF">UF:</label>
+                                <select id="sltUF" name="UF" class="form-control"
+                                    [(ngModel)]="editSiglaUF" #uf="ngModel">
+                                    <option *ngFor="let op of unidadesFederacao" value="{{ op.siglaUF }}">{{ op.siglaUF }}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6">

@@ -10,6 +10,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import { AtcService } from '../../shared/services/atc.service';
 
 import { Atc, AtcDao } from './../../shared/model/atc';
+import { UnidadeFederacaoService } from '../../shared/services/unidade-federacao.service';
+import { UnidadeFederacao } from '../../shared/model/unidade-federacao';
 
 @Component({
   selector: 'app-atc-list',
@@ -20,20 +22,21 @@ export class AtcListComponent implements OnInit {
 
   title = 'Consulta de ATCs';
 
-  editAtcId: number = null;
-  _atcId: number = 0;
+  editSiglaUF: string = null;
+  _siglaUF: string = '0';
+
+
 
   private selectedAtc: Atc;
 
-  atcDaos: AtcDao[];
   atcs: Atc[];
-
-
+  unidadesFederacao: UnidadeFederacao[];
 
   submitted = false;
 
   constructor(
     private service: AtcService,
+    private serviceUF: UnidadeFederacaoService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -41,10 +44,6 @@ export class AtcListComponent implements OnInit {
 
   getAtcs(): void {
     this.service.getAtcs().subscribe(atcs => this.atcs = atcs);
-  }
-
-  getAtcsLst(): void {
-    this.service.getAtcsLst().subscribe(atcDaos => this.atcDaos = atcDaos);
   }
 
   onSubmit() {
@@ -55,14 +54,19 @@ export class AtcListComponent implements OnInit {
 
   gotoBuscarAtcs() {
 
-    if (this.editAtcId !== null) {
-        this._atcId = this.editAtcId;
+    if (this.editSiglaUF !== null) {
+        this._siglaUF = this.editSiglaUF;
     }
 
-    this.service.getByFilters(this._atcId)
+    this.service.getByFilters(this._siglaUF)
         .subscribe(atcs => this.atcs = atcs);
 
-    this._atcId = 0;
+    this._siglaUF = '0';
+  }
+
+  getUFsUtilizadas() {
+
+    this.serviceUF.getUnidadesFederacaoUtilizadas().subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
   }
 
 
@@ -76,7 +80,7 @@ export class AtcListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getAtcsLst();
+    this.getUFsUtilizadas();
     this.getAtcs();
   }
 }

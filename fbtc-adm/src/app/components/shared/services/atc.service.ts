@@ -22,12 +22,12 @@ export class AtcService {
         private apiRoute: AtcRoute,
         private messageService: MessageService) { }
 
-        getByFilters(atcId: number): Observable<Atc[]> {
+        getByFilters(siglaUF: string): Observable<Atc[]> {
 
-            return this.http.get<Atc[]>(this.apiRoute.getFindByFilters(atcId))
+            return this.http.get<Atc[]>(this.apiRoute.getFindByFilters(siglaUF))
                 .pipe(
-                    tap(atcs => this.log(`fetched Atcs Filter atc=${atcId}`)),
-                    catchError(this.handleError(`getByFilters atcs=${atcId}`, []))
+                    tap(atcs => this.log(`fetched Atcs Filter atc=${siglaUF}`)),
+                    catchError(this.handleError(`getByFilters atcs=${siglaUF}`, []))
             );
         }
 

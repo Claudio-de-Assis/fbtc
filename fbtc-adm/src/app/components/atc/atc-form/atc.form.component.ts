@@ -2,8 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
+
 import { Atc } from '../../shared/model/atc';
+
 import { AtcService } from '../../shared/services/atc.service';
+import { UnidadeFederacaoService } from '../../shared/services/unidade-federacao.service';
+
+import { Util } from '../../shared/util/util';
+import { UnidadeFederacao } from '../../shared/model/unidade-federacao';
 
 @Component({
   selector: 'app-atc-form',
@@ -22,14 +28,18 @@ export class AtcFormComponent implements OnInit {
 
   private selectedId: any;
 
+  unidadesFederacao: UnidadeFederacao[];
+
   submitted = false;
+
+  _util = Util;
 
   constructor(
     private service: AtcService,
+    private serviceUF: UnidadeFederacaoService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
-
 
   getAtcById(id: number): void {
 
@@ -63,6 +73,12 @@ excluir() {
     this.gotoAtcs();
 }
 
+getUFsDisponiveis(atcId: number) {
+
+  this.serviceUF.getUnidadesFederacaoDisponiveis(atcId).subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
+}
+
+
 onSubmit() {
 
   this.submitted = true;
@@ -73,6 +89,8 @@ onSubmit() {
   ngOnInit() {
 
     this.editAtcId = +this.route.snapshot.paramMap.get('id');
+
+    this.getUFsDisponiveis(this.editAtcId);
 
     if (this.editAtcId > 0) {
         this.badge = 'Edição';

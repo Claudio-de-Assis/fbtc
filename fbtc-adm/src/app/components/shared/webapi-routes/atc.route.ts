@@ -18,8 +18,8 @@ export class AtcRoute {
 
     // Deve-se informar "0" quando não houver valor válido para o filtro.
     // [Route("FindByFilters/{atcId}")]
-    getFindByFilters(atcId: number): string {
-        return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${atcId}`;
+    getFindByFilters(siglaUF: string): string {
+        return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${siglaUF}`;
     }
 
     // [Route("{id:int}")]

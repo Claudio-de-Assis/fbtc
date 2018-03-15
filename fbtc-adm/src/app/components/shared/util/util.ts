@@ -68,4 +68,22 @@ export class Util {
         {name: 'Doutor', value: '4'},
         {name: 'Pós-Doutor', value: '5'}
     ];
+
+    public static optStatusPS = [
+        {name: '', value: '0'},
+        {name: 'Aguardando pagamento', value: '1'},
+        {name: 'Em Análise', value: '2'},
+        {name: 'Paga', value: '3'},
+        {name: 'Disponível', value: '4'},
+        {name: 'Em Disputa', value: '5'},
+        {name: 'Devolvida', value: '6'},
+        {name: 'Cancelada', value: '7'},
+        {name: 'Debitado', value: '8'},
+        {name: 'Retenção Temporária', value: '9'}
+    ];
+
+    public static optObjetivoPagamento = [
+        {name: 'Evento', value: '1'},
+        {name: 'Anuidade', value: '2'}
+    ];
 }

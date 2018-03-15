@@ -1,0 +1,105 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    
+        <form (ngSubmit)="onSubmit()" #relatorioForm="ngForm">
+            <div class="panel panel-default">
+              <div class="panel-heading">Filtro</div>
+              <div class="panel-body">
+                  <div class="row">
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="sltObjetivoPagamento">Objetivo Pagamento:</label><br>
+                              <select id="sltObjetivoPagamento" required name="objetivoPagamento" class="form-control"
+                                  [(ngModel)]="editObjetivoPagamento" #objetivoPagamento="ngModel">
+                                  <option *ngFor="let op of _util.optObjetivoPagamento" value="{{ op.value }}">{{ op.name }}</option>
+                              </select>
+                              <div *ngIf="objetivoPagamento.invalid && (objetivoPagamento.dirty || objetivoPagamento.touched)"
+                                  class="alert alert-danger">
+                                  <div *ngIf="objetivoPagamento.errors.required">* Informe o Objetivo do pagamento.</div>
+                              </div> 
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="sltStatusPS">Status Pagamento:</label><br>
+                              <select id="sltStatusPS" name="statusPS" class="form-control"
+                                  [(ngModel)]="editStatusPS" #statusPS="ngModel">
+                                  <option *ngFor="let op of _util.optStatusPS" value="{{ op.value }}">{{ op.name }}</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="sltAno">Ano:</label><br>
+                              <select id="sltAno" name="ano" class="form-control"
+                                  required  
+                                  [(ngModel)]="editAno"  #ano="ngModel">
+                                  <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                              </select>
+                              <div *ngIf="ano.invalid && (ano.dirty || ano.touched)"
+                                  class="alert alert-danger">
+                                  <div *ngIf="ano.errors.required">* Informe o Ano.</div>
+                              </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="panel-footer">
+                  <div class="row">
+                      <div class="col-lg-12 text-right">
+                          <button type="submit" class="btn btn-primary" [disabled]="!relatorioForm.form.valid">Pesquisar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+              Registros:
+          </div>
+          <div class="panel-body">
+                  <div class="table-responsive">
+                      <table class="table table-hover">
+                          <thead>
+                              <tr>
+                                  <td>Status Pagamento</td>
+                                  <td>Quant</td>
+                                  <td>Valor</td>
+                              </tr>
+                          </thead>
+                          <tbody class="rptRecebimentoStatusDAOs">
+                              <tr *ngFor="let rptRecebimentoStatusDAO of rptRecebimentoStatusDAOs">
+                                  <td>{{ rptRecebimentoStatusDAO.statusPagamento }}</td>
+                                  <td>{{ rptRecebimentoStatusDAO.qtd }}</td>
+                                  <td>{{ rptRecebimentoStatusDAO.valorPorStatus }}</td>
+                              </tr>
+                              <tr *ngFor="let rptRecebimentoStatusDAO of rptRecebimentoStatusDAOs ; let idx = index">
+                                    <td *ngIf="idx === 0"></td>  
+                                    <td *ngIf="idx === 0">Valor Total</td>
+                                  <td *ngIf="idx === 0">{{ rptRecebimentoStatusDAO.valorTotal }}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+          </div>
+          <div class="panel-footer text-center">
+              <div class="btn-group">
+              <!--    
+              <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                  <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
+                  <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
+                  <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+              -->
+              <button class="btn btn-default" (click)="gotoImprimir()">Imprimir</button>
+            </div>
+      </div>
+
+
+    </div>
+<div>
+    <!--      
+    </div>
+</div>
+-->
