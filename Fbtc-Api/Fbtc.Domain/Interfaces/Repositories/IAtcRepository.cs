@@ -17,6 +17,6 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         string Update(int id, Atc atc);
 
-        IEnumerable<Atc> FindByFilters(int atcId);
+        IEnumerable<Atc> FindByFilters(string siglaUF);
     }
 }

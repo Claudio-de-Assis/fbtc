@@ -65,7 +65,9 @@
     <Compile Include="Entities\Recebimento.cs" />
     <Compile Include="Entities\ParametroAdimplencia.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Entities\Relatorios.cs" />
     <Compile Include="Entities\TipoPublico.cs" />
+    <Compile Include="Entities\UnidadeFederacao.cs" />
     <Compile Include="Entities\ValorAnuidadePublico.cs" />
     <Compile Include="Entities\ValorEventoPublico.cs" />
     <Compile Include="Interfaces\Repositories\IAnuidadeRepository.cs" />
@@ -77,7 +79,9 @@
     <Compile Include="Interfaces\Repositories\IIsencaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPagSeguroRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRecebimentoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRelatoriosRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoPublicoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUnidadeFederacaoRepository.cs" />
     <Compile Include="Interfaces\Services\IAnuidadeService.cs" />
     <Compile Include="Interfaces\Services\IAssociadoService.cs" />
     <Compile Include="Interfaces\Services\IAtcService.cs" />
@@ -87,7 +91,9 @@
     <Compile Include="Interfaces\Services\IIsencaoService.cs" />
     <Compile Include="Interfaces\Services\IPagSeguroService.cs" />
     <Compile Include="Interfaces\Services\IRecebimentoService.cs" />
+    <Compile Include="Interfaces\Services\IRelatoriosService.cs" />
     <Compile Include="Interfaces\Services\ITipoPublicoService.cs" />
+    <Compile Include="Interfaces\Services\IUnidadeFederacaoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AnuidadeService.cs" />
     <Compile Include="Services\AssociadoService.cs" />
@@ -98,7 +104,9 @@
     <Compile Include="Services\IsencaoService.cs" />
     <Compile Include="Services\PagSeguroService.cs" />
     <Compile Include="Services\RecebimentoService.cs" />
+    <Compile Include="Services\RelatoriosService.cs" />
     <Compile Include="Services\TipoPublicoService.cs" />
+    <Compile Include="Services\UnidadeFederacaoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

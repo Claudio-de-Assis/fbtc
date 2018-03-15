@@ -28,6 +28,8 @@ namespace Fbtc.Ioc
             container.Register<IIsencaoApplication, IsencaoApplication>(Lifestyle.Scoped);
             container.Register<IAnuidadeApplication, AnuidadeApplication>(Lifestyle.Scoped);
             container.Register<IPagSeguroApplication, PagSeguroApplication>(Lifestyle.Scoped);
+            container.Register<IUnidadeFederacaoApplication, UnidadeFederacaoApplication>(Lifestyle.Scoped);
+            container.Register<IRelatoriosApplication, RelatoriosApplication>(Lifestyle.Scoped);
 
 
             // Servicços de domínio:
@@ -41,6 +43,8 @@ namespace Fbtc.Ioc
             container.Register<IIsencaoService, IsencaoService>(Lifestyle.Scoped);
             container.Register<IAnuidadeService, AnuidadeService>(Lifestyle.Scoped);
             container.Register<IPagSeguroService, PagSeguroService>(Lifestyle.Scoped);
+            container.Register<IUnidadeFederacaoService, UnidadeFederacaoService>(Lifestyle.Scoped);
+            container.Register<IRelatoriosService, RelatoriosService>(Lifestyle.Scoped);
 
             // Infra Repositórios:
             container.Register<IAssociadoRepository, AssociadoRepository>(Lifestyle.Scoped);
@@ -53,6 +57,8 @@ namespace Fbtc.Ioc
             container.Register<IIsencaoRepository, IsencaoRepository>(Lifestyle.Scoped);
             container.Register<IAnuidadeRepository, AnuidadeRepository>(Lifestyle.Scoped);
             container.Register<IPagSeguroRepository, PagSeguroRepository>(Lifestyle.Scoped);
+            container.Register<IUnidadeFederacaoRepository, UnidadeFederacaoRepository>(Lifestyle.Scoped);
+            container.Register<IRelatoriosRepository, RelatoriosRepository>(Lifestyle.Scoped);
         }
     }
 }

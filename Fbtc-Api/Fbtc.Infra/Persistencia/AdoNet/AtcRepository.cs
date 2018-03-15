@@ -207,15 +207,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         }
 
 
-        public IEnumerable<Atc> FindByFilters(int atcId)
+        public IEnumerable<Atc> FindByFilters(string siglaUF)
         {
             query = @"SELECT AtcId, Nome, UF, NomePres, NomeVPres, NomePSec, NomeSSec,
                         NomePTes, NomeSTes, Site, SiteDiretoria, Ativo, Codigo
                     FROM dbo.AD_ATC
                     WHERE AtcId > 0 ";
 
-            if (atcId != 0)
-                query = query + $" AND AtcId = {atcId} ";
+            if (!siglaUF.Equals("0"))
+                query = query + $" AND UF = '{siglaUF}' ";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);

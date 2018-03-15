@@ -201,16 +201,16 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
-        [Route("FindByFilters/{atcId}")]
+        [Route("FindByFilters/{siglaUF}")]
         [HttpGet]
-        public Task<HttpResponseMessage> FindByFilters(int atcId)
+        public Task<HttpResponseMessage> FindByFilters(string siglaUF)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
 
             try
             {
-                var resultado = _atcApplication.FindByFilters(atcId);
+                var resultado = _atcApplication.FindByFilters(siglaUF);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

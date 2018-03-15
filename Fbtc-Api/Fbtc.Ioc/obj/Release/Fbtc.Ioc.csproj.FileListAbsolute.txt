@@ -39,3 +39,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csprojResolveAssemblyR
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\Fbtc.Domain.dll.config

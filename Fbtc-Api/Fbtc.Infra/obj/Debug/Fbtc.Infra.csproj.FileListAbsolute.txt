@@ -35,3 +35,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Microsoft.Extensions.PlatformAb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Debug\Newtonsoft.Json.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Debug\Fbtc.Infra.csproj.CopyComplete

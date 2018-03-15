@@ -40,3 +40,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Debug\Newtonsoft.Json.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.csprojResolveAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Debug\Fbtc.Ioc.csproj.CopyComplete

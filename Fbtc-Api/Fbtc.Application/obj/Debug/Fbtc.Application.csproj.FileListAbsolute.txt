@@ -10,3 +10,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csprojRe
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.pdb
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csproj.CopyComplete

@@ -17,7 +17,7 @@ namespace Fbtc.Application.Interfaces
 
         string Save(Atc atc);
 
-        IEnumerable<Atc> FindByFilters(int atcId);
+        IEnumerable<Atc> FindByFilters(string siglaUF);
 
     }
 }
