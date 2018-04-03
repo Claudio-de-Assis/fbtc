@@ -31,7 +31,7 @@ export class ColaboradorFormComponent implements OnInit {
             cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
     };
 
-    title = 'Integrante da Equipe';
+    title = 'Integrante da Administração';
     badget = '';
 
     private selectedId: any;

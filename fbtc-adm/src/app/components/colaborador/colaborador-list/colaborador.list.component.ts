@@ -17,7 +17,7 @@ import { Util } from './../../shared/util/util';
 })
 export class ColaboradorListComponent implements OnInit {
 
-  title = 'Consulta de integrante da equipe';
+  title = 'Consulta de integrante da Administração';
 
   editAtivo: boolean = true;
   editNome: string = '';
