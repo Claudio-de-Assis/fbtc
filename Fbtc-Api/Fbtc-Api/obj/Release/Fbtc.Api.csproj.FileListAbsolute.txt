@@ -52,3 +52,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Domain.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Net.Http.Extensions.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.App.config
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.CopyComplete

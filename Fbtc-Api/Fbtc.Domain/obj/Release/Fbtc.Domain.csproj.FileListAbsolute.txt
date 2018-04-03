@@ -12,3 +12,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\Newtonsoft.Json.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\System.Net.Http.Extensions.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csproj.App.config
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csproj.CopyComplete

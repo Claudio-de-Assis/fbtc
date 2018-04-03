@@ -40,3 +40,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csproj.CoreCompileInpu
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\Fbtc.Domain.dll.config
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csproj.CopyComplete

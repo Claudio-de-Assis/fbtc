@@ -35,3 +35,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Release\Fbtc.Infra.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Release\Fbtc.Application.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Release\Fbtc.Application.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\bin\Release\Fbtc.Domain.dll.config
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Infra\obj\Release\Fbtc.Infra.csproj.CopyComplete

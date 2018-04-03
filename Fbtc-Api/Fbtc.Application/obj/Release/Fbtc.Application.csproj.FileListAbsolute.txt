@@ -10,3 +10,4 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Release\Fbtc.Application.csproj
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Release\Fbtc.Application.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Release\Fbtc.Application.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Release\Fbtc.Domain.dll.config
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Release\Fbtc.Application.csproj.CopyComplete
