@@ -41,6 +41,11 @@ namespace Fbtc.Domain.Services
             return _colaboradorRepository.Insert(colaborador);
         }
 
+        public string RessetPasswordById(int id)
+        {
+            return _colaboradorRepository.RessetPasswordById(id);
+        }
+
         public string Update(int id, Colaborador colaborador)
         {
             return _colaboradorRepository.Update(id, colaborador);

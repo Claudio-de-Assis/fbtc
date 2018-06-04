@@ -6,8 +6,10 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\prmToolkit.Validation.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\Fbtc.Domain.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\Fbtc.Domain.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\Newtonsoft.Json.xml
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csprojResolveAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csproj.CopyComplete
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csprojAssemblyReference.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\EPPlus.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\EPPlus.xml

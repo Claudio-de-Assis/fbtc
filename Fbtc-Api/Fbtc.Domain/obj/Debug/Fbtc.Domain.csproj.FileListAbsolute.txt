@@ -11,5 +11,7 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\System.Net.Http.Extensions.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csprojResolveAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csproj.CopyComplete
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Debug\Fbtc.Domain.csprojAssemblyReference.cache
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\EPPlus.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Debug\EPPlus.xml

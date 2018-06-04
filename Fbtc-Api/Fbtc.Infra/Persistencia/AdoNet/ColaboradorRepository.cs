@@ -118,18 +118,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     string _paramDtNasc = colaborador.DtNascimento != null ? ", @DtNascimento " : "";
 
                     command.CommandText = "" +
-                        "INSERT into dbo.AD_Pessoa (Nome, EMail, NrCelular, PasswordHash, " +
+                        "INSERT into dbo.AD_Pessoa (Nome, EMail, NrCelular, " +
                         "   DtCadastro " + _dtNasc + ") " +
-                        "VALUES(@Nome, @EMail, @NrCelular, @PasswordHash, " +
+                        "VALUES(@Nome, @EMail, @NrCelular, " +
                         "   @DtCadastro " + _paramDtNasc + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("Nome", colaborador.Nome);
                     command.Parameters.AddWithValue("EMail", colaborador.EMail);
                     command.Parameters.AddWithValue("NrCelular", colaborador.NrCelular);
-//                  command.Parameters.AddWithValue("NomeFoto", colaborador.NomeFoto);
-//                  command.Parameters.AddWithValue("Sexo", colaborador.Sexo);
-                    command.Parameters.AddWithValue("PasswordHash", colaborador.PasswordHash);
                     command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
 
                     if (_dtNasc != "")
@@ -197,16 +194,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Pessoa " +
-                        "SET Nome = @nome, EMail = @EMail, NrCelular = @NrCelular, PasswordHash = @PasswordHash, " +
+                        "SET Nome = @nome, EMail = @EMail, NrCelular = @NrCelular,  " +
                             "Ativo = @Ativo " + _dtNasc +
                         "WHERE PessoaId = @id";
 
                     command.Parameters.AddWithValue("Nome", colaborador.Nome);
                     command.Parameters.AddWithValue("EMail", colaborador.EMail);
-//                  command.Parameters.AddWithValue("NomeFoto", colaborador.NomeFoto);
-//                  command.Parameters.AddWithValue("Sexo", colaborador.Sexo);
                     command.Parameters.AddWithValue("NrCelular", colaborador.NrCelular);
-                    command.Parameters.AddWithValue("PasswordHash", colaborador.PasswordHash);
                     command.Parameters.AddWithValue("Ativo", colaborador.Ativo);
                     command.Parameters.AddWithValue("id", id);
 
@@ -229,6 +223,94 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     _msg = x > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
 
                     transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
+        }
+
+        public string RessetPasswordById(int id)
+        {
+            bool _sendSucess = false;
+            string _msg = "", _newPassword = "", _newPasswordHash = "";
+            bool _isBodyHtml = true;
+
+            string _subject, _textBody;
+
+            Colaborador _colaborador = new Colaborador();
+            _colaborador = GetColaboradorById(id);
+
+            SendEMail _sendMail = new SendEMail();
+
+            _newPassword = Functions.GetNovaSenhaAcesso("");
+            _newPasswordHash = Functions.CriptografaSenha(_newPassword);
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("RessetSenhaColaborador");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    // Atualizando a senha na tabela PESSOA:
+                    command.CommandText = "" +
+                        "UPDATE dbo.AD_Pessoa " +
+                        "SET PasswordHash = @PasswordHash " +
+                        "WHERE PessoaId = @id";
+
+                    command.Parameters.AddWithValue("PasswordHash", _newPasswordHash);
+                    command.Parameters.AddWithValue("id", _colaborador.PessoaId);
+
+                    int i = command.ExecuteNonQuery();
+
+                    transaction.Commit();
+
+                    if (i > 0)
+                    {
+                        _subject = "Site FBTC - Troca de Senha - A sua nova senha de acesso chegou!";
+
+                        _textBody = "<html><body> " +
+                                    $"<p>Olá {_colaborador.Nome}!</p>" +
+                                    "<p>Esta mensagem foi gerada pelo sistema Troca de Senha do Site FBTC.</p>" +
+                                    "<p>Conforme solicitação através do site, a sua senha de acesso a sua conta no site fbtc.org.br foi reiniciada.</br></br>" +
+                                        "Para você logar-se, por favor, informe o seu e-mail e a senha abaixo:</br></br></br>" +
+                                        $"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{_newPassword}</b></br></br></br>" +
+                                        "Por favor, para seu segurança, troque-a no seu próximo acesso.</br></br></br>" +
+                                        "<a href='http://www.fbtc.org.br/Account/Login' target='_blank'>fbtc.org.br - Acessar sua Conta</a></br>" +
+                                    "</p>" +
+                                    "<p><i>2018 - FBTC Federação Brasileira de Terapias Cognitivas - Direitos reservados.</i></p> " +
+                                     "<p>Este é um e-mail automático da FBTC, por favor não o responda.</p> " +
+                                    "</body></html> ";
+
+                        _sendSucess = _sendMail.SendMessage(_colaborador.EMail, _subject, _isBodyHtml, _textBody);
+
+                        _msg = _sendSucess == true ? $"A nova senha foi enviada para o e-mail: { _colaborador.EMail }." : "Houve uma falha no envio da sua senha";
+                    }
+                    else
+                    {
+                        _msg = "Atualização NÃO realiada com sucesso";
+                        _sendSucess = false;
+                    } 
                 }
                 catch (Exception ex)
                 {

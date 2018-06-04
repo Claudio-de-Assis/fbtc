@@ -65,6 +65,11 @@ namespace Fbtc.Domain.Services
             return _associadoRepository.InsertIsento(associadoIsentoDao);
         }
 
+        public string RessetPasswordById(int id)
+        {
+            return _associadoRepository.RessetPasswordById(id);
+        }
+
         public string Update(int id, Associado associado)
         {
             return _associadoRepository.Update(id, associado);

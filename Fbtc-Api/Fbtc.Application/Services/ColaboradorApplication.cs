@@ -44,6 +44,11 @@ namespace Fbtc.Application.Services
             return _colaboradorService.GetColaboradorById(id);
         }
 
+        public string RessetPasswordById(int id)
+        {
+            return _colaboradorService.RessetPasswordById(id);
+        }
+
         public string Save(Colaborador c)
         {
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(

@@ -232,5 +232,10 @@ namespace Fbtc.Application.Services
         {
             return _associadoService.GetNomeFotoByAssociadoId(id);
         }
+
+        public string RessetPasswordById(int id)
+        {
+            return _associadoService.RessetPasswordById(id);
+        }
     }
 }

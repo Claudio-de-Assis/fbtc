@@ -28,5 +28,7 @@ namespace Fbtc.Domain.Interfaces.Services
             int tipoPublico, string estado, string cidade, bool? ativo);
 
         string GetNomeFotoByAssociadoId(int id);
+
+        string RessetPasswordById(int id);
     }
 }
