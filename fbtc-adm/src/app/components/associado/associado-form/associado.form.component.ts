@@ -1,3 +1,4 @@
+import { Pessoa } from './../../shared/model/pessoa';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -41,10 +42,11 @@ export class AssociadoFormComponent implements OnInit {
     badge = '';
 
     _util = Util;
-    _nomeFotoPadrao: string = '_no-foto.png';
-    _nomeFoto: string = '_no-foto.png';
+    _nomeFotoPadrao: string;
+    _nomeFoto: string;
+    _msg: string;
 
-    editAssociadoId: number = 0;
+    editAssociadoId: number;
 
     private selectedId: any;
 
@@ -66,6 +68,11 @@ export class AssociadoFormComponent implements OnInit {
         private apiRoute: FileUploadRoute,
         private valueShareService: ValueShareService
     ) {
+        this._nomeFotoPadrao = '_no-foto.png';
+        this._nomeFoto = '_no-foto.png';
+        this.editAssociadoId = 0;
+        this._msg = '';
+
         valueShareService.valueStringInformada$.subscribe(
             nomeFoto => {
                 this.history.push(nomeFoto);
@@ -76,6 +83,11 @@ export class AssociadoFormComponent implements OnInit {
 
         this.service.getById(id)
             .subscribe(associado => this.associado = associado);
+/*
+            valueShareService.valueStringInformada$.subscribe(
+                nomeFoto => {
+                    this.history.push(nomeFoto);
+                });*/
     }
 
     setAssociado(): void {
@@ -103,7 +115,23 @@ export class AssociadoFormComponent implements OnInit {
         .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
 
         this.submitted = false;
+        this._msg = '';
     }
+
+    gotoReenviarSenha() {
+
+        this._msg = '';
+        if (this.editAssociadoId !== 0) {
+
+            this.service.ressetPassWordById(this.editAssociadoId)
+            .subscribe(msg => this._msg = msg);
+
+        } else {
+
+            alert('Atenção: Você precisa primeiro incluir o registro');
+        }
+    }
+
 
     gotoShowPopUp(msg: string) {
 

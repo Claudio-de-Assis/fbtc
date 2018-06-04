@@ -31,23 +31,33 @@ export class ColaboradorFormComponent implements OnInit {
             cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
     };
 
-    title = 'Integrante da Administração';
-    badget = '';
+    title: string;
+    badget: string;
+    _msg: string;
+    _id: number;
 
     private selectedId: any;
 
     _util = Util;
 
-    @Input() editMessagem: string = '';
-    @Input() editShowPopup: boolean = false;
+    @Input() editMessagem: string;
+    @Input() editShowPopup: boolean;
 
-    submitted = false;
+    submitted: boolean;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private service: ColaboradorService
-    ) { }
+    ) {
+        this.title = 'Integrante da Administração';
+        this.badget = '';
+        this.editMessagem = '';
+        this.editShowPopup = false;
+        this._msg = '';
+        this._id = 0;
+        this.submitted = false;
+     }
 
     getColaboradorById(id: number): void {
 
@@ -63,10 +73,11 @@ export class ColaboradorFormComponent implements OnInit {
 
     save() {
 
-        this.service.addColaborador(this.colaborador)
+         this.service.addColaborador(this.colaborador)
             .subscribe(() =>  this.gotoShowPopUp());
 
         this.submitted = false;
+        this._msg = '';
     }
 
     gotoShowPopUp() {
@@ -77,15 +88,19 @@ export class ColaboradorFormComponent implements OnInit {
       alert('Registro salvo com sucesso!');
     }
 
-    /*excluir() {
-        this.gotoColaboradores();
-    }*/
+    gotoReenviarSenha() {
 
-    reenviarSenha() {
+        this._msg = '';
+        if (this._id !== 0) {
 
-        alert('Senha reenviada com sucesso!');
+            this.service.ressetPassWordById(this._id)
+            .subscribe(msg => this._msg = msg);
+
+        } else {
+
+            this._msg = 'Atenção: Você precisa primeiro incluir o registro';
+        }
     }
-
 
     gotoColaboradores() {
 
@@ -98,13 +113,11 @@ export class ColaboradorFormComponent implements OnInit {
         return true;
     }
 
-
     onSubmit() {
 
         this.submitted = true;
         this.save();
     }
-
 
     /** Called by Angular after ColaboradorForm component initialized */
     ngOnInit(): void {
@@ -113,9 +126,9 @@ export class ColaboradorFormComponent implements OnInit {
         if (id > 0) {
             this.badget = 'Edição';
             this.getColaboradorById(id);
+            this._id = id;
         } else {
             this.badget = 'Novo';
-            // this.setColaborador();
         }
     }
 }

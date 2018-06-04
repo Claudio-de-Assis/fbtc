@@ -1,4 +1,3 @@
-import { debug } from 'util';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -10,6 +9,9 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptAssociadoFaixaDAO } from './../../shared/model/relatorios';
+import { debug } from 'util';
+
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-associados-faixa',
@@ -18,26 +20,28 @@ import { RptAssociadoFaixaDAO } from './../../shared/model/relatorios';
 })
 export class RelatorioAssociadosFaixaComponent implements OnInit {
 
-  title = 'Relatório Usuários por Faixa Etária';
-
   rptAssociadoFaixaDAOs: RptAssociadoFaixaDAO[];
 
-  submitted = false;
+  title: string;
+  rptRoute: string;
+  submitted: boolean;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.title = 'Relatório Usuários por Faixa Etária';
+    this.rptRoute = apiRoute.getRptAssociadosFaixaToExcel();
+    this.submitted = false;
+  }
 
   getDadosRpt(): void {
 
+    this.submitted = true;
     this.service.getRptAssociadosFaixaDAO().subscribe(rptAssociadoFaixaDAOs => this.rptAssociadoFaixaDAOs = rptAssociadoFaixaDAOs);
-  }
-
-  gotoImprimir() {
-
-    console.log('imprimir');
   }
 
   onSubmit() {

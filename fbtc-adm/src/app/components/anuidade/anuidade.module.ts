@@ -11,12 +11,15 @@ import { AnuidadeService } from './../shared/services/anuidade.service';
 import { AnuidadeRoutingModule } from './anuidade.routing.module';
 import { SharedModule } from './../shared/shared.module';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AnuidadeRoutingModule,
     SharedModule,
+    NgxPaginationModule,
     HttpModule
   ],
   declarations: [

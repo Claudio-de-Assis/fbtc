@@ -10,6 +10,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-total-associados-tipo',
@@ -18,26 +19,27 @@ import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
 })
 export class RelatorioTotalAssociadosTipoComponent implements OnInit {
 
-  title = 'Relatório Total de Usuários por Tipo de Associação';
-
   rptTotalAssociadosDAOs: RptTotalAssociadosDAO[];
 
-  submitted = false;
+  title: string;
+  submitted: boolean;
+  rptRoute: string;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.title = 'Relatório Total de Usuários por Tipo de Associação';
+    this.rptRoute = apiRoute.getRptTotalAssociadosTipoToExcel();
+    this.submitted = false;
+  }
 
   getDadosRpt(): void {
 
     this.service.getRptTotalAssociadosTipo().subscribe(rptTotalAssociadosDAOs => this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs);
-  }
-
-  gotoImprimir() {
-
-    console.log('imprimir');
   }
 
   onSubmit() {

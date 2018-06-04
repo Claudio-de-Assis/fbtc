@@ -10,11 +10,14 @@ import { RecebimentoEventoFormComponent } from './recebimento-evento-form/recebi
 import { RecebimentoEventoRoutingModule } from './recebimento.evento.routing.module';
 import { SharedModule } from './../shared/shared.module';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RecebimentoEventoRoutingModule,
+    NgxPaginationModule,
     SharedModule
   ],
   declarations: [

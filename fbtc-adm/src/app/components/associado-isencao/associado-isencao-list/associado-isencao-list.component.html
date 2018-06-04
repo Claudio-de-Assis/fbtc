@@ -92,7 +92,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let associado of associados">
+                                    <tr *ngFor="let associado of associados | paginate: { itemsPerPage: _itensPerPage, currentPage: p }">
                                         <td>&nbsp;{{ associado.nome }}</td>
                                         <td>&nbsp;{{ associado.cpf }}</td>
                                         <td>&nbsp;{{ associado.crp }}</td>
@@ -111,10 +111,12 @@
                 </div>
                 <div class="panel-footer text-center">
                     <div class="btn-group">
-                        <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
-                        <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
-                        <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
-                        <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                            <pagination-controls    (pageChange)="p = $event"
+                                                    maxSize="9"
+                                                    directionLinks="true"
+                                                    previousLabel="Anterior"
+                                                    nextLabel="Próxima"
+                            ></pagination-controls>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,8 @@ export class ColaboradorListComponent implements OnInit {
   _nome: string = '0';
   _ativo: string = '2';
 
+  _itensPerPage = 30;
+
   _util = Util;
 
   colaboradores: Colaborador[];

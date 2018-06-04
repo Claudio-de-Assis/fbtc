@@ -12,6 +12,8 @@ import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptRecebimentoStatusDAO } from './../../shared/model/relatorios';
 import { Util } from '../../shared/util/util';
 
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+
 @Component({
   selector: 'app-relatorio-recebimento-status',
   templateUrl: './relatorio-recebimento-status.component.html',
@@ -19,33 +21,37 @@ import { Util } from '../../shared/util/util';
 })
 export class RelatorioRecebimentoStatusComponent implements OnInit {
 
-  title = 'Relatório de Recebimentos por Tipo';
-
   rptRecebimentoStatusDAOs: RptRecebimentoStatusDAO[];
 
+  title: string;
   editObjetivoPagamento: number;
-  editStatusPS: number = 0;
+  editStatusPS: number;
   editAno: number;
+  rptRoute: string;
+  submitted: boolean;
 
   _util = Util;
-
-  submitted = false;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.title = 'Relatório de Recebimentos por Tipo';
+    this.rptRoute = apiRoute.getRptTotalAssociadosTipoToExcel();
+    this.editStatusPS = 0;
+    this.submitted = false;
+  }
 
   getDadosRpt(): void {
 
+    this.rptRoute = this.apiRoute.getRptRecebimentoStatusToExcel(this.editObjetivoPagamento, this.editAno, this.editStatusPS);
+    this.submitted = true;
+
     this.service.getRptRecebimentoStatusDAO(this.editObjetivoPagamento, this.editAno, this.editStatusPS)
     .subscribe(rptRecebimentoStatusDAOs => this.rptRecebimentoStatusDAOs = rptRecebimentoStatusDAOs);
-  }
-
-  gotoImprimir() {
-
-    console.log('imprimir');
   }
 
   onSubmit() {

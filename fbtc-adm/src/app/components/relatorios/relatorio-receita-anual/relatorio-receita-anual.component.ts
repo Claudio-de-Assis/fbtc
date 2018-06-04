@@ -11,7 +11,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 
-
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-receita-anual',
@@ -20,26 +20,27 @@ import { RelatoriosService } from '../../shared/services/relatorios.service';
 })
 export class RelatorioReceitaAnualComponent implements OnInit {
 
-  title = 'Relatório de Receita Anual';
-
   rptReceitaAnualDAOs: RptReceitaAnualDAO[];
 
-  submitted = false;
+  title: string;
+  submitted: boolean;
+  rptRoute: string;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.title = 'Relatório de Receita Anual';
+    this.rptRoute = apiRoute.getRptReceitaAnualToExcel();
+    this.submitted = false;
+   }
 
   getDadosRpt(): void {
 
     this.service.getRptReceitaAnualDAO().subscribe(rptReceitaAnualDAOs => this.rptReceitaAnualDAOs = rptReceitaAnualDAOs);
-  }
-
-  gotoImprimir() {
-
-    console.log('imprimir');
   }
 
   onSubmit() {

@@ -25,7 +25,7 @@ export class AtcListComponent implements OnInit {
   editSiglaUF: string = null;
   _siglaUF: string = '0';
 
-
+  _itensPerPage = 30;
 
   private selectedAtc: Atc;
 

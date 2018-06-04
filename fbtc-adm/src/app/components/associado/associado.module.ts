@@ -24,6 +24,8 @@ import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 import { AtcRoute } from '../shared/webApi-routes/atc.route';
 import { AtcService } from '../shared/services/atc.service';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
       CommonModule,
@@ -31,6 +33,7 @@ import { AtcService } from '../shared/services/atc.service';
       AssociadoRoutingModule,
       SharedModule,
       FileUploadModule,
+      NgxPaginationModule,
       HttpModule
   ],
   declarations: [

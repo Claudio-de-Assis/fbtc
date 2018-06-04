@@ -36,6 +36,8 @@ export class EventoListComponent implements OnInit {
 
   _util = Util;
 
+  _itensPerPage = 30;
+
   submitted = false;
 
   constructor(

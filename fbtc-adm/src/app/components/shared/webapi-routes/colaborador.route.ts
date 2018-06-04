@@ -30,6 +30,13 @@ export class ColaboradorRoute {
 
     // [Route("Colaborador")]
     postColaborador(): string {
-        return AppSettings.API_ENDPOINT + this.url + 'Colaborador';
+        return AppSettings.API_ENDPOINT + this.url + `Colaborador`;
+    }
+
+    // [Route("RessetPassword/{id:int}")]
+    ressetPassWord(id: number): string {
+        return AppSettings.API_ENDPOINT + this.url + `RessetPassword/${id}`;
     }
 }
+
+

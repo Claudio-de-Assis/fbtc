@@ -9,10 +9,12 @@ import { UserService } from '../services/user.service';
 
 export class HeaderComponent {
 
-    user: string = '';
+    user: string;
+    isLoged: boolean;
 
     constructor(userService: UserService) {
 
+        this.isLoged = true;
         this.user = userService.userName;
     }
 }

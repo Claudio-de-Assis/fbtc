@@ -67,7 +67,7 @@
                                 </tr>
                             </thead>
                             <tbody class="eventos">
-                                <tr *ngFor="let evento of eventos"
+                                <tr *ngFor="let evento of eventos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="evento.eventoId === selectedId">
                                     <td>{{ evento.titulo }}</td>
                                     <td>{{ evento.tipoEvento | tipoEvento }}</td>
@@ -84,11 +84,13 @@
             </div>
             <div class="panel-footer text-center">
                 <div class="btn-group">
-                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
-                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
-                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
-                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
-                </div>
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                    </div>
             </div>
         </div>
     </div>

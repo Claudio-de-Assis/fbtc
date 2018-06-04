@@ -10,11 +10,14 @@ import { IsencaoAnuidadeListComponent } from './isencao-anuidade-list/isencao.an
 import { IsencaoAnuidadeRoutingModule } from './isencao.anuidade.routing.module';
 import { AssociadoIsencaoModule } from './../associado-isencao/associado-isencao.module';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AssociadoIsencaoModule,
+    NgxPaginationModule,
     IsencaoAnuidadeRoutingModule,
   ],
   declarations: [

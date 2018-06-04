@@ -1,4 +1,3 @@
-import { debug } from 'util';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +10,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptAssociadosEstadosDAO } from './../../shared/model/relatorios';
 
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-relatorio-associados-estados',
@@ -19,28 +20,28 @@ import { RptAssociadosEstadosDAO } from './../../shared/model/relatorios';
 })
 export class RelatorioAssociadosEstadosComponent implements OnInit {
 
-  title = 'Relatório de Usuários para UF e Tipo de Associação';
-
   rptAssociadosEstadosDAOs: RptAssociadosEstadosDAO[];
 
-
-  submitted = false;
+  title: string;
+  rptRoute: string;
+  submitted: boolean;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.title = 'Relatório de Usuários para UF e Tipo de Associação';
+    this.rptRoute = apiRoute.getRptAssociadosEstadosToExcel();
+    this.submitted = false;
+  }
 
   getDadosRpt(): void {
 
     this.service.getRptAssociadosEstadosDAO()
     .subscribe(rptAssociadosEstadosDAOs => this.rptAssociadosEstadosDAOs = rptAssociadosEstadosDAOs);
-  }
-
-  gotoImprimir() {
-
-    console.log('imprimir');
   }
 
   onSubmit() {
@@ -53,5 +54,4 @@ export class RelatorioAssociadosEstadosComponent implements OnInit {
 
     this.getDadosRpt();
   }
-
 }

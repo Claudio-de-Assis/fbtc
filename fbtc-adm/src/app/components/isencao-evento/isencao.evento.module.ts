@@ -9,11 +9,14 @@ import { IsencaoEventoListComponent } from './isencao-evento-list/isencao.evento
 import { IsencaoEventoRoutingModule } from './isencao.evento.routing.module';
 import { AssociadoIsencaoModule } from './../associado-isencao/associado-isencao.module';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AssociadoIsencaoModule,
+    NgxPaginationModule,
     IsencaoEventoRoutingModule
   ],
   declarations: [

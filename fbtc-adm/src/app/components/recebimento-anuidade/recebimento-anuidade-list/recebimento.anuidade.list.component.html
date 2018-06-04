@@ -96,7 +96,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let recebimento of recebimentos"
+                                <tr *ngFor="let recebimento of recebimentos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="recebimento.recebimentoId === selectedId">
                                     <td>{{ recebimento.nome }}</td>
                                     <td>{{ recebimento.cpf }}</td>
@@ -114,10 +114,12 @@
             </div>
             <div class="panel-footer text-center">
                 <div class="btn-group">
-                    <button (click)="gotoPrimeiraPagina()" class="btn btn-default"><i class="fa fa-angle-double-left"></i></button>
-                    <button (click)="gotoPaginaAnterio()" class="btn btn-default"><i class="fa fa-angle-left"></i></button>
-                    <button (click)="gotoProximaPagina()" class="btn btn-default"><i class="fa fa-angle-right"></i></button>
-                    <button (click)="gotoUltimaPagina()" class="btn btn-default"><i class="fa fa-angle-double-right"></i></button>
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AtcFormComponent } from './atc-form.component';
+import { AtcFormComponent } from './atc.form.component';
 
 describe('AtcFormComponent', () => {
   let component: AtcFormComponent;

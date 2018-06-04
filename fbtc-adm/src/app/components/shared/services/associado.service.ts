@@ -88,7 +88,6 @@ export class AssociadoService {
         );
     }
 
-
     //  nome: string, cpf: string, sexo: string, atcId: number, crp: string, tipoProfissao: string, tipoPublicoId: number
     getIsentoByFilters(isencaoId: number, nome: string, cpf: string, sexo: string, atcId: number,
         crp: string, tipoProfissao: string, tipoPublicoId: number, estado: string, cidade: string, ativo: string): Observable<AssociadoIsentoDao[]> {
@@ -100,6 +99,13 @@ export class AssociadoService {
                 catchError(this.handleError(`getByFilters isencaoId=${isencaoId}, nome=${nome}, cpf=${cpf}, sexo=${sexo}, atcId=${atcId},
                     crp=${crp}, tipoProfissao=${tipoProfissao}, tipoPublicoId=${tipoPublicoId}, estado=${estado},
                      cidade=${cidade}, ativo=${ativo}`, []))
+        );
+    }
+
+    ressetPassWordById(id: number): Observable<string> {
+        return this.http.get<string>(this.apiRoute.postRessetPassWord(id)).pipe(
+            tap(_ => this.log(`fetched associado id=${id}`)),
+            catchError(this.handleError<string>(`ressetPasswordById id=${id}`))
         );
     }
 

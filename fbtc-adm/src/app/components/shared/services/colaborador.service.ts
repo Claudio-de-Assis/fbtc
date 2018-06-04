@@ -64,6 +64,13 @@ export class ColaboradorService {
         );
     }
 
+    ressetPassWordById(id: number): Observable<string> {
+        return this.http.get<string>(this.apiRoute.ressetPassWord(id)).pipe(
+            tap(_ => this.log(`fetched colaborador id=${id}`)),
+            catchError(this.handleError<string>(`ressetPasswordById id=${id}`))
+        );
+    }
+
     /**
     * Handle Http operation that failed.
     * Let the app continue.

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AppSettings } from './../../../app.settings';
 
 @Injectable()
-export class AssociadoRoute {
+export class UserRoute {
 
-    private url = 'Associado/';
+    private url = 'User/';
 
     // [Route("GetAll")]
     getAll(): string {
@@ -43,10 +43,10 @@ export class AssociadoRoute {
        + this.url +`FindIsentoByFilters/${isencaoId},${nome},${cpf},${sexo},${atcId},${crp},${tipoProfissao},${tipoPublicoId},${estado},${cidade},${ativo}`;
    }
 
-    // [Route("Associado}")]
+    // [Route("Associado")]
     postAssociado(): string {
 
-        return AppSettings.API_ENDPOINT + this.url + `Associado`;
+        return AppSettings.API_ENDPOINT + this.url + 'Associado';
     }
 
     // [Route("AssociadoIsento")]
@@ -58,10 +58,5 @@ export class AssociadoRoute {
     // [Route("SetAssociado")]
     setAssociado(): string {
         return AppSettings.API_ENDPOINT + this.url + 'SetAssociado';
-    }
-
-    // [Route("RessetPassword/{id:int}")]
-    postRessetPassWord(id: number): string {
-        return AppSettings.API_ENDPOINT + this.url + `RessetPassword/${id}`;
     }
 }

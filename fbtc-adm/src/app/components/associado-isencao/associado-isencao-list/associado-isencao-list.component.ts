@@ -62,6 +62,8 @@ export class AssociadoIsencaoListComponent implements OnInit {
     submitted = false;
     isBusy = false;
 
+    _itensPerPage = 30;
+
     constructor(
         private service: AssociadoService,
         private serviceTP: TipoPublicoService,

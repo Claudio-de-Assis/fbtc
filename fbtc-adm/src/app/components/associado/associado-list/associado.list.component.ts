@@ -57,6 +57,8 @@ export class AssociadoListComponent implements OnInit {
 
     submitted = false;
 
+    _itensPerPage = 30;
+
     /** AssociadoList ctor */
     constructor(
         private service: AssociadoService,

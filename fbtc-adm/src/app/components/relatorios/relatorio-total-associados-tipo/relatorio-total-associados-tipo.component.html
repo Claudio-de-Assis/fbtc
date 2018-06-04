@@ -57,52 +57,17 @@
                           </table>
                         </div>
               </div>
-              <div class="panel-footer text-center">
-                 <div class="btn-group">
-                  <!--    
-                  <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
-                      <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
-                      <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
-                      <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
-                  -->
-                      <button type="submit" class="btn btn-primary">Atualizar</button>&nbsp;
-                      <button class="btn btn-default" (click)="gotoImprimir()">Imprimir</button>
+              <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="{{ rptRoute }}"><button type="button" class="btn btn-success" >Exportar para o Excel</button></a>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <button type="submit" class="btn btn-primary">Atualizar</button>&nbsp;
+                        </div>
                     </div>
               </div>
         </div>
     </form>
-    <!--
-    <div class="panel panel-primary">
-          <div class="panel-heading">
-            Listagem de Eventos
-          </div>
-            <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Tipo de Associação</td>
-                                    <td>Quant</td>
-                                </tr>
-                            </thead>
-                            <tbody class="RptTotalAssociadosDAO">
-                                <tr *ngFor="let rptTotalAssociadosDAO of rptTotalAssociadosDAOs">
-                                    <td>{{ rptTotalAssociadosDAO.nomeTipoAssociado }}</td>
-                                    <td>{{ rptTotalAssociadosDAO.qtd }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            </div>
-            <div class="panel-footer text-center">
-                <div class="btn-group">
-                    <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
-                    <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
-                    <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
-                    <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
-                </div>
-            </div>
-        </div>
-      -->
     </div>
 </div>

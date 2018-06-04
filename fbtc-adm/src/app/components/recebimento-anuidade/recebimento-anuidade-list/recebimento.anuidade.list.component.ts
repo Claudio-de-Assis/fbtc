@@ -58,6 +58,8 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
 
   submitted = false;
 
+  _itensPerPage = 30;
+
   constructor(
       private service: RecebimentoService,
       private serviceTP: TipoPublicoService,

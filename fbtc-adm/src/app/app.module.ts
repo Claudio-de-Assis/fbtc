@@ -29,6 +29,7 @@ import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
 
+
 @NgModule({
   imports: [
     CommonModule,

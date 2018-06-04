@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { AssociadoService } from './../shared/services/associado.service';
 import { AssociadoIsencaoListComponent } from './associado-isencao-list/associado-isencao-list.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   declarations: [
     AssociadoIsencaoListComponent

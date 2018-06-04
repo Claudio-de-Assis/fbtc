@@ -1,5 +1,3 @@
-import { Util } from './../../shared/util/util';
-import { debug } from 'util';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -12,6 +10,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
 
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { Util } from './../../shared/util/util';
+import { debug } from 'util';
+
 @Component({
   selector: 'app-relatorio-associados-ano',
   templateUrl: './relatorio-associados-ano.component.html',
@@ -19,30 +21,36 @@ import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
 })
 export class RelatorioAssociadosAnoComponent implements OnInit {
 
-  title = 'Relatório de Usuários por Ano e Tipo de Associação';
-
   rptTotalAssociadosDAOs: RptTotalAssociadosDAO[];
 
+  title: string;
   _util = Util;
   editAno: number;
-
-  submitted = false;
+  submitted: boolean;
+  rptRoute: string;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(0);
+    this.title = 'Relatório de Usuários por Ano e Tipo de Associação';
+    this.submitted = false;
+   }
 
   getDadosRpt(): void {
 
+    this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(this.editAno);
     this.service.getRptAssociadosAnoDAO(this.editAno).
     subscribe(rptTotalAssociadosDAOs => this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs);
   }
 
-  gotoImprimir() {
-
-    console.log('imprimir');
+  setAnoRpt(): void {
+    console.log('aqui');
+    this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(this.editAno);
   }
 
   onSubmit() {

@@ -38,6 +38,8 @@ export class IsencaoAnuidadeListComponent implements OnInit {
   _identificacao: string = '0';
   _tipoIsencao: string = '2'; // Anuidade:2 Evento: 1
 
+  _itensPerPage = 30;
+
   constructor(
     private service: IsencaoService,
     private serviceTP: TipoPublicoService,

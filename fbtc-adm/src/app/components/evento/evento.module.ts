@@ -15,6 +15,8 @@ import { FileUploadModule } from './../shared/upload/file-upload.module';
 
 import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
     EventoRoutingModule,
     SharedModule,
     FileUploadModule,
+    NgxPaginationModule,
     HttpModule
   ],
   declarations: [

@@ -16,6 +16,8 @@ import { ColaboradorRoute } from '../shared/webApi-routes/colaborador.route';
 import { TipoPublicoRoute } from '../shared/webApi-routes/tipo-publico.route';
 import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { CustomAlertsModule } from '../shared/custom-alerts/custom-alerts.module';
 // import { AlertConfigService } from '../shared/services/alert-config.service';
@@ -28,6 +30,7 @@ import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
       ColaboradorRoutingModule,
       SharedModule,
       ReactiveFormsModule,
+      NgxPaginationModule,
 //      NgbModule.forRoot(),
 //      CustomAlertsModule
   ],

@@ -1,4 +1,3 @@
-import { debug } from 'util';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -12,7 +11,8 @@ import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
 
 import { Util } from './../../shared/util/util';
-
+import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-relatorio-associados-genero',
@@ -21,31 +21,34 @@ import { Util } from './../../shared/util/util';
 })
 export class RelatorioAssociadosGeneroComponent implements OnInit {
 
-  title = 'Relatório Total de Usuários por Sexo e Tipo de Associação';
-
   rptTotalAssociadosDAOs: RptTotalAssociadosDAO[];
 
-  editSexo: string = 'M';
+  editSexo: string;
+  title: string;
+  submitted: boolean;
+  rptRoute: string;
 
   _util = Util;
-
-  submitted = false;
 
   constructor(
     private service: RelatoriosService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private apiRoute: RelatoriosRoute,
+  ) {
+
+    this.editSexo = 'M';
+    this.title = 'Relatório Total de Usuários por Sexo e Tipo de Associação';
+    this.rptRoute = apiRoute.getRptAssociadosGeneroToExcel(this.editSexo);
+    this.submitted = false;
+  }
 
   getDadosRpt(): void {
 
+    this.submitted = true;
+    this.rptRoute = this.apiRoute.getRptAssociadosGeneroToExcel(this.editSexo);
     this.service.getRptAssociadosGeneroDAO(this.editSexo).
     subscribe(rptTotalAssociadosDAOs => this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs);
-  }
-
-  gotoImprimir() {
-
-    console.log('imprimir');
   }
 
   onSubmit() {

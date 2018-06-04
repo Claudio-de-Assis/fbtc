@@ -22,6 +22,8 @@ export class AnuidadeListComponent implements OnInit {
 
   anuidades: Anuidade[];
 
+  _itensPerPage = 30;
+
   private selectedId: number;
 
   private selectedAnuidade: Anuidade;

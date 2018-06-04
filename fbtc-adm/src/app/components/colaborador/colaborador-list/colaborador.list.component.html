@@ -65,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody class="associados">
-                            <tr *ngFor="let colaborador of colaboradores"
+                            <tr *ngFor="let colaborador of colaboradores | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                 [class.selected]="colaborador.colaboradorId === selectedId">
                                 <td>{{ colaborador.ColaboradorId}} {{ colaborador.nome}}</td>
                                 <td>{{colaborador.eMail}}</td>
@@ -84,10 +84,16 @@
             <div class="panel-footer">
                 <div class="text-center">
                     <div class="btn-group">
-                        <button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                        <!--<button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
                         <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
                         <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
-                        <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>
+                        <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>-->
                     </div>
                 </div>
             </div>

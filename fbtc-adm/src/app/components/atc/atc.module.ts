@@ -13,12 +13,15 @@ import { SharedModule } from '../shared/shared.module';
 import { AtcRoutingModule } from './atc.routing.module';
 import { UnidadeFederacaoRoute } from '../shared/webapi-routes/unidade-federacao.route';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AtcRoutingModule,
     SharedModule,
+    NgxPaginationModule,
     HttpModule
   ],
   declarations: [

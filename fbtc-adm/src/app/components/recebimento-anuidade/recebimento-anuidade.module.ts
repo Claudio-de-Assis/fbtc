@@ -11,11 +11,14 @@ import { RecebimentoAnuidadeFormComponent } from './recebimento-anuidade-form/re
 import { RecebimentoAnuidadeListComponent } from './recebimento-anuidade-list/recebimento.anuidade.list.component';
 import { RecebimentoAnuidadeRoutingModule } from './recebimento.anuidade.routing.module';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RecebimentoAnuidadeRoutingModule,
+    NgxPaginationModule,
     SharedModule
   ],
   declarations: [
