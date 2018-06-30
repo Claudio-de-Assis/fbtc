@@ -1,3 +1,4 @@
+import { Endereco } from './../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -20,6 +21,8 @@ import { Evento } from './../../shared/model/evento';
 })
 export class RecebimentoEventoFormComponent implements OnInit {
 
+  enderecos: Endereco[];
+
   @Input() recebimento: Recebimento = { recebimentoId: 0, associadoId: 0, associadoIsentoId: 0, valorAnuidadePublicoId: 0,
         valorEventoPublicoId: 0, objetivoPagamento: '', dtNotificacao: null, observacao: '',
         codePS: '', referencePS: '', typePS: 0, statusPS: 99, lastEventDatePS: null, typePaymentMethodPS: 0,
@@ -32,21 +35,21 @@ export class RecebimentoEventoFormComponent implements OnInit {
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
             dtCadastro: null, ativo: true,
-              enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',
-              bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
-              cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}}
+              enderecosPessoa: this.enderecos}
   };
 
+  /*
+   new endereco { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '',
+              bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
+              cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
+  */
   @Input() evento: Evento = new Evento();
 
-  title = 'Dados de pagamento de evento';
-
+  title: string;
   private selectedId: any;
-
   tiposPublicos: TipoPublico[];
   eventos: Evento[];
-
-  submitted = false;
+  submitted: boolean;
 
   constructor(
     private service: RecebimentoService,
@@ -54,7 +57,10 @@ export class RecebimentoEventoFormComponent implements OnInit {
     private serviceEvento: EventoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.title = 'Dados de pagamento de evento';
+    this.submitted = false;
+   }
 
   getRecebimentoById(id: number): void {
 
@@ -96,7 +102,7 @@ export class RecebimentoEventoFormComponent implements OnInit {
 
   getTiposPublicos(): void {
 
-    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    this.serviceTP.getTiposPublicos('true').subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
   }
 
   getEventoByRecebimentoId(id: number): void {

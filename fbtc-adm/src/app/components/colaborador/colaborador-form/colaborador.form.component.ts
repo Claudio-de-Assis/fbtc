@@ -1,18 +1,12 @@
+import { Endereco } from './../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
-
-import {FormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 
 import { ColaboradorService } from '../../shared/services/colaborador.service';
 import { Colaborador } from './../../shared/model/colaborador';
 
 import { Util } from './../../shared/util/util';
-
-// import { CustomAlertsModule } from '../../shared/custom-alerts/custom-alerts.module';
 
 @Component({
     selector: 'app-colaborador-form',
@@ -22,21 +16,23 @@ import { Util } from './../../shared/util/util';
 /** ColaboradorFrm component*/
 export class ColaboradorFormComponent implements OnInit {
 
+    enderecos: Endereco[];
+
     @Input() colaborador: Colaborador = { colaboradorId: 0, tipoPerfil: '',
         pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
         sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
         dtCadastro: null, ativo: true,
-        enderecoPessoa: { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '',
-            bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
-            cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
+        enderecosPessoa: this.enderecos
     };
 
     title: string;
     badget: string;
     _msg: string;
+    _msgRetorno: string;
     _id: number;
 
-    private selectedId: any;
+    _colabId: number;
+    _isEMailValid: boolean;
 
     _util = Util;
 
@@ -57,6 +53,10 @@ export class ColaboradorFormComponent implements OnInit {
         this._msg = '';
         this._id = 0;
         this.submitted = false;
+
+        this._colabId = 0;
+        this._msgRetorno = '';
+        this._isEMailValid = false;
      }
 
     getColaboradorById(id: number): void {
@@ -71,13 +71,27 @@ export class ColaboradorFormComponent implements OnInit {
             .subscribe(colaborador => this.colaborador = colaborador);
     }
 
+    gotoValidarEMail() {
+
+        this.service.getValidaEMail(this.colaborador.colaboradorId, this.colaborador.eMail)
+        .subscribe(
+            msg => {
+                this._msgRetorno = msg;
+                this.avaliaRetornoEMail(this._msgRetorno);
+            });
+    }
+
     save() {
 
          this.service.addColaborador(this.colaborador)
-            .subscribe(() =>  this.gotoShowPopUp());
+         .subscribe(
+            msg => {
+                this._msgRetorno = msg;
+                this.avaliaRetorno(this._msgRetorno);
+            }
+        );
 
         this.submitted = false;
-        this._msg = '';
     }
 
     gotoShowPopUp() {
@@ -86,6 +100,33 @@ export class ColaboradorFormComponent implements OnInit {
       this.editShowPopup = true;
       // Colocar a chamada para a implementação do PopUp modal de aviso:
       alert('Registro salvo com sucesso!');
+    }
+
+    avaliaRetorno(msgRet: string) {
+
+        if (msgRet.substring(0, 1) === '0') {
+
+            this._colabId = parseInt(msgRet.substring(0, 10), 10);
+
+            this.router.navigate([`/Colaborador/${this._colabId}`]);
+
+            this.getColaboradorById(this._colabId);
+
+            this._msg = this._msgRetorno.substring(10);
+
+        } else {
+
+            this._msg = this._msgRetorno;
+        }
+    }
+
+    avaliaRetornoEMail(msgRet: string) {
+
+        if (msgRet !== 'OK') {
+
+            alert(msgRet);
+            this.colaborador.eMail = '';
+        }
     }
 
     gotoReenviarSenha() {

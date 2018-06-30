@@ -1,3 +1,4 @@
+import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,6 +9,7 @@ import { IsencaoEventoFormComponent } from './isencao-evento-form/isencao.evento
 import { IsencaoEventoListComponent } from './isencao-evento-list/isencao.evento.list.component';
 import { IsencaoEventoRoutingModule } from './isencao.evento.routing.module';
 import { AssociadoIsencaoModule } from './../associado-isencao/associado-isencao.module';
+import { FileUploadModule } from '../shared/upload/file-upload.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -17,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     AssociadoIsencaoModule,
     NgxPaginationModule,
+    FileUploadModule,
     IsencaoEventoRoutingModule
   ],
   declarations: [
@@ -28,7 +31,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     IsencaoEventoListComponent
   ],
   providers: [
-    IsencaoService
+    IsencaoService,
+    FileUploadRoute
   ]
 })
 export class IsencaoEventoModule { }

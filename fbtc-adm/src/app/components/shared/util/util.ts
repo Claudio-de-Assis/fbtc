@@ -49,10 +49,10 @@ export class Util {
     ];
 
     public static optTipoFormaContato = [
-        {name: 'E-Mail', value: 1},
-        {name: 'Celular', value: 2},
-        {name: 'Endereço', value: 3},
-        {name: 'Todos', value: 4}
+        {name: 'E-Mail', value: '1'},
+        {name: 'Celular', value: '2'},
+        {name: 'Endereço', value: '3'},
+        {name: 'Todos', value: '4'}
     ];
 
     public static optTipoProfissao = [
@@ -85,5 +85,12 @@ export class Util {
     public static optObjetivoPagamento = [
         {name: 'Evento', value: '1'},
         {name: 'Anuidade', value: '2'}
+    ];
+
+    public static optTipoEndereco = [
+        {name: '', value: ''},
+        {name: 'Residencial', value: '1'},
+        {name: 'Comercial', value: '2'},
+        {name: 'Outro', value: '3'}
     ];
 }

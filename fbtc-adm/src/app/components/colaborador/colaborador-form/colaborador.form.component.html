@@ -23,7 +23,7 @@
                                 <label for="inpEMail">E-Mail:</label>
                                 <input id="inpEMail" name="eMail" class="form-control" type="email"
                                     required minlength="4" maxlength="100"
-                                    [(ngModel)]="colaborador.eMail"  #eMail="ngModel"/>
+                                    [(ngModel)]="colaborador.eMail"  #eMail="ngModel"  (blur)="gotoValidarEMail()"/>
 
                                 <div *ngIf="eMail.invalid && (eMail.dirty || eMail.touched)"
                                     class="alert alert-danger">

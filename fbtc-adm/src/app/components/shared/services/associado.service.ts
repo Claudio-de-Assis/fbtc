@@ -59,12 +59,29 @@ export class AssociadoService {
 
     //////// Save methods //////////
     /** POST: add a new Associado to the server */
-    addAssociado (associado: Associado): Observable<Associado> {
+/**
+ *     addAssociado (associado: Associado): Observable<Associado> {
         return this.http.post<Associado>(this.apiRoute.postAssociado(), associado, httpOptions).pipe(
           tap((_associado: Associado) => this.log(`added associado w/ id=${associado.associadoId}`)),
           catchError(this.handleError<Associado>('addAssociado'))
         );
     }
+  **/
+    addAssociado (associado: Associado): Observable<string> {
+        return this.http.post<string>(this.apiRoute.postAssociado(), associado, httpOptions).pipe(
+          tap(_ => this.log(`added associado w/ id=${associado.associadoId}`)),
+          catchError(this.handleError<string>('addAssociado'))
+        );
+    }
+
+    /**
+     *     ressetPassWordById(id: number): Observable<string> {
+        return this.http.get<string>(this.apiRoute.postRessetPassWord(id)).pipe(
+            tap(_ => this.log(`fetched associado id=${id}`)),
+            catchError(this.handleError<string>(`ressetPasswordById id=${id}`))
+        );
+    }
+     **/
 
     //////// Save methods //////////
     /** POST: add a new Associado to the server */
@@ -106,6 +123,13 @@ export class AssociadoService {
         return this.http.get<string>(this.apiRoute.postRessetPassWord(id)).pipe(
             tap(_ => this.log(`fetched associado id=${id}`)),
             catchError(this.handleError<string>(`ressetPasswordById id=${id}`))
+        );
+    }
+
+    getValidaEMail(associadoId: number, eMail: string): Observable<string> {
+        return this.http.get<string>(this.apiRoute.getValidaEMail(associadoId, eMail)).pipe(
+            tap(_ => this.log(`fetched associado associadoId=${associadoId}, eMail=${eMail}`)),
+            catchError(this.handleError<string>(`getValidaEMail id=${associadoId}`))
         );
     }
 

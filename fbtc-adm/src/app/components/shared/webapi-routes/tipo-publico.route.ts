@@ -7,8 +7,8 @@ export class TipoPublicoRoute {
     private url = 'TipoPublico/';
 
     // [Route("GetAll")]
-    getAll(): string {
-        return AppSettings.API_ENDPOINT + this.url + 'GetAll';
+    getAll(isAtivo: string): string {
+        return AppSettings.API_ENDPOINT + this.url + 'GetAll/' + isAtivo;
     }
 
     // [Route("GetAll")]

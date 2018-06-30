@@ -64,4 +64,10 @@ export class AssociadoRoute {
     postRessetPassWord(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + `RessetPassword/${id}`;
     }
+
+    // [Route("ValidaEmail/{associadoid:int},{eMail}")]
+    getValidaEMail(associadoId: number, eMail: string): string {
+
+        return AppSettings.API_ENDPOINT + this.url + `ValidaEmail/${associadoId},${eMail}/`;
+    }
 }

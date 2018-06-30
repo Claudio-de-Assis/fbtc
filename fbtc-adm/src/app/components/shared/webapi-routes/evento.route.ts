@@ -36,6 +36,12 @@ export class EventoRoute {
         return AppSettings.API_ENDPOINT + this.url + 'Evento';
     }
 
+
+    // [Route("Evento")]
+    postEventoDao(): string {
+        return AppSettings.API_ENDPOINT + this.url + 'EventoDao';
+    }
+
     // [Route("NomeFoto/{id:int}")]
     getNomeFotoById(id: number): string {
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { MessageService } from './../../../message.service';
-import { Evento } from './../model/evento';
+import { Evento, EventoDao } from './../model/evento';
 import { TipoPublicoValorDao } from '../model/tipo-publico';
 
 import { EventoRoute } from './../webapi-routes/evento.route';
@@ -36,11 +36,11 @@ export class EventoService {
         );
     }
 
-    getById(id: number): Observable<Evento> {
+    getById(id: number): Observable<EventoDao> {
 
-        return this.http.get<Evento>(this.apiRoute.getById(id)).pipe(
+        return this.http.get<EventoDao>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched Evento id=${id}`)),
-            catchError(this.handleError<Evento>(`getById id=${id}`))
+            catchError(this.handleError<EventoDao>(`getById id=${id}`))
         );
     }
 
@@ -77,11 +77,20 @@ export class EventoService {
     }
 
     //////// Save methods //////////
-    addEvento (evento: Evento): Observable<Evento> {
+    addEvento (evento: Evento): Observable<string> {
 
-        return this.http.post<Evento>(this.apiRoute.postEvento(), evento, httpOptions).pipe(
-            tap((_evento: Evento) => this.log(`added Evento w/ id=${evento.eventoId}`)),
-            catchError(this.handleError<Evento>('addEvento'))
+        return this.http.post<string>(this.apiRoute.postEvento(), evento, httpOptions).pipe(
+            tap(_ => this.log(`added Evento w/ id=${evento.eventoId}`)),
+            catchError(this.handleError<string>('addEvento'))
+        );
+    }
+
+    //////// Save methods //////////
+    addEventoDao (eventoDao: EventoDao): Observable<string> {
+
+        return this.http.post<string>(this.apiRoute.postEvento(), eventoDao, httpOptions).pipe(
+            tap(_ => this.log(`added Evento w/ id=${eventoDao.eventoId}`)),
+            catchError(this.handleError<string>('addEventoDao'))
         );
     }
 

@@ -6,4 +6,5 @@ export class Endereco extends EnderecoCep {
     numero: string;
     complemento: string;
     tipoEndereco: string;
+    ordemEndereco: string;
 }

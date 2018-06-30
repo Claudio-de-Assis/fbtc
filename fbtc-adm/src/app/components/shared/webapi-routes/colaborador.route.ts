@@ -37,6 +37,12 @@ export class ColaboradorRoute {
     ressetPassWord(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + `RessetPassword/${id}`;
     }
+
+    // [Route("ValidaEmail/{colaboradorId:int},{eMail}")]
+    getValidaEMail(colaboradorId: number, eMail: string): string {
+
+        return AppSettings.API_ENDPOINT + this.url + `ValidaEmail/${colaboradorId},${eMail}/`;
+    }
 }
 
 

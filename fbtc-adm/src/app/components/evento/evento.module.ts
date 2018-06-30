@@ -1,7 +1,7 @@
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { EventoListComponent } from './evento-list/evento.list.component';
 import { EventoFormComponent } from './evento-form/evento.form.component';
@@ -39,7 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   providers: [
     EventoService,
-    FileUploadRoute
+    FileUploadRoute,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
 })
 export class EventoModule { }

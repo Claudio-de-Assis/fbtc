@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-
 import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -12,7 +11,7 @@ import { EventoService } from '../../shared/services/evento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { ValueShareService } from './../../shared/services/value-share.service';
 
-import { Evento } from '../../shared/model/evento';
+import { EventoDao } from '../../shared/model/evento';
 import { TipoPublicoValorDao } from './../../shared/model/tipo-publico';
 
 import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
@@ -27,25 +26,26 @@ import { Util } from './../../shared/util/util';
 })
 export class EventoFormComponent implements OnInit {
 
-  @Input() evento: Evento = { eventoId: 0, titulo: '', descricao: '', codigo: '', dtInicio: null,
-            dtTermino: null, dtTerminoInscricao: null, tipoEvento: '', aceitaIsencaoAta: false,
-            ativo: false, nomeFoto: '_no-foto-evento.jpg'
-  };
-
-  title = 'Evento';
-  badge = '';
-
-  _util = Util;
-  _nomeFotoPadrao: string = '_no-foto-evento.jpg';
-  _nomeFoto: string = '_no-foto-evento.jpg';
-
-  editEventoId: number = 0;
-
-  private selectedId: any;
-
   @Input() tiposPublicosValoresDao: TipoPublicoValorDao[];
 
-  submitted = false;
+  @Input() eventoDao: EventoDao = { eventoId: 0, titulo: '', descricao: '', codigo: '', dtInicio: null,
+            dtTermino: null, dtTerminoInscricao: null, tipoEvento: '', aceitaIsencaoAta: false,
+            ativo: false, nomeFoto: '_no-foto-evento.jpg', tiposPublicosValoresDao: this.tiposPublicosValoresDao
+  };
+
+  title: string;
+  badge: string;
+
+  _util = Util;
+  _nomeFotoPadrao: string;
+  _nomeFoto: string;
+  _eventoId: number;
+  _msgRetorno: string;
+  _msg: string;
+
+  editEventoId: number;
+
+  submitted: boolean;
 
   history: string[] = [];
 
@@ -57,59 +57,73 @@ export class EventoFormComponent implements OnInit {
     private apiRoute: FileUploadRoute,
     private valueShareService: ValueShareService
   ) {
-    valueShareService.valueStringInformada$.subscribe(
-      nomeFoto => {
-          this.history.push(nomeFoto);
+      valueShareService.valueStringInformada$.subscribe(
+        nomeFoto => {
+            this.history.push(nomeFoto);
       });
-   }
+      this.title = 'Evento';
+      this.badge = '';
+      this._nomeFotoPadrao = '_no-foto-evento.jpg';
+      this._nomeFoto = '_no-foto-evento.jpg';
+      this.editEventoId = 0;
+      this.submitted = false;
+      this._eventoId = 0;
+      this._msg = '';
+      this._msgRetorno = '';
+    }
 
   getEventoById(id: number): void {
 
       this.service.getById(id)
-          .subscribe(evento => this.evento = evento);
+          .subscribe(eventoDao => this.eventoDao = eventoDao);
   }
 
-  setEvento(): void {
-
-      this.service.setEvento()
-          .subscribe(evento => this.evento = evento);
-  }
-
-  getTiposPublicos(id: number): void {
+  getTiposPublicosById(id: number): void {
 
     this.serviceTP.getTiposPublicoByEventoId(id).
-      subscribe(tiposPublicosValoresDao => this.tiposPublicosValoresDao = tiposPublicosValoresDao);
+      subscribe(tiposPublicosValoresDao => this.eventoDao.tiposPublicosValoresDao = tiposPublicosValoresDao);
   }
 
   gotoEventos() {
 
-    let eventoId = this.evento ? this.evento.eventoId : null;
+    let eventoId = this.eventoDao ? this.eventoDao.eventoId : null;
     this.router.navigate(['/Evento', { id: eventoId, foo: 'foo' }]);
   }
 
   SaveEvento() {
 
+    this._msg = '';
     this._nomeFoto = this.history[0];
 
     if (this._nomeFoto === undefined) {
         this._nomeFoto = this._nomeFotoPadrao;
     }
 
-    this.evento.nomeFoto = this._nomeFoto;
-    this.service.addEvento(this.evento)
-    .subscribe(() =>  this.SaveValoresEvento());
+    this.eventoDao.nomeFoto = this._nomeFoto;
+    this.service.addEventoDao(this.eventoDao)
+    .subscribe(
+      msg => {
+          this._msgRetorno = msg;
+          this.avaliaRetorno(this._msgRetorno);
+      });
   }
 
-  SaveValoresEvento() {
+  avaliaRetorno(msgRet: string) {
 
-    if (this.evento.eventoId !== 0 ) {
-      this.service.addValoresEvento(this.tiposPublicosValoresDao)
-      .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
+    if (msgRet.substring(0, 1) === '0') {
+
+        this._eventoId = parseInt(msgRet.substring(0, 10), 10);
+
+        this.router.navigate([`/Evento/${this._eventoId}`]);
+
+        this.getEventoById(this._eventoId);
+
+        this._msg = this._msgRetorno.substring(10);
+
     } else {
-      this.gotoShowPopUp('Registro salvo com sucesso!');
-      this.gotoEventos();
+
+        this._msg = this._msgRetorno;
     }
-    this.submitted = false;
   }
 
   onSubmit() {
@@ -124,13 +138,6 @@ export class EventoFormComponent implements OnInit {
     alert(msg);
   }
 
-  /*gotoDeleteEvento() {
-    if (confirm('Confirma a exclusão do registro?')) {
-      alert(this.service.DeleteEvento(this.editEventoId));
-      this.gotoEventos();
-    }
-  }*/
-
   gotoPreviewAnuncio() {
 
     this.router.navigate(['/EventoPreview', +this.route.snapshot.paramMap.get('id') ]);
@@ -143,13 +150,12 @@ export class EventoFormComponent implements OnInit {
     if (this.editEventoId > 0) {
       this.badge = 'Edição';
       this.getEventoById(this.editEventoId);
-      this.getTiposPublicos(this.editEventoId);
+      this.getTiposPublicosById(this.editEventoId);
 
     } else {
       this.badge = 'Novo';
-
+      this.getTiposPublicosById(0);
     }
-
   }
 
   refreshImages(status) {

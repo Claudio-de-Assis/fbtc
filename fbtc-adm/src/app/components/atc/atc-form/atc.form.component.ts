@@ -21,17 +21,16 @@ export class AtcFormComponent implements OnInit {
   @Input() atc: Atc = { atcId: 0, nome: '', uf: '', nomePres: '', nomeVPres: '', nomePSec: '', nomeSSec: '', nomePTes: '',
                         nomeSTes: '', site: '', siteDiretoria: '', ativo: true};
 
-  title = 'Atc';
-  badge = '';
-
-  editAtcId: number = 0;
-
-  private selectedId: any;
+  title: string;
+  badge: string;
+  editAtcId: number;
+  // private selectedId: any;
+  submitted: boolean;
+  _msgRetorno: string;
+  _msg: string;
+  _atcId: number;
 
   unidadesFederacao: UnidadeFederacao[];
-
-  submitted = false;
-
   _util = Util;
 
   constructor(
@@ -39,7 +38,15 @@ export class AtcFormComponent implements OnInit {
     private serviceUF: UnidadeFederacaoService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+    this.title = 'Atc';
+    this.badge = '';
+    this.editAtcId = 0;
+    this.submitted = false;
+    this._msgRetorno = '';
+    this._msg = '';
+    this._atcId = 0;
+   }
 
   getAtcById(id: number): void {
 
@@ -53,38 +60,57 @@ export class AtcFormComponent implements OnInit {
     this.router.navigate(['/Atc', { id: atcId, foo: 'foo' }]);
   }
 
-save() {
+  save() {
 
-  this.service.addAtc(this.atc)
-  .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
+    this.service.addAtc(this.atc)
+    .subscribe(
+      msg => {
+          this._msgRetorno = msg;
+          this.avaliaRetorno(this._msgRetorno);
+      });
 
-  this.submitted = false;
-}
+    this.submitted = false;
+  }
 
+  avaliaRetorno(msgRet: string) {
 
-gotoShowPopUp(msg: string) {
+    if (msgRet.substring(0, 1) === '0') {
 
-  // Colocar a chamada para a implementação do PopUp modal de aviso:
-  alert(msg);
-}
+        this._atcId = parseInt(msgRet.substring(0, 10), 10);
 
-excluir() {
+        this.router.navigate([`/Atc/${this._atcId}`]);
+
+        this.getAtcById(this._atcId);
+
+        this._msg = this._msgRetorno.substring(10);
+
+    } else {
+
+        this._msg = this._msgRetorno;
+    }
+  }
+
+  gotoShowPopUp(msg: string) {
+
+    // Colocar a chamada para a implementação do PopUp modal de aviso:
+    alert(msg);
+  }
+
+  excluir() {
 
     this.gotoAtcs();
-}
+  }
 
-getUFsDisponiveis(atcId: number) {
+  getUFsDisponiveis(atcId: number) {
 
-  this.serviceUF.getUnidadesFederacaoDisponiveis(atcId).subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
-}
+    this.serviceUF.getUnidadesFederacaoDisponiveis(atcId).subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
+  }
 
+  onSubmit() {
 
-onSubmit() {
-
-  this.submitted = true;
-  this.save();
-}
-
+    this.submitted = true;
+    this.save();
+  }
 
   ngOnInit() {
 

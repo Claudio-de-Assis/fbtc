@@ -57,10 +57,10 @@ export class ColaboradorService {
 
     //////// Save methods //////////
     /** POST: add a new Colaborador to the server */
-    addColaborador (colaborador: Colaborador): Observable<Colaborador> {
-        return this.http.post<Colaborador>(this.apiRoute.postColaborador(), colaborador, httpOptions).pipe(
-            tap((_colaborador: Colaborador) => this.log(`added Colaborador w/ id=${colaborador.colaboradorId}`)),
-            catchError(this.handleError<Colaborador>('addColaborador'))
+    addColaborador (colaborador: Colaborador): Observable<string> {
+        return this.http.post<string>(this.apiRoute.postColaborador(), colaborador, httpOptions).pipe(
+            tap(_ => this.log(`added Colaborador w/ id=${colaborador.colaboradorId}`)),
+            catchError(this.handleError<string>('addColaborador'))
         );
     }
 
@@ -68,6 +68,13 @@ export class ColaboradorService {
         return this.http.get<string>(this.apiRoute.ressetPassWord(id)).pipe(
             tap(_ => this.log(`fetched colaborador id=${id}`)),
             catchError(this.handleError<string>(`ressetPasswordById id=${id}`))
+        );
+    }
+
+    getValidaEMail(colaboradorId: number, eMail: string): Observable<string> {
+        return this.http.get<string>(this.apiRoute.getValidaEMail(colaboradorId, eMail)).pipe(
+            tap(_ => this.log(`fetched colaborador colaboradorId=${colaboradorId}, eMail=${eMail}`)),
+            catchError(this.handleError<string>(`getValidaEMail id=${colaboradorId}`))
         );
     }
 

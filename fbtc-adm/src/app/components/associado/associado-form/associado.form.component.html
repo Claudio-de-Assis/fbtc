@@ -22,7 +22,7 @@
                             <label for="inpEmail">E-Mail:</label>
                             <input id="inpEmail" name="email" class="form-control" type="email"
                                 required minlength="4" maxlength="100" 
-                                [(ngModel)]="associado.eMail" #eMail="ngModel"/>
+                                [(ngModel)]="associado.eMail" #eMail="ngModel" (blur)="gotoValidarEMail()"/>
                             <div *ngIf="eMail.invalid && (eMail.dirty || eMail.touched)"
                                 class="alert alert-danger">
                                 <div *ngIf="eMail.errors.required">* O E-Mail é obrigatório.</div>
@@ -121,14 +121,16 @@
                         <div class="form-group">
                             <label for="sltATC">ATC:</label>
                             <select id="sltATC"  name="ATC" class="form-control" 
-                                required    
+                                    
                                 [(ngModel)]="associado.atcId" #atcId="ngModel">
                                 <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
                             </select>
+                            <!--
                             <div *ngIf="atcId.invalid && (atcId.dirty || atcId.touched)"
                                 class="alert alert-danger">
                                 <div *ngIf="atcId.errors.required">* Informe a Atc do associado.</div>
-                            </div>    
+                            </div>  
+                            -->  
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -231,7 +233,7 @@
                         <div class="form-group">
                             <label>Contato para divulgação:</label><br>
                             <label required class="checkbox-inline" *ngFor="let op of _util.optTipoFormaContato" >
-                                <input type="checkbox" [(ngModel)]="associado.tipoFormaContato" name="tipoFormaContato" id="rdbTipoFormaContato"
+                                <input type="radio" [(ngModel)]="associado.tipoFormaContato" name="tipoFormaContato" id="rdbTipoFormaContato"
                                 [checked]="op.value === associado.tipoFormaContato" [value]="op.value"> {{ op.name }} &nbsp; </label>
                         </div>
                     </div>
@@ -272,78 +274,183 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="well">
-                            <h3>Dados de Endereço:</h3>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="inpCEP">CEP:</label>
-                                        <div class="input-group">
-                                            <input id="inpCEP" name="cep" class="form-control" type="text"
-                                                maxlength="9"    
-                                                [(ngModel)]="associado.enderecoPessoa.cep" #cep="ngModel"/>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button" (click)="getEnderecoByCep()" title="Buscar Cep"><i class="fa fa-search"></i></button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <div class="form-group">
-                                        <label for="inpLogradouro">Logradouro:</label>
-                                        <input id="inpLogradouro" name="logradouro" class="form-control" type="text"
-                                            maxlength="100" readonly    
-                                            [(ngModel)]="associado.enderecoPessoa.logradouro" #logradouro="ngModel"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="form-group">
-                                        <label for="inpNumero">Nº:</label>
-                                        <input id="inpNumero" name="numero"class="form-control" type="text"
-                                            maxlength="10"
-                                            [(ngModel)]="associado.enderecoPessoa.numero" #numero="ngModel"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label for="inpComplemento">Complemento:</label>
-                                        <input id="inpComplemento" name="complemento" class="form-control" type="text"
-                                            maxlength="100"
-                                            [(ngModel)]="associado.enderecoPessoa.complemento" #complemento="ngModel"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="inpBairro">Bairro:</label>
-                                        <input id="inpBairro" name="bairro" class="form-control" type="text"
-                                            size="20px" maxlength="100" readonly
-                                            [(ngModel)]="associado.enderecoPessoa.bairro" #bairro="ngModel"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="inpCidade">Cidade:</label>
-                                        <input id="inpCidade" name="cidade" class="form-control" type="text"
-                                            size="20px" maxlength="100" readonly   
-                                            [(ngModel)]="associado.enderecoPessoa.cidade" #cidade="ngModel"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="inpEstado">Estado:</label>
-                                        <input id="inpEstado" name="estado" class="form-control" type="text"
-                                            size="5px" maxlength="2" readonly    
-                                            [(ngModel)]="associado.enderecoPessoa.estado" #estado="ngModel"/>
-                                    </div>
+
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#principal">Endereço Principal</a></li>
+    <li><a data-toggle="tab" href="#secundario">Endereço Sencudário</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="principal" class="tab-pane fade in active">
+            <div class="well">
+                    <h4>Dados de endereço principal:</h4>
+                   <input type="hidden" id="inpHOrdemEnderecoPri" name="inpHOrdemEnderecoPri"
+                    [(ngModel)]="associado.enderecosPessoa[0].ordemEndereco" #ordemEnderecoPri="ngModel"/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpCEPPri">CEP:</label>
+                                <div class="input-group">
+                                    <input id="inpCEPPri" name="cepPri" class="form-control" type="text"
+                                        maxlength="9"    
+                                        [(ngModel)]="associado.enderecosPessoa[0].cep" #cepPri="ngModel"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" (click)="getEnderecoByCep(0)" title="Buscar Cep"><i class="fa fa-search"></i></button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpTipoEnderecoPri">Tipo de Endereço:</label>
+                                <select id="inpTipoEnderecoPri" name="TipoEnderecoPri" class="form-control"
+                                [(ngModel)]="associado.enderecosPessoa[0].tipoEndereco" #tipoEnderecoPri="ngModel">
+                                <option *ngFor="let op of _util.optTipoEndereco" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inpLogradouroPri">Logradouro:</label>
+                                <input id="inpLogradouroPri" name="logradouroPri" class="form-control" type="text"
+                                    maxlength="100" readonly    
+                                    [(ngModel)]="associado.enderecosPessoa[0].logradouro" #logradouroPri="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="inpNumeroPri">Nº:</label>
+                                <input id="inpNumeroPri" name="numeroPri" class="form-control" type="text"
+                                    maxlength="10"
+                                    [(ngModel)]="associado.enderecosPessoa[0].numero" #numeroPri="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpComplementoPri">Complemento:</label>
+                                <input id="inpComplementoPri" name="complementoPri" class="form-control" type="text"
+                                    maxlength="100"
+                                    [(ngModel)]="associado.enderecosPessoa[0].complemento" #complementoPri="ngModel"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpBairroPri">Bairro:</label>
+                                <input id="inpBairroPri" name="bairroPri" class="form-control" type="text"
+                                    size="20px" maxlength="100" readonly
+                                    [(ngModel)]="associado.enderecosPessoa[0].bairro" #bairroPri="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpCidadePri">Cidade:</label>
+                                <input id="inpCidadePri" name="cidadePri" class="form-control" type="text"
+                                    size="20px" maxlength="100" readonly   
+                                    [(ngModel)]="associado.enderecosPessoa[0].cidade" #cidadePri="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpEstadoPri">Estado:</label>
+                                <input id="inpEstadoPri" name="estadoPri" class="form-control" type="text"
+                                    size="5px" maxlength="2" readonly    
+                                    [(ngModel)]="associado.enderecosPessoa[0].estado" #estadoPri="ngModel"/>
+                            </div>
+                        </div>
+                    </div>
+            </div>    
+    </div>
+    <div id="secundario" class="tab-pane fade">
+            <div class="well">
+                    <h4>Dados de endereço secundário:</h4>
+                    <input type="hidden" id="inpHOrdemEnderecoSec" name="inpHOrdemEnderecoSec"
+                    [(ngModel)]="associado.enderecosPessoa[1].ordemEndereco" #ordemEnderecoSec="ngModel"/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpCEPSec">CEP:</label>
+                                <div class="input-group">
+                                    <input id="inpCEPSec" name="cepSec" class="form-control" type="text"
+                                        maxlength="9"    
+                                        [(ngModel)]="associado.enderecosPessoa[1].cep" #cepSec="ngModel"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" (click)="getEnderecoByCep(1)" title="Buscar Cep"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpTipoEnderecoSec">Tipo de Endereço:</label>
+                                <select id="inpTipoEnderecoSec" name="TipoEnderecoSec" class="form-control"
+                                [(ngModel)]="associado.enderecosPessoa[1].tipoEndereco" #tipoEnderecoSec="ngModel">
+                                <option *ngFor="let op of _util.optTipoEndereco" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inpLogradouroSec">Logradouro:</label>
+                                <input id="inpLogradouroSec" name="logradouro" class="form-control" type="text"
+                                    maxlength="100" readonly    
+                                    [(ngModel)]="associado.enderecosPessoa[1].logradouro" #logradouroSec="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="inpNumeroSec">Nº:</label>
+                                <input id="inpNumeroSec" name="numeroSec"class="form-control" type="text"
+                                    maxlength="10"
+                                    [(ngModel)]="associado.enderecosPessoa[1].numero" #numeroSec="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpComplementoSec">Complemento:</label>
+                                <input id="inpComplementoSec" name="complementoSec" class="form-control" type="text"
+                                    maxlength="100"
+                                    [(ngModel)]="associado.enderecosPessoa[1].complemento" #complementoSec="ngModel"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpBairroSec">Bairro:</label>
+                                <input id="inpBairroSec" name="bairroSec" class="form-control" type="text"
+                                    size="20px" maxlength="100" readonly
+                                    [(ngModel)]="associado.enderecosPessoa[1].bairro" #bairroSec="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpCidadeSec">Cidade:</label>
+                                <input id="inpCidadeSec" name="cidadeSec" class="form-control" type="text"
+                                    size="20px" maxlength="100" readonly   
+                                    [(ngModel)]="associado.enderecosPessoa[1].cidade" #cidadeSec="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inpEstadoSec">Estado:</label>
+                                <input id="inpEstadoSec" name="estadoSec" class="form-control" type="text"
+                                    size="5px" maxlength="2" readonly    
+                                    [(ngModel)]="associado.enderecosPessoa[1].estado" #estadoSec="ngModel"/>
+                            </div>
+                        </div>
+                    </div>
+            </div>    
+    </div>
+  </div>
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div *ngIf="_msg !== ''" class="alert alert-success">

@@ -25,8 +25,8 @@ export class TipoPublicoService {
         private apiRoute: TipoPublicoRoute,
         private messageService: MessageService) { }
 
-    getTiposPublicos(): Observable<TipoPublico[]> {
-        return this.http.get<TipoPublico[]>(this.apiRoute.getAll())
+    getTiposPublicos(isAtivo: string): Observable<TipoPublico[]> {
+        return this.http.get<TipoPublico[]>(this.apiRoute.getAll(isAtivo))
             .pipe(
                 tap(tiposPublicos => this.log('Fetched TipoPublico')),
                 catchError(this.handleError('getTiposPublicos()', []))

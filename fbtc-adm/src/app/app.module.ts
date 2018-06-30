@@ -29,7 +29,6 @@ import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -61,8 +60,7 @@ import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.rout
     AnuidadeRoute,
     PagSeguroRoute,
     RelatoriosRoute,
-    // AtcRoute,
-    { provide: LOCALE_ID, useValue: 'PT-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [
 

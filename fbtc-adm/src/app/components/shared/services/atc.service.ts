@@ -63,10 +63,10 @@ export class AtcService {
 
     //////// Save methods //////////
     /** POST: add a new Associado to the server */
-    addAtc (atc: Atc): Observable<Atc> {
-        return this.http.post<Atc>(this.apiRoute.postAtc(), atc, httpOptions).pipe(
-          tap((_atc: Atc) => this.log(`added atc w/ id=${atc.atcId}`)),
-          catchError(this.handleError<Atc>('addAtc'))
+    addAtc (atc: Atc): Observable<string> {
+        return this.http.post<string>(this.apiRoute.postAtc(), atc, httpOptions).pipe(
+          tap(_ => this.log(`added atc w/ id=${atc.atcId}`)),
+          catchError(this.handleError<string>('addAtc'))
         );
     }
 

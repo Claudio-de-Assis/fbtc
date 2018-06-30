@@ -97,7 +97,7 @@ export class IsencaoEventoListComponent implements OnInit {
 
   getTiposPublicos(): void {
 
-    this.serviceTP.getTiposPublicos().subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+    this.serviceTP.getTiposPublicos('true').subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
   }
 
   ngOnInit() {
