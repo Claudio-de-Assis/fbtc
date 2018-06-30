@@ -191,6 +191,7 @@ namespace Fbtc.Api.Controllers
                 resultado = _colaboradorApplication.Save(colaborador);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                response.ReasonPhrase = resultado;
 
                 tsc.SetResult(response);
 
@@ -228,6 +229,44 @@ namespace Fbtc.Api.Controllers
                 var resultado = _colaboradorApplication.RessetPasswordById(id);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
+        [Route("ValidaEmail/{pessoaId:int},{eMail}/")]
+        [HttpGet]
+        public Task<HttpResponseMessage> ValidaEmail(int pessoaId, string eMail)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (eMail == "") throw new Exception("eMail não informado!");
+
+                var resultado = _colaboradorApplication.ValidaEMail(pessoaId, eMail);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                response.ReasonPhrase = resultado;
 
                 tsc.SetResult(response);
 

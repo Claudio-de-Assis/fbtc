@@ -24,9 +24,5 @@ namespace Fbtc.Infra.Helpers
             return connectionString;
 
         }
-
-
-
     }
-
 }

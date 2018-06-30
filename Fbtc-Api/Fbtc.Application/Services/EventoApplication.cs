@@ -34,6 +34,16 @@ namespace Fbtc.Application.Services
             return _eventoService.FindByFilters(_titulo, ano, _tipoEvento);
         }
 
+        public IEnumerable<EventoDao> FindEventoDaoByFilters(string titulo, int ano, string tipoEvento)
+        {
+            string _titulo, _tipoEvento;
+
+            _titulo = titulo == "0" ? "" : titulo;
+            _tipoEvento = tipoEvento == "0" ? "" : tipoEvento;
+
+            return _eventoService.FindEventoDaoByFilters(_titulo, ano, _tipoEvento);
+        }
+
         public IEnumerable<Evento> GetAll()
         {
             return _eventoService.GetAll();
@@ -47,6 +57,11 @@ namespace Fbtc.Application.Services
         public Evento GetEventoByRecebimentoId(int id)
         {
             return _eventoService.GetEventoByRecebimentoId(id);
+        }
+
+        public EventoDao GetEventoDaoById(int id)
+        {
+            return _eventoService.GetEventoDaoById(id);
         }
 
         public string GetNomeFotoByEventoId(int id)
@@ -96,28 +111,52 @@ namespace Fbtc.Application.Services
             }
         }
 
-        public string SaveValoresEvento(IEnumerable<TipoPublicoValorDao> tiposPublicosValoresDao)
+        public string SaveEventoDao(EventoDao e)
         {
-            string msg = "";
+            ArgumentsValidator.RaiseExceptionOfInvalidArguments(
+               RaiseException.IfNullOrEmpty(e.Titulo, "Título não informado"),
+               RaiseException.IfNullOrEmpty(e.Descricao, "Descrição não informada"),
+               RaiseException.IfTrue(DateTime.Equals(e.DtInicio, DateTime.MinValue), "Data de Início não informada"),
+               RaiseException.IfTrue(DateTime.Equals(e.DtTermino, DateTime.MinValue), "Data de Término não informada"),
+               RaiseException.IfNullOrEmpty(e.TipoEvento, "Tipo de Evento não informado")
+            );
+
+            EventoDao _e = new EventoDao()
+            {
+                EventoId = e.EventoId,
+                Titulo = Functions.AjustaTamanhoString(e.Titulo, 100),
+                Descricao = Functions.AjustaTamanhoString(e.Descricao, 2000),
+                Codigo = Functions.AjustaTamanhoString(e.Codigo, 60),
+                DtInicio = e.DtInicio,
+                DtTermino = e.DtTermino,
+                DtTerminoInscricao = e.DtTerminoInscricao,
+                TipoEvento = e.TipoEvento,
+                AceitaIsencaoAta = e.AceitaIsencaoAta,
+                NomeFoto = e.NomeFoto,
+                Ativo = e.Ativo,
+                TiposPublicosValoresDao = e.TiposPublicosValoresDao
+            };
+
             try
             {
-                foreach (var vtp in tiposPublicosValoresDao)
+                if (_e.EventoId == 0)
                 {
-                    if (vtp.ValorEventoPublicoId == 0)
-                    {
-                        msg = _eventoService.InsertValorEvento(vtp);
-                    }
-                    else
-                    {
-                        msg = _eventoService.UpdateValorEvento(vtp.ValorEventoPublicoId, vtp);
-                    }
+                    return _eventoService.InsertEventoDao(_e);
+                }
+                else
+                {
+                    return _eventoService.UpdateEventoDao(e.EventoId, _e);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return msg;
+        }
+
+        public string SaveValoresEvento(IEnumerable<TipoPublicoValorDao> tiposPublicosValoresDao)
+        {
+            throw new NotImplementedException();
         }
 
         public Evento SetEvento()

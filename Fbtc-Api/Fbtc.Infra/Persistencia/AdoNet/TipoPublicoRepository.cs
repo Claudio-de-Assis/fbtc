@@ -22,12 +22,16 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             strConnSql = ConfigHelper.GetConnectionString("FBTC_ConnectionString");
         }
 
-        public IEnumerable<TipoPublico> GetAll()
+        public IEnumerable<TipoPublico> GetAll(bool? isAtivo)
         {
+            string _where = "";
+
+            _where = !isAtivo.Equals(null) ? $" where Ativo = '{isAtivo}' " : "";
+
             query = @"SELECT TipoPublicoId, 
                     Nome, Ativo, Ordem, Associado 
-                    FROM dbo.AD_TIPO_PUBLICO 
-                    ORDER BY Ordem";
+                    FROM dbo.AD_TIPO_PUBLICO " + _where + "" +
+                    " ORDER BY Ordem";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
@@ -70,6 +74,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id)
         {
+
             query = @"SELECT TP.TipoPublicoId, TP.Nome, TP.DescricaoValor, TP.Ordem, TP.Ativo, TP.Associado, 
 		            ISNULL((SELECT VEP.ValorEventoPublicoId FROM
                         dbo.AD_Valor_Evento_Publico VEP

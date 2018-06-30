@@ -5,7 +5,7 @@ namespace Fbtc.Application.Interfaces
 {
     public interface ITipoPublicoApplication
     {
-        IEnumerable<TipoPublico> GetAll();
+        IEnumerable<TipoPublico> GetAll(bool? isAtivo);
 
         IEnumerable<TipoPublico> GetByTipoAssociacao(bool? associado);
 

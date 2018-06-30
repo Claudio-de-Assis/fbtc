@@ -74,5 +74,10 @@ namespace Fbtc.Domain.Services
         {
             return _associadoRepository.Update(id, associado);
         }
+
+        public string ValidaEMail(int associadoId, string eMail)
+        {
+            return _associadoRepository.ValidaEMail(associadoId, eMail);
+        }
     }
 }

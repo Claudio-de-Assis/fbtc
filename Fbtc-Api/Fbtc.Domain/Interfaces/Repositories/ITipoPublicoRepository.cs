@@ -5,7 +5,7 @@ namespace Fbtc.Domain.Interfaces.Repositories
 {
     public interface ITipoPublicoRepository
     {
-        IEnumerable<TipoPublico> GetAll();
+        IEnumerable<TipoPublico> GetAll(bool? isAtivo);
 
         IEnumerable<TipoPublico> GetByTipoAssociacao(bool associado);
 

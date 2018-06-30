@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fbtc.Domain.Entities
 {
@@ -17,6 +18,6 @@ namespace Fbtc.Domain.Entities
         public DateTime? DtCadastro { get; set; }
         public bool Ativo { get; set; }
 
-        public Endereco EnderecoPessoa { get; set; }
+        public IEnumerable<Endereco> EnderecosPessoa { get; set; }
     }
 }

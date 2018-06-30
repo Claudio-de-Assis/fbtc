@@ -27,7 +27,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Associado> FindByFilters(string nome, string cpf,  
+        public IEnumerable<Associado> FindByFilters(string nome, string cpf,
             string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
             query = @"SELECT Distinct P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
@@ -93,14 +93,14 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         (   SELECT  0 as AssociadoIsentoId, 0 as IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp, A.AtcId, A.TipoPublicoId, P.Ativo 
                             FROM dbo.AD_Associado A 
                             INNER JOIN  dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId 
-                            WHERE A.AssociadoId not in (SELECT AI2.AssociadoId FROM dbo.AD_Associado_Isento AI2 WHERE AI2.IsencaoId = " + isencaoId  + ") ";
+                            WHERE A.AssociadoId not in (SELECT AI2.AssociadoId FROM dbo.AD_Associado_Isento AI2 WHERE AI2.IsencaoId = " + isencaoId + ") ";
             query = query + @"UNION 
                             SELECT  AI.AssociadoIsentoId, AI.IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp,  A.AtcId, A.TipoPublicoId, P.Ativo 
                             FROM dbo.AD_Associado A 
                             INNER JOIN  dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId 
                             LEFT JOIN dbo.AD_Associado_Isento AI ON A.AssociadoId = AI.AssociadoId 
                             WHERE AI.IsencaoId =  " + isencaoId + " ) AS TAB WHERE AssociadoId IS NOT NULL ";
-            
+
             if (!string.IsNullOrEmpty(nome))
                 query = query + $" AND Nome Like '%{nome}%' ";
 
@@ -175,7 +175,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE AssociadoId = " + id +"";
+                    WHERE AssociadoId = " + id + "";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
@@ -192,14 +192,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                 if (ends != null && ends.Count() > 0)
                 {
-                    associado.EnderecoPessoa = ends.First<Endereco>();
-                }
-                else
-                {
-                    associado.EnderecoPessoa = new Endereco() { EnderecoId = 0, PessoaId = associado.PessoaId,
-                        Logradouro = "", Numero = "", Complemento = "", Bairro = "",
-                        Cidade = "", Estado = "", Cep = "", TipoEndereco = ""
-                    };
+                    associado.EnderecosPessoa = ends;
                 }
             }
 
@@ -212,6 +205,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             string _msg = "";
             string _msgEnd = "";
             Int32 id = 0;
+            Int32 assocId = 0;
+            string _ident = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -234,11 +229,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Pessoa (Nome, EMail, CPF, RG, NomeFoto, " +
-                        "   Sexo, NrCelular, PasswordHash, " +
-                        "   DtCadastro "+ _dtNasc + ") " +
+                        "   Sexo, NrCelular, " +
+                        "   DtCadastro " + _dtNasc + ") " +
                         "VALUES(@Nome, @EMail, @CPF, @RG, @NomeFoto, " +
                         "   @Sexo, @NrCelular, " +
-                        "   @DtCadastro "+ _paramDtNasc + ") " +
+                        "   @DtCadastro " + _paramDtNasc + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("Nome", associado.Nome);
@@ -250,28 +245,32 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NrCelular", associado.NrCelular);
                     command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
 
-                    if(_dtNasc != "")
+                    if (_dtNasc != "")
                         command.Parameters.AddWithValue("DtNascimento", associado.DtNascimento);
 
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
-                    
+
                     // Inserindo os dados na tabela ASSOCIADO:
                     string _dtCert = associado.DtCertificacao != null ? ", DtCertificacao " : "";
-                    string _paramDtCert = associado.DtCertificacao != null ? ", @DtCertificacao " : ""; 
+                    string _paramDtCert = associado.DtCertificacao != null ? ", @DtCertificacao " : "";
+
+                    string _atc = associado.ATCId != null ? ", AtcId " : "";
+                    string _paramAtac = associado.ATCId != null ? ", @AtcId " : "";
+
 
                     command.CommandText = "" +
-                        "INSERT into dbo.AD_Associado (PessoaId, AtcId, TipoPublicoId, " +
+                        "INSERT into dbo.AD_Associado (PessoaId "+ _atc +", TipoPublicoId, " +
                         "   NrMatricula, CRP, CRM, NomeInstFormacao, Certificado, " +
                         "   DivulgarContato, TipoFormaContato, IntegraDiretoria, IntegraConfi, " +
                         "   NrTelDivulgacao, ComprovanteAfiliacaoAtc, TipoProfissao, TipoTitulacao " + _dtCert + ") " +
-                        "VALUES (@PessoaId, @AtcId, @TipoPublicoId, " +
+                        "VALUES (@PessoaId "+ _paramAtac +", @TipoPublicoId, " +
                         "   @NrMatricula, @CRP, @CRM, @NomeInstFormacao, @Certificado, " +
                         "   @DivulgarContato, @TipoFormaContato, @IntegraDiretoria, @IntegraConfi, " +
-                        "   @NrTelDivulgacao, @ComprovanteAfiliacaoAtc, @TipoProfissao, @TipoTitulacao "+ _paramDtCert +") ";
+                        "   @NrTelDivulgacao, @ComprovanteAfiliacaoAtc, @TipoProfissao, @TipoTitulacao " + _paramDtCert + ") " +
+                        "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("PessoaId", id);
-                    command.Parameters.AddWithValue("AtcId", associado.ATCId);
                     command.Parameters.AddWithValue("TipoPublicoId", associado.TipoPublicoId);
                     command.Parameters.AddWithValue("NrMatricula", associado.NrMatricula);
                     command.Parameters.AddWithValue("CRP", associado.Crp);
@@ -287,26 +286,41 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("TipoProfissao", associado.TipoProfissao);
                     command.Parameters.AddWithValue("TipoTitulacao", associado.TipoTitulacao);
 
-                    if (_dtCert!="")
+                    if (_dtCert != "")
                         command.Parameters.AddWithValue("DtCertificacao", associado.DtCertificacao);
 
-                    int x = command.ExecuteNonQuery();
-                    _resultado = x > 0;
+                    if(_atc != "")
+                        command.Parameters.AddWithValue("AtcId", associado.ATCId);
 
-                    _msg = x > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
-                    
+                    assocId = (Int32)command.ExecuteScalar();
+
+                    _resultado = assocId > 0;
+
+
+                    if (assocId > 0)
+                        _ident = _ident.PadLeft(10 - assocId.ToString().Length, '0') + assocId.ToString();
+
+                    _msg = assocId > 0 ? $"{_ident}Inclusão realiada com sucesso" : $"{_ident}Inclusão Não realiada com sucesso";
+
                     transaction.Commit();
 
                     // Inserindo endereco:
-                    if (associado.EnderecoPessoa != null)
+                    if (associado.EnderecosPessoa != null)
                     {
-                        if (!string.IsNullOrWhiteSpace(associado.EnderecoPessoa.Cep))
+                        foreach (var end in associado.EnderecosPessoa)
                         {
                             EnderecoRepository _endRep = new EnderecoRepository();
 
-                            associado.EnderecoPessoa.PessoaId = id;
+                            end.PessoaId = id;
 
-                            _msgEnd = _endRep.Insert(associado.EnderecoPessoa);
+                            if (end.EnderecoId != 0)
+                            {
+                                _msgEnd = _endRep.Update(end.EnderecoId, end);
+                            }
+                            else
+                            {
+                                _msgEnd = _endRep.Insert(end);
+                            }
                         }
                     }
                 }
@@ -356,7 +370,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         "UPDATE dbo.AD_Pessoa " +
                         "SET Nome = @nome, EMail = @EMail, NomeFoto = @NomeFoto, CPF = @CPF, RG = @RG, " +
                             "Sexo = @Sexo, NrCelular = @NrCelular, " +
-                            "Ativo = @Ativo " + _dtNasc + 
+                            "Ativo = @Ativo " + _dtNasc +
                         "WHERE PessoaId = @id";
 
                     command.Parameters.AddWithValue("Nome", associado.Nome);
@@ -377,10 +391,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     // Atualizando os dados na tabela Associado:
                     string _dtCert = associado.DtCertificacao != null ? ", DtCertificacao = @DtCertificacao " : "";
+                    string _atc = associado.ATCId != null ? " AtcId = @AtcId, " : "";
 
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Associado  " +
-                        "SET AtcId = @AtcId, TipoPublicoId = @TipoPublicoId, " +
+                        "SET TipoPublicoId = @TipoPublicoId , " + _atc +
                         "   NrMatricula = @NrMatricula, CRP = @CRP, CRM = @CRM, " +
                         "   NomeInstFormacao = @NomeInstFormacao, Certificado = @Certificado, " +
                         "   DivulgarContato = @DivulgarContato, TipoFormaContato = @TipoFormaContato, " +
@@ -389,7 +404,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         "   TipoProfissao = @TipoProfissao, TipoTitulacao = @TipoTitulacao  " + _dtCert +
                         "WHERE PessoaId = @id";
 
-                    command.Parameters.AddWithValue("AtcId", associado.ATCId);
                     command.Parameters.AddWithValue("TipoPublicoId", associado.TipoPublicoId);
                     command.Parameters.AddWithValue("NrMatricula", associado.NrMatricula);
                     command.Parameters.AddWithValue("CRP", associado.Crp);
@@ -408,30 +422,36 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     if (_dtCert != "")
                         command.Parameters.AddWithValue("DtCertificacao", associado.DtCertificacao);
 
+                    if (_atc != "")
+                        command.Parameters.AddWithValue("AtcId", associado.ATCId);
+
                     int x = command.ExecuteNonQuery();
                     _resultado = x > 0;
 
-                    _msg = x > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = x > 0 ? "Atualização realizada com sucesso" : "Atualização NÃO realizada com sucesso";
 
                     transaction.Commit();
 
                     // Atualizando endereco:
-                    if(associado.EnderecoPessoa != null)
+                    if (associado.EnderecosPessoa != null)
                     {
-                        if (!string.IsNullOrWhiteSpace(associado.EnderecoPessoa.Cep))
+                        foreach (var end in associado.EnderecosPessoa)
                         {
+                            // if (!string.IsNullOrWhiteSpace(end.Cep))
+                            // {
                             EnderecoRepository _endRep = new EnderecoRepository();
 
-                            associado.EnderecoPessoa.PessoaId = id;
+                            end.PessoaId = id;
 
-                            if (associado.EnderecoPessoa.EnderecoId != 0)
+                            if (end.EnderecoId != 0)
                             {
-                                _msgEnd = _endRep.Update(associado.EnderecoPessoa.EnderecoId, associado.EnderecoPessoa);
+                                _msgEnd = _endRep.Update(end.EnderecoId, end);
                             }
                             else
                             {
-                                _msgEnd = _endRep.Insert(associado.EnderecoPessoa);
+                                _msgEnd = _endRep.Insert(end);
                             }
+                            //  }
                         }
                     }
                 }
@@ -523,7 +543,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
 
                     _msg = id > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
-              
+
                 }
                 catch (Exception ex)
                 {
@@ -687,6 +707,44 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
                 connection.Close();
+            }
+            return _msg;
+        }
+
+        public string ValidaEMail(int associadoId, string eMail)
+        {
+            string _msg = "OK";
+
+            try
+            {
+                query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
+                        A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
+                        A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
+                        A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
+                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
+                    FROM dbo.AD_Associado A 
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
+                    WHERE AssociadoId != " + associadoId + " " +
+                        " AND P.EMail = '" + eMail + "' ";
+
+                // Define o banco de dados que será usando:
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+                // Obtém os dados do banco de dados:
+                IEnumerable<Associado> _collection = GetCollection<Associado>(cmd)?.ToList();
+
+                // Verificando se há registro:
+                foreach (var item in _collection)
+                {
+                    if (item.PessoaId > 0)
+                        _msg = $"Atenção: O EMail {eMail} já está um uso por outro usuário";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Exception Type:{ex.GetType()}. Erro:{ex.Message}");
             }
             return _msg;
         }

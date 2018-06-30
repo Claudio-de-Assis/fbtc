@@ -20,18 +20,24 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
-        [Route("GetAll")]
+        [Route("GetAll/{isAtivo}")]
         [HttpGet]
-        public Task<HttpResponseMessage> GetAll()
+        public Task<HttpResponseMessage> GetAll(bool? isAtivo)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
 
             try
             {
-                var resultado = _tipoPublicoApplication.GetAll();
+                bool? _isAtivo = null;
+
+                if (isAtivo != null)
+                    _isAtivo = isAtivo.Equals(true) ? true : false;
+
+                var resultado = _tipoPublicoApplication.GetAll(_isAtivo);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                // response.ReasonPhrase = resultado;
 
                 tsc.SetResult(response);
 
@@ -138,7 +144,7 @@ namespace Fbtc.Api.Controllers
 
             try
             {
-                if (id == 0) throw new Exception("Id não informado!");
+                // if (id == 0) throw new Exception("Id não informado!");
 
                 var resultado = _tipoPublicoApplication.GetTipoPublicoValorByEventoId(id);
 

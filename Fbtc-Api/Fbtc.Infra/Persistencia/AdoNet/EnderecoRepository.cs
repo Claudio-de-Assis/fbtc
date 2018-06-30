@@ -35,9 +35,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public IEnumerable<Endereco> GetByPessoaId(int id)
         {
             query = @"SELECT EnderecoId, PessoaId, Logradouro, Numero,  
-                        Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco 
+                        Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco, OrdemEndereco 
                     FROM dbo.AD_Endereco  
-                    WHERE PessoaId = " + id + " ORDER BY TipoEndereco";
+                    WHERE PessoaId = " + id + " ORDER BY OrdemEndereco";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
@@ -51,9 +51,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public Endereco GetEnderecoById(int id)
         {
             query = @"SELECT EnderecoId, PessoaId, Logradouro, Numero,  
-                        Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco 
+                        Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco, OrdemEndereco 
                     FROM dbo.AD_Endereco  
-                    WHERE PessoaId = " + id + " ORDER BY TipoEndereco";
+                    WHERE PessoaId = " + id + " ORDER BY OrdemEndereco";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
@@ -87,9 +87,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 {
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Endereco (PessoaId, Logradouro, Numero, " +  
-                        "   Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco) " +
+                        "   Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco, OrdemEndereco) " +
                         "VALUES(@PessoaId, @Logradouro, @Numero, " +
-                        "   @Complemento, @Bairro, @Cidade, @Estado, @CEP, @TipoEndereco) " +
+                        "   @Complemento, @Bairro, @Cidade, @Estado, @CEP, @TipoEndereco, @OrdemEndereco) " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("PessoaId", endereco.PessoaId );
@@ -101,6 +101,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("Estado", endereco.Estado);
                     command.Parameters.AddWithValue("CEP", endereco.Cep);
                     command.Parameters.AddWithValue("TipoEndereco", endereco.TipoEndereco);
+                    command.Parameters.AddWithValue("OrdemEndereco", endereco.OrdemEndereco);
 
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
@@ -151,7 +152,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         "UPDATE dbo.AD_Endereco " +
                         "SET Logradouro = @Logradouro, Numero = @Numero, " +
                         "   Complemento = @Complemento, Bairro = @Bairro, Cidade = @Cidade, " +
-                        "   Estado = @Estado, CEP = @CEP, TipoEndereco = @TipoEndereco " +
+                        "   Estado = @Estado, CEP = @CEP, TipoEndereco = @TipoEndereco, OrdemEndereco = @OrdemEndereco " +
                         "WHERE EnderecoId = @id";
 
                     command.Parameters.AddWithValue("Logradouro", endereco.Logradouro);
@@ -161,7 +162,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("Cidade", endereco.Cidade);
                     command.Parameters.AddWithValue("Estado", endereco.Estado);
                     command.Parameters.AddWithValue("CEP", endereco.Cep);
-                    command.Parameters.AddWithValue("TipoEndereco", endereco.TipoEndereco);
+                    command.Parameters.AddWithValue("TipoEndereco", endereco.TipoEndereco.Trim());
+                    command.Parameters.AddWithValue("OrdemEndereco", endereco.OrdemEndereco);
                     command.Parameters.AddWithValue("id", id);
 
                     int x = command.ExecuteNonQuery();

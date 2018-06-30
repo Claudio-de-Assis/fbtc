@@ -30,5 +30,7 @@ namespace Fbtc.Domain.Interfaces.Services
         string GetNomeFotoByAssociadoId(int id);
 
         string RessetPasswordById(int id);
+
+        string ValidaEMail(int associadoId, string eMail);
     }
 }

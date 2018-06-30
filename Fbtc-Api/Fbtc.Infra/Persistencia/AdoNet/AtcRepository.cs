@@ -64,6 +64,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             bool _resultado = false;
             string _msg = "";
             Int32 id = 0;
+            string _ident = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -102,7 +103,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    _msg = id > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+                    if (id > 0)
+                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
+                    
+                    _msg = id > 0 ? $"{_ident}Inclusão realizada com sucesso" : $"{_ident}Inclusão Não realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -169,7 +173,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     int x = command.ExecuteNonQuery();
                     _resultado = x > 0;
 
-                    _msg = x > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = x > 0 ? "Atualização realizada com sucesso" : "Atualização NÃO realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -205,8 +209,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             return AtcCollection;
         }
-
-
+        
         public IEnumerable<Atc> FindByFilters(string siglaUF)
         {
             query = @"SELECT AtcId, Nome, UF, NomePres, NomeVPres, NomePSec, NomeSSec,

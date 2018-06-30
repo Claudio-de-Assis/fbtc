@@ -18,5 +18,7 @@ namespace Fbtc.Domain.Interfaces.Repositories
         IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo);
 
         string RessetPasswordById(int id);
+
+        string ValidaEMail(int associadoId, string eMail);
     }
 }

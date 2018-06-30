@@ -178,6 +178,7 @@ namespace Fbtc.Api.Controllers
                 resultado = _atcApplication.Save(atc);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                response.ReasonPhrase = resultado;
 
                 tsc.SetResult(response);
 

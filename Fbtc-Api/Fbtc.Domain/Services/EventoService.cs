@@ -26,6 +26,11 @@ namespace Fbtc.Domain.Services
             return _eventoRepository.FindByFilters(titulo, ano, tipoEvento);
         }
 
+        public IEnumerable<EventoDao> FindEventoDaoByFilters(string titulo, int ano, string tipoEvento)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Evento> GetAll()
         {
             return _eventoRepository.GetAll();
@@ -41,6 +46,11 @@ namespace Fbtc.Domain.Services
             return _eventoRepository.GetEventoByRecebimentoId(id);
         }
 
+        public EventoDao GetEventoDaoById(int id)
+        {
+            return _eventoRepository.GetEventoDaoById(id);
+        }
+
         public string GetNomeFotoByEventoId(int id)
         {
             return _eventoRepository.GetNomeFotoByEventoId(id);
@@ -51,9 +61,24 @@ namespace Fbtc.Domain.Services
             return _eventoRepository.Insert(evento);
         }
 
+        public string InsertEventoDao(EventoDao eventoDao)
+        {
+            return _eventoRepository.InsertEventoDao(eventoDao);
+        }
+
         public string InsertValorEvento(TipoPublicoValorDao tipoPublicoValorDao)
         {
             return _eventoRepository.InsertValorEvento(tipoPublicoValorDao);
+        }
+
+        public string SaveValoresEvento(IEnumerable<TipoPublicoValorDao> tiposPublicosValoresDao)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Evento SetEvento()
+        {
+            throw new NotImplementedException();
         }
 
         public string Update(int id, Evento evento)
@@ -61,10 +86,14 @@ namespace Fbtc.Domain.Services
             return _eventoRepository.Update(id, evento);
         }
 
+        public string UpdateEventoDao(int id, EventoDao eventoDao)
+        {
+            return _eventoRepository.UpdateEventoDao(id, eventoDao);
+        }
+
         public string UpdateValorEvento(int id, TipoPublicoValorDao tipoPublicoValorDao)
         {
             return _eventoRepository.UpdateValorEvento(id, tipoPublicoValorDao);
         }
     }
-
 }

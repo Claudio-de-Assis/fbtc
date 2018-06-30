@@ -97,6 +97,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             bool _resultado = false;
             string _msg = "";
             Int32 id = 0;
+            Int32 colabId = 0;
+            string _ident = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -135,19 +137,21 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    // Inserindo os dados na tabela ASSOCIADO:
-
+                    // Inserindo os dados na tabela Colaborador:
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Colaborador (PessoaId, TipoPerfil) " +
-                        "VALUES (@PessoaId, @TipoPerfil) ";
+                        "   VALUES (@PessoaId, @TipoPerfil) " +
+                        "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("PessoaId", id);
                     command.Parameters.AddWithValue("TipoPerfil", colaborador.TipoPerfil);
 
-                    int x = command.ExecuteNonQuery();
-                    _resultado = x > 0;
+                    colabId = (Int32)command.ExecuteScalar();
 
-                    _msg = x > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+                    if (colabId > 0)
+                        _ident = _ident.PadLeft(10 - colabId.ToString().Length, '0') + colabId.ToString();
+
+                    _msg = colabId > 0 ? $"{_ident}Inclusão realiada com sucesso" : $"{_ident}Inclusão Não realiada com sucesso";
 
                     transaction.Commit();
                 }
@@ -325,6 +329,40 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
                 connection.Close();
+            }
+            return _msg;
+        }
+
+        public string ValidaEMail(int colaboradorId, string eMail)
+        {
+            string _msg = "OK";
+
+            try
+            {
+                query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+                        P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
+                        C.ColaboradorId, C.TipoPerfil  
+                    FROM dbo.AD_Colaborador C 
+                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId 
+                    WHERE ColaboradorId != " + colaboradorId + "" +
+                        " AND P.EMail = '" + eMail + "' ";
+
+                // Define o banco de dados que será usando:
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+                // Obtém os dados do banco de dados:
+                IEnumerable<Colaborador> _collection = GetCollection<Colaborador>(cmd)?.ToList();
+
+                // Verificando se há registro:
+                foreach (var item in _collection)
+                {
+                    if (item.PessoaId > 0)
+                        _msg = $"Atenção: O EMail {eMail} já está um uso por outro usuário";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Exception Type:{ex.GetType()}. Erro:{ex.Message}");
             }
             return _msg;
         }

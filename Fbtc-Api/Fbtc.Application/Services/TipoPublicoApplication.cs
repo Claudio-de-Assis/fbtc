@@ -19,9 +19,9 @@ namespace Fbtc.Application.Services
             _tipoPublicoService = tipoPublicoService;
         }
 
-        public IEnumerable<TipoPublico> GetAll()
+        public IEnumerable<TipoPublico> GetAll(bool? isAtivo)
         {
-            return _tipoPublicoService.GetAll();
+            return _tipoPublicoService.GetAll(isAtivo);
         }
 
         public IEnumerable<TipoPublico> GetByTipoAssociacao(bool? associado)

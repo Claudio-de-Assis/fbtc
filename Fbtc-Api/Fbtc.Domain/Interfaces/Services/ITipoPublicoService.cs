@@ -5,7 +5,7 @@ namespace Fbtc.Domain.Interfaces.Services
 {
     public interface ITipoPublicoService
     {
-        IEnumerable<TipoPublico> GetAll();
+        IEnumerable<TipoPublico> GetAll(bool? isAtivo);
 
         IEnumerable<TipoPublico> GetByTipoAssociacao(bool associado);
 

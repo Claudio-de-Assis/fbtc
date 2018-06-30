@@ -89,6 +89,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             bool _resultado = false;
             string _msg = "";
             Int32 id = 0;
+            string _ident = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -132,7 +133,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    _msg = _resultado ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+                    if (id > 0)
+                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
+
+                    _msg = id > 0 ? $"{_ident}Inclusão realizada com sucesso" : $"{_ident}Inclusão Não realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -201,7 +205,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     int i = command.ExecuteNonQuery();
                     _resultado = i > 0;
 
-                    _msg = _resultado ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = _resultado ? "Atualização realizada com sucesso" : "Atualização NÃO realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -395,6 +399,204 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
 
             return NomeFoto;
+        }
+
+        public EventoDao GetEventoDaoById(int id)
+        {
+            query = @"SELECT EventoId, Titulo, Descricao, Codigo, DtInicio, DtTermino, 
+                        DtTerminoInscricao, TipoEvento, AceitaIsencaoAta, Ativo, NomeFoto 
+                    FROM dbo.AD_Evento 
+                    WHERE EventoId = " + id + "";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            EventoDao eventoDao = GetCollection<EventoDao>(cmd)?.First();
+
+            if (eventoDao != null)
+            {
+                TipoPublicoRepository tp = new TipoPublicoRepository();
+
+                eventoDao.TiposPublicosValoresDao = tp.GetTipoPublicoValorByEventoId(eventoDao.EventoId);
+            }
+
+            return eventoDao;
+        }
+
+        public Evento SetEvento()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<EventoDao> FindEventoDaoByFilters(string titulo, int ano, string tipoEvento)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string InsertEventoDao(EventoDao eventoDao)
+        {
+            bool _resultado = false;
+            string _msg = "";
+            Int32 id = 0;
+            string _ident = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("IncluirEvento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    // Inserindo os dados na tabela:
+                    string _dtTermInscr = eventoDao.DtTerminoInscricao != null ? ", DtTerminoInscricao " : "";
+                    string _paramDtTermInscr = eventoDao.DtTerminoInscricao != null ? ", @DtTerminoInscricao " : "";
+
+                    command.CommandText = "" +
+                        "INSERT into dbo.AD_Evento (Titulo, Descricao, Codigo, DtInicio, DtTermino, " +
+                        "   TipoEvento, AceitaIsencaoAta, NomeFoto, Ativo " + _dtTermInscr + ") " +
+                        "VALUES(@Titulo, @Descricao, @Codigo, @DtInicio, @DtTermino, " +
+                        "   @TipoEvento, @AceitaIsencaoAta, @NomeFoto, @Ativo " + _paramDtTermInscr + ") " +
+                        "SELECT CAST(scope_identity() AS int) ";
+
+                    command.Parameters.AddWithValue("Titulo", eventoDao.Titulo);
+                    command.Parameters.AddWithValue("Descricao", eventoDao.Descricao);
+                    command.Parameters.AddWithValue("Codigo", eventoDao.Codigo);
+                    command.Parameters.AddWithValue("DtInicio", eventoDao.DtInicio);
+                    command.Parameters.AddWithValue("DtTermino", eventoDao.DtTermino);
+                    command.Parameters.AddWithValue("TipoEvento", eventoDao.TipoEvento);
+                    command.Parameters.AddWithValue("AceitaIsencaoAta", eventoDao.AceitaIsencaoAta);
+                    command.Parameters.AddWithValue("NomeFoto", eventoDao.NomeFoto);
+                    command.Parameters.AddWithValue("Ativo", eventoDao.Ativo);
+
+                    if (_dtTermInscr != "")
+                        command.Parameters.AddWithValue("DtTerminoInscricao", eventoDao.DtTerminoInscricao);
+
+                    id = (Int32)command.ExecuteScalar();
+                    _resultado = id > 0;
+
+                    if (id > 0)
+                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
+
+                    _msg = id > 0 ? $"{_ident}Inclusão realizada com sucesso" : $"{_ident}Inclusão Não realizada com sucesso";
+
+                    transaction.Commit();
+
+                    // Inserindo os valores na tabela
+                    List<string> lstResultados = new List<string>();
+
+                    if (eventoDao.TiposPublicosValoresDao != null && id> 0)
+                    {
+                        foreach (var valor in eventoDao.TiposPublicosValoresDao)
+                        {
+                            valor.EventoId = id;
+                            lstResultados.Add(this.InsertValorEvento(valor));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
+        }
+
+        public string UpdateEventoDao(int id, EventoDao eventoDao)
+        {
+            bool _resultado = false;
+            string _msg = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("AtualizarEvento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    // Atualizando os dados na tabela PESSOA:
+                    string _dtTermInscr = eventoDao.DtTerminoInscricao != null ? ", DtTerminoInscricao = @DtTerminoInscricao " : "";
+
+                    command.CommandText = "" +
+                        "UPDATE dbo.AD_Evento " +
+                        "SET Titulo = @Titulo, Descricao = @Descricao, Codigo = @Codigo, " +
+                            "DtInicio = @DtInicio, DtTermino = @DtTermino, TipoEvento = @TipoEvento, " +
+                            "AceitaIsencaoAta = @AceitaIsencaoAta, NomeFoto = @NomeFoto, Ativo = @Ativo " + _dtTermInscr +
+                        "WHERE EventoId = @id";
+
+                    command.Parameters.AddWithValue("Titulo", eventoDao.Titulo);
+                    command.Parameters.AddWithValue("Descricao", eventoDao.Descricao);
+                    command.Parameters.AddWithValue("Codigo", eventoDao.Codigo);
+                    command.Parameters.AddWithValue("DtInicio", eventoDao.DtInicio);
+                    command.Parameters.AddWithValue("DtTermino", eventoDao.DtTermino);
+                    command.Parameters.AddWithValue("TipoEvento", eventoDao.TipoEvento);
+                    command.Parameters.AddWithValue("AceitaIsencaoAta", eventoDao.AceitaIsencaoAta);
+                    command.Parameters.AddWithValue("NomeFoto", eventoDao.NomeFoto);
+                    command.Parameters.AddWithValue("Ativo", eventoDao.Ativo);
+                    command.Parameters.AddWithValue("id", id);
+
+                    if (_dtTermInscr != "")
+                        command.Parameters.AddWithValue("DtTerminoInscricao", eventoDao.DtTerminoInscricao);
+
+                    int i = command.ExecuteNonQuery();
+                    _resultado = i > 0;
+
+                    _msg = _resultado ? "Atualização realizada com sucesso" : "Atualização NÃO realizada com sucesso";
+
+                    transaction.Commit();
+
+                    // Atualizando os valores na tabela
+                    List<string> lstResultados = new List<string>();
+
+                    if (eventoDao.TiposPublicosValoresDao != null && i > 0)
+                    {
+                        foreach (var valor in eventoDao.TiposPublicosValoresDao)
+                        {
+                            lstResultados.Add(this.UpdateValorEvento(valor.ValorEventoPublicoId, valor));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                    }
+                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                }
+                connection.Close();
+            }
+            return _msg;
         }
     }
 }

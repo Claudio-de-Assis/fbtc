@@ -58,7 +58,7 @@ namespace Fbtc.Api.Controllers
         // [Authorize]
         [Route("{id:int}")]
         [HttpGet]
-        public Task<HttpResponseMessage> GetById(int id)
+        public Task<HttpResponseMessage> GetDaoById(int id)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -67,7 +67,7 @@ namespace Fbtc.Api.Controllers
             {
                 if (id == 0) throw new Exception("Id não informado!");
 
-                var resultado = _eventoApplication.GetEventoById(id);
+                var resultado = _eventoApplication.GetEventoDaoById(id);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 
@@ -92,7 +92,7 @@ namespace Fbtc.Api.Controllers
             }
         }
 
-        // [Authorize]
+         // [Authorize]
         [Route("NomeFoto/{id:int}")]
         [HttpGet]
         public Task<HttpResponseMessage> GetNomeFotoById(int id)
@@ -241,7 +241,7 @@ namespace Fbtc.Api.Controllers
         // [Authorize]
         [Route("Evento")]
         [HttpPost]
-        public Task<HttpResponseMessage> Post(Evento evento)
+        public Task<HttpResponseMessage> Post(EventoDao eventoDao)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -249,11 +249,12 @@ namespace Fbtc.Api.Controllers
 
             try
             {
-                if (evento == null) throw new ArgumentNullException("O objeto 'Evento' está nulo!");
+                if (eventoDao == null) throw new ArgumentNullException("O objeto 'EventoDao' está nulo!");
 
-                resultado = _eventoApplication.Save(evento);
+                resultado = _eventoApplication.SaveEventoDao(eventoDao);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                response.ReasonPhrase = resultado;
 
                 tsc.SetResult(response);
 
@@ -275,7 +276,48 @@ namespace Fbtc.Api.Controllers
                 return tsc.Task;
             }
         }
-        
+
+        // [Authorize]
+        [Route("EventoDao")]
+        [HttpPost]
+        public Task<HttpResponseMessage> PostDao(EventoDao eventoDao)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            string resultado = "false";
+
+            try
+            {
+                if (eventoDao == null) throw new ArgumentNullException("O objeto 'EventoDao' está nulo!");
+
+                resultado = _eventoApplication.SaveEventoDao(eventoDao);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                response.ReasonPhrase = resultado;
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+
+
         // [Authorize]
         [Route("ValoresEvento")]
         [HttpPost]

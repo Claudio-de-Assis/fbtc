@@ -50,5 +50,10 @@ namespace Fbtc.Domain.Services
         {
             return _colaboradorRepository.Update(id, colaborador);
         }
+
+        public string ValidaEMail(int colaboradorId, string eMail)
+        {
+            return _colaboradorRepository.ValidaEMail(colaboradorId, eMail);
+        }
     }
 }

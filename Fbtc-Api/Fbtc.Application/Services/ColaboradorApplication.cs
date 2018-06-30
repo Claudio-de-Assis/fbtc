@@ -109,5 +109,10 @@ namespace Fbtc.Application.Services
 
             return c;
         }
+
+        public string ValidaEMail(int colaboradorId, string eMail)
+        {
+            return _colaboradorService.ValidaEMail(colaboradorId, eMail);
+        }
     }
 }

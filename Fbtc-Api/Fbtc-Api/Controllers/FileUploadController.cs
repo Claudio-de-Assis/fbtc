@@ -79,30 +79,9 @@ namespace Fbtc.Api.Controllers
             // save image of size max 600 x 600 ou 600 x 708
             SaveToFolder(img, new Size(600, 600), file.ImagePath);
 
-            // Save  to database
-            // await Save(file);
         }
 
-        /*
-        public async Task<HttpResponseMessage> GetImages()
-        {
-            var response = new MyReponse();
-            // var files =  await db.Files.ToListAsync();
-            // response.Result = files;
 
-            response.Status = true;
-            response.Message = "Success";
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
-        */
-        /*
-        private async Task<bool> Save(FileImage file)
-        {
-            // db.Files.Add(file);
-            // await db.SaveChangesAsync();
-            return true;
-        }
-        */
 
         private Size NewImageSize(Size imageSize, Size newSize)
         {
