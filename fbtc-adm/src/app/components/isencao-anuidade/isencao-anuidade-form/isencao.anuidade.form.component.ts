@@ -24,9 +24,9 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
   @Input() isencao: Isencao = { isencaoId: 0, anuidadeId: null, eventoId : null,
                               descricao: '', dtAta: null, anoEvento: 0 , tipoIsencao: '2', ativo: true};
 
-  title = 'Conceder Isenção de Anuidade';
-  badge = '';
-  isEdicaoIsencao: boolean = false;
+  title: string;
+  badge: string;
+  isEdicaoIsencao: boolean;
 
     anuidades: Anuidade[];
    _anuidade: Anuidade;
@@ -37,18 +37,30 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
 
    _isencaoId: number;
 
+   _msg: string;
+   _msgRetorno: string;
+
   private selectedId: any;
 
   _util = Util;
 
-  submitted = false;
+  submitted: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: IsencaoService,
     private anuidadeService: AnuidadeService
-) { }
+) {
+  this.title = 'Conceder Isenção de Anuidade';
+  this.badge = '';
+  this.isEdicaoIsencao = false;
+  this.submitted = false;
+  this._msg = '';
+  this._msgRetorno = '';
+
+  this._tipoIsencao = '2';
+  }
 
 
   getAnuidades(): void {
@@ -80,38 +92,45 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
 
   saveIsencao() {
 
+    this._msg = '';
+
     const y: number = parseInt(this.isencao.anuidadeId.toString());
 
     this._anuidade = this.anuidades.find(anuidade => anuidade.anuidadeId === y);
     this.isencao.anoEvento = this._anuidade.codigo;
 
-    this.service.addIsencao(this.isencao).subscribe(() =>  this.savaAssociadosIsentos());
+    this.service.addIsencao(this.isencao).subscribe(
+      msg => {
+          this._msgRetorno = msg;
+          this.avaliaRetorno(this._msgRetorno);
+      });
   }
 
-  savaAssociadosIsentos() {
+  avaliaRetorno(msgRet: string) {
 
-    if (this.isencao.isencaoId !== 0 ) {
+    if (msgRet.substring(0, 1) === '0') {
 
-      // Colocar aqui a chamada para salvar os associados isentos: Ex:
-      // this.service.addValoresEvento(this.tiposPublicosValoresDao)
-      // .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
-      this.gotoShowPopUp('Registro salvo com sucesso!');
+      this._isencaoId = parseInt(msgRet.substring(0, 10), 10);
+
+      this.router.navigate([`/IsencaoAnuidade/${this._isencaoId}`]);
+
+      this.getIsencaoById(this._isencaoId);
+
+      this._msg = this._msgRetorno.substring(10);
+
+      this.badge = 'Edição';
+
+      this.isEdicaoIsencao = true;
+
+      this.getIsencaoById(this._isencaoId);
 
     } else {
-      this.gotoShowPopUp('Registro salvo com sucesso!');
-      this.gotoIsencaoAnuidades();
+
+        this._msg = this._msgRetorno;
     }
   }
 
-  gotoShowPopUp(msg: string) {
-
-    // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert(msg);
-  }
-
   ngOnInit() {
-
-    this._tipoIsencao = '2';
 
     this.getAnuidades();
 

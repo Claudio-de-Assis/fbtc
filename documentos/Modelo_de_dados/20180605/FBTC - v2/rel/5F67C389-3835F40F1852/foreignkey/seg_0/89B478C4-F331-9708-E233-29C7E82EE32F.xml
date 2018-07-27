@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="89B478C4-F331-9708-E233-29C7E82EE32F" containerWithKeyObject="446C896C-D4B3-6CEC-75FB-EF8643B5BE83" localFKIndex="C0A8CE6B-00CC-35C1-BFAF-A26DE18FD4E5" name="ASSOCIADO_ISENTO_ISENCAO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:19:12 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>ISENCAO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>170A7AA0-9FE0-CD0E-0173-090A655B73B2</referredTableID>
+<keyObject>2A64634F-BDC4-F3E7-E40B-B32356B0B6B6</keyObject>
+<referredKeyID>2A64634F-BDC4-F3E7-E40B-B32356B0B6B6</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>IsencaoId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

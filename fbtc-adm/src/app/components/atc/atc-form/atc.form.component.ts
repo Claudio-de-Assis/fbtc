@@ -84,6 +84,8 @@ export class AtcFormComponent implements OnInit {
 
         this._msg = this._msgRetorno.substring(10);
 
+        this.badge = 'Edição';
+
     } else {
 
         this._msg = this._msgRetorno;

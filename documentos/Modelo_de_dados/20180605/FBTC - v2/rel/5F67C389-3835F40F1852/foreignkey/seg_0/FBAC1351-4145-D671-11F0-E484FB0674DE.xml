@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="FBAC1351-4145-D671-11F0-E484FB0674DE" containerWithKeyObject="09263120-9E1D-A192-2CAD-C22B069EEBA9" localFKIndex="1EEEB880-6DB6-04A6-7EF6-BF3E81360A59" name="ASSOCIADO_ATC_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:03:04 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>ATC</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>080BD3DA-509F-7C0C-B35C-FA8DF451584E</referredTableID>
+<keyObject>9D1AB87B-B657-2DF6-3681-BEE2B7DCBBC6</keyObject>
+<referredKeyID>9D1AB87B-B657-2DF6-3681-BEE2B7DCBBC6</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>AtcId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

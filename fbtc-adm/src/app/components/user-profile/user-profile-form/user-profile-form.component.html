@@ -1,0 +1,143 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <form (ngSubmit)="onSubmit()" #UserProfileForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" name="nome" class="form-control" type="text"
+                                required minlength="4" maxlength="100" 
+                                [(ngModel)]="userProfile.nome"  #nome="ngModel"/>
+                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="nome.errors.required">* O Nome é obrigatório.</div>
+                                <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 4 letras.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inpEmail">E-Mail:</label>
+                            <input id="inpEmail" name="email" class="form-control" type="email"
+                                required minlength="4" maxlength="100" 
+                                [(ngModel)]="userProfile.eMail" #eMail="ngModel" (blur)="gotoValidarEMail()"/>
+                            <div *ngIf="eMail.invalid && (eMail.dirty || eMail.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="eMail.errors.required">* O E-Mail é obrigatório.</div>
+                                <div *ngIf="eMail.errors.minlength">* O E-Mail deve ter pelo menos 4 letras.</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDataNascimento">Data de Nascimento:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input id="inpDataNascimento" name="dataNascimento" class="form-control" type="date"
+                                    [ngModel]="userProfile.dtNascimento | date:'yyyy-MM-dd'" (ngModelChange)="userProfile.dtNascimento = $event"  #dataNascimento="ngModel" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sltSexo">Sexo:</label>
+                            <select id="sltSexo" name="sexo" class="form-control" 
+                                required 
+                                [(ngModel)]="userProfile.sexo" #sexo="ngModel">
+                                <option *ngFor="let op of _util.optSexo" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                            <div *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="sexo.errors.required">* O Sexo deve ser informado.</div>
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <app-file-upload
+                            targetId= "{{ editUserProfileId }}"
+                            projectId="FBTC" 
+                            sectionId="UP" 
+                            maxFiles="1" 
+                            maxSize="2" 
+                            fileExt="JPG, GIF, PNG" 
+                            (uploadStatus)="refreshImages($event)" >
+                        </app-file-upload>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                      <label for="inpNrelular">Celular:</label>
+                      <input id="inpNrCelular" name="nrCelular" class="form-control" type="number"
+                          required  minlength="10" maxlength="11" 
+                          [(ngModel)]="userProfile.nrCelular" #nrCelular="ngModel"/>
+                          <div *ngIf="nrCelular.invalid && (nrCelular.dirty || nrCelular.touched)"
+                              class="alert alert-danger">
+                              <div *ngIf="nrCelular.errors.required">* O Nº do celular é obrigatório.</div>
+                              <div *ngIf="nrCelular.errors.minlength">* O Nº do celular deve ter pelo menos 10 algarismos.</div>
+                          </div> 
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="inpNovaSenha">Nova Senha:</label>
+                            <input id="inpNovaSenha" name="editNovaSenha" class="form-control" type="password"
+                                minlength="8" maxlength="20"
+                                [(ngModel)]="editNovaSenha"  #rg="ngModel"/>
+                                <div *ngIf="editNovaSenha.invalid && (editNovaSenha.dirty || editNovaSenha.touched)"
+                                    class="alert alert-danger">
+                                  <div *ngIf="editNovaSenha.errors.minlength">* A nova senha deve ter pelo menos 8 algarismos.</div>
+                                </div> 
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                          <label for="inpNovaSenhaConf">Confirmar Nova Senha:</label>
+                          <input id="inpNovaSenhaConf" name="novaSenhaConf" class="form-control" type="password"
+                              maxlength="15"
+                              [(ngModel)]="editNovaSenhaConf"  #rg="ngModel"/>
+                              <div *ngIf="editNovaSenhaConf.invalid && (editNovaSenhaConf.dirty || editNovaSenhaConf.touched)"
+                                  class="alert alert-danger">
+                                  <div *ngIf="editNovaSenhaConf.errors.minlength">* A nova senha deve ter pelo menos 8 algarismos.</div>
+                                  <div *ngIf="editNovaSenha !== editNovaSenhaConf">* Confirme a senha!.</div>
+                              </div> 
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div *ngIf="_msg !== ''" class="alert alert-success">
+                                    <div >{{ _msg }}</div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4">
+                              &nbsp;
+                            </div>
+                          <div class="col-lg-4">
+                            <div *ngIf="_msgSenha !== ''" class="alert alert-danger">
+                              <div >{{ _msgSenha }}</div>
+                          </div>
+                        </div>
+                        
+                        </div>
+                    
+                      </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--<button type="button" class="btn btn-success" [disabled]="!UserProfileForm.form.valid" (click)="gotoReenviarSenha()">Reenviar Senha</button>-->
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!UserProfileForm.form.valid">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoHome()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

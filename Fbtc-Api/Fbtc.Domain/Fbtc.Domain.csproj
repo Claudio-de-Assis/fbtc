@@ -75,6 +75,7 @@
     <Compile Include="Entities\Relatorios.cs" />
     <Compile Include="Entities\TipoPublico.cs" />
     <Compile Include="Entities\UnidadeFederacao.cs" />
+    <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Entities\ValorAnuidadePublico.cs" />
     <Compile Include="Entities\ValorEventoPublico.cs" />
     <Compile Include="Interfaces\Repositories\IAnuidadeRepository.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Interfaces\Repositories\IRelatoriosRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoPublicoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUnidadeFederacaoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserProfileRepository.cs" />
     <Compile Include="Interfaces\Services\IAnuidadeService.cs" />
     <Compile Include="Interfaces\Services\IAssociadoService.cs" />
     <Compile Include="Interfaces\Services\IAtcService.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Interfaces\Services\IRelatoriosService.cs" />
     <Compile Include="Interfaces\Services\ITipoPublicoService.cs" />
     <Compile Include="Interfaces\Services\IUnidadeFederacaoService.cs" />
+    <Compile Include="Interfaces\Services\IUserProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AnuidadeService.cs" />
     <Compile Include="Services\AssociadoService.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="Services\RelatoriosService.cs" />
     <Compile Include="Services\TipoPublicoService.cs" />
     <Compile Include="Services\UnidadeFederacaoService.cs" />
+    <Compile Include="Services\UserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,289 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="09263120-9E1D-A192-2CAD-C22B069EEBA9" name="ASSOCIADO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:12:47 UTC</createdTime>
+<comment>Registra os dados dos usuários Associado e Não Associados do Site&lt;br/&gt;Eu 15/12/2017, a cliente solicitou que os associados e não associados passassem e ser conhecidos como Usuários</comment>
+<commentInRDBMS>Registra os dados dos usuários Associado e Não Associados do Site&lt;br/&gt;Eu 15/12/2017, a cliente solicitou que os associados e não associados passassem e ser conhecidos como Usuários</commentInRDBMS>
+<notes>Registra os dados dos usuários Associado e Não Associados do Site&lt;br/&gt;Eu 15/12/2017, a cliente solicitou que os associados e não associados passassem e ser conhecidos como Usuários</notes>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="AssociadoId" id="BF1D2F32-65FE-44F7-94E7-336BD0E2F1B3">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:12:47 UTC</createdTime>
+<commentInRDBMS>Identificador da tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PessoaId" id="7A30060A-0A02-44EE-9677-4F4496764554">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:25:03 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C5E09CEC-E7BC-D6EF-13CA-408B11DB593D" referredColumn="3883136E-96DA-1B6E-3AC6-78F5E96129A7"/>
+</associations>
+</Column>
+<Column name="AtcId" id="D0B38DFA-7E91-AD35-ECEC-ABE5C8C58497">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:03:04 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FBAC1351-4145-D671-11F0-E484FB0674DE" referredColumn="55974C80-C98B-7A19-60FD-9EFF8FD30A0C"/>
+</associations>
+</Column>
+<Column name="TipoPublicoId" id="3D7C1CFC-3C82-5914-3241-61713BCAFC4A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:54:46 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B59C24C0-AF98-F27F-AB6A-23EB80A691BF" referredColumn="552B0097-C374-AE27-8007-D7D4373DA8AD"/>
+</associations>
+</Column>
+<Column name="NrMatricula" id="4E25F9DF-AD04-87B1-6EAC-CFCCCF3998F2">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:12:47 UTC</createdTime>
+<commentInRDBMS>Nº da matrícula</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CRP" id="BE7C41F9-E5E9-4C0A-DAF8-DAD058B2B940">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:12:47 UTC</createdTime>
+<commentInRDBMS>Nº do CRP</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CRM" id="15A6D61D-C145-06F1-5B20-F843E89CA3D2">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:12:47 UTC</createdTime>
+<commentInRDBMS>Nº do CRM</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NomeInstFormacao" id="5841446C-77BC-9295-8CD2-07E400B08FFB">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:12:47 UTC</createdTime>
+<commentInRDBMS>Nome da Instituição de Formação</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Certificado" id="9082C177-DA79-DA79-259F-E7759FF79C5F">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:15:06 UTC</createdTime>
+<commentInRDBMS>Informa se o associado é certificado&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtCertificacao" id="0813B4A6-B13C-9EA1-69FE-1C4F5B97825A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:20:07 UTC</createdTime>
+<commentInRDBMS>Data da certificação do associado</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DivulgarContato" id="A530BB95-D989-3117-1AAA-2DE4EAC9F2BA">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:30:09 UTC</createdTime>
+<commentInRDBMS>Informa se associado autoriza a divulgação do seu contato</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoFormaContato" id="D8E6AB03-EF5A-6819-2831-7CE30EFE8BD2">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:22:11 UTC</createdTime>
+<commentInRDBMS>Informa opção do tipo de forma de contato &lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;E-Mail: 1&lt;br/&gt;Celular: 2&lt;br/&gt;Endereço: 3&lt;br/&gt;Todos: 4&lt;br/&gt;Indefinido: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IntegraDiretoria" id="184C7021-70C4-6C65-1994-7C42D4AA4F8C">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-06 13:00:12 UTC</createdTime>
+<commentInRDBMS>Informa se o associado é integrante da  Diretoria do FBTC&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IntegraConfi" id="5BEE95AD-4E1E-00A7-79ED-FED74EFB508A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-06 13:01:15 UTC</createdTime>
+<commentInRDBMS>Informa se o Associado é integrante do CONFI&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NrTelDivulgacao" id="5C04BDCB-93C6-57C5-E57C-6D4339E35820">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-16 14:38:16 UTC</createdTime>
+<commentInRDBMS>Número do telefone do associado que será apresentado na consulta de terapeutas associados</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ComprovanteAfiliacaoATC" id="1E09BC3B-344B-733D-3B03-36CCA6DEFA17">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-16 15:09:42 UTC</createdTime>
+<commentInRDBMS>Nome do arquivo de imagem do comprovante de filiação da ATC</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoProfissao" id="B55B5B90-DE5C-5145-DA9A-ED65A0ACD739">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-16 15:11:10 UTC</createdTime>
+<commentInRDBMS>Profissão do associado&lt;br/&gt;&lt;br/&gt;Tipos Aceitos&lt;br/&gt;Outros: 1&lt;br/&gt;Psicólogo: 7&lt;br/&gt;Médico: 8</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoTitulacao" id="10A22E17-07AD-BF45-C0A5-4510F0E46781">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-16 15:16:23 UTC</createdTime>
+<commentInRDBMS>Titulação do associado&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Graduado: 1&lt;br/&gt;Especialista: 2&lt;br/&gt;Mestre: 3&lt;br/&gt;Doutor: 4&lt;br/&gt;Pós-Doutor: 5&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A8520D46-251F-6C39-99C0-D4CC2B197645" name="ASSOCIADO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:24:52 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BF1D2F32-65FE-44F7-94E7-336BD0E2F1B3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C3A2E26F-6FF3-B6FB-815C-88403A8B4337" name="ASSOCIADO_PESSOA_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:25:03 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7A30060A-0A02-44EE-9677-4F4496764554"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1EEEB880-6DB6-04A6-7EF6-BF3E81360A59" name="ASSOCIADO_ATC_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:03:04 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D0B38DFA-7E91-AD35-ECEC-ABE5C8C58497"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EB2339E1-0D62-0A71-F382-A654B15C1EB0" name="ASSOCIADO_TIPO_PUBLICO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:54:46 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3D7C1CFC-3C82-5914-3241-61713BCAFC4A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

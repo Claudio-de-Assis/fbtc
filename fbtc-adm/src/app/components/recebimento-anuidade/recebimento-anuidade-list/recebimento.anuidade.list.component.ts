@@ -34,31 +34,33 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   tiposPublicos: TipoPublico[];
   mensagemSincronizacao: string;
 
-  editNome: string = '';
-  editCpf: string = '';
-  editCrp: string = '';
-  editCrm: string = '';
-  editAno: number = 0;
-  editMes: number = 0;
-  editStatusPS: number = 99;
-  editAtivo: boolean = true;
-  editTipoPublicoId: number = 0;
+  editNome: string;
+  editCpf: string;
+  editCrp: string;
+  editCrm: string;
+  editAno: number;
+  editMes: number;
+  editStatusPS: number;
+  editAtivo: boolean;
+  editTipoPublicoId: number;
 
-  _objetivoPagamento: string = '2';
-  _nome: string = '0';
-  _cpf: string = '0';
-  _crp: string = '0';
-  _crm: string = '0';
-  _statusPS: number = 99;
-  _ano: number = 0;
-  _mes: number = 0;
-  _ativo: string = '2';
-  _tipoPublicoId: number = 0;
-  _isAssociado: boolean = true;
+  _objetivoPagamento: string;
+  _nome: string;
+  _cpf: string;
+  _crp: string;
+  _crm: string;
+  _statusPS: number;
+  _ano: number;
+  _mes: number;
+  _ativo: string;
+  _tipoPublicoId: number;
+  _isAssociado: boolean;
 
-  submitted = false;
+  submitted: boolean;
 
-  _itensPerPage = 30;
+  _itensPerPage: number;
+
+  _msg: string;
 
   constructor(
       private service: RecebimentoService,
@@ -66,7 +68,34 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
       private servicePS: PagSeguroService,
       private router: Router,
       private route: ActivatedRoute
-  ) { }
+  ) {
+      this.editNome = '';
+      this.editCpf = '';
+      this.editCrp = '';
+      this.editCrm = '';
+      this.editAno = 0;
+      this.editMes = 0;
+      this.editStatusPS = 99;
+      this.editAtivo = true;
+      this.editTipoPublicoId = 0;
+
+      this._objetivoPagamento = '2';
+      this._nome = '0';
+      this._cpf = '0';
+      this._crp = '0';
+      this._crm = '0';
+      this._statusPS = 99;
+      this._ano = 0;
+      this._mes = 0;
+      this._ativo = '2';
+      this._tipoPublicoId = 0;
+      this._isAssociado = true;
+      this.submitted = false;
+      this._itensPerPage = 30;
+
+      this.mensagemSincronizacao = '';
+      this._msg = '';
+  }
 
   onSelect(recebimento: Recebimento): void {
     this.selectedRecebimento = recebimento;
@@ -77,10 +106,12 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this.gotoBuscarRecebimento();
   }
 
+  /*
   gotoGerarNovaCobranca() {
 
     console.log('Gerando nova conbrança...');
   }
+  */
 
   gotoBuscarRecebimento(): void {
 
@@ -142,7 +173,14 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   }
 
   gotoSicronizarComPagSeguro(): void {
-    this.servicePS.postSincronizarRecebimentos().subscribe(mensagemSincronizacao => this.mensagemSincronizacao = mensagemSincronizacao);
+    this.mensagemSincronizacao = 'Processando a sincronização. Por favor, aguarde!....';
+    this._msg = '';
+
+    this.servicePS.postSincronizarRecebimentos().subscribe(
+      _msg => [
+          this._msg = _msg,
+          this.mensagemSincronizacao = ''
+      ]);
   }
 
   ngOnInit() {

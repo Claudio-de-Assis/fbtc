@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EEF62C2A-18A8-571D-1BEB-39A60BF9173F" name="ANUIDADE">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:52:24 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_7</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="AnuidadeId" id="D110EDD3-DA5B-5610-5A93-B3DEB36D7C8C">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:53:54 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtCadastro" id="A127B9D2-B83B-7DF8-3212-8E6B89755D82">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:53:54 UTC</createdTime>
+<commentInRDBMS>Data de cadastro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Codigo" id="EF446795-28D1-D810-0758-E6D347CF677A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:58:17 UTC</createdTime>
+<commentInRDBMS>Código da anuidade&lt;br/&gt;&lt;br/&gt;Ex:&lt;br/&gt;2015, 2016, 2017, (2017 + 1).....</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ativo" id="5A552B6A-A7A9-DF01-6B53-767897AAF7CD">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-04 22:28:12 UTC</createdTime>
+<commentInRDBMS>Informa se o registro está ativo&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Ativo: 1&lt;br/&gt;Inativo: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C7543CFB-6C7B-7792-FEF5-8A8617F40452" name="ANUIDADE_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:53:54 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D110EDD3-DA5B-5610-5A93-B3DEB36D7C8C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

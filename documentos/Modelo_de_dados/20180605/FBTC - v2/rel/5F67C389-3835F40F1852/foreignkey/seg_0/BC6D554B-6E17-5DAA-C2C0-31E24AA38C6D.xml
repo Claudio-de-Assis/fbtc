@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BC6D554B-6E17-5DAA-C2C0-31E24AA38C6D" containerWithKeyObject="170A7AA0-9FE0-CD0E-0173-090A655B73B2" localFKIndex="3813BCD2-8397-5684-B679-09DAC926CD0F" name="ATA_ISENCAO_ANUIDADE_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:04:54 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>ANUIDADE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>EEF62C2A-18A8-571D-1BEB-39A60BF9173F</referredTableID>
+<keyObject>C7543CFB-6C7B-7792-FEF5-8A8617F40452</keyObject>
+<referredKeyID>C7543CFB-6C7B-7792-FEF5-8A8617F40452</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>AnuidadeId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

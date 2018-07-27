@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="938DD86D-E200-FFEB-73CE-563C4756E6C1" name="NOTIFICACAO_PAGSEGURO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 17:36:58 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_16</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="NotificacaoPagSeguroId" id="A07E6864-9348-4A8C-42F2-2371937C723D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 17:38:55 UTC</createdTime>
+<commentInRDBMS>Identificação do registro na tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NotificationCode" id="8D36017A-C299-1A6A-F679-C1D036D7CE33">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 17:38:55 UTC</createdTime>
+<commentInRDBMS>O código que identifica a notificação. Este código deve ser usado para consultar a notificação e obter os dados da transação associada. Note que o código que identifica a notificação não é o mesmo que o código que identifica a transação. Tipo: Texto.&lt;br/&gt;Formato: Uma sequência de 39 caracteres. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>39</dataTypeSize>
+<ownDataTypeParameters>39,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NotificationType" id="C1F142F2-9DE4-7EFC-8FDB-E09838C4E967">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 17:41:50 UTC</createdTime>
+<commentInRDBMS>O tipo da notificação enviada. No momento, apenas notificações de transação são enviadas. Tipo: Texto.&lt;br/&gt;Formato: No momento, apenas o valor transaction é enviado. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>39</dataTypeSize>
+<ownDataTypeParameters>39,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtCadastro" id="E3C52142-54B8-FAD4-11C3-99EAA9ABDDEB">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 17:43:03 UTC</createdTime>
+<commentInRDBMS>Data do registro da notificação</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="183A4E38-176D-D38B-6451-6E8C9599931C" name="NOTIFICACAO_PAGSEGURO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 17:38:55 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A07E6864-9348-4A8C-42F2-2371937C723D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

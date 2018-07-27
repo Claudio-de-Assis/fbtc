@@ -1,4 +1,3 @@
-import { Pessoa } from './../../shared/model/pessoa';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -75,7 +74,7 @@ export class AssociadoFormComponent implements OnInit {
     tiposPublicos: TipoPublico[];
     atcs: Atc[];
 
-    submitted = false;
+    submitted: boolean;
 
     history: string[] = [];
 
@@ -100,6 +99,7 @@ export class AssociadoFormComponent implements OnInit {
         this._ordEnd = '';
         this.associado.enderecosPessoa = [this.enderecoPri, this.enderecoSec];
         this._isEMailValid = false;
+        this.submitted = false;
 
         valueShareService.valueStringInformada$.subscribe(
             nomeFoto => {
@@ -177,6 +177,8 @@ export class AssociadoFormComponent implements OnInit {
             this.getAssociadoById(this._assocId);
 
             this._msg = this._msgRetorno.substring(10);
+
+            this.badge = 'Edição';
 
         } else {
 

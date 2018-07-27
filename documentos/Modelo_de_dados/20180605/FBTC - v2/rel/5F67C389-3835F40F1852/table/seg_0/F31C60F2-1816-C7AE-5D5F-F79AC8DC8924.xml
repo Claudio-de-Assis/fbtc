@@ -1,0 +1,96 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F31C60F2-1816-C7AE-5D5F-F79AC8DC8924" name="TIPO_PUBLICO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:36:42 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_10</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="TipoPublicoId" id="552B0097-C374-AE27-8007-D7D4373DA8AD">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:39:41 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nome" id="68883A58-FB29-42F8-08F6-FE3812E83D9D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:39:41 UTC</createdTime>
+<commentInRDBMS>Nome do tipo</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60</dataTypeSize>
+<ownDataTypeParameters>60,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DescricaoValor" id="70E1CC95-078E-85F3-8106-7448D722A7D7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-17 19:43:00 UTC</createdTime>
+<commentInRDBMS>Descrição do valor(do evento ou da anuidade) que ser aplica ao tipo de público</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ativo" id="A61CFDC3-738C-1582-7EFD-573550D04F2C">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:40:29 UTC</createdTime>
+<commentInRDBMS>Informa se o registro está ativo	&lt;br/&gt;&lt;br/&gt;valores aceitos: &lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ordem" id="E2B7B719-8C98-01CA-FDAE-33436C27848E">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-02-16 13:41:40 UTC</createdTime>
+<commentInRDBMS>Ordem de apresentação dos registros</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Associado" id="6BCEFB93-3377-1915-9039-8FBA77C4CF4B">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-08 12:43:31 UTC</createdTime>
+<commentInRDBMS>Informa se a o Tipo de publico é um tipo associado.&lt;br/&gt;&lt;br/&gt;Valores aceitos&lt;br/&gt;Associado: 1&lt;br/&gt;Não associado: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="89C1EBFC-CACC-0BA2-6FBC-53CF0CE44F4B" name="TIPO_PUBLICO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:39:41 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="552B0097-C374-AE27-8007-D7D4373DA8AD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

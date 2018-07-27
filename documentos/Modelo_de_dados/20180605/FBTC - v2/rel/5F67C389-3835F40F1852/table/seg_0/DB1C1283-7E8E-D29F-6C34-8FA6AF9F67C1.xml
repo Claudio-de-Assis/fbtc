@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DB1C1283-7E8E-D29F-6C34-8FA6AF9F67C1" name="VALOR_ANUIDADE_PUBLICO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:24:53 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_15</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ValorAnuidadePublicoId" id="512C55C7-471B-A507-1468-E66FE704F870">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:26:20 UTC</createdTime>
+<commentInRDBMS>Identificador do registro na tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Valor" id="CBCA53C5-DE6D-CB17-FDDC-61D7104259FE">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:27:41 UTC</createdTime>
+<commentInRDBMS>Valor da anuidade</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AnuidadeId" id="50FF2698-0726-80CC-972D-899CB3D57C4E">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:30:06 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C388BD27-37FA-F83E-3328-FE4A6624F366" referredColumn="D110EDD3-DA5B-5610-5A93-B3DEB36D7C8C"/>
+</associations>
+</Column>
+<Column name="TipoPublicoId" id="23B77819-77FD-E33F-8D2E-920762F0A0DB">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:30:15 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AF50A1E7-EE8E-6FB9-DA60-BAF12B051A61" referredColumn="552B0097-C374-AE27-8007-D7D4373DA8AD"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="99CC1D7D-53BA-0978-7056-092F49C11234" name="ANUIDADE_TIPO_PUBLICO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:26:20 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="512C55C7-471B-A507-1468-E66FE704F870"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1C7CCFC7-29C2-38E8-265E-E72D6C413A8C" name="ANUIDADE_TIPO_PUBLICO_ANUIDADE_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:30:06 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="50FF2698-0726-80CC-972D-899CB3D57C4E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5278C712-8657-3905-7A31-0E5D392AB605" name="ANUIDADE_TIPO_PUBLICO_TIPO_PUBLICO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:30:15 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="23B77819-77FD-E33F-8D2E-920762F0A0DB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

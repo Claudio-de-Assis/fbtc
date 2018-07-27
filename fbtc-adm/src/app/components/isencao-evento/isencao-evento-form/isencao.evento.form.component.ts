@@ -21,18 +21,19 @@ export class IsencaoEventoFormComponent implements OnInit {
   @Input() isencao: Isencao = { isencaoId: 0, anuidadeId: null, eventoId : null,
     descricao: '', dtAta: null, anoEvento: null , tipoIsencao: '1', ativo: true};
 
-  title = 'Conceder Isenção de Evento';
-  badge = '';
-  isEdicaoIsencao: boolean = false;
+  title: string;
+  badge: string;
+  isEdicaoIsencao: boolean;
 
   eventos: Evento[];
 
   _isencaoId: number;
   _tipoIsencao: string;
 
-  private selectedId: any;
+  _msg: string;
+  _msgRetorno: string;
 
-  // isencaos: Observable<Isencao>;
+  private selectedId: any;
 
   _util = Util;
 
@@ -43,7 +44,18 @@ export class IsencaoEventoFormComponent implements OnInit {
     private router: Router,
     private serviceEvento: EventoService,
     private service: IsencaoService
-  ) { }
+  ) {
+
+    this.title = 'Conceder Isenção de Evento';
+    this.badge = '';
+    this.isEdicaoIsencao = false;
+    this.submitted = false;
+
+    this._msg = '';
+    this._msgRetorno = '';
+
+    this._tipoIsencao = '1';
+   }
 
   gotoIsencaoEventos() {
 
@@ -69,28 +81,37 @@ export class IsencaoEventoFormComponent implements OnInit {
 
   saveIsencao() {
 
-    this.service.addIsencao(this.isencao).subscribe(() =>  this.savaAssociadosIsentos());
+    this._msg = '';
+
+    this.service.addIsencao(this.isencao).subscribe(
+      msg => {
+          this._msgRetorno = msg;
+          this.avaliaRetorno(this._msgRetorno);
+      });
   }
 
-  savaAssociadosIsentos() {
+  avaliaRetorno(msgRet: string) {
 
-    if (this.isencao.isencaoId !== 0 ) {
+    if (msgRet.substring(0, 1) === '0') {
 
-      // Colocar aqui a chamada para salvar os associados isentos: Ex:
-      // this.service.addValoresEvento(this.tiposPublicosValoresDao)
-      // .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
-      this.gotoShowPopUp('Registro salvo com sucesso!');
+      this._isencaoId = parseInt(msgRet.substring(0, 10), 10);
+
+        this.router.navigate([`/IsencaoEvento/${this._isencaoId}`]);
+
+        this.getIsencaoById(this._isencaoId);
+
+        this._msg = this._msgRetorno.substring(10);
+
+        this.badge = 'Edição';
+
+        this.isEdicaoIsencao = true;
+
+        this.getIsencaoById(this._isencaoId);
 
     } else {
-      this.gotoShowPopUp('Registro salvo com sucesso!');
-      this.gotoIsencaoEventos();
+
+        this._msg = this._msgRetorno;
     }
-  }
-
-  gotoShowPopUp(msg: string) {
-
-    // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert(msg);
   }
 
   getEventos(): void {
@@ -100,15 +121,13 @@ export class IsencaoEventoFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this._tipoIsencao = '1';
-
     this.getEventos();
 
     this._isencaoId = +this.route.snapshot.paramMap.get('id');
 
     if (this._isencaoId > 0) {
       this.isEdicaoIsencao = true;
-      this.badge = '"Edição';
+      this.badge = 'Edição';
         this.getIsencaoById(this._isencaoId);
     } else {
       this.isEdicaoIsencao = false;

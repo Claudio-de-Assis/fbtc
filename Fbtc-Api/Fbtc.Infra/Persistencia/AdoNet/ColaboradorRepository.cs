@@ -168,7 +168,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -240,7 +243,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -318,17 +324,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 }
                 catch (Exception ex)
                 {
-                    try
+                    if (ex.Message.IndexOf("Mail") < 0)
                     {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch (Exception ex2)
+                        {
+                            throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
+                        }
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }

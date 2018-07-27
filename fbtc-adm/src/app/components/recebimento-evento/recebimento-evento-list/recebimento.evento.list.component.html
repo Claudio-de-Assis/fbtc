@@ -67,15 +67,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div *ngIf="_msg !== ''" class="alert alert-success">
+                            <div >{{ _msg }}</div>
+                        </div>
+                        <div *ngIf="mensagemSincronizacao !== ''" class="alert alert-info">
+                            <div >{{ mensagemSincronizacao }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-6">
-                        <button class="btn btn-success" (click)="gotoImprimirLista()">Imprimir Lista</button>
+                        <!--<button class="btn btn-success" (click)="gotoImprimirLista()">Imprimir Lista</button>-->
                     </div>
                     <div class="col-lg-6 text-right">
                         <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincroniza o sistema 30 dias">Sincronizar com PagSeguro</button>
-                        <button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>
+                        <!--<button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>-->
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
                 </div>
@@ -83,7 +93,7 @@
         </div>
         </form>
         <div class="panel panel-primary">
-            <div class="panel-heading">Listagem de Inscritos{{ mensagemSincronizacao }}</div>
+            <div class="panel-heading">Listagem de Inscritos</div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">

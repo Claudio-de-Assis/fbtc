@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="6D539CC8-311C-4BC0-D240-0D7CF35F79D0" containerWithKeyObject="19EE4E0F-D0AF-3125-8359-DF610FE0506B" localFKIndex="EF4919F9-C3AC-9A91-2816-D4650E33031C" name="PAGAMENTO_ANUIDADE_ASSOCIADO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:46:42 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>ASSOCIADO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>09263120-9E1D-A192-2CAD-C22B069EEBA9</referredTableID>
+<keyObject>A8520D46-251F-6C39-99C0-D4CC2B197645</keyObject>
+<referredKeyID>A8520D46-251F-6C39-99C0-D4CC2B197645</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>AssociadoId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

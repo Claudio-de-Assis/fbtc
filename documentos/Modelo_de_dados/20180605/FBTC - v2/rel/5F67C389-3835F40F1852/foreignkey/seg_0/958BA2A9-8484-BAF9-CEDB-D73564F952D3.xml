@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="958BA2A9-8484-BAF9-CEDB-D73564F952D3" containerWithKeyObject="D7B14A27-5015-F65D-9618-F19BB3431CCF" localFKIndex="E1B3D1A4-8F12-2C7C-E526-EF3D43841C4F" name="VALOR_EVENTO_PUBLICO_EVENTO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:44:28 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>EVENTO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>7AFA6A42-E0A9-BF19-EC3E-C2CC826C6D70</referredTableID>
+<keyObject>34B78C56-B8F2-B9AE-A882-D0442755AB05</keyObject>
+<referredKeyID>34B78C56-B8F2-B9AE-A882-D0442755AB05</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>EventoId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

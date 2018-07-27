@@ -66,7 +66,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
 
@@ -627,7 +630,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -681,7 +687,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -770,7 +779,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -819,7 +831,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -896,7 +911,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }

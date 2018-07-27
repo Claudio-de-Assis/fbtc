@@ -71,11 +71,11 @@ export class IsencaoService {
         );
     }
 
-    addIsencao (isencao: Isencao): Observable<Isencao> {
+    addIsencao (isencao: Isencao): Observable<string> {
 
-        return this.http.post<Isencao>(this.apiRoute.postIsencao(), isencao, httpOptions).pipe(
-            tap((_isencao: Isencao) => this.log(`added isencao w/ id=${isencao.isencaoId}`)),
-            catchError(this.handleError<Isencao>('addIsencao'))
+        return this.http.post<string>(this.apiRoute.postIsencao(), isencao, httpOptions).pipe(
+            tap(_ => this.log(`added isencao w/ id=${isencao.isencaoId}`)),
+            catchError(this.handleError<string>('addIsencao'))
         );
     }
 

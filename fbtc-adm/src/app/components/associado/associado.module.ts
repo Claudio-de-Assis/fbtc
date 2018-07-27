@@ -19,7 +19,7 @@ import { MessagesComponent } from './../../messages/messages.component';
 import { AssociadoRoutingModule } from './associado.routing.module';
 
 import { SharedModule } from '../shared/shared.module';
-import { FileUploadModule } from '../shared/upload/file-upload.module';
+// import { FileUploadModule } from '../shared/upload/file-upload.module';
 import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 import { AtcRoute } from '../shared/webApi-routes/atc.route';
 import { AtcService } from '../shared/services/atc.service';
@@ -32,7 +32,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
       FormsModule,
       AssociadoRoutingModule,
       SharedModule,
-      FileUploadModule,
+//       FileUploadModule,
       NgxPaginationModule,
       HttpModule
   ],

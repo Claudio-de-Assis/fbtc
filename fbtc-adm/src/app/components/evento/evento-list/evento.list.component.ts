@@ -20,31 +20,45 @@ import { Util } from '../../shared/util/util';
 })
 export class EventoListComponent implements OnInit {
 
-  title = 'Consulta de Eventos';
+  title: string;
 
-  editNome: string = '';
-  editAno: number = null;
-  editTipoEvento: string = '';
+  editNome: string;
+  editAno: number;
+  editTipoEvento: string;
 
   private selectedEvento: Evento;
 
-  _nome: string = '0';
-  _ano: number = 0;
-  _tipoEvento: string = '0';
+  _nome: string;
+  _ano: number;
+  _tipoEvento: string;
 
   eventos: Evento[];
 
   _util = Util;
 
-  _itensPerPage = 30;
+  _itensPerPage: number;
 
-  submitted = false;
+  submitted: boolean;
 
   constructor(
     private service: EventoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+
+    this.title = 'Consulta de Eventos';
+
+    this.editNome = '';
+    this.editAno = null;
+    this.editTipoEvento = '';
+
+    this._nome = '0';
+    this._ano = 0;
+    this._tipoEvento = '0';
+    this._itensPerPage = 30;
+
+    this.submitted = false;
+   }
 
   getEventos(): void {
     this.service.getEventos().subscribe(eventos => this.eventos = eventos);

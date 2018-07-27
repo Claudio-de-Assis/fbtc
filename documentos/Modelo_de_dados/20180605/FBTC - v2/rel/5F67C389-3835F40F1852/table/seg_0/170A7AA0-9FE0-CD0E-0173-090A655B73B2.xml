@@ -1,0 +1,144 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="170A7AA0-9FE0-CD0E-0173-090A655B73B2" name="ISENCAO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 18:56:35 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_13</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="IsencaoId" id="4DB21F70-F949-2A37-66B9-C6B054A7AED5">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 18:58:28 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AnuidadeId" id="3CB0137A-9434-1D10-65D6-3B2D3E2FC8FB">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:04:54 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BC6D554B-6E17-5DAA-C2C0-31E24AA38C6D" referredColumn="D110EDD3-DA5B-5610-5A93-B3DEB36D7C8C"/>
+</associations>
+</Column>
+<Column name="EventoId" id="301DFB2F-E88E-788A-8F4B-87E0462CA1C7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:05:12 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="38F2FB24-E4CD-28E4-47B6-93C41A0E8EBC" referredColumn="A18AD802-ADF2-D0D6-4EC2-8B3F24205D4E"/>
+</associations>
+</Column>
+<Column name="Descricao" id="0B84E824-F191-53FC-1D88-D17FB372144A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 18:59:38 UTC</createdTime>
+<commentInRDBMS>Descrição da Ata</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtAta" id="5032D54F-C607-965B-CB14-964D00FF9B18">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:00:35 UTC</createdTime>
+<commentInRDBMS>Data da reunião em que foi concedida a reunião</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AnoEvento" id="0E958ACF-9871-9AE6-3F03-2FCD0C905CE7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:01:51 UTC</createdTime>
+<commentInRDBMS>Ano do evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoIsencao" id="6BBD0597-0A6A-F6AB-EC8D-E01113523996">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:03:07 UTC</createdTime>
+<commentInRDBMS>Identifica o tipo do evento que terá isenção&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;&lt;br/&gt;Evento: 1&lt;br/&gt;Anuidade: 2</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ativo" id="4CDEC3AC-5962-5091-3B68-C1B30A7D8024">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:11:57 UTC</createdTime>
+<commentInRDBMS>Indicador se o registro está ativo&lt;br/&gt;&lt;br/&gt;Valores aceitos&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2A64634F-BDC4-F3E7-E40B-B32356B0B6B6" name="ATA_ISENCAO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 18:58:28 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4DB21F70-F949-2A37-66B9-C6B054A7AED5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3813BCD2-8397-5684-B679-09DAC926CD0F" name="ATA_ISENCAO_ANUIDADE_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:04:54 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3CB0137A-9434-1D10-65D6-3B2D3E2FC8FB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="54634EEC-4819-F69F-6BB2-5C9E52BFF2B4" name="ATA_ISENCAO_EVENTO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:05:11 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="301DFB2F-E88E-788A-8F4B-87E0462CA1C7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

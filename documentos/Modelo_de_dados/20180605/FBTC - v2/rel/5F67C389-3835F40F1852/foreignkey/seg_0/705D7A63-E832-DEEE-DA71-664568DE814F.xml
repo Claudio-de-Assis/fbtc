@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="705D7A63-E832-DEEE-DA71-664568DE814F" containerWithKeyObject="4CAF8BF3-04A9-1A55-B9E3-703975EC8D06" localFKIndex="39004DAB-B180-7307-A9EA-7CD4375430CE" name="ENDERECO_PESSOA_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:27:34 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>PESSOA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>C36E8F21-1469-7337-292C-72877BCE1D75</referredTableID>
+<keyObject>BEA92344-75BB-73CD-0651-6E039B8D6066</keyObject>
+<referredKeyID>BEA92344-75BB-73CD-0651-6E039B8D6066</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>PessoaId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

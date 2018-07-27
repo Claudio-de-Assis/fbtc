@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C4C4E5CA-3F05-51C5-7525-B1C1152D81A7" name="COLABORADOR">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:33:37 UTC</createdTime>
+<comment>Registra os Usuário Administrativos do sistema&lt;br/&gt;Não reuniao do dia 15/12/2017 passaram a ser conhecidos como Equipe</comment>
+<commentInRDBMS>Não reuniao do dia 15/12/2017 passaram a ser conhecidos como Equipe</commentInRDBMS>
+<notes>Registra os Usuário Administrativos do sistema&lt;br/&gt;Não reuniao do dia 15/12/2017 passaram a ser conhecidos como Equipe</notes>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_4</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ColaboradorId" id="B025A591-44CE-64AB-2027-36994D95D09A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:35:37 UTC</createdTime>
+<commentInRDBMS>Identificador do registro da tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PessoaId" id="BE7B9FEE-F16C-7E9C-36BA-A1715213A9DC">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:35:47 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9C1E18E8-6515-DD05-0B05-A8EE85875EE6" referredColumn="3883136E-96DA-1B6E-3AC6-78F5E96129A7"/>
+</associations>
+</Column>
+<Column name="TipoPerfil" id="221274D6-3000-1454-603C-7B491054F649">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:35:05 UTC</createdTime>
+<commentInRDBMS>Indica o perfil do profissional colaborador&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Gestor: 1&lt;br/&gt;Secretário: 2&lt;br/&gt;Financeiro: 3&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1523EE12-53C8-5458-836D-071B2FE992C3" name="COLABORADOR_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:35:37 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B025A591-44CE-64AB-2027-36994D95D09A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="278A034C-50E3-CCA5-32C7-050F0A3D6818" name="COLABORADOR_PESSOA_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:35:47 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BE7B9FEE-F16C-7E9C-36BA-A1715213A9DC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

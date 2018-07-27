@@ -11,7 +11,7 @@ import { EventoService } from './../shared/services/evento.service';
 
 import { EventoRoutingModule } from './evento.routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { FileUploadModule } from './../shared/upload/file-upload.module';
+// import { FileUploadModule } from './../shared/upload/file-upload.module';
 
 import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
 
@@ -23,7 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     EventoRoutingModule,
     SharedModule,
-    FileUploadModule,
+//    FileUploadModule,
     NgxPaginationModule,
     HttpModule
   ],

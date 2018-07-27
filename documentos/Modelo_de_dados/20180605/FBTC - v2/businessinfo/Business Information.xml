@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="F1BD4580-EF3F-495E-4225-607E2283C57D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:40:46 UTC</createdTime>
+<ownerDesignName>FBTC</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

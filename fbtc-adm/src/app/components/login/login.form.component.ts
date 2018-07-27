@@ -1,84 +1,120 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
+import { UserProfileService } from './../shared/services/user-profile.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-// import { Atc } from '../../shared/model/atc';
-
-// import { AtcService } from '../../shared/services/atc.service';
-// import { UnidadeFederacaoService } from '../../shared/services/unidade-federacao.service';
-
-// import { Util } from '../../shared/util/util';
-// import { UnidadeFederacao } from '../../shared/model/unidade-federacao';
-
+import { AuthService } from './../shared/services/auth.service';
+/*
+@Component({
+  template: `
+    <h2>LOGIN</h2>
+    <p>{{message}}</p>
+    <p>
+      <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
+      <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+    </p>`
+})
+*/
 @Component({
   selector: 'app-login-form',
   templateUrl: './login.form.component.html',
   styleUrls: ['./login.form.component.css']
 })
-export class LoginFormComponent implements OnInit {
-
-  // @Input() atc: Atc = { atcId: 0, nome: '', uf: '', nomePres: '', nomeVPres: '', nomePSec: '', nomeSSec: '', nomePTes: '',
-  //                       nomeSTes: '', site: '', siteDiretoria: '', ativo: true};
-
-  title = 'Login';
-  badge = '';
-
-  userName: string;
-  passWord: string;
 
 
-  // editAtcId: number = 0;
+export class LoginComponent {
 
-  // private selectedId: any;
-
-  // unidadesFederacao: UnidadeFederacao[];
-
-  submitted = false;
-
-  // _util = Util;
+  message: string;
+  title: string;
+  _msg: string;
+  _msgDng: string;
+  editeMail: string;
+  editPassword: string;
 
   constructor(
-    // private service: AtcService,
-    // private serviceUF: UnidadeFederacaoService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {
+      public authService: AuthService,
+      public userProfileService: UserProfileService,
+      public router: Router) {
+    this.setMessage();
+    this.title = 'Login';
+    this._msg = '';
+    this._msgDng = '';
+    this.editeMail = '';
+    this.editPassword = '';
+  }
 
-    this.userName = '';
-    this.passWord = '';
+  setMessage() {
+    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
 
+console.log ( 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out'));
+  }
+
+  login() {
+    this._msgDng = '';
+
+    this.message = 'Trying to log in ...';
+
+    console.log('Trying to log in ...');
+
+    if (this.editeMail.trim() === '') {
+      this._msgDng = 'Por favor, informe o seu E-Mail';
+      return;
+    }
+
+    if (this.editPassword.trim() === '') {
+      this._msgDng = 'Por favor, informe a sua senha E-Mail';
+      return;
+    }
+
+    console.log('pre: ' + this.authService.isLoggedIn);
+
+    this.authService.login(this.editPassword, this.editeMail)
+      .subscribe(
+        () => {
+          this.setMessage();
+
+          console.log('antes: ' + this.authService.isLoggedIn);
+
+          if (this.authService.isLoggedIn) {
+            // Get the redirect URL from our auth service
+            // If no redirect has been set, use the default
+            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+
+            console.log(`User Name: ${this.authService.getUserProfile().nome}`);
+
+            // Redirect the user
+            this.router.navigate([redirect]);
+          }
+        }
+      );
   }
 
 
+  gotoReenviarSenha() {
 
+    this._msg = '';
+    if (this.editeMail !== '') {
 
+      console.log('Reenvio ...');
 
-loginUser() {
-/*
-  this.service.addAtc(this.atc)
-  .subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
-*/
-  this.submitted = false;
+        this.editeMail = this.editeMail.trim();
+        this.editeMail = this.editeMail.toLowerCase();
+
+        this.userProfileService.ressetPassWordByEMail(this.editeMail)
+           .subscribe(msg => this._msg = msg);
+
+    } else {
+
+        this._msgDng = 'Por favor, informe o seu E-Mail';
+    }
 }
 
 
-gotoShowPopUp(msg: string) {
+  onSubmit() {
+    this.login();
+  }
 
-  // Colocar a chamada para a implementação do PopUp modal de aviso:
-  alert(msg);
-}
-
-
-
-onSubmit() {
-
-  this.submitted = true;
-  this.loginUser();
-}
-
-
-  ngOnInit() {
-
+  logout() {
+    this.authService.logout();
+    this.setMessage();
   }
 }

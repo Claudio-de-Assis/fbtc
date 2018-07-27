@@ -1,0 +1,109 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D7B14A27-5015-F65D-9618-F19BB3431CCF" name="VALOR_EVENTO_PUBLICO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:41:21 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ValorEventoPublicoId" id="79E351AB-1361-DF41-1AB6-EEBE5682D900">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:42:38 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EventoId" id="5A5F400B-3FF3-55E1-B85D-D275C1492D14">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:44:28 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="958BA2A9-8484-BAF9-CEDB-D73564F952D3" referredColumn="A18AD802-ADF2-D0D6-4EC2-8B3F24205D4E"/>
+</associations>
+</Column>
+<Column name="Valor" id="5BCBAB6F-379D-11D8-4771-7562ABEF37A1">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:43:32 UTC</createdTime>
+<commentInRDBMS>Valor do evento de acordo com tipo de público</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoPublicoId" id="00F0CDCD-4C1E-BF0C-D3FB-831287850363">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:44:21 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CE8E2289-6353-4996-6B9D-6E82C3E64D68" referredColumn="552B0097-C374-AE27-8007-D7D4373DA8AD"/>
+</associations>
+</Column>
+<Column name="Ativo" id="73B99DB2-8C19-FEA3-3ACB-8F643F8DF841">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-12-22 11:05:45 UTC</createdTime>
+<commentInRDBMS>Informa se o valor está ativo&lt;br/&gt;&lt;br/&gt;valores aceitos: &lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="78DCB587-56BE-D9CC-0A4B-02D9C2395169" name="VALOR_EVENTO_PUBLICO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:42:38 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="79E351AB-1361-DF41-1AB6-EEBE5682D900"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1B44307D-881A-2921-AED0-21A359B2131A" name="VALOR_EVENTO_PUBLICO_TIPO_PUBLICO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:44:21 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00F0CDCD-4C1E-BF0C-D3FB-831287850363"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E1B3D1A4-8F12-2C7C-E526-EF3D43841C4F" name="VALOR_EVENTO_PUBLICO_EVENTO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:44:28 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5A5F400B-3FF3-55E1-B85D-D275C1492D14"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

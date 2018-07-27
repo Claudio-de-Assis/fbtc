@@ -97,6 +97,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             bool _resultado = false;
             string _msg = "";
             Int32 id = 0;
+            string _ident = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -145,7 +146,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    _msg = _resultado ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+                    if (id > 0)
+                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
+
+                    _msg = id > 0 ? $"{_ident}Inclusão realiada com sucesso" : $"{_ident}Inclusão Não realiada com sucesso";
 
                     transaction.Commit();
                 }
@@ -162,7 +166,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -234,7 +241,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }

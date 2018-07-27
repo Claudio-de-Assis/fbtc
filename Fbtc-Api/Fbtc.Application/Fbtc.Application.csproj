@@ -66,6 +66,7 @@
     <Compile Include="Interfaces\ITipoPublicoApplication.cs" />
     <Compile Include="Interfaces\IUnidadeFederacaoApplication.cs" />
     <Compile Include="Interfaces\IRelatoriosApplication.cs" />
+    <Compile Include="Interfaces\IUserProfileApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AnuidadeApplication.cs" />
     <Compile Include="Services\AssociadoApplication.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Services\RelatoriosApplication.cs" />
     <Compile Include="Services\TipoPublicoApplication.cs" />
     <Compile Include="Services\UnidadeFederacaoApplication.cs" />
+    <Compile Include="Services\UserProfileApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

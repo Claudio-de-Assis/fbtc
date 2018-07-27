@@ -149,7 +149,7 @@
     <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\TipoPublicoController.cs" />
     <Compile Include="Controllers\UnidadeFederacaoController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationApi.cs" />
     <Compile Include="Startup.cs" />

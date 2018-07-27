@@ -1,0 +1,171 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C36E8F21-1469-7337-292C-72877BCE1D75" name="PESSOA">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:40:59 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PessoaId" id="3883136E-96DA-1B6E-3AC6-78F5E96129A7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:43:01 UTC</createdTime>
+<commentInRDBMS>Identificador da tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nome" id="A66AB92D-E949-12BF-5A31-D2D69CBD96AD">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:43:44 UTC</createdTime>
+<commentInRDBMS>Nome da pessoa</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CPF" id="6E586569-64D6-3490-1091-5BAC46542B20">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-30 18:04:41 UTC</createdTime>
+<commentInRDBMS>CPF da Pessoa</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="RG" id="53AA378B-28A3-E91B-0305-707D15E61FB7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-30 18:05:14 UTC</createdTime>
+<commentInRDBMS>RG da Pessoa</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMail" id="B0456B0D-2C5A-DC24-4A9D-42EC2701FCC9">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:44:54 UTC</createdTime>
+<commentInRDBMS>E-Mail da pessoa</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NomeFoto" id="DD1A3CB4-37CA-C070-5A44-19396CF74DBE">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:50:18 UTC</createdTime>
+<commentInRDBMS>Nome e endereço do arquivo com a foto da pessoa</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Sexo" id="3ACD65D2-28CE-6E6B-D1ED-A8C446D3A887">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:50:54 UTC</createdTime>
+<commentInRDBMS>Sexo</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtNascimento" id="BAAFE2EA-CCBA-B497-6382-977B3BCC3469">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:51:24 UTC</createdTime>
+<commentInRDBMS>Data de Nascimento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NrCelular" id="BE1477A6-49BE-8F5D-4BD4-93BC14A14A18">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:53:35 UTC</createdTime>
+<commentInRDBMS>Número do celular</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PasswordHash" id="0F0D21ED-B119-EBD7-30D0-EAB9831EB7BC">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 13:56:54 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtCadastro" id="EB423F51-36A4-AD0F-5E58-FAFC095437D3">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:04:17 UTC</createdTime>
+<commentInRDBMS>Data de Cadastro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ativo" id="3BE75E1F-16F5-72D9-7950-572BDA623A50">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:11:05 UTC</createdTime>
+<commentInRDBMS>Informa se o registro está ativo&lt;br/&gt;&lt;br/&gt;Valores esperados&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BEA92344-75BB-73CD-0651-6E039B8D6066" name="PESSOA_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 14:24:47 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3883136E-96DA-1B6E-3AC6-78F5E96129A7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

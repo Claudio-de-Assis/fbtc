@@ -1,3 +1,4 @@
+import { UserProfileService } from './../../services/user-profile.service';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -18,13 +19,13 @@ import { FileUploadRoute } from './../../webapi-routes/file-upload.route';
 export class FileUploadComponent implements OnInit, OnDestroy {
 
   errors: Array<string> = [];
-  dragAreaClass: string = 'dragarea';
+  dragAreaClass: string;
   @Input() targetId: number;
   @Input() projectId: string;
   @Input() sectionId: string;
-  @Input() fileExt: string = 'JPG, GIF, PNG';
-  @Input() maxFiles: number = 1;
-  @Input() maxSize: number = 2; // 2MB
+  @Input() fileExt: string;
+  @Input() maxFiles: number;
+  @Input() maxSize: number;
   @Output() uploadStatus = new EventEmitter();
 
   subscription: Subscription;
@@ -42,12 +43,24 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     private associadoRoute: AssociadoRoute,
     private valueShareService: ValueShareService,
     private associadoService: AssociadoService,
-    private eventoService: EventoService
-  ) { }
+    private eventoService: EventoService,
+    private userProfileService: UserProfileService
+  ) {
+    this.dragAreaClass = 'dragarea';
+    this.fileExt = 'JPG, GIF, PNG';
+    this.maxFiles = 1;
+    this.maxSize = 2; // 2MB
+  }
 
   getNomeImagemByAssociadoId(id: number): void {
 
     this.associadoService.getNomeImagemById(id)
+        .subscribe(nomeFoto => this.nomeFoto = nomeFoto);
+  }
+
+  getNomeImagemByPessoaId(id: number): void {
+
+    this.userProfileService.getNomeImagemByPessoaId(id)
         .subscribe(nomeFoto => this.nomeFoto = nomeFoto);
   }
 
@@ -182,6 +195,15 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
       if (this.targetId > 0) {
         this.getNomeImagemByEventoId(this.targetId);
+      }
+    } else if (this.sectionId === 'UP') {
+
+      this.nomeFoto = '_no-foto.png';
+      // UserProfile:
+      this.srcFoto = this.apiRoute.getImageFolder();
+
+      if (this.targetId > 0) {
+        this.getNomeImagemByPessoaId(this.targetId);
       }
     }
   }

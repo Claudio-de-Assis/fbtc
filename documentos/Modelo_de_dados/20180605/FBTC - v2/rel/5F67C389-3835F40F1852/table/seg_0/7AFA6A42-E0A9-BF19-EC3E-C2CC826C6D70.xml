@@ -1,0 +1,156 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7AFA6A42-E0A9-BF19-EC3E-C2CC826C6D70" name="EVENTO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:19:24 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_9</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="EventoId" id="A18AD802-ADF2-D0D6-4EC2-8B3F24205D4E">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:20:27 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Titulo" id="57BA081E-E8B2-8D51-D9A6-1A4C21479CF9">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:21:28 UTC</createdTime>
+<commentInRDBMS>Título do evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Descricao" id="3EF3774C-6F2A-6EE4-E71F-FDDBFD575CE4">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:22:08 UTC</createdTime>
+<commentInRDBMS>Descrição do evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2000</dataTypeSize>
+<ownDataTypeParameters>2000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Codigo" id="937D5211-90D1-F7AB-208B-551C7837E1AA">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:23:56 UTC</createdTime>
+<commentInRDBMS>Código do evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60</dataTypeSize>
+<ownDataTypeParameters>60,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtInicio" id="E8361072-D832-6094-DDB3-0A04EA5E7517">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:24:31 UTC</createdTime>
+<commentInRDBMS>Data de início</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtTermino" id="E7072DB8-D337-678D-FD7D-C17E8371A2C0">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:24:58 UTC</createdTime>
+<commentInRDBMS>Data de término do evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtTerminoInscricao" id="FF40E5D9-046C-CD94-2416-2626AE3677DB">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-11-14 21:16:13 UTC</createdTime>
+<commentInRDBMS>Data de Término da Inscrição para o evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoEvento" id="3FBA5C4D-F234-40EB-F501-958BAB207493">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:29:30 UTC</createdTime>
+<commentInRDBMS>Tipo do evento&lt;br/&gt;&lt;br/&gt;São valores aceitos:&lt;br/&gt;&lt;br/&gt;Workshop internacional e Congresso: 1&lt;br/&gt;Workshop Internacional: 2&lt;br/&gt;Workshop Nacional: 3&lt;br/&gt;Congresso Nacional: 4&lt;br/&gt;Certificação: 5&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AceitarIsencaoAta" id="B8BAC60F-BC0C-677D-CFC3-DF90F3572D93">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:34:07 UTC</createdTime>
+<commentInRDBMS>Informa se evento aceita isenção de pagamento por ata de reunião&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0&lt;br/&gt; &lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NomeFoto" id="7D4A0D8E-87FB-8F9B-3F00-00D088FFD1BC">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-10 19:43:28 UTC</createdTime>
+<commentInRDBMS>Nome do arquivo da imagem do evento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ativo" id="D5B6F252-04F8-CA0D-67C8-07A57507BB99">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:35:04 UTC</createdTime>
+<commentInRDBMS>Informa se o evento está ativo&lt;br/&gt;&lt;br/&gt;valores aceitos&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="34B78C56-B8F2-B9AE-A882-D0442755AB05" name="EVENTO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:20:27 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A18AD802-ADF2-D0D6-4EC2-8B3F24205D4E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

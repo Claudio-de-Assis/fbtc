@@ -87,12 +87,14 @@ export class RecebimentoEventoFormComponent implements OnInit {
     alert('Registro salvo com sucesso!');
   }
 
+  /*
   gotoNotificarAssociado() {
 
     if (confirm('Deseja notificar o Associado?')) {
       alert('Notificação enviada com sucesso');
     }
   }
+  */
 
   gotoRecebimentoAnuidade() {
 

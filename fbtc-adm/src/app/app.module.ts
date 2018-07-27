@@ -1,4 +1,3 @@
-import { RelatoriosRoute } from './components/shared/webapi-routes/relatorios.route';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -22,12 +21,18 @@ import { EventoModule } from './components/evento/evento.module';
 import { AnuidadeModule } from './components/anuidade/anuidade.module';
 import { RelatoriosModule } from './components/relatorios/relatorios.module';
 import { AtcModule } from './components/atc/atc.module';
+import { UserProfileModule } from './components/user-profile/user-profile.module';
+import { LoginModule } from './components/login/login.module';
 
+import { RelatoriosRoute } from './components/shared/webapi-routes/relatorios.route';
+import { LoginRoute } from './components/shared/webapi-routes/login.route';
 import { AnuidadeRoute } from './components/shared/webapi-routes/anuidade.route';
 import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
+import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   imports: [
@@ -44,6 +49,9 @@ import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.rout
     RecebimentoEventoModule,
     AtcModule,
     RelatoriosModule,
+    UserProfileModule,
+    AdminModule,
+    LoginModule,
     AppRoutingModule,
   ],
   declarations: [
@@ -60,6 +68,8 @@ import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.rout
     AnuidadeRoute,
     PagSeguroRoute,
     RelatoriosRoute,
+    UserProfileRoute,
+    LoginRoute,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [

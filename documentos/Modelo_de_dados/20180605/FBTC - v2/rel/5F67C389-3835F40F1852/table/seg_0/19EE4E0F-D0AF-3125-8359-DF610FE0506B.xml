@@ -1,0 +1,321 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="19EE4E0F-D0AF-3125-8359-DF610FE0506B" name="RECEBIMENTO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:34:18 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_6</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="RecebimentoId" id="27C3A916-E5CE-428A-BFD6-6A4F1A9F3EF6">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:35:04 UTC</createdTime>
+<commentInRDBMS>Identificador do registro na tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AssociadoId" id="81137EC0-0280-9D49-8FDD-DE0D4B7A7CFA">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:46:42 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6D539CC8-311C-4BC0-D240-0D7CF35F79D0" referredColumn="BF1D2F32-65FE-44F7-94E7-336BD0E2F1B3"/>
+</associations>
+</Column>
+<Column name="ValorEventoPublicoId" id="2D092858-8FCC-9E06-9A28-B2A247BF497C">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:03:52 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D9183365-9DD3-DC6B-BC7F-92BCFC1E5E50" referredColumn="79E351AB-1361-DF41-1AB6-EEBE5682D900"/>
+</associations>
+</Column>
+<Column name="ObjetivoPagamento" id="EAFF0D17-E4E6-A8B3-A7F7-C73DC9CD084F">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-10 19:08:24 UTC</createdTime>
+<commentInRDBMS>Indica qual o objetivo do  pagamento, ou seja, se foi o pagamento de uma  evento ou de uma anuidade&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;&lt;br/&gt;Evento: 1&lt;br/&gt;Anuidade: 2&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtNotificacao" id="DA147CB2-23CF-B801-0CDA-B85AA13E2114">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:38:04 UTC</createdTime>
+<commentInRDBMS>Data da notificação </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Observacao" id="1E77862E-B3D5-8E59-A0FC-EFAFEECA6DF2">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:45:32 UTC</createdTime>
+<commentInRDBMS>Observação a respeito do pagamento</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<ownDataTypeParameters>500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AssociadoIsentoId" id="8BD07381-13C5-29F8-62CE-CEFCD084141F">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:25:02 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2A5EBB8C-BFA8-2635-217B-9F89BF58CAD8" referredColumn="052015FC-655C-5451-3F06-75F1A12B6DEC"/>
+</associations>
+</Column>
+<Column name="ValorAnuidadePublicoId" id="458A8F69-F562-13D0-7DE4-949D23CF4FC4">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:32:00 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6AFF4E4B-4223-EAB6-6378-985E9C22AF4A" referredColumn="512C55C7-471B-A507-1468-E66FE704F870"/>
+</associations>
+</Column>
+<Column name="CodePS" id="5A361E07-1C94-2B2B-1A91-EC7CDBCC1EF9">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:46:26 UTC</createdTime>
+<commentInRDBMS>Código identificador da transação PagSeguro. Retorna o código que identifica a transação de forma única. Presença: Obrigatória.&lt;br/&gt;Tipo: Texto.&lt;br/&gt;Formato: Uma sequência de 36 caracteres. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>36</dataTypeSize>
+<ownDataTypeParameters>36,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ReferencePS" id="543E5B4B-82EB-02B7-8E08-4D73D6CDE298">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:33:08 UTC</createdTime>
+<commentInRDBMS>Código de referência da transação PagSeguro. Informa o código que foi usado para fazer referência ao pagamento. Este código foi fornecido no momento do pagamento e é útil para vincular as transações do PagSeguro às vendas registradas no seu sistema. Presença: Opcional.&lt;br/&gt;Tipo: Texto.&lt;br/&gt;Formato: Livre, com o limite de 200 caracteres. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TypePS" id="411A18E3-6488-7664-562F-A5C04CA699A7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:34:54 UTC</createdTime>
+<commentInRDBMS>Tipo da transação. Representa o tipo da transação recebida. Os valores mais comuns para este campo e seus respectivos resultados são descritos abaixo. &lt;br/&gt;&lt;br/&gt;Código&lt;br/&gt;Significado&lt;br/&gt;1&lt;br/&gt;Pagamento: a transação foi criada por um comprador fazendo um pagamento. Este é o tipo mais comum de transação que você irá receber.&lt;br/&gt;11&lt;br/&gt;Recorrência: a transação foi criada a partir de uma cobrança de assinatura.&lt;br/&gt;&lt;br/&gt;Outros tipos menos comuns de transações foram omitidos. Note que novos tipos podem ser adicionados em versões futuras do serviço.&lt;br/&gt;Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Inteiro.</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="StatusPS" id="DE979455-5DAD-4DC4-96A9-BF9736454F63">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:37:37 UTC</createdTime>
+<commentInRDBMS>Status da transação. Informa o código representando o status da transação, permitindo que você decida se deve liberar ou não os produtos ou serviços adquiridos. Os valores possíveis estão descritos no diagrama de status de transações e são apresentados juntamente com seus respectivos códigos na tabela abaixo. &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Código - Significado&lt;br/&gt;1 - Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.&lt;br/&gt;2 - Em análise: o comprador optou por pagar com um cartão de crédito e o PagSeguro está analisando o risco da transação.&lt;br/&gt;3 - Paga: a transação foi paga pelo comprador e o PagSeguro já recebeu uma confirmação da instituição financeira responsável pelo processamento.&lt;br/&gt;4 - Disponível: a transação foi paga e chegou ao final de seu prazo de liberação sem ter sido retornada e sem que haja nenhuma disputa aberta.&lt;br/&gt;5 - Em disputa: o comprador, dentro do prazo de liberação da transação, abriu uma disputa.&lt;br/&gt;6 - Devolvida: o valor da transação foi devolvido para o comprador.&lt;br/&gt;7 - Cancelada: a transação foi cancelada sem ter sido finalizada.&lt;br/&gt;8 - Debitado: o valor da transação foi devolvido para o comprador.&lt;br/&gt;9 - Retenção temporária: o comprador contestou o pagamento junto à operadora do cartão de crédito ou abriu uma demanda judicial ou administrativa (Procon).&lt;br/&gt;&lt;br/&gt;Outros status menos relevantes foram omitidos. Em resumo, você deve considerar transações nos status de Paga para liberação de produtos ou serviços.&lt;br/&gt;Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Inteiro. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LastEventDatePS" id="1543B930-6A3E-CE2D-4DF6-DE20C90BD4CF">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:41:23 UTC</createdTime>
+<commentInRDBMS>Data do último evento. Informa o momento em que ocorreu a última alteração no status da transação. Presença: Obrigatória.&lt;br/&gt;Tipo: Data/hora.&lt;br/&gt;Formato: YYYY-MM-DDThh:mm:ss.sTZD, o formato oficial do W3C para datas. Veja mais sobre formatação de datas. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LastEventHourTZDPS" id="6BF901BC-97E0-DC64-AB1D-B665F3C6E9E2">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-29 22:24:09 UTC</createdTime>
+<commentInRDBMS>Regista a informação relativa a TZD do LastEventDatePS&lt;br/&gt;&lt;br/&gt;TZD  = time zone designator (Z or +hh:mm or -hh:mm)</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TypePaymentMethodPS" id="AA1925F8-CE08-70FA-4D28-73EEF4D77E60">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:46:18 UTC</createdTime>
+<commentInRDBMS>Tipo do meio de pagamento PagSeguro. Informa o tipo do meio de pagamento usado pelo comprador. Este tipo agrupa diversos meios de pagamento e determina de forma geral o comportamento da transação. A tabela abaixo descreve os valores disponíveis e seus significados. &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Código&lt;br/&gt;Significado&lt;br/&gt;1&lt;br/&gt;Cartão de crédito: O comprador pagou pela transação com um cartão de crédito. Neste caso, o pagamento é processado imediatamente ou no máximo em algumas horas, dependendo da sua classificação de risco.&lt;br/&gt;2&lt;br/&gt;Boleto: O comprador optou por pagar com um boleto bancário. Ele terá que imprimir o boleto e pagá-lo na rede bancária. Este tipo de pagamento é confirmado em geral de um a dois dias após o pagamento do boleto. O prazo de vencimento do boleto é de 3 dias.&lt;br/&gt;3&lt;br/&gt;Débito online (TEF): O comprador optou por pagar com débito online de algum dos bancos com os quais o PagSeguro está integrado. O PagSeguro irá abrir uma nova janela com o Internet Banking do banco escolhido, onde o comprador irá efetuar o pagamento. Este tipo de pagamento é confirmado normalmente em algumas horas.&lt;br/&gt;4&lt;br/&gt;Saldo PagSeguro: O comprador possuía saldo suficiente na sua conta PagSeguro e pagou integralmente pela transação usando seu saldo.&lt;br/&gt;5&lt;br/&gt;Oi Paggo *: o comprador paga a transação através de seu celular Oi. A confirmação do pagamento acontece em até duas horas.&lt;br/&gt;7&lt;br/&gt;Depósito em conta: o comprador optou por fazer um depósito na conta corrente do PagSeguro. Ele precisará ir até uma agência bancária, fazer o depósito, guardar o comprovante e retornar ao PagSeguro para informar os dados do pagamento. A transação será confirmada somente após a finalização deste processo, que pode levar de 2 a 13 dias úteis.&lt;br/&gt;* Os tipos marcados não estão disponíveis para utilização.&lt;br/&gt;&lt;br/&gt;Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Inteiro.</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CodePaymentMethodPS" id="89C20762-9A21-CECD-6D5B-2B8635900FA6">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:53:10 UTC</createdTime>
+<commentInRDBMS>Código identificador do meio de pagamento Informa um código que identifica o meio de pagamento usado pelo comprador. O meio de pagamento descreve a bandeira de cartão de crédito utilizada ou banco escolhido para um débito online. A tabela abaixo descreve os possíveis valores e seus significados. &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Código&lt;br/&gt;Significado&lt;br/&gt;101&lt;br/&gt;Cartão de crédito Visa.&lt;br/&gt;102&lt;br/&gt;Cartão de crédito MasterCard.&lt;br/&gt;103&lt;br/&gt;Cartão de crédito American Express.&lt;br/&gt;104&lt;br/&gt;Cartão de crédito Diners.&lt;br/&gt;105&lt;br/&gt;Cartão de crédito Hipercard.&lt;br/&gt;106&lt;br/&gt;Cartão de crédito Aura.&lt;br/&gt;107&lt;br/&gt;Cartão de crédito Elo.&lt;br/&gt;108&lt;br/&gt;Cartão de crédito PLENOCard. *&lt;br/&gt;109&lt;br/&gt;Cartão de crédito PersonalCard.&lt;br/&gt;110&lt;br/&gt;Cartão de crédito JCB.&lt;br/&gt;111&lt;br/&gt;Cartão de crédito Discover.&lt;br/&gt;112&lt;br/&gt;Cartão de crédito BrasilCard.&lt;br/&gt;113&lt;br/&gt;Cartão de crédito FORTBRASIL.&lt;br/&gt;114&lt;br/&gt;Cartão de crédito CARDBAN. *&lt;br/&gt;115&lt;br/&gt;Cartão de crédito VALECARD.&lt;br/&gt;116&lt;br/&gt;Cartão de crédito Cabal.&lt;br/&gt;117&lt;br/&gt;Cartão de crédito Mais!.&lt;br/&gt;118&lt;br/&gt;Cartão de crédito Avista.&lt;br/&gt;119&lt;br/&gt;Cartão de crédito GRANDCARD.&lt;br/&gt;120&lt;br/&gt;Cartão de crédito Sorocred.&lt;br/&gt;201&lt;br/&gt;Boleto Bradesco. *&lt;br/&gt;202&lt;br/&gt;Boleto Santander.&lt;br/&gt;301&lt;br/&gt;Débito online Bradesco.&lt;br/&gt;302&lt;br/&gt;Débito online Itaú.&lt;br/&gt;303&lt;br/&gt;Débito online Unibanco. *&lt;br/&gt;304&lt;br/&gt;Débito online Banco do Brasil.&lt;br/&gt;305&lt;br/&gt;Débito online Banco Real. *&lt;br/&gt;306&lt;br/&gt;Débito online Banrisul.&lt;br/&gt;307&lt;br/&gt;Débito online HSBC.&lt;br/&gt;401&lt;br/&gt;Saldo PagSeguro.&lt;br/&gt;501&lt;br/&gt;Oi Paggo. *&lt;br/&gt;701&lt;br/&gt;Depósito em conta - Banco do Brasil&lt;br/&gt;702&lt;br/&gt;Depósito em conta - HSBC&lt;br/&gt;* Os meios de pagamento marcados não estão disponíveis para utilização.&lt;br/&gt;&lt;br/&gt;Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Inteiro.</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NetAmountPS" id="CA020FC2-5BF4-1B74-5707-7EA71508A54D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-23 21:56:28 UTC</createdTime>
+<commentInRDBMS>Valor líquido da transação no PagSeguro. Informa o valor líquido da transação, que corresponde ao valor bruto, menos o valor das taxas. Caso presente, o valor de extraAmount (que pode ser positivo ou negativo) também é considerado no cálculo. Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Decimal, com duas casas decimais separadas por ponto (&quot;.&quot;). Por exemplo, 1234.56. </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtCadastro" id="73CD0D2F-A3C0-912E-8C1E-6929D65C5ACD">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:35:49 UTC</createdTime>
+<commentInRDBMS>Data de cadastro do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Ativo" id="52A7DEBC-1621-565E-8B19-61743CA27A2C">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:49:53 UTC</createdTime>
+<commentInRDBMS>Informa se o registro está ativo&lt;br/&gt;&lt;br/&gt;Valores esperados&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtAtualizacaoPS" id="14D437F8-CF58-DB03-DE5E-4EB46EC01E68">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-31 12:54:21 UTC</createdTime>
+<commentInRDBMS>Data de atualização do registro pelas rotinas do PagSeguro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="838952CF-0873-BAB7-9A63-2E3674634796" name="RECEBIMENTO_ANUIDADE_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:35:04 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="27C3A916-E5CE-428A-BFD6-6A4F1A9F3EF6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EF4919F9-C3AC-9A91-2816-D4650E33031C" name="PAGAMENTO_ANUIDADE_ASSOCIADO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:46:42 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="81137EC0-0280-9D49-8FDD-DE0D4B7A7CFA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D664F0D8-877C-E489-E2D5-586B7BBB2E24" name="RECEBIMENTO_VALOR_EVENTO_PUBLICO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:03:52 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2D092858-8FCC-9E06-9A28-B2A247BF497C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="56BC6D91-1B95-C708-5AB7-9EB851F932C9" name="RECEBIMENTO_ASSOCIADO_ISENTO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:25:02 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8BD07381-13C5-29F8-62CE-CEFCD084141F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="10C6B378-D5F1-E57A-5C72-7FB853113871" name="RECEBIMENTO_ANUIDADE_TIPO_PUBLICO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-23 14:32:00 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="458A8F69-F562-13D0-7DE4-949D23CF4FC4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

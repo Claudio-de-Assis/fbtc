@@ -8,21 +8,17 @@ using Fbtc.Application.Interfaces;
 using Fbtc.Domain.Entities;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Fbtc.Infra.Helpers;
 
 namespace Fbtc.Api.Controllers
 {
     [RoutePrefix("api/PagSeguro")]
     public class PagSeguroController : ApiController
     {
-        private readonly string EMail = "anuidades@fbtc.org.br";
-
-        // PRD:
-        private readonly string BaseUrl = "https://ws.pagseguro.uol.com.br/v2/";
-        private readonly string Token = "E954153EC8584C4A93FFD2808F021477";
-
-        //SandBox
-        //private readonly string BaseUrl = "https://ws.sandbox.pagseguro.uol.com.br/v2/";
-        //private readonly string Token = "B1AC46BB903E4E8B8667C84B77C2E640";
+        private readonly Boolean PS_IsDebug;
+        private readonly string EMail;
+        private readonly string BaseUrl;
+        private readonly string Token;
 
         private HttpClient httpClient = new HttpClient();
 
@@ -31,6 +27,22 @@ namespace Fbtc.Api.Controllers
         public PagSeguroController(IPagSeguroApplication pagSeguroApplication)
         {
             _pagSeguroApplication = pagSeguroApplication;
+
+            PS_IsDebug = Boolean.Parse(ConfigHelper.GetKeyAppSetting("PS_IsDebug"));
+
+            if (PS_IsDebug)
+            {
+                // Dados do Sandbox:
+                EMail = ConfigHelper.GetKeyAppSetting("PSSbox_EMail");
+                BaseUrl = ConfigHelper.GetKeyAppSetting("PSSbox_BaseUrl");
+                Token = ConfigHelper.GetKeyAppSetting("PSSbox_Token");
+            } else
+            {
+                // Dados de produção:
+                EMail = ConfigHelper.GetKeyAppSetting("PSPrd_EMail");
+                BaseUrl = ConfigHelper.GetKeyAppSetting("PSPrd_BaseUrl");
+                Token = ConfigHelper.GetKeyAppSetting("PSPrd_Token");
+            }
         }
 
         /// <summary>
@@ -179,7 +191,7 @@ namespace Fbtc.Api.Controllers
                             _transacoesPS = await GetSincronizarRecebimentosAPIPagSeguro(_dtIni, _dtFim, (int)_currPage, _maxPageResults, EMail, Token);
                     }
 
-                    response = Request.CreateResponse(HttpStatusCode.OK, $"   --   Foram atualizados {_nrRegistrosAtualizados} registros!");
+                    response = Request.CreateResponse(HttpStatusCode.OK, $"Foram atualizados {_nrRegistrosAtualizados} registros!");
                 }
                 else
                 {

@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EC058F85-7E23-C2C0-1046-A797E85A89B7" name="CARTAO_ASSOCIADO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:11:33 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_12</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CartaoAssociadoId" id="7BA82DB1-D173-A91D-3265-F5071DACE352">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:12:41 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AssociadoId" id="0154B725-FD25-52E6-6F20-676D5D2DF41B">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:14:16 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0358F372-F1DF-8CB6-A6AE-9EAAAB98FD4C" referredColumn="BF1D2F32-65FE-44F7-94E7-336BD0E2F1B3"/>
+</associations>
+</Column>
+<Column name="DtEmissao" id="1CAE811C-A60D-4B5F-C1D3-FA1C94DA840F">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:13:10 UTC</createdTime>
+<commentInRDBMS>Data da emissão do cartão</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8C7EEF40-EC19-126A-E406-5256FF8DA862" name="CARTAO_ASSOCIADO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:12:41 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7BA82DB1-D173-A91D-3265-F5071DACE352"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4492AF63-3C35-ABE9-7C49-BB32A28F759E" name="CARTAO_ASSOCIADO_ASSOCIADO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 17:14:16 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0154B725-FD25-52E6-6F20-676D5D2DF41B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

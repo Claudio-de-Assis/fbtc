@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="CE8E2289-6353-4996-6B9D-6E82C3E64D68" containerWithKeyObject="D7B14A27-5015-F65D-9618-F19BB3431CCF" localFKIndex="1B44307D-881A-2921-AED0-21A359B2131A" name="VALOR_EVENTO_PUBLICO_TIPO_PUBLICO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:44:21 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<referredTableLongName>TIPO_PUBLICO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>F31C60F2-1816-C7AE-5D5F-F79AC8DC8924</referredTableID>
+<keyObject>89C1EBFC-CACC-0BA2-6FBC-53CF0CE44F4B</keyObject>
+<referredKeyID>89C1EBFC-CACC-0BA2-6FBC-53CF0CE44F4B</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>TipoPublicoId</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

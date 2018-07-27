@@ -1,0 +1,96 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="446C896C-D4B3-6CEC-75FB-EF8643B5BE83" name="ASSOCIADO_ISENTO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:17:25 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_14</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="AssociadoIsentoId" id="052015FC-655C-5451-3F06-75F1A12B6DEC">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:18:23 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IsencaoId" id="170DBA95-B6A5-E112-B1FD-425470ECF307">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:19:12 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="89B478C4-F331-9708-E233-29C7E82EE32F" referredColumn="4DB21F70-F949-2A37-66B9-C6B054A7AED5"/>
+</associations>
+</Column>
+<Column name="AssociadoId" id="D5D02545-AE26-CC66-2E9F-5980CBD1B222">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:19:20 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AB2E20DB-40B7-A1F4-7622-7A15CBB5205F" referredColumn="BF1D2F32-65FE-44F7-94E7-336BD0E2F1B3"/>
+</associations>
+</Column>
+<Column name="DtCadastro" id="BB762F6C-B541-25FE-257A-E59EF33293A7">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:18:47 UTC</createdTime>
+<commentInRDBMS>Data do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="497C376A-5722-F116-265B-A31DCE21D61D" name="ASSOCIADO_ISENTO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:18:23 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="052015FC-655C-5451-3F06-75F1A12B6DEC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C0A8CE6B-00CC-35C1-BFAF-A26DE18FD4E5" name="ASSOCIADO_ISENTO_ISENCAO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:19:12 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="170DBA95-B6A5-E112-B1FD-425470ECF307"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="73D47E66-9F79-66A1-CA5E-040053557B62" name="ASSOCIADO_ISENTO_ASSOCIADO_FK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 19:19:20 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D5D02545-AE26-CC66-2E9F-5980CBD1B222"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

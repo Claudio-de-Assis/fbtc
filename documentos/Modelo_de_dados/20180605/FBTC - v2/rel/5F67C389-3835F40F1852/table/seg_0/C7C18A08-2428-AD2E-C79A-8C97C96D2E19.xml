@@ -1,0 +1,84 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C7C18A08-2428-AD2E-C79A-8C97C96D2E19" name="PARAMETROS_ADIMPLENCIA">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:57:49 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_8</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ParametroAdimplenciaId" id="EDD1EE7F-4BA8-FF6A-788D-986722198100">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 15:59:01 UTC</createdTime>
+<commentInRDBMS>Identificador do registro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NotificarVencAnuidade" id="3AB0DE32-D2F2-A7DF-0B31-96941F789A17">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:00:48 UTC</createdTime>
+<commentInRDBMS>Informa se o sistema enviará para os associados a notificação automática de vencimento de anuidade&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NotificarVencEventos" id="15C071CB-4A77-84E6-8AEB-3C61DB2494F5">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:02:03 UTC</createdTime>
+<commentInRDBMS>Informa se o sistema enviará a notificação automática de vencimento de eventos&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EnviarBoletoEmail" id="471D4ADD-8DC6-F522-BB67-2B1860D07F83">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:04:24 UTC</createdTime>
+<commentInRDBMS>Informa se o sistema enviará por e-mail os boletos de vencimento de anuidade&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="QtdDias" id="375999A3-DB16-EF56-32E3-5CB5080CC8A3">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:06:12 UTC</createdTime>
+<commentInRDBMS>Quantidade de dias de antecedência da data de vencimento para envio das notificações</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D2F695A7-CE91-452F-1BB5-767496F8B400" name="PARAMETROS_ADIMPLENCIA_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:06:45 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EDD1EE7F-4BA8-FF6A-788D-986722198100"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

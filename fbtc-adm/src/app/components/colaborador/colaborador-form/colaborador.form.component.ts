@@ -26,7 +26,7 @@ export class ColaboradorFormComponent implements OnInit {
     };
 
     title: string;
-    badget: string;
+    badge: string;
     _msg: string;
     _msgRetorno: string;
     _id: number;
@@ -47,7 +47,7 @@ export class ColaboradorFormComponent implements OnInit {
         private service: ColaboradorService
     ) {
         this.title = 'Integrante da Administração';
-        this.badget = '';
+        this.badge = '';
         this.editMessagem = '';
         this.editShowPopup = false;
         this._msg = '';
@@ -114,6 +114,8 @@ export class ColaboradorFormComponent implements OnInit {
 
             this._msg = this._msgRetorno.substring(10);
 
+            this.badge = 'Edição';
+
         } else {
 
             this._msg = this._msgRetorno;
@@ -165,11 +167,11 @@ export class ColaboradorFormComponent implements OnInit {
 
         const id = +this.route.snapshot.paramMap.get('id');
         if (id > 0) {
-            this.badget = 'Edição';
+            this.badge = 'Edição';
             this.getColaboradorById(id);
             this._id = id;
         } else {
-            this.badget = 'Novo';
+            this.badge = 'Novo';
         }
     }
 }

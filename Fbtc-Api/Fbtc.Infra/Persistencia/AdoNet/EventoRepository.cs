@@ -153,7 +153,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -221,7 +224,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -286,7 +292,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 try
                 {
                     // Inserindo os dados na tabela:
-
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Valor_Evento_Publico (EventoId, Valor, TipoPublicoId, Ativo) " +
                         "VALUES(@EventoId, @Valor, @TipoPublicoId, @Ativo) " +
@@ -317,7 +322,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -372,7 +380,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -515,7 +526,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }
@@ -594,7 +608,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
-                connection.Close();
+                finally
+                {
+                    connection.Close();
+                }
             }
             return _msg;
         }

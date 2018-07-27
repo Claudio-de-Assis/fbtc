@@ -20,8 +20,6 @@ import { PagSeguroService } from '../../shared/services/pagSeguro.service';
 })
 export class RecebimentoEventoListComponent implements OnInit {
 
-  title = 'Consulta de pagamento de eventos';
-
   _util = Util;
 
   private selectedId: number;
@@ -33,27 +31,30 @@ export class RecebimentoEventoListComponent implements OnInit {
   tiposPublicos: TipoPublico[];
   mensagemSincronizacao: string;
 
-  editNome: string = '';
-  editCpf: string = '';
-  editCrp: string = '';
-  editCrm: string = '';
-  editStatusPS: number = 99;
-  editAno: number = 0;
-  editAtivo: boolean = true;
-  editTipoEvento: string = '0';
-  editTipoPublicoId: number = 0;
+  title: string;
+  editNome: string;
+  editCpf: string;
+  editCrp: string;
+  editCrm: string;
+  editStatusPS: number;
+  editAno: number;
+  editAtivo: boolean;
+  editTipoEvento: string;
+  editTipoPublicoId: number;
 
-  _objetivoPagamento: string = '1';
-  _nome: string = '0';
-  _cpf: string = '0';
-  _crp: string = '0';
-  _crm: string = '0';
-  _statusPS: number = 99;
-  _ano: number = 0;
-  _mes: number = 0;
-  _ativo: string = '2';
-  _tipoEvento: string = '0';
-  _tipoPublicoId: number = 0;
+  _objetivoPagamento: string;
+  _nome: string;
+  _cpf: string;
+  _crp: string;
+  _crm: string;
+  _statusPS: number;
+  _ano: number;
+  _mes: number;
+  _ativo: string;
+  _tipoEvento: string;
+  _tipoPublicoId: number;
+
+  _msg: string;
 
   submitted = false;
 
@@ -65,9 +66,34 @@ export class RecebimentoEventoListComponent implements OnInit {
       private servicePS: PagSeguroService,
       private router: Router,
       private route: ActivatedRoute
-  ) { }
+  ) {
+    this.title = 'Consulta de pagamento de eventos';
+    this.editNome = '';
+    this.editCpf = '';
+    this.editCrp = '';
+    this.editCrm = '';
+    this.editStatusPS = 99;
+    this.editAno = 0;
+    this.editAtivo = true;
+    this.editTipoEvento = '0';
+    this.editTipoPublicoId = 0;
+    this._objetivoPagamento = '1';
+    this._nome = '0';
+    this._cpf = '0';
+    this._crp = '0';
+    this._crm = '0';
+    this._statusPS = 99;
+    this._ano = 0;
+    this._mes = 0;
+    this._ativo = '2';
+    this._tipoEvento = '0';
+    this._tipoPublicoId = 0;
 
-  gotoImprimirLista() {}
+    this.mensagemSincronizacao = '';
+    this._msg = '';
+  }
+
+  // gotoImprimirLista() {}
 
   // getRecebimentos(objRec: string): void {
 
@@ -84,11 +110,12 @@ export class RecebimentoEventoListComponent implements OnInit {
     this.gotoBuscarRecebimento();
   }
 
-
+  /*
   gotoGerarNovaCobranca() {
 
     console.log('Gerando nova cobrança....');
   }
+ */
 
   gotoBuscarRecebimento(): void {
 
@@ -148,7 +175,14 @@ export class RecebimentoEventoListComponent implements OnInit {
   }
 
   gotoSicronizarComPagSeguro(): void {
-    this.servicePS.postSincronizarRecebimentos().subscribe(mensagemSincronizacao => this.mensagemSincronizacao = mensagemSincronizacao);
+    this.mensagemSincronizacao = 'Processando a sincronização. Por favor, aguarde!....';
+    this._msg = '';
+
+    this.servicePS.postSincronizarRecebimentos().subscribe(
+      _msg => [
+          this._msg = _msg,
+          this.mensagemSincronizacao = ''
+      ]);
   }
 
   ngOnInit() {

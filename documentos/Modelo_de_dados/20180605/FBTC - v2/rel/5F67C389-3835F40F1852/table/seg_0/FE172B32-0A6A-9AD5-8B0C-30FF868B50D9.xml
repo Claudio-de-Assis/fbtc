@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FE172B32-0A6A-9AD5-8B0C-30FF868B50D9" name="UNIDADE_FEDERACAO">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-02-12 14:44:03 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<ordsAlias>table_17</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="UnidadeFederacaoId" id="82DB7DF8-B85F-7C8B-1BCC-05A68C8F4D3D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-02-12 14:46:29 UTC</createdTime>
+<commentInRDBMS>Identificador do registro na tabela</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SiglaUF" id="EC8C727E-465E-9924-FDDF-61FD647B9D73">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-02-12 14:46:29 UTC</createdTime>
+<commentInRDBMS>Sigla da unidade da federação</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2</dataTypeSize>
+<ownDataTypeParameters>2,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nome" id="2A7810B6-DCFF-418B-F046-05AB7A7C349A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-02-12 14:47:26 UTC</createdTime>
+<commentInRDBMS>Nome da unidade da federação</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2A277E57-3660-89F7-FA2C-F7AB9520C8DB" name="UNIDADE_FEDERACAO_PK">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-02-12 14:47:38 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="82DB7DF8-B85F-7C8B-1BCC-05A68C8F4D3D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

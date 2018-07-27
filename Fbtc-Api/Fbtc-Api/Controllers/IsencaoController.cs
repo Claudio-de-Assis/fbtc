@@ -224,6 +224,7 @@ namespace Fbtc.Api.Controllers
                 resultado = _isencaoApplication.Save(isencao);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                response.ReasonPhrase = resultado;
 
                 tsc.SetResult(response);
 

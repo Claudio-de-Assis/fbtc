@@ -69,14 +69,14 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
     alert('Registro salvo com sucesso!');
   }
 
-
+/*
   gotoNotificarAssociado() {
 
     if (confirm('Deseja notificar o Associado?')) {
       alert('Notificação enviada com sucesso');
     }
   }
-
+*/
   gotoRecebimentoAnuidade() {
 
     let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
