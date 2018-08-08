@@ -24,14 +24,14 @@ namespace Fbtc.Application.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo)
+        public IEnumerable<Colaborador> FindByFilters(string nome, int perfilId, bool? ativo)
         {
             string _nome, _tipoPerfil;
             
             _nome = nome == "0" ? "" : nome;
-            _tipoPerfil = tipoPerfil == "0" ? "" : tipoPerfil;
+            // _tipoPerfil = tipoPerfil == "0" ? "" : tipoPerfil;
 
-            return _colaboradorService.FindByFilters(_nome, _tipoPerfil, ativo);
+            return _colaboradorService.FindByFilters(_nome, perfilId, ativo);
         }
 
         public IEnumerable<Colaborador> GetAll()
@@ -54,14 +54,12 @@ namespace Fbtc.Application.Services
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
                 RaiseException.IfNullOrEmpty(c.Nome, "Nome do Colaborador não informado"),
                 RaiseException.IfNotEmail(c.EMail, "E-Mail inválido"),
-                RaiseException.IfNullOrEmpty(c.NrCelular, "NrCelular não informado"),
-                RaiseException.IfNullOrEmpty(c.TipoPerfil, "Perfil não informado")
+                RaiseException.IfNullOrEmpty(c.NrCelular, "NrCelular não informado")
             );
 
             Colaborador _c = new Colaborador()
             {
                 ColaboradorId = c.ColaboradorId,
-                TipoPerfil = c.TipoPerfil,
                 PessoaId = c.PessoaId,
                 Nome = Functions.AjustaTamanhoString(c.Nome, 100),
                 EMail = Functions.AjustaTamanhoString(c.EMail, 100),
@@ -94,7 +92,6 @@ namespace Fbtc.Application.Services
         {
             Colaborador c = new Colaborador() {
                 ColaboradorId = 0,
-                TipoPerfil = "",
                 PessoaId = 0,
                 Nome = "",
                 EMail = "",

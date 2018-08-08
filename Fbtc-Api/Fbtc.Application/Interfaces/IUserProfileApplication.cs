@@ -17,7 +17,9 @@ namespace Fbtc.Application.Interfaces
 
         string RessetPasswordByEMail(string email);
 
-        bool Login(string email, string password);
+        // bool Login(string email, string password);
+
+        UserProfile Login(string email, string password);
 
         UserProfile GetByEmailPassword(string email, string password);
     }

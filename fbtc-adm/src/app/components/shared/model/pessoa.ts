@@ -2,6 +2,7 @@ import { Endereco } from './endereco';
 
 export class Pessoa {
     pessoaId: number;
+    perfilId: number;
     nome: string;
     cpf: string;
     rg: string;

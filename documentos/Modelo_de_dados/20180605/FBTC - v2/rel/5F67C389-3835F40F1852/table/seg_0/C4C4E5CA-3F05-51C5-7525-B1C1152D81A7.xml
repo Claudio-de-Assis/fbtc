@@ -36,19 +36,6 @@
 <colAssociation fkAssociation="9C1E18E8-6515-DD05-0B05-A8EE85875EE6" referredColumn="3883136E-96DA-1B6E-3AC6-78F5E96129A7"/>
 </associations>
 </Column>
-<Column name="TipoPerfil" id="221274D6-3000-1454-603C-7B491054F649">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 14:35:05 UTC</createdTime>
-<commentInRDBMS>Indica o perfil do profissional colaborador&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Gestor: 1&lt;br/&gt;Secretário: 2&lt;br/&gt;Financeiro: 3&lt;br/&gt;</commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT034</logicalDatatype>
-<dataTypeSize>1</dataTypeSize>
-<ownDataTypeParameters>1,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="1523EE12-53C8-5458-836D-071B2FE992C3" name="COLABORADOR_PK">

@@ -28,7 +28,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
                     WHERE P.PessoaId = " + id + "";
 
@@ -51,7 +51,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             String NomeFoto = "_no-foto.png";
 
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId,P.Ativo 
                     FROM dbo.AD_Pessoa P  
                     WHERE P.PessoaId = " + id + "";
 
@@ -190,7 +190,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Pessoa " +
                         "SET Nome = @nome, EMail = @EMail, NomeFoto = @NomeFoto, " +
-                            "Sexo = @Sexo, NrCelular = @NrCelular, PassWordHash = @PassWordHash " + _dtNasc +
+                            "Sexo = @Sexo, NrCelular = @NrCelular, PassWordHash = @PassWordHash, PerfilId = @PerfilId " + _dtNasc +
                         "WHERE PessoaId = @id";
 
                     command.Parameters.AddWithValue("Nome", userProfile.Nome);
@@ -198,6 +198,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NomeFoto", userProfile.NomeFoto);
                     command.Parameters.AddWithValue("Sexo", userProfile.Sexo);
                     command.Parameters.AddWithValue("NrCelular", userProfile.NrCelular);
+                    command.Parameters.AddWithValue("PerfilId", userProfile.PerfilId);
                     command.Parameters.AddWithValue("PassWordHash", userProfile.PasswordHash);
                     command.Parameters.AddWithValue("id", userProfile.PessoaId);
 
@@ -238,7 +239,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
                     WHERE P.PessoaId = " + pessoaId + " AND P.EMail = '" + eMail + "' ";
 
@@ -356,14 +357,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _msg;
         }
 
-        public bool Login(string email, string password)
+        public UserProfile Login(string email, string password)
         {
-            bool _isSucess = false;
-
+            // bool _isSucess = false;
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
                     WHERE P.EMail = '" + email + "'";
 
@@ -373,10 +373,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 // Obtém os dados do banco de dados:
                 UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
 
-                if (userProfile != null)
-                    _isSucess = Functions.ValidaSenha(password, userProfile.PasswordHash);
+                //if (userProfile != null)
+                //    _isSucess = Functions.ValidaSenha(password, userProfile.PasswordHash);
 
-                return _isSucess;
+                return userProfile;
             }
             catch (Exception ex)
             {
@@ -389,7 +389,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
                     WHERE P.EMail = '" + email + "'";
 
@@ -417,7 +417,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
                     WHERE P.EMail = '" + email + "'";
 

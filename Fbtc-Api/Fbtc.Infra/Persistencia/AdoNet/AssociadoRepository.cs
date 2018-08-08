@@ -145,14 +145,14 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public IEnumerable<Associado> GetAll()
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
+                        P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
                         A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
-                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId
                     ORDER BY P.Nome";
 
             // Define o banco de dados que será usando:
@@ -167,7 +167,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public Associado GetAssociadoById(int id)
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
-                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
@@ -229,10 +229,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Pessoa (Nome, EMail, CPF, RG, NomeFoto, " +
-                        "   Sexo, NrCelular, " +
+                        "   Sexo, NrCelular, PerfilId, " +
                         "   DtCadastro " + _dtNasc + ") " +
                         "VALUES(@Nome, @EMail, @CPF, @RG, @NomeFoto, " +
-                        "   @Sexo, @NrCelular, " +
+                        "   @Sexo, @NrCelular, @PerfilId " +
                         "   @DtCadastro " + _paramDtNasc + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
@@ -243,6 +243,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NomeFoto", associado.NomeFoto);
                     command.Parameters.AddWithValue("Sexo", associado.Sexo);
                     command.Parameters.AddWithValue("NrCelular", associado.NrCelular);
+                    command.Parameters.AddWithValue("PerfilId", associado.PerfilId);
                     command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
 
                     if (_dtNasc != "")
@@ -372,7 +373,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Pessoa " +
                         "SET Nome = @nome, EMail = @EMail, NomeFoto = @NomeFoto, CPF = @CPF, RG = @RG, " +
-                            "Sexo = @Sexo, NrCelular = @NrCelular, " +
+                            "Sexo = @Sexo, NrCelular = @NrCelular, PerfilId = @PerfilId, " +
                             "Ativo = @Ativo " + _dtNasc +
                         "WHERE PessoaId = @id";
 
@@ -383,6 +384,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NomeFoto", associado.NomeFoto);
                     command.Parameters.AddWithValue("Sexo", associado.Sexo);
                     command.Parameters.AddWithValue("NrCelular", associado.NrCelular);
+                    command.Parameters.AddWithValue("PerfilId", associado.PerfilId);
                     command.Parameters.AddWithValue("Ativo", associado.Ativo);
                     command.Parameters.AddWithValue("id", id);
 

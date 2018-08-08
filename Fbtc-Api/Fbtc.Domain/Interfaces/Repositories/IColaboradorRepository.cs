@@ -15,7 +15,7 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         string Update(int id, Colaborador colaborador);
 
-        IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo);
+        IEnumerable<Colaborador> FindByFilters(string nome, int perfilId, bool? ativo);
 
         string RessetPasswordById(int id);
 

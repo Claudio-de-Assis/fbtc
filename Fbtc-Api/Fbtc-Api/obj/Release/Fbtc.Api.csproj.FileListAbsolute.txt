@@ -42,7 +42,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.Owin.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Infra.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Infra.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\FirebirdSql.Data.FirebirdClient.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csprojResolveAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.pdb
@@ -53,3 +52,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Net.Http.Extensions.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.App.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.CopyComplete
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\EPPlus.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\EPPlus.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csprojAssemblyReference.cache

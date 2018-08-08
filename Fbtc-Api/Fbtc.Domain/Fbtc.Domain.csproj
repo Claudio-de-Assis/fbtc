@@ -69,6 +69,7 @@
     <Compile Include="Entities\FileImage.cs" />
     <Compile Include="Entities\Isencao.cs" />
     <Compile Include="Entities\PagSeguro.cs" />
+    <Compile Include="Entities\Perfil.cs" />
     <Compile Include="Entities\Recebimento.cs" />
     <Compile Include="Entities\ParametroAdimplencia.cs" />
     <Compile Include="Entities\Pessoa.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Interfaces\Repositories\IEventoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IIsencaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPagSeguroRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPerfilRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRecebimentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRelatoriosRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITipoPublicoRepository.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Interfaces\Services\IEventoService.cs" />
     <Compile Include="Interfaces\Services\IIsencaoService.cs" />
     <Compile Include="Interfaces\Services\IPagSeguroService.cs" />
+    <Compile Include="Interfaces\Services\IPerfilService.cs" />
     <Compile Include="Interfaces\Services\IRecebimentoService.cs" />
     <Compile Include="Interfaces\Services\IRelatoriosService.cs" />
     <Compile Include="Interfaces\Services\ITipoPublicoService.cs" />
@@ -113,6 +116,7 @@
     <Compile Include="Services\EventoService.cs" />
     <Compile Include="Services\IsencaoService.cs" />
     <Compile Include="Services\PagSeguroService.cs" />
+    <Compile Include="Services\PerfilService.cs" />
     <Compile Include="Services\RecebimentoService.cs" />
     <Compile Include="Services\RelatoriosService.cs" />
     <Compile Include="Services\TipoPublicoService.cs" />

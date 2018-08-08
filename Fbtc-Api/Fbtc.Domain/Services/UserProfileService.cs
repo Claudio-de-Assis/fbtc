@@ -33,7 +33,7 @@ namespace Fbtc.Domain.Services
             return _userProfileRepository.GetNomeFotoByPessoaId(id);
         }
 
-        public bool Login(string email, string password)
+        public UserProfile Login(string email, string password)
         {
             return _userProfileRepository.Login(email, password);
         }

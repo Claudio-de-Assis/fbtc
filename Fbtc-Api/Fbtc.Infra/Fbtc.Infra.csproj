@@ -124,6 +124,7 @@
     <Compile Include="Persistencia\AdoNet\EnderecoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\EventoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\IsencaoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\PerfilRepository.cs" />
     <Compile Include="Persistencia\AdoNet\RecebimentoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\RelatoriosRepository.cs" />
     <Compile Include="Persistencia\AdoNet\TipoPublicoRepository.cs" />
