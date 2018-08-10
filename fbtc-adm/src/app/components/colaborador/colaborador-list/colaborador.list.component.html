@@ -73,7 +73,7 @@
                                 <td>{{colaborador.tipoPerfil | tipoPerfil }}</td>
                                 <td>{{colaborador.ativo | booMessage }}</td>
                                 <td>
-                                    <a [routerLink]="['/Colaborador', colaborador.colaboradorId]"><i class="fa fa-pencil text-primary" ></i></a>
+                                    <a [routerLink]="['/admin/Colaborador', colaborador.colaboradorId]"><i class="fa fa-pencil text-primary" ></i></a>
                                     <i class="fa fa-trash text-danger" data-toggle="modal" data-target="#myModal"></i>
                                 </td>
                             </tr>

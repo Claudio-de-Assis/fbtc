@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/shared/header/header.component';
+
 import { MessagesComponent } from './messages/messages.component';
+
 
 import { MessageService } from './message.service';
 import { UserService } from './components/shared/services/user.service';
@@ -33,6 +34,10 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
 import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
 import { AdminModule } from './components/admin/admin.module';
+import { HomeRoutingModule } from './components/home/home.routing.module';
+
+import { NgxPermissionsModule } from 'ngx-permissions';
+
 
 @NgModule({
   imports: [
@@ -53,11 +58,12 @@ import { AdminModule } from './components/admin/admin.module';
     AdminModule,
     LoginModule,
     AppRoutingModule,
+    NgxPermissionsModule.forRoot()
+    
   ],
   declarations: [
     AppComponent,
     MessagesComponent,
-    HeaderComponent
   ],
   providers: [
     UserService,
@@ -70,6 +76,7 @@ import { AdminModule } from './components/admin/admin.module';
     RelatoriosRoute,
     UserProfileRoute,
     LoginRoute,
+    HomeRoutingModule,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [

@@ -239,26 +239,26 @@
                     </div>
                 </li>
                 -->
+                <!-- <li>
+                    <a [routerLink]="['/admin']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Admin</a>
+                </li> -->
                 <li>
-                    <a routerLink="/admin" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Admin</a>
+                    <a [routerLink]="['Associado']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
                 </li>
                 <li>
-                    <a routerLink="/Associado" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
+                    <a [routerLink]="['Colaborador']" routerLinkActtive="active"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Administração</a>
                 </li>
                 <li>
-                    <a routerLink="/Colaborador" routerLinkActtive="active"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Administração</a>
-                </li>
-                <li>
-                    <a routerLink="/Evento" routerLinkActtive="active"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Eventos</a>
+                    <a [routerLink]="['Evento']" routerLinkActtive="active"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Eventos</a>
                 </li>
                 <li>
                         <a href="#"><i class="fa fa-money fa-fw"></i> Recebimentos<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a routerLink="/RecebimentoAnuidade" routerLinkActtive="active">Anuidades</a>
+                            <a [routerLink]="['RecebimentoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
                         <li>
-                                <a routerLink="/RecebimentoEvento" routerLinkActtive="active">Eventos</a>
+                                <a [routerLink]="['RecebimentoEvento']" routerLinkActtive="active">Eventos</a>
                         </li>
                     </ul>
                 </li>
@@ -269,39 +269,39 @@
                     <a href="#"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a routerLink="/IsencaoAnuidade" routerLinkActtive="active">Anuidades</a>
+                            <a [routerLink]="['IsencaoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
                         <li>
-                            <a routerLink="/IsencaoEvento" routerLinkActtive="active">Eventos</a>
+                            <a [routerLink]="['IsencaoEvento']" routerLinkActtive="active">Eventos</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a routerLink="/Atc" routerLinkActtive="active"><i class="fa fa-group" aria-hidden="true"></i> Atc</a>
+                    <a [routerLink]="['Atc']" routerLinkActtive="active"><i class="fa fa-group" aria-hidden="true"></i> Atc</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-newspaper-o"></i> Relatórios<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a routerLink="/RptTotalAssociadosTipo" routerLinkActtive="active">Usuários por Tipo de Associação</a>
+                            <a [routerLink]="['RptTotalAssociadosTipo']" routerLinkActtive="active">Usuários por Tipo de Associação</a>
                         </li>
                         <li>
-                            <a routerLink="/RptAssociadosFaixa" routerLinkActtive="active">Usuários por faixa etária</a>
+                            <a [routerLink]="['RptAssociadosFaixa']" routerLinkActtive="active">Usuários por faixa etária</a>
                         </li>
                         <li>
-                            <a routerLink="/RptAssociadosEstados" routerLinkActtive="active">Usuários por UF</a>
+                            <a [routerLink]="['RptAssociadosEstados']" routerLinkActtive="active">Usuários por UF</a>
                         </li>
                         <li>
-                            <a routerLink="/RptAssociadosGenero" routerLinkActtive="active">Usuários por Gênero</a>
+                            <a [routerLink]="['RptAssociadosGenero']" routerLinkActtive="active">Usuários por Gênero</a>
                         </li>
                         <li>
-                            <a routerLink="/RptAssociadosAno" routerLinkActtive="active">Associados por ano</a>
+                            <a [routerLink]="['RptAssociadosAno']" routerLinkActtive="active">Associados por ano</a>
                         </li>
                         <li>
-                            <a routerLink="/RptRecebimentoStatus" routerLinkActtive="active">Relatório de Recebimentos</a>
+                            <a [routerLink]="['RptRecebimentoStatus']" routerLinkActtive="active">Relatório de Recebimentos</a>
                         </li>
                         <li>
-                            <a routerLink="/RptReceitaAnual" routerLinkActtive="active">Receita por ano</a>
+                            <a [routerLink]="['RptReceitaAnual']" routerLinkActtive="active">Receita por ano</a>
                         </li>
                     </ul>
                 </li>

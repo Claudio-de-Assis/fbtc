@@ -1,8 +1,24 @@
-<h3>ADMIN</h3>
+<!-- <h3>ADMIN</h3>
     <nav>
       <a routerLink="./" routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
       <a routerLink="./crises" routerLinkActive="active">Manage Crises</a>
       <a routerLink="./heroes" routerLinkActive="active">Manage Heroes</a>
     </nav>
-    <router-outlet></router-outlet>
+    <router-outlet></router-outlet> -->
+<app-shared-header></app-shared-header>
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <router-outlet></router-outlet>
+                <!-- <app-messages></app-messages> -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

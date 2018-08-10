@@ -115,7 +115,7 @@
                                     <td>{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ recebimento.statusPS |  statusPagamento }}</td>
                                     <td>
-                                        <a [routerLink]="['/RecebimentoAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                        <a [routerLink]="['/admin/RecebimentoAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
                                         <i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>
                                     </td>
                                 </tr>

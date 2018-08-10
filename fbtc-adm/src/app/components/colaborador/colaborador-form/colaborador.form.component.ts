@@ -148,7 +148,7 @@ export class ColaboradorFormComponent implements OnInit {
     gotoColaboradores() {
 
         let colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
-        this.router.navigate(['/Colaborador', { id: colaboradorId, foo: 'foo' }]);
+        this.router.navigate(['admin/Colaborador', { id: colaboradorId, foo: 'foo' }]);
     }
 
     gotoValidacaoForm(): boolean {

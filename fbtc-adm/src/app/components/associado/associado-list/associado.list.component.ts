@@ -108,7 +108,7 @@ export class AssociadoListComponent implements OnInit {
 
     gotoNovoAssociado() {
 
-        this.router.navigate(['/Associado', 0]);
+        this.router.navigate(['admin/AssociadoNovo']);
     }
 
     gotoBuscarAssociado(): void {

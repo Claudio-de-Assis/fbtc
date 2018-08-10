@@ -10,19 +10,19 @@ import { RelatorioRecebimentoStatusComponent } from './relatorio-recebimento-sta
 import { RelatorioAssociadosAnoComponent } from './relatorio-associados-ano/relatorio-associados-ano.component';
 import { RelatorioTotalAssociadosTipoComponent } from './relatorio-total-associados-tipo/relatorio-total-associados-tipo.component';
 
-const relatoriosRoutes: Routes = [
-    { path: 'RptTotalAssociadosTipo', component: RelatorioTotalAssociadosTipoComponent },
-    { path: 'RptRecebimentoStatus', component: RelatorioRecebimentoStatusComponent },
-    { path: 'RptAssociadosFaixa', component: RelatorioAssociadosFaixaComponent },
-    { path: 'RptAssociadosEstados', component: RelatorioAssociadosEstadosComponent },
-    { path: 'RptAssociadosGenero', component: RelatorioAssociadosGeneroComponent },
-    { path: 'RptAssociadosAno', component: RelatorioAssociadosAnoComponent },
-    { path: 'RptReceitaAnual', component: RelatorioReceitaAnualComponent }
-];
+// const relatoriosRoutes: Routes = [
+//     { path: 'RptTotalAssociadosTipo', component: RelatorioTotalAssociadosTipoComponent },
+//     { path: 'RptRecebimentoStatus', component: RelatorioRecebimentoStatusComponent },
+//     { path: 'RptAssociadosFaixa', component: RelatorioAssociadosFaixaComponent },
+//     { path: 'RptAssociadosEstados', component: RelatorioAssociadosEstadosComponent },
+//     { path: 'RptAssociadosGenero', component: RelatorioAssociadosGeneroComponent },
+//     { path: 'RptAssociadosAno', component: RelatorioAssociadosAnoComponent },
+//     { path: 'RptReceitaAnual', component: RelatorioReceitaAnualComponent }
+// ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(relatoriosRoutes)
+        // RouterModule.forChild(relatoriosRoutes)
     ],
     exports: [
         RouterModule

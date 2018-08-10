@@ -5,19 +5,24 @@ import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { ManageCrisesComponent } from './manage-crises.component';
 import { ManageHeroesComponent } from './manage-heroes.component';
+import { HeaderComponent } from './../shared/header/header.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+
   ],
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
     ManageCrisesComponent,
-    ManageHeroesComponent
-  ]
+    ManageHeroesComponent,
+    HeaderComponent
+
+  ],
+  
 })
 export class AdminModule {}

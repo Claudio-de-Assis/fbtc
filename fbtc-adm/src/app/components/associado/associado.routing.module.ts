@@ -5,14 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AssociadoFormComponent } from './associado-form/associado.form.component';
 import { AssociadoListComponent } from './associado-list/associado.list.component';
 
-const associadoRoutes: Routes = [
-  { path: 'Associado', component: AssociadoListComponent },
-  { path: 'Associado/:id', component: AssociadoFormComponent },
-];
+// const associadoRoutes: Routes = [
+//   { path:'' }
+//   { path: 'Associado', component: AssociadoListComponent },
+//   { path: 'Associado/:id', component: AssociadoFormComponent },
+// ];
 
 @NgModule({
   imports: [
-      RouterModule.forChild(associadoRoutes)
+      // RouterModule.forChild(associadoRoutes)
   ],
   exports: [
       RouterModule

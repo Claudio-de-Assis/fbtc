@@ -122,7 +122,7 @@ export class AssociadoFormComponent implements OnInit {
     gotoAssociados() {
 
         let associadoId = this.associado ? this.associado.associadoId : null;
-        this.router.navigate(['/Associado', { id: associadoId, foo: 'foo' }]);
+        this.router.navigate(['admin/Associado', { id: associadoId, foo: 'foo' }]);
     }
 
     gotoValidarEMail() {

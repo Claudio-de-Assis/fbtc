@@ -54,7 +54,7 @@ export class ColaboradorListComponent implements OnInit {
 
   gotoNovoColaborador() {
 
-      this.router.navigate(['/Colaborador', 0]);
+      this.router.navigate(['admin/ColaboradorNovo']);
   }
 
   gotoBuscarColaborador(): void {
