@@ -8,19 +8,23 @@ import { AuthService } from './../shared/services/auth.service';
 import { LoginRoutingModule } from './login-routing.module';
 import { UserProfile } from '../shared/model/user-profile';
 
+// import { NgxPermissionsModule } from 'ngx-permissions';
+
 
 @NgModule({
     imports: [
       CommonModule,
       FormsModule,
       LoginRoutingModule,
-      HttpModule
+      HttpModule,
+      // NgxPermissionsModule.forChild()
     ],
     declarations: [
       LoginComponent
     ],
     exports: [
-        LoginComponent
+        LoginComponent,
+        // NgxPermissionsModule.forChild(),
     ],
     providers: [
       AuthService,

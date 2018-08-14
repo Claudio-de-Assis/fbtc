@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxPermissionsService } from 'ngx-permissions';
+
 
 
 @Component({
@@ -9,11 +9,10 @@ import { NgxPermissionsService } from 'ngx-permissions';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private permissionsService: NgxPermissionsService,) { }
+  constructor() { }
 
   ngOnInit() {
-    const permission = ["Financeiro", "Gestor", "Secretário"];
-    this.permissionsService.loadPermissions(permission);
+    
   }
 
 

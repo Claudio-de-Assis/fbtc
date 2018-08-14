@@ -34,10 +34,8 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
 import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
 import { AdminModule } from './components/admin/admin.module';
-import { HomeRoutingModule } from './components/home/home.routing.module';
 
 import { NgxPermissionsModule } from 'ngx-permissions';
-
 
 @NgModule({
   imports: [
@@ -76,7 +74,6 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     RelatoriosRoute,
     UserProfileRoute,
     LoginRoute,
-    HomeRoutingModule,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [
