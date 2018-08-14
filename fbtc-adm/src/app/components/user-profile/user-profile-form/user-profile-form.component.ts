@@ -1,3 +1,4 @@
+import { Perfil } from './../../shared/model/perfil';
 
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -33,7 +34,7 @@ export class UserProfileFormComponent implements OnInit {
 
   @Input() userProfile: UserProfile = {pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '_no-foto.png',
   sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '', dtCadastro: null, ativo: true, passwordHashReturned: '',
-  enderecosPessoa: this.enderecos
+  enderecosPessoa: this.enderecos, perfilId: 0
   };
 
   title = 'Usuário Profile';

@@ -129,9 +129,9 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
-        [Route("FindByFilters/{nome},{tipoPerfil},{ativo}")]
+        [Route("FindByFilters/{nome},{perfilId:int},{ativo}")]
         [HttpGet]
-        public Task<HttpResponseMessage> FindByFilters(string nome, string tipoPerfil,
+        public Task<HttpResponseMessage> FindByFilters(string nome, int perfilId,
             string ativo)
         {
             HttpResponseMessage response = new HttpResponseMessage();
@@ -149,7 +149,7 @@ namespace Fbtc.Api.Controllers
                         _ativo = false;
                 }
 
-                var resultado = _colaboradorApplication.FindByFilters(nome, tipoPerfil,
+                var resultado = _colaboradorApplication.FindByFilters(nome, perfilId,
                     _ativo);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);

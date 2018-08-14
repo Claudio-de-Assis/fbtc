@@ -35,9 +35,9 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\FirebirdSql.Data.FirebirdClient
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\Microsoft.Extensions.PlatformAbstractions.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\SimpleInjector.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\Newtonsoft.Json.xml
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csprojResolveAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\bin\Release\Fbtc.Domain.dll.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csproj.CopyComplete
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Ioc\obj\Release\Fbtc.Ioc.csprojAssemblyReference.cache

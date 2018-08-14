@@ -40,7 +40,7 @@ namespace Fbtc.Application.Services
             return _userProfileService.GetNomeFotoByPessoaId(id);
         }
 
-        public bool Login(string email, string password)
+        public UserProfile Login(string email, string password)
         {
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
                 RaiseException.IfNotEmail(email, "Atenção: E-Mail inválido"),

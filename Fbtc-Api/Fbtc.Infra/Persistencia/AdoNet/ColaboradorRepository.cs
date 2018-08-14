@@ -27,20 +27,20 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo)
+        public IEnumerable<Colaborador> FindByFilters(string nome, int perfilId, bool? ativo)
         {
             query = @"SELECT Distinct P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
-                        C.ColaboradorId, C.TipoPerfil  
+                        C.ColaboradorId, P.PerfilId  
                     FROM dbo.AD_Colaborador C 
-                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId 
+                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId
                     WHERE P.PessoaId > 0 ";
 
             if (!string.IsNullOrEmpty(nome))
                 query = query + $" AND P.Nome Like '%{nome}%' ";
 
-            if (!string.IsNullOrEmpty(tipoPerfil))
-                query = query + $" AND C.TipoPerfil = '{tipoPerfil}' ";
+            if (perfilId > 0)
+                query = query + $" AND P.PerfilId = {perfilId} ";
 
             if (ativo != null)
                 query = query + $" AND P.Ativo = '{ativo}' ";
@@ -60,9 +60,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
-                        C.ColaboradorId, C.TipoPerfil  
+                        C.ColaboradorId, P.PerfilId  
                     FROM dbo.AD_Colaborador C 
-                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId 
+                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId
                     ORDER BY P.Nome";
 
             // Define o banco de dados que será usando:
@@ -78,9 +78,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
-                        C.ColaboradorId, C.TipoPerfil  
+                        C.ColaboradorId, P.PerfilId  
                     FROM dbo.AD_Colaborador C 
-                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId 
+                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId
                     WHERE ColaboradorId= " + id + "";
 
             // Define o banco de dados que será usando:
@@ -121,14 +121,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Pessoa (Nome, EMail, NrCelular, " +
-                        "   DtCadastro " + _dtNasc + ") " +
+                        "   DtCadastro, PerfilId  " + _dtNasc + ") " +
                         "VALUES(@Nome, @EMail, @NrCelular, " +
-                        "   @DtCadastro " + _paramDtNasc + ") " +
+                        "   @DtCadastro, @PerfilId " + _paramDtNasc + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("Nome", colaborador.Nome);
                     command.Parameters.AddWithValue("EMail", colaborador.EMail);
                     command.Parameters.AddWithValue("NrCelular", colaborador.NrCelular);
+                    command.Parameters.AddWithValue("PerfilId", colaborador.PerfilId);
                     command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
 
                     if (_dtNasc != "")
@@ -139,12 +140,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     // Inserindo os dados na tabela Colaborador:
                     command.CommandText = "" +
-                        "INSERT into dbo.AD_Colaborador (PessoaId, TipoPerfil) " +
-                        "   VALUES (@PessoaId, @TipoPerfil) " +
+                        "INSERT into dbo.AD_Colaborador (PessoaId) " +
+                        "   VALUES (@PessoaId) " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("PessoaId", id);
-                    command.Parameters.AddWithValue("TipoPerfil", colaborador.TipoPerfil);
 
                     colabId = (Int32)command.ExecuteScalar();
 
@@ -178,7 +178,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public string Update(int id, Colaborador colaborador)
         {
-            bool _resultado = false;
             string _msg = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
@@ -202,32 +201,22 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Pessoa " +
                         "SET Nome = @nome, EMail = @EMail, NrCelular = @NrCelular,  " +
-                            "Ativo = @Ativo " + _dtNasc +
+                            "PerfilId = @PerfilId, Ativo = @Ativo " + _dtNasc +
                         "WHERE PessoaId = @id";
 
                     command.Parameters.AddWithValue("Nome", colaborador.Nome);
                     command.Parameters.AddWithValue("EMail", colaborador.EMail);
                     command.Parameters.AddWithValue("NrCelular", colaborador.NrCelular);
                     command.Parameters.AddWithValue("Ativo", colaborador.Ativo);
+                    command.Parameters.AddWithValue("PerfilId", colaborador.PerfilId);
                     command.Parameters.AddWithValue("id", id);
 
                     if (_dtNasc != "")
                         command.Parameters.AddWithValue("DtNascimento", colaborador.DtNascimento);
 
                     int i = command.ExecuteNonQuery();
-                    _resultado = i > 0;
 
-                    command.CommandText = "" +
-                        "UPDATE dbo.AD_Colaborador  " +
-                        "SET TipoPerfil = @TipoPerfil " +
-                        "WHERE PessoaId = @id";
-
-                    command.Parameters.AddWithValue("TipoPerfil", colaborador.TipoPerfil);
-
-                    int x = command.ExecuteNonQuery();
-                    _resultado = x > 0;
-
-                    _msg = x > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = i > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
 
                     transaction.Commit();
                 }

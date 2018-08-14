@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IIsencaoApplication.cs" />
     <Compile Include="Interfaces\IPagSeguroApplication.cs" />
     <Compile Include="Interfaces\IRecebimentoApplication.cs" />
+    <Compile Include="Interfaces\IPerfilApplication.cs" />
     <Compile Include="Interfaces\ITipoPublicoApplication.cs" />
     <Compile Include="Interfaces\IUnidadeFederacaoApplication.cs" />
     <Compile Include="Interfaces\IRelatoriosApplication.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Services\EventoApplication.cs" />
     <Compile Include="Services\IsencaoApplication.cs" />
     <Compile Include="Services\PagSeguroApplication.cs" />
+    <Compile Include="Services\PerfilApplication.cs" />
     <Compile Include="Services\RecebimentoApplication.cs" />
     <Compile Include="Services\RelatoriosApplication.cs" />
     <Compile Include="Services\TipoPublicoApplication.cs" />

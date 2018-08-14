@@ -15,7 +15,7 @@ namespace Fbtc.Application.Interfaces
 
         string DeleteById(int id);
 
-        IEnumerable<Colaborador> FindByFilters(string nome, string tipoPerfil, bool? ativo);
+        IEnumerable<Colaborador> FindByFilters(string nome, int perfilId, bool? ativo);
 
         string RessetPasswordById(int id);
 

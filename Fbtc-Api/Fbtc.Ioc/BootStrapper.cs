@@ -31,7 +31,7 @@ namespace Fbtc.Ioc
             container.Register<IUnidadeFederacaoApplication, UnidadeFederacaoApplication>(Lifestyle.Scoped);
             container.Register<IRelatoriosApplication, RelatoriosApplication>(Lifestyle.Scoped);
             container.Register<IUserProfileApplication, UserProfileApplication>(Lifestyle.Scoped);
-
+            container.Register<IPerfilApplication, PerfilApplication>(Lifestyle.Scoped);
 
             // Servicços de domínio:
             container.Register<IAssociadoService, AssociadoService>(Lifestyle.Scoped);
@@ -47,6 +47,7 @@ namespace Fbtc.Ioc
             container.Register<IUnidadeFederacaoService, UnidadeFederacaoService>(Lifestyle.Scoped);
             container.Register<IRelatoriosService, RelatoriosService>(Lifestyle.Scoped);
             container.Register<IUserProfileService, UserProfileService>(Lifestyle.Scoped);
+            container.Register<IPerfilService, PerfilService>(Lifestyle.Scoped);
 
             // Infra Repositórios:
             container.Register<IAssociadoRepository, AssociadoRepository>(Lifestyle.Scoped);
@@ -62,6 +63,7 @@ namespace Fbtc.Ioc
             container.Register<IUnidadeFederacaoRepository, UnidadeFederacaoRepository>(Lifestyle.Scoped);
             container.Register<IRelatoriosRepository, RelatoriosRepository>(Lifestyle.Scoped);
             container.Register<IUserProfileRepository, UserProfileRepository>(Lifestyle.Scoped);
+            container.Register<IPerfilRepository, PerfilRepository>(Lifestyle.Scoped);
         }
     }
 }

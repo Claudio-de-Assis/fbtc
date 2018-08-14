@@ -68,10 +68,10 @@ export class UserProfileService {
         );
     }
 
-    getLogin(senha: string, eMail: string): Observable<boolean> {
-        return this.http.get<boolean>(this.apiRoute.loginUser(senha, eMail)).pipe(
+    getLogin(senha: string, eMail: string): Observable<UserProfile> {
+        return this.http.get<UserProfile>(this.apiRoute.loginUser(senha, eMail)).pipe(
             tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
-            catchError(this.handleError<boolean>(`getUserProfile senha=${senha},email=${eMail}`))
+            catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
         );
     }
 

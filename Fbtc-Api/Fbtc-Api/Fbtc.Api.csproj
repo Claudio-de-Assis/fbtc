@@ -147,6 +147,7 @@
     <Compile Include="Controllers\PagSeguroController.cs" />
     <Compile Include="Controllers\RecebimentoController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\TipoPublicoController.cs" />
     <Compile Include="Controllers\UnidadeFederacaoController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />

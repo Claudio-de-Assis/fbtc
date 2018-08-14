@@ -1,6 +1,5 @@
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\Fbtc.Domain.pdb
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csprojResolveAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csproj.CoreCompileInputs.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.pdb
@@ -13,3 +12,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\System.Net.Http.Extensions.x
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csproj.App.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csproj.CopyComplete
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\EPPlus.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\bin\Release\EPPlus.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Domain\obj\Release\Fbtc.Domain.csprojAssemblyReference.cache

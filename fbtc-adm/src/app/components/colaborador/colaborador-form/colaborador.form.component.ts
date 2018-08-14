@@ -1,3 +1,4 @@
+import { Perfil } from './../../shared/model/perfil';
 import { Endereco } from './../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -17,12 +18,14 @@ import { Util } from './../../shared/util/util';
 export class ColaboradorFormComponent implements OnInit {
 
     enderecos: Endereco[];
+    perfil: Perfil;
 
     @Input() colaborador: Colaborador = { colaboradorId: 0, tipoPerfil: '',
         pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
         sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
         dtCadastro: null, ativo: true,
-        enderecosPessoa: this.enderecos
+        enderecosPessoa: this.enderecos,
+        perfilId: 0
     };
 
     title: string;
