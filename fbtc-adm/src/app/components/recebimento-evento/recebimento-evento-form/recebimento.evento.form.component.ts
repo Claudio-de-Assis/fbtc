@@ -34,7 +34,7 @@ export class RecebimentoEventoFormComponent implements OnInit {
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true,
+            dtCadastro: null, ativo: true, perfilId:0,
               enderecosPessoa: this.enderecos}
   };
 

@@ -26,7 +26,7 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
         comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
         pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
         sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-        dtCadastro: null, ativo: false,
+        dtCadastro: null, ativo: false, perfilId: 0,
           enderecosPessoa: this.enderecos}
   };
 

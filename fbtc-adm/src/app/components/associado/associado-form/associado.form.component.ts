@@ -48,7 +48,7 @@ export class AssociadoFormComponent implements OnInit {
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '_no-foto.png',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true,
+            dtCadastro: null, ativo: true, perfilId:0,
             enderecosPessoa: this.enderecos
     };
 
