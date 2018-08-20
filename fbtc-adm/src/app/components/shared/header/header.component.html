@@ -253,8 +253,8 @@
                     <a [routerLink]="['Evento']" routerLinkActtive="active"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Eventos</a>
                 </li>
                 <li>
-                        <a href="#"><i class="fa fa-money fa-fw"></i> Recebimentos<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <a href="javascript:void(0)" (click)="isToggle('menuRecebimentos')"><i class="fa fa-money fa-fw"></i> Recebimentos<span class="fa arrow"></span></a>
+                    <ul id="menuRecebimentos" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuRecebimentos'}"  >
                         <li>
                             <a [routerLink]="['RecebimentoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
@@ -267,8 +267,8 @@
                     
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <a href="javascript:void(0)" (click)="isToggle('menuIsencoes')"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
+                    <ul id="menuIsencoes" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuIsencoes'}">
                         <li>
                             <a [routerLink]="['IsencaoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
@@ -281,8 +281,8 @@
                     <a [routerLink]="['Atc']" routerLinkActtive="active"><i class="fa fa-group" aria-hidden="true"></i> Atc</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-newspaper-o"></i> Relatórios<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <a href="javascript:void(0)"  (click)="isToggle('menuRelatorios')"><i class="fa fa-newspaper-o"></i> Relatórios<span class="fa arrow"></span></a>
+                    <ul id="menuRelatorios" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuRelatorios'}">
                         <li>
                             <a [routerLink]="['RptTotalAssociadosTipo']" routerLinkActtive="active">Usuários por Tipo de Associação</a>
                         </li>

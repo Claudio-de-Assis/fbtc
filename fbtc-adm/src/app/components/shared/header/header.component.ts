@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { UserService } from '../services/user.service';
 
@@ -11,10 +11,20 @@ export class HeaderComponent {
 
     user: string;
     isLoged: boolean;
+    isToggleIn: string = '';
 
+    @ViewChild("toogle") toggle;
     constructor(userService: UserService) {
 
         this.isLoged = true;
         this.user = userService.userName;
+    }
+
+    isToggle(menuItem: string) {        
+        if (menuItem === this.isToggleIn) {
+            this.isToggleIn = '0';
+        } else {
+            this.isToggleIn = menuItem;
+        }
     }
 }
