@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { UserService } from '../services/user.service';
 
+
 @Component({
     selector: 'app-shared-header',
     templateUrl: './header.component.html',
@@ -27,4 +28,6 @@ export class HeaderComponent {
             this.isToggleIn = menuItem;
         }
     }
+
+    
 }

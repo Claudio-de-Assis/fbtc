@@ -37,15 +37,15 @@ export class AuthService {
    }
 
   login(senha: string, eMail: string ): Observable<boolean> {
-//  return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
-  return Observable.of(true).delay(1000)
-  .do(val => {
-    this.isLoggedIn = (true);
+  //  return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+    return Observable.of(true).delay(1000)
+    .do(val => {
+      this.isLoggedIn = (true);
 
-    // this.userProfileService.getLogin(senha, eMail)
-     // .subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+      // this.userProfileService.getLogin(senha, eMail)
+      // .subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
 
-  });
+    });
 
   }
 

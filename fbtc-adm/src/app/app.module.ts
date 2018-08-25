@@ -35,7 +35,7 @@ import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.rout
 import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
 import { AdminModule } from './components/admin/admin.module';
 
-import { NgxPermissionsModule } from 'ngx-permissions';
+
 
 @NgModule({
   imports: [
@@ -55,8 +55,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     UserProfileModule,
     AdminModule,
     LoginModule,
-    AppRoutingModule,
-    NgxPermissionsModule.forRoot()
+    AppRoutingModule
     
   ],
   declarations: [

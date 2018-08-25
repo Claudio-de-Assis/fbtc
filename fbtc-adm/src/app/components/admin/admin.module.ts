@@ -9,11 +9,16 @@ import { HeaderComponent } from './../shared/header/header.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { UserProfileService } from '../shared/services/user-profile.service';
+import { Util } from '../shared/util/util'
+
+
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
-
+    NgxPermissionsModule.forRoot(),
   ],
   declarations: [
     AdminComponent,
@@ -23,6 +28,10 @@ import { AdminRoutingModule } from './admin-routing.module';
     HeaderComponent
 
   ],
+  providers:[
+    UserProfileService,
+    Util
+  ]
   
 })
 export class AdminModule {}

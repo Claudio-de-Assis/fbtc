@@ -1,7 +1,6 @@
 import { UserProfileService } from './../shared/services/user-profile.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 import { AuthService } from './../shared/services/auth.service';
 /*
@@ -36,8 +35,7 @@ export class LoginComponent {
   constructor(
       public authService: AuthService,
       public userProfileService: UserProfileService,
-      public router: Router,
-      private permissionsService: NgxPermissionsService,) {
+      public router: Router) {
     this.setMessage();
     this.title = 'Login';
     this._msg = '';
@@ -85,8 +83,7 @@ console.log ( 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out'));
 
             console.log(`User Name: ${this.authService.getUserProfile().nome}`);
             console.log(`User: ${JSON.stringify(this.authService.getUserProfile())}`);
-            this.permission = ['Financeiro'];
-            this.permissionsService.loadPermissions(this.permission);
+
             // Redirect the user
             this.router.navigate([redirect]);
           }
