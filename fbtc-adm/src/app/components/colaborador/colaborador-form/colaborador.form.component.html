@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label for="sltTipoPerfil">Perfil:</label>
                                 <select id="sltTipoPerfil" name="tipoPerfil" class="form-control"
-                                    required [(ngModel)]="colaborador.tipoPerfil" #tipoPerfil="ngModel">
+                                    required [(ngModel)]="colaborador.perfilId" #tipoPerfil="ngModel">
                                     <option *ngFor="let op of _util.optTipoPerfil" value="{{ op.value }}">{{ op.name }}</option>
                                 </select>
                                 <div *ngIf="tipoPerfil.tipoPerfil && (tipoPerfil.dirty || tipoPerfil.touched)"
