@@ -3,6 +3,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { UserProfileService } from '../shared/services/user-profile.service';
 import { UserProfile } from '../shared/model/user-profile';
 import { Util } from '../shared/util/util'
+import { AuthService } from '../shared/services/auth.service';
 
 
 
@@ -18,19 +19,26 @@ export class AdminComponent implements OnInit {
   constructor(
               private permissionsService: NgxPermissionsService, 
               private userProfileService: UserProfileService,
+              public authService: AuthService,
               private util: Util) { }
 
   ngOnInit() {
-    // this.getPerfil()
-    this.permission = ['Financeiro'];//Exemplo de perfil permitido
+    let role = this.getPerfil()
+    this.permission = [role];//Exemplo de perfil permitido
     this.permissionsService.loadPermissions(this.permission);    
   }
 
   getPerfil(){
-    this.userProfile = this.userProfileService.getUserProfile();
+    this.userProfile = this.authService.getUserProfile();
+    let roles = Util.optTipoPerfil
+    let found: string
 
-    console.log("user=>", this.userProfile)
+    roles.forEach(role =>{
+      if(parseInt(role.value) === this.userProfile.perfilId){
+        found =  role.name
+      }      
+    })
+    return found
   }
 
-  
 }

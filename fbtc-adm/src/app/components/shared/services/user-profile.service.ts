@@ -72,9 +72,9 @@ export class UserProfileService {
     getLogin(senha: string, eMail: string): Observable<UserProfile> {
         return this.http.get<UserProfile>(this.apiRoute.loginUser(senha, eMail))
             .do(result => this.userProfile = result)
-            .pipe(tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
-                  catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
-        );
+            // .pipe(tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
+            //       catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
+        // );
     }
 
     getByEmailPassword(senha: string, eMail: string): Observable<UserProfile> {
