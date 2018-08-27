@@ -1,4 +1,4 @@
-import { RptReceitaAnualDAO } from './../../shared/model/relatorios';
+import { RptReceitaAnualDAO } from '../../shared/model/relatorios';
 import { debug } from 'util';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -11,7 +11,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 
-import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-receita-anual',

@@ -1,13 +1,13 @@
-import { AnuidadeService } from './../../shared/services/anuidade.service';
+import { AnuidadeService } from '../../shared/services/anuidade.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Data } from '@angular/router/src/config';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 
-import { Anuidade } from './../../shared/model/anuidade';
+import { Anuidade } from '../../shared/model/anuidade';
 
 @Component({
   selector: 'app-anuidade.list',

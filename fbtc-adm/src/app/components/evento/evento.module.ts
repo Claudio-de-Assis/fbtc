@@ -7,13 +7,13 @@ import { EventoListComponent } from './evento-list/evento.list.component';
 import { EventoFormComponent } from './evento-form/evento.form.component';
 import { EventoPreviewComponent } from './evento-preview/evento-preview.component';
 
-import { EventoService } from './../shared/services/evento.service';
+import { EventoService } from '../shared/services/evento.service';
 
 import { EventoRoutingModule } from './evento.routing.module';
 import { SharedModule } from '../shared/shared.module';
 // import { FileUploadModule } from './../shared/upload/file-upload.module';
 
-import { FileUploadRoute } from './../shared/webapi-routes/file-upload.route';
+import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 

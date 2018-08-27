@@ -4,12 +4,12 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { MessageService } from './../../../message.service';
+import { MessageService } from '../../../message.service';
 import { Anuidade } from '../model/anuidade';
 
-import { AnuidadeRoute } from './../webapi-routes/anuidade.route';
+import { AnuidadeRoute } from '../webapi-routes/anuidade.route';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

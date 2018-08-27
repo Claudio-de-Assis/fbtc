@@ -6,10 +6,10 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AssociadoService } from '../../shared/services/associado.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { AtcService } from '../../shared/services/atc.service';
- import { EnderecoService } from './../../shared/services/endereco.service';
+ import { EnderecoService } from '../../shared/services/endereco.service';
 
 import { Associado } from '../../shared/model/associado';
-import { TipoPublico } from './../../shared/model/tipo-publico';
+import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from '../../shared/model/atc';
 import { EstadoEnderecoCepDao, CidadeEnderecoCepDao } from '../../shared/model/endereco-cep';
 

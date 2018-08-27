@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppSettings } from './../../../app.settings';
+import { AppSettings } from '../../../app.settings';
 
 @Injectable()
 export class UserProfileRoute {

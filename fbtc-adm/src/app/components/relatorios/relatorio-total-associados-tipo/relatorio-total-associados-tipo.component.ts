@@ -9,8 +9,8 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
-import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
-import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { RptTotalAssociadosDAO } from '../../shared/model/relatorios';
+import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-total-associados-tipo',

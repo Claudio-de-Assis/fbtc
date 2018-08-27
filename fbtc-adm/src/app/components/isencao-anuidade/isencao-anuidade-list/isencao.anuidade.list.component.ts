@@ -1,10 +1,10 @@
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Isencao, IsencaoDao } from './../../shared/model/isencao';
+import { Isencao, IsencaoDao } from '../../shared/model/isencao';
 import { IsencaoService } from '../../shared/services/isencao.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { TipoPublico } from '../../shared/model/tipo-publico';

@@ -10,7 +10,7 @@ import { StatusPagamentoPipe } from './pipes/status-pagamento-pipe';
 import { ObjetivoPagamentoPipe } from './pipes/objetivo-pagamento.pipe';
 import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
 
-import { FileUploadModule } from '../shared/upload/file-upload.module';
+import { FileUploadModule } from './upload/file-upload.module';
 import { FileUploadRoute } from './webapi-routes/file-upload.route';
 
 @NgModule({

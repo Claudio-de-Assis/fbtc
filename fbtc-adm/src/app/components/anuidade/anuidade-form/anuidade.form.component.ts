@@ -1,4 +1,4 @@
-import { Anuidade } from './../../shared/model/anuidade';
+import { Anuidade } from '../../shared/model/anuidade';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';

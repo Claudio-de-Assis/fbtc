@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/Rx';
+import 'rxjs';
 
 import { Associado } from '../model/associado';
 import { Colaborador } from '../model/colaborador';

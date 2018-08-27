@@ -1,4 +1,4 @@
-import { Isencao } from './../model/isencao';
+import { Isencao } from '../model/isencao';
 
 export const ISENCOES: Isencao[] = [
     /*

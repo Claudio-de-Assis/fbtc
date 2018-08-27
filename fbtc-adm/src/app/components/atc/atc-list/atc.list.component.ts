@@ -9,7 +9,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { AtcService } from '../../shared/services/atc.service';
 
-import { Atc, AtcDao } from './../../shared/model/atc';
+import { Atc, AtcDao } from '../../shared/model/atc';
 import { UnidadeFederacaoService } from '../../shared/services/unidade-federacao.service';
 import { UnidadeFederacao } from '../../shared/model/unidade-federacao';
 

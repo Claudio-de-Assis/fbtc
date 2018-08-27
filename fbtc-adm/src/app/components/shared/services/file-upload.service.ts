@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { FileUploadRoute } from './../webapi-routes/file-upload.route';
+import { FileUploadRoute } from '../webapi-routes/file-upload.route';
 
 
 @Injectable()

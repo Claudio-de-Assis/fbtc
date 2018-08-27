@@ -1,4 +1,4 @@
-import { Evento } from '../model/Evento';
+import { Evento } from '../model/evento';
 
 export const EVENTOS: Evento[] = [
     {eventoId: 1, titulo: 'Tratamento Cognitivo Comportamental para o Transtorno de Ansiedade',

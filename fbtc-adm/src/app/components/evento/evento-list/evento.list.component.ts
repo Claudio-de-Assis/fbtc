@@ -7,7 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
-import { EventoService } from './../../shared/services/evento.service';
+import { EventoService } from '../../shared/services/evento.service';
 
 import { Evento } from '../../shared/model/evento';
 

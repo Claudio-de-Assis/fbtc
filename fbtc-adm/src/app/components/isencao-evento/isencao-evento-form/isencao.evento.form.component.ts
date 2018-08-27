@@ -4,7 +4,7 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { IsencaoService } from '../../shared/services/isencao.service';
-import { EventoService } from './../../shared/services/evento.service';
+import { EventoService } from '../../shared/services/evento.service';
 
 import { Isencao } from '../../shared/model/isencao';
 import { Evento } from '../../shared/model/evento';

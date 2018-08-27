@@ -4,14 +4,14 @@ import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Data } from '@angular/router/src/config';
 
-import { RecebimentoService } from './../../shared/services/recebimento.service';
-import { TipoPublicoService } from './../../shared/services/tipo-publico.service';
+import { RecebimentoService } from '../../shared/services/recebimento.service';
+import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { PagSeguroService } from '../../shared/services/pagSeguro.service';
 
-import { Recebimento, RecebimentoAssociadoDao } from './../../shared/model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from '../../shared/model/recebimento';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 import { debug } from 'util';
 
 @Component({

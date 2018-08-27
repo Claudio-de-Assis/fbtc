@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { AtcListComponent } from './atc-list/atc.list.component';
 import { AtcFormComponent } from './atc-form/atc.form.component';
 
-import { AtcService } from './../shared/services/atc.service';
+import { AtcService } from '../shared/services/atc.service';
 import { UnidadeFederacaoService } from '../shared/services/unidade-federacao.service';
 
 import { SharedModule } from '../shared/shared.module';

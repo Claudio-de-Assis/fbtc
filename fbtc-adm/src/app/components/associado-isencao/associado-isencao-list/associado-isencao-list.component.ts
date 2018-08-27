@@ -1,4 +1,4 @@
-import { AssociadoIsento } from './../../shared/model/associado-isento';
+import { AssociadoIsento } from '../../shared/model/associado-isento';
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -7,15 +7,15 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AssociadoService } from '../../shared/services/associado.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { AtcService } from '../../shared/services/atc.service';
-import { EnderecoService } from './../../shared/services/endereco.service';
+import { EnderecoService } from '../../shared/services/endereco.service';
 
 import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from '../../shared/model/atc';
-import { CidadeEnderecoCepDao, EstadoEnderecoCepDao } from './../../shared/model/endereco-cep';
+import { CidadeEnderecoCepDao, EstadoEnderecoCepDao } from '../../shared/model/endereco-cep';
 import { AssociadoIsentoDao } from '../../shared/model/associado-isento';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 
 @Component({
   selector: 'app-associado-isencao-list',

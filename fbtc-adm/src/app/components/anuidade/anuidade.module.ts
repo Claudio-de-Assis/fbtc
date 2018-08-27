@@ -6,10 +6,10 @@ import { CommonModule } from '@angular/common';
 import { AnuidadeFormComponent } from './anuidade-form/anuidade.form.component';
 import { AnuidadeListComponent } from './anuidade-list/anuidade.list.component';
 
-import { AnuidadeService } from './../shared/services/anuidade.service';
+import { AnuidadeService } from '../shared/services/anuidade.service';
 
 import { AnuidadeRoutingModule } from './anuidade.routing.module';
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 

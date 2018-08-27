@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AssociadoService } from './../shared/services/associado.service';
+import { AssociadoService } from '../shared/services/associado.service';
 import { CepCorreiosService } from '../shared/services/cep-correios.service';
 import { EnderecoService } from '../shared/services/endereco.service';
 
 import { AssociadoRoute } from '../shared/webApi-routes/associado.route';
 import { CepCorreiosRoute } from '../shared/webApi-routes/cep-correios.route';
-import { EnderecoRoute } from './../shared/webapi-routes/endereco.route';
+import { EnderecoRoute } from '../shared/webapi-routes/endereco.route';
 
 import { AssociadoListComponent } from './associado-list/associado.list.component';
 import { AssociadoFormComponent } from './associado-form/associado.form.component';
-import { MessagesComponent } from './../../messages/messages.component';
+import { AssociadoSelfFormComponent } from './associado-self-form/associado-self.form.component';
+import { MessagesComponent } from '../../messages/messages.component';
 
 import { AssociadoRoutingModule } from './associado.routing.module';
 
@@ -38,11 +39,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   declarations: [
       AssociadoFormComponent,
-      AssociadoListComponent
+      AssociadoListComponent,
+      AssociadoSelfFormComponent
   ],
   exports: [
       AssociadoFormComponent,
-      AssociadoListComponent
+      AssociadoListComponent,
+      AssociadoSelfFormComponent
   ],
   providers: [
       AssociadoService,

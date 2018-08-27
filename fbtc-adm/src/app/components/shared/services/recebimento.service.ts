@@ -4,11 +4,11 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
 import { MessageService } from '../../../message.service';
-import { RecebimentoRoute } from './../webapi-routes/recebimento.route';
-import { Recebimento, RecebimentoAssociadoDao } from './../model/recebimento';
+import { RecebimentoRoute } from '../webapi-routes/recebimento.route';
+import { Recebimento, RecebimentoAssociadoDao } from '../model/recebimento';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -4,13 +4,13 @@ import { Http, ResponseContentType  } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { MessageService } from './../../../message.service';
+import { MessageService } from '../../../message.service';
 import { Relatorios, RptTotalAssociadosDAO, RptRecebimentoStatusDAO, RptAssociadoFaixaDAO,
-    RptAssociadosEstadosDAO, RptReceitaAnualDAO } from './../model/relatorios';
+    RptAssociadosEstadosDAO, RptReceitaAnualDAO } from '../model/relatorios';
 
-import { RelatoriosRoute } from './../webapi-routes/relatorios.route';
+import { RelatoriosRoute } from '../webapi-routes/relatorios.route';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

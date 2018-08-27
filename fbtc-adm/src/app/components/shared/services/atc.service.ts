@@ -4,9 +4,9 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { MessageService } from './../../../message.service';
+import { MessageService } from '../../../message.service';
 import { Atc, AtcDao } from '../model/atc';
 import { AtcRoute } from '../webApi-routes/atc.route';
 

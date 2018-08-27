@@ -4,11 +4,11 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { TipoPublicoRoute } from './../webApi-routes/tipo-publico.route';
-import { MessageService } from './../../../message.service';
-import { TipoPublico, TipoPublicoValorDao } from './../model/tipo-publico';
+import { TipoPublicoRoute } from '../webApi-routes/tipo-publico.route';
+import { MessageService } from '../../../message.service';
+import { TipoPublico, TipoPublicoValorDao } from '../model/tipo-publico';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

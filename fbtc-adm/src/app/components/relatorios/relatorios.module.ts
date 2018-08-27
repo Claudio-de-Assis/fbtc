@@ -1,4 +1,4 @@
-import { RelatoriosService } from './../shared/services/relatorios.service';
+import { RelatoriosService } from '../shared/services/relatorios.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';

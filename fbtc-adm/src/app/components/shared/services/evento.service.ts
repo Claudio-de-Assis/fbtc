@@ -4,13 +4,13 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { MessageService } from './../../../message.service';
-import { Evento, EventoDao } from './../model/evento';
+import { MessageService } from '../../../message.service';
+import { Evento, EventoDao } from '../model/evento';
 import { TipoPublicoValorDao } from '../model/tipo-publico';
 
-import { EventoRoute } from './../webapi-routes/evento.route';
+import { EventoRoute } from '../webapi-routes/evento.route';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

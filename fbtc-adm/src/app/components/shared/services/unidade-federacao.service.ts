@@ -4,11 +4,11 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { UnidadeFederacaoRoute } from './../webapi-routes/unidade-federacao.route';
-import { MessageService } from './../../../message.service';
-import { UnidadeFederacao } from './../model/unidade-federacao';
+import { UnidadeFederacaoRoute } from '../webapi-routes/unidade-federacao.route';
+import { MessageService } from '../../../message.service';
+import { UnidadeFederacao } from '../model/unidade-federacao';
 
 
 const httpOptions = {

@@ -8,7 +8,7 @@ import { ManageCrisesComponent } from './manage-crises.component';
 import { AdminComponent } from './admin.component';
 
 
-import { AuthGuard } from './../shared/services/auth-guard.service';
+import { AuthGuard } from '../shared/services/auth-guard.service';
 import { AssociadoListComponent } from '../associado/associado-list/associado.list.component';
 import { AssociadoFormComponent } from '../associado/associado-form/associado.form.component';
 import { ColaboradorListComponent } from '../colaborador/colaborador-list/colaborador.list.component';

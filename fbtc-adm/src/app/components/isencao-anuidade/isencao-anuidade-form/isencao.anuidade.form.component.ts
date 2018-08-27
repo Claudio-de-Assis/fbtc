@@ -7,10 +7,10 @@ import { IsencaoService } from '../../shared/services/isencao.service';
 import { AnuidadeService } from '../../shared/services/anuidade.service';
 
 import { Isencao } from '../../shared/model/isencao';
-import { Anuidade } from './../../shared/model/anuidade';
+import { Anuidade } from '../../shared/model/anuidade';
 
 import { debug } from 'util';
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 import { parse } from 'querystring';
 
 @Component({

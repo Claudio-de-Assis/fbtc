@@ -8,10 +8,10 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
-import { RptAssociadoFaixaDAO } from './../../shared/model/relatorios';
+import { RptAssociadoFaixaDAO } from '../../shared/model/relatorios';
 import { debug } from 'util';
 
-import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-associados-faixa',

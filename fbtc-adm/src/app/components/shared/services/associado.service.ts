@@ -4,10 +4,10 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { MessageService } from './../../../message.service';
-import { AssociadoRoute } from './../webApi-routes/associado.route';
+import { MessageService } from '../../../message.service';
+import { AssociadoRoute } from '../webApi-routes/associado.route';
 import { Associado } from '../model/associado';
 import { AssociadoIsentoDao } from '../model/associado-isento';
 

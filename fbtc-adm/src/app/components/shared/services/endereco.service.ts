@@ -1,14 +1,14 @@
-import { EnderecoRoute } from './../webapi-routes/endereco.route';
+import { EnderecoRoute } from '../webapi-routes/endereco.route';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { MessageService } from './../../../message.service';
-import { EstadoEnderecoCepDao, CidadeEnderecoCepDao, EnderecoCep } from './../model/endereco-cep';
+import { MessageService } from '../../../message.service';
+import { EstadoEnderecoCepDao, CidadeEnderecoCepDao, EnderecoCep } from '../model/endereco-cep';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -1,4 +1,4 @@
-import { UserProfile } from './../model/user-profile';
+import { UserProfile } from '../model/user-profile';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';

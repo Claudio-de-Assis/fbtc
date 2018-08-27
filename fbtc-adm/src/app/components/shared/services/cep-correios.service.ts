@@ -4,10 +4,10 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 
-import { CepCorreiosRoute } from './../webApi-routes/cep-correios.route';
-import { MessageService } from './../../../message.service';
+import { CepCorreiosRoute } from '../webApi-routes/cep-correios.route';
+import { MessageService } from '../../../message.service';
 // import { CepCorreios } from './../model/cep-correios';
 import { Endereco } from '../model/endereco';
 

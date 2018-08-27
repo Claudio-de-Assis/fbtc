@@ -9,14 +9,14 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import { EventoService } from '../../shared/services/evento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
-import { ValueShareService } from './../../shared/services/value-share.service';
+import { ValueShareService } from '../../shared/services/value-share.service';
 
 import { EventoDao } from '../../shared/model/evento';
-import { TipoPublicoValorDao } from './../../shared/model/tipo-publico';
+import { TipoPublicoValorDao } from '../../shared/model/tipo-publico';
 
-import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
+import { FileUploadRoute } from '../../shared/webapi-routes/file-upload.route';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 
 @Component({
   selector: 'app-evento-form',

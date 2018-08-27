@@ -9,10 +9,10 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
-import { RptRecebimentoStatusDAO } from './../../shared/model/relatorios';
+import { RptRecebimentoStatusDAO } from '../../shared/model/relatorios';
 import { Util } from '../../shared/util/util';
 
-import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 
 @Component({
   selector: 'app-relatorio-recebimento-status',

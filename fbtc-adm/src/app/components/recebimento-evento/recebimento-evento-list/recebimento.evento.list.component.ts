@@ -8,7 +8,7 @@ import { RecebimentoService } from '../../shared/services/recebimento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
 import { TipoPublico } from '../../shared/model/tipo-publico';
-import { Recebimento, RecebimentoAssociadoDao } from './../../shared/model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from '../../shared/model/recebimento';
 
 import { Util } from '../../shared/util/util';
 import { PagSeguroService } from '../../shared/services/pagSeguro.service';

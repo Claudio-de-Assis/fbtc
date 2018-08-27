@@ -9,6 +9,7 @@ import { AssociadoListComponent } from './associado-list/associado.list.componen
 //   { path:'' }
 //   { path: 'Associado', component: AssociadoListComponent },
 //   { path: 'Associado/:id', component: AssociadoFormComponent },
+//   { path: 'AssociadoSelf/:id', component: AssociadoSelfFormComponent }, --> Nova Rota
 // ];
 
 @NgModule({

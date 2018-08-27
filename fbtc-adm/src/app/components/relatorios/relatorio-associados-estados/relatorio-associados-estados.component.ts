@@ -8,9 +8,9 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
-import { RptAssociadosEstadosDAO } from './../../shared/model/relatorios';
+import { RptAssociadosEstadosDAO } from '../../shared/model/relatorios';
 
-import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
+import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 import { debug } from 'util';
 
 @Component({

@@ -4,17 +4,17 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { AssociadoService } from '../../shared/services/associado.service';
-import { CepCorreiosService } from './../../shared/services/cep-correios.service';
+import { CepCorreiosService } from '../../shared/services/cep-correios.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
-import { AtcService } from './../../shared/services/atc.service';
-import { ValueShareService } from './../../shared/services/value-share.service';
+import { AtcService } from '../../shared/services/atc.service';
+import { ValueShareService } from '../../shared/services/value-share.service';
 
 import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from '../../shared/model/tipo-publico';
-import { Atc } from './../../shared/model/atc';
+import { Atc } from '../../shared/model/atc';
 
-import { Util } from './../../shared/util/util';
-import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
+import { Util } from '../../shared/util/util';
+import { FileUploadRoute } from '../../shared/webapi-routes/file-upload.route';
 import { Endereco } from '../../shared/model/endereco';
 
 @Component({

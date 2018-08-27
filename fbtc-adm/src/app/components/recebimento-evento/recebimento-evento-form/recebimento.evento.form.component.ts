@@ -1,4 +1,4 @@
-import { Endereco } from './../../shared/model/endereco';
+import { Endereco } from '../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -6,13 +6,13 @@ import { Observable } from 'rxjs/Observable';
 
 import { Data } from '@angular/router/src/config';
 
-import { RecebimentoService } from './../../shared/services/recebimento.service';
+import { RecebimentoService } from '../../shared/services/recebimento.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { EventoService } from '../../shared/services/evento.service';
 
 import { Recebimento } from '../../shared/model/recebimento';
 import { TipoPublico } from '../../shared/model/tipo-publico';
-import { Evento } from './../../shared/model/evento';
+import { Evento } from '../../shared/model/evento';
 
 @Component({
   selector: 'app-recebimento-evento-form',

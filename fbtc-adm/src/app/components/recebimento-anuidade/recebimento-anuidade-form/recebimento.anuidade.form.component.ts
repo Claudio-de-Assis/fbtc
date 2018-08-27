@@ -1,11 +1,11 @@
-import { Endereco } from './../../shared/model/endereco';
+import { Endereco } from '../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { RecebimentoService } from '../../shared/services/recebimento.service';
-import { Recebimento } from './../../shared/model/recebimento';
+import { Recebimento } from '../../shared/model/recebimento';
 
 @Component({
   selector: 'app-recebimento-anuidade-form',

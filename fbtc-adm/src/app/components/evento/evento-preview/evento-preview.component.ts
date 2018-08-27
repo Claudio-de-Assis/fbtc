@@ -4,7 +4,7 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 // import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
-import { TipoPublico } from './../../shared/model/tipo-publico';
+import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Evento } from '../../shared/model/evento';
 import { EventoService } from '../../shared/services/evento.service';
 

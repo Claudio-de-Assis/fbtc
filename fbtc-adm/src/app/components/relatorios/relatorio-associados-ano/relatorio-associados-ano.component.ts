@@ -8,10 +8,10 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import { RelatoriosService } from '../../shared/services/relatorios.service';
-import { RptTotalAssociadosDAO } from './../../shared/model/relatorios';
+import { RptTotalAssociadosDAO } from '../../shared/model/relatorios';
 
-import { RelatoriosRoute } from './../../shared/webapi-routes/relatorios.route';
-import { Util } from './../../shared/util/util';
+import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
+import { Util } from '../../shared/util/util';
 import { debug } from 'util';
 
 @Component({

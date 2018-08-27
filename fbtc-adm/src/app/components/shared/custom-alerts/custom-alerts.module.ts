@@ -5,7 +5,7 @@ import { AlertCustomComponent } from './alert-custom/alert-custom.component';
 import { AlertCloseableComponent } from './alert-closeable/alert-closeable.component';
 import { AlertBasicComponent } from './alert-basic/alert-basic.component';
 import { AlertSelfclosingComponent } from './alert-selfclosing/alert-selfclosing.component';
-import { AlertConfigService } from './../services/alert-config.service';
+import { AlertConfigService } from '../services/alert-config.service';
 
 @NgModule({
   imports: [

@@ -1,9 +1,9 @@
-import { UserProfileService } from './../shared/services/user-profile.service';
+import { UserProfileService } from '../shared/services/user-profile.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxPermissionsService } from 'ngx-permissions';
 
-import { AuthService } from './../shared/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 /*
 @Component({
   template: `
@@ -31,13 +31,12 @@ export class LoginComponent {
   editeMail: string;
   editPassword: string;
   permission = [];
-    
 
   constructor(
       public authService: AuthService,
       public userProfileService: UserProfileService,
       public router: Router,
-      private permissionsService: NgxPermissionsService,) {
+      private permissionsService: NgxPermissionsService) {
     this.setMessage();
     this.title = 'Login';
     this._msg = '';
@@ -81,7 +80,7 @@ console.log ( 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out'));
           if (this.authService.isLoggedIn) {
             // Get the redirect URL from our auth service
             // If no redirect has been set, use the default
-            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+            const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
 
             console.log(`User Name: ${this.authService.getUserProfile().nome}`);
             console.log(`User: ${JSON.stringify(this.authService.getUserProfile())}`);

@@ -1,17 +1,17 @@
-import { Perfil } from './../../shared/model/perfil';
+import { Perfil } from '../../shared/model/perfil';
 
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-import { Util } from './../../shared/util/util';
-import { FileUploadRoute } from './../../shared/webapi-routes/file-upload.route';
+import { Util } from '../../shared/util/util';
+import { FileUploadRoute } from '../../shared/webapi-routes/file-upload.route';
 
-import { ValueShareService } from './../../shared/services/value-share.service';
-import { UserProfileService } from './../../shared/services/user-profile.service';
+import { ValueShareService } from '../../shared/services/value-share.service';
+import { UserProfileService } from '../../shared/services/user-profile.service';
 
-import { UserProfile } from './../../shared/model/user-profile';
+import { UserProfile } from '../../shared/model/user-profile';
 import { Endereco } from '../../shared/model/endereco';
 
 @Component({

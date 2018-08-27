@@ -1,13 +1,13 @@
-import { Perfil } from './../../shared/model/perfil';
-import { Endereco } from './../../shared/model/endereco';
+import { Perfil } from '../../shared/model/perfil';
+import { Endereco } from '../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { ColaboradorService } from '../../shared/services/colaborador.service';
-import { Colaborador } from './../../shared/model/colaborador';
+import { Colaborador } from '../../shared/model/colaborador';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 
 @Component({
     selector: 'app-colaborador-form',

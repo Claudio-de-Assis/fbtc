@@ -1,4 +1,4 @@
-import { Colaborador } from '../model/Colaborador';
+import { Colaborador } from '../model/colaborador';
 
 /*
 export const COLABORADORES: Colaborador[] = [

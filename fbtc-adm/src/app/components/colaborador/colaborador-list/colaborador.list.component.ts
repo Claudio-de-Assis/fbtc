@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Colaborador } from './../../shared/model/colaborador';
+import { Colaborador } from '../../shared/model/colaborador';
 import { ColaboradorService } from '../../shared/services/colaborador.service';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 
 // import { CustomAlertsModule } from '../../shared/custom-alerts/custom-alerts.module';
 

@@ -4,10 +4,10 @@ import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+// import 'rxjs';
 
-import { MessageService } from './../../../message.service';
-import { UserProfileRoute } from './../webapi-routes/user-profile.route';
+import { MessageService } from '../../../message.service';
+import { UserProfileRoute } from '../webapi-routes/user-profile.route';
 import { UserProfile } from '../model/user-profile';
 
 const httpOptions = {

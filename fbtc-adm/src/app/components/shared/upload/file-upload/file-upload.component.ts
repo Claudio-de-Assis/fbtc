@@ -1,15 +1,15 @@
-import { UserProfileService } from './../../services/user-profile.service';
+import { UserProfileService } from '../../services/user-profile.service';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
-import { FileUploadService } from './../../services/file-upload.service';
-import { EventoService } from './../../services/evento.service';
-import { AssociadoService } from './../../services/associado.service';
-import { ValueShareService } from './../../services/value-share.service';
+import { FileUploadService } from '../../services/file-upload.service';
+import { EventoService } from '../../services/evento.service';
+import { AssociadoService } from '../../services/associado.service';
+import { ValueShareService } from '../../services/value-share.service';
 
 import { AssociadoRoute } from '../../webApi-routes/associado.route';
-import { FileUploadRoute } from './../../webapi-routes/file-upload.route';
+import { FileUploadRoute } from '../../webapi-routes/file-upload.route';
 
 @Component({
   selector: 'app-file-upload',

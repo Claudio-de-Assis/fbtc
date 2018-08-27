@@ -8,10 +8,10 @@ import { Data } from '@angular/router/src/config';
 import { IsencaoService } from '../../shared/services/isencao.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 
-import { Isencao, IsencaoDao } from './../../shared/model/isencao';
+import { Isencao, IsencaoDao } from '../../shared/model/isencao';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 
-import { Util } from './../../shared/util/util';
+import { Util } from '../../shared/util/util';
 
 @Component({
   selector: 'app-isencao-evento-list',
