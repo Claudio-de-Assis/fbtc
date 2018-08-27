@@ -242,19 +242,19 @@
                 <!-- <li>
                     <a [routerLink]="['/admin']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Admin</a>
                 </li> -->
-                <!-- <li *ngxPermissionsOnly="['admin']"> -->
-                <li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                <!-- <li > -->
                     <a [routerLink]="['Associado']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
                 </li>
-                <li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Colaborador']" routerLinkActtive="active"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Administração</a>
                 </li>
-                <li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Evento']" routerLinkActtive="active"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Eventos</a>
                 </li>
-                <li>
-                        <a href="#"><i class="fa fa-money fa-fw"></i> Recebimentos<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a href="javascript:void(0)" (click)="isToggle('menuRecebimentos')"><i class="fa fa-money fa-fw"></i> Recebimentos<span class="fa arrow"></span></a>
+                    <ul id="menuRecebimentos" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuRecebimentos'}"  >
                         <li>
                             <a [routerLink]="['RecebimentoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
@@ -266,9 +266,9 @@
                 <li>
                     
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a href="javascript:void(0)" (click)="isToggle('menuIsencoes')"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
+                    <ul id="menuIsencoes" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuIsencoes'}">
                         <li>
                             <a [routerLink]="['IsencaoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
@@ -277,12 +277,12 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Atc']" routerLinkActtive="active"><i class="fa fa-group" aria-hidden="true"></i> Atc</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-newspaper-o"></i> Relatórios<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a href="javascript:void(0)"  (click)="isToggle('menuRelatorios')"><i class="fa fa-newspaper-o"></i> Relatórios<span class="fa arrow"></span></a>
+                    <ul id="menuRelatorios" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuRelatorios'}">
                         <li>
                             <a [routerLink]="['RptTotalAssociadosTipo']" routerLinkActtive="active">Usuários por Tipo de Associação</a>
                         </li>

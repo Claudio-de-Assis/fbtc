@@ -25,7 +25,8 @@ export class UserProfileService {
         private messageService: MessageService) { }
 
     getById(id: number): Observable<UserProfile> {
-        return this.http.get<UserProfile>(this.apiRoute.getById(id)).pipe(
+        return this.http.get<UserProfile>(this.apiRoute.getById(id))
+        .pipe(
             tap(_ => this.log(`fetched UserProfile id=${id}`)),
             catchError(this.handleError<UserProfile>(`getUserProfile id=${id}`))
         );
@@ -69,10 +70,11 @@ export class UserProfileService {
     }
 
     getLogin(senha: string, eMail: string): Observable<UserProfile> {
-        return this.http.get<UserProfile>(this.apiRoute.loginUser(senha, eMail)).pipe(
-            tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
-            catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
-        );
+        return this.http.get<UserProfile>(this.apiRoute.loginUser(senha, eMail))
+            .do(result => this.userProfile = result)
+            // .pipe(tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
+            //       catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
+        // );
     }
 
     getByEmailPassword(senha: string, eMail: string): Observable<UserProfile> {
@@ -120,5 +122,9 @@ export class UserProfileService {
             }),
             catchError(this.handleError<UserProfile>(`getUserProfile id=${id}`))
         );
+    }
+
+    getUserProfile(){
+        return this.userProfile
     }
 }

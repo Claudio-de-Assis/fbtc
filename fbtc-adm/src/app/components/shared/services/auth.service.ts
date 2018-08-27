@@ -1,11 +1,14 @@
 import { UserProfile } from '../model/user-profile';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 import { UserProfileService } from './user-profile.service';
+import { UserProfileRoute } from '../webapi-routes/user-profile.route';
 
 @Injectable()
 export class AuthService {
@@ -18,11 +21,13 @@ export class AuthService {
   _i: number;
 
   constructor(
+    private http: HttpClient,
+    private apiRoute: UserProfileRoute,
     private userProfileService: UserProfileService
     ) {
       this.isLoggedIn = false;
       this.redirectUrl = '';
-      this.userProfile = new UserProfile();
+      // this.userProfile = new UserProfile();
     }
 
    getDadosUser(senha: string, eMail: string) {
@@ -36,17 +41,12 @@ export class AuthService {
     );
    }
 
-  login(senha: string, eMail: string ): Observable<boolean> {
-//  return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
-  return Observable.of(true).delay(1000)
-  .do(val => {
-    this.isLoggedIn = (true);
-
-    // this.userProfileService.getLogin(senha, eMail)
-     // .subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
-
-  });
-
+  login(senha: string, eMail: string ): Observable<UserProfile> {
+      return this.http.get<UserProfile>(this.apiRoute.loginUser(senha, eMail))
+          .do(result => {
+            this.userProfile = result
+            this.isLoggedIn = true
+          })
   }
 
   getUserProfile(): UserProfile {

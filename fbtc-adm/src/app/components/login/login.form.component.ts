@@ -1,9 +1,11 @@
-import { UserProfileService } from '../shared/services/user-profile.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxPermissionsService } from 'ngx-permissions';
 
 import { AuthService } from '../shared/services/auth.service';
+
+import { UserProfile } from './../shared/model/user-profile';
+import { UserProfileService } from '../shared/services/user-profile.service';
 /*
 @Component({
   template: `
@@ -70,22 +72,19 @@ console.log ( 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out'));
 
     console.log('pre: ' + this.authService.isLoggedIn);
 
-    this.authService.login(this.editPassword, this.editeMail)
-      .subscribe(
-        () => {
+    this.authService.login(this.editPassword, this.editeMail).subscribe((userProfile: UserProfile) => {
           this.setMessage();
 
           console.log('antes: ' + this.authService.isLoggedIn);
 
-          if (this.authService.isLoggedIn) {
+          if (userProfile) {
             // Get the redirect URL from our auth service
             // If no redirect has been set, use the default
             const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
 
-            console.log(`User Name: ${this.authService.getUserProfile().nome}`);
+            // console.log(`User Name: ${this.authService.getUserProfile().nome}`);
             console.log(`User: ${JSON.stringify(this.authService.getUserProfile())}`);
-            this.permission = ['Financeiro'];
-            this.permissionsService.loadPermissions(this.permission);
+
             // Redirect the user
             this.router.navigate([redirect]);
           }
