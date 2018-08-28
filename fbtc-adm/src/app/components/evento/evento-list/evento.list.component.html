@@ -74,7 +74,7 @@
                                     <td>{{ evento.dtInicio | date: 'dd/MM/yyyy' }}</td>
                                     <td>{{ evento.codigo }}</td>    
                                     <td>
-                                        <a [routerLink]="['/Evento', evento.eventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                        <a [routerLink]="['admin/Evento', evento.eventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
                                         <i class="fa fa-trash text-danger"></i>
                                     </td>
                                 </tr>

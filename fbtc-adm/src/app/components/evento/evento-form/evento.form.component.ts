@@ -87,7 +87,7 @@ export class EventoFormComponent implements OnInit {
   gotoEventos() {
 
     let eventoId = this.eventoDao ? this.eventoDao.eventoId : null;
-    this.router.navigate(['/Evento', { id: eventoId, foo: 'foo' }]);
+    this.router.navigate(['admin/Evento', { id: eventoId, foo: 'foo' }]);
   }
 
   SaveEvento() {
@@ -114,7 +114,7 @@ export class EventoFormComponent implements OnInit {
 
         this._eventoId = parseInt(msgRet.substring(0, 10), 10);
 
-        this.router.navigate([`/Evento/${this._eventoId}`]);
+        this.router.navigate([`admin/Evento/${this._eventoId}`]);
 
         this.getEventoById(this._eventoId);
 
@@ -142,7 +142,7 @@ export class EventoFormComponent implements OnInit {
 
   gotoPreviewAnuncio() {
 
-    this.router.navigate(['/EventoPreview', +this.route.snapshot.paramMap.get('id') ]);
+    this.router.navigate(['admin/EventoPreview', +this.route.snapshot.paramMap.get('id') ]);
   }
 
   ngOnInit() {

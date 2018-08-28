@@ -30,6 +30,9 @@ import { RelatorioAssociadosEstadosComponent } from '../relatorios/relatorio-ass
 import { RelatorioAssociadosGeneroComponent } from '../relatorios/relatorio-associados-genero/relatorio-associados-genero.component';
 import { RelatorioAssociadosAnoComponent } from '../relatorios/relatorio-associados-ano/relatorio-associados-ano.component';
 import { RelatorioReceitaAnualComponent } from '../relatorios/relatorio-receita-anual/relatorio-receita-anual.component';
+import { EventoListComponent } from '../evento/evento-list/evento.list.component';
+import { EventoFormComponent } from '../evento/evento-form/evento.form.component';
+import { EventoPreviewComponent } from '../evento/evento-preview/evento-preview.component';
 
 
 
@@ -63,7 +66,11 @@ const adminRoutes: Routes = [
             { path: 'RptAssociadosEstados', component: RelatorioAssociadosEstadosComponent },
             { path: 'RptAssociadosGenero', component: RelatorioAssociadosGeneroComponent },
             { path: 'RptAssociadosAno', component: RelatorioAssociadosAnoComponent },
-            { path: 'RptReceitaAnual', component: RelatorioReceitaAnualComponent }
+            { path: 'RptReceitaAnual', component: RelatorioReceitaAnualComponent },
+            { path: 'Evento', component: EventoListComponent },
+            { path: 'Evento/:id', component: EventoFormComponent },
+            { path: 'EventoNovo', component: EventoFormComponent },
+            { path: 'EventoPreview/:id', component: EventoPreviewComponent},
       ]
     }
   ];

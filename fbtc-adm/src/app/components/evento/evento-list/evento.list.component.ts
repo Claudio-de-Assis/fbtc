@@ -79,7 +79,7 @@ export class EventoListComponent implements OnInit {
   }
 
   gotoNovoEvento() {
-      this.router.navigate(['/Evento', 0]);
+      this.router.navigate(['admin/Evento', 0]);
   }
 
   gotoBuscareventos() {
