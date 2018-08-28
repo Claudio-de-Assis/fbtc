@@ -17,11 +17,28 @@ export class AdminComponent implements OnInit {
   permission = [];
   userProfile:  UserProfile;
   constructor(
-              private permissionsService: NgxPermissionsService,
+              private permissionsService: NgxPermissionsService, 
               private userProfileService: UserProfileService,
               public authService: AuthService,
               private util: Util) { }
 
   ngOnInit() {
+    let role = this.getPerfil()
+    this.permission = [role];//Exemplo de perfil permitido
+    this.permissionsService.loadPermissions(this.permission);    
   }
+
+  getPerfil(){
+    this.userProfile = this.authService.getUserProfile();
+    let roles = Util.optTipoPerfil
+    let found: string
+
+    roles.forEach(role =>{
+      if(parseInt(role.value) === this.userProfile.perfilId){
+        found =  role.name
+      }      
+    })
+    return found
+  }
+
 }
