@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +17,7 @@ export class HeaderComponent {
     isToggleIn: string = '';
 
     @ViewChild("toogle") toggle;
-    constructor(userService: UserService) {
+    constructor(userService: UserService, private authService: AuthService, private router: Router) {
 
         this.isLoged = true;
         this.user = userService.userName;
@@ -27,6 +29,11 @@ export class HeaderComponent {
         } else {
             this.isToggleIn = menuItem;
         }
+    }
+
+    logout(){
+        this.authService.logout();
+        this.router.navigate(['login']);
     }
 
     

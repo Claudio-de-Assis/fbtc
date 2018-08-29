@@ -33,6 +33,7 @@ import { RelatorioReceitaAnualComponent } from '../relatorios/relatorio-receita-
 import { EventoListComponent } from '../evento/evento-list/evento.list.component';
 import { EventoFormComponent } from '../evento/evento-form/evento.form.component';
 import { EventoPreviewComponent } from '../evento/evento-preview/evento-preview.component';
+import { UserProfileFormComponent } from '../user-profile/user-profile-form/user-profile-form.component';
 
 
 
@@ -71,6 +72,7 @@ const adminRoutes: Routes = [
             { path: 'Evento/:id', component: EventoFormComponent },
             { path: 'EventoNovo', component: EventoFormComponent },
             { path: 'EventoPreview/:id', component: EventoPreviewComponent},
+            { path: 'UserProfile/:id', component: UserProfileFormComponent }
       ]
     }
   ];

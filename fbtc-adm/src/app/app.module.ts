@@ -22,7 +22,7 @@ import { EventoModule } from './components/evento/evento.module';
 import { AnuidadeModule } from './components/anuidade/anuidade.module';
 import { RelatoriosModule } from './components/relatorios/relatorios.module';
 import { AtcModule } from './components/atc/atc.module';
-import { UserProfileModule } from './components/user-profile/user-profile.module';
+
 import { LoginModule } from './components/login/login.module';
 
 import { RelatoriosRoute } from './components/shared/webapi-routes/relatorios.route';
@@ -32,7 +32,7 @@ import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
-import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
+// import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
 import { AdminModule } from './components/admin/admin.module';
 
 
@@ -52,7 +52,7 @@ import { AdminModule } from './components/admin/admin.module';
     RecebimentoEventoModule,
     AtcModule,
     RelatoriosModule,
-    UserProfileModule,
+    
     AdminModule,
     LoginModule,
     AppRoutingModule
@@ -71,7 +71,7 @@ import { AdminModule } from './components/admin/admin.module';
     AnuidadeRoute,
     PagSeguroRoute,
     RelatoriosRoute,
-    UserProfileRoute,
+    // UserProfileRoute,
     LoginRoute,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],

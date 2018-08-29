@@ -12,6 +12,9 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { UserProfileService } from '../shared/services/user-profile.service';
 import { Util } from '../shared/util/util'
+import { UserProfileModule } from '../user-profile/user-profile.module';
+import { UserProfileRoute } from '../shared/webapi-routes/user-profile.route';
+
 
 
 @NgModule({
@@ -19,6 +22,7 @@ import { Util } from '../shared/util/util'
     CommonModule,
     AdminRoutingModule,
     NgxPermissionsModule.forRoot(),
+    UserProfileModule,
   ],
   declarations: [
     AdminComponent,
@@ -30,7 +34,9 @@ import { Util } from '../shared/util/util'
   ],
   providers:[
     UserProfileService,
-    Util
+    Util,
+    UserProfileRoute
+
   ]
   
 })
