@@ -75,7 +75,7 @@ export class AtcListComponent implements OnInit {
   }
 
   gotoNovaAtc() {
-      this.router.navigate(['/Atc', 0]);
+      this.router.navigate(['/admin/Atc', 0]);
   }
 
   ngOnInit() {

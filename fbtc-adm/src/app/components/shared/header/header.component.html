@@ -242,8 +242,11 @@
                 <!-- <li>
                     <a [routerLink]="['/admin']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Admin</a>
                 </li> -->
+                <li *ngxPermissionsOnly="['Publico']">                
+                    <a [routerLink]="['AssociadoPublico']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
+                </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                <!-- <li > -->
+                
                     <a [routerLink]="['Associado']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
                 </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">

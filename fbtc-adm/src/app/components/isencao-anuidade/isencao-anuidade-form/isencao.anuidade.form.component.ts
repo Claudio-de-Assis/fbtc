@@ -71,7 +71,7 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
   gotoIsencaoAnuidades() {
 
     let eventoId = this.isencao ? this.isencao.isencaoId : null;
-    this.router.navigate(['/IsencaoAnuidade', { id: eventoId, foo: 'foo' }]);
+    this.router.navigate(['/admin/IsencaoAnuidade', { id: eventoId, foo: 'foo' }]);
   }
 
   getIsencaoById(id: number): void {

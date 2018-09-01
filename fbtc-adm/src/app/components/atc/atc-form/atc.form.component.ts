@@ -57,7 +57,7 @@ export class AtcFormComponent implements OnInit {
   gotoAtcs() {
 
     let atcId = this.atc ? this.atc.atcId : null;
-    this.router.navigate(['/Atc', { id: atcId, foo: 'foo' }]);
+    this.router.navigate(['/admin/Atc', { id: atcId, foo: 'foo' }]);
   }
 
   save() {
@@ -78,7 +78,7 @@ export class AtcFormComponent implements OnInit {
 
         this._atcId = parseInt(msgRet.substring(0, 10), 10);
 
-        this.router.navigate([`/Atc/${this._atcId}`]);
+        this.router.navigate([`/admin/Atc/${this._atcId}`]);
 
         this.getAtcById(this._atcId);
 
