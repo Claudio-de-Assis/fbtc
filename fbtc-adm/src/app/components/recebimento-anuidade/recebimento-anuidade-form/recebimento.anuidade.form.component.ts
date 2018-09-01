@@ -80,7 +80,7 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
   gotoRecebimentoAnuidade() {
 
     let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
-    this.router.navigate(['/RecebimentoAnuidade', { id: recebimentoId, foo: 'foo' }]);
+    this.router.navigate(['/admin/RecebimentoAnuidade', { id: recebimentoId, foo: 'foo' }]);
   }
 
   ngOnInit() {

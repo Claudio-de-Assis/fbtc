@@ -99,7 +99,7 @@ export class RecebimentoEventoFormComponent implements OnInit {
   gotoRecebimentoAnuidade() {
 
     let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
-    this.router.navigate(['/RecebimentoEvento', { id: recebimentoId, foo: 'foo' }]);
+    this.router.navigate(['/admin/RecebimentoEvento', { id: recebimentoId, foo: 'foo' }]);
   }
 
   getTiposPublicos(): void {
