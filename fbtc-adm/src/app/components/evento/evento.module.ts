@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 
 import { NgxPaginationModule } from 'ngx-pagination';
-import { EditorModule } from '@tinymce/tinymce-angular';
+
 
 @NgModule({
   imports: [
@@ -27,7 +27,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 //    FileUploadModule,
     NgxPaginationModule,
     HttpModule,
-    EditorModule
+    
   ],
   declarations: [
     EventoListComponent,

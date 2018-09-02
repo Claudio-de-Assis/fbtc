@@ -35,10 +35,6 @@ import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.rout
 // import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
 import { AdminModule } from './components/admin/admin.module';
 
-
-
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -53,12 +49,11 @@ import { AdminModule } from './components/admin/admin.module';
     RecebimentoAnuidadeModule,
     RecebimentoEventoModule,
     AtcModule,
-    RelatoriosModule,
-    
+    RelatoriosModule,    
     AdminModule,
     LoginModule,
     AppRoutingModule,
-    
+
     
   ],
   declarations: [
