@@ -37,6 +37,8 @@ import { AdminModule } from './components/admin/admin.module';
 
 
 
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { AdminModule } from './components/admin/admin.module';
     
     AdminModule,
     LoginModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
     
   ],
   declarations: [

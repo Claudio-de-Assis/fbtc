@@ -112,7 +112,7 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
 
       this._isencaoId = parseInt(msgRet.substring(0, 10), 10);
 
-      this.router.navigate([`/IsencaoAnuidade/${this._isencaoId}`]);
+      this.router.navigate([`admin/IsencaoAnuidade/${this._isencaoId}`]);
 
       this.getIsencaoById(this._isencaoId);
 

@@ -8,7 +8,8 @@ export class Util {
     public static optTipoPerfil = [
         {name: 'Gestor', value: '1'},
         {name: 'Secretário', value: '2'},
-        {name: 'Financeiro', value: '3'}
+        {name: 'Financeiro', value: '3'},
+        {name: 'Cliente Externo', value: '4'}
     ];
 
     public static lstMes = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];

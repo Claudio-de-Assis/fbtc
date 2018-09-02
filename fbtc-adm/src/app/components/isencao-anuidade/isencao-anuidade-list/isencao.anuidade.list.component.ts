@@ -82,7 +82,7 @@ export class IsencaoAnuidadeListComponent implements OnInit {
 
   gotoNovaIsencao() {
 
-    this.router.navigate(['/IsencaoAnuidade', 0]);
+    this.router.navigate(['admin/IsencaoAnuidade', 0]);
   }
 
   getTiposPublicos(): void {

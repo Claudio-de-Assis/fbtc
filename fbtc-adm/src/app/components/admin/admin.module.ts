@@ -20,12 +20,14 @@ import { Util } from '../shared/util/util'
 //thity components
 import { NgxPermissionsModule } from 'ngx-permissions';
 
+
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
     NgxPermissionsModule.forRoot(),
     UserProfileModule,
+    
   ],
   declarations: [
     AdminComponent,
