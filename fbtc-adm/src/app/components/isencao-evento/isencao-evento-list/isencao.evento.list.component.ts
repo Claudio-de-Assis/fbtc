@@ -92,7 +92,7 @@ export class IsencaoEventoListComponent implements OnInit {
 
   gotoNovaIsencao() {
 
-    this.router.navigate(['/IsencaoEvento', 0]);
+    this.router.navigate(['admin/IsencaoEvento', 0]);
   }
 
   getTiposPublicos(): void {
