@@ -18,6 +18,10 @@ export class AssociadoRoute {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
+    getPessoaAssociadoById(id: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url+'Pessoa/'+ id;
+    }
     // [Route("{id:int}")]
     getNomeFotoById(id: number): string {
 

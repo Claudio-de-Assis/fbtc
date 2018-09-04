@@ -16,6 +16,8 @@ import { Atc } from '../../shared/model/atc';
 import { Util } from '../../shared/util/util';
 import { FileUploadRoute } from '../../shared/webapi-routes/file-upload.route';
 import { Endereco } from '../../shared/model/endereco';
+import { AuthService } from '../../shared/services/auth.service';
+import { UserProfile } from '../../shared/model/user-profile';
 
 @Component({
     selector: 'app-associado-self-form',
@@ -86,7 +88,8 @@ export class AssociadoSelfFormComponent implements OnInit {
         private serviceCEP: CepCorreiosService,
         private serviceAtc: AtcService,
         private apiRoute: FileUploadRoute,
-        private valueShareService: ValueShareService
+        private valueShareService: ValueShareService,
+        private authService: AuthService
     ) {
         this._nomeFotoPadrao = '_no-foto.png';
         this._nomeFoto = '_no-foto.png';
@@ -109,7 +112,7 @@ export class AssociadoSelfFormComponent implements OnInit {
 
     getAssociadoById(id: number): void {
 
-        this.service.getById(id)
+        this.service.getPessoaAssociadoById(id)
             .subscribe(associado => this.associado = associado);
     }
 
@@ -255,7 +258,10 @@ export class AssociadoSelfFormComponent implements OnInit {
 
         this.getTiposPublicos();
 
-        this.editAssociadoId = +this.route.snapshot.paramMap.get('id');
+        let UserProfile: UserProfile = this.authService.getUserProfile()
+
+        // this.editAssociadoId = +this.route.snapshot.paramMap.get('id');
+        this.editAssociadoId = UserProfile.pessoaId
 
         this.badge = 'Edição';
         this.getAssociadoById(this.editAssociadoId);

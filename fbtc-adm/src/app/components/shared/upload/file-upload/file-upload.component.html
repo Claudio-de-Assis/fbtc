@@ -3,7 +3,7 @@
     <div class="col-md-12 text-center" >
       <a href="javascript:void(0)" (click)="file.click()" >
       <div class="form-group">
-        <img id="imgFoto" name="foto" src="{{ srcFoto + nomeFoto }}"  alt="{{ srcFoto + nomeFoto }}" 
+        <img id="imgFoto" name="foto" src="{{ srcFoto + nomeFoto }}" error="assets/no-foto.png"  alt="{{ srcFoto + nomeFoto }}" 
           width="135px" height="135px">
       </div></a>
       <input type="file" #file [multiple]="(maxFiles > 1)" (change) = "onFileChange($event)"
