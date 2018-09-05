@@ -110,23 +110,10 @@
                 <div class="row">
                     <div class="col-lg-12">   
                         <label>Descrição:</label>
-                        <textarea id="areaDescricao" name="descricao" class="form-control"
+                        <!-- <textarea id="areaDescricao" name="descricao" class="form-control"
                             rows="15" required maxlength="2000" minlength="5"
-                            [(ngModel)]="eventoDao.descricao" #descricao="ngModel"></textarea>
-                            <!-- <div >
-                                <editor
-                                  apiKey="test"
-                                  [(ngModel)]="eventoDao.descricao"
-                                  name="descricao"
-                                  #descricao="ngModel"                                  
-                                  plugins="advlist autolink lists link image charmap print preview anchor,
-                                            searchreplace visualblocks code fullscreen,
-                                            insertdatetime media table contextmenu paste imagetools wordcount"
-                                  toolbar= "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"                                  
-                                  required
-                                ></editor>
-                            </div> -->
-                            
+                            [(ngModel)]="eventoDao.descricao" #descricao="ngModel"></textarea>  -->
+                            <ck-editor id="areaDescricao" name="descricao" [(ngModel)]="eventoDao.descricao" skin="moono-lisa" lang="pt-BR" [fullPage]="true" #descricao="ngModel"></ck-editor>
                         
                             <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
                                 class="alert alert-danger">

@@ -16,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 //    FileUploadModule,
     NgxPaginationModule,
     HttpModule,
+    CKEditorModule
     
   ],
   declarations: [
