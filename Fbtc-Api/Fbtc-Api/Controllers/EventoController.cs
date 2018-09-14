@@ -316,8 +316,6 @@ namespace Fbtc.Api.Controllers
             }
         }
 
-
-
         // [Authorize]
         [Route("ValoresEvento")]
         [HttpPost]
