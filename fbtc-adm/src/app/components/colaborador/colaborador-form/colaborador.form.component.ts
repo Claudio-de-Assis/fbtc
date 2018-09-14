@@ -111,7 +111,7 @@ export class ColaboradorFormComponent implements OnInit {
 
             this._colabId = parseInt(msgRet.substring(0, 10), 10);
 
-            this.router.navigate([`/Colaborador/${this._colabId}`]);
+            this.router.navigate([`admin/Colaborador/${this._colabId}`]);
 
             this.getColaboradorById(this._colabId);
 

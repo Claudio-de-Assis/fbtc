@@ -35,6 +35,8 @@ import { EventoFormComponent } from '../evento/evento-form/evento.form.component
 import { EventoPreviewComponent } from '../evento/evento-preview/evento-preview.component';
 import { UserProfileFormComponent } from '../user-profile/user-profile-form/user-profile-form.component';
 import { AssociadoSelfFormComponent } from '../associado/associado-self-form/associado-self.form.component';
+import { FichaFinanceiraFormComponent } from './../ficha-financeira/ficha-financeira-form/ficha.financeira.form.component';
+import { FichaFinanceiraListComponent } from './../ficha-financeira/ficha-financeira-list/ficha.financeira.list.component';
 
 
 
@@ -43,7 +45,7 @@ const adminRoutes: Routes = [
     { path: 'admin',
       component: AdminComponent,
       canActivate: [AuthGuard],
-      children: [        
+      children: [
             { path: 'Associado', component: AssociadoListComponent },
             { path: 'AssociadoNovo', component: AssociadoFormComponent },
             { path: 'Associado/:id', component: AssociadoFormComponent },
@@ -74,8 +76,11 @@ const adminRoutes: Routes = [
             { path: 'EventoNovo', component: EventoFormComponent },
             { path: 'EventoPreview/:id', component: EventoPreviewComponent},
             { path: 'UserProfile/:id', component: UserProfileFormComponent },
-            { path: 'AssociadoPublico', component: AssociadoSelfFormComponent}
-      ]
+            { path: 'AssociadoPublico', component: AssociadoSelfFormComponent},
+            { path: 'FichaFinanceira', component: FichaFinanceiraListComponent},
+            { path: 'FichaFinanceira/:id', component: FichaFinanceiraFormComponent},
+            { path: 'FichaFinanceiraNova', component: FichaFinanceiraFormComponent}
+          ]
     }
   ];
 
@@ -88,4 +93,3 @@ const adminRoutes: Routes = [
     ]
   })
   export class AdminRoutingModule {}
-  

@@ -28,11 +28,6 @@ import { UserProfile } from '../../shared/model/user-profile';
 /** AssociadoSelfForm component*/
 export class AssociadoSelfFormComponent implements OnInit {
 
-    /*
-    endereco: Endereco = { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '',
-    bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
-    cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''};*/
-
     enderecoPri: Endereco = { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '1',
     bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
     cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''};
@@ -40,7 +35,6 @@ export class AssociadoSelfFormComponent implements OnInit {
     enderecoSec: Endereco = { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '2',
     bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
     cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''};
-
 
     enderecos: Endereco[];
 
@@ -50,7 +44,7 @@ export class AssociadoSelfFormComponent implements OnInit {
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '_no-foto.png',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true, perfilId:0,
+            dtCadastro: null, ativo: true, perfilId: 0,
             enderecosPessoa: this.enderecos
     };
 
@@ -134,7 +128,11 @@ export class AssociadoSelfFormComponent implements OnInit {
         this._nomeFoto = this.history[0];
 
         if (this._nomeFoto === undefined) {
-            this._nomeFoto = this._nomeFotoPadrao;
+            if (this.associado.associadoId === 0) {
+                this._nomeFoto = this._nomeFotoPadrao;
+            } else {
+                this._nomeFoto = this.associado.nomeFoto;
+            }
         }
 
         if (this.associado.enderecosPessoa[0].ordemEndereco === '') {
@@ -258,10 +256,10 @@ export class AssociadoSelfFormComponent implements OnInit {
 
         this.getTiposPublicos();
 
-        let UserProfile: UserProfile = this.authService.getUserProfile()
+        let UserProfile: UserProfile = this.authService.getUserProfile();
 
         // this.editAssociadoId = +this.route.snapshot.paramMap.get('id');
-        this.editAssociadoId = UserProfile.pessoaId
+        this.editAssociadoId = UserProfile.pessoaId;
 
         this.badge = 'Edição';
         this.getAssociadoById(this.editAssociadoId);

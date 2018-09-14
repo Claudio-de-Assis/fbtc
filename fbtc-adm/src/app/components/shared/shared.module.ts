@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 import { BooMessagePipe } from './pipes/boolean-viewer.pipe';
@@ -12,6 +11,7 @@ import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
 
 import { FileUploadModule } from './upload/file-upload.module';
 import { FileUploadRoute } from './webapi-routes/file-upload.route';
+import { MycurrencyPipe } from './pipes/mycurrency';
 
 @NgModule({
   imports: [
@@ -25,7 +25,8 @@ import { FileUploadRoute } from './webapi-routes/file-upload.route';
     TipoEventoPipe,
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
-    FormaPagamentoPipe
+    FormaPagamentoPipe,
+    MycurrencyPipe
   ],
   exports: [
     BooMessagePipe,
@@ -35,7 +36,8 @@ import { FileUploadRoute } from './webapi-routes/file-upload.route';
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
     FormaPagamentoPipe,
-    FileUploadModule
+    FileUploadModule,
+    MycurrencyPipe
   ],
   providers: [
     FileUploadRoute

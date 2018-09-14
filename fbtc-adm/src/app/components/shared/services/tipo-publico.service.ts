@@ -1,3 +1,4 @@
+import { TipoPublicoValorAnuidadeDao } from './../model/tipo-publico';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -53,6 +54,14 @@ export class TipoPublicoService {
             .pipe(
                 tap(tiposPublicos => this.log('Fetched TipoPublicoValorDao')),
                 catchError(this.handleError('getTiposPublicoByEventoId()', []))
+        );
+    }
+
+    getTiposPublicoByAnuidadeId(id: number): Observable<TipoPublicoValorAnuidadeDao[]> {
+        return this.http.get<TipoPublicoValorAnuidadeDao[]>(this.apiRoute.getByAnuidadeId(id))
+            .pipe(
+                tap(tiposPublicos => this.log('Fetched TipoPublicoValorAnuidadeDao')),
+                catchError(this.handleError('getTiposPublicoByAnuidadeId()', []))
         );
     }
 

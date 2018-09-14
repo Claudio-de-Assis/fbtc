@@ -48,7 +48,7 @@ export class AssociadoFormComponent implements OnInit {
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '_no-foto.png',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true, perfilId:0,
+            dtCadastro: null, ativo: true, perfilId: 0,
             enderecosPessoa: this.enderecos
     };
 
@@ -143,7 +143,11 @@ export class AssociadoFormComponent implements OnInit {
         this._nomeFoto = this.history[0];
 
         if (this._nomeFoto === undefined) {
-            this._nomeFoto = this._nomeFotoPadrao;
+            if (this.associado.associadoId === 0) {
+                this._nomeFoto = this._nomeFotoPadrao;
+            } else {
+                this._nomeFoto = this.associado.nomeFoto;
+            }
         }
 
         if (this.associado.enderecosPessoa[0].ordemEndereco === '') {
@@ -172,7 +176,7 @@ export class AssociadoFormComponent implements OnInit {
 
             this._assocId = parseInt(msgRet.substring(0, 10), 10);
 
-            this.router.navigate([`/Associado/${this._assocId}`]);
+            this.router.navigate([`admin/Associado/${this._assocId}`]);
 
             this.getAssociadoById(this._assocId);
 

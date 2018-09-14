@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 
 import { MessagesComponent } from './messages/messages.component';
 
-
 import { MessageService } from './message.service';
 import { UserService } from './components/shared/services/user.service';
 
@@ -32,8 +31,9 @@ import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
 import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
-// import { UserProfileRoute } from './components/shared/webapi-routes/user-profile.route';
 import { AdminModule } from './components/admin/admin.module';
+import { FichaFinanceiraModule } from './components/ficha-financeira/ficha-financeira.module';
+
 
 @NgModule({
   imports: [
@@ -49,12 +49,11 @@ import { AdminModule } from './components/admin/admin.module';
     RecebimentoAnuidadeModule,
     RecebimentoEventoModule,
     AtcModule,
-    RelatoriosModule,    
+    RelatoriosModule,
     AdminModule,
     LoginModule,
-    AppRoutingModule,
-
-    
+    FichaFinanceiraModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -71,7 +70,7 @@ import { AdminModule } from './components/admin/admin.module';
     RelatoriosRoute,
     // UserProfileRoute,
     LoginRoute,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt' }
   ],
   exports: [
 

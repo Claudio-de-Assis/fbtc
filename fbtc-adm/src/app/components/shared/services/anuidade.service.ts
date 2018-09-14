@@ -1,3 +1,4 @@
+import { AnuidadeDao } from './../model/anuidade';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -38,6 +39,14 @@ export class AnuidadeService {
           );
     }
 
+
+    getAnuidadeDaoById(id: number): Observable<AnuidadeDao> {
+        return this.http.get<AnuidadeDao>(this.apiRoute.getAnuidadeDaoById(id)).pipe(
+            tap(_ => this.log(`fetched Anuidade id=${id}`)),
+            catchError(this.handleError<AnuidadeDao>(`getAnuidade id=${id}`))
+          );
+    }
+
     setAnuidade(): Observable<Anuidade> {
         return this.http.get<Anuidade>(this.apiRoute.setAnuidade()).pipe(
             tap(_ => this.log(`fetched anuidade id=${0}`)),
@@ -45,12 +54,29 @@ export class AnuidadeService {
         );
     }
 
+    getByFilters(codigo: number, ativo: string): Observable<Anuidade[]> {
+        return this.http.get<Anuidade[]>(this.apiRoute.getFindByFilters(codigo, ativo))
+            .pipe(
+                tap(anuidades => this.log(`fetched Anuidade Filter codigo=${codigo}, Ativo=${ativo}`)),
+                catchError(this.handleError(`getByFilters codigo=${codigo}, Ativo=${ativo}`, []))
+        );
+    }
+
+
     //////// Save methods //////////
     /** POST: add a new Associado to the server */
     addAnuidade (anuidade: Anuidade): Observable<Anuidade> {
         return this.http.post<Anuidade>(this.apiRoute.postAnuidade(), anuidade, httpOptions).pipe(
           tap((_anuidade: Anuidade) => this.log(`added anuidade w/ id=${anuidade.anuidadeId}`)),
           catchError(this.handleError<Anuidade>('addAnuidade'))
+        );
+    }
+
+    addAnuidadeDao (anuidadeDao: AnuidadeDao): Observable<string> {
+
+        return this.http.post<string>(this.apiRoute.postAnuidadeDao(), anuidadeDao, httpOptions).pipe(
+          tap(_ => this.log(`added anuidadeDao w/ id=${anuidadeDao.anuidadeId}`)),
+          catchError(this.handleError<string>('addAnuidadeDao'))
         );
     }
 

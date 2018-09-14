@@ -1,0 +1,91 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #fichaFinanceiraForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="inpCodigo">Anuidade:</label>
+                            <input id="inpCodigo" name="codigo" class="form-control" type="text"
+                            required minlength="4" maxlength="4"
+                                [(ngModel)]="anuidadeDao.codigo"  #codigo="ngModel"/>
+                            <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="codigo.errors.required">* O código da anuidade é obrigatório.</div>
+                                <div *ngIf="codigo.errors.minlength"> * O código deve ter 4 algarismos.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Ativo:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
+                                    <input type="radio" [(ngModel)]="anuidadeDao.ativo" name="ativo" id="rdbAtivo" 
+                                    [checked]="op.value === anuidadeDao.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-lg-12">
+                                <div class="form-group">
+                                        <div class="panel panel-default" *ngIf="anuidadeDao.tiposPublicosValorsAnuidadesDao"> 
+                                                <div class="panel-heading">
+                                                    Faixa de Pre&ccedil;os
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Tipo de Público</th>
+                                                                    <th>Valor</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let tp of anuidadeDao.tiposPublicosValorsAnuidadesDao" >
+                                                                    <td>{{ tp.nome }}</td>
+                                                                    <td><input currencyMask [(ngModel)]="tp.valor" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                            id="inp{{ tp.tipoPublicoId }}" name="inp{{ tp.tipoPublicoId }}"  class="form-control"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                            <div *ngIf="_msg !== ''" class="alert alert-success">
+                                                <div >{{ _msg }}</div>
+                                            </div>
+                                        </div>
+                                </div>
+                                
+                            </div>     
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--<button class="btn btn-success" (click)="gotoNotificarAssociado()">Notificar Associados</button>-->
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!fichaFinanceiraForm.form.valid">Salvar</button>
+                        <button class="btn btn-default" (click)="gotoFichaFinanceira()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

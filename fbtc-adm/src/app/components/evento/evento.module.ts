@@ -17,7 +17,7 @@ import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CKEditorModule } from 'ngx-ckeditor';
-
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   imports: [
@@ -28,8 +28,8 @@ import { CKEditorModule } from 'ngx-ckeditor';
 //    FileUploadModule,
     NgxPaginationModule,
     HttpModule,
+    NgxCurrencyModule,
     CKEditorModule
-    
   ],
   declarations: [
     EventoListComponent,
@@ -44,7 +44,7 @@ import { CKEditorModule } from 'ngx-ckeditor';
   providers: [
     EventoService,
     FileUploadRoute,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt' }
   ]
 })
 export class EventoModule { }

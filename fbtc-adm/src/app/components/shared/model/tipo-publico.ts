@@ -12,3 +12,9 @@ export class TipoPublicoValorDao extends TipoPublico {
     valor: number;
     valorAtivo: boolean;
 }
+
+export class TipoPublicoValorAnuidadeDao extends TipoPublico {
+    valorAnuidadePublicoId: number;
+    valor: number;
+    anuidadeId: number;
+}

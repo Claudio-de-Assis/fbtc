@@ -108,7 +108,11 @@ export class UserProfileFormComponent implements OnInit {
     this._nomeFoto = this.history[0];
 
     if (this._nomeFoto === undefined) {
+      if ( this.userProfile.pessoaId === 0) {
         this._nomeFoto = this._nomeFotoPadrao;
+      } else {
+        this._nomeFoto = this.userProfile.nomeFoto;
+      }
     }
 
     if (this.editNovaSenha !== '') {

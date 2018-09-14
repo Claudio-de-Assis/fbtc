@@ -245,8 +245,10 @@
                 <li *ngxPermissionsOnly="['Cliente Externo']">                
                     <a [routerLink]="['AssociadoPublico']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
                 </li>
+                <li *ngxPermissionsOnly="['Cliente Externo']">                
+                    <a [routerLink]="['AssociadoFichaFinanceira']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Ficha Financeira</a>
+                </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                
                     <a [routerLink]="['Associado']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
                 </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
@@ -255,6 +257,11 @@
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Evento']" routerLinkActtive="active"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Eventos</a>
                 </li>
+                
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a [routerLink]="['FichaFinanceira']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Ficha Financeira</a>
+                </li>
+                
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a href="javascript:void(0)" (click)="isToggle('menuRecebimentos')"><i class="fa fa-money fa-fw"></i> Recebimentos<span class="fa arrow"></span></a>
                     <ul id="menuRecebimentos" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuRecebimentos'}"  >
@@ -267,7 +274,6 @@
                     </ul>
                 </li>
                 <li>
-                    
                 </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a href="javascript:void(0)" (click)="isToggle('menuIsencoes')"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
@@ -308,6 +314,9 @@
                             <a [routerLink]="['RptReceitaAnual']" routerLinkActtive="active">Receita por ano</a>
                         </li>
                     </ul>
+                </li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a [routerLink]="['Cursos&Noticias']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Cursos e Notícias</a>
                 </li>
             </ul>
         </div>
