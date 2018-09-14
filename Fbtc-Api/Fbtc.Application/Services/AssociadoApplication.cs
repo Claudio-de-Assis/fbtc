@@ -192,6 +192,87 @@ namespace Fbtc.Application.Services
             return _associado; 
         }
 
+
+        public Associado GetAssociadoByPessoaId(int id)
+        {
+            Associado _associado = _associadoService.GetAssociadoByPessoaId(id);
+
+            //Adicionando objeto Endereco caso não exista:
+            if (_associado.EnderecosPessoa == null)
+            {
+                List<Endereco> lstEnd = new List<Endereco>();
+
+                int i = 1;
+
+                while (i < 3)
+                {
+                    lstEnd.Add(new Endereco()
+                    {
+                        PessoaId = 0,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    });
+                }
+                _associado.EnderecosPessoa = lstEnd;
+            }
+            else
+            {
+                List<Endereco> lstEnd = new List<Endereco>();
+
+                foreach (var end in _associado.EnderecosPessoa)
+                {
+                    lstEnd.Add(end);
+                }
+
+                if (lstEnd.Count < 2)
+                {
+                    int i = 0;
+                    int pessoaId = 0;
+
+                    foreach (var end in lstEnd)
+                    {
+                        i = int.Parse(end.OrdemEndereco);
+                        pessoaId = end.PessoaId;
+
+                        if (i == 1)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            i--;
+                        }
+                    }
+
+                    lstEnd.Add(new Endereco()
+                    {
+                        PessoaId = pessoaId,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    });
+                    _associado.EnderecosPessoa = lstEnd;
+                }
+            }
+
+            return _associado;
+        }
+
         public string Save(Associado a)
         {
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
@@ -229,6 +310,7 @@ namespace Fbtc.Application.Services
                 ComprovanteAfiliacaoAtc = Functions.AjustaTamanhoString(a.ComprovanteAfiliacaoAtc, 100),
                 TipoProfissao = a.TipoProfissao,
                 TipoTitulacao = a.TipoTitulacao,
+                PerfilId = a.PerfilId
             };
 
             if (a.EnderecosPessoa != null)

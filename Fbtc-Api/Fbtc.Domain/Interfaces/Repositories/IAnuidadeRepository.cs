@@ -9,10 +9,18 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         Anuidade GetAnuidadeById(int id);
 
+        AnuidadeDao GetAnuidadeDaoById(int id);
+
         string DeleteById(int id);
 
         string Insert(Anuidade anuidade);
 
         string Update(int id, Anuidade anuidade);
+
+        string InsertAnuidadeDao(AnuidadeDao anuidadeDao);
+
+        string UpdateAnuidadeDao(int id, AnuidadeDao anuidadeDao);
+
+        IEnumerable<Anuidade> FindByFilters(int codigo, bool? ativo);
     }
 }

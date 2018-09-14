@@ -12,5 +12,7 @@ namespace Fbtc.Domain.Interfaces.Repositories
         TipoPublico GetTipoPublicoById(int id);
 
         IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id);
+
+        IEnumerable<TipoPublicoValorAnuidadeDao> GetTipoPublicoValorByAnuidadeId(int id);
     }
 }

@@ -50,6 +50,11 @@ namespace Fbtc.Domain.Services
             return _associadoRepository.GetAssociadoById(id);
         }
 
+        public Associado GetAssociadoByPessoaId(int id)
+        {
+            return _associadoRepository.GetAssociadoByPessoaId(id);
+        }
+        
         public string GetNomeFotoByAssociadoId(int id)
         {
             return _associadoRepository.GetNomeFotoByAssociadoId(id);

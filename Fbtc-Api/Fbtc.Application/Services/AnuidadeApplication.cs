@@ -24,6 +24,11 @@ namespace Fbtc.Application.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Anuidade> FindByFilters(int codigo, bool? ativo)
+        {
+            return _anuidadeService.FindByFilters(codigo, ativo);
+        }
+
         public IEnumerable<Anuidade> GetAll()
         {
             return _anuidadeService.GetAll();
@@ -32,6 +37,11 @@ namespace Fbtc.Application.Services
         public Anuidade GetAnuidadeById(int id)
         {
             return _anuidadeService.GetAnuidadeById(id);
+        }
+
+        public AnuidadeDao GetAnuidadeDaoById(int id)
+        {
+            return _anuidadeService.GetAnuidadeDaoById(id);
         }
 
         public string Save(Anuidade a)
@@ -52,6 +62,38 @@ namespace Fbtc.Application.Services
                 else
                 {
                     return _anuidadeService.Update(a.AnuidadeId, _a);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string SaveAnuidadeDao(AnuidadeDao a)
+        {
+            ArgumentsValidator.RaiseExceptionOfInvalidArguments(
+            RaiseException.IfTrue(a.Codigo == 0, "Código não informado")
+            );
+
+            AnuidadeDao _a = new AnuidadeDao
+            {
+                AnuidadeId = a.AnuidadeId,
+                Codigo = a.Codigo,
+                DtCadastro = a.DtCadastro,
+                Ativo = a.Ativo,
+                TiposPublicosValorsAnuidadesDao = a.TiposPublicosValorsAnuidadesDao
+            };
+
+            try
+            {
+                if (_a.AnuidadeId == 0)
+                {
+                    return _anuidadeService.InsertAnuidadeDao(_a);
+                }
+                else
+                {
+                    return _anuidadeService.UpdateAnuidadeDao(a.AnuidadeId, _a);
                 }
             }
             catch (Exception ex)

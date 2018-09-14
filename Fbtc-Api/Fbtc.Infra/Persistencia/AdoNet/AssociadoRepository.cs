@@ -199,6 +199,41 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return associado;
         }
 
+        public Associado GetAssociadoByPessoaId(int id)
+        {
+            query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
+                        A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
+                        A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
+                        A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
+                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
+                    FROM dbo.AD_Associado A 
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
+                    WHERE P.PessoaId = " + id + "";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            Associado associado = GetCollection<Associado>(cmd)?.First();
+
+            // Obtendo um endereco:
+            if (associado != null)
+            {
+                EnderecoRepository _endRep = new EnderecoRepository();
+
+                var ends = _endRep.GetByPessoaId(associado.PessoaId);
+
+                if (ends != null && ends.Count() > 0)
+                {
+                    associado.EnderecosPessoa = ends;
+                }
+            }
+
+            return associado;
+        }
+
         public string Insert(Associado associado)
         {
             bool _resultado = false;

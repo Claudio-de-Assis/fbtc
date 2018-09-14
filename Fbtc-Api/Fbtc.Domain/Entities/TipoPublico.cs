@@ -18,4 +18,12 @@ namespace Fbtc.Domain.Entities
         public decimal Valor { get; set; }
         public bool ValorAtivo { get; set; }
     }
+
+    // Classe DAO usada para apresentar os valores no Cadastro de Anuidades
+    public class TipoPublicoValorAnuidadeDao : TipoPublico
+    {
+        public int ValorAnuidadePublicoId { get; set; }
+        public decimal Valor { get; set; }
+        public int AnuidadeId { get; set; }
+    }
 }

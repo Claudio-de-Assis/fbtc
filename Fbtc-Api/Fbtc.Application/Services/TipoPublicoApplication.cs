@@ -40,5 +40,10 @@ namespace Fbtc.Application.Services
         {
             return _tipoPublicoService.GetTipoPublicoValorByEventoId(id);
         }
+
+        public IEnumerable<TipoPublicoValorAnuidadeDao> GetTipoPublicoValorByAnuidadeId(int id)
+        {
+            return _tipoPublicoService.GetTipoPublicoValorByAnuidadeId(id);
+        }
     }
 }

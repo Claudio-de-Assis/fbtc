@@ -9,10 +9,16 @@ namespace Fbtc.Application.Interfaces
 
         Anuidade GetAnuidadeById(int id);
 
+        AnuidadeDao GetAnuidadeDaoById(int id);
+        
         Anuidade SetAnuidade();
 
         string DeleteById(int id);
 
         string Save(Anuidade anuidade);
+
+        string SaveAnuidadeDao(AnuidadeDao anuidadeDao);
+
+        IEnumerable<Anuidade> FindByFilters(int codigo, bool? ativo);
     }
 }

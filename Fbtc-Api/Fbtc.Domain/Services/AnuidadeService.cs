@@ -21,6 +21,11 @@ namespace Fbtc.Domain.Services
             throw new System.NotImplementedException();
         }
 
+        public IEnumerable<Anuidade> FindByFilters(int codigo, bool? ativo)
+        {
+            return _anuidadeRepository.FindByFilters(codigo, ativo);
+        }
+
         public IEnumerable<Anuidade> GetAll()
         {
             return _anuidadeRepository.GetAll();
@@ -31,14 +36,29 @@ namespace Fbtc.Domain.Services
             return _anuidadeRepository.GetAnuidadeById(id);
         }
 
+        public AnuidadeDao GetAnuidadeDaoById(int id)
+        {
+            return _anuidadeRepository.GetAnuidadeDaoById(id);
+        }
+
         public string Insert(Anuidade anuidade)
         {
             return _anuidadeRepository.Insert(anuidade);
         }
 
+        public string InsertAnuidadeDao(AnuidadeDao anuidadeDao)
+        {
+            return _anuidadeRepository.InsertAnuidadeDao(anuidadeDao);
+        }
+
         public string Update(int id, Anuidade anuidade)
         {
             return _anuidadeRepository.Update(id, anuidade);
+        }
+
+        public string UpdateAnuidadeDao(int id, AnuidadeDao anuidadeDao)
+        {
+            return _anuidadeRepository.UpdateAnuidadeDao(id, anuidadeDao);
         }
     }
 }

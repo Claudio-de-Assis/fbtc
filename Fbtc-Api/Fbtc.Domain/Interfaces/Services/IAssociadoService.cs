@@ -32,5 +32,7 @@ namespace Fbtc.Domain.Interfaces.Services
         string RessetPasswordById(int id);
 
         string ValidaEMail(int associadoId, string eMail);
+
+        Associado GetAssociadoByPessoaId(int id);
     }
 }

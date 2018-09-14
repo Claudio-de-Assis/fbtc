@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fbtc.Domain.Entities
 {
@@ -8,5 +9,10 @@ namespace Fbtc.Domain.Entities
         public int Codigo { get; set; }
         public DateTime DtCadastro { get; set; }
         public bool Ativo { get; set; }
+    }
+   
+    public class AnuidadeDao : Anuidade
+    {
+        public IEnumerable<TipoPublicoValorAnuidadeDao> TiposPublicosValorsAnuidadesDao { get; set; }
     }
 }

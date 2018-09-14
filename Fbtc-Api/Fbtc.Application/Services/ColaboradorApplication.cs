@@ -54,7 +54,8 @@ namespace Fbtc.Application.Services
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
                 RaiseException.IfNullOrEmpty(c.Nome, "Nome do Colaborador não informado"),
                 RaiseException.IfNotEmail(c.EMail, "E-Mail inválido"),
-                RaiseException.IfNullOrEmpty(c.NrCelular, "NrCelular não informado")
+                RaiseException.IfNullOrEmpty(c.NrCelular, "NrCelular não informado"),
+                RaiseException.IfEqualsZero(c.PerfilId, "Perfil não informado")
             );
 
             Colaborador _c = new Colaborador()
@@ -68,6 +69,7 @@ namespace Fbtc.Application.Services
                 DtNascimento = c.DtNascimento,
                 NrCelular = Functions.AjustaTamanhoString(c.NrCelular, 15),
                 PasswordHash = Functions.AjustaTamanhoString(c.PasswordHash, 100),
+                PerfilId = c.PerfilId,
                 Ativo = c.Ativo
             };
 
