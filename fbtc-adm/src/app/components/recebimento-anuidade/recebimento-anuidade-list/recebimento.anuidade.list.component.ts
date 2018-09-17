@@ -176,6 +176,35 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
       ]);
   }
 
+  gotoLimparFiltros() {
+    this.editNome = '';
+    this.editCpf = '';
+    this.editCrp = '';
+    this.editCrm = '';
+    this.editAno = 0;
+    this.editMes = 0;
+    this.editStatusPS = 99;
+    this.editAtivo = true;
+    this.editTipoPublicoId = 0;
+
+    this._objetivoPagamento = '2';
+    this._nome = '0';
+    this._cpf = '0';
+    this._crp = '0';
+    this._crm = '0';
+    this._statusPS = 99;
+    this._ano = 0;
+    this._mes = 0;
+    this._ativo = '2';
+    this._tipoPublicoId = 0;
+    this._isAssociado = true;
+    this.submitted = false;
+    this._itensPerPage = 30;
+
+    this.mensagemSincronizacao = '';
+    this._msg = '';
+  }
+
   ngOnInit() {
 
     this.getTiposPublicos();

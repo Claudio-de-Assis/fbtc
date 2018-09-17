@@ -54,11 +54,11 @@ export class RecebimentoEventoListComponent implements OnInit {
   _tipoEvento: string;
   _tipoPublicoId: number;
 
+  _itensPerPage: number;
+
   _msg: string;
 
   submitted = false;
-
-  _itensPerPage = 30;
 
   constructor(
       private service: RecebimentoService,
@@ -68,6 +68,8 @@ export class RecebimentoEventoListComponent implements OnInit {
       private route: ActivatedRoute
   ) {
     this.title = 'Consulta de pagamento de eventos';
+    this._itensPerPage = 30;
+
     this.editNome = '';
     this.editCpf = '';
     this.editCrp = '';
@@ -175,5 +177,31 @@ export class RecebimentoEventoListComponent implements OnInit {
     this.getTiposPublicos();
     this.gotoBuscarRecebimento();
 
+  }
+
+  gotoLimparFiltros() {
+    this.editNome = '';
+    this.editCpf = '';
+    this.editCrp = '';
+    this.editCrm = '';
+    this.editStatusPS = 99;
+    this.editAno = 0;
+    this.editAtivo = true;
+    this.editTipoEvento = '0';
+    this.editTipoPublicoId = 0;
+    this._objetivoPagamento = '1';
+    this._nome = '0';
+    this._cpf = '0';
+    this._crp = '0';
+    this._crm = '0';
+    this._statusPS = 99;
+    this._ano = 0;
+    this._mes = 0;
+    this._ativo = '2';
+    this._tipoEvento = '0';
+    this._tipoPublicoId = 0;
+
+    this.mensagemSincronizacao = '';
+    this._msg = '';
   }
 }

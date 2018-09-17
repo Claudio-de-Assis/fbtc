@@ -44,6 +44,7 @@
                 </div>
             </div>
             <div class="panel-footer text-right">
+                <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                 <button type="submit" class="btn btn-primary">Pesquisar</button>
                 <button class="btn btn-default" (click)="gotoNovoColaborador()">Novo</button>
             </div>
@@ -74,7 +75,7 @@
                                 <td>{{colaborador.ativo | booMessage }}</td>
                                 <td>
                                     <a [routerLink]="['/admin/Colaborador', colaborador.colaboradorId]"><i class="fa fa-pencil text-primary" ></i></a>
-                                    <i class="fa fa-trash text-danger" data-toggle="modal" data-target="#myModal"></i>
+                                    <!--<i class="fa fa-trash text-danger" data-toggle="modal" data-target="#myModal"></i>-->
                                 </td>
                             </tr>
                         </tbody>
@@ -90,10 +91,6 @@
                                                 previousLabel="Anterior"
                                                 nextLabel="Próxima"
                         ></pagination-controls>
-                        <!--<button class="btn btn-default" (click)="gotoPrimeiraPagina()"><i class="fa fa-angle-double-left"></i></button>
-                        <button class="btn btn-default" (click)="gotoPaginaAnterio()"><i class="fa fa-angle-left"></i></button>
-                        <button class="btn btn-default" (click)="gotoProximaPagina()"><i class="fa fa-angle-right"></i></button>
-                        <button class="btn btn-default" (click)="gotoUltimaPagina()"><i class="fa fa-angle-double-right"></i></button>-->
                     </div>
                 </div>
             </div>

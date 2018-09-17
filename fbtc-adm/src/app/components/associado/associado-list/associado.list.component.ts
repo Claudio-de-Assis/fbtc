@@ -159,6 +159,27 @@ export class AssociadoListComponent implements OnInit {
           this._ativo = '2';
     }
 
+    gotoLimparFiltros() {
+
+        this.editNome = '';
+        this.editCpf = '';
+        this.editSexo = '0';
+        this.editAtcId = 0;
+        this.editCrp = '';
+        this.editTipoProfissao = '0';
+        this.editTipoPublicoId = 0;
+        this.editEstado = '0';
+        this.editCidade = '0';
+        this.editAtivo = true;
+        this._nome = '0';
+        this._cpf = '0';
+        this._crp = '0';
+        this._estado = '0';
+        this._cidade = '0';
+        this._ativo = '2';
+
+    }
+
     ngOnInit(): void {
 
         this.getTiposPublicos();

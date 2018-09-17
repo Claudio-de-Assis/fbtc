@@ -20,8 +20,6 @@ import { Util } from '../../shared/util/util';
 })
 export class IsencaoEventoListComponent implements OnInit {
 
-  title = 'Consulta de Isenção de Evento';
-
   _util = Util;
 
   isencoes: IsencaoDao[];
@@ -32,24 +30,37 @@ export class IsencaoEventoListComponent implements OnInit {
 
   tiposPublicos: TipoPublico[];
 
-  editNome: string = '';
-  editAnoIsencao: number = 0;
-  editIdentificacao: string = '';
-  editTipoEvento: string = '0';
+  title: string;
+  editNome: string;
+  editAnoIsencao: number;
+  editIdentificacao: string;
+  editTipoEvento: string;
 
-  _nome: string = '0';
-  _anoIsencao: number = 0;
-  _identificacao: string = '0';
-  _tipoIsencao: string = '1'; // Anuidade:2 Evento: 1
+  _nome: string;
+  _anoIsencao: number;
+  _identificacao: string;
+  _tipoIsencao: string;
 
-  _itensPerPage = 30;
+  _itensPerPage: number;
 
   constructor(
     private service: IsencaoService,
     private serviceTP: TipoPublicoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+
+    this.title = 'Consulta de Isenção de Evento';
+
+    this.editNome = '';
+    this.editAnoIsencao = 0;
+    this.editIdentificacao = '';
+    this.editTipoEvento = '0';
+    this._nome = '0';
+    this._anoIsencao = 0;
+    this._identificacao = '0';
+    this._tipoIsencao = '1'; // Anuidade:2 Evento: 1
+  }
 
   submitted = false;
 
@@ -104,5 +115,16 @@ export class IsencaoEventoListComponent implements OnInit {
 
     this.getTiposPublicos();
     this.gotoBuscarIsencao();
+  }
+
+  gotoLimparFiltros() {
+    this.editNome = '';
+    this.editAnoIsencao = 0;
+    this.editIdentificacao = '';
+    this.editTipoEvento = '0';
+    this._nome = '0';
+    this._anoIsencao = 0;
+    this._identificacao = '0';
+    this._tipoIsencao = '1'; // Anuidade:2 Evento: 1
   }
 }

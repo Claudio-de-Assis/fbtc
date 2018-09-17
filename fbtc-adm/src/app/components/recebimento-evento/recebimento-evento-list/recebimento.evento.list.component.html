@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-lg-6 text-right">
                         <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincroniza o sistema 30 dias">Sincronizar com PagSeguro</button>
-                        <!--<button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>-->
+                        <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                                     <td>
                                         <a [routerLink]="['/admin/RecebimentoEvento', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
                                         <!--<a href="javascript: alert('excluir'); return false;"><i class="fa fa-trash text-danger"></i></a>-->
-                                        <i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>
+                                        <!--<i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>-->
                                     </td>
                                 </tr>
                             </tbody>

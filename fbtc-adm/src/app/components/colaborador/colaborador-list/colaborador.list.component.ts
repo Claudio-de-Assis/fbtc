@@ -19,16 +19,14 @@ export class ColaboradorListComponent implements OnInit {
 
   title = 'Consulta de integrante da Administração';
 
-  editAtivo: boolean = true;
-  editNome: string = '';
-  editTipoPerfil: string = '0';
-  _nome: string = '0';
-  _ativo: string = '2';
-
-  _itensPerPage = 30;
+  editAtivo: boolean;
+  editNome: string;
+  editTipoPerfil: string;
+  _nome: string;
+  _ativo: string;
+  _itensPerPage: number;
 
   _util = Util;
-
   colaboradores: Colaborador[];
 
   private selectedColaborador: Colaborador;
@@ -40,7 +38,14 @@ export class ColaboradorListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
 
-  ) { }
+  ) {
+    this.editAtivo = true;
+    this.editNome = '';
+    this.editTipoPerfil = '0';
+    this._nome = '0';
+    this._ativo = '2';
+    this._itensPerPage = 30;
+  }
 
   getColaboradores(): void {
     this.service.getColaboradores()
@@ -79,6 +84,15 @@ export class ColaboradorListComponent implements OnInit {
     this._ativo = '2';
   }
 
+  gotoLimparFiltros() {
+    this.editAtivo = true;
+    this.editNome = '';
+    this.editTipoPerfil = '0';
+    this._nome = '0';
+    this._ativo = '2';
+  }
+
+
   onSubmit() {
     this.submitted = true;
     this.gotoBuscarColaborador();
@@ -87,9 +101,4 @@ export class ColaboradorListComponent implements OnInit {
   ngOnInit() {
     this.getColaboradores();
   }
-
-  /*
-  excluir() {
-    // this.gotoColaboradores();
-  }*/
 }

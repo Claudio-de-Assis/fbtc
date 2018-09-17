@@ -47,17 +47,15 @@ export class EventoListComponent implements OnInit {
   ) {
 
     this.title = 'Consulta de Eventos';
+    this._itensPerPage = 30;
+    this.submitted = false;
 
     this.editNome = '';
     this.editAno = null;
     this.editTipoEvento = '';
-
     this._nome = '0';
     this._ano = 0;
     this._tipoEvento = '0';
-    this._itensPerPage = 30;
-
-    this.submitted = false;
    }
 
   getEventos(): void {
@@ -98,6 +96,15 @@ export class EventoListComponent implements OnInit {
         .subscribe(eventos => this.eventos = eventos);
 
     this.submitted = false;
+    this._nome = '0';
+    this._ano = 0;
+    this._tipoEvento = '0';
+  }
+
+  gotoLimparFiltros() {
+    this.editNome = '';
+    this.editAno = null;
+    this.editTipoEvento = '';
     this._nome = '0';
     this._ano = 0;
     this._tipoEvento = '0';

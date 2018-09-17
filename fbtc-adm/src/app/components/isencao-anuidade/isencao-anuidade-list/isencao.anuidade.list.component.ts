@@ -16,8 +16,6 @@ import { TipoPublico } from '../../shared/model/tipo-publico';
 })
 export class IsencaoAnuidadeListComponent implements OnInit {
 
-  title = 'Consulta de Isenção de Anuidade';
-
   _util = Util;
 
   isencoes: IsencaoDao[];
@@ -28,26 +26,41 @@ export class IsencaoAnuidadeListComponent implements OnInit {
 
   tiposPublicos: TipoPublico[];
 
-  editNome: string = '';
-  editAnoIsencao: number = 0;
-  editIdentificacao: string = '';
-  editTipoEvento: string = '0';
+  title: string;
+  editNome: string;
+  editAnoIsencao: number;
+  editIdentificacao: string;
+  editTipoEvento: string;
+  submitted: boolean;
 
-  _nome: string = '0';
-  _anoIsencao: number = 0;
-  _identificacao: string = '0';
-  _tipoIsencao: string = '2'; // Anuidade:2 Evento: 1
+  _nome: string;
+  _anoIsencao: number;
+  _identificacao: string;
+  _tipoIsencao: string;
 
-  _itensPerPage = 30;
+  _itensPerPage: number;
 
   constructor(
     private service: IsencaoService,
     private serviceTP: TipoPublicoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
 
-  submitted = false;
+    this.title = 'Consulta de Isenção de Anuidade';
+    this._itensPerPage = 30;
+    this.submitted = false;
+
+    this.editNome = '';
+    this.editAnoIsencao = 0;
+    this.editIdentificacao = '';
+    this.editTipoEvento = '0';
+    this._nome = '0';
+    this._anoIsencao = 0;
+    this._identificacao = '0';
+    this._tipoIsencao = '2'; // Anuidade:2 Evento: 1
+  }
+
 
   onSubmit() {
     this.submitted = true;
@@ -88,6 +101,17 @@ export class IsencaoAnuidadeListComponent implements OnInit {
   getTiposPublicos(): void {
 
     this.serviceTP.getTiposPublicos('true').subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
+  }
+
+  gotoLimparFiltros() {
+    this.editNome = '';
+    this.editAnoIsencao = 0;
+    this.editIdentificacao = '';
+    this.editTipoEvento = '0';
+    this._nome = '0';
+    this._anoIsencao = 0;
+    this._identificacao = '0';
+    this._tipoIsencao = '2'; // Anuidade:2 Evento: 1
   }
 
   ngOnInit() {

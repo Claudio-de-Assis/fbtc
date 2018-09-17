@@ -109,7 +109,7 @@ export class AssociadoFormComponent implements OnInit {
 
     getAssociadoById(id: number): void {
 
-        this.service.getById(id)
+        this.service.getPessoaAssociadoById(id)
             .subscribe(associado => this.associado = associado);
     }
 

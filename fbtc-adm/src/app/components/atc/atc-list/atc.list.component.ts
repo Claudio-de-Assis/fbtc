@@ -20,26 +20,32 @@ import { UnidadeFederacao } from '../../shared/model/unidade-federacao';
 })
 export class AtcListComponent implements OnInit {
 
-  title = 'Consulta de ATCs';
+  title: string;
 
-  editSiglaUF: string = null;
-  _siglaUF: string = '0';
+  editSiglaUF: string;
+  _siglaUF: string;
+  submitted: boolean;
 
-  _itensPerPage = 30;
+  _itensPerPage: number;
 
   private selectedAtc: Atc;
 
   atcs: Atc[];
   unidadesFederacao: UnidadeFederacao[];
 
-  submitted = false;
-
   constructor(
     private service: AtcService,
     private serviceUF: UnidadeFederacaoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.title = 'Consulta de ATCs';
+    this.submitted = false;
+    this._itensPerPage = 30;
+
+    this.editSiglaUF = null;
+    this._siglaUF = '0';
+  }
 
 
   getAtcs(): void {
@@ -76,6 +82,11 @@ export class AtcListComponent implements OnInit {
 
   gotoNovaAtc() {
       this.router.navigate(['/admin/Atc', 0]);
+  }
+
+  gotoLimparFiltros() {
+    this.editSiglaUF = null;
+    this._siglaUF = '0';
   }
 
   ngOnInit() {

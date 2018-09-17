@@ -82,8 +82,8 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-12 text-right">
-                        <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincroniza o sistema 30 dias">Sincronizar com PagSeguro</button>
-                        <!--<button class="btn btn-success" (click)="gotoGerarNovaCobranca()">Gera nova cobrança</button>-->
+                            <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincronizar pagamentos dos últimos 30 dias">Sincronizar com PagSeguro</button>
+                            <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                                     <td>{{ recebimento.statusPS |  statusPagamento }}</td>
                                     <td>
                                         <a [routerLink]="['/admin/RecebimentoAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
-                                        <i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>
+                                        <!--<i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>-->
                                     </td>
                                 </tr>
                             </tbody>
