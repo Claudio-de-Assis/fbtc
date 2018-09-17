@@ -27,23 +27,23 @@ export class AssociadoListComponent implements OnInit {
 
     title = 'Consulta de Usuário'; // Associado
 
-    editNome: string = '';
-    editCpf: string = '';
-    editSexo: string = '0';
-    editAtcId: number = 0;
-    editCrp: string = '';
-    editTipoProfissao: string = '0';
-    editTipoPublicoId: number = 0;
-    editEstado: string = '0';
-    editCidade: string = '0';
-    editAtivo: boolean = true;
+    editNome: string;
+    editCpf: string;
+    editSexo: string;
+    editAtcId: number;
+    editCrp: string;
+    editTipoProfissao: string;
+    editTipoPublicoId: number;
+    editEstado: string;
+    editCidade: string;
+    editAtivo: boolean;
 
-    _nome: string = '0';
-    _cpf: string = '0';
-    _crp: string = '0';
-    _estado: string = '0';
-    _cidade: string = '0';
-    _ativo: string = '2';
+    _nome: string;
+    _cpf: string;
+    _crp: string;
+    _estado: string;
+    _cidade: string;
+    _ativo: string;
 
     _util = Util;
 
@@ -67,7 +67,25 @@ export class AssociadoListComponent implements OnInit {
         private route: ActivatedRoute,
         private serviceAtc: AtcService,
         private serviceEnd: EnderecoService
-    ) { }
+    ) {
+
+        this.editNome = '';
+        this.editCpf = '';
+        this.editSexo = '0';
+        this.editAtcId = 0;
+        this.editCrp = '';
+        this.editTipoProfissao = '0';
+        this.editTipoPublicoId = 0;
+        this.editEstado = '0';
+        this.editCidade = '0';
+        this.editAtivo = true;
+        this._nome = '0';
+        this._cpf = '0';
+        this._crp = '0';
+        this._estado = '0';
+        this._cidade = '0';
+        this._ativo = '2';
+    }
 
     getEstados(): void {
 

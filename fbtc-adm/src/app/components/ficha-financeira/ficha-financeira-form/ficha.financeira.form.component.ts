@@ -72,7 +72,7 @@ export class FichaFinanceiraFormComponent implements OnInit {
 
   gotoFichaFinanceira() {
 
-    let anuidadeId = this.anuidadeDao ? this.anuidadeDao.anuidadeId : null;
+    const anuidadeId = this.anuidadeDao ? this.anuidadeDao.anuidadeId : null;
     this.router.navigate(['/admin/FichaFinanceira', { id: anuidadeId, foo: 'foo' }]);
   }
 

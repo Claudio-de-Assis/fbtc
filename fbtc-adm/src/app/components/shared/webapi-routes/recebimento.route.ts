@@ -17,6 +17,10 @@ export class RecebimentoRoute {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
+    getPagamentoAssociadoByRecebimentoId(id: number): string {
+        return AppSettings.API_ENDPOINT + this.url + 'PagamentoAssociado/' + id;
+    }
+
     // objetivoPagamento: 1: Evento; 2: Anuidade
     // [Route("SetRecebimento/{objetivoPagamento}")]
     setRecebimento(objetivoPagamento: string): string {
@@ -40,6 +44,12 @@ export class RecebimentoRoute {
 
         return AppSettings.API_ENDPOINT + this.url +
         `FindAnuidadeByFilters/${nome},${cpf},${crp},${crm},${statusPS},${ano},${mes},${ativo},${tipoPublicoId}`;
+    }
+
+    FindPagamentosByPessoaIdIdFilters(pessoaId: number, objetivoPagamento: string, ano: number, statusPS: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url +
+        `FindPagamentosByPessoaIdIdFilters/${pessoaId},${objetivoPagamento},${ano},${statusPS}`;
     }
 
     FindByAnuidadeIdFilters(anuidadeId: number, nome: string, cpf: string, crp: string, crm: string,

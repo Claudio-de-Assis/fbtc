@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { ManageHeroesComponent } from './manage-heroes.component';
 import { ManageCrisesComponent } from './manage-crises.component';
 import { AdminComponent } from './admin.component';
-
 
 import { AuthGuard } from '../shared/services/auth-guard.service';
 import { AssociadoListComponent } from '../associado/associado-list/associado.list.component';
@@ -23,6 +21,7 @@ import { IsencaoEventoListComponent } from '../isencao-evento/isencao-evento-lis
 import { IsencaoEventoFormComponent } from '../isencao-evento/isencao-evento-form/isencao.evento.form.component';
 import { AtcListComponent } from '../atc/atc-list/atc.list.component';
 import { AtcFormComponent } from '../atc/atc-form/atc.form.component';
+// tslint:disable-next-line:max-line-length
 import { RelatorioTotalAssociadosTipoComponent } from '../relatorios/relatorio-total-associados-tipo/relatorio-total-associados-tipo.component';
 import { RelatorioRecebimentoStatusComponent } from '../relatorios/relatorio-recebimento-status/relatorio-recebimento-status.component';
 import { RelatorioAssociadosFaixaComponent } from '../relatorios/relatorio-associados-faixa/relatorio-associados-faixa.component';
@@ -37,6 +36,12 @@ import { UserProfileFormComponent } from '../user-profile/user-profile-form/user
 import { AssociadoSelfFormComponent } from '../associado/associado-self-form/associado-self.form.component';
 import { FichaFinanceiraFormComponent } from './../ficha-financeira/ficha-financeira-form/ficha.financeira.form.component';
 import { FichaFinanceiraListComponent } from './../ficha-financeira/ficha-financeira-list/ficha.financeira.list.component';
+// tslint:disable-next-line:max-line-length
+import { AssociadoFichaFinanceiraListComponent } from './../associado-ficha-financeira/associado-ficha-financeira-list/associado.ficha.financeira.list.component';
+// tslint:disable-next-line:max-line-length
+import { AssociadoFichaFinanceiraEventoFormComponent } from './../associado-ficha-financeira/associado-ficha-financeira-evento-form/associado.ficha.financeira.evento.form.component';
+// tslint:disable-next-line:max-line-length
+import { AssociadoFichaFinanceiraAnuidadeFormComponent } from './../associado-ficha-financeira/associado-ficha-financeira-anuidade-form/associado.ficha.financeira.anuidade.form.component';
 
 
 
@@ -79,7 +84,10 @@ const adminRoutes: Routes = [
             { path: 'AssociadoPublico', component: AssociadoSelfFormComponent},
             { path: 'FichaFinanceira', component: FichaFinanceiraListComponent},
             { path: 'FichaFinanceira/:id', component: FichaFinanceiraFormComponent},
-            { path: 'FichaFinanceiraNova', component: FichaFinanceiraFormComponent}
+            { path: 'FichaFinanceiraNova', component: FichaFinanceiraFormComponent},
+            { path: 'AssociadoFichaFinanceira', component: AssociadoFichaFinanceiraListComponent},
+            { path: 'AssociadoFichaFinanceiraAnuidade/:id', component: AssociadoFichaFinanceiraAnuidadeFormComponent},
+            { path: 'AssociadoFichaFinanceiraEvento/:id', component: AssociadoFichaFinanceiraEventoFormComponent}
           ]
     }
   ];

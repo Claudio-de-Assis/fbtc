@@ -27,14 +27,14 @@ export class RecebimentoEventoFormComponent implements OnInit {
         valorEventoPublicoId: 0, objetivoPagamento: '', dtNotificacao: null, observacao: '',
         codePS: '', referencePS: '', typePS: 0, statusPS: 99, lastEventDatePS: null, typePaymentMethodPS: 0,
         codePaymentMethodPS: 0, netAmountPS: 0,
-        dtCadastro: null, ativo: true,
+        dtCadastro: null, ativo: true, dtVencimento: null,
           associado: { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
             crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
             tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true, perfilId:0,
+            dtCadastro: null, ativo: true, perfilId: 0,
               enderecosPessoa: this.enderecos}
   };
 

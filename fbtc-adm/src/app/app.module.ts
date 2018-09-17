@@ -33,7 +33,7 @@ import { EventoRoute } from './components/shared/webapi-routes/evento.route';
 import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.route';
 import { AdminModule } from './components/admin/admin.module';
 import { FichaFinanceiraModule } from './components/ficha-financeira/ficha-financeira.module';
-
+import { AssociadoFichaFinanceiraModule } from './components/associado-ficha-financeira/associado-ficha-financeira.module';
 
 @NgModule({
   imports: [
@@ -53,6 +53,7 @@ import { FichaFinanceiraModule } from './components/ficha-financeira/ficha-finan
     AdminModule,
     LoginModule,
     FichaFinanceiraModule,
+    AssociadoFichaFinanceiraModule,
     AppRoutingModule
   ],
   declarations: [

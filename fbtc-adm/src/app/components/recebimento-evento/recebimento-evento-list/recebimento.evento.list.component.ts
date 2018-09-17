@@ -93,29 +93,14 @@ export class RecebimentoEventoListComponent implements OnInit {
     this._msg = '';
   }
 
-  // gotoImprimirLista() {}
-
-  // getRecebimentos(objRec: string): void {
-
-  //  this.service.getAll(objRec).subscribe(recebimentos => this.recebimentos = recebimentos);
-  // }
-
   onSelect(recebimento: Recebimento): void {
     this.selectedRecebimento = recebimento;
   }
-
 
   onSubmit() {
     this.submitted = true;
     this.gotoBuscarRecebimento();
   }
-
-  /*
-  gotoGerarNovaCobranca() {
-
-    console.log('Gerando nova cobrança....');
-  }
- */
 
   gotoBuscarRecebimento(): void {
 
@@ -189,5 +174,6 @@ export class RecebimentoEventoListComponent implements OnInit {
 
     this.getTiposPublicos();
     this.gotoBuscarRecebimento();
+
   }
 }

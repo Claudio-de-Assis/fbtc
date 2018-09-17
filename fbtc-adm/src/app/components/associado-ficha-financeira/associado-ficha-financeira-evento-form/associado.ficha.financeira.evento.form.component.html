@@ -1,0 +1,105 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading"><label>Evento: {{recebimentoAssociadoDao.titulo}}</label></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input class="form-control" value="{{ recebimento.associado.nome }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>CPF:</label>
+                            <input class="form-control" value="{{ recebimento.associado.cpf }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Celular:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.associado.nrCelular }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Associado Ativo:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.associado.ativo | booMessage }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <input type="email" class="form-control" value="{{ recebimento.associado.eMail }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Situação:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.statusPS | statusPagamento}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Data do status:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Nº Doc Cobrança:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.codePS }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Forma Pagamento</label>
+                            <input type="text" class="form-control" value="{{ recebimento.typePaymentMethodPS | formaPagamento }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Valor pago:</label>
+                            <input type="text" class="form-control" value="{{ recebimento.netAmountPS  | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+                <!--
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="areaObservacao">Observação:</label>
+                            <textarea id="areaObservacao" name="observacao" class="form-control" 
+                            rows="10" cols="134" maxlength="500"
+                            [(ngModel)]="recebimento.observacao" #observacao="ngModel"></textarea>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--<button class="btn btn-success" (click)="gotoNotificarAssociado()">Notificar Associados</button>-->
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary">Imprimir Boleto</button>
+                        <button class="btn btn-default" (click)="gotoRecebimentoAnuidade()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

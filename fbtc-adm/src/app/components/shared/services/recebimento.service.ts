@@ -42,6 +42,17 @@ export class RecebimentoService {
         );
     }
 
+    getPagamentoAssociadoByRecebimentoId(id: number): Observable<RecebimentoAssociadoDao> {
+
+        return this.http.get<RecebimentoAssociadoDao>(this.apiRoute.getPagamentoAssociadoByRecebimentoId(id)).pipe(
+            tap(_ => this.log(`fetched recebimento id=${id}`)),
+            catchError(this.handleError<RecebimentoAssociadoDao>(`getPagamentoAssociadoByRecebimentoId id=${id}`))
+        );
+    }
+
+
+
+
     getByPessoaId(objetivoPagamento: string, id: number): Observable<Recebimento[]> {
 
         return this.http.get<Recebimento[]>(this.apiRoute.getByPessoaId(objetivoPagamento, id))
@@ -78,6 +89,17 @@ export class RecebimentoService {
                 catchError(this.handleError(`getAnuidadeByFilters nome=${nome}, cpf=${cpf}, crp=${crp},
                     crp=${crm}, statusPS=${statusPS},
                     ano=${ano},mes=${mes},ativo=${ativo}, tipoPublicoId=${tipoPublicoId}`, []))
+        );
+    }
+
+    getPagamentosByPessoaIdIdFilters(pessoaId: number, objetivoPagamento: string, ano: number,
+         statusPS: number): Observable<RecebimentoAssociadoDao[]> {
+            return this.http.get<RecebimentoAssociadoDao[]>(this.apiRoute
+                .FindPagamentosByPessoaIdIdFilters(pessoaId, objetivoPagamento, ano, statusPS))
+                .pipe(tap(recebimentos => this.log(`fetched recebimento Filter pessoaId=${pessoaId},
+                    objetivoPagamento=${objetivoPagamento}, statusPS=${statusPS},ano=${ano}`)),
+                catchError(this.handleError(`getPagamentosByPessoaIdIdFilters pessoaId=${pessoaId},
+                objetivoPagamento=${objetivoPagamento}, statusPS=${statusPS},ano=${ano}`, []))
         );
     }
 

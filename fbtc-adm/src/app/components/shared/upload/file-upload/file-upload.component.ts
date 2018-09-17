@@ -54,7 +54,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   getNomeImagemByAssociadoId(id: number): void {
 
-    this.associadoService.getNomeImagemById(id)
+    this.associadoService.getNomeImagemByPessoaId(id)
         .subscribe(nomeFoto => this.nomeFoto = nomeFoto);
   }
 

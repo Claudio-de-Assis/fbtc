@@ -106,13 +106,6 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this.gotoBuscarRecebimento();
   }
 
-  /*
-  gotoGerarNovaCobranca() {
-
-    console.log('Gerando nova conbrança...');
-  }
-  */
-
   gotoBuscarRecebimento(): void {
 
     if (this.editNome.trim() !== '') {

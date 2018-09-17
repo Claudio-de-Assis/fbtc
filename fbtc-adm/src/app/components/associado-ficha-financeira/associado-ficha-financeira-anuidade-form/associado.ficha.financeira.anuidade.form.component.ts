@@ -1,18 +1,18 @@
-import { Endereco } from '../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { RecebimentoService } from '../../shared/services/recebimento.service';
-import { Recebimento } from '../../shared/model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from '../../shared/model/recebimento';
+import { Endereco } from '../../shared/model/endereco';
 
 @Component({
-  selector: 'app-recebimento-anuidade-form',
-  templateUrl: './recebimento.anuidade.form.component.html',
-  styleUrls: ['./recebimento.anuidade.form.component.css']
+  selector: 'app-associado-ficha-financeira-anuidade-form',
+  templateUrl: './associado.ficha.financeira.anuidade.form.component.html',
+  styleUrls: ['./associado.ficha.financeira.anuidade.form.component.css']
 })
-export class RecebimentoAnuidadeFormComponent implements OnInit {
+export class AssociadoFichaFinanceiraAnuidadeFormComponent implements OnInit {
 
   enderecos: Endereco[];
 
@@ -30,6 +30,11 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
           enderecosPessoa: this.enderecos}
   };
 
+  @Input() recebimentoAssociadoDao: RecebimentoAssociadoDao = { associadoId: 0, titulo: '', anuidade: 0, nome: '',
+  cpf: '', nomeTP: '', recebimentoId: 0, statusPS: 0, lastEventDatePS: null, ativoRec: false,
+  isencaoIdId: 0, dtVencimento: null
+};
+
   title: string;
   private selectedId: any;
   submitted: boolean;
@@ -39,7 +44,7 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
 ) {
-  this.title = 'Dados de pagamento de anuidade do associado';
+  this.title = 'Dados de pagamento da anuidade';
   this.submitted = false;
 
 }
@@ -48,26 +53,31 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
     this.service.getById(id)
           .subscribe(recebimento => this.recebimento = recebimento);
+
+    this.service.getPagamentoAssociadoByRecebimentoId(id)
+          .subscribe(recebimento => this.recebimentoAssociadoDao = recebimento);
   }
 
+  /*
   gotoSave() {
 
       this.service.addRecebimento(this.recebimento)
       .subscribe(() =>  this.gotoShowPopUp());
 
       this.submitted = false;
-  }
+  }*/
 
   onSubmit() {
     this.submitted = true;
-    this.gotoSave();
+    // this.gotoSave();
   }
 
+  /*
   gotoShowPopUp() {
 
     // Colocar a chamada para a implementação do PopUp modal de aviso:
     alert('Registro salvo com sucesso!');
-  }
+  }*/
 
 /*
   gotoNotificarAssociado() {
@@ -79,8 +89,8 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 */
   gotoRecebimentoAnuidade() {
 
-    let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
-    this.router.navigate(['/admin/RecebimentoAnuidade', { id: recebimentoId, foo: 'foo' }]);
+    const recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
+    this.router.navigate(['admin/AssociadoFichaFinanceira', { id: recebimentoId, foo: 'foo' }]);
   }
 
   ngOnInit() {
@@ -88,9 +98,6 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
       if (id > 0) {
           this.getRecebimentoById(id);
-    } else {
-      // alert('Não foi encontrato recebimento para o Id Informado');
-      // this.gotoRecebimentoAnuidade();
     }
   }
 }

@@ -19,6 +19,7 @@ export class Recebimento {
     netAmountPS: number;
     dtCadastro: Date;
     ativo: boolean;
+    dtVencimento: Date;
 
     associado: Associado;
 }
@@ -35,4 +36,6 @@ export class RecebimentoAssociadoDao {
     lastEventDatePS: Date;
     ativoRec: boolean;
     isencaoIdId: number;
+    dtVencimento: Date;
+
 }

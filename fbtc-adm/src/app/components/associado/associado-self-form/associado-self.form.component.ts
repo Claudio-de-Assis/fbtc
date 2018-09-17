@@ -161,7 +161,7 @@ export class AssociadoSelfFormComponent implements OnInit {
 
             this._assocId = parseInt(msgRet.substring(0, 10), 10);
 
-            this.router.navigate([`/Associado/${this._assocId}`]);
+            this.router.navigate([`Admin/Associado/${this._assocId}`]);
 
             this.getAssociadoById(this._assocId);
 

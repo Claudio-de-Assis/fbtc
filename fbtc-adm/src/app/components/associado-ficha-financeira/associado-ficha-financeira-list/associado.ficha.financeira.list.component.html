@@ -1,0 +1,139 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="sltObjetivoPagamento">Objetivo do Pagamento:</label><br>
+                            <select id="sltObjetivoPagamento" required name="objetivoPagamento" class="form-control"
+                                [(ngModel)]="editObjetivoPagamento" #objetivoPagamento="ngModel">
+                                <option *ngFor="let op of _util.optObjetivoPagamento" value="{{ op.value }}">{{ op.name }}</option>
+                            </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <label for="">Ano do vencimento:</label>
+                                <select id="sltSAno" class="form-control"
+                                    [(ngModel)]="editAno" name="Ano">
+                                    <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Status do pagamento:</label>
+                            <select id="sltStatusPagamento" class="form-control" 
+                            [(ngModel)]="editStatusPS" name="statusPS">
+                                <option *ngFor="let op of _util.optStatusAdimplencia" [value]="op.value">{{ op.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div *ngIf="_msg !== ''" class="alert alert-success">
+                            <div >{{ _msg }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <!-- PAINEL RESULTADO DA BUSCA -->
+        <div class="panel panel-primary" *ngIf="editObjetivoPagamento === '2'">
+            <div class="panel-heading">Minhas Anuidades</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Anuidade</th>
+                                    <th>Vencimento</th>
+                                    <th>Data Status</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="Anuidades">
+                                <tr *ngFor="let recebimento of recebimentosAnuidade | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                    [class.selected]="recebimento.recebimentoId === selectedId">
+                                    <td>{{ recebimento.anuidade }}</td>
+                                    <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.statusPS |  statusPagamento }}</td>
+                                    <td>
+                                        <a [routerLink]="['/admin/AssociadoFichaFinanceiraAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary" *ngIf="editObjetivoPagamento === '1'">
+            <div class="panel-heading">Meus de Eventos</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Evento</td>
+                                    <td>Vencimento</td>
+                                    <td>Data Status</td>
+                                    <td>Status</td>
+                                    <td>Ações</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let recebimento of recebimentosEvento | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                    [class.selected]="recebimento.recebimentoId === selectedId">
+                                    <td>{{ recebimento.titulo }}</td>
+                                    <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ recebimento.statusPS |  statusPagamento }}</td>
+                                    <td>
+                                        <a [routerLink]="['/admin/AssociadoFichaFinanceiraEvento', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

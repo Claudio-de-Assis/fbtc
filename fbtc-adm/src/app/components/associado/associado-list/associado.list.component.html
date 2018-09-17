@@ -148,7 +148,7 @@
                                         <td>{{associado.cpf}}</td>
                                         <td>{{associado.tipoPublicoId | findNameInTipoPublico : tiposPublicos}}</td>
                                         <td>
-                                            <a [routerLink]="['/admin/Associado', associado.associadoId]"><i class="fa fa-pencil text-default"></i></a>&nbsp;
+                                            <a [routerLink]="['/admin/Associado', associado.pessoaId]"><i class="fa fa-pencil text-default"></i></a>&nbsp;
                                             <i class="fa fa-trash text-danger"></i>
                                         </td>
                                     </tr>
