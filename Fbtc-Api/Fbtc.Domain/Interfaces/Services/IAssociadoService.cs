@@ -27,7 +27,7 @@ namespace Fbtc.Domain.Interfaces.Services
             string sexo, int atcId, string crp, string tipoProfissao,
             int tipoPublico, string estado, string cidade, bool? ativo);
 
-        string GetNomeFotoByAssociadoId(int id);
+        string GetNomeFotoByPessoaId(int id);
 
         string RessetPasswordById(int id);
 

@@ -55,9 +55,19 @@ namespace Fbtc.Domain.Services
                 statusPS, ano, mes, ativo, tipoEvento, tipoPublicoId);
         }
 
+        public IEnumerable<RecebimentoAssociadoDao> FindPagamentosByPessoaIdIdFilters(int pessoaId, string objetivoPagamento, int ano, int statusPS)
+        {
+            return _recebimentoRepository.FindPagamentosByPessoaIdIdFilters(pessoaId, objetivoPagamento, ano, statusPS);
+        }
+
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)
         {
             return _recebimentoRepository.GetAll(objetivoPagamento);
+        }
+
+        public RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id)
+        {
+            return _recebimentoRepository.GetRecebimentoAssociadoDaoByRecebimentoId(id);
         }
 
         public IEnumerable<Recebimento> GetRecebimentoByAnuidadeId(int id)

@@ -55,9 +55,9 @@ namespace Fbtc.Domain.Services
             return _associadoRepository.GetAssociadoByPessoaId(id);
         }
         
-        public string GetNomeFotoByAssociadoId(int id)
+        public string GetNomeFotoByPessoaId(int id)
         {
-            return _associadoRepository.GetNomeFotoByAssociadoId(id);
+            return _associadoRepository.GetNomeFotoByPessoaId(id);
         }
 
         public string Insert(Associado associado)

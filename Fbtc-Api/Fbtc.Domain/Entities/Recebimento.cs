@@ -22,6 +22,7 @@ namespace Fbtc.Domain.Entities
         public decimal NetAmountPS { get; set; }
         public DateTime DtCadastro { get; set; }
         public bool Ativo { get; set; }
+        public DateTime DtVencimento { get; set; }
 
         public Associado Associado { get; set; }
     }
@@ -39,5 +40,7 @@ namespace Fbtc.Domain.Entities
         public DateTime? LastEventDatePS { get; set; }
         public bool AtivoRec { get; set; }
         public int IsencaoIdId { get; set; }
+        public DateTime DtVencimento { get; set; }
+
     }
 }

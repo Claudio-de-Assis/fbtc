@@ -131,7 +131,7 @@ namespace Fbtc.Api.Controllers
         // [Authorize]
         [Route("NomeFoto/{id:int}")]
         [HttpGet]
-        public Task<HttpResponseMessage> GetNomeFotoById(int id)
+        public Task<HttpResponseMessage> GetNomeFotoByPessoaId(int id)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -140,7 +140,7 @@ namespace Fbtc.Api.Controllers
             {
                 if (id == 0) throw new Exception("Id não informado!");
 
-                var resultado = _associadoApplication.GetNomeFotoByAssociadoId(id);
+                var resultado = _associadoApplication.GetNomeFotoByPessoaId(id);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

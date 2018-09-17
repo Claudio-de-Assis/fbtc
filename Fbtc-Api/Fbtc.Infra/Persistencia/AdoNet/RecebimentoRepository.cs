@@ -74,21 +74,16 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _msg;
 
         }
-
-        IEnumerable<RecebimentoAssociadoDao> IRecebimentoRepository.FindByEventoIdFilters(int eventoId, string nome, string cpf, string crp, string crm, int statusPS, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
-        {
-            throw new NotImplementedException();
-        }
-        
+       
         public IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf, string crp, 
             string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId)
         {
             query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, 
                         StatusPS, LastEventDatePS, AtivoRec,
-	                    IsencaoId, TipoPublicoId FROM (
+	                    IsencaoId, TipoPublicoId, DtVencimento FROM (
                     SELECT	A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
 	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
-	                    null as IsencaoId, TP.TipoPublicoId
+	                    null as IsencaoId, TP.TipoPublicoId, RE.DtVencimento 
                     FROM dbo.AD_Associado A
                     INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
                     INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
@@ -103,7 +98,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     SELECT	DISTINCT A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
 	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
-	                    I.IsencaoId, TP.TipoPublicoId
+	                    I.IsencaoId, TP.TipoPublicoId, RE.DtVencimento 
                     FROM dbo.AD_Associado A
                     INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
                     INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
@@ -185,7 +180,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                             WHERE R5.AssociadoId = A.AssociadoId
                                 AND R5.ObjetivoPagamento = '2'
                                 AND V1.AnuidadeId = " + anuidadeId + @") as AtivoRec,
-	                    IsNull((    SELECT I.IsencaoId FROM dbo.AD_Isencao I 
+
+            		    (   SELECT R6.DtVencimento FROM dbo.AD_Recebimento R6
+                            INNER JOIN dbo.AD_Valor_Anuidade_Publico V1 
+                                ON R5.ValorAnuidadePublicoId = V1.ValorAnuidadePublicoId
+                            WHERE R5.AssociadoId = A.AssociadoId
+                                AND R5.ObjetivoPagamento = '2'
+                                AND V1.AnuidadeId = " + anuidadeId + @") as DtVencimento,
+
+                        IsNull((    SELECT I.IsencaoId FROM dbo.AD_Isencao I 
                                     INNER JOIN dbo.AD_Associado_Isento AI 
                                         ON I.IsencaoId = AI.IsencaoId
                                     WHERE I.AnuidadeId =  = " + anuidadeId + @" 
@@ -239,10 +242,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             string crm, int statusPS, int ano, int mes, bool? ativo, string tipoEvento, int tipoPublicoId)
         {
             query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, StatusPS, LastEventDatePS,
-                        AtivoRec, IsencaoId, DtInicio, TipoPublicoId, TipoEvento  FROM (
+                        AtivoRec, IsencaoId, DtInicio, TipoPublicoId, TipoEvento, DtVencimento  FROM (
                     SELECT	A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
 	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
-	                    null as IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento
+	                    null as IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento, RE.DtVencimento 
                     FROM dbo.AD_Associado A
                     INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
                     INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
@@ -257,7 +260,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     SELECT	DISTINCT A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
 	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
-	                    I.IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento
+	                    I.IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento, RE.DtVencimento 
                     FROM dbo.AD_Associado A
                     INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
                     INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
@@ -309,7 +312,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _collection;
         }
         
-        IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf,
+        public IEnumerable<RecebimentoAssociadoDao> FindByEventoIdFilters(int eventoId, string nome, string cpf,
             string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
             string tipoEvento, int tipoPublicoId)
         {
@@ -342,7 +345,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                             WHERE R5.AssociadoId = A.AssociadoId
                                 AND R5.ObjetivoPagamento = '1'
                                 AND V1.EventoId = " + eventoId + @") as AtivoRec,
-	                    IsNull((    SELECT I.IsencaoId 
+
+            		    (   SELECT R6.DtVencimento FROM dbo.AD_Recebimento R6
+                            INNER JOIN dbo.AD_Valor_Evento_Publico V1 
+                                ON R5.ValorEventoPublicoId = V1.ValorEventoPublicoId
+                            WHERE R5.AssociadoId = A.AssociadoId
+                                AND R5.ObjetivoPagamento = '1'
+                                AND V1.EventoId = " + eventoId + @") as DtVencimento,
+
+                            IsNull((    SELECT I.IsencaoId 
                                     FROM dbo.AD_Isencao I 
                                     INNER JOIN dbo.AD_Associado_Isento AI 
                                         ON I.IsencaoId = AI.IsencaoId
@@ -394,13 +405,117 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _collection;
         }
 
+        public IEnumerable<RecebimentoAssociadoDao> FindPagamentosByPessoaIdIdFilters(int pessoaId,
+            string objetivoPagamento, int ano, int statusPS)
+        {
+            if (objetivoPagamento.Equals("1")) 
+            {
+                //Evento:
+
+                query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, StatusPS, LastEventDatePS,
+                        AtivoRec, IsencaoId, DtInicio, TipoPublicoId, TipoEvento, DtVencimento  FROM (
+                    SELECT	A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    null as IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON RE.ValorEventoPublicoId = VEP.ValorEventoPublicoId
+                    INNER JOIN dbo.AD_Evento EV ON VEP.EventoId = EV.EventoId
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 1
+	                    AND RE.AssociadoIsentoId is null 
+                        AND P.PessoaId = "+ pessoaId + @"
+
+                    UNION
+
+                    SELECT	DISTINCT A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    I.IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Associado_Isento AI ON RE.AssociadoIsentoId = AI.AssociadoIsentoId
+                    INNER JOIN dbo.AD_Isencao I ON AI.IsencaoId = I.IsencaoId
+                    INNER JOIN dbo.AD_Evento EV ON I.EventoId = EV.EventoId
+
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 1
+	                    AND RE.AssociadoIsentoId is not null
+                        AND P.PessoaId = " + pessoaId + @") AS TAB
+                    WHERE AssociadoId is not null ";
+            }
+            else
+            {
+                //Anuidade:
+
+                query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, 
+                        StatusPS, LastEventDatePS, AtivoRec,
+	                    IsencaoId, TipoPublicoId, DtVencimento FROM (
+                    SELECT	A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    null as IsencaoId, TP.TipoPublicoId, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Valor_Anuidade_Publico VAP ON RE.ValorAnuidadePublicoId = VAP.ValorAnuidadePublicoId
+                    INNER JOIN dbo.AD_Anuidade AN ON VAP.AnuidadeId = AN.AnuidadeId
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 2
+	                    AND RE.AssociadoIsentoId is null
+                        AND P.PessoaId = " + pessoaId + @" 
+
+                    UNION
+
+                    SELECT	DISTINCT A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    I.IsencaoId, TP.TipoPublicoId, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Associado_Isento AI ON RE.AssociadoIsentoId = AI.AssociadoIsentoId
+                    INNER JOIN dbo.AD_Isencao I ON AI.IsencaoId = I.IsencaoId
+                    INNER JOIN dbo.AD_Anuidade AN ON I.AnuidadeId = AN.AnuidadeId
+
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 2
+	                    AND RE.AssociadoIsentoId is not null
+                        AND P.PessoaId = " + pessoaId + @") AS TAB
+                    WHERE AssociadoId is not null ";
+            }
+
+            if (statusPS >= 0 && statusPS <= 9)
+                query = query + $" AND StatusPS = {statusPS} ";
+
+            if (ano != 0)
+                query = query + $" AND Year(DtVencimento) = {ano} ";
+
+            /*
+            if (ativo != null)
+                query = query + $" AND AtivoRec = '{ativo}' ";
+                */
+            query = query + " Order by DtVencimento desc ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<RecebimentoAssociadoDao> _collection = GetCollection<RecebimentoAssociadoDao>(cmd)?.ToList();
+
+            return _collection;
+        }
+
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)
         {
             query = @"SELECT R.RecebimentoId, R.AssociadoId, R.ValorEventoPublicoId, R.ObjetivoPagamento,
                         R.DtNotificacao, R.Observacao, R.AssociadoIsentoId, R.ValorAnuidadePublicoId, 
                         R.CodePS, R.ReferencePS, R.TypePS, R.StatusPS, R.LastEventDatePS, 
                         R.TypePaymentMethodPS, R.CodePaymentMethodPS, R.NetAmountPS, 
-                        R.DtCadastro, R.Ativo 
+                        R.DtCadastro, R.Ativo, R.DtVencimento  
                     FROM dbo.AD_Recebimento R 
                     WHERE R.ObjetivoPagamento = '" + objetivoPagamento + "' Order by R.DtCadastro Desc ";
 
@@ -443,7 +558,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         R.DtNotificacao, R.Observacao, R.AssociadoIsentoId, R.ValorAnuidadePublicoId, 
                         R.CodePS, R.ReferencePS, R.TypePS, R.StatusPS, R.LastEventDatePS, 
                         R.TypePaymentMethodPS, R.CodePaymentMethodPS, R.NetAmountPS, 
-                        R.DtCadastro, R.Ativo 
+                        R.DtCadastro, R.Ativo, R.DtVencimento  
                     FROM dbo.AD_Recebimento R 
                         INNER JOIN dbo.AD_Valor_Anuidade_Publico V ON R.ValorAnuidadePublicoId = V.ValorAnuidadePublicoId 
                         INNER JOIN dbo.AD_Anuidade AN ON V.AnuidadeId = AN.AnuidadeId 
@@ -464,7 +579,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         R.DtNotificacao, R.Observacao, R.AssociadoIsentoId, R.ValorAnuidadePublicoId, 
                         R.CodePS, R.ReferencePS, R.TypePS, R.StatusPS, R.LastEventDatePS, 
                         R.TypePaymentMethodPS, R.CodePaymentMethodPS, R.NetAmountPS, 
-                        R.DtCadastro, R.Ativo 
+                        R.DtCadastro, R.Ativo, R.DtVencimento 
                     FROM dbo.AD_Recebimento R 
                         INNER JOIN dbo.AD_Valor_Evento_Publico V ON R.ValorEventoPublicoId = V.ValorEventoPublicoId 
                         INNER JOIN dbo.AD_Evento E ON V.EventoId = E.EventoId 
@@ -485,7 +600,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         R.DtNotificacao, R.Observacao, R.AssociadoIsentoId, R.ValorAnuidadePublicoId, 
                         R.CodePS, R.ReferencePS, R.TypePS, R.StatusPS, R.LastEventDatePS, 
                         R.TypePaymentMethodPS, R.CodePaymentMethodPS, R.NetAmountPS, 
-                        R.DtCadastro, R.Ativo 
+                        R.DtCadastro, R.Ativo, R.DtVencimento  
                     FROM dbo.AD_Recebimento R 
                     WHERE R.RecebimentoId = " + id + " ";
 
@@ -588,11 +703,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Recebimento (AssociadoId, ObjetivoPagamento, Observacao, " +
                         "   CodePS, ReferencePS, TypePS, StatusPS, LastEventDatePS, TypePaymentMethod, " +
-                        "   CodePaymentMethod,  NetAmountPS, DtCadastro, Ativo " +
+                        "   CodePaymentMethod,  NetAmountPS, DtCadastro, Ativo , DtVencimento " +
                         "    " + _atributos + ") " +
                         "VALUES(@AssociadoId, @ObjetivoPagamento, @Observacao, " +
                         "   @CodePS, @ReferencePS, @TypePS, @StatusPS, @LastEventDatePS, @TypePaymentMethod, " +
-                        "   @CodePaymentMethod,  @NetAmountPS, @DtCadastro, @Ativo " +
+                        "   @CodePaymentMethod,  @NetAmountPS, @DtCadastro, @Ativo, @DtVencimento " +
                         "    " + _values + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
@@ -609,6 +724,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NetAmountPS", r.NetAmountPS);
                     command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
                     command.Parameters.AddWithValue("Ativo", r.Ativo);
+                    command.Parameters.AddWithValue("DtVencimento", r.DtVencimento);
 
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
@@ -738,10 +854,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Recebimento (AssociadoId, ObjetivoPagamento, Observacao, AssociadoIsentoId, " +
                         "    CodePS, ReferencePS, TypePS, StatusPS, LastEventDatePS,  TypePaymentMethodPS,  " +
-                        "   CodePaymentMethodPS, NetAmountPS, DtCadastro, Ativo) " +
+                        "   CodePaymentMethodPS, NetAmountPS, DtCadastro, Ativo, DtVencimento) " +
                         "VALUES(@AssociadoId, @ObjetivoPagamento, @Observacao, @AssociadoIsentoId, " +
                         "    @CodePS, @ReferencePS, @TypePS, @StatusPS, @LastEventDatePS, @TypePaymentMethodPS,  " +
-                        "   @CodePaymentMethodPS, @NetAmountPS, @DtCadastro, @Ativo) " +
+                        "   @CodePaymentMethodPS, @NetAmountPS, @DtCadastro, @Ativo, @DtVencimento) " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("AssociadoId", associadoId);
@@ -758,6 +874,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NetAmountPS", _netAmountPS);
                     command.Parameters.AddWithValue("DtCadastro", _date);
                     command.Parameters.AddWithValue("Ativo", true);
+                    command.Parameters.AddWithValue("DtVencimento", _date);
 
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
@@ -917,6 +1034,101 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 }
             }
             return _msg;
+        }
+
+        // RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id);
+
+        public RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id)
+        {
+            Recebimento rec = this.GetRecebimentoById(id);
+
+            if (rec.ObjetivoPagamento == null)
+                return null;
+
+            if (rec.ObjetivoPagamento.Equals("1"))
+            {
+                //Evento:
+                query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, StatusPS, LastEventDatePS,
+                        AtivoRec, IsencaoId, DtInicio, TipoPublicoId, TipoEvento, DtVencimento  FROM (
+                    SELECT	A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    null as IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON RE.ValorEventoPublicoId = VEP.ValorEventoPublicoId
+                    INNER JOIN dbo.AD_Evento EV ON VEP.EventoId = EV.EventoId
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 1
+	                    AND RE.AssociadoIsentoId is null 
+                        AND RE.RecebimentoId = " + id + @"
+
+                    UNION
+
+                    SELECT	DISTINCT A.AssociadoId, EV.Titulo, null as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    I.IsencaoId, EV.DtInicio, TP.TipoPublicoId, EV.TipoEvento, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Associado_Isento AI ON RE.AssociadoIsentoId = AI.AssociadoIsentoId
+                    INNER JOIN dbo.AD_Isencao I ON AI.IsencaoId = I.IsencaoId
+                    INNER JOIN dbo.AD_Evento EV ON I.EventoId = EV.EventoId
+
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 1
+	                    AND RE.AssociadoIsentoId is not null
+                        AND RE.RecebimentoId = " + id + @") AS TAB";
+            }
+            else
+            {
+                //Anuidade:
+
+                query = @"SELECT AssociadoId, Titulo, Anuidade , Nome, CPF, NomeTP, RecebimentoId, 
+                        StatusPS, LastEventDatePS, AtivoRec,
+	                    IsencaoId, TipoPublicoId, DtVencimento FROM (
+                    SELECT	A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    null as IsencaoId, TP.TipoPublicoId, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Valor_Anuidade_Publico VAP ON RE.ValorAnuidadePublicoId = VAP.ValorAnuidadePublicoId
+                    INNER JOIN dbo.AD_Anuidade AN ON VAP.AnuidadeId = AN.AnuidadeId
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 2
+	                    AND RE.AssociadoIsentoId is null
+                        AND RE.RecebimentoId = " + id + @"
+
+                    UNION
+
+                    SELECT	DISTINCT A.AssociadoId, '' as Titulo, AN.Codigo as Anuidade , P.Nome, P.CPF, TP.Nome as NomeTP, 
+	                    RE.RecebimentoId, RE.StatusPS, RE.LastEventDatePS, RE.Ativo as AtivoRec,
+	                    I.IsencaoId, TP.TipoPublicoId, RE.DtVencimento 
+                    FROM dbo.AD_Associado A
+                    INNER JOIN dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId
+                    INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+                    INNER JOIN dbo.AD_Recebimento RE on A.AssociadoId = RE.AssociadoId
+                    INNER JOIN dbo.AD_Associado_Isento AI ON RE.AssociadoIsentoId = AI.AssociadoIsentoId
+                    INNER JOIN dbo.AD_Isencao I ON AI.IsencaoId = I.IsencaoId
+                    INNER JOIN dbo.AD_Anuidade AN ON I.AnuidadeId = AN.AnuidadeId
+
+                    WHERE TP.Associado = 'true' 
+	                    AND RE.ObjetivoPagamento = 2
+	                    AND RE.AssociadoIsentoId is not null
+                        AND RE.RecebimentoId = " + id + @") AS TAB";
+            }
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+
+            // Obtém os dados do banco de dados:
+            RecebimentoAssociadoDao _recebimentoAssociadoDao = GetCollection<RecebimentoAssociadoDao>(cmd)?.First();
+
+            return _recebimentoAssociadoDao;
         }
     }
 }

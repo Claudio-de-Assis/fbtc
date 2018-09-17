@@ -175,7 +175,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE AssociadoId = " + id + "";
+                    WHERE A.AssociadoId = " + id + "";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
@@ -515,7 +515,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _msg;
         }
 
-        public string GetNomeFotoByAssociadoId(int id)
+        public string GetNomeFotoByPessoaId(int id)
         {
             String NomeFoto = "_no-foto.png";
 
@@ -528,7 +528,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE AssociadoId = " + id + "";
+                    WHERE P.PessoaId = " + id + "";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);

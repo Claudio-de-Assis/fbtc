@@ -114,7 +114,7 @@ namespace Fbtc.Application.Services
 
         public Associado GetAssociadoById(int id)
         {
-            Associado _associado = _associadoService.GetAssociadoById(id);
+            Associado _associado = _associadoService.GetAssociadoById(id)?? this.SetAssociado();
 
             //Adicionando objeto Endereco caso não exista:
             if (_associado.EnderecosPessoa == null)
@@ -191,8 +191,7 @@ namespace Fbtc.Application.Services
 
             return _associado; 
         }
-
-
+        
         public Associado GetAssociadoByPessoaId(int id)
         {
             Associado _associado = _associadoService.GetAssociadoByPessoaId(id);
@@ -382,9 +381,9 @@ namespace Fbtc.Application.Services
             }
         }
 
-        public string GetNomeFotoByAssociadoId(int id)
+        public string GetNomeFotoByPessoaId(int id)
         {
-            return _associadoService.GetNomeFotoByAssociadoId(id);
+            return _associadoService.GetNomeFotoByPessoaId(id);
         }
 
         public string RessetPasswordById(int id)

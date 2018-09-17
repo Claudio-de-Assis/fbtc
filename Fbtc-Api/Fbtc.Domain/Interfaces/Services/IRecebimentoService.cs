@@ -33,11 +33,16 @@ namespace Fbtc.Domain.Interfaces.Services
             string crp, string crm, int statusPS, int ano, int mes, bool? ativo,
             string tipoEvento, int tipoPublicoId);
 
+        IEnumerable<RecebimentoAssociadoDao> FindPagamentosByPessoaIdIdFilters(int pessoaId,
+            string objetivoPagamento, int ano, int statusPS);
+
         // Tipo 1: Anuidade; Tipo 2: Evento
         IEnumerable<Recebimento> GetRecebimentoByPessoaId(string objetivoPagamento, int id);
 
         IEnumerable<Recebimento> GetRecebimentoByEventoId(int id);
 
         IEnumerable<Recebimento> GetRecebimentoByAnuidadeId(int id);
+
+        RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id);
     }
 }

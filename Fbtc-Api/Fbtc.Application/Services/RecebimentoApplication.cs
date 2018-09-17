@@ -93,6 +93,13 @@ namespace Fbtc.Application.Services
                 ano, mes, ativo, _tipoEvento, tipoPublicoId);
         }
 
+        public IEnumerable<RecebimentoAssociadoDao> FindPagamentosByPessoaIdIdFilters(int pessoaId,
+            string objetivoPagamento, int ano, int statusPS)
+        {
+            return _recebimentoService.FindPagamentosByPessoaIdIdFilters(pessoaId,
+            objetivoPagamento, ano, statusPS);
+        }
+
         public IEnumerable<Recebimento> GetAll(string objetivoPagamento)
         {
             return _recebimentoService.GetAll(objetivoPagamento);
@@ -144,6 +151,7 @@ namespace Fbtc.Application.Services
                 DtNotificacao = r.DtNotificacao,
                 Observacao = Functions.AjustaTamanhoString(r.Observacao, 500),
                 Ativo = r.Ativo,
+                DtVencimento = r.DtVencimento
             };
 
             try
@@ -193,6 +201,11 @@ namespace Fbtc.Application.Services
         public string DeleteByAssociadoIsentoId(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id)
+        {
+            return _recebimentoService.GetRecebimentoAssociadoDaoByRecebimentoId(id);
         }
     }
 }
