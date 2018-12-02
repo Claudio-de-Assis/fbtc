@@ -9,13 +9,13 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Evento:</label>
-                            <input class="form-control" value="{{ evento.titulo }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.titulo }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Tipo de público:</label>
-                            <input class="form-control" value="{{ recebimento.associado.tipoPublicoId | findNameInTipoPublico: tiposPublicos }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.nomeTP }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -23,25 +23,25 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nome:</label>
-                            <input class="form-control" value="{{ recebimento.associado.nome }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.nome }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>CPF:</label>
-                            <input class="form-control" value="{{ recebimento.associado.cpf }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.cpf }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Celular:</label>
-                            <input class="form-control" value="{{ recebimento.associado.nrCelular }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.nrCelular }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Associado Ativo:</label>
-                            <input class="form-control" value="{{ recebimento.associado.ativo | booMessage }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.ativoAssociado | booMessage }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -49,19 +49,19 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-Mail:</label>
-                            <input class="form-control" value="{{ recebimento.associado.eMail }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.eMail }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Situação:</label>
-                            <input class="form-control" value="{{ recebimento.statusPS | statusPagamento}}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.statusPS | statusPagamento}}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Data do status:</label>
-                            <input class="form-control" value="{{ recebimento.lastEventDatePS  | date: 'dd/MM/yyyy'}}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.lastEventDatePS  | date: 'dd/MM/yyyy'}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -69,25 +69,25 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Nº Doc Cobrança:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.codePS }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.codePS }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Forma Pagamento</label>
-                            <input class="form-control" value="{{ recebimento.typePaymentMethodPS | formaPagamento }} " disabled>
+                            <input class="form-control" value="{{ recebimentoDao.typePaymentMethodPS | formaPagamento }} " disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Valor pago:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.netAmountPS | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.netAmountPS | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Data Notificação:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.dtNotificacao | date:'dd/MM/yyyy' }}" disabled>
+                                <label>Status FBTC:</label>
+                                <input type="text" class="form-control" value="{{ recebimentoDao.statusFBTC  | statusPagamentoFBTC }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -97,10 +97,19 @@
                                 <label for="areaObservacao">Observação:</label>
                                 <textarea id="areaObservacao" name="observacao" class="form-control" 
                                     rows="10" cols="134" maxlength="500"
-                                    [(ngModel)]="recebimento.observacao" #observacao="ngModel"></textarea>
+                                    [(ngModel)]="recebimentoDao.observacao" #observacao="ngModel"></textarea>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div *ngIf="_msg !== ''" class="alert alert-success">
+                            <div >{{ _msg }}</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="panel-footer">
                 <div class="row">

@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { AnuidadeService } from './../../shared/services/anuidade.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +18,7 @@ import { Anuidade } from '../../shared/model/anuidade';
 })
 export class FichaFinanceiraListComponent implements OnInit {
 
-  title = 'Consulta da Anuidades';
+  title: string;
 
   _util = Util;
 
@@ -29,10 +30,10 @@ export class FichaFinanceiraListComponent implements OnInit {
 
   mensagemSincronizacao: string;
 
-  editCodigo: number;
+  editExercicio: number;
   editAtivo: boolean;
 
-  _codigo: number;
+  _exercicio: number;
   _ativo: string;
 
   submitted: boolean;
@@ -40,28 +41,33 @@ export class FichaFinanceiraListComponent implements OnInit {
   _itensPerPage: number;
 
   _msg: string;
+  _msgProgresso: string;
 
   constructor(
       private service: AnuidadeService,
-      private serviceTP: TipoPublicoService,
       private servicePS: PagSeguroService,
       private router: Router,
       private route: ActivatedRoute
   ) {
-      this.editCodigo = null;
-      this._codigo = 0;
-      this.editAtivo = true;
+      this.title = 'Consulta da Anuidades';
+      this._itensPerPage = AppSettings.ITENS_PER_PAGE;
+
+      this.editExercicio = null;
+      this._exercicio = 0;
+      this.editAtivo = null;
 
       this._ativo = '2';
       this.submitted = false;
-      this._itensPerPage = 30;
 
       this.mensagemSincronizacao = '';
       this._msg = '';
+      this._msgProgresso = '';
   }
 
   onSelect(anuidade: Anuidade): void {
+
     this.selectedAnuidade = anuidade;
+    this.router.navigate(['admin/FichaFinanceira', this.selectedAnuidade.anuidadeId]);
   }
 
   onSubmit() {
@@ -71,8 +77,8 @@ export class FichaFinanceiraListComponent implements OnInit {
 
   gotoBuscarAnuidade(): void {
 
-    if (this.editCodigo !== null) {
-      this._codigo = this.editCodigo;
+    if (this.editExercicio !== null) {
+      this._exercicio = this.editExercicio;
     }
 
     if (this.editAtivo !== null) {
@@ -83,26 +89,24 @@ export class FichaFinanceiraListComponent implements OnInit {
       }
     }
 
-    this.service.getByFilters(this._codigo, this._ativo)
-        .subscribe(anuidades => this.anuidades = anuidades);
+    this._msgProgresso = '...Pesquisando...';
+
+    this.service.getByFilters(this._exercicio, this._ativo)
+        .subscribe(
+          anuidades => {
+            this.anuidades = anuidades;
+            this._msgProgresso =  this.anuidades.length === 0 ? ' - Não foram encontrados registros' : '';
+          });
 
     this.submitted = false;
-    this._codigo = 0;
+    this._exercicio = 0;
     this._ativo = '2';
-    this.editCodigo = null;
   }
-
 
   gotoNovaAnuidade() {
 
     this.router.navigate(['admin/FichaFinanceiraNova']);
   }
-
-  /*
-  getTiposPublicos(): void {
-
-    this.serviceTP.getByTipoAssociacao(this._isAssociado).subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
-  }*/
 
   gotoSicronizarComPagSeguro(): void {
     this.mensagemSincronizacao = 'Processando a sincronização. Por favor, aguarde!....';
@@ -115,9 +119,15 @@ export class FichaFinanceiraListComponent implements OnInit {
       ]);
   }
 
+  gotoLimparFiltros() {
+    this._exercicio = 0;
+    this._ativo = '2';
+    this.editExercicio = null;
+    this.editAtivo = true;
+  }
+
   ngOnInit() {
 
-    // this.getTiposPublicos();
     this.gotoBuscarAnuidade();
   }
 }

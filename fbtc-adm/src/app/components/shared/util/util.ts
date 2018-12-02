@@ -1,7 +1,7 @@
 export class Util {
 
 
-    public static lstAno = [2019, 2018, 2017, 2016, 2015];
+    public static lstAno = [2000];
 
     // public static lstPerfil = ['Gestor do Site', 'Secretaria', 'Financeiro'];
 
@@ -39,10 +39,11 @@ export class Util {
         {name: 'Retenção temporária', value: '9'}
     ];
 
+    /*
     public static optTiposEventos = [
         {name: 'Workshop Internacional', value: '2'},
         {name: 'Congresso Brasileiro', value: '4'},
-    ];
+    ];*/
 
     public static optSexo = [
         {name: 'Masculino', value: 'M'},
@@ -84,7 +85,7 @@ export class Util {
     ];
 
     public static optObjetivoPagamento = [
-        {name: 'Evento', value: '1'},
+       // {name: 'Evento', value: '1'},
         {name: 'Anuidade', value: '2'}
     ];
 

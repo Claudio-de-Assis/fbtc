@@ -31,11 +31,11 @@
                       </div>
                       <div class="col-lg-3">
                           <div class="form-group">
-                              <label for="sltAno">Ano:</label><br>
+                              <label for="sltAno">Anuidade:</label><br>
                               <select id="sltAno" name="ano" class="form-control"
-                                  required  
-                                  [(ngModel)]="editAno"  #ano="ngModel">
-                                  <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                                  required
+                                  [(ngModel)]="editAno" #ano="ngModel">
+                                  <option *ngFor="let op of anuidades" value="{{ op.exercicio }}">{{ op.exercicio }}</option>
                               </select>
                               <div *ngIf="ano.invalid && (ano.dirty || ano.touched)"
                                   class="alert alert-danger">
@@ -48,7 +48,8 @@
               <div class="panel-footer">
                   <div class="row">
                       <div class="col-lg-12 text-right">
-                          <button type="submit" class="btn btn-primary" [disabled]="!relatorioForm.form.valid">Pesquisar</button>
+                        <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!relatorioForm.form.valid">Pesquisar</button>
                       </div>
                   </div>
               </div>
@@ -57,8 +58,8 @@
 
     <div class="panel panel-primary">
           <div class="panel-heading">
-              Registros:
-          </div>
+                Resultado{{ _msgProgresso }}
+           </div>
           <div class="panel-body">
                   <div class="table-responsive">
                       <table class="table table-hover">
@@ -73,12 +74,12 @@
                               <tr *ngFor="let rptRecebimentoStatusDAO of rptRecebimentoStatusDAOs">
                                   <td>{{ rptRecebimentoStatusDAO.statusPagamento }}</td>
                                   <td>{{ rptRecebimentoStatusDAO.qtd }}</td>
-                                  <td>{{ rptRecebimentoStatusDAO.valorPorStatus }}</td>
+                                  <td>{{ rptRecebimentoStatusDAO.valorPorStatus | currency:'BRL':'symbol':'1.2-2':'pt-br' }}</td>
                               </tr>
                               <tr *ngFor="let rptRecebimentoStatusDAO of rptRecebimentoStatusDAOs ; let idx = index">
                                     <td *ngIf="idx === 0"></td>  
                                     <td *ngIf="idx === 0">Valor Total</td>
-                                  <td *ngIf="idx === 0">{{ rptRecebimentoStatusDAO.valorTotal }}</td>
+                                  <td *ngIf="idx === 0">{{ rptRecebimentoStatusDAO.valorTotal | currency:'BRL':'symbol':'1.2-2':'pt-br' }}</td>
                               </tr>
                           </tbody>
                       </table>

@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -47,7 +48,7 @@ export class EventoListComponent implements OnInit {
   ) {
 
     this.title = 'Consulta de Eventos';
-    this._itensPerPage = 30;
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
     this.submitted = false;
 
     this.editNome = '';
@@ -73,7 +74,9 @@ export class EventoListComponent implements OnInit {
   }
 
   onSelect(evento: Evento): void {
+
     this.selectedEvento = evento;
+    this.router.navigate(['admin/Evento', this.selectedEvento.eventoId]);
   }
 
   gotoNovoEvento() {

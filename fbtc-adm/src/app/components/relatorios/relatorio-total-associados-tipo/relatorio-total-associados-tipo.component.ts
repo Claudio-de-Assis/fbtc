@@ -25,6 +25,8 @@ export class RelatorioTotalAssociadosTipoComponent implements OnInit {
   submitted: boolean;
   rptRoute: string;
 
+  _msgProgresso: string;
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
@@ -35,11 +37,19 @@ export class RelatorioTotalAssociadosTipoComponent implements OnInit {
     this.title = 'Relatório Total de Usuários por Tipo de Associação';
     this.rptRoute = apiRoute.getRptTotalAssociadosTipoToExcel();
     this.submitted = false;
+
+    this._msgProgresso = '';
   }
 
   getDadosRpt(): void {
 
-    this.service.getRptTotalAssociadosTipo().subscribe(rptTotalAssociadosDAOs => this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs);
+    this._msgProgresso = '...Pesquisando...';
+
+    this.service.getRptTotalAssociadosTipo().subscribe(
+      rptTotalAssociadosDAOs => {
+        this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs;
+        this._msgProgresso =  this.rptTotalAssociadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+      });
   }
 
   onSubmit() {

@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -21,7 +22,7 @@ import { debug } from 'util';
 })
 export class AssociadoFichaFinanceiraListComponent implements OnInit {
 
-  title = 'Consulta da pegamentos';
+  title: string;
 
   _util = Util;
 
@@ -47,6 +48,7 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
   _itensPerPage: number;
 
   _msg: string;
+  _msgProgresso: string;
 
   constructor(
       private service: RecebimentoService,
@@ -54,6 +56,8 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
       private route: ActivatedRoute,
       private authService: AuthService
   ) {
+      this.title = 'Consulta da Pagamentos';
+
       this.editAno = 0;
       this.editStatusPS = 99;
       this.editAtivo = true;
@@ -62,21 +66,24 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
       this._ano = 0;
       this._ativo = '2';
       this.submitted = false;
-      this._itensPerPage = 30;
+      this._itensPerPage = AppSettings.ITENS_PER_PAGE;
 
       this._msg = '';
+      this._msgProgresso = '';
 
       this.editObjetivoPagamento = '2';
   }
 
   onSelect(recebimento: Recebimento): void {
+
     this.selectedRecebimento = recebimento;
+    this.router.navigate(['/admin/AssociadoFichaFinanceiraAnuidade', this.selectedRecebimento.recebimentoId]);
   }
 
   onSubmit() {
     this.submitted = true;
     this.gotoBuscarRecebimentoAnuidade();
-    this.gotoBuscarRecebimentoEvento();
+    // this.gotoBuscarRecebimentoEvento();
   }
 
 
@@ -89,8 +96,13 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
       this._ano = this.editAno;
     }
 
+    this._msgProgresso = '...Pesquisando...';
+
     this.service.getPagamentosByPessoaIdIdFilters(this._pessoaId, '2', this._ano, this._statusPS)
-        .subscribe(recebimentos => this.recebimentosAnuidade = recebimentos);
+        .subscribe(recebimentos => {
+          this.recebimentosAnuidade = recebimentos;
+          this._msgProgresso =  this.recebimentosAnuidade.length === 0 ? ' - Não foram encontrados registros' : '';
+        });
 
     this.submitted = false;
 
@@ -133,6 +145,6 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
     this._pessoaId = userProfile.pessoaId;
 
     this.gotoBuscarRecebimentoAnuidade();
-    this.gotoBuscarRecebimentoEvento();
+    // this.gotoBuscarRecebimentoEvento();
   }
 }

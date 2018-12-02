@@ -1,4 +1,4 @@
-import { debug } from 'util';
+import { AnuidadeService } from './../../shared/services/anuidade.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -11,6 +11,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import { RelatoriosService } from '../../shared/services/relatorios.service';
 import { RptRecebimentoStatusDAO } from '../../shared/model/relatorios';
 import { Util } from '../../shared/util/util';
+
+import { Anuidade } from './../../shared/model/anuidade';
+import { debug } from 'util';
 
 import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 
@@ -32,17 +35,24 @@ export class RelatorioRecebimentoStatusComponent implements OnInit {
 
   _util = Util;
 
+  _msgProgresso: string;
+
+  anuidades: Anuidade[];
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
     private route: ActivatedRoute,
     private apiRoute: RelatoriosRoute,
+    private serviceAnuidade: AnuidadeService,
   ) {
 
     this.title = 'Relatório de Recebimentos por Tipo';
     this.rptRoute = apiRoute.getRptTotalAssociadosTipoToExcel();
     this.editStatusPS = 0;
     this.submitted = false;
+
+    this._msgProgresso = '';
   }
 
   getDadosRpt(): void {
@@ -50,8 +60,13 @@ export class RelatorioRecebimentoStatusComponent implements OnInit {
     this.rptRoute = this.apiRoute.getRptRecebimentoStatusToExcel(this.editObjetivoPagamento, this.editAno, this.editStatusPS);
     this.submitted = true;
 
+    this._msgProgresso = '...Pesquisando...';
+
     this.service.getRptRecebimentoStatusDAO(this.editObjetivoPagamento, this.editAno, this.editStatusPS)
-    .subscribe(rptRecebimentoStatusDAOs => this.rptRecebimentoStatusDAOs = rptRecebimentoStatusDAOs);
+    .subscribe(rptRecebimentoStatusDAOs => {
+      this.rptRecebimentoStatusDAOs = rptRecebimentoStatusDAOs;
+      this._msgProgresso =  this.rptRecebimentoStatusDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+    });
   }
 
   onSubmit() {
@@ -60,8 +75,20 @@ export class RelatorioRecebimentoStatusComponent implements OnInit {
     this.getDadosRpt();
   }
 
+  gotoLimparFiltros() {
+
+    this.editStatusPS = 0;
+    this.editAno = null;
+    this.editObjetivoPagamento = null;
+  }
+
+  getAnuidades(): void {
+    this.serviceAnuidade.getAnuidades().subscribe(anuidades => this.anuidades = anuidades);
+  }
+
   ngOnInit() {
 
+    this.getAnuidades();
     // this.getDadosRpt();
   }
 

@@ -105,11 +105,11 @@
                                     <!--<td>Vencimento</td>
                                     <td>Pagamento</td>-->
                                     <td>Situação</td>
-                                    <td>Ações</td>
+                                    <!--<td>Ações</td>-->
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let recebimento of recebimentos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                <tr (click)="onSelect(recebimento)" *ngFor="let recebimento of recebimentos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="recebimento.recebimentoId === selectedId">
                                     <td>{{ recebimento.nome }}</td>
                                     <td>{{ recebimento.nomeTP }}</td>
@@ -117,11 +117,11 @@
                                     <!--<td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ recebimento.dtPagamento | date:'dd/MM/yyyy' }}</td>-->
                                     <td>{{ recebimento.statusPS |  statusPagamento }}</td>
-                                    <td>
-                                        <a [routerLink]="['/admin/RecebimentoEvento', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                    <!--<td>
+                                        <a [routerLink]="['/admin/RecebimentoEvento', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;-->
                                         <!--<a href="javascript: alert('excluir'); return false;"><i class="fa fa-trash text-danger"></i></a>-->
                                         <!--<i *ngIf="recebimento.statusPagamento !== '3'" class="fa fa-trash text-danger"></i>-->
-                                    </td>
+                                    <!--</td>-->
                                 </tr>
                             </tbody>
                         </table>

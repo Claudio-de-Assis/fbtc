@@ -31,7 +31,7 @@ export class UserProfileRoute {
 
     // [Route("RessetPasswordByEmail/{email}/")]
     postRessetPassWordByEmail(email: string): string {
-        return AppSettings.API_ENDPOINT + this.url + `RessetPassword/${email}/`;
+        return AppSettings.API_ENDPOINT + this.url + `RessetPasswordByEmail/${email}/`;
     }
 
     // [Route("ValidaEmail/{pessoaId:int},{eMail}/")]

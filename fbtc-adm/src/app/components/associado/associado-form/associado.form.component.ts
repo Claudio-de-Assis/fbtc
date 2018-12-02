@@ -1,3 +1,4 @@
+import { AssociadoDao } from './../../shared/model/associado';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -26,11 +27,6 @@ import { Endereco } from '../../shared/model/endereco';
 /** AssociadoForm component*/
 export class AssociadoFormComponent implements OnInit {
 
-    /*
-    endereco: Endereco = { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '',
-    bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
-    cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''};*/
-
     enderecoPri: Endereco = { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '1',
     bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
     cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''};
@@ -39,21 +35,20 @@ export class AssociadoFormComponent implements OnInit {
     bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
     cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''};
 
-
     enderecos: Endereco[];
 
-    @Input() associado: Associado = { associadoId: 0, atcId: null, tipoPublicoId: null, nrMatricula: '', crp: '',
+    @Input() associado: AssociadoDao = { associadoId: 0, atcId: null, tipoPublicoId: null, nrMatricula: '', crp: '',
             crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
-            tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
+            tipoFormaContato: '',  nrTelDivulgacao: '',
             comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
             pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '_no-foto.png',
             sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true, perfilId: 0,
+            dtCadastro: null, ativo: true, perfilId: 0, membroConfi: false, membroDiretoria: false, anuidadeAtcOk: false,
             enderecosPessoa: this.enderecos
     };
 
-    title = 'Usuário'; // Associado
-    badge = '';
+    title: string;
+    badge: string;
 
     _util = Util;
     _nomeFotoPadrao: string;
@@ -61,13 +56,14 @@ export class AssociadoFormComponent implements OnInit {
     _msg: string;
     _msgRetorno: string;
     _assocId: number;
+    _pessoaId: number;
 
     _endId: number;
     _pesId: number;
     _ordEnd: string;
     _isEMailValid: boolean;
 
-    editAssociadoId: number;
+    editPessoaId: number;
 
     private selectedId: any;
 
@@ -77,6 +73,10 @@ export class AssociadoFormComponent implements OnInit {
     submitted: boolean;
 
     history: string[] = [];
+
+    alertClassType: string;
+
+    _msgProgresso: string;
 
     constructor(
         private service: AssociadoService,
@@ -88,12 +88,15 @@ export class AssociadoFormComponent implements OnInit {
         private apiRoute: FileUploadRoute,
         private valueShareService: ValueShareService
     ) {
+        this.title = 'Usuário';
+        this.badge = '';
         this._nomeFotoPadrao = '_no-foto.png';
         this._nomeFoto = '_no-foto.png';
-        this.editAssociadoId = 0;
+        this.editPessoaId = 0;
         this._msg = '';
         this._msgRetorno = '';
         this._assocId = 0;
+        this._pessoaId = 0;
         this._endId = 0;
         this._pesId = 0;
         this._ordEnd = '';
@@ -101,28 +104,31 @@ export class AssociadoFormComponent implements OnInit {
         this._isEMailValid = false;
         this.submitted = false;
 
+        this.alertClassType = 'alert alert-info';
+
+        this._msgProgresso = '';
+
         valueShareService.valueStringInformada$.subscribe(
             nomeFoto => {
                 this.history.push(nomeFoto);
             });
     }
 
-    getAssociadoById(id: number): void {
+    getAssociadoByPessoaId(id: number): void {
 
-        this.service.getPessoaAssociadoById(id)
-            .subscribe(associado => this.associado = associado);
-    }
+        this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
 
-    setAssociado(): void {
-
-        this.service.setAssociado()
-            .subscribe(associado => this.associado = associado);
+        this.service.getAssociadoDaoByPessoaId(id)
+            .subscribe(associadoDao => {
+                this.associado = associadoDao;
+                this._msgProgresso = '';
+            });
     }
 
     gotoAssociados() {
 
-        let associadoId = this.associado ? this.associado.associadoId : null;
-        this.router.navigate(['admin/Associado', { id: associadoId, foo: 'foo' }]);
+        const pessoaId = this.associado ? this.associado.pessoaId : null;
+        this.router.navigate(['admin/Associado', { id: pessoaId, foo: 'foo' }]);
     }
 
     gotoValidarEMail() {
@@ -135,10 +141,10 @@ export class AssociadoFormComponent implements OnInit {
             });
     }
 
-
     save() {
 
-        this._msg = '';
+        this.alertClassType = 'alert alert-info';
+        this._msg = 'Salvando os dados. Por favor, aguarde...';
 
         this._nomeFoto = this.history[0];
 
@@ -174,18 +180,20 @@ export class AssociadoFormComponent implements OnInit {
 
         if (msgRet.substring(0, 1) === '0') {
 
-            this._assocId = parseInt(msgRet.substring(0, 10), 10);
+            this._pessoaId = parseInt(msgRet.substring(0, 10), 10);
 
-            this.router.navigate([`admin/Associado/${this._assocId}`]);
+            // this.router.navigate([`admin/Associado/${this._pessoaId}`]);
 
-            this.getAssociadoById(this._assocId);
+            this.getAssociadoByPessoaId(this._pessoaId);
 
+            this.alertClassType = 'alert alert-success';
             this._msg = this._msgRetorno.substring(10);
 
             this.badge = 'Edição';
 
         } else {
 
+            this.alertClassType = 'alert alert-success';
             this._msg = this._msgRetorno;
         }
     }
@@ -201,11 +209,16 @@ export class AssociadoFormComponent implements OnInit {
 
     gotoReenviarSenha() {
 
-        this._msg = '';
-        if (this.editAssociadoId !== 0) {
+        this.alertClassType = 'alert alert-info';
+        this._msg = 'Enviando a senha para o e-mail do associado. Por favor, aguarde...';
 
-            this.service.ressetPassWordById(this.editAssociadoId)
-            .subscribe(msg => this._msg = msg);
+        if (this.editPessoaId !== 0) {
+
+            this.service.ressetPassWordById(this.editPessoaId)
+            .subscribe(msg => {
+                this.alertClassType = 'alert alert-success';
+                this._msg = msg;
+            });
 
         } else {
 
@@ -276,11 +289,11 @@ export class AssociadoFormComponent implements OnInit {
 
         this.getTiposPublicos();
 
-        this.editAssociadoId = +this.route.snapshot.paramMap.get('id');
+        this.editPessoaId = +this.route.snapshot.paramMap.get('id');
 
-        if (this.editAssociadoId > 0) {
+        if (this.editPessoaId > 0) {
             this.badge = 'Edição';
-            this.getAssociadoById(this.editAssociadoId);
+            this.getAssociadoByPessoaId(this.editPessoaId);
 
         } else {
             this.badge = 'Novo';

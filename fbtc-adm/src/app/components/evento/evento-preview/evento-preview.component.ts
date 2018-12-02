@@ -15,7 +15,7 @@ import { EventoService } from '../../shared/services/evento.service';
 })
 export class EventoPreviewComponent implements OnInit {
 
-  title: 'Dados do Evento - Preview';
+  title: string;
 
   private selectedId: any;
 
@@ -43,7 +43,9 @@ export class EventoPreviewComponent implements OnInit {
     private router: Router,
     // private serviceTP: TipoPublicoService,
     private service: EventoService,
-  ) { }
+  ) {
+    this.title = 'Dados do Evento - Preview';
+  }
 
   gotoEvento() {
     this.router.navigate(['/Evento', this.editEventoId]);

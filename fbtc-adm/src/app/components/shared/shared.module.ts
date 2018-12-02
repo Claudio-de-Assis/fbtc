@@ -12,6 +12,9 @@ import { FormaPagamentoPipe } from './pipes/forma-pagamento.pipe';
 import { FileUploadModule } from './upload/file-upload.module';
 import { FileUploadRoute } from './webapi-routes/file-upload.route';
 import { MycurrencyPipe } from './pipes/mycurrency';
+import { TipoAnuidadePipe } from './pipes/tipo-anuidade';
+import { StatusPagamentoFBTCPipe } from './pipes/status-pagamento-fbtc.pipe';
+import { TipoDescontoPipe } from './pipes/tipo-desconto.pipe';
 
 @NgModule({
   imports: [
@@ -22,22 +25,28 @@ import { MycurrencyPipe } from './pipes/mycurrency';
     BooMessagePipe,
     FindNameInTipoPublicoPipe,
     TipoPerfilPipe,
+    TipoAnuidadePipe,
     TipoEventoPipe,
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
+    StatusPagamentoFBTCPipe,
     FormaPagamentoPipe,
-    MycurrencyPipe
+    MycurrencyPipe,
+    TipoDescontoPipe,
   ],
   exports: [
     BooMessagePipe,
     FindNameInTipoPublicoPipe,
     TipoPerfilPipe,
+    TipoAnuidadePipe,
     TipoEventoPipe,
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
+    StatusPagamentoFBTCPipe,
     FormaPagamentoPipe,
     FileUploadModule,
-    MycurrencyPipe
+    MycurrencyPipe,
+    TipoDescontoPipe,
   ],
   providers: [
     FileUploadRoute

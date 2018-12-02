@@ -32,6 +32,14 @@ export class AnuidadeService {
         );
     }
 
+    getAnuidadesPendentesByPessoaId(pessoaId: number): Observable<Anuidade[]> {
+        return this.http.get<Anuidade[]>(this.apiRoute.getAnuidadesPendentesByPessoaId(pessoaId))
+        .pipe(
+            tap(anuidades => this.log('Fetched Anuidade')),
+            catchError(this.handleError('getAnuidadesPendentesByPessoaId()', []))
+        );
+    }
+
     getById(id: number): Observable<Anuidade> {
         return this.http.get<Anuidade>(this.apiRoute.getById(id)).pipe(
             tap(_ => this.log(`fetched Anuidade id=${id}`)),
@@ -40,10 +48,18 @@ export class AnuidadeService {
     }
 
 
+
     getAnuidadeDaoById(id: number): Observable<AnuidadeDao> {
         return this.http.get<AnuidadeDao>(this.apiRoute.getAnuidadeDaoById(id)).pipe(
             tap(_ => this.log(`fetched Anuidade id=${id}`)),
             catchError(this.handleError<AnuidadeDao>(`getAnuidade id=${id}`))
+          );
+    }
+
+    getAnuidadeDaoByIdTipoPublicoId(id: number, tipoPublicoId: number): Observable<AnuidadeDao> {
+        return this.http.get<AnuidadeDao>(this.apiRoute.getAnuidadeDaoByIdTipoPublicoId(id, tipoPublicoId)).pipe(
+            tap(_ => this.log(`fetched Anuidade id=${id}, tipoPublicoId=${tipoPublicoId}`)),
+            catchError(this.handleError<AnuidadeDao>(`getAnuidade id=${id}, tipoPublicoId=${tipoPublicoId}`))
           );
     }
 
@@ -54,14 +70,13 @@ export class AnuidadeService {
         );
     }
 
-    getByFilters(codigo: number, ativo: string): Observable<Anuidade[]> {
-        return this.http.get<Anuidade[]>(this.apiRoute.getFindByFilters(codigo, ativo))
+    getByFilters(exercicio: number, ativo: string): Observable<Anuidade[]> {
+        return this.http.get<Anuidade[]>(this.apiRoute.getFindByFilters(exercicio, ativo))
             .pipe(
-                tap(anuidades => this.log(`fetched Anuidade Filter codigo=${codigo}, Ativo=${ativo}`)),
-                catchError(this.handleError(`getByFilters codigo=${codigo}, Ativo=${ativo}`, []))
+                tap(anuidades => this.log(`fetched Anuidade Filter Exercicio=${exercicio}, Ativo=${ativo}`)),
+                catchError(this.handleError(`getByFilters Exercicio=${exercicio}, Ativo=${ativo}`, []))
         );
     }
-
 
     //////// Save methods //////////
     /** POST: add a new Associado to the server */

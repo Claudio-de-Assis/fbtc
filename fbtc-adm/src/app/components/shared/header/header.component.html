@@ -248,18 +248,27 @@
                 <li *ngxPermissionsOnly="['Cliente Externo']">                
                     <a [routerLink]="['AssociadoFichaFinanceira']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Ficha Financeira</a>
                 </li>
+
+                <li *ngxPermissionsOnly="['Cliente Externo']">                
+                        <a [routerLink]="['MinhaAssinaturaAnuidade']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Minhas Anuidades</a>
+                </li>
+
+               <!-- <li *ngxPermissionsOnly="['Cliente Externo']">                
+                        <a [routerLink]="['MinhaAssinaturaEvento']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Eventos</a>
+                </li>-->
+
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Associado']" routerLinkActtive="active"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i> Usuário</a>
                 </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Colaborador']" routerLinkActtive="active"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Administração</a>
                 </li>
-                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                <!--<li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Evento']" routerLinkActtive="active"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Eventos</a>
-                </li>
+                </li>-->
                 
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                    <a [routerLink]="['FichaFinanceira']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Ficha Financeira</a>
+                    <a [routerLink]="['FichaFinanceira']" routerLinkActtive="active"><i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Anuidade</a>
                 </li>
                 
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
@@ -268,13 +277,27 @@
                         <li>
                             <a [routerLink]="['RecebimentoAnuidade']" routerLinkActtive="active">Anuidades</a>
                         </li>
-                        <li>
+                       <!-- <li>
                                 <a [routerLink]="['RecebimentoEvento']" routerLinkActtive="active">Eventos</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </li>
+
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a href="javascript:void(0)" (click)="isToggle('menuAssinatura')"><i class="fa fa-money fa-fw"></i> Assinatura<span class="fa arrow"></span></a>
+                    <ul id="menuAssinatura" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuAssinatura'}"  >
+                        <li>
+                            <a [routerLink]="['AssinaturaAnuidade']" routerLinkActtive="active">Anuidades</a>
+                        </li>
+                        <!--<li>
+                                <a [routerLink]="['AssinaturaEvento']" routerLinkActtive="active">Eventos</a>
+                        </li>-->
+                    </ul>
+                </li>
+
                 <li>
                 </li>
+                <!--
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a href="javascript:void(0)" (click)="isToggle('menuIsencoes')"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
                     <ul id="menuIsencoes" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuIsencoes'}">
@@ -285,7 +308,7 @@
                             <a [routerLink]="['IsencaoEvento']" routerLinkActtive="active">Eventos</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Atc']" routerLinkActtive="active"><i class="fa fa-group" aria-hidden="true"></i> Atc</a>
                 </li>
@@ -318,6 +341,13 @@
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Cursos&Noticias']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Cursos e Notícias</a>
                 </li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                        <a [routerLink]="['Gestao']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Gestão</a>
+                </li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                        <a [routerLink]="['DescontoAnuidadeAtc']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Desconto ATC</a>
+                </li>
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

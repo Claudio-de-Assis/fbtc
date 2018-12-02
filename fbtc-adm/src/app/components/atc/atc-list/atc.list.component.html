@@ -33,7 +33,7 @@
         </div>
     </form>
     <div class="panel panel-primary">
-            <div class="panel-heading">Listagem de Eventos</div>
+            <div class="panel-heading">Listagem de ATCs{{ _msgProgresso }}</div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -42,19 +42,19 @@
                                     <td>Nome</td>
                                     <td>UF</td>
                                     <td>Presidente</td>
-                                    <td>Ações</td>
+                                    <!--<td>Ações</td>-->
                                 </tr>
                             </thead>
                             <tbody class="Atcs">
-                                <tr *ngFor="let atc of atcs | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                <tr (click)="onSelect(atc)" *ngFor="let atc of atcs | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="atc.atcId === selectedId">
                                     <td>{{ atc.nome }}</td>
                                     <td>{{ atc.uf }}</td>
                                     <td>{{ atc.nomePres }}</td>
-                                    <td>
-                                        <a [routerLink]="['/admin/Atc', atc.atcId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                    <!--<td>
+                                        <a [routerLink]="['/admin/Atc', atc.atcId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;-->
                                         <!--<i class="fa fa-trash text-danger"></i>-->
-                                    </td>
+                                    <!--</td>-->
                                 </tr>
                             </tbody>
                         </table>

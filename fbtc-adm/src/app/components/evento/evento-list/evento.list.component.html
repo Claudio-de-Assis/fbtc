@@ -64,20 +64,20 @@
                                     <td>Tipo</td>
                                     <td>Início</td>
                                     <td>Código</td>
-                                    <td>Ações</td>
+                                    <!--<td>Ações</td>-->
                                 </tr>
                             </thead>
                             <tbody class="eventos">
-                                <tr *ngFor="let evento of eventos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                <tr (click)="onSelect(evento)" *ngFor="let evento of eventos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="evento.eventoId === selectedId">
                                     <td>{{ evento.titulo }}</td>
                                     <td>{{ evento.tipoEvento | tipoEvento }}</td>
                                     <td>{{ evento.dtInicio | date: 'dd/MM/yyyy' }}</td>
                                     <td>{{ evento.codigo }}</td>    
-                                    <td>
-                                        <a [routerLink]="['/admin/Evento', evento.eventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
+                                    <!--<td>
+                                        <a [routerLink]="['/admin/Evento', evento.eventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;-->
                                         <!--<i class="fa fa-trash text-danger"></i>-->
-                                    </td>
+                                    <!--</td>-->
                                 </tr>
                             </tbody>
                         </table>

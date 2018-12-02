@@ -26,6 +26,8 @@ export class RelatorioReceitaAnualComponent implements OnInit {
   submitted: boolean;
   rptRoute: string;
 
+  _msgProgresso: string;
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
@@ -36,11 +38,19 @@ export class RelatorioReceitaAnualComponent implements OnInit {
     this.title = 'Relatório de Receita Anual';
     this.rptRoute = apiRoute.getRptReceitaAnualToExcel();
     this.submitted = false;
+
+    this._msgProgresso = '';
    }
 
   getDadosRpt(): void {
 
-    this.service.getRptReceitaAnualDAO().subscribe(rptReceitaAnualDAOs => this.rptReceitaAnualDAOs = rptReceitaAnualDAOs);
+    this._msgProgresso = '...Pesquisando...';
+
+    this.service.getRptReceitaAnualDAO().subscribe(
+      rptReceitaAnualDAOs => {
+        this.rptReceitaAnualDAOs = rptReceitaAnualDAOs;
+        this._msgProgresso =  this.rptReceitaAnualDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+      });
   }
 
   onSubmit() {

@@ -1,3 +1,5 @@
+import { ValorAnuidade } from './../../shared/model/valor-anuidade';
+import { AnuidadeTipoPublicoDao } from './../../shared/model/anuidade-tipo-publico';
 import { TipoPublicoValorAnuidadeDao } from './../../shared/model/tipo-publico';
 import { AnuidadeDao } from './../../shared/model/anuidade';
 import { Component, OnInit, Input } from '@angular/core';
@@ -16,10 +18,39 @@ import { TipoPublicoService } from './../../shared/services/tipo-publico.service
 })
 export class FichaFinanceiraFormComponent implements OnInit {
 
-  @Input() tiposPublicosValorsAnuidadesDao: TipoPublicoValorAnuidadeDao[];
+  ValAnuidade_1P: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 1, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_2P: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 2, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_3P: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 3, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_1EP: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 1, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_2EP: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 2, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_3EP: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 3, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_1E: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 1, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_2E: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 2, AnuidadeTipoPublicoId: 0};
+  ValAnuidade_3E: ValorAnuidade = {valorAnuidadeId: 0, valor: 0, tipoAnuidade: 3, AnuidadeTipoPublicoId: 0};
 
-  @Input() anuidadeDao: AnuidadeDao = {anuidadeId: 0, codigo: null, dtCadastro: null, ativo: false,
-    tiposPublicosValorsAnuidadesDao: this.tiposPublicosValorsAnuidadesDao };
+  valoresAnuidade_1: ValorAnuidade[];
+  valoresAnuidade_2: ValorAnuidade[];
+  valoresAnuidade_3: ValorAnuidade[];
+
+  anuidadesTPProfAsso: AnuidadeTipoPublicoDao = { anuidadeTipoPublicoId: 0, anuidadeId: 0,
+    tipoPublicoId: 0, nomeTipoPublico: 'Profissional - Associado', codigo: 'IPA', valoresAnuidades: this.valoresAnuidade_1
+   };
+
+   anuidadesTPProfEstPos: AnuidadeTipoPublicoDao = { anuidadeTipoPublicoId: 0, anuidadeId: 0,
+    tipoPublicoId: 0, nomeTipoPublico: 'Estudante de Pós - Associado', codigo: 'IEPA', valoresAnuidades: this.valoresAnuidade_2
+   };
+
+   anuidadesTPProfEst: AnuidadeTipoPublicoDao = { anuidadeTipoPublicoId: 0, anuidadeId: 0,
+    tipoPublicoId: 0, nomeTipoPublico: 'Estudante - Associado', codigo: 'IEA', valoresAnuidades: this.valoresAnuidade_3
+   };
+
+
+  @Input() anuidadesTiposPublicosDao: AnuidadeTipoPublicoDao[];
+
+  @Input() anuidadeDao: AnuidadeDao = {anuidadeId: 0, exercicio: null,
+    dtVencimento: null, dtInicioVigencia: null, dtTerminoVigencia: null,
+    cobrancaLiberada: false, dtCobrancaLiberada: null, dtCadastro: null, ativo: false,
+    anuidadesTiposPublicosDao: this.anuidadesTiposPublicosDao };
 
   title: string;
   badge: string;
@@ -30,7 +61,15 @@ export class FichaFinanceiraFormComponent implements OnInit {
   _msg: string;
   _anuidadeId: number;
 
+  editTipoAnuidade_1: number;
+  editTipoAnuidade_2: number;
+  editTipoAnuidade_3: number;
+
   _util = Util;
+
+  alertClassType: string;
+
+  _msgProgresso: string;
 
   constructor(
     private service: AnuidadeService,
@@ -45,17 +84,37 @@ export class FichaFinanceiraFormComponent implements OnInit {
   this.anuidadeId = 0;
   this.badge = '';
   this._anuidadeId = 0;
+
+  this.editTipoAnuidade_1 = 0;
+  this.editTipoAnuidade_2 = 0;
+  this.editTipoAnuidade_3 = 0;
+
+  this.anuidadesTPProfAsso.valoresAnuidades = [this.ValAnuidade_1P, this.ValAnuidade_2P, this.ValAnuidade_3P];
+  this.anuidadesTPProfEstPos.valoresAnuidades = [this.ValAnuidade_1EP, this.ValAnuidade_2EP, this.ValAnuidade_3EP];
+  this.anuidadesTPProfEst.valoresAnuidades = [this.ValAnuidade_1E, this.ValAnuidade_2E, this.ValAnuidade_3E];
+
+  this.anuidadeDao.anuidadesTiposPublicosDao = [this.anuidadesTPProfAsso, this.anuidadesTPProfEstPos, this.anuidadesTPProfEst];
+
+  this.alertClassType = 'alert alert-info';
+
+  this._msgProgresso = '';
 }
 
-  getAnuidadeById(id: number): void {
+  getAnuidadeDaoById(id: number): void {
+
+    this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
 
     this.service.getAnuidadeDaoById(id)
-          .subscribe(anuidadeDao => this.anuidadeDao = anuidadeDao);
+          .subscribe(anuidadeDao => {
+            this.anuidadeDao = anuidadeDao;
+            this._msgProgresso = '';
+          });
   }
 
   gotoSave() {
 
-      this._msg = '';
+    this.alertClassType = 'alert alert-info';
+    this._msg = 'Salvando os dados. Por favor, aguarde...';
 
       this.service.addAnuidadeDao(this.anuidadeDao)
        .subscribe(
@@ -75,43 +134,47 @@ export class FichaFinanceiraFormComponent implements OnInit {
     const anuidadeId = this.anuidadeDao ? this.anuidadeDao.anuidadeId : null;
     this.router.navigate(['/admin/FichaFinanceira', { id: anuidadeId, foo: 'foo' }]);
   }
-
+/*
   getTiposPublicosByAnuidadeId(id: number): void {
 
-    this.serviceTP.getTiposPublicoByAnuidadeId(id).
-      subscribe(tiposPublicosValorsAnuidadesDao => this.anuidadeDao.tiposPublicosValorsAnuidadesDao = tiposPublicosValorsAnuidadesDao);
-  }
+    this.service.getAnuidadeDaoById(id).
+      subscribe(anuidadesDao => this.anuidadeDao = anuidadesDao);
+  }*/
 
   avaliaRetorno(msgRet: string) {
 
     if (msgRet.substring(0, 1) === '0') {
 
+console.log('msgRet...' + msgRet);
+
         this._anuidadeId = parseInt(msgRet.substring(0, 10), 10);
 
-        this.router.navigate([`admin/FichaFinanceira/${this._anuidadeId}`]);
+console.log('_anuidadeId...' + this._anuidadeId);
+        // this.router.navigate([`admin/FichaFinanceira/${this._anuidadeId}`]);
 
-        this.getAnuidadeById(this._anuidadeId);
+        this.getAnuidadeDaoById(this._anuidadeId);
 
+        this.alertClassType = 'alert alert-success';
         this._msg = this._msgRetorno.substring(10);
 
         this.badge = 'Edição';
 
     } else {
 
+        this.alertClassType = 'alert alert-success';
         this._msg = this._msgRetorno;
     }
   }
 
-
   ngOnInit() {
 
     this.anuidadeId = +this.route.snapshot.paramMap.get('id');
+
       if (this.anuidadeId > 0) {
         this.badge = 'Edição';
-          this.getAnuidadeById(this.anuidadeId);
+          this.getAnuidadeDaoById(this.anuidadeId);
     } else {
       this.badge = 'Novo';
-      this.getTiposPublicosByAnuidadeId(0);
     }
   }
 }

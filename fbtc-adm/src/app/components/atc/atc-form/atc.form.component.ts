@@ -33,6 +33,10 @@ export class AtcFormComponent implements OnInit {
   unidadesFederacao: UnidadeFederacao[];
   _util = Util;
 
+  alertClassType: string;
+
+  _msgProgresso: string;
+
   constructor(
     private service: AtcService,
     private serviceUF: UnidadeFederacaoService,
@@ -46,21 +50,33 @@ export class AtcFormComponent implements OnInit {
     this._msgRetorno = '';
     this._msg = '';
     this._atcId = 0;
+
+    this.alertClassType = 'alert alert-info';
+
+    this._msgProgresso = '';
    }
 
   getAtcById(id: number): void {
 
+    this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
+
     this.service.getById(id)
-        .subscribe(atc => this.atc = atc);
+        .subscribe(atc => {
+          this.atc = atc;
+          this._msgProgresso = '';
+        });
   }
 
   gotoAtcs() {
 
-    let atcId = this.atc ? this.atc.atcId : null;
+    const atcId = this.atc ? this.atc.atcId : null;
     this.router.navigate(['/admin/Atc', { id: atcId, foo: 'foo' }]);
   }
 
   save() {
+
+    this.alertClassType = 'alert alert-info';
+    this._msg = 'Salvando os dados. Por favor, aguarde...';
 
     this.service.addAtc(this.atc)
     .subscribe(
@@ -82,13 +98,15 @@ export class AtcFormComponent implements OnInit {
 
         this.getAtcById(this._atcId);
 
+        this.alertClassType = 'alert alert-success';
         this._msg = this._msgRetorno.substring(10);
 
         this.badge = 'Edição';
 
     } else {
 
-        this._msg = this._msgRetorno;
+      this.alertClassType = 'alert alert-success';
+      this._msg = this._msgRetorno;
     }
   }
 

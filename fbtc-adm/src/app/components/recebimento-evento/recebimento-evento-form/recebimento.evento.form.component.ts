@@ -1,4 +1,3 @@
-import { Endereco } from '../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -14,6 +13,8 @@ import { Recebimento } from '../../shared/model/recebimento';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Evento } from '../../shared/model/evento';
 
+import { RecebimentoAssociadoDao } from './../../shared/model/recebimento';
+
 @Component({
   selector: 'app-recebimento-evento-form',
   templateUrl: './recebimento.evento.form.component.html',
@@ -21,28 +22,13 @@ import { Evento } from '../../shared/model/evento';
 })
 export class RecebimentoEventoFormComponent implements OnInit {
 
-  enderecos: Endereco[];
+  @Input() recebimentoDao: RecebimentoAssociadoDao = { titulo: '', anuidade: null, nome: '', cpf: '', nomeTP: '',
+                    eMail: '', nrCelular: '', ativoAssociado: false, recebimentoId: 0, assinaturaAnuidadeId: null,
+                    assinaturaEventoId: null, observacao: '', notificationCodePS: '', typePS: null,
+                    statusPS: null, lastEventDatePS: null, typePaymentMethodPS: null, codePaymentMethodPS: null,
+                    netAmountPS: 0, dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
+                    dtCadastro: null, ativo: false};
 
-  @Input() recebimento: Recebimento = { recebimentoId: 0, associadoId: 0, associadoIsentoId: 0, valorAnuidadePublicoId: 0,
-        valorEventoPublicoId: 0, objetivoPagamento: '', dtNotificacao: null, observacao: '',
-        codePS: '', referencePS: '', typePS: 0, statusPS: 99, lastEventDatePS: null, typePaymentMethodPS: 0,
-        codePaymentMethodPS: 0, netAmountPS: 0,
-        dtCadastro: null, ativo: true, dtVencimento: null,
-          associado: { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
-            crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
-            tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
-            comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
-            pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
-            sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-            dtCadastro: null, ativo: true, perfilId: 0,
-              enderecosPessoa: this.enderecos}
-  };
-
-  /*
-   new endereco { enderecoId: 0, pessoaId: 0, numero: '', complemento: '', tipoEndereco: '', ordemEndereco: '',
-              bairro: '', cidade: '', logradouro: '', estado_info: { area_km2: '', codigo_ibge: '', nome: '' },
-              cep: '', cidade_info: { area_km2: '', codigo_ibge: ''}, estado: ''}
-  */
   @Input() evento: Evento = new Evento();
 
   title: string;
@@ -50,6 +36,10 @@ export class RecebimentoEventoFormComponent implements OnInit {
   tiposPublicos: TipoPublico[];
   eventos: Evento[];
   submitted: boolean;
+
+  _msg: string;
+  _msgRetorno: string;
+  _recebimentoId: number;
 
   constructor(
     private service: RecebimentoService,
@@ -60,45 +50,58 @@ export class RecebimentoEventoFormComponent implements OnInit {
   ) {
     this.title = 'Dados de pagamento de evento';
     this.submitted = false;
+    this._msgRetorno = '';
+    this._msg = '';
+    this._recebimentoId = 0;
    }
 
-  getRecebimentoById(id: number): void {
+   getRecebimentoAssociadoDaoByRecebimentoId(id: number): void {
 
-    this.service.getById(id)
-          .subscribe(recebimento => this.recebimento = recebimento);
-
-    this.submitted = false;
+    this.service.getRecebimentoAssociadoDaoByRecebimentoId(id)
+          .subscribe(recebimentoDao => this.recebimentoDao = recebimentoDao);
   }
 
   gotoSave() {
 
-    this.service.addRecebimento(this.recebimento)
-    .subscribe(() =>  this.gotoShowPopUp());
+    this._msg = '';
+
+    this.service.addRecebimento(this.recebimentoDao)
+      .subscribe(
+        msg => {
+          this._msgRetorno = msg;
+          this.avaliaRetorno(this._msgRetorno);
+        }
+      );
+      this.submitted = false;
   }
+
+
+  avaliaRetorno(msgRet: string) {
+
+    if (msgRet.substring(0, 1) === '0') {
+
+        this._recebimentoId = parseInt(msgRet.substring(0, 10), 10);
+
+        // this.router.navigate([`admin/Recebimento/${this._recebimentoId}`]);
+
+        this.getRecebimentoAssociadoDaoByRecebimentoId(this._recebimentoId);
+
+        this._msg = this._msgRetorno.substring(10);
+
+    } else {
+
+        this._msg = this._msgRetorno;
+    }
+}
 
   onSubmit() {
     this.submitted = true;
     this.gotoSave();
   }
 
-  gotoShowPopUp() {
-
-    // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert('Registro salvo com sucesso!');
-  }
-
-  /*
-  gotoNotificarAssociado() {
-
-    if (confirm('Deseja notificar o Associado?')) {
-      alert('Notificação enviada com sucesso');
-    }
-  }
-  */
-
   gotoRecebimentoAnuidade() {
 
-    let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
+    const recebimentoId = this.recebimentoDao ? this.recebimentoDao.recebimentoId : null;
     this.router.navigate(['/admin/RecebimentoEvento', { id: recebimentoId, foo: 'foo' }]);
   }
 
@@ -119,7 +122,7 @@ export class RecebimentoEventoFormComponent implements OnInit {
 
     const id = +this.route.snapshot.paramMap.get('id');
     if (id > 0) {
-        this.getRecebimentoById(id);
+        this.getRecebimentoAssociadoDaoByRecebimentoId(id);
         this.getEventoByRecebimentoId(id);
     } else {
       alert('Não foi encontrato recebimento para o Id Informado');

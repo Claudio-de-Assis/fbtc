@@ -62,7 +62,6 @@ export class UserProfileFormComponent implements OnInit {
 
   history: string[] = [];
 
-
   constructor(
     private service: UserProfileService,
     private router: Router,

@@ -13,10 +13,10 @@
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="sltAno">Ano:</label><br>
-                                <select id="sltAno" name="ano" class="form-control"
-                                    required  
-                                    [(ngModel)]="editAno"  #ano="ngModel" (ngModelChange)="setAnoRpt()">
-                                    <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                                <select id="sltAno" (ngModelChange)="setAnoRpt()" name="ano" class="form-control"
+                                    required
+                                    [(ngModel)]="editAno" #ano="ngModel">
+                                    <option *ngFor="let op of anuidades" value="{{ op.exercicio }}">{{ op.exercicio }}</option>
                                 </select>
                                 <div *ngIf="ano.invalid && (ano.dirty || ano.touched)"
                                     class="alert alert-danger">
@@ -41,7 +41,7 @@
     
     <div class="panel panel-primary">
           <div class="panel-heading">
-              Registros:
+              Resultado{{ _msgProgresso }}
           </div>
           <div class="panel-body">
                   <div class="table-responsive">
@@ -71,6 +71,7 @@
                     <a href="{{ rptRoute }}"><button type="button" class="btn btn-success" [disabled]="!relatorioForm.form.valid">Exportar para o Excel</button></a>
                 </div>
                 <div class="col-lg-6 text-right">
+                    <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                     <button type="submit" class="btn btn-primary" [disabled]="!relatorioForm.form.valid">Atualizar</button>&nbsp;
                 </div>
             </div>

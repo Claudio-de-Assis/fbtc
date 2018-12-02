@@ -8,7 +8,7 @@ import 'rxjs';
 
 import { MessageService } from '../../../message.service';
 import { AssociadoRoute } from '../webApi-routes/associado.route';
-import { Associado } from '../model/associado';
+import { Associado, AssociadoDao } from '../model/associado';
 import { AssociadoIsentoDao } from '../model/associado-isento';
 
 
@@ -50,6 +50,20 @@ export class AssociadoService {
           );
     }
 
+    getAssociadoDaoById(id: number, anuidadeId: number): Observable<AssociadoDao> {
+        return this.http.get<AssociadoDao>(this.apiRoute.getAssociadoDaoById(id, anuidadeId)).pipe(
+            tap(_ => this.log(`fetched associadoDao id=${id} anuidadeId=${anuidadeId}`)),
+            catchError(this.handleError<AssociadoDao>(`getAssociadoDao id=${id} anuidadeId=${anuidadeId}`))
+          );
+    }
+
+    getAssociadoDaoByPessoaId(id: number): Observable<AssociadoDao> {
+        return this.http.get<AssociadoDao>(this.apiRoute.getAssociadoDaoByPessoaId(id)).pipe(
+            tap(_ => this.log(`fetched associadoDao id=${id}`)),
+            catchError(this.handleError<AssociadoDao>(`getAssociadoDao id=${id}`))
+          );
+    }
+
     getPessoaAssociadoById(id: number): Observable<Associado> {
         return this.http.get<Associado>(this.apiRoute.getPessoaAssociadoById(id)).pipe(
             tap(_ => this.log(`fetched associado id=${id}`)),
@@ -74,7 +88,7 @@ export class AssociadoService {
         );
     }
   **/
-    addAssociado (associado: Associado): Observable<string> {
+    addAssociado (associado: AssociadoDao): Observable<string> {
         return this.http.post<string>(this.apiRoute.postAssociado(), associado, httpOptions).pipe(
           tap(_ => this.log(`added associado w/ id=${associado.associadoId}`)),
           catchError(this.handleError<string>('addAssociado'))

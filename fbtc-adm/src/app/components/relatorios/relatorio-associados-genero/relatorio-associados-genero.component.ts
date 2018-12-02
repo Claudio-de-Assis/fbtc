@@ -30,6 +30,8 @@ export class RelatorioAssociadosGeneroComponent implements OnInit {
 
   _util = Util;
 
+  _msgProgresso: string;
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
@@ -41,14 +43,22 @@ export class RelatorioAssociadosGeneroComponent implements OnInit {
     this.title = 'Relatório Total de Usuários por Sexo e Tipo de Associação';
     this.rptRoute = apiRoute.getRptAssociadosGeneroToExcel(this.editSexo);
     this.submitted = false;
+
+    this._msgProgresso = '';
   }
 
   getDadosRpt(): void {
 
     this.submitted = true;
     this.rptRoute = this.apiRoute.getRptAssociadosGeneroToExcel(this.editSexo);
+
+    this._msgProgresso = '...Pesquisando...';
+
     this.service.getRptAssociadosGeneroDAO(this.editSexo).
-    subscribe(rptTotalAssociadosDAOs => this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs);
+    subscribe(rptTotalAssociadosDAOs => {
+      this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs;
+      this._msgProgresso =  this.rptTotalAssociadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+    });
   }
 
   onSubmit() {

@@ -14,6 +14,9 @@ import { RelatoriosRoute } from '../../shared/webapi-routes/relatorios.route';
 import { Util } from '../../shared/util/util';
 import { debug } from 'util';
 
+import { Anuidade } from './../../shared/model/anuidade';
+import { AnuidadeService } from './../../shared/services/anuidade.service';
+
 @Component({
   selector: 'app-relatorio-associados-ano',
   templateUrl: './relatorio-associados-ano.component.html',
@@ -29,27 +32,41 @@ export class RelatorioAssociadosAnoComponent implements OnInit {
   submitted: boolean;
   rptRoute: string;
 
+  _msgProgresso: string;
+
+  anuidades: Anuidade[];
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
     private route: ActivatedRoute,
     private apiRoute: RelatoriosRoute,
+    private serviceAnuidade: AnuidadeService,
   ) {
 
     this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(0);
     this.title = 'Relatório de Usuários por Ano e Tipo de Associação';
     this.submitted = false;
+
+    this._msgProgresso = '';
    }
 
   getDadosRpt(): void {
 
+    this._msgProgresso = '...Pesquisando...';
+
     this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(this.editAno);
+
     this.service.getRptAssociadosAnoDAO(this.editAno).
-    subscribe(rptTotalAssociadosDAOs => this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs);
+    subscribe(
+      rptTotalAssociadosDAOs => {
+        this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs;
+        this._msgProgresso =  this.rptTotalAssociadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+      });
   }
 
   setAnoRpt(): void {
-    console.log('aqui');
+
     this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(this.editAno);
   }
 
@@ -59,7 +76,16 @@ export class RelatorioAssociadosAnoComponent implements OnInit {
     this.getDadosRpt();
   }
 
+  gotoLimparFiltros() {
+
+    this.editAno = null;
+  }
+
+  getAnuidades(): void {
+    this.serviceAnuidade.getAnuidades().subscribe(anuidades => this.anuidades = anuidades);
+  }
   ngOnInit() {
+    this.getAnuidades();
 
     // this.getDadosRpt();
   }

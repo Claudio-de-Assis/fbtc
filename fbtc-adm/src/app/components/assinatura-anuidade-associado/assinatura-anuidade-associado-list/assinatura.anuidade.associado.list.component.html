@@ -1,0 +1,87 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #assinaturaForm="ngForm">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="sltAnuidade">{{_labelAnuidade}}:</label>
+                                <select id="sltAnuidade"  name="anuidade" class="form-control"
+                                    required [disabled]="_habilitaAnuidade"
+                                    [(ngModel)]="editAnuidadeId" #anuidade="ngModel" en>
+                                    <option *ngFor="let op of anuidades" value="{{ op.anuidadeId }}">{{ op.exercicio }}</option>
+                                </select>
+                                <div *ngIf="anuidade.invalid && (anuidade.dirty || anuidade.touched)"
+                                    class="alert alert-danger">
+                                <div *ngIf="anuidade.errors.required">* Informe a anuidade.</div>
+                            </div>    
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                                <div class="form-group">
+                                </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                            <button type="submit" class="btn btn-primary" [disabled]="!assinaturaForm.form.valid">Renovar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="panel panel-primary">
+            <div class="panel-heading">Minhas renovações realizadas</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Exercício</td>
+                                    <td>Início</td>
+                                    <td>Término</td>
+                                    <td>Valor Praticado</td>
+                                    <td>Desconto</td>
+                                    <td>Anuidade</td>
+                                </tr>
+                            </thead>
+                            <tbody class="AssinaturaAnuidades">
+                                <tr (click)="onSelect(assinaturaAnuidadeDao)" *ngFor="let assinaturaAnuidadeDao of assinaturaAnuidades | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                    [class.selected]="assinaturaAnuidadeDao.assinaturaAnuidadeId === selectedId">
+                                    <td>{{ assinaturaAnuidadeDao.exercicio }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.anoInicio }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.anoTermino }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.valor | mycurrency: 2 }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.tipoDesconto | tipoDesconto }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.tipoAnuidade | tipoAnuidade }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 export class ValorAnuidadePublico {
-    ValorAnuidadePublicoId: number;
+    valorAnuidadePublicoId: number;
     valor: number;
-    AnuidadeId: number;
-    TipoPublicoId: number;
+    anuidadeId: number;
+    tipoPublicoId: number;
+    tipoAnuidade: string;
 }

@@ -42,6 +42,14 @@ export class RecebimentoService {
         );
     }
 
+    getRecebimentoAssociadoDaoByRecebimentoId(id: number): Observable<RecebimentoAssociadoDao> {
+
+        return this.http.get<RecebimentoAssociadoDao>(this.apiRoute.getRecebimentoAssociadoDaoByRecebimentoId(id)).pipe(
+            tap(_ => this.log(`fetched RecebimentoAssociadoDao id=${id}`)),
+            catchError(this.handleError<RecebimentoAssociadoDao>(`getRecebimentoAssociadoDaoByRecebimentoId id=${id}`))
+        );
+    }
+
     getPagamentoAssociadoByRecebimentoId(id: number): Observable<RecebimentoAssociadoDao> {
 
         return this.http.get<RecebimentoAssociadoDao>(this.apiRoute.getPagamentoAssociadoByRecebimentoId(id)).pipe(
@@ -49,9 +57,6 @@ export class RecebimentoService {
             catchError(this.handleError<RecebimentoAssociadoDao>(`getPagamentoAssociadoByRecebimentoId id=${id}`))
         );
     }
-
-
-
 
     getByPessoaId(objetivoPagamento: string, id: number): Observable<Recebimento[]> {
 
@@ -70,11 +75,11 @@ export class RecebimentoService {
         );
     }
 
-    addRecebimento (recebimento: Recebimento): Observable<Recebimento> {
+    addRecebimento (recebimento: Recebimento): Observable<string> {
 
-        return this.http.post<Recebimento>(this.apiRoute.postRecebimento(), recebimento, httpOptions).pipe(
-            tap((_recebimento: Recebimento) => this.log(`added recebimento w/ id=${recebimento.recebimentoId}`)),
-            catchError(this.handleError<Recebimento>('addRecebimento'))
+        return this.http.post<string>(this.apiRoute.postRecebimento(), recebimento, httpOptions).pipe(
+            tap(_ => this.log(`added recebimento w/ id=${recebimento.recebimentoId}`)),
+            catchError(this.handleError<string>('addRecebimento'))
         );
     }
 

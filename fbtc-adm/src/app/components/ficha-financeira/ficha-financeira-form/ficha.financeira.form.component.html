@@ -3,81 +3,230 @@
     <div class="col-lg-12">
     <form (ngSubmit)="onSubmit()" #fichaFinanceiraForm="ngForm">
         <div class="panel panel-default">
-            <div class="panel-heading">Dados</div>
+            <div class="panel-heading">
+                Dados{{ _msgProgresso }}
+            </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="inpCodigo">Anuidade:</label>
-                            <input id="inpCodigo" name="codigo" class="form-control" type="text"
-                            required minlength="4" maxlength="4"
-                                [(ngModel)]="anuidadeDao.codigo"  #codigo="ngModel"/>
-                            <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)"
+                            <label for="inpExercicio">Exercício:</label>
+                            <input id="inpExercicio" name="exercicio" class="form-control" type="text"
+                                required minlength="4" maxlength="4"
+                                [(ngModel)]="anuidadeDao.exercicio"  #exercicio="ngModel"/>
+                            <div *ngIf="exercicio.invalid && (exercicio.dirty || exercicio.touched)"
                                 class="alert alert-danger">
-                                <div *ngIf="codigo.errors.required">* O código da anuidade é obrigatório.</div>
-                                <div *ngIf="codigo.errors.minlength"> * O código deve ter 4 algarismos.</div>
+                                <div *ngIf="exercicio.errors.required">* O exercício da anuidade é obrigatório.</div>
+                                <div *ngIf="exercicio.errors.minlength"> * O exercício deve ter 4 algarismos.</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDtVencimento">Data de Vencimento:</label>
+                            <input id="inpDtVencimento" name="inpDtVencimento" class="form-control" type="date"
+                            required
+                            [ngModel]="anuidadeDao.dtVencimento | date:'yyyy-MM-dd'" (ngModelChange)="anuidadeDao.dtVencimento=$event" #dtVencimento="ngModel"/>
+                        <div *ngIf="dtVencimento.invalid && (dtVencimento.dirty || dtVencimento.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="dtVencimento.errors.required">* A data de vencimento é obrigatória.</div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDtInicioVigencia">Data Início:</label>
+                                <input id="inpDtInicioVigencia" name="inpDtInicioVigencia" class="form-control" type="date"
+                                required
+                                [ngModel]="anuidadeDao.dtInicioVigencia | date:'yyyy-MM-dd'" (ngModelChange)="anuidadeDao.dtInicioVigencia=$event" #dtInicioVigencia="ngModel"/>
+                            <div *ngIf="dtInicioVigencia.invalid && (dtInicioVigencia.dirty || dtInicioVigencia.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="dtInicioVigencia.errors.required">* A data de início de vigência é obrigatória.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDtTerminoVigencia">Data Término:</label>
+                            <input id="inpDtTerminoVigencia" name="inpDtTerminoVigencia" class="form-control" type="date"
+                            required
+                            [ngModel]="anuidadeDao.dtTerminoVigencia | date:'yyyy-MM-dd'" (ngModelChange)="anuidadeDao.dtTerminoVigencia=$event" #dtTerminoVigencia="ngModel"/>
+                            <div *ngIf="dtTerminoVigencia.invalid && (dtTerminoVigencia.dirty || dtTerminoVigencia.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="dtTerminoVigencia.errors.required">* A data de término de vigência é obrigatória.</div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Cobrança liberada:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
+                                    <input type="radio" [(ngModel)]="anuidadeDao.cobrancaLiberada" name="cobrancaLiberada" id="rdbCobrancaLiberada" 
+                                    [checked]="op.value === anuidadeDao.cobrancaLiberada" [value]="op.value"> {{ op.name }} &nbsp; 
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDtCobrancaLiberada">Data da primeira liberação:</label>
+                            <input id="inpDtCobrancaLiberada" name="inpDtCobrancaLiberada" class="form-control" type="date"
+                            [ngModel]="anuidadeDao.dtCobrancaLiberada | date:'yyyy-MM-dd'" (ngModelChange)="anuidadeDao.dtCobrancaLiberada=$event" #dtCobrancaLiberada="ngModel" readonly/>
+                        </div>    
+                    </div>
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label>Ativo:</label><br>
                             <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
                                     <input type="radio" [(ngModel)]="anuidadeDao.ativo" name="ativo" id="rdbAtivo" 
-                                    [checked]="op.value === anuidadeDao.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                                    [checked]="op.value === anuidadeDao.ativo" [value]="op.value"> {{ op.name }} &nbsp; 
+                            </label>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-
-                        </div>
+                    <div class="col-lg-3">
+                        <div class="form-group"></div>    
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col-lg-12">
-                                <div class="form-group">
-                                        <div class="panel panel-default" *ngIf="anuidadeDao.tiposPublicosValorsAnuidadesDao"> 
-                                                <div class="panel-heading">
-                                                    Faixa de Pre&ccedil;os
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs">
+                            <li  class="active"><a data-toggle="tab" href="#Prof">{{ anuidadeDao.anuidadesTiposPublicosDao[0].nomeTipoPublico }}</a></li>
+                            <li><a data-toggle="tab" href="#EstudantePos">{{ anuidadeDao.anuidadesTiposPublicosDao[1].nomeTipoPublico }}</a></li>
+                            <li><a data-toggle="tab" href="#Estudante">{{ anuidadeDao.anuidadesTiposPublicosDao[2].nomeTipoPublico }}</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="Prof" class="tab-pane fade in active">
+                                <div class="well">
+                                    <h4>Valores para {{ anuidadeDao.anuidadesTiposPublicosDao[0].nomeTipoPublico }}:</h4>
+                                    <input type="hidden" id="inpHTipoAnuidade_1" name="inpHTipoAnuidade_1"
+                                    [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[0].tipoPublicoId" #tipoAnuidade_1="ngModel"/>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="inpUmAnoP">{{ anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades[0].tipoAnuidade | tipoAnuidade}}:</label>
+                                                <div class="input-group">
+                                                    <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades[0].valor" 
+                                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                        id="inpUmAnoP" name="umAnoP"  class="form-control"/>
                                                 </div>
-                                                <div class="panel-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Tipo de Público</th>
-                                                                    <th>Valor</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr *ngFor="let tp of anuidadeDao.tiposPublicosValorsAnuidadesDao" >
-                                                                    <td>{{ tp.nome }}</td>
-                                                                    <td><input currencyMask [(ngModel)]="tp.valor" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                                                            id="inp{{ tp.tipoPublicoId }}" name="inp{{ tp.tipoPublicoId }}"  class="form-control"/>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                            </div>
+                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="inpDoisAnosP">{{ anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades[1].tipoAnuidade | tipoAnuidade}}:</label>
+                                                    <div class="input-group">
+                                                        <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades[1].valor" 
+                                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                            id="inpDoisAnosP" name="doisAnosP"  class="form-control"/>
                                                     </div>
                                                 </div>
                                             </div>
-                                </div>
-
-                                <div class="row">
-                                        <div class="col-lg-6">
-                                            <div *ngIf="_msg !== ''" class="alert alert-success">
-                                                <div >{{ _msg }}</div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="inpTresAnosP">{{ anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades[2].tipoAnuidade | tipoAnuidade}}:</label>
+                                                    <div class="input-group">
+                                                        <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades[2].valor" 
+                                                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                            id="inpTresAnosP" name="tresAnosP"  class="form-control"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
-                                
-                            </div>     
+                                <div id="EstudantePos" class="tab-pane fade">
+                                    <div class="well">
+                                        <h4>Valores para {{ anuidadeDao.anuidadesTiposPublicosDao[1].nomeTipoPublico }}:</h4>
+                                            <input type="hidden" id="inpHTipoAnuidade_2" name="inpHTipoAnuidade_2"
+                                                [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[1].tipoPublicoId" #tipoAnuidade_2="ngModel"/>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="inpUmAnoEP">{{ anuidadeDao.anuidadesTiposPublicosDao[1].valoresAnuidades[0].tipoAnuidade | tipoAnuidade}}:</label>
+                                                            <div class="input-group">
+                                                                <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[1].valoresAnuidades[0].valor" 
+                                                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                    id="inpUmAnoEP" name="umAnoEP"  class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="inpDoisAnosEP">{{ anuidadeDao.anuidadesTiposPublicosDao[1].valoresAnuidades[1].tipoAnuidade | tipoAnuidade}}:</label>
+                                                            <div class="input-group">
+                                                                <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[1].valoresAnuidades[1].valor" 
+                                                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                    id="inpDoisAnosEP" name="doisAnosEP"  class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="inpTresAnosEP">{{ anuidadeDao.anuidadesTiposPublicosDao[1].valoresAnuidades[2].tipoAnuidade | tipoAnuidade}}:</label>
+                                                            <div class="input-group">
+                                                                <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[1].valoresAnuidades[2].valor" 
+                                                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                    id="inpTresAnosEP" name="tresAnosEP"  class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                </div>
+                                <div id="Estudante" class="tab-pane fade">
+                                    <div class="well">
+                                        <h4>Valores para {{ anuidadeDao.anuidadesTiposPublicosDao[2].nomeTipoPublico }}:</h4>
+                                            <input type="hidden" id="inpHTipoAnuidade_3" name="inpHTipoAnuidade_3"
+                                                [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[2].tipoPublicoId" #tipoAnuidade_3="ngModel"/>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="inpUmAnoE">{{ anuidadeDao.anuidadesTiposPublicosDao[2].valoresAnuidades[0].tipoAnuidade | tipoAnuidade}}:</label>
+                                                            <div class="input-group">
+                                                                <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[2].valoresAnuidades[0].valor" 
+                                                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                    id="inpUmAnoE" name="umAnoE"  class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="inpDoisAnosE">{{ anuidadeDao.anuidadesTiposPublicosDao[2].valoresAnuidades[1].tipoAnuidade | tipoAnuidade}}:</label>
+                                                            <div class="input-group">
+                                                                <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[2].valoresAnuidades[1].valor" 
+                                                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                    id="inpDoisAnosE" name="doisAnosE"  class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="inpTresAnosE">{{ anuidadeDao.anuidadesTiposPublicosDao[2].valoresAnuidades[2].tipoAnuidade | tipoAnuidade}}:</label>
+                                                            <div class="input-group">
+                                                                <input currencyMask [(ngModel)]="anuidadeDao.anuidadesTiposPublicosDao[2].valoresAnuidades[2].valor" 
+                                                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                                    id="inpTresAnosE" name="tresAnosE"  class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>                    
+                        <div class="row">
+                                <div class="col-lg-6">
+                                    <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
+                                        <div >{{ _msg }}</div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>     
                 </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-6">
-                        <!--<button class="btn btn-success" (click)="gotoNotificarAssociado()">Notificar Associados</button>-->
                     </div>
                     <div class="col-lg-6 text-right">
                         <button type="submit" class="btn btn-primary" [disabled]="!fichaFinanceiraForm.form.valid">Salvar</button>

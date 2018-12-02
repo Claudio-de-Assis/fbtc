@@ -4,6 +4,7 @@ export class TipoPublico {
     descricaoValor: string;
     ativo: boolean;
     associado: boolean;
+    codigo: string;
 }
 
 export class TipoPublicoValorDao extends TipoPublico {
@@ -15,6 +16,8 @@ export class TipoPublicoValorDao extends TipoPublico {
 
 export class TipoPublicoValorAnuidadeDao extends TipoPublico {
     valorAnuidadePublicoId: number;
-    valor: number;
+    tipoPublicoId: number;
     anuidadeId: number;
+    tipoAnuidade: string;
+    valor: number;
 }

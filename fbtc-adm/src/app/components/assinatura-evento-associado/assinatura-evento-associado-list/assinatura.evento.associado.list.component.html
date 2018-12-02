@@ -1,0 +1,98 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #eventoForm="ngForm">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inpNome">Nome:</label>
+                                <input id="inpNome" name="nome" class="form-control" type="text"
+                                    minlength="2"  maxlength="100"
+                                    [(ngModel)]="editNome" #nome="ngModel"/>
+                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="sltAno">Ano:</label>
+                                        <select id="sltAno" name="Ano" class="form-control"
+                                            [(ngModel)]="editAno" #ano="ngModel">
+                                            <option *ngFor="let ano of _util.lstAno" [value]="ano">{{ ano }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Tipo de evento:</label>
+                                        <select id="sltTipoEvento" name="TipoEvento" class="form-control"
+                                            [(ngModel)]="editTipoEvento" #tipoEvento="ngModel">
+                                            <option *ngFor="let op of _util.optTiposEventos" value="{{ op.value }}">{{ op.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                            <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                           <!-- <button class="btn btn-default" (click)="gotoNovoEvento()">Novo</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="panel panel-primary">
+            <div class="panel-heading">Listagem de Eventos</div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>Tipo</td>
+                                    <td>Início</td>
+                                    <td>Código</td>
+                                    <!--<td>Ações</td>-->
+                                </tr>
+                            </thead>
+                            <tbody class="eventos">
+                                <tr (click)="onSelect(evento)" *ngFor="let evento of eventos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                    [class.selected]="evento.eventoId === selectedId">
+                                    <td>{{ evento.titulo }}</td>
+                                    <td>{{ evento.tipoEvento | tipoEvento }}</td>
+                                    <td>{{ evento.dtInicio | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ evento.codigo }}</td>    
+                                    <!--<td>
+                                        <a [routerLink]="['/admin/Evento', evento.eventoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;-->
+                                        <!--<i class="fa fa-trash text-danger"></i>-->
+                                    <!--</td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -54,7 +54,7 @@
         </form>
         <!-- PAINEL RESULTADO DA BUSCA -->
         <div class="panel panel-primary" *ngIf="editObjetivoPagamento === '2'">
-            <div class="panel-heading">Minhas Anuidades</div>
+            <div class="panel-heading">Minhas Anuidades{{ _msgProgresso }}</div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -64,19 +64,19 @@
                                     <th>Vencimento</th>
                                     <th>Data Status</th>
                                     <th>Status</th>
-                                    <th>Ações</th>
+                                    <!--<th>Ações</th>-->
                                 </tr>
                             </thead>
                             <tbody class="Anuidades">
-                                <tr *ngFor="let recebimento of recebimentosAnuidade | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                <tr (click)="onSelect(recebimento)" *ngFor="let recebimento of recebimentosAnuidade | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="recebimento.recebimentoId === selectedId">
                                     <td>{{ recebimento.anuidade }}</td>
                                     <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ recebimento.statusPS |  statusPagamento }}</td>
-                                    <td>
+                                    <!--<td>
                                         <a [routerLink]="['/admin/AssociadoFichaFinanceiraAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
-                                    </td>
+                                    </td>-->
                                 </tr>
                             </tbody>
                         </table>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="panel panel-primary" *ngIf="editObjetivoPagamento === '1'">
-            <div class="panel-heading">Meus de Eventos</div>
+            <div class="panel-heading">Meus de Eventos{{ _msgProgresso }}</div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">

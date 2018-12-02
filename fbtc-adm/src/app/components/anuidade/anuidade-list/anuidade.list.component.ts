@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { AnuidadeService } from '../../shared/services/anuidade.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -16,13 +17,11 @@ import { Anuidade } from '../../shared/model/anuidade';
 })
 export class AnuidadeListComponent implements OnInit {
 
-  title = 'Consulta de Anuidade';
-
+  title: string;
   _util = Util;
+  _itensPerPage: number;
 
   anuidades: Anuidade[];
-
-  _itensPerPage = 30;
 
   private selectedId: number;
 
@@ -32,7 +31,10 @@ export class AnuidadeListComponent implements OnInit {
     private service: AnuidadeService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.title = 'Consulta de Anuidade';
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
+  }
 
   submitted = false;
 

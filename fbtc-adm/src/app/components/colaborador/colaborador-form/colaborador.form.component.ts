@@ -76,7 +76,7 @@ export class ColaboradorFormComponent implements OnInit {
 
     gotoValidarEMail() {
 
-        this.service.getValidaEMail(this.colaborador.colaboradorId, this.colaborador.eMail)
+        this.service.getValidaEMail(this.colaborador.pessoaId, this.colaborador.eMail)
         .subscribe(
             msg => {
                 this._msgRetorno = msg;
@@ -150,7 +150,7 @@ export class ColaboradorFormComponent implements OnInit {
 
     gotoColaboradores() {
 
-        let colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
+        const colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
         this.router.navigate(['admin/Colaborador', { id: colaboradorId, foo: 'foo' }]);
     }
 

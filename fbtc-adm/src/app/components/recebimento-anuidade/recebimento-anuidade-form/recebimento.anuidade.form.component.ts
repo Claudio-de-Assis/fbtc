@@ -5,7 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 import { RecebimentoService } from '../../shared/services/recebimento.service';
-import { Recebimento } from '../../shared/model/recebimento';
+import { Recebimento, RecebimentoAssociadoDao } from '../../shared/model/recebimento';
 
 @Component({
   selector: 'app-recebimento-anuidade-form',
@@ -16,23 +16,24 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
   enderecos: Endereco[];
 
-  @Input() recebimento: Recebimento = { recebimentoId: 0, associadoId: 0, associadoIsentoId: 0, valorAnuidadePublicoId: 0,
-    valorEventoPublicoId: 0, objetivoPagamento: '', dtNotificacao: null, observacao: '', codePS: '', referencePS: '', typePS: 0,
-    statusPS: 99, lastEventDatePS: null, typePaymentMethodPS: 0, codePaymentMethodPS: 0, netAmountPS: 0,
-    dtCadastro: null, ativo: true, dtVencimento: null,
-      associado: { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
-        crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
-        tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
-        comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
-        pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
-        sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-        dtCadastro: null, ativo: false, perfilId: 0,
-          enderecosPessoa: this.enderecos}
-  };
+  @Input() recebimentoDao: RecebimentoAssociadoDao = { titulo: '', anuidade: null, nome: '', cpf: '', nomeTP: '',
+                    eMail: '', nrCelular: '', ativoAssociado: false, recebimentoId: 0, assinaturaAnuidadeId: null,
+                    assinaturaEventoId: null, observacao: '', notificationCodePS: '', typePS: null,
+                    statusPS: null, lastEventDatePS: null, typePaymentMethodPS: null, codePaymentMethodPS: null,
+                    netAmountPS: 0, dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
+                    dtCadastro: null, ativo: false};
 
   title: string;
   private selectedId: any;
   submitted: boolean;
+
+  _msg: string;
+  _msgRetorno: string;
+  _recebimentoId: number;
+
+  alertClassType: string;
+
+  _msgProgresso: string;
 
   constructor(
     private service: RecebimentoService,
@@ -42,20 +43,62 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
   this.title = 'Dados de pagamento de anuidade do associado';
   this.submitted = false;
 
+  this._msgRetorno = '';
+  this._msg = '';
+  this._recebimentoId = 0;
+
+  this.alertClassType = 'alert alert-info';
+
+  this._msgProgresso = '';
 }
 
-  getRecebimentoById(id: number): void {
+  getRecebimentoAssociadoDaoByRecebimentoId(id: number): void {
 
-    this.service.getById(id)
-          .subscribe(recebimento => this.recebimento = recebimento);
+    this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
+
+    this.service.getRecebimentoAssociadoDaoByRecebimentoId(id)
+          .subscribe(recebimentoDao => {
+            this.recebimentoDao = recebimentoDao;
+            this._msgProgresso = '';
+          });
   }
 
   gotoSave() {
 
-      this.service.addRecebimento(this.recebimento)
-      .subscribe(() =>  this.gotoShowPopUp());
+    this.alertClassType = 'alert alert-info';
+    this._msg = 'Salvando os dados. Por favor, aguarde...';
 
+    this.service.addRecebimento(this.recebimentoDao)
+      .subscribe(
+        msg => {
+          this._msgRetorno = msg;
+          this.avaliaRetorno(this._msgRetorno);
+        }
+      );
       this.submitted = false;
+      this._msgRetorno = '';
+      // this._msg = '';
+      this._recebimentoId = 0;
+  }
+
+  avaliaRetorno(msgRet: string) {
+
+    if (msgRet.substring(0, 1) === '0') {
+
+        this._recebimentoId = parseInt(msgRet.substring(0, 10), 10);
+
+        // this.router.navigate([`admin/Recebimento/${this._recebimentoId}`]);
+
+        this.getRecebimentoAssociadoDaoByRecebimentoId(this._recebimentoId);
+
+        this.alertClassType = 'alert alert-success';
+        this._msg = this._msgRetorno.substring(10);
+
+    } else {
+
+      this.alertClassType = 'alert alert-success';
+      this._msg = this._msgRetorno;
+    }
   }
 
   onSubmit() {
@@ -63,23 +106,9 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
     this.gotoSave();
   }
 
-  gotoShowPopUp() {
-
-    // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert('Registro salvo com sucesso!');
-  }
-
-/*
-  gotoNotificarAssociado() {
-
-    if (confirm('Deseja notificar o Associado?')) {
-      alert('Notificação enviada com sucesso');
-    }
-  }
-*/
   gotoRecebimentoAnuidade() {
 
-    let recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
+    const recebimentoId = this.recebimentoDao ? this.recebimentoDao.recebimentoId : null;
     this.router.navigate(['/admin/RecebimentoAnuidade', { id: recebimentoId, foo: 'foo' }]);
   }
 
@@ -87,10 +116,10 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
     const id = +this.route.snapshot.paramMap.get('id');
       if (id > 0) {
-          this.getRecebimentoById(id);
+          this.getRecebimentoAssociadoDaoByRecebimentoId(id);
     } else {
-      // alert('Não foi encontrato recebimento para o Id Informado');
-      // this.gotoRecebimentoAnuidade();
+      alert('Não foi encontrato recebimento para o Id Informado');
+      this.gotoRecebimentoAnuidade();
     }
   }
 }

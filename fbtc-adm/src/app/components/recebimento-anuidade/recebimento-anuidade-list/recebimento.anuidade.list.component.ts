@@ -14,6 +14,10 @@ import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Util } from '../../shared/util/util';
 import { debug } from 'util';
 
+import { Anuidade } from './../../shared/model/anuidade';
+import { AnuidadeService } from './../../shared/services/anuidade.service';
+import { AppSettings } from './../../../app.settings';
+
 @Component({
   selector: 'app-recebimento-anuidade-list',
   templateUrl: './recebimento.anuidade.list.component.html',
@@ -21,7 +25,7 @@ import { debug } from 'util';
 })
 export class RecebimentoAnuidadeListComponent implements OnInit {
 
-  title = 'Consulta de pagamento de anuidades';
+  title: string;
 
   _util = Util;
 
@@ -30,6 +34,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   private selectedRecebimento: Recebimento;
 
   recebimentos: RecebimentoAssociadoDao[];
+  anuidades: Anuidade[];
 
   tiposPublicos: TipoPublico[];
   mensagemSincronizacao: string;
@@ -61,14 +66,19 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   _itensPerPage: number;
 
   _msg: string;
+  _msgProgresso: string;
+
+  _sincronizandoPS: boolean;
 
   constructor(
       private service: RecebimentoService,
       private serviceTP: TipoPublicoService,
       private servicePS: PagSeguroService,
+      private serviceAnuidade: AnuidadeService,
       private router: Router,
       private route: ActivatedRoute
   ) {
+      this.title = 'Consulta de pagamento de anuidades';
       this.editNome = '';
       this.editCpf = '';
       this.editCrp = '';
@@ -91,17 +101,30 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
       this._tipoPublicoId = 0;
       this._isAssociado = true;
       this.submitted = false;
-      this._itensPerPage = 30;
+      this._itensPerPage = AppSettings.ITENS_PER_PAGE;
 
       this.mensagemSincronizacao = '';
       this._msg = '';
+      this._msgProgresso = '';
+
+      this._sincronizandoPS = false;
+  }
+
+  getAnuidades(): void {
+    this.serviceAnuidade.getAnuidades().subscribe(anuidades => this.anuidades = anuidades);
   }
 
   onSelect(recebimento: Recebimento): void {
+
     this.selectedRecebimento = recebimento;
+    this.router.navigate(['admin/RecebimentoAnuidade', this.selectedRecebimento.recebimentoId]);
   }
 
   onSubmit() {
+
+    this.mensagemSincronizacao = '';
+    this._msg = '';
+
     this.submitted = true;
     this.gotoBuscarRecebimento();
   }
@@ -143,9 +166,14 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
       }
     }
 
+    this._msgProgresso = '...Pesquisando...';
+
     this.service.getAnuidadeByFilters(this._nome, this._cpf, this._crp,  this._crm,
           this._statusPS, this._ano, this._mes, this._ativo, this.editTipoPublicoId)
-        .subscribe(recebimentos => this.recebimentos = recebimentos);
+        .subscribe(recebimentos => {
+          this.recebimentos = recebimentos;
+          this._msgProgresso =  this.recebimentos.length === 0 ? ' - Não foram encontrados registros' : '';
+        });
 
     this.submitted = false;
     this._nome = '0';
@@ -168,11 +196,15 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   gotoSicronizarComPagSeguro(): void {
     this.mensagemSincronizacao = 'Processando a sincronização. Por favor, aguarde!....';
     this._msg = '';
+    this._sincronizandoPS = true;
+    console.log('sinc..0' + this._sincronizandoPS),
 
     this.servicePS.postSincronizarRecebimentos().subscribe(
       _msg => [
           this._msg = _msg,
-          this.mensagemSincronizacao = ''
+          this.mensagemSincronizacao = '',
+          this._sincronizandoPS = false,
+          this.gotoBuscarRecebimento(),
       ]);
   }
 
@@ -199,7 +231,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this._tipoPublicoId = 0;
     this._isAssociado = true;
     this.submitted = false;
-    this._itensPerPage = 30;
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
 
     this.mensagemSincronizacao = '';
     this._msg = '';
@@ -207,6 +239,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getAnuidades();
     this.getTiposPublicos();
     this.gotoBuscarRecebimento();
   }

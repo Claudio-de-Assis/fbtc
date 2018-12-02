@@ -57,14 +57,6 @@ export class TipoPublicoService {
         );
     }
 
-    getTiposPublicoByAnuidadeId(id: number): Observable<TipoPublicoValorAnuidadeDao[]> {
-        return this.http.get<TipoPublicoValorAnuidadeDao[]>(this.apiRoute.getByAnuidadeId(id))
-            .pipe(
-                tap(tiposPublicos => this.log('Fetched TipoPublicoValorAnuidadeDao')),
-                catchError(this.handleError('getTiposPublicoByAnuidadeId()', []))
-        );
-    }
-
     /**
     * Handle Http operation that failed.
     * Let the app continue.

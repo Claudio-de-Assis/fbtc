@@ -1,0 +1,116 @@
+import { AppSettings } from '../../../app.settings';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
+
+import {FormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+
+import { EventoService } from '../../shared/services/evento.service';
+
+import { Evento } from '../../shared/model/evento';
+
+import { Util } from '../../shared/util/util';
+
+@Component({
+  selector: 'app-assinatura-evento-associado-list',
+  templateUrl: './assinatura.evento.associado.list.component.html',
+  styleUrls: ['./assinatura.evento.associado.list.component.css']
+})
+export class AssinaturaEventoAssociadoListComponent implements OnInit {
+
+  title: string;
+
+  editNome: string;
+  editAno: number;
+  editTipoEvento: string;
+
+  private selectedEvento: Evento;
+
+  _nome: string;
+  _ano: number;
+  _tipoEvento: string;
+
+  eventos: Evento[];
+
+  _util = Util;
+
+  _itensPerPage: number;
+
+  submitted: boolean;
+
+  constructor(
+    private service: EventoService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+
+    this.title = 'Minha Consulta de Eventos';
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
+    this.submitted = false;
+
+    this.editNome = '';
+    this.editAno = null;
+    this.editTipoEvento = '';
+    this._nome = '0';
+    this._ano = 0;
+    this._tipoEvento = '0';
+   }
+
+  getEventos(): void {
+    this.service.getEventos().subscribe(eventos => this.eventos = eventos);
+  }
+
+  onSubmit() {
+
+    this.submitted = true;
+    this.gotoBuscareventos();
+  }
+
+  ngOnInit() {
+    this.getEventos();
+  }
+
+  onSelect(evento: Evento): void {
+
+    this.selectedEvento = evento;
+    this.router.navigate(['admin/MinhaAssinaturaEventoDetalhe', this.selectedEvento.eventoId]);
+  }
+
+  /*
+  gotoNovoEvento() {
+      this.router.navigate(['admin/Evento', 0]);
+  }*/
+
+  gotoBuscareventos() {
+
+    if (this.editNome.trim() !== '') {
+      this._nome = this.editNome.trim();
+    }
+    if (this.editAno !== null) {
+        this._ano = this.editAno;
+    }
+    if (this.editTipoEvento !== '') {
+        this._tipoEvento = this.editTipoEvento;
+    }
+
+    this.service.getByFilters(this._nome, this._ano, this._tipoEvento)
+        .subscribe(eventos => this.eventos = eventos);
+
+    this.submitted = false;
+    this._nome = '0';
+    this._ano = 0;
+    this._tipoEvento = '0';
+  }
+
+  gotoLimparFiltros() {
+    this.editNome = '';
+    this.editAno = null;
+    this.editTipoEvento = '';
+    this._nome = '0';
+    this._ano = 0;
+    this._tipoEvento = '0';
+  }
+}

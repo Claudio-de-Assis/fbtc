@@ -1,0 +1,159 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #eventoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dados</div>
+            <div class="panel-body">
+                
+                <!---->
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                        <label for="inpNome">Nome:</label>
+                                        <input id="inpNome" name="Nome" class="form-control" value="Fila de tal" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="inpCpf">CPF:</label>
+                                    <input id="inpCpf" name="Cpf" class="form-control" value="143.409.460-01" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="inpTipoPublico">Tipo de associação:</label>
+                                    <input id="inpTipoPublico" name="tipoPublico" type="text" class="form-control" value="Profissinal - Associado" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="inpAtc">ATC Ok?:</label>
+                                    <input id="inpAtc" name="Atc" type="text" class="form-control" value="Sim" disabled>
+                                    <!--<input id="inpAtc" name="Atc" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.anuidadeAtcOk | booMessage}}" disabled>-->
+        
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="inpDiretoria">Diretoria?:</label>
+                                    <input id="inpDiretoria" name="diretoria" type="text" class="form-control" value="Não" disabled>
+                                    <!--<input id="inpDiretoria" name="diretoria" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.membroDiretoria | booMessage}}" disabled>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="inpConfi">Confi?:</label>
+                                    <!--<input id="inpConfi" name="confi" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.membroConfi | booMessage}}" disabled>-->
+                                    <input id="inpConfi" name="confi" type="text" class="form-control" value="Não" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="inpTipoAssinatura">Valor:</label>
+                                    <!--<select id="inpTipoAssinatura" name="tipoAssinatura" class="form-control" 
+                                        required  (ngModelChange)="setValorAnuidade($event)"  [disabled]="_emProcessoPagamento"
+                                        [(ngModel)]="assinaturaAnuidadeDao.valorAnuidadeId" #tipoAssinatura="ngModel">
+                                        <option *ngFor="let op of anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades" value="{{ op.valorAnuidadeId }}">{{ op.tipoAnuidade | tipoAnuidade }} - Valor: {{ op.valor | mycurrency: 2}}</option>
+                                    </select>
+                                    <div *ngIf="tipoAssinatura.invalid && (tipoAssinatura.dirty || tipoAssinatura.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="tipoAssinatura.errors.required">* Informe a anuidade.</div>
+                                    </div>   --> 
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <label for="inpValorPraticado">Valor praticado:</label>
+                                <!--<input id="inpValorPraticado" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.valor | mycurrency: 2 }}" disabled>-->
+                                <input id="inpValorPraticado" type="text" class="form-control" value="R$ 500,00" disabled>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-lg-2">
+                        <app-file-upload
+                            targetId= "{{ editEventoId }}"
+                            projectId="FBTC" 
+                            sectionId="EV" 
+                            maxFiles="1" 
+                            maxSize="2" 
+                            fileExt="JPG, GIF, PNG" 
+                            (uploadStatus)="refreshImages($event)" >
+                        </app-file-upload>
+                    </div>                    
+                </div>
+                <!---->
+                
+                <!---->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <label for="inpTitulo">Titulo:</label>
+                        <div class="input-group">
+                            <h3>{{ eventoDao.titulo }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="inpDtInicio">Data:</label>
+                        <div class="input-group">
+                            <h3>{{ eventoDao.dtTerminoInscricao | date: 'dd/MM/yyyy' }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="inpDtVencimento">Data Venc.:</label>
+                        
+                        <div class="input-group">
+                                <h3>{{ _editDtPagamento | date: 'dd/MM/yyyy' }}</h3>
+                            </div>
+                        
+                        
+                       <!-- <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            <input id="inpDtVencimento" name="dataVencimento" class="form-control" type="date" disabled
+                            [ngModel]="_editDtPagamento | date:'yyyy-MM-dd'" (ngModelChange)="_editDtPagamento = $event"  #dataNascimento="ngModel" />
+                        </div>-->
+                    </div>
+                </div>
+                <!---->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Descrição:</label>
+                        <textarea id="areaDescricao" name="descricao" class="form-control"
+                            rows="20" maxlength="2000" minlength="5"
+                            [(ngModel)]="eventoDao.descricao" #descricao="ngModel"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div *ngIf="_msg !== ''" class="alert alert-success">
+                            <div >{{ _msg }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type="button" class="btn btn-default btn-xs" (click)="gotoPagSeguro()" *ngIf="_botaoPagSeguroOk === true">
+                            <a href="{{ _targetPagSeguro }}" target="blanck"><img id="imgFoto" name="foto" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/184x42-pagar-assina.gif" error="assets/no-foto.png"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"></a>
+                        </button>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!eventoForm.form.valid">Adquirir</button>
+                        <button type="button" class="btn btn-default" (click)="gotoEventos()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

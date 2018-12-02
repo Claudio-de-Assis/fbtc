@@ -18,24 +18,12 @@ export class AssociadoFichaFinanceiraEventoFormComponent implements OnInit {
 
    enderecos: Endereco[];
 
-  @Input() recebimento: Recebimento = { recebimentoId: 0, associadoId: 0, associadoIsentoId: 0, valorAnuidadePublicoId: 0,
-    valorEventoPublicoId: 0, objetivoPagamento: '', dtNotificacao: null, observacao: '', codePS: '', referencePS: '', typePS: 0,
-    statusPS: 99, lastEventDatePS: null, typePaymentMethodPS: 0, codePaymentMethodPS: 0, netAmountPS: 0,
-    dtCadastro: null, ativo: true, dtVencimento: null,
-      associado: { associadoId: 0, atcId: 0, tipoPublicoId: 0, nrMatricula: '', crp: '',
-        crm: '', nomeInstFormacao: '', certificado: false, dtCertificacao: null, divulgarContato: false,
-        tipoFormaContato: '', integraDiretoria: false, integraConfi: false, nrTelDivulgacao: '',
-        comprovanteAfiliacaoAtc: '', tipoProfissao: '', tipoTitulacao: '',
-        pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
-        sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
-        dtCadastro: null, ativo: false, perfilId: 0,
-          enderecosPessoa: this.enderecos}
-  };
-
-  @Input() recebimentoAssociadoDao: RecebimentoAssociadoDao = { associadoId: 0, titulo: '', anuidade: 0, nome: '',
-          cpf: '', nomeTP: '', recebimentoId: 0, statusPS: 0, lastEventDatePS: null, ativoRec: false,
-          isencaoIdId: 0, dtVencimento: null
-  };
+  @Input() recebimentoDao: RecebimentoAssociadoDao = { titulo: '', anuidade: null, nome: '', cpf: '', nomeTP: '',
+                    eMail: '', nrCelular: '', ativoAssociado: false, recebimentoId: 0, assinaturaAnuidadeId: null,
+                    assinaturaEventoId: null, observacao: '', notificationCodePS: '', typePS: null,
+                    statusPS: null, lastEventDatePS: null, typePaymentMethodPS: null, codePaymentMethodPS: null,
+                    netAmountPS: 0, dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
+                    dtCadastro: null, ativo: false};
 
   title: string;
   private selectedId: any;
@@ -53,21 +41,17 @@ export class AssociadoFichaFinanceiraEventoFormComponent implements OnInit {
 
   getRecebimentoById(id: number): void {
 
-    this.service.getById(id)
-          .subscribe(recebimento => this.recebimento = recebimento);
-
     this.service.getPagamentoAssociadoByRecebimentoId(id)
-          .subscribe(recebimento => this.recebimentoAssociadoDao = recebimento);
+          .subscribe(recebimentoDao => this.recebimentoDao = recebimentoDao);
    }
 
   onSubmit() {
     this.submitted = true;
-    // this.gotoSave();
   }
 
   gotoRecebimentoAnuidade() {
 
-    const recebimentoId = this.recebimento ? this.recebimento.recebimentoId : null;
+    const recebimentoId = this.recebimentoDao ? this.recebimentoDao.recebimentoId : null;
     this.router.navigate(['admin/AssociadoFichaFinanceira', { id: recebimentoId, foo: 'foo' }]);
   }
 

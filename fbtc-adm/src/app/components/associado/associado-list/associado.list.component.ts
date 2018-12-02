@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -25,7 +26,7 @@ import { Util } from '../../shared/util/util';
 /** AssociadoList component*/
 export class AssociadoListComponent implements OnInit {
 
-    title = 'Consulta de Usuário'; // Associado
+    title: string;
 
     editNome: string;
     editCpf: string;
@@ -46,6 +47,10 @@ export class AssociadoListComponent implements OnInit {
     _ativo: string;
 
     _util = Util;
+    submitted: boolean;
+    _itensPerPage: number;
+
+    _msgProgresso: string;
 
     associados: Associado[];
     tiposPublicos: TipoPublico[];
@@ -54,10 +59,6 @@ export class AssociadoListComponent implements OnInit {
     cidades: CidadeEnderecoCepDao[];
 
     private selectedAssociado: Associado;
-
-    submitted = false;
-
-    _itensPerPage = 30;
 
     /** AssociadoList ctor */
     constructor(
@@ -68,7 +69,7 @@ export class AssociadoListComponent implements OnInit {
         private serviceAtc: AtcService,
         private serviceEnd: EnderecoService
     ) {
-
+        this.title = 'Consulta de Usuário'; // Associado
         this.editNome = '';
         this.editCpf = '';
         this.editSexo = '0';
@@ -85,6 +86,11 @@ export class AssociadoListComponent implements OnInit {
         this._estado = '0';
         this._cidade = '0';
         this._ativo = '2';
+
+        this._msgProgresso = '';
+
+        this.submitted = false;
+        this._itensPerPage = AppSettings.ITENS_PER_PAGE;
     }
 
     getEstados(): void {
@@ -101,7 +107,13 @@ export class AssociadoListComponent implements OnInit {
 
     getAssociados(): void {
 
-        this.service.getAssociados().subscribe(associados => this.associados = associados);
+        this._msgProgresso = '...Pesquisando...';
+
+        this.service.getAssociados().subscribe(
+            associados => {
+                this.associados = associados;
+                this._msgProgresso =  this.associados.length === 0 ? ' - Não foram encontrados registros' : '';
+            });
     }
 
     onSubmit() {
@@ -122,6 +134,7 @@ export class AssociadoListComponent implements OnInit {
     onSelect(associado: Associado): void {
 
         this.selectedAssociado = associado;
+        this.router.navigate(['admin/Associado', this.selectedAssociado.pessoaId]);
     }
 
     gotoNovoAssociado() {
@@ -134,9 +147,6 @@ export class AssociadoListComponent implements OnInit {
         if (this.editNome.trim() !== '') {
             this._nome = this.editNome.trim();
         }
-        if (this.editCpf !== '') {
-            this._cpf = this.editCpf;
-        }
         if (this.editCrp !== '') {
             this._crp = this.editCrp;
         }
@@ -146,11 +156,17 @@ export class AssociadoListComponent implements OnInit {
             } else {
               this._ativo = 'false';
             }
-          }
+        }
+
+        this._msgProgresso = '...Pesquisando...';
 
         this.service.getByFilters(this._nome, this._cpf, this.editSexo, this.editAtcId,
                 this._crp, this.editTipoProfissao, this.editTipoPublicoId, this.editEstado, this.editCidade, this._ativo)
-            .subscribe(associados => this.associados = associados);
+            .subscribe(
+                associados => {
+                    this.associados = associados;
+                    this._msgProgresso =  this.associados.length === 0 ? ' - Não foram encontrados registros' : '';
+                });
 
           this.submitted = false;
           this._nome = '0';
@@ -177,7 +193,6 @@ export class AssociadoListComponent implements OnInit {
         this._estado = '0';
         this._cidade = '0';
         this._ativo = '2';
-
     }
 
     ngOnInit(): void {

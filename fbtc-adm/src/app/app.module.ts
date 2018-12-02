@@ -23,6 +23,7 @@ import { RelatoriosModule } from './components/relatorios/relatorios.module';
 import { AtcModule } from './components/atc/atc.module';
 
 import { LoginModule } from './components/login/login.module';
+import { AssinaturaAnuidadeModule } from './components/assinatura-anuidade/assinatura-anuidade.module';
 
 import { RelatoriosRoute } from './components/shared/webapi-routes/relatorios.route';
 import { LoginRoute } from './components/shared/webapi-routes/login.route';
@@ -34,6 +35,12 @@ import { PagSeguroRoute } from './components/shared/webapi-routes/pagSeguro.rout
 import { AdminModule } from './components/admin/admin.module';
 import { FichaFinanceiraModule } from './components/ficha-financeira/ficha-financeira.module';
 import { AssociadoFichaFinanceiraModule } from './components/associado-ficha-financeira/associado-ficha-financeira.module';
+// import { AssinaturaEventoRoutingModule } from './components/assinatura-evento/assinatura-evento.routing.module';
+import { AssinaturaAnuidadeAssociadoModule } from './components/assinatura-anuidade-associado/assinatura-anuidade-associado.module';
+import { DescontoAnuidadeAtcModule } from './components/desconto-anuidade-atc/desconto.anuidade.atc.module';
+import { AssinaturaEventoAssociadoModule } from './components/assinatura-evento-associado/assinatura-evento-associado.module';
+import { AssociadoCaptacaoModule } from './components/associado-captacao/associado-captacao.module';
+
 
 @NgModule({
   imports: [
@@ -54,6 +61,12 @@ import { AssociadoFichaFinanceiraModule } from './components/associado-ficha-fin
     LoginModule,
     FichaFinanceiraModule,
     AssociadoFichaFinanceiraModule,
+    AssinaturaAnuidadeModule,
+    // AssinaturaEventoRoutingModule,
+    AssinaturaAnuidadeAssociadoModule,
+    DescontoAnuidadeAtcModule,
+    AssinaturaEventoAssociadoModule,
+    AssociadoCaptacaoModule,
     AppRoutingModule
   ],
   declarations: [
@@ -69,7 +82,6 @@ import { AssociadoFichaFinanceiraModule } from './components/associado-ficha-fin
     AnuidadeRoute,
     PagSeguroRoute,
     RelatoriosRoute,
-    // UserProfileRoute,
     LoginRoute,
     { provide: LOCALE_ID, useValue: 'pt' }
   ],

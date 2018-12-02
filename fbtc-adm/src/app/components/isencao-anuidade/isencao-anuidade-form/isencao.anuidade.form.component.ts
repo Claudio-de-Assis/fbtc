@@ -97,7 +97,7 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
     const y: number = parseInt(this.isencao.anuidadeId.toString());
 
     this._anuidade = this.anuidades.find(anuidade => anuidade.anuidadeId === y);
-    this.isencao.anoEvento = this._anuidade.codigo;
+    this.isencao.anoEvento = this._anuidade.exercicio;
 
     this.service.addIsencao(this.isencao).subscribe(
       msg => {

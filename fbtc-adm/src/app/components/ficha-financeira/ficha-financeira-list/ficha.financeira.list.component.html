@@ -8,10 +8,10 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="inpAnuidade">Anuidade:</label>
-                            <input id="inpAnuidade" name="codigo" class="form-control" type="number"
+                            <label for="inpExercicio">Exercício:</label>
+                            <input id="inpExercicio" name="exercicio" class="form-control" type="number"
                                 maxlength="4"
-                                [(ngModel)]="editCodigo"  #nome="ngModel"/>
+                                [(ngModel)]="editExercicio"  #exercicio="ngModel"/>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -43,6 +43,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-right">
                        <!-- <button class="btn btn-success" (click)="gotoSicronizarComPagSeguro()" alt="Sincroniza o sistema 30 dias">Sincronizar com PagSeguro</button> -->
+                       <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                        <button type="submit" class="btn btn-primary">Pesquisar</button>
                        <button type="reset" class="btn btn-default" (click)="gotoNovaAnuidade()">Nova</button>
                     </div>
@@ -52,25 +53,27 @@
         </form>
         <!-- PAINEL RESULTADO DA BUSCA -->
         <div class="panel panel-primary">
-            <div class="panel-heading">Listagem de anuidades</div>
+            <div class="panel-heading">
+                Listagem de anuidades{{ _msgProgresso }}
+            </div>
             <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <td>Anuidade</td>
+                                    <td>Exercício</td>
                                     <td>Ativo</td>
-                                    <td>Ações</td>
+                                    <!--<td>Ações</td>-->
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let anuidade of anuidades | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                <tr (click)="onSelect(anuidade)" *ngFor="let anuidade of anuidades | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="anuidade.anuidadeId === selectedId">
-                                    <td>{{ anuidade.codigo }}</td>
+                                    <td>{{ anuidade.exercicio }}</td>
                                     <td>{{ anuidade.ativo | booMessage }}</td>
-                                    <td>
+                                    <!--<td>
                                         <a [routerLink]="['/admin/FichaFinanceira', anuidade.anuidadeId]"><i class="fa fa-pencil text-primary"></i></a>
-                                    </td>
+                                    </td>-->
                                 </tr>
                             </tbody>
                         </table>

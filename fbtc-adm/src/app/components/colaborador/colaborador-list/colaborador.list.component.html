@@ -51,7 +51,9 @@
         </div>
     </form>
         <div class="panel panel-primary">
-            <div class="panel-heading">Resultado da Consulta</div>
+            <div class="panel-heading">
+                Resultado da Consulta{{ _msgProgresso }}
+            </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -62,21 +64,21 @@
                                 <th>Celular</th>
                                 <th>Perfil</th>
                                 <th>Ativo</th>
-                                <th>A&ccedil;&otilde;es</th>
+                                <!--<th>A&ccedil;&otilde;es</th>-->
                             </tr>
                         </thead>
                         <tbody class="associados">
-                            <tr *ngFor="let colaborador of colaboradores | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                            <tr (click)="onSelect(colaborador)" *ngFor="let colaborador of colaboradores | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                 [class.selected]="colaborador.colaboradorId === selectedId">
                                 <td>{{ colaborador.ColaboradorId}} {{ colaborador.nome}}</td>
                                 <td>{{colaborador.eMail}}</td>
                                 <td>{{colaborador.nrCelular}}</td>
                                 <td>{{colaborador.tipoPerfil | tipoPerfil }}</td>
                                 <td>{{colaborador.ativo | booMessage }}</td>
-                                <td>
-                                    <a [routerLink]="['/admin/Colaborador', colaborador.colaboradorId]"><i class="fa fa-pencil text-primary" ></i></a>
+                                <!--<td>
+                                    <a [routerLink]="['/admin/Colaborador', colaborador.colaboradorId]"><i class="fa fa-pencil text-primary" ></i></a>-->
                                     <!--<i class="fa fa-trash text-danger" data-toggle="modal" data-target="#myModal"></i>-->
-                                </td>
+                                <!--</td>-->
                             </tr>
                         </tbody>
                     </table>

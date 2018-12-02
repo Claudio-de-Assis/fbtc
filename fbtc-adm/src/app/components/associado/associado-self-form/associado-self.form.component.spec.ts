@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssociadoFormComponent } from './associado-self.form.component';
+import { AssociadoSelfFormComponent } from './associado-self.form.component';
 
-describe('AssociadoFormComponent', () => {
-  let component: AssociadoFormComponent;
-  let fixture: ComponentFixture<AssociadoFormComponent>;
+describe('AssociadoSelfFormComponent', () => {
+  let component: AssociadoSelfFormComponent;
+  let fixture: ComponentFixture<AssociadoSelfFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssociadoFormComponent ]
+      declarations: [ AssociadoSelfFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssociadoFormComponent);
+    fixture = TestBed.createComponent(AssociadoSelfFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

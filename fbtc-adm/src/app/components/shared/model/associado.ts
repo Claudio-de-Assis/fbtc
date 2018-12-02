@@ -12,10 +12,14 @@ export class Associado extends Pessoa {
     dtCertificacao: Date;
     divulgarContato: boolean;
     tipoFormaContato: string;
-    integraDiretoria: boolean;
-    integraConfi: boolean;
     nrTelDivulgacao: string;
     comprovanteAfiliacaoAtc: string;
     tipoProfissao: string;
     tipoTitulacao: string;
+}
+
+export class AssociadoDao extends Associado {
+    membroDiretoria: boolean;
+    anuidadeAtcOk: boolean;
+    membroConfi: boolean;
 }

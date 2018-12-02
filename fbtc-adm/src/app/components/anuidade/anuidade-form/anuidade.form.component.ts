@@ -14,37 +14,37 @@ import { AnuidadeService } from '../../shared/services/anuidade.service';
 })
 export class AnuidadeFormComponent implements OnInit {
 
-  @Input() anuidade: Anuidade = { anuidadeId: 0, codigo: null, dtCadastro: null, ativo: true};
-
-  title = 'Anuidade';
-  badge = '';
+  title: string;
+  badge: string;
+  submitted: boolean;
 
   private selectedId: any;
-
   _util = Util;
-
-  submitted = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: AnuidadeService
-  ) { }
+  ) {
+    this.title = 'Anuidade';
+    this.badge = '';
+    this.submitted = false;
+   }
 
   gotoAnuidades() {
 
-    let anuidadeId = this.anuidade ? this.anuidade.anuidadeId : null;
-    this.router.navigate(['/Anuidade', { id: anuidadeId, foo: 'foo' }]);
+    // let anuidadeId = this.anuidade ? this.anuidade.anuidadeId : null;
+    // this.router.navigate(['/Anuidade', { id: anuidadeId, foo: 'foo' }]);
   }
 
   getAnuidadeById(id: number): void {
 
-    this.service.getById(id).subscribe(anuidade => this.anuidade = anuidade);
+    // this.service.getById(id).subscribe(anuidade => this.anuidade = anuidade);
   }
 
   setAnuidade(): void {
 
-    this.service.setAnuidade().subscribe(anuidade => this.anuidade = anuidade);
+    // this.service.setAnuidade().subscribe(anuidade => this.anuidade = anuidade);
   }
 
   onSubmit() {
@@ -55,7 +55,7 @@ export class AnuidadeFormComponent implements OnInit {
 
   saveAnuidade() {
 
-    this.service.addAnuidade(this.anuidade).subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
+    // this.service.addAnuidade(this.anuidade).subscribe(() =>  this.gotoShowPopUp('Registro salvo com sucesso!'));
   }
 
   gotoShowPopUp(msg: string) {

@@ -3,31 +3,33 @@
     <div class="col-lg-12">
     <form (ngSubmit)="onSubmit()" #recebimentoForm="ngForm">
         <div class="panel panel-default">
-            <div class="panel-heading"><label>Anuidade: {{ recebimentoAssociadoDao.anuidade }}</label></div>
+            <div class="panel-heading">
+                <label>Anuidade: {{ recebimentoDao.anuidade }}</label>{{ _msgProgresso }}
+            </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nome:</label>
-                            <input class="form-control" value="{{ recebimento.associado.nome }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.nome }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>CPF:</label>
-                            <input class="form-control" value="{{ recebimento.associado.cpf }}" disabled>
+                            <input class="form-control" value="{{ recebimentoDao.cpf }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Celular:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.nrCelular }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.nrCelular }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Associado Ativo:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.associado.ativo | booMessage }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.ativo | booMessage }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -35,19 +37,19 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-mail:</label>
-                            <input type="email" class="form-control" value="{{ recebimento.associado.eMail }}" disabled>
+                            <input type="email" class="form-control" value="{{ recebimentoDao.eMail }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Situação:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.statusPS | statusPagamento}}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.statusPS | statusPagamento}}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Data do status:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.lastEventDatePS | date:'dd/MM/yyyy' }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -55,19 +57,19 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Nº Doc Cobrança:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.codePS }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.notificationCodePS }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Forma Pagamento</label>
-                            <input type="text" class="form-control" value="{{ recebimento.typePaymentMethodPS | formaPagamento }}" disabled>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.typePaymentMethodPS | formaPagamento }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Valor pago:</label>
-                            <input type="text" class="form-control" value="{{ recebimento.netAmountPS  | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
+                            <label>Valor:</label>
+                            <input type="text" class="form-control" value="{{ recebimentoDao.grossAmountPS  | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -95,7 +97,7 @@
                         <!--<button class="btn btn-success" (click)="gotoNotificarAssociado()">Notificar Associados</button>-->
                     </div>
                     <div class="col-lg-6 text-right">
-                        <button type="submit" class="btn btn-primary">Imprimir Boleto</button>
+                        <!--button type="submit" class="btn btn-primary">Imprimir Boleto</button>-->
                         <button class="btn btn-default" (click)="gotoRecebimentoAnuidade()">Retornar</button>
                     </div>
                 </div>

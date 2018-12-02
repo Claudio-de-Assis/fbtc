@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -68,7 +69,7 @@ export class RecebimentoEventoListComponent implements OnInit {
       private route: ActivatedRoute
   ) {
     this.title = 'Consulta de pagamento de eventos';
-    this._itensPerPage = 30;
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
 
     this.editNome = '';
     this.editCpf = '';
@@ -96,7 +97,9 @@ export class RecebimentoEventoListComponent implements OnInit {
   }
 
   onSelect(recebimento: Recebimento): void {
+
     this.selectedRecebimento = recebimento;
+    this.router.navigate(['admin/RecebimentoEvento', this.selectedRecebimento.recebimentoId]);
   }
 
   onSubmit() {

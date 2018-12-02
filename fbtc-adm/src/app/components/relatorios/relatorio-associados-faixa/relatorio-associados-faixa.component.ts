@@ -26,6 +26,8 @@ export class RelatorioAssociadosFaixaComponent implements OnInit {
   rptRoute: string;
   submitted: boolean;
 
+  _msgProgresso: string;
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
@@ -36,12 +38,22 @@ export class RelatorioAssociadosFaixaComponent implements OnInit {
     this.title = 'Relatório Usuários por Faixa Etária';
     this.rptRoute = apiRoute.getRptAssociadosFaixaToExcel();
     this.submitted = false;
+
+    this._msgProgresso = '';
   }
 
   getDadosRpt(): void {
 
     this.submitted = true;
-    this.service.getRptAssociadosFaixaDAO().subscribe(rptAssociadoFaixaDAOs => this.rptAssociadoFaixaDAOs = rptAssociadoFaixaDAOs);
+
+    this._msgProgresso = '...Pesquisando...';
+
+    this.service.getRptAssociadosFaixaDAO().subscribe(
+      rptAssociadoFaixaDAOs => {
+        this.rptAssociadoFaixaDAOs = rptAssociadoFaixaDAOs;
+        this._msgProgresso =  this.rptAssociadoFaixaDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+
+      });
   }
 
   onSubmit() {

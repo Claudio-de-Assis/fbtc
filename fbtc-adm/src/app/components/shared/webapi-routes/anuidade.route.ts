@@ -11,14 +11,24 @@ export class AnuidadeRoute {
         return AppSettings.API_ENDPOINT + this.url + 'GetAll';
     }
 
+    // [Route("AnuidadesPendentes/{pessoaId:int}")]
+    getAnuidadesPendentesByPessoaId(pessoaId: number): string {
+        return AppSettings.API_ENDPOINT + this.url + `AnuidadesPendentes/${pessoaId}`;
+    }
+
     // [Route("{id:int}")]
     getById(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
-    // [Route("{id:int}")]
+    // [Route("AnuidadeDao/{id:int}")]
     getAnuidadeDaoById(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + `AnuidadeDao/${id}`;
+    }
+
+    // [Route("AnuidadeDaoTP/{id:int},{tipoPublicoId:int}")]
+    getAnuidadeDaoByIdTipoPublicoId(id: number, tipoPublicoId: number): string {
+        return AppSettings.API_ENDPOINT + this.url + `AnuidadeDaoTP/${id},${tipoPublicoId}`;
     }
 
     // [Route("Anuidade")]
@@ -37,9 +47,9 @@ export class AnuidadeRoute {
     }
 
     // Deve-se informar "0" quando não houver valor válido para o filtro.
-    // [Route("FindByFilters/{codigo},{ativo}")]
-    getFindByFilters(codigo: number, ativo: string): string {
-        return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${codigo},${ativo}`;
+    // [Route("FindByFilters/{exercicio},{ativo}")]
+    getFindByFilters(exercicio: number, ativo: string): string {
+        return AppSettings.API_ENDPOINT + this.url + `FindByFilters/${exercicio},${ativo}`;
     }
 
 

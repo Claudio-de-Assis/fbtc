@@ -8,6 +8,7 @@ import { Isencao, IsencaoDao } from '../../shared/model/isencao';
 import { IsencaoService } from '../../shared/services/isencao.service';
 import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { TipoPublico } from '../../shared/model/tipo-publico';
+import { AppSettings } from '../../../app.settings';
 
 @Component({
   selector: 'app-isencao-anuidade-list',
@@ -48,7 +49,7 @@ export class IsencaoAnuidadeListComponent implements OnInit {
   ) {
 
     this.title = 'Consulta de Isenção de Anuidade';
-    this._itensPerPage = 30;
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
     this.submitted = false;
 
     this.editNome = '';

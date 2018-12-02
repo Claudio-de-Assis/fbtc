@@ -42,8 +42,19 @@ import { AssociadoFichaFinanceiraListComponent } from './../associado-ficha-fina
 import { AssociadoFichaFinanceiraEventoFormComponent } from './../associado-ficha-financeira/associado-ficha-financeira-evento-form/associado.ficha.financeira.evento.form.component';
 // tslint:disable-next-line:max-line-length
 import { AssociadoFichaFinanceiraAnuidadeFormComponent } from './../associado-ficha-financeira/associado-ficha-financeira-anuidade-form/associado.ficha.financeira.anuidade.form.component';
+import { AssinaturaAnuidadeAssociadoFormComponent } from './../assinatura-anuidade-associado/assinatura-anuidade-associado-form/assinatura.anuidade.associado.form.component';
+// tslint:disable-next-line:max-line-length
+import { AssinaturaAnuidadeAssociadoListComponent } from '../assinatura-anuidade-associado/assinatura-anuidade-associado-list/assinatura.anuidade.associado.list.component';
+import { AssinaturaAnuidadeFormComponent } from './../assinatura-anuidade/assinatura-anuidade-form/assinatura.anuidade.form.component';
+import { AssinaturaAnuidadeListComponent } from './../assinatura-anuidade/assinatura-anuidade-list/assinatura.anuidade.list.component';
 
-
+// tslint:disable-next-line:max-line-length
+import { DescontoAnuidadeAtcListComponent } from './../desconto-anuidade-atc/desconto-anuidade-atc-list/desconto.anuidade.atc.list.component';
+import { DescontoAnuidadeAtcFormComponent } from './../desconto-anuidade-atc/desconto-anuidade-atc-form/desconto.anuidade.atc.form.component';
+// tslint:disable-next-line:max-line-length
+import { AssinaturaEventoAssociadoListComponent } from '../assinatura-evento-associado/assinatura-evento-associado-list/assinatura.evento.associado.list.component';
+import { AssinaturaEventoAssociadoFormComponent } from '../assinatura-evento-associado/assinatura-evento-associado-form/assinatura.evento.associado.form.component';
+import { AssociadoCaptacaoFormComponent } from '../associado-captacao/associado-captacao-form/associado-captacao.form.component';
 
 const adminRoutes: Routes = [
     {path: '', redirectTo: 'admin', pathMatch: 'full'},
@@ -82,12 +93,22 @@ const adminRoutes: Routes = [
             { path: 'EventoPreview/:id', component: EventoPreviewComponent},
             { path: 'UserProfile/:id', component: UserProfileFormComponent },
             { path: 'AssociadoPublico', component: AssociadoSelfFormComponent},
+            // { path: 'AssociadoCaptacao', component: AssociadoCaptacaoFormComponent},
             { path: 'FichaFinanceira', component: FichaFinanceiraListComponent},
             { path: 'FichaFinanceira/:id', component: FichaFinanceiraFormComponent},
             { path: 'FichaFinanceiraNova', component: FichaFinanceiraFormComponent},
             { path: 'AssociadoFichaFinanceira', component: AssociadoFichaFinanceiraListComponent},
             { path: 'AssociadoFichaFinanceiraAnuidade/:id', component: AssociadoFichaFinanceiraAnuidadeFormComponent},
-            { path: 'AssociadoFichaFinanceiraEvento/:id', component: AssociadoFichaFinanceiraEventoFormComponent}
+            { path: 'AssociadoFichaFinanceiraEvento/:id', component: AssociadoFichaFinanceiraEventoFormComponent},
+            { path: 'AssinaturaAnuidade', component: AssinaturaAnuidadeListComponent},
+            { path: 'AssinaturaAnuidadeDetalhe', component: AssinaturaAnuidadeFormComponent},
+            { path: 'MinhaAssinaturaAnuidade', component: AssinaturaAnuidadeAssociadoListComponent},
+            { path: 'MinhaAssinaturaAnuidadeDetalhe', component: AssinaturaAnuidadeAssociadoFormComponent},
+            { path: 'DescontoAnuidadeAtc', component: DescontoAnuidadeAtcListComponent},
+            { path: 'DescontoAnuidadeAtcDetalhe', component: DescontoAnuidadeAtcFormComponent},
+            { path: 'MinhaAssinaturaEvento', component: AssinaturaEventoAssociadoListComponent},
+            { path: 'MinhaAssinaturaEventoDetalhe/:id', component: AssinaturaEventoAssociadoFormComponent},
+
           ]
     }
   ];

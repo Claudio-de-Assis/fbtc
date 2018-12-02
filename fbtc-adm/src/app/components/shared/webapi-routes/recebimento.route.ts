@@ -17,6 +17,12 @@ export class RecebimentoRoute {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
+    // [Route("RecebimentoAssociadoDao/{id:int}")]
+    getRecebimentoAssociadoDaoByRecebimentoId(id: number): string {
+        return AppSettings.API_ENDPOINT + this.url + 'RecebimentoAssociadoDao/' + id;
+    }
+
+
     getPagamentoAssociadoByRecebimentoId(id: number): string {
         return AppSettings.API_ENDPOINT + this.url + 'PagamentoAssociado/' + id;
     }

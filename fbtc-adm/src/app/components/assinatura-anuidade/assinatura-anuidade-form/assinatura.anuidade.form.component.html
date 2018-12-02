@@ -1,0 +1,119 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #assinaturaForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Dados{{ _msgProgresso }}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="inpExercicio" >Exercício:</label>
+                                <input id="inpExercicio" name="Exercicio" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.exercicio }}" disabled>
+                            </div>
+                        </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" name="Nome" class="form-control" value="{{ assinaturaAnuidadeDao.nomePessoa }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpCPF">CPF:</label>
+                            <input id="inpCPF" name="Cpf" class="form-control" value="{{ assinaturaAnuidadeDao.cpf }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpTipoPublico">Tipo Público:</label>
+                            <input id="inpTipoPublico" name="TipoPublico" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.nomeTP }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <label for="inpAtc">ATC Ok?:</label>
+                            <input id="inpAtc" name="Atc" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.anuidadeAtcOk | booMessage}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <label for="inpDiretoria">Diretoria?:</label>
+                            <input id="inpDiretoria" name="Diretoria" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.membroDiretoria | booMessage}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <label for="inpConfi">Confi?:</label>
+                            <input id="inpConfi" name="Confi" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.membroConfi | booMessage}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpTipoAssinatura">Tipo de Assinatura:</label>
+                            <select id="inpTipoAssinatura" name="tipoAssinatura" class="form-control" 
+                                required  (ngModelChange)="setValorAnuidade($event)"  [disabled]="_emProcessoPagamento"
+                                [(ngModel)]="assinaturaAnuidadeDao.valorAnuidadeId" #tipoAssinatura="ngModel">
+                                <option *ngFor="let op of anuidadeDao.anuidadesTiposPublicosDao[0].valoresAnuidades" value="{{ op.valorAnuidadeId }}">{{ op.tipoAnuidade | tipoAnuidade }} - Valor: {{ op.valor | mycurrency: 2}}</option>
+                            </select>
+                                <div *ngIf="tipoAssinatura.invalid && (tipoAssinatura.dirty || tipoAssinatura.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="tipoAssinatura.errors.required">* Informe a anuidade.</div>
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="inpValorPraticado">Valor praticado:</label>
+                        <input id="inpValorPraticado" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.valor | mycurrency: 2 }}" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="inpDtVencimento">Data Venc.:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            <input id="inpDtVencimento" name="dataVencimento" class="form-control" [disabled]="_emProcessoPagamento" type="date"
+                                [ngModel]="assinaturaAnuidadeDao.dtVencimentoPagamento | date:'yyyy-MM-dd'" (ngModelChange)="assinaturaAnuidadeDao.dtVencimentoPagamento = $event"  #dataNascimento="ngModel" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" *ngIf="_botaoPagSeguroOk">
+                                <label for="inpLink">Link para o pagamento:</label>
+                                <input id="inpLink" name="link" class="form-control" value="{{ _targetPagSeguro }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
+                            <div >{{ _msg }}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!--<div *ngIf="_msgVenc !== ''" class="alert alert-danger">
+                            <div >{{ _msgVenc }}</div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type="button" class="btn btn-default btn-xs" (click)="gotoPagSeguro()" *ngIf="_botaoPagSeguroOk">
+                            <a href="{{ _targetPagSeguro }}" target="blanck"><img id="imgFoto" name="foto" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/184x42-pagar-assina.gif" error="assets/no-foto.png"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"></a>
+                        </button>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!assinaturaForm.form.valid">Salvar</button>
+                        <button type="button" class="btn btn-default" (click)="gotoAssinaturasAnuidades()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

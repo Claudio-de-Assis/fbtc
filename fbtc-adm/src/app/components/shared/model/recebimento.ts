@@ -2,40 +2,33 @@ import { Associado } from './associado';
 
 export class Recebimento {
     recebimentoId: number;
-    associadoId: number;
-    associadoIsentoId: number;
-    valorAnuidadePublicoId: number;
-    valorEventoPublicoId: number;
-    objetivoPagamento: string;
-    dtNotificacao: Date;
+    assinaturaAnuidadeId: number;
+    assinaturaEventoId: number;
     observacao: string;
-    codePS: string;
-    referencePS: string;
+    notificationCodePS: string;
     typePS: number;
     statusPS: number;
     lastEventDatePS: Date;
     typePaymentMethodPS: number;
     codePaymentMethodPS: number;
     netAmountPS: number;
+    dtVencimento: Date;
+    statusFBTC: string;
+    dtStatusFBTC: Date;
+    origemEmissaoTitulo: string;
     dtCadastro: Date;
     ativo: boolean;
-    dtVencimento: Date;
 
-    associado: Associado;
+//    associado: Associado;
 }
 
-export class RecebimentoAssociadoDao {
-    associadoId: number;
+export class RecebimentoAssociadoDao extends Recebimento {
     titulo: string;
     anuidade: number;
     nome: string;
     cpf: string;
     nomeTP: string;
-    recebimentoId: number;
-    statusPS: number;
-    lastEventDatePS: Date;
-    ativoRec: boolean;
-    isencaoIdId: number;
-    dtVencimento: Date;
-
+    eMail: string;
+    nrCelular: string;
+    ativoAssociado: boolean;
 }

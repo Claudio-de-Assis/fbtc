@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -28,6 +29,8 @@ export class AtcListComponent implements OnInit {
 
   _itensPerPage: number;
 
+  _msgProgresso: string;
+
   private selectedAtc: Atc;
 
   atcs: Atc[];
@@ -41,15 +44,24 @@ export class AtcListComponent implements OnInit {
   ) {
     this.title = 'Consulta de ATCs';
     this.submitted = false;
-    this._itensPerPage = 30;
+    this._itensPerPage = AppSettings.ITENS_PER_PAGE;
 
     this.editSiglaUF = null;
     this._siglaUF = '0';
+
+    this._msgProgresso = '';
   }
 
 
   getAtcs(): void {
-    this.service.getAtcs().subscribe(atcs => this.atcs = atcs);
+
+    this._msgProgresso = '...Pesquisando...';
+
+    this.service.getAtcs().subscribe(
+      atcs => {
+        this.atcs = atcs;
+        this._msgProgresso =  this.atcs.length === 0 ? ' - Não foram encontrados registros' : '';
+      });
   }
 
   onSubmit() {
@@ -64,8 +76,14 @@ export class AtcListComponent implements OnInit {
         this._siglaUF = this.editSiglaUF;
     }
 
+    this._msgProgresso = '...Pesquisando...';
+
     this.service.getByFilters(this._siglaUF)
-        .subscribe(atcs => this.atcs = atcs);
+        .subscribe(
+          atcs => {
+            this.atcs = atcs;
+            this._msgProgresso =  this.atcs.length === 0 ? ' - Não foram encontrados registros' : '';
+          });
 
     this._siglaUF = '0';
   }
@@ -75,9 +93,10 @@ export class AtcListComponent implements OnInit {
     this.serviceUF.getUnidadesFederacaoUtilizadas().subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
   }
 
-
   onSelect(atc: Atc): void {
+
     this.selectedAtc = atc;
+    this.router.navigate(['admin/Atc', this.selectedAtc.atcId]);
   }
 
   gotoNovaAtc() {

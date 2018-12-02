@@ -18,14 +18,26 @@ export class AssociadoRoute {
         return AppSettings.API_ENDPOINT + this.url + id;
     }
 
+    // [Route("AssociadoDao/{id:int},{anuidadeId:int}")]
+    getAssociadoDaoById(id: number, anuidadeId: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url + `AssociadoDao/${id},${anuidadeId}`;
+    }
+
+    // [Route("AssociadoDao/{id:int}")]
+    getAssociadoDaoByPessoaId(id: number): string {
+
+        return AppSettings.API_ENDPOINT + this.url + `AssociadoDao/${id}`;
+    }
+
     getPessoaAssociadoById(id: number): string {
 
-        return AppSettings.API_ENDPOINT + this.url + 'Pessoa/' + id;
+        return AppSettings.API_ENDPOINT + this.url + `Pessoa/${id}`;
     }
     // [Route("{id:int}")]
     getNomeFotoByPessoaId(id: number): string {
 
-        return AppSettings.API_ENDPOINT + this.url + 'NomeFoto/' + id;
+        return AppSettings.API_ENDPOINT + this.url + `NomeFoto/${id}`;
     }
 
     // Deve-se informar "0" quando não houver valor válido para o filtro.

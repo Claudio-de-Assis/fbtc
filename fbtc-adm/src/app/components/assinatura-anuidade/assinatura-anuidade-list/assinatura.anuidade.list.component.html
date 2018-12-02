@@ -1,0 +1,153 @@
+<h1 class="page-header">{{ title }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #assinaturaForm="ngForm">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="sltAnuidade">Anuidade:</label>
+                                <select id="sltAnuidade" (ngModelChange)="gotoLimparGrids()" name="anuidade" class="form-control"
+                                    required
+                                    [(ngModel)]="editAnuidadeId" #anuidade="ngModel">
+                                    <option *ngFor="let op of anuidades" value="{{ op.anuidadeId }}">{{ op.exercicio }}</option>
+                                </select>
+                                <div *ngIf="anuidade.invalid && (anuidade.dirty || anuidade.touched)"
+                                    class="alert alert-danger">
+                                <div *ngIf="anuidade.errors.required">* Informe a anuidade.</div>
+                            </div>    
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                                <div class="form-group">
+                                        <label for="inpNome">Nome:</label>
+                                        <input id="inpNome" name="nome" class="form-control" type="text"
+                                            minlength="2"  maxlength="100"
+                                            [(ngModel)]="editNome"  #nome="ngModel"/>
+                                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                                        </div>
+                                </div>
+                            </div>
+<!--
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                        <label for="inpCpf">CPF:</label>
+                                        <input id="inpCpf" name="Cpf" class="form-control" type="number"
+                                            maxlength="15"
+                                            [(ngModel)]="editCpf" placeholder="000.000.000-00" #cpf="ngModel"/>
+                                </div>
+                            </div>
+            
+-->
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Status da Assinatura:</label><br>
+                                    <div>
+                                        <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
+                                            <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                            <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="!assinaturaForm.form.valid">Pesquisar</button>
+                            <!--<button class="btn btn-default" [disabled]="!assinaturaForm.form.valid" (click)="gotoNovaAssinaturaAnuidade()">Nova</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="panel panel-primary">
+            <div class="panel-heading">
+                Listagem de Assinaturas{{ _msgProgresso }}
+            </div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Exercício</td>
+                                    <td>Nome</td>
+                                    <td>CPF</td>
+                                    <td>Tipo Publico</td>
+                                    <td>Tipo</td>
+                                </tr>
+                            </thead>
+                            <tbody class="AssinaturaAnuidades">
+                                <tr (click)="onSelect(assinaturaAnuidadeDao)" *ngFor="let assinaturaAnuidadeDao of assinaturaAnuidades | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                    [class.selected]="assinaturaAnuidadeDao.assinaturaAnuidadeId === selectedId">
+                                    <td>{{ assinaturaAnuidadeDao.exercicio }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.nomePessoa }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.cpf }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.nomeTP }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.tipoAnuidade | tipoAnuidade }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                        <pagination-controls    (pageChange)="p = $event"
+                                                maxSize="9"
+                                                directionLinks="true"
+                                                previousLabel="Anterior"
+                                                nextLabel="Próxima"
+                        ></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Listagem de Assinaturas Pendentes{{ _msgProgresso2 }}
+                </div>
+                <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>Exercício</td>
+                                        <td>Nome</td>
+                                        <td>CPF</td>
+                                        <td>Tipo Publico</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="AssinaturaAnuidadesPendentes">
+                                    <tr (click)="onSelectPendente(assinaturaAnuidadeDao2)"  *ngFor="let assinaturaAnuidadeDao2 of assinaturaAnuidadesPendentes | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                        [class.selected]="assinaturaAnuidadeDao2.assinaturaAnuidadeId === selectedId">
+                                        <td>{{ assinaturaAnuidadeDao2.exercicio }}</td>
+                                        <td>{{ assinaturaAnuidadeDao2.nomePessoa }}</td>
+                                        <td>{{ assinaturaAnuidadeDao2.cpf }}</td>
+                                        <td>{{ assinaturaAnuidadeDao2.nomeTP }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <div class="btn-group">
+                            <pagination-controls    (pageChange)="p = $event"
+                                                    maxSize="9"
+                                                    directionLinks="true"
+                                                    previousLabel="Anterior"
+                                                    nextLabel="Próxima"
+                            ></pagination-controls>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

@@ -26,6 +26,8 @@ export class RelatorioAssociadosEstadosComponent implements OnInit {
   rptRoute: string;
   submitted: boolean;
 
+  _msgProgresso: string;
+
   constructor(
     private service: RelatoriosService,
     private router: Router,
@@ -36,12 +38,19 @@ export class RelatorioAssociadosEstadosComponent implements OnInit {
     this.title = 'Relatório de Usuários para UF e Tipo de Associação';
     this.rptRoute = apiRoute.getRptAssociadosEstadosToExcel();
     this.submitted = false;
+
+    this._msgProgresso = '';
   }
 
   getDadosRpt(): void {
 
+    this._msgProgresso = '...Pesquisando...';
+
     this.service.getRptAssociadosEstadosDAO()
-    .subscribe(rptAssociadosEstadosDAOs => this.rptAssociadosEstadosDAOs = rptAssociadosEstadosDAOs);
+    .subscribe(rptAssociadosEstadosDAOs => {
+      this.rptAssociadosEstadosDAOs = rptAssociadosEstadosDAOs;
+      this._msgProgresso =  this.rptAssociadosEstadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+    });
   }
 
   onSubmit() {

@@ -1,0 +1,92 @@
+<h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+<div class="row">
+    <div class="col-lg-12">
+    <form (ngSubmit)="onSubmit()" #descontoForm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Dados{{ _msgProgresso }}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="inpExercicio">Exercício:</label>
+                                <input id="inpExercicio" name="Exercicio" type="text" class="form-control" value="{{ descontoAnuidadeAtcDao.exercicio }}" disabled>
+                            </div>
+                        </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" name="Nome" class="form-control" value="{{ descontoAnuidadeAtcDao.nomePessoa }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpNomeAtc">Atc:</label>
+                            <input id="inpNomeAtc" name="Atc" class="form-control" value="{{ descontoAnuidadeAtcDao.nomeAtc }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpDtDesconto">Data Desconto:</label>
+                            <input id="inpDtDesconto" name="DtDesconto" type="text" class="form-control" value="{{ descontoAnuidadeAtcDao.dtDesconto | date: 'dd/MM/yyyy' }}" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="areaObservacao">Observação:</label>
+                            <textarea id="areaObservacao" name="observacao" class="form-control" 
+                            rows="5" cols="134" maxlength="500"
+                            [(ngModel)]="descontoAnuidadeAtcDao.observacao" #observacao="ngModel"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="inpColaborador">Nome Resp:</label>
+                            <input id="inpColaborador" name="nomeColaborador" type="text" class="form-control" value="{{ descontoAnuidadeAtcDao.nomeColaborador }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inpNomeArquivoComprovante">Nome do Comprovante:</label>
+                                <input id="inpNomeArquivoComprovante" name="nomeArquivoComprovante" class="form-control" type="text" 
+                                    maxlength="100" 
+                                    [(ngModel)]="descontoAnuidadeAtcDao.nomeArquivoComprovante" #nome="ngModel"/>
+                            </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="rdbAtivo">Ativo:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
+                                    <input type="radio" [(ngModel)]="descontoAnuidadeAtcDao.ativo" name="ativo" id="rdbAtivo" 
+                                    [checked]="op.value === descontoAnuidadeAtcDao.ativo" [value]="op.value"> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
+                            <div >{{ _msg }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!descontoForm.form.valid">Salvar</button>
+                        <button type="button" class="btn btn-default" (click)="gotoDescontoAssinaturasAtcs()">Retornar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
