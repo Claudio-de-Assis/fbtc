@@ -169,6 +169,30 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="DtAtivo" id="95A407A9-7FA6-556D-BB8D-4D8260C01C8D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-20 12:14:05 UTC</createdTime>
+<commentInRDBMS>Data da atualização do atributo ATIVO</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ObservacaoDesativacao" id="5C08708F-C42D-E5FC-AF46-C22266A3D095">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-20 12:15:57 UTC</createdTime>
+<commentInRDBMS>Observação a respeito da desatvação da Pessoa/Associado</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<ownDataTypeParameters>500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="BEA92344-75BB-73CD-0651-6E039B8D6066" name="PESSOA_PK">

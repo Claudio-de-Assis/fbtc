@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DB1C1283-7E8E-D29F-6C34-8FA6AF9F67C1" name="VALOR_ANUIDADE_PUBLICO">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DB1C1283-7E8E-D29F-6C34-8FA6AF9F67C1" name="ANUIDADE_TIPO_PUBLICO">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-10-23 14:24:53 UTC</createdTime>
 <ownerDesignName>FBTC - v2</ownerDesignName>
@@ -8,7 +8,7 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="ValorAnuidadePublicoId" id="512C55C7-471B-A507-1468-E66FE704F870">
+<Column name="AnuidadeTipoPublicoId" id="512C55C7-471B-A507-1468-E66FE704F870">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-10-23 14:26:20 UTC</createdTime>
 <commentInRDBMS>Identificador do registro na tabela</commentInRDBMS>
@@ -17,19 +17,6 @@
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="Valor" id="CBCA53C5-DE6D-CB17-FDDC-61D7104259FE">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-23 14:27:41 UTC</createdTime>
-<commentInRDBMS>Valor da anuidade</commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
-<dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="AnuidadeId" id="50FF2698-0726-80CC-972D-899CB3D57C4E">

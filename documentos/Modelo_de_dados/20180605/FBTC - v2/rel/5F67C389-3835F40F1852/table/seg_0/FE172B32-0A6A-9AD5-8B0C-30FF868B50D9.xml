@@ -43,6 +43,18 @@
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Ativo" id="9F01FA94-3047-0A58-893A-1986EF0AF3C6">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-19 23:26:03 UTC</createdTime>
+<commentInRDBMS>Informa se o registro está ativo&lt;br/&gt;&lt;br/&gt;Valores esperados&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="2A277E57-3660-89F7-FA2C-F7AB9520C8DB" name="UNIDADE_FEDERACAO_PK">

@@ -19,23 +19,9 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="AssociadoId" id="81137EC0-0280-9D49-8FDD-DE0D4B7A7CFA">
+<Column name="AssinaturaAnuidadeId" id="C63F2835-80CE-DCA6-ABAF-AC626B5360E7">
 <createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 15:46:42 UTC</createdTime>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="6D539CC8-311C-4BC0-D240-0D7CF35F79D0" referredColumn="BF1D2F32-65FE-44F7-94E7-336BD0E2F1B3"/>
-</associations>
-</Column>
-<Column name="ValorEventoPublicoId" id="2D092858-8FCC-9E06-9A28-B2A247BF497C">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 17:03:52 UTC</createdTime>
+<createdTime>2018-10-01 22:28:33 UTC</createdTime>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -45,33 +31,23 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="D9183365-9DD3-DC6B-BC7F-92BCFC1E5E50" referredColumn="79E351AB-1361-DF41-1AB6-EEBE5682D900"/>
+<colAssociation fkAssociation="E48FF668-77B9-B828-0C90-BF54619FF82B" referredColumn="2C63315E-7059-51E5-BB97-29D665CD4D7E"/>
 </associations>
 </Column>
-<Column name="ObjetivoPagamento" id="EAFF0D17-E4E6-A8B3-A7F7-C73DC9CD084F">
+<Column name="AssinaturaEventoId" id="74787AFE-FE2A-1DBB-D864-10DB14F2F223">
 <createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-10 19:08:24 UTC</createdTime>
-<commentInRDBMS>Indica qual o objetivo do  pagamento, ou seja, se foi o pagamento de uma  evento ou de uma anuidade&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;&lt;br/&gt;Evento: 1&lt;br/&gt;Anuidade: 2&lt;br/&gt;</commentInRDBMS>
+<createdTime>2018-10-01 22:38:27 UTC</createdTime>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT025</logicalDatatype>
-<dataTypeSize>1</dataTypeSize>
-<ownDataTypeParameters>1,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="DtNotificacao" id="DA147CB2-23CF-B801-0CDA-B85AA13E2114">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 15:38:04 UTC</createdTime>
-<commentInRDBMS>Data da notificação </commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT008</logicalDatatype>
+<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8634E172-838D-40F2-E644-A097DC3E0107" referredColumn="3114D939-1869-392F-8F15-E76E4DD41753"/>
+</associations>
 </Column>
 <Column name="Observacao" id="1E77862E-B3D5-8E59-A0FC-EFAFEECA6DF2">
 <createdBy>Cláudio de Assis</createdBy>
@@ -86,40 +62,10 @@
 <ownDataTypeParameters>500,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="AssociadoIsentoId" id="8BD07381-13C5-29F8-62CE-CEFCD084141F">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 19:25:02 UTC</createdTime>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="2A5EBB8C-BFA8-2635-217B-9F89BF58CAD8" referredColumn="052015FC-655C-5451-3F06-75F1A12B6DEC"/>
-</associations>
-</Column>
-<Column name="ValorAnuidadePublicoId" id="458A8F69-F562-13D0-7DE4-949D23CF4FC4">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-23 14:32:00 UTC</createdTime>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="6AFF4E4B-4223-EAB6-6378-985E9C22AF4A" referredColumn="512C55C7-471B-A507-1468-E66FE704F870"/>
-</associations>
-</Column>
-<Column name="CodePS" id="5A361E07-1C94-2B2B-1A91-EC7CDBCC1EF9">
+<Column name="NotificationCodePS" id="5A361E07-1C94-2B2B-1A91-EC7CDBCC1EF9">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-10-09 15:46:26 UTC</createdTime>
-<commentInRDBMS>Código identificador da transação PagSeguro. Retorna o código que identifica a transação de forma única. Presença: Obrigatória.&lt;br/&gt;Tipo: Texto.&lt;br/&gt;Formato: Uma sequência de 36 caracteres. </commentInRDBMS>
+<commentInRDBMS>Código gerado pelo PagSeguro, no momento em que ocorre o pagamento do título. Esse valor é enviado para o FBTC pela interface do PagSeguro&lt;br/&gt;&lt;br/&gt;A vinculação ao pagamento ocorre através do atrituto AssinaturaAnuidade.Reference ou AssinaturaEvento.Reference&lt;br/&gt;</commentInRDBMS>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -127,19 +73,6 @@
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>36</dataTypeSize>
 <ownDataTypeParameters>36,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="ReferencePS" id="543E5B4B-82EB-02B7-8E08-4D73D6CDE298">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2018-01-23 21:33:08 UTC</createdTime>
-<commentInRDBMS>Código de referência da transação PagSeguro. Informa o código que foi usado para fazer referência ao pagamento. Este código foi fornecido no momento do pagamento e é útil para vincular as transações do PagSeguro às vendas registradas no seu sistema. Presença: Opcional.&lt;br/&gt;Tipo: Texto.&lt;br/&gt;Formato: Livre, com o limite de 200 caracteres. </commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>200</dataTypeSize>
-<ownDataTypeParameters>200,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="TypePS" id="411A18E3-6488-7664-562F-A5C04CA699A7">
@@ -229,6 +162,119 @@
 <ownDataTypeParameters>,6,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="GrossAmountPS" id="8107AFC9-B3A5-BE37-F9E4-A6A190B58690">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-11-15 17:51:47 UTC</createdTime>
+<commentInRDBMS>Valor Bruto do PagSeguro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DiscountAmountPS" id="8B408A01-5D54-FFF1-5994-58C70CB1B76D">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-11-15 17:52:36 UTC</createdTime>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FeeAmountPS" id="6A58F5C1-2312-ED16-CC9A-54063FE20CB9">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-11-15 18:02:43 UTC</createdTime>
+<commentInRDBMS>Taxa cobrada pelo PagSeguro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ExtraAmountPS" id="48890630-1F6D-21DF-8AC3-0090EB4DD46B">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-11-15 18:06:28 UTC</createdTime>
+<commentInRDBMS>Cobrança Extra do PagSeguro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtAtualizacaoPS" id="14D437F8-CF58-DB03-DE5E-4EB46EC01E68">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-01-31 12:54:21 UTC</createdTime>
+<commentInRDBMS>Data de atualização do registro pelas rotinas do PagSeguro</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtVencimento" id="905D8FFB-61BB-E6A6-84BA-AC2128CE7853">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-16 00:34:51 UTC</createdTime>
+<commentInRDBMS>Data de vencimento do título</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="StatusFBTC" id="02678E8B-AC48-88CD-93F4-5400A8B850C9">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-20 01:03:43 UTC</createdTime>
+<commentInRDBMS>Informa se há algum status FBTC&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Vigente: 1 (Nesse caso, o status do título é o que é reportado pelo PagSeguro)&lt;br/&gt;Cancelado: 2&lt;br/&gt;Baixa Manual 3&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtStatusFBTC" id="294753F0-CEB1-54F1-0AEB-A3854014996A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-20 01:04:41 UTC</createdTime>
+<commentInRDBMS>Data do status do FBTC&lt;br/&gt;&lt;br/&gt;Data em que houve alteração do status do título por parte da administração do FBTC</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OrigemEmissaoTitulo" id="75B8F426-FDB7-731E-2178-65D761054400">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-21 12:01:29 UTC</createdTime>
+<commentInRDBMS>Informa a Origem da emissão do título de recebimento&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Emitido por Associado: 1&lt;br/&gt;Emitido por ADM FBTC: 2</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="DtCadastro" id="73CD0D2F-A3C0-912E-8C1E-6929D65C5ACD">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-10-09 15:35:49 UTC</createdTime>
@@ -252,18 +298,6 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="DtAtualizacaoPS" id="14D437F8-CF58-DB03-DE5E-4EB46EC01E68">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2018-01-31 12:54:21 UTC</createdTime>
-<commentInRDBMS>Data de atualização do registro pelas rotinas do PagSeguro</commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT008</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="838952CF-0873-BAB7-9A63-2E3674634796" name="RECEBIMENTO_ANUIDADE_PK">
@@ -277,44 +311,24 @@
 <colUsage columnID="27C3A916-E5CE-428A-BFD6-6A4F1A9F3EF6"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="EF4919F9-C3AC-9A91-2816-D4650E33031C" name="PAGAMENTO_ANUIDADE_ASSOCIADO_FK">
+<ind_PK_UK id="EBDDE0EF-5178-175C-EC20-253E79A3668B" name="RECEBIMENTO_ASSINATURA_ANUIDADE_FK">
 <createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 15:46:42 UTC</createdTime>
+<createdTime>2018-10-01 22:28:33 UTC</createdTime>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="81137EC0-0280-9D49-8FDD-DE0D4B7A7CFA"/>
+<colUsage columnID="C63F2835-80CE-DCA6-ABAF-AC626B5360E7"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="D664F0D8-877C-E489-E2D5-586B7BBB2E24" name="RECEBIMENTO_VALOR_EVENTO_PUBLICO_FK">
+<ind_PK_UK id="43E515A5-71AC-F726-60FB-D87DEE29EB70" name="RECEBIMENTO_ASSINATURA_EVENTO_FK">
 <createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 17:03:52 UTC</createdTime>
+<createdTime>2018-10-01 22:38:27 UTC</createdTime>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="2D092858-8FCC-9E06-9A28-B2A247BF497C"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="56BC6D91-1B95-C708-5AB7-9EB851F932C9" name="RECEBIMENTO_ASSOCIADO_ISENTO_FK">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 19:25:02 UTC</createdTime>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="8BD07381-13C5-29F8-62CE-CEFCD084141F"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="10C6B378-D5F1-E57A-5C72-7FB853113871" name="RECEBIMENTO_ANUIDADE_TIPO_PUBLICO_FK">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-23 14:32:00 UTC</createdTime>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="458A8F69-F562-13D0-7DE4-949D23CF4FC4"/>
+<colUsage columnID="74787AFE-FE2A-1DBB-D864-10DB14F2F223"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

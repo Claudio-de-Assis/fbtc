@@ -19,6 +19,74 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Exercicio" id="EF446795-28D1-D810-0758-E6D347CF677A">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2017-10-09 16:58:17 UTC</createdTime>
+<commentInRDBMS>Exercício(ano) da anuidade&lt;br/&gt;&lt;br/&gt;Ex:&lt;br/&gt;2015, 2016, 2017, (2017 + 1).....</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtVencimento" id="C0961481-CECB-B64B-45C1-89CD270E0065">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-21 11:55:28 UTC</createdTime>
+<commentInRDBMS>Data de vencimento da anuidade</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtInicioVigencia" id="11D93B69-D795-3F68-244E-339B5BE70567">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-20 01:10:45 UTC</createdTime>
+<commentInRDBMS>Data do início da vigência da anuidade</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtTerminoVigencia" id="CCCF91B6-23AE-C879-B94B-9538DCDCE25C">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-20 01:11:40 UTC</createdTime>
+<commentInRDBMS>Data de término da Vigência da anuidade</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CobrancaLiberada" id="8BC12E63-068F-463F-26F3-50EF4ABFF389">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-25 01:04:49 UTC</createdTime>
+<commentInRDBMS>Informa se a anuidade está com a sua cobrança liberada&lt;br/&gt;&lt;br/&gt;Valores aceitos:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DtCobrancaLiberada" id="E4B54D45-43F5-0E10-BA4C-20C4319121D2">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-09-25 01:04:06 UTC</createdTime>
+<commentInRDBMS>Data em que a cobranca da anuidade foi liberada</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="DtCadastro" id="A127B9D2-B83B-7DF8-3212-8E6B89755D82">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-10-09 15:53:54 UTC</createdTime>
@@ -27,17 +95,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT008</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="Codigo" id="EF446795-28D1-D810-0758-E6D347CF677A">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-10-09 16:58:17 UTC</createdTime>
-<commentInRDBMS>Código da anuidade&lt;br/&gt;&lt;br/&gt;Ex:&lt;br/&gt;2015, 2016, 2017, (2017 + 1).....</commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>

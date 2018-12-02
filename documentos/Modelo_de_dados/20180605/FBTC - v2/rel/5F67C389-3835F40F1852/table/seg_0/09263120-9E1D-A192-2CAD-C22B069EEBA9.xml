@@ -164,32 +164,6 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="IntegraDiretoria" id="184C7021-70C4-6C65-1994-7C42D4AA4F8C">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-11-06 13:00:12 UTC</createdTime>
-<commentInRDBMS>Informa se o associado é integrante da  Diretoria do FBTC&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT034</logicalDatatype>
-<dataTypeSize>1</dataTypeSize>
-<ownDataTypeParameters>1,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="IntegraConfi" id="5BEE95AD-4E1E-00A7-79ED-FED74EFB508A">
-<createdBy>Cláudio de Assis</createdBy>
-<createdTime>2017-11-06 13:01:15 UTC</createdTime>
-<commentInRDBMS>Informa se o Associado é integrante do CONFI&lt;br/&gt;&lt;br/&gt;Valores esperados:&lt;br/&gt;Sim: 1&lt;br/&gt;Não: 0</commentInRDBMS>
-<ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT034</logicalDatatype>
-<dataTypeSize>1</dataTypeSize>
-<ownDataTypeParameters>1,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="NrTelDivulgacao" id="5C04BDCB-93C6-57C5-E57C-6D4339E35820">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-11-16 14:38:16 UTC</createdTime>

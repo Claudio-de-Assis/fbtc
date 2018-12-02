@@ -1,10 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <osdmAllTables:Tables xmlns:osdmAllTables="http://oracle.com/datamodeler/reports/tables">
-   <osdmAllTables:ReportCaption>FBTC-Modelo_de_Dados-20180808</osdmAllTables:ReportCaption>
-   <osdmAllTables:CompanyName>FBTC</osdmAllTables:CompanyName>
+   <osdmAllTables:ReportCaption>FBTC-Modelo_de_Dados-20180919</osdmAllTables:ReportCaption>
+   <osdmAllTables:CompanyName>FBTC-Modelo_de_Dados-20180919</osdmAllTables:CompanyName>
    <osdmAllTables:UsePageBreaks>true</osdmAllTables:UsePageBreaks>
    <osdmAllTables:DesignName>FBTC - v2</osdmAllTables:DesignName>
-   <osdmAllTables:VersionDate>08.08.2018 08:41:02</osdmAllTables:VersionDate>
+   <osdmAllTables:VersionDate>25.09.2018 11:17:02</osdmAllTables:VersionDate>
    <osdmAllTables:ModelName>Relational_1</osdmAllTables:ModelName>
    <osdmAllTables:TablesCollection>
       <osdmAllTables:TableDetails>
@@ -15,7 +15,7 @@
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>9</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -38,6 +38,84 @@
             </osdmAllTables:ColumnDetails>
             <osdmAllTables:ColumnDetails>
                <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Exercicio</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtVencimento</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtInicioVigencia</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtTerminoVigencia</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>6</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>CobrancaLiberada</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>7</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtCobrancaLiberada</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>Datetime</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>8</osdmAllTables:Sequence>
                <osdmAllTables:ColumnName>DtCadastro</osdmAllTables:ColumnName>
                <osdmAllTables:PK/>
                <osdmAllTables:FK/>
@@ -50,20 +128,7 @@
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
             <osdmAllTables:ColumnDetails>
-               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
-               <osdmAllTables:ColumnName>Codigo</osdmAllTables:ColumnName>
-               <osdmAllTables:PK/>
-               <osdmAllTables:FK/>
-               <osdmAllTables:M>Y</osdmAllTables:M>
-               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
-               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
-               <osdmAllTables:DomainName/>
-               <osdmAllTables:Formula/>
-               <osdmAllTables:Security/>
-               <osdmAllTables:PreferredAbbreviation/>
-            </osdmAllTables:ColumnDetails>
-            <osdmAllTables:ColumnDetails>
-               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:Sequence>9</osdmAllTables:Sequence>
                <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
                <osdmAllTables:PK/>
                <osdmAllTables:FK/>
@@ -84,19 +149,48 @@
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
-               <osdmAllTables:ColumnCommentsName>DtCadastro</osdmAllTables:ColumnCommentsName>
-               <osdmAllTables:ColumnDescription>Data de cadastro</osdmAllTables:ColumnDescription>
-            </osdmAllTables:ColumnCommentsDetails>
-            <osdmAllTables:ColumnCommentsDetails>
-               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
-               <osdmAllTables:ColumnCommentsName>Codigo</osdmAllTables:ColumnCommentsName>
-               <osdmAllTables:ColumnDescription>Código da anuidade
+               <osdmAllTables:ColumnCommentsName>Exercicio</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Exercício(ano) da anuidade
 
 Ex:
 2015, 2016, 2017, (2017 + 1).....</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtVencimento</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data de vencimento da anuidade</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtInicioVigencia</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data do início da vigência da anuidade</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtTerminoVigencia</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data de término da Vigência da anuidade</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>6</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>CobrancaLiberada</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se a anuidade está com a sua cobrança liberada
+
+Valores aceitos:
+Sim: 1
+Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>7</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtCobrancaLiberada</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data em que a cobranca da anuidade foi liberada</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>8</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtCadastro</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data de cadastro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>9</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Informa se o registro está ativo
 
@@ -131,6 +225,16 @@ Inativo: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:FKName>ATA_ISENCAO_ANUIDADE_FK</osdmAllTables:FKName>
                <osdmAllTables:FKReferredFrom>ISENCAO</osdmAllTables:FKReferredFrom>
                <osdmAllTables:FKMandatory/>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AnuidadeId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AnuidadeId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_ANUIDADE_FKv2</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>DESCONTO_ANUIDADE_ATC</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
                <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
                <osdmAllTables:FKInArc/>
                <osdmAllTables:FKReferringColumnName>AnuidadeId</osdmAllTables:FKReferringColumnName>
@@ -570,6 +674,26 @@ Pós-Doutor: 5
                <osdmAllTables:FKDeleteRule/>
             </osdmAllTables:FKRFDetails>
             <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_ASSOCIADO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>DESCONTO_ANUIDADE_ATC</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AssociadoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AssociadoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_ASSOCIADO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>MEMBRO_GESTAO</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AssociadoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AssociadoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+            <osdmAllTables:FKRFDetails>
                <osdmAllTables:FKName>PAGAMENTO_ANUIDADE_ASSOCIADO_FK</osdmAllTables:FKName>
                <osdmAllTables:FKReferredFrom>RECEBIMENTO</osdmAllTables:FKReferredFrom>
                <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
@@ -993,6 +1117,135 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:FKReferredColumnName>AtcId</osdmAllTables:FKReferredColumnName>
                <osdmAllTables:FKDeleteRule/>
             </osdmAllTables:FKRFDetails>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_ATC_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>DESCONTO_ANUIDADE_ATC</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AtcId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AtcId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+         </osdmAllTables:FKRFCollection>
+      </osdmAllTables:TableDetails>
+      <osdmAllTables:TableDetails>
+         <osdmAllTables:TableName>CARGO_GESTAO</osdmAllTables:TableName>
+         <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
+         <osdmAllTables:FunctionalName/>
+         <osdmAllTables:Abbreviation/>
+         <osdmAllTables:ClassificationTypeName/>
+         <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:QuantitativeInfoCollection>
+            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
+            <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
+            <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
+            <osdmAllTables:ExpectedGrowth>0</osdmAllTables:ExpectedGrowth>
+            <osdmAllTables:GrowthInterval>Year</osdmAllTables:GrowthInterval>
+         </osdmAllTables:QuantitativeInfoCollection>
+         <osdmAllTables:ColumnsCollection>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>1</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>CargoGestaoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK>P</osdmAllTables:PK>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Nome</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>VARCHAR (100) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ordem</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+         </osdmAllTables:ColumnsCollection>
+         <osdmAllTables:ColumnsCommentsCollection>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>CargoGestaoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Nome</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Nome do Cargo</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ordem</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Ordenação do registro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o registro está ativo
+
+Valores esperados
+Sim: 1
+Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+         </osdmAllTables:ColumnsCommentsCollection>
+         <osdmAllTables:IndexesCollection>
+            <osdmAllTables:IndexDetails>
+               <osdmAllTables:IndexName>CARGO_GESTAO_PK</osdmAllTables:IndexName>
+               <osdmAllTables:IndexState>PK</osdmAllTables:IndexState>
+               <osdmAllTables:IndexFunctional/>
+               <osdmAllTables:IndexSpatial/>
+               <osdmAllTables:IndexExpression/>
+               <osdmAllTables:IndexColumnName>CargoGestaoId</osdmAllTables:IndexColumnName>
+               <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
+            </osdmAllTables:IndexDetails>
+         </osdmAllTables:IndexesCollection>
+         <osdmAllTables:FKRFCollection>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_CARGO_GESTAO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>MEMBRO_GESTAO</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>CargoGestaoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>CargoGestaoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
          </osdmAllTables:FKRFCollection>
       </osdmAllTables:TableDetails>
       <osdmAllTables:TableDetails>
@@ -1141,7 +1394,6 @@ Não reuniao do dia 15/12/2017 passaram a ser conhecidos como Equipe</osdmAllTab
                <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>ColaboradorId</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Identificador do registro da tabela</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -1164,6 +1416,275 @@ Não reuniao do dia 15/12/2017 passaram a ser conhecidos como Equipe</osdmAllTab
                <osdmAllTables:FKInArc/>
                <osdmAllTables:FKReferringColumnName>PessoaId</osdmAllTables:FKReferringColumnName>
                <osdmAllTables:FKReferredColumnName>PessoaId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+         </osdmAllTables:FKRTCollection>
+         <osdmAllTables:FKRFCollection>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_COLABORADOR_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>DESCONTO_ANUIDADE_ATC</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>ColaboradorId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>ColaboradorId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+         </osdmAllTables:FKRFCollection>
+      </osdmAllTables:TableDetails>
+      <osdmAllTables:TableDetails>
+         <osdmAllTables:TableName>DESCONTO_ANUIDADE_ATC</osdmAllTables:TableName>
+         <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
+         <osdmAllTables:FunctionalName/>
+         <osdmAllTables:Abbreviation/>
+         <osdmAllTables:ClassificationTypeName/>
+         <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:QuantitativeInfoCollection>
+            <osdmAllTables:NumberOfColumns>10</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
+            <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
+            <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
+            <osdmAllTables:ExpectedGrowth>0</osdmAllTables:ExpectedGrowth>
+            <osdmAllTables:GrowthInterval>Year</osdmAllTables:GrowthInterval>
+         </osdmAllTables:QuantitativeInfoCollection>
+         <osdmAllTables:ColumnsCollection>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>1</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DescontoAnuidadeAtcId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK>P</osdmAllTables:PK>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>AssociadoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>ColaboradorId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>AnuidadeId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>AtcId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>6</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Observacao</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (500) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>7</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>NomeArquivoComprovante</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (100) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>8</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtDesconto</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>9</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtCadastro</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>10</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+         </osdmAllTables:ColumnsCollection>
+         <osdmAllTables:ColumnsCommentsCollection>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DescontoAnuidadeAtcId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>AssociadoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificaçãodo associado que recebeu o desconto</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>ColaboradorId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificaçãodo colaborador  que concedeu o desconto</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>AnuidadeId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Anuidade que receberá o desconto</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>AtcId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificação da ATC </osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>6</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Observacao</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Observacao a respeito do desconto</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>7</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>NomeArquivoComprovante</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Nome do arquivo de comprovante</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>8</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtDesconto</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data de concessão do desconto</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>9</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtCadastro</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data do cadastro do registro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>10</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o registro está ativo:
+
+Valores aceitos:
+Sim: 1
+Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+         </osdmAllTables:ColumnsCommentsCollection>
+         <osdmAllTables:IndexesCollection>
+            <osdmAllTables:IndexDetails>
+               <osdmAllTables:IndexName>DESCONTO_ANUIDADE_ATC_PK</osdmAllTables:IndexName>
+               <osdmAllTables:IndexState>PK</osdmAllTables:IndexState>
+               <osdmAllTables:IndexFunctional/>
+               <osdmAllTables:IndexSpatial/>
+               <osdmAllTables:IndexExpression/>
+               <osdmAllTables:IndexColumnName>DescontoAnuidadeAtcId</osdmAllTables:IndexColumnName>
+               <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
+            </osdmAllTables:IndexDetails>
+         </osdmAllTables:IndexesCollection>
+         <osdmAllTables:FKRTCollection>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_ATC_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>ATC</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AtcId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AtcId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_ASSOCIADO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>ASSOCIADO</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AssociadoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AssociadoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_ANUIDADE_FKv2</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>ANUIDADE</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AnuidadeId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AnuidadeId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>DESCONTO_ANUIDADE_ATC_COLABORADOR_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>COLABORADOR</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>ColaboradorId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>ColaboradorId</osdmAllTables:FKReferredColumnName>
                <osdmAllTables:FKDeleteRule/>
             </osdmAllTables:FKRTDetails>
          </osdmAllTables:FKRTCollection>
@@ -1687,6 +2208,146 @@ Não: 0</osdmAllTables:ColumnDescription>
          </osdmAllTables:FKRFCollection>
       </osdmAllTables:TableDetails>
       <osdmAllTables:TableDetails>
+         <osdmAllTables:TableName>GESTAO</osdmAllTables:TableName>
+         <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
+         <osdmAllTables:FunctionalName/>
+         <osdmAllTables:Abbreviation/>
+         <osdmAllTables:ClassificationTypeName/>
+         <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:QuantitativeInfoCollection>
+            <osdmAllTables:NumberOfColumns>5</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
+            <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
+            <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
+            <osdmAllTables:ExpectedGrowth>0</osdmAllTables:ExpectedGrowth>
+            <osdmAllTables:GrowthInterval>Year</osdmAllTables:GrowthInterval>
+         </osdmAllTables:QuantitativeInfoCollection>
+         <osdmAllTables:ColumnsCollection>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>1</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>GestaoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK>P</osdmAllTables:PK>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>AnoInicial</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>AnoFinal</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Descricao</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (100) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+         </osdmAllTables:ColumnsCollection>
+         <osdmAllTables:ColumnsCommentsCollection>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>GestaoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>AnoInicial</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Ano inicial da vigência da Gestão</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>AnoFinal</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Ano final da vigência da Gestão</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o registro está ativo
+
+Valores esperados
+Sim: 1
+Não: 0
+</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Descricao</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Descrição da Gestão
+
+É a forma como a Gestão é conhecida</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+         </osdmAllTables:ColumnsCommentsCollection>
+         <osdmAllTables:IndexesCollection>
+            <osdmAllTables:IndexDetails>
+               <osdmAllTables:IndexName>Gestao_PK</osdmAllTables:IndexName>
+               <osdmAllTables:IndexState>PK</osdmAllTables:IndexState>
+               <osdmAllTables:IndexFunctional/>
+               <osdmAllTables:IndexSpatial/>
+               <osdmAllTables:IndexExpression/>
+               <osdmAllTables:IndexColumnName>GestaoId</osdmAllTables:IndexColumnName>
+               <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
+            </osdmAllTables:IndexDetails>
+         </osdmAllTables:IndexesCollection>
+         <osdmAllTables:FKRFCollection>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_Gestao_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>MEMBRO_GESTAO</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>GestaoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>GestaoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+         </osdmAllTables:FKRFCollection>
+      </osdmAllTables:TableDetails>
+      <osdmAllTables:TableDetails>
          <osdmAllTables:TableName>ISENCAO</osdmAllTables:TableName>
          <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
          <osdmAllTables:FunctionalName/>
@@ -1893,6 +2554,409 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:FKDeleteRule/>
             </osdmAllTables:FKRFDetails>
          </osdmAllTables:FKRFCollection>
+      </osdmAllTables:TableDetails>
+      <osdmAllTables:TableDetails>
+         <osdmAllTables:TableName>LOG</osdmAllTables:TableName>
+         <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
+         <osdmAllTables:FunctionalName/>
+         <osdmAllTables:Abbreviation/>
+         <osdmAllTables:ClassificationTypeName/>
+         <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:DescriptionNotes>
+            <osdmAllTables:Description/>
+            <osdmAllTables:Notes/>
+         </osdmAllTables:DescriptionNotes>
+         <osdmAllTables:QuantitativeInfoCollection>
+            <osdmAllTables:NumberOfColumns>8</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
+            <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
+            <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
+            <osdmAllTables:ExpectedGrowth>0</osdmAllTables:ExpectedGrowth>
+            <osdmAllTables:GrowthInterval>Year</osdmAllTables:GrowthInterval>
+         </osdmAllTables:QuantitativeInfoCollection>
+         <osdmAllTables:ColumnsCollection>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>1</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>LogId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK>P</osdmAllTables:PK>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>MetodoOrigem</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>VARCHAR (100) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>TipoInstrucao</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>VARCHAR (30) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Entidade</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (100) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>EntidadeId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>6</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>InstrucaoSQL</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (1000) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>7</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Resultado</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (1000) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>8</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtCadastro</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Datetime</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+         </osdmAllTables:ColumnsCollection>
+         <osdmAllTables:ColumnsCommentsCollection>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>LogId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>MetodoOrigem</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Nome do método de origem do registro do Log
+
+Ex: "RecebimentoRepository/Insert", "RecebimentoRepository/GetRecebimentoById"</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>TipoInstrucao</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Tipo da Instrução
+
+Ex: "SELECT", INSERT, UPDATE...</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Entidade</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Entidade principal da transação
+
+Ex: Anuidade, Associado, AssociadoISento....</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>EntidadeId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>ID da entidade principal da transação
+
+Ex: Valor da AnuidadeId....</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>6</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>InstrucaoSQL</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Instrução SQL da transação</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>7</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Resultado</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Resultado da execução do método
+
+Resultados esperados:
+
+a) "SUCESSO", quando a transação tiver sucesso;
+b) Exception.Message</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>8</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtCadastro</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data do registro do log</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnNotes/>
+            </osdmAllTables:ColumnCommentsDetails>
+         </osdmAllTables:ColumnsCommentsCollection>
+         <osdmAllTables:IndexesCollection>
+            <osdmAllTables:IndexDetails>
+               <osdmAllTables:IndexName>LOG_PK</osdmAllTables:IndexName>
+               <osdmAllTables:IndexState>PK</osdmAllTables:IndexState>
+               <osdmAllTables:IndexFunctional/>
+               <osdmAllTables:IndexSpatial/>
+               <osdmAllTables:IndexExpression/>
+               <osdmAllTables:IndexColumnName>LogId</osdmAllTables:IndexColumnName>
+               <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
+            </osdmAllTables:IndexDetails>
+         </osdmAllTables:IndexesCollection>
+      </osdmAllTables:TableDetails>
+      <osdmAllTables:TableDetails>
+         <osdmAllTables:TableName>MEMBRO_GESTAO</osdmAllTables:TableName>
+         <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
+         <osdmAllTables:FunctionalName/>
+         <osdmAllTables:Abbreviation/>
+         <osdmAllTables:ClassificationTypeName/>
+         <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:QuantitativeInfoCollection>
+            <osdmAllTables:NumberOfColumns>7</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
+            <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
+            <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
+            <osdmAllTables:ExpectedGrowth>0</osdmAllTables:ExpectedGrowth>
+            <osdmAllTables:GrowthInterval>Year</osdmAllTables:GrowthInterval>
+         </osdmAllTables:QuantitativeInfoCollection>
+         <osdmAllTables:ColumnsCollection>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>1</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>MembroGestaoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK>P</osdmAllTables:PK>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Descricao</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (500) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>GestaoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>CargoGestaoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>AssociadoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>6</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>UnidadeFederacaoId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>7</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>IntegraConselhoConsultivo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+         </osdmAllTables:ColumnsCollection>
+         <osdmAllTables:ColumnsCommentsCollection>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>MembroGestaoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Descricao</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Descrição/Observação a respeito do carga da diretoria</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>GestaoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela Gestão</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>CargoGestaoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela CARGO_GESTAO</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>AssociadoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela Associado</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>6</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>UnidadeFederacaoId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela UNIDADE_FEDERACAO</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>7</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>IntegraConselhoConsultivo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o membro da diretoria integra o conselho consultivo 
+
+Valores esperados
+Sim: 1
+Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+         </osdmAllTables:ColumnsCommentsCollection>
+         <osdmAllTables:IndexesCollection>
+            <osdmAllTables:IndexDetails>
+               <osdmAllTables:IndexName>MEMBRO_GESTAO_PK</osdmAllTables:IndexName>
+               <osdmAllTables:IndexState>PK</osdmAllTables:IndexState>
+               <osdmAllTables:IndexFunctional/>
+               <osdmAllTables:IndexSpatial/>
+               <osdmAllTables:IndexExpression/>
+               <osdmAllTables:IndexColumnName>MembroGestaoId</osdmAllTables:IndexColumnName>
+               <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
+            </osdmAllTables:IndexDetails>
+         </osdmAllTables:IndexesCollection>
+         <osdmAllTables:FKRTCollection>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_ASSOCIADO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>ASSOCIADO</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>AssociadoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>AssociadoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_Gestao_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>GESTAO</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>GestaoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>GestaoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_UNIDADE_FEDERACAO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>UNIDADE_FEDERACAO</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>UnidadeFederacaoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>UnidadeFederacaoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_CARGO_GESTAO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>CARGO_GESTAO</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>CargoGestaoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>CargoGestaoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+         </osdmAllTables:FKRTCollection>
       </osdmAllTables:TableDetails>
       <osdmAllTables:TableDetails>
          <osdmAllTables:TableName>NOTIFICACAO_PAGSEGURO</osdmAllTables:TableName>
@@ -2139,10 +3203,6 @@ Não: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:Abbreviation/>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
-         <osdmAllTables:DescriptionNotes>
-            <osdmAllTables:Description/>
-            <osdmAllTables:Notes/>
-         </osdmAllTables:DescriptionNotes>
          <osdmAllTables:QuantitativeInfoCollection>
             <osdmAllTables:NumberOfColumns>5</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
@@ -2223,13 +3283,11 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>PerfilId</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Identificador do Registro</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>Nome</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Nome do perfil</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
@@ -2242,7 +3300,6 @@ Secretário: 2
 Financeiro: 3
 Cliente Externo: 4
 </osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
@@ -2253,7 +3310,6 @@ Valores esperados:
 Interno: I
 Externo: E
 </osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
@@ -2263,7 +3319,6 @@ Externo: E
 Valores esperados
 Sim: 1
 Não: 0</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -2297,12 +3352,8 @@ Não: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:Abbreviation/>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
-         <osdmAllTables:DescriptionNotes>
-            <osdmAllTables:Description/>
-            <osdmAllTables:Notes/>
-         </osdmAllTables:DescriptionNotes>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>13</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>15</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -2479,19 +3530,43 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:Security/>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>14</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtAtivo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>15</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>ObservacaoDesativacao</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>VARCHAR (500) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
          </osdmAllTables:ColumnsCollection>
          <osdmAllTables:ColumnsCommentsCollection>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>PessoaId</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Identificador da tabela</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>PerfilId</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Idenbtificador do registro na tabela Perfil</osdmAllTables:ColumnDescription>
-               <osdmAllTables:ColumnNotes/>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
@@ -2546,6 +3621,16 @@ Não: 0</osdmAllTables:ColumnDescription>
 Valores esperados
 Sim: 1
 Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>14</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtAtivo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data da atualização do atributo ATIVO</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>15</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>ObservacaoDesativacao</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Observação a respeito da desatvação da Pessoa/Associado</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -2612,7 +3697,7 @@ Não: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>20</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>24</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -2856,6 +3941,58 @@ Não: 0</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnDetails>
             <osdmAllTables:ColumnDetails>
                <osdmAllTables:Sequence>19</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtAtualizacaoPS</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M/>
+               <osdmAllTables:DataType>Datetime</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>20</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtVencimento</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Datetime</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>21</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>StatusFBTC</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>CHAR (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>22</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>DtStatusFBTC</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Date</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>23</osdmAllTables:Sequence>
                <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
                <osdmAllTables:PK/>
                <osdmAllTables:FK/>
@@ -2868,12 +4005,12 @@ Não: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
             <osdmAllTables:ColumnDetails>
-               <osdmAllTables:Sequence>20</osdmAllTables:Sequence>
-               <osdmAllTables:ColumnName>DtAtualizacaoPS</osdmAllTables:ColumnName>
+               <osdmAllTables:Sequence>24</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>OrigemEmissaoTitulo</osdmAllTables:ColumnName>
                <osdmAllTables:PK/>
                <osdmAllTables:FK/>
-               <osdmAllTables:M/>
-               <osdmAllTables:DataType>Datetime</osdmAllTables:DataType>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>CHAR (1) </osdmAllTables:DataType>
                <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
                <osdmAllTables:DomainName/>
                <osdmAllTables:Formula/>
@@ -3098,6 +4235,34 @@ Formato: Decimal, com duas casas decimais separadas por ponto ("."). Por exemplo
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
                <osdmAllTables:ColumnCommentsSequence>19</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtAtualizacaoPS</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data de atualização do registro pelas rotinas do PagSeguro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>20</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtVencimento</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data de vencimento do título</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>21</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>StatusFBTC</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se há algum status FBTC
+
+Valores aceitos:
+Vigente: 1 (Nesse caso, o status do título é o que é reportado pelo PagSeguro)
+Cancelado: 2
+Baixa Manual 3
+</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>22</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>DtStatusFBTC</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Data do status do FBTC
+
+Data em que houve alteração do status do título por parte da administração do FBTC</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>23</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Informa se o registro está ativo
 
@@ -3107,9 +4272,13 @@ Não: 0
 </osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
             <osdmAllTables:ColumnCommentsDetails>
-               <osdmAllTables:ColumnCommentsSequence>20</osdmAllTables:ColumnCommentsSequence>
-               <osdmAllTables:ColumnCommentsName>DtAtualizacaoPS</osdmAllTables:ColumnCommentsName>
-               <osdmAllTables:ColumnDescription>Data de atualização do registro pelas rotinas do PagSeguro</osdmAllTables:ColumnDescription>
+               <osdmAllTables:ColumnCommentsSequence>24</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>OrigemEmissaoTitulo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa a Origem da emissão do título de recebimento
+
+Valores aceitos:
+Emitido por Associado: 1
+Emitido por ADM FBTC: 2</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -3165,6 +4334,105 @@ Não: 0
                <osdmAllTables:FKDeleteRule/>
             </osdmAllTables:FKRTDetails>
          </osdmAllTables:FKRTCollection>
+      </osdmAllTables:TableDetails>
+      <osdmAllTables:TableDetails>
+         <osdmAllTables:TableName>TIPO_ANUIDADE</osdmAllTables:TableName>
+         <osdmAllTables:DiagramSuffix>__dg_rm_1</osdmAllTables:DiagramSuffix>
+         <osdmAllTables:FunctionalName/>
+         <osdmAllTables:Abbreviation/>
+         <osdmAllTables:ClassificationTypeName/>
+         <osdmAllTables:ObjectTypeName/>
+         <osdmAllTables:QuantitativeInfoCollection>
+            <osdmAllTables:NumberOfColumns>3</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
+            <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
+            <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
+            <osdmAllTables:ExpectedGrowth>0</osdmAllTables:ExpectedGrowth>
+            <osdmAllTables:GrowthInterval>Year</osdmAllTables:GrowthInterval>
+         </osdmAllTables:QuantitativeInfoCollection>
+         <osdmAllTables:ColumnsCollection>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>1</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>TipoAnuidadeId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK>P</osdmAllTables:PK>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>2</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Descricao</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>VARCHAR (100) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>3</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>QtdAnuidade</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
+         </osdmAllTables:ColumnsCollection>
+         <osdmAllTables:ColumnsCommentsCollection>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>1</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>TipoAnuidadeId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Descricao</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Descrição do tipo de anuidade</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>3</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>QtdAnuidade</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Indica a quantidade de anuidades referente ao valor da anuidade para o tipo de público
+
+Valores conhecidos: 1, 2 , 3</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+         </osdmAllTables:ColumnsCommentsCollection>
+         <osdmAllTables:IndexesCollection>
+            <osdmAllTables:IndexDetails>
+               <osdmAllTables:IndexName>TIPO_ANUIDADE_PK</osdmAllTables:IndexName>
+               <osdmAllTables:IndexState>PK</osdmAllTables:IndexState>
+               <osdmAllTables:IndexFunctional/>
+               <osdmAllTables:IndexSpatial/>
+               <osdmAllTables:IndexExpression/>
+               <osdmAllTables:IndexColumnName>TipoAnuidadeId</osdmAllTables:IndexColumnName>
+               <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
+            </osdmAllTables:IndexDetails>
+         </osdmAllTables:IndexesCollection>
+         <osdmAllTables:FKRFCollection>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>VALOR_ANUIDADE_PUBLICO_TIPO_ANUIDADE_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>VALOR_ANUIDADE_PUBLICO</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>TipoAnuidadeId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>TipoAnuidadeId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+         </osdmAllTables:FKRFCollection>
       </osdmAllTables:TableDetails>
       <osdmAllTables:TableDetails>
          <osdmAllTables:TableName>TIPO_PUBLICO</osdmAllTables:TableName>
@@ -3353,7 +4621,7 @@ Não associado: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>3</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -3400,6 +4668,19 @@ Não associado: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:Security/>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>4</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>Ativo</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK/>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>BIT (1) </osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
          </osdmAllTables:ColumnsCollection>
          <osdmAllTables:ColumnsCommentsCollection>
             <osdmAllTables:ColumnCommentsDetails>
@@ -3417,6 +4698,15 @@ Não associado: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:ColumnCommentsName>Nome</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Nome da unidade da federação</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>4</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>Ativo</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Informa se o registro está ativo
+
+Valores esperados
+Sim: 1
+Não: 0</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
             <osdmAllTables:IndexDetails>
@@ -3429,6 +4719,18 @@ Não associado: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:IndexSortOrder>ASC</osdmAllTables:IndexSortOrder>
             </osdmAllTables:IndexDetails>
          </osdmAllTables:IndexesCollection>
+         <osdmAllTables:FKRFCollection>
+            <osdmAllTables:FKRFDetails>
+               <osdmAllTables:FKName>MEMBRO_GESTAO_UNIDADE_FEDERACAO_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferredFrom>MEMBRO_GESTAO</osdmAllTables:FKReferredFrom>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>UnidadeFederacaoId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>UnidadeFederacaoId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRFDetails>
+         </osdmAllTables:FKRFCollection>
       </osdmAllTables:TableDetails>
       <osdmAllTables:TableDetails>
          <osdmAllTables:TableName>VALOR_ANUIDADE_PUBLICO</osdmAllTables:TableName>
@@ -3438,7 +4740,7 @@ Não associado: 0</osdmAllTables:ColumnDescription>
          <osdmAllTables:ClassificationTypeName/>
          <osdmAllTables:ObjectTypeName/>
          <osdmAllTables:QuantitativeInfoCollection>
-            <osdmAllTables:NumberOfColumns>4</osdmAllTables:NumberOfColumns>
+            <osdmAllTables:NumberOfColumns>5</osdmAllTables:NumberOfColumns>
             <osdmAllTables:NumberOfRowsMin>0</osdmAllTables:NumberOfRowsMin>
             <osdmAllTables:NumberOfRowsMax>9999999</osdmAllTables:NumberOfRowsMax>
             <osdmAllTables:ExpectedNumberOfRows>0</osdmAllTables:ExpectedNumberOfRows>
@@ -3498,6 +4800,19 @@ Não associado: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:Security/>
                <osdmAllTables:PreferredAbbreviation/>
             </osdmAllTables:ColumnDetails>
+            <osdmAllTables:ColumnDetails>
+               <osdmAllTables:Sequence>5</osdmAllTables:Sequence>
+               <osdmAllTables:ColumnName>TipoAnuidadeId</osdmAllTables:ColumnName>
+               <osdmAllTables:PK/>
+               <osdmAllTables:FK>F</osdmAllTables:FK>
+               <osdmAllTables:M>Y</osdmAllTables:M>
+               <osdmAllTables:DataType>Integer</osdmAllTables:DataType>
+               <osdmAllTables:DataTypeKind>LT</osdmAllTables:DataTypeKind>
+               <osdmAllTables:DomainName/>
+               <osdmAllTables:Formula/>
+               <osdmAllTables:Security/>
+               <osdmAllTables:PreferredAbbreviation/>
+            </osdmAllTables:ColumnDetails>
          </osdmAllTables:ColumnsCollection>
          <osdmAllTables:ColumnsCommentsCollection>
             <osdmAllTables:ColumnCommentsDetails>
@@ -3509,6 +4824,11 @@ Não associado: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:ColumnCommentsSequence>2</osdmAllTables:ColumnCommentsSequence>
                <osdmAllTables:ColumnCommentsName>Valor</osdmAllTables:ColumnCommentsName>
                <osdmAllTables:ColumnDescription>Valor da anuidade</osdmAllTables:ColumnDescription>
+            </osdmAllTables:ColumnCommentsDetails>
+            <osdmAllTables:ColumnCommentsDetails>
+               <osdmAllTables:ColumnCommentsSequence>5</osdmAllTables:ColumnCommentsSequence>
+               <osdmAllTables:ColumnCommentsName>TipoAnuidadeId</osdmAllTables:ColumnCommentsName>
+               <osdmAllTables:ColumnDescription>Identificador do registro na tabela TIPO_ANUIDADE</osdmAllTables:ColumnDescription>
             </osdmAllTables:ColumnCommentsDetails>
          </osdmAllTables:ColumnsCommentsCollection>
          <osdmAllTables:IndexesCollection>
@@ -3541,6 +4861,16 @@ Não associado: 0</osdmAllTables:ColumnDescription>
                <osdmAllTables:FKInArc/>
                <osdmAllTables:FKReferringColumnName>AnuidadeId</osdmAllTables:FKReferringColumnName>
                <osdmAllTables:FKReferredColumnName>AnuidadeId</osdmAllTables:FKReferredColumnName>
+               <osdmAllTables:FKDeleteRule/>
+            </osdmAllTables:FKRTDetails>
+            <osdmAllTables:FKRTDetails>
+               <osdmAllTables:FKName>VALOR_ANUIDADE_PUBLICO_TIPO_ANUIDADE_FK</osdmAllTables:FKName>
+               <osdmAllTables:FKReferringTo>TIPO_ANUIDADE</osdmAllTables:FKReferringTo>
+               <osdmAllTables:FKMandatory>Y</osdmAllTables:FKMandatory>
+               <osdmAllTables:FKTransferable>Y</osdmAllTables:FKTransferable>
+               <osdmAllTables:FKInArc/>
+               <osdmAllTables:FKReferringColumnName>TipoAnuidadeId</osdmAllTables:FKReferringColumnName>
+               <osdmAllTables:FKReferredColumnName>TipoAnuidadeId</osdmAllTables:FKReferredColumnName>
                <osdmAllTables:FKDeleteRule/>
             </osdmAllTables:FKRTDetails>
          </osdmAllTables:FKRTCollection>

@@ -79,6 +79,18 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Codigo" id="EDDAABD0-63C0-C06C-7D0D-9910F620A767">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-10-09 22:57:55 UTC</createdTime>
+<commentInRDBMS>Código identificador do Tipo Público&lt;br/&gt;&lt;br/&gt;Será usado para referenciar o tipo do TIPO PUBLICO no código fonte de aplicação. São tipos conhecidos:&lt;br/&gt;&lt;br/&gt;- IPA - Interno Profissional Associado&lt;br/&gt;- IEPA - Interno Estudante de Pós Associado&lt;br/&gt;- IEA - Interno Estudante Associado&lt;br/&gt;&lt;br/&gt;- EPNA - Externo Profissional Não Associado&lt;br/&gt;- EEPNA - Externo Estudante de Pós Não Associado&lt;br/&gt;- EENA - Externo Estudante Não Associado&lt;br/&gt;</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5</dataTypeSize>
+<ownDataTypeParameters>5,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="89C1EBFC-CACC-0BA2-6FBC-53CF0CE44F4B" name="TIPO_PUBLICO_PK">
