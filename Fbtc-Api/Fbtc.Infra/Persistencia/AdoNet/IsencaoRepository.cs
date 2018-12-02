@@ -87,7 +87,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            Isencao _collection = GetCollection<Isencao>(cmd)?.First();
+            Isencao _collection = GetCollection<Isencao>(cmd)?.FirstOrDefault<Isencao>();
 
             return _collection;
         }
@@ -149,7 +149,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     if (id > 0)
                         _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
 
-                    _msg = id > 0 ? $"{_ident}Inclusão realiada com sucesso" : $"{_ident}Inclusão Não realiada com sucesso";
+                    _msg = id > 0 ? $"{_ident}Inclusão Realizada com sucesso" : $"{_ident}Inclusão Não Realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -224,7 +224,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     int x = command.ExecuteNonQuery();
                     _resultado = x > 0;
 
-                    _msg = _resultado ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = _resultado ? "Atualização Realizada com sucesso" : "Atualização NÃO Realizada com sucesso";
 
                     transaction.Commit();
                 }

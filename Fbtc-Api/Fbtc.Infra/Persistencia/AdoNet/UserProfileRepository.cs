@@ -9,7 +9,7 @@ using Fbtc.Domain.Interfaces.Repositories;
 
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
-
+using System.Data.Common;
 
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
@@ -25,15 +25,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         
         public UserProfile GetByPessoaId(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter paramId = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(paramId);
+            // Fim da definição dos parâmetros
+            
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
-                    WHERE P.PessoaId = " + id + "";
+                    WHERE P.PessoaId = @id";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
@@ -48,15 +56,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public string GetNomeFotoByPessoaId(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pid = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(pid);
+            // Fim da definição dos parâmetros
+
             String NomeFoto = "_no-foto.png";
 
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId,P.Ativo 
                     FROM dbo.AD_Pessoa P  
-                    WHERE P.PessoaId = " + id + "";
+                    WHERE P.PessoaId = @id";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
@@ -83,8 +99,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             SendEMail _sendMail = new SendEMail();
 
-            _newPassword = Functions.GetNovaSenhaAcesso("");
-            _newPasswordHash = Functions.CriptografaSenha(_newPassword);
+            _newPassword = PasswordFunctions.GetNovaSenhaAcesso("");
+            _newPasswordHash = PasswordFunctions.CriptografaSenha(_newPassword);
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -137,7 +153,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     else
                     {
-                        _msg = "Atualização NÃO realiada com sucesso";
+                        _msg = "Atualização NÃO Realizada com sucesso";
                         _sendSucess = false;
                     }
                 }
@@ -171,6 +187,16 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
+
+                string _passWord = "";
+                string _passwordHash = "";
+
+                if (!string.IsNullOrEmpty(userProfile.PasswordHashReturned))
+                {
+                    _passwordHash = PasswordFunctions.CriptografaSenha(userProfile.PasswordHashReturned);
+                    _passWord = ", PassWordHash = @PassWordHash ";
+                }
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -187,11 +213,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     // Atualizando os dados na tabela PESSOA:
                     string _dtNasc = userProfile.DtNascimento != null ? ", DtNascimento = @DtNascimento " : "";
 
-                    command.CommandText = "" +
-                        "UPDATE dbo.AD_Pessoa " +
-                        "SET Nome = @nome, EMail = @EMail, NomeFoto = @NomeFoto, " +
-                            "Sexo = @Sexo, NrCelular = @NrCelular, PassWordHash = @PassWordHash, PerfilId = @PerfilId " + _dtNasc +
-                        "WHERE PessoaId = @id";
+                    command.CommandText = $@" UPDATE dbo.AD_Pessoa 
+                                        SET Nome = @nome, EMail = @EMail, NomeFoto = @NomeFoto, 
+                                            Sexo = @Sexo, NrCelular = @NrCelular, 
+                                            PerfilId = @PerfilId {_dtNasc} {_passWord}
+                                        WHERE PessoaId = @id";
 
                     command.Parameters.AddWithValue("Nome", userProfile.Nome);
                     command.Parameters.AddWithValue("EMail", userProfile.EMail);
@@ -199,11 +225,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("Sexo", userProfile.Sexo);
                     command.Parameters.AddWithValue("NrCelular", userProfile.NrCelular);
                     command.Parameters.AddWithValue("PerfilId", userProfile.PerfilId);
-                    command.Parameters.AddWithValue("PassWordHash", userProfile.PasswordHash);
                     command.Parameters.AddWithValue("id", userProfile.PessoaId);
 
                     if (_dtNasc != "")
                         command.Parameters.AddWithValue("DtNascimento", userProfile.DtNascimento);
+
+                    if (!string.IsNullOrEmpty(userProfile.PasswordHashReturned))
+                        command.Parameters.AddWithValue("PassWordHash", _passwordHash);
 
                     int i = command.ExecuteNonQuery();
                     _resultado = i > 0;
@@ -236,15 +264,25 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             string _msg = "OK";
 
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pPessoaId = new SqlParameter() { ParameterName = "@pessoaId", Value = pessoaId };
+            _parametros.Add(pPessoaId);
+
+            SqlParameter pEMail = new SqlParameter() { ParameterName = "@eMail", Value = eMail };
+            _parametros.Add(pEMail);
+            // Fim da definição dos parâmetros
+
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
-                    WHERE P.PessoaId = " + pessoaId + " AND P.EMail = '" + eMail + "' ";
+                    WHERE P.PessoaId = @pessoaId AND P.EMail = @eMail";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 IEnumerable<UserProfile> _collection = GetCollection<UserProfile>(cmd)?.ToList();
@@ -276,8 +314,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             SendEMail _sendMail = new SendEMail();
 
-            _newPassword = Functions.GetNovaSenhaAcesso("");
-            _newPasswordHash = Functions.CriptografaSenha(_newPassword);
+            _newPassword = PasswordFunctions.GetNovaSenhaAcesso("");
+            _newPasswordHash = PasswordFunctions.CriptografaSenha(_newPassword);
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -330,7 +368,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     else
                     {
-                        _msg = "Atualização NÃO realiada com sucesso";
+                        _msg = "Atualização NÃO Realizada com sucesso";
                         _sendSucess = false;
                     }
                 }
@@ -359,22 +397,34 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public UserProfile Login(string email, string password)
         {
-            // bool _isSucess = false;
+            bool _isSucess = false;
+
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pEmail = new SqlParameter() { ParameterName = "@email", Value = email };
+
+            _parametros.Add(pEmail);
+            // Fim da definição dos parâmetros
+
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
-                    WHERE P.EMail = '" + email + "'";
+                    WHERE P.EMail = @email";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
 
-                //if (userProfile != null)
-                //    _isSucess = Functions.ValidaSenha(password, userProfile.PasswordHash);
+                if (userProfile != null)
+                    _isSucess = PasswordFunctions.ValidaSenha(password, userProfile.PasswordHash);
+
+                if (!_isSucess)
+                    userProfile = null;
 
                 return userProfile;
             }
@@ -386,15 +436,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public UserProfile GetByEMail(string email)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pEmail = new SqlParameter() { ParameterName = "@email", Value = email };
+
+            _parametros.Add(pEmail);
+            // Fim da definição dos parâmetros
+
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
-                    WHERE P.EMail = '" + email + "'";
+                    WHERE P.EMail = @email";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
@@ -414,22 +472,30 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public UserProfile GetByEmailPassword(string email, string password)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pEmail = new SqlParameter() { ParameterName = "@email", Value = email };
+
+            _parametros.Add(pEmail);
+            // Fim da definição dos parâmetros
+
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
                     FROM dbo.AD_Pessoa P  
-                    WHERE P.EMail = '" + email + "'";
+                    WHERE P.EMail = @email";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
 
                 if (userProfile != null)
                 {
-                    if (!Functions.ValidaSenha(password, userProfile.PasswordHash))
+                    if (!PasswordFunctions.ValidaSenha(password, userProfile.PasswordHash))
                         userProfile = new UserProfile();
                 }
 

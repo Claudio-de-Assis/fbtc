@@ -9,6 +9,7 @@ using Fbtc.Domain.Interfaces.Repositories;
 
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
+using System.Data.Common;
 
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
@@ -29,26 +30,43 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<Colaborador> FindByFilters(string nome, int perfilId, bool? ativo)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
             query = @"SELECT Distinct P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
                         C.ColaboradorId, P.PerfilId  
                     FROM dbo.AD_Colaborador C 
                     INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId
-                    WHERE P.PessoaId > 0 ";
+                    WHERE 1 = 1  ";
 
             if (!string.IsNullOrEmpty(nome))
-                query = query + $" AND P.Nome Like '%{nome}%' ";
+            {
+                query = query + $" AND P.Nome Like '%'+ @nome +'%' ";
+
+                SqlParameter pnome = new SqlParameter() { ParameterName = "@nome", Value = nome };
+                _parametros.Add(pnome);
+            }
 
             if (perfilId > 0)
-                query = query + $" AND P.PerfilId = {perfilId} ";
+            {
+                query = query + $" AND P.PerfilId = @perfilId ";
+
+                SqlParameter pperfilId = new SqlParameter() { ParameterName = "@perfilId", Value = perfilId };
+                _parametros.Add(pperfilId);
+            }
 
             if (ativo != null)
-                query = query + $" AND P.Ativo = '{ativo}' ";
+            {
+                query = query + $" AND P.Ativo = @ativo ";
+
+                SqlParameter pativo = new SqlParameter() { ParameterName = "@ativo", Value = ativo };
+                _parametros.Add(pativo);
+            }
 
             query = query + " ORDER BY P.Nome ";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<Colaborador> _collection = GetCollection<Colaborador>(cmd)?.ToList();
@@ -76,18 +94,26 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public Colaborador GetColaboradorById(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pid = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(pid);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
                         C.ColaboradorId, P.PerfilId  
                     FROM dbo.AD_Colaborador C 
                     INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId
-                    WHERE ColaboradorId= " + id + "";
+                    WHERE ColaboradorId = @id";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
-            Colaborador colaborador = GetCollection<Colaborador>(cmd)?.First();
+            Colaborador colaborador = GetCollection<Colaborador>(cmd)?.FirstOrDefault<Colaborador>();
 
             return colaborador;
         }
@@ -151,7 +177,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     if (colabId > 0)
                         _ident = _ident.PadLeft(10 - colabId.ToString().Length, '0') + colabId.ToString();
 
-                    _msg = colabId > 0 ? $"{_ident}Inclusão realiada com sucesso" : $"{_ident}Inclusão Não realiada com sucesso";
+                    _msg = colabId > 0 ? $"{_ident}Inclusão Realizada com sucesso" : $"{_ident}Inclusão Não Realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -216,7 +242,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     int i = command.ExecuteNonQuery();
 
-                    _msg = i > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = i > 0 ? "Atualização Realizada com sucesso" : "Atualização NÃO Realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -253,8 +279,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             SendEMail _sendMail = new SendEMail();
 
-            _newPassword = Functions.GetNovaSenhaAcesso("");
-            _newPasswordHash = Functions.CriptografaSenha(_newPassword);
+            _newPassword = PasswordFunctions.GetNovaSenhaAcesso("");
+            _newPasswordHash = PasswordFunctions.CriptografaSenha(_newPassword);
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -307,7 +333,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     else
                     {
-                        _msg = "Atualização NÃO realiada com sucesso";
+                        _msg = "Atualização NÃO Realizada com sucesso";
                         _sendSucess = false;
                     } 
                 }
@@ -334,22 +360,31 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _msg;
         }
 
-        public string ValidaEMail(int colaboradorId, string eMail)
+        public string ValidaEMail(int pessoaId, string eMail)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter ppessoaId = new SqlParameter() { ParameterName = "@pessoaId", Value = pessoaId };
+            _parametros.Add(ppessoaId);
+
+            SqlParameter peMail = new SqlParameter() { ParameterName = "@eMail", Value = eMail };
+            _parametros.Add(peMail);
+            // Fim da definição dos parâmetros
+
             string _msg = "OK";
 
             try
             {
                 query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
-                        C.ColaboradorId, C.TipoPerfil  
-                    FROM dbo.AD_Colaborador C 
-                    INNER JOIN dbo.AD_Pessoa P on C.PessoaId = P.PessoaId 
-                    WHERE ColaboradorId != " + colaboradorId + "" +
-                        " AND P.EMail = '" + eMail + "' ";
+                        P.PerfilId 
+                    FROM dbo.AD_Pessoa P 
+                    WHERE P.PessoaId != @pessoaId 
+                        AND P.EMail = @eMai";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 IEnumerable<Colaborador> _collection = GetCollection<Colaborador>(cmd)?.ToList();

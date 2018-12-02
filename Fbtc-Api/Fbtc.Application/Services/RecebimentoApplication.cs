@@ -135,23 +135,22 @@ namespace Fbtc.Application.Services
             Recebimento _r = new Recebimento()
             {
                 RecebimentoId = r.RecebimentoId,
-                AssociadoId = r.AssociadoId,
-                ValorEventoPublicoId = r.ValorEventoPublicoId,
-                ValorAnuidadePublicoId = r.ValorAnuidadePublicoId,
-                AssociadoIsentoId = r.AssociadoIsentoId,
-                ObjetivoPagamento = r.ObjetivoPagamento,
-                CodePaymentMethodPS = r.CodePaymentMethodPS,
-                CodePS = r.CodePS,
-                LastEventDatePS = r.LastEventDatePS,
-                NetAmountPS = r.NetAmountPS,
-                ReferencePS = r.ReferencePS,
-                StatusPS = r.StatusPS,
-                TypePaymentMethodPS = r.TypePaymentMethodPS,
-                TypePS = r.TypePS,
-                DtNotificacao = r.DtNotificacao,
+                AssinaturaAnuidadeId = r.AssinaturaAnuidadeId,
+                AssinaturaEventoId = r.AssinaturaEventoId,
                 Observacao = Functions.AjustaTamanhoString(r.Observacao, 500),
+                NotificationCodePS = r.NotificationCodePS,
+                TypePS = r.TypePS,
+                StatusPS = r.StatusPS,
+                LastEventDatePS = r.LastEventDatePS,
+                TypePaymentMethodPS = r.TypePaymentMethodPS,
+                CodePaymentMethodPS = r.CodePaymentMethodPS,
+                NetAmountPS = r.NetAmountPS,
+                DtVencimento = r.DtVencimento,
+                StatusFBTC = r.StatusFBTC,
+                DtStatusFBTC = r.DtStatusFBTC,
+                OrigemEmissaoTitulo = r.OrigemEmissaoTitulo,
+                DtCadastro = r.DtCadastro,
                 Ativo = r.Ativo,
-                DtVencimento = r.DtVencimento
             };
 
             try
@@ -168,39 +167,17 @@ namespace Fbtc.Application.Services
         {
             Recebimento r = new Recebimento() {
                 RecebimentoId = 0,
-                AssociadoId = 0,
-                ValorEventoPublicoId = null,
-                ValorAnuidadePublicoId = null,
-                AssociadoIsentoId = null,
-                ObjetivoPagamento = objetivoPagamento,
                 CodePaymentMethodPS = null,
-                CodePS = null,
+                NotificationCodePS = null,
                 LastEventDatePS = null,
                 NetAmountPS = 0,
-                ReferencePS = null,
                 StatusPS = null,
                 TypePaymentMethodPS = null,
                 TypePS = null,
-                DtNotificacao = null,
                 Observacao = "",
                 Ativo = true
             };
             return r;
-        }
-
-        public string SaveIsento(Recebimento recebimento)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string InsertIsento(int associadoId, int associadoIsentoId, string ojetivoPagamento, string tipoIsencao)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string DeleteByAssociadoIsentoId(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id)

@@ -8,5 +8,7 @@ namespace Fbtc.Application.Interfaces
         IEnumerable<Perfil> GetAll(bool? isAtivo, string dominio);
 
         Perfil GetPerfilById(int id);
+
+        int GetPerfilIdByNomePerfil(string nomePerfil);
     }
 }

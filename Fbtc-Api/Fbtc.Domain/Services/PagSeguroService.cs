@@ -20,6 +20,11 @@ namespace Fbtc.Domain.Services
             _pagSeguroRepository = pagSeguroRepository;
         }
 
+        public CheckOutPagSeguro getDadosParaCheckOutPagSeguro(int associadoId, string tipoEndereco, int anoInicio, int anoTermino, bool enderecoRequerido, bool isAnuidade)
+        {
+            return _pagSeguroRepository.getDadosParaCheckOutPagSeguro(associadoId, tipoEndereco, anoInicio, anoTermino, enderecoRequerido, isAnuidade);
+        }
+
         /*
         public string GetNotificationCode(string notificationCode)
         {
@@ -34,6 +39,11 @@ namespace Fbtc.Domain.Services
         public string UpdateRecebimentoPagSeguro(TransacaoPagSeguro transacaoPagSeguro)
         {
             return _pagSeguroRepository.UpdateRecebimentoPagSeguro(transacaoPagSeguro);
+        }
+
+        public string SaveDadosTransacaoPagSeguro(TransacaoPagSeguro transacaoPagSeguro)
+        {
+            return _pagSeguroRepository.SaveDadosTransacaoPagSeguro(transacaoPagSeguro);
         }
 
         public int UpdateRecebimentosPeriodoPagSeguro(TransactionSearchResult transactionSearchResult)

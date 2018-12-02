@@ -13,3 +13,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csproj.C
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\obj\Debug\Fbtc.Application.csprojAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\EPPlus.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\EPPlus.xml
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\prmToolkit.AccessMultipleDatabaseWithAdoNet.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
+C:\C-Projetos\fbtc\Fbtc-Api\Fbtc.Application\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb

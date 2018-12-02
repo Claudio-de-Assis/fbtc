@@ -9,22 +9,26 @@ namespace Fbtc.Application.Interfaces
 
         Associado GetAssociadoById(int id);
 
+        AssociadoDao GetAssociadoDaoById(int id, int anuidadeId);
+
+        AssociadoDao GetAssociadoDaoByPessoaId(int id);
+
         Associado SetAssociado();
 
         string DeleteById(int id);
 
-        string Save(Associado associado);
+        string Save(AssociadoDao associado);
 
-        string SaveIsento(AssociadoIsentoDao associadoIsentoDao);
+        // string SaveIsento(AssociadoIsentoDao associadoIsentoDao);
 
         IEnumerable<Associado> FindByFilters(string nome, string cpf, 
             string sexo, int atcId, string crp, string tipoProfissao, 
             int tipoPublico, string estado, string cidade, bool? ativo);
-
+        /*
         IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
             string sexo, int atcId, string crp, string tipoProfissao,
             int tipoPublico, string estado, string cidade, bool? ativo);
-
+            */
         string GetNomeFotoByPessoaId(int id);
 
         string RessetPasswordById(int id);

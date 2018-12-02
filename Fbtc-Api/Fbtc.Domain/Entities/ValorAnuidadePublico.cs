@@ -7,5 +7,6 @@ namespace Fbtc.Domain.Entities
         public decimal Valor { get; set; }
         public int AnuidadeId { get; set; }
         public int TipoPublicoId { get; set; }
+        public string TipoAnuidade { get; set; }
     }
 }

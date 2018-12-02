@@ -53,11 +53,11 @@ namespace Fbtc.Api.Controllers
         /// pelo método POST.
         /// </summary>
         /// <param name="notificationCode"></param>
-        /// <param name="notificationType"></param>
+        /// <param name="notificationType">transaction</param>
         /// <returns></returns>
         //Recebendo uma notificação de transação:
         // [Authorize]
-        [Route("notificacao/")]
+        [Route("notificacao")]
         [HttpPost]
         public async Task<HttpResponseMessage> ReceiveNotificationTransacao(string notificationCode, string notificationType)
         {
@@ -70,12 +70,13 @@ namespace Fbtc.Api.Controllers
                 if (notificationCode is null) throw new ArgumentNullException("notificationCode está nulo!");
                 if (notificationType is null) throw new ArgumentNullException("notificationType está nulo!");
 
+                // Grava os dados da noficação recebida:
                 resultado = _pagSeguroApplication.NotificationTransacao(notificationCode, notificationType);
 
                 TransacaoPagSeguro _transacaoPagSeguro = await GetTransacaoAPIPagSeguroByNotification(notificationCode.Trim(), EMail, Token);
 
-                if (_transacaoPagSeguro.Code != null && _transacaoPagSeguro.Reference != null)
-                    resultado = _pagSeguroApplication.UpdateRecebimentoPagSeguro(_transacaoPagSeguro);
+                if (_transacaoPagSeguro.NotificationCode != null && _transacaoPagSeguro.Reference != null)
+                    resultado = _pagSeguroApplication.SaveDadosTransacaoPagSeguro(_transacaoPagSeguro);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 
@@ -90,6 +91,67 @@ namespace Fbtc.Api.Controllers
                 tsc.SetResult(response);
 
                 return await tsc.Task;
+            }
+        }
+
+        /// <summary>
+        /// Para obter o código de checkout para uma venda junto ao PagSeguro. Função para uso externo
+        /// método GET 
+        /// </summary>
+        /// <param name="notificationCode"></param>
+        /// <param name="eMail"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        [Route("getTokenCheckOut/")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetTokenCheckOut(int associadoId, string valor, string tipoEndereco, int anoInicio, int anoTermino, bool enderecoRequerido, bool isAnuidade)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                CheckOutPagSeguro _ck = _pagSeguroApplication.getDadosParaCheckOutPagSeguro(associadoId, valor, tipoEndereco, anoInicio, anoTermino, enderecoRequerido, isAnuidade);
+
+                TokenCheckOutPagSeguro token = await GetTokenDinamicoAPIPagSeguro(EMail, Token, _ck);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, token);
+
+                tsc.SetResult(response);
+
+                return await tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+
+                tsc.SetResult(response);
+
+                return await tsc.Task;
+            }
+        }
+
+        /// <summary>
+        /// Para obter o código de checkout para uma venda junto ao PagSeguro. Essa função é para uso interno 
+        /// método GET 
+        /// </summary>
+        /// <param name="notificationCode"></param>
+        /// <param name="eMail"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public async Task<TokenCheckOutPagSeguro> GetTokenCheckOutPessoaId(int pessoaId, string valor, string tipoEndereco, int anoInicio, int anoTermino, bool enderecoRequerido, bool isAnuidade)
+        {
+            try
+            {
+                CheckOutPagSeguro _ck = _pagSeguroApplication.getDadosParaCheckOutPagSeguro(pessoaId, valor, tipoEndereco, anoInicio, anoTermino, enderecoRequerido, isAnuidade);
+
+                TokenCheckOutPagSeguro token = await GetTokenDinamicoAPIPagSeguro(EMail, Token, _ck);
+
+                return token;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"ATENÇÃO: Ocorreu um erro durante o acesso ao PagSeguro. Exception Type:{ex.GetType()}. Erro:{ex.Message}");
             }
         }
 
@@ -109,11 +171,29 @@ namespace Fbtc.Api.Controllers
                 Uri _uri = new Uri($"{BaseUrl}transactions/notifications/{notificationCode}?email={eMail}&token={token}");
 
                 HttpResponseMessage responseGet = await httpClient.GetAsync(_uri);
+
                 string response = await responseGet.Content.ReadAsStringAsync();
 
+                if (response.Equals("Unauthorized"))
+                    throw new Exception("ATENÇÃO: Ocorreu uma falha durante a autenticação do acesso ao serviço PagSeguro/transactions/notifications");
+
                 TransacaoPagSeguro _tr = new TransacaoPagSeguro();
+                ErrorsPagSeguro errorsPagSeguro = new ErrorsPagSeguro();
 
                 XDocument doc = XDocument.Parse(response);
+
+                // Verificando se houve erro na requisição:
+                foreach (var er in doc.Descendants("error"))
+                {
+                    errorsPagSeguro.NotificationConde = notificationCode;
+                    errorsPagSeguro.DtNotificacaoErro = DateTime.Now;
+                    errorsPagSeguro.Code = (string)er.Element("code") ?? "";
+                    errorsPagSeguro.Message = (string)er.Element("message") ?? "";
+                }
+
+                if (errorsPagSeguro.Message != null)
+                    throw new Exception($"ATENÇÃO: Ocorreu um erro ao processar ao consultar notificação junto ao PagSeguro. NotificationCode: {notificationCode}, Código do Erro: {errorsPagSeguro.Code} - Mensagem: {errorsPagSeguro.Message}");
+                // Fim da verificação:
 
                 foreach (var tr in doc.Descendants("transaction"))
                 {
@@ -121,7 +201,7 @@ namespace Fbtc.Api.Controllers
                     {
                         Date = (string)tr.Element("date") ?? "",
                         Reference = (string)tr.Element("reference") ?? "",
-                        Code = (string)tr.Element("code") ?? "",
+                        NotificationCode = (string)tr.Element("code") ?? "",
                         Type = (int?)tr.Element("type") ?? null,
                         Status = (int?)tr.Element("status") ?? null,
                         PaymentMethod = new PaymentMethodPagSeguro() { Type = (int?)tr.Element("type") ?? null, Code = (int?)tr.Element("code") ?? null },
@@ -132,7 +212,6 @@ namespace Fbtc.Api.Controllers
                         Lasteventdate = (string)tr.Element("lastEventDate") ?? ""
                     };
                 }
-                
                 return _tr;
             }
             catch (Exception ex)
@@ -184,6 +263,7 @@ namespace Fbtc.Api.Controllers
                     while (_currPage <= _transacoesPS.TotalPages)
                     {
                         _nrRegistrosAtualizados += _pagSeguroApplication.UpdateRecebimentosPeriodoPagSeguro(_transacoesPS);
+                        // _nrRegistrosAtualizados += _pagSeguroApplication.SaveDadosTransacaoPagSeguro(_transacoesPS);
 
                         _currPage++;
 
@@ -229,12 +309,31 @@ namespace Fbtc.Api.Controllers
                 Uri _uri = new Uri($"{BaseUrl}transactions?initialDate={dtInicial}&finalDate={dtFinal}&page={page}&maxPageResults={maxPageResults}&email={eMail}&token={token}");
 
                 HttpResponseMessage responseGet = await httpClient.GetAsync(_uri);
+
                 string response = await responseGet.Content.ReadAsStringAsync();
+
+                if (response.Equals("Unauthorized"))
+                    throw new Exception("ATENÇÃO: Ocorreu uma falha durante a autenticação do acesso ao serviço PagSeguro/transactions");
 
                 TransactionSearchResult _ts = new TransactionSearchResult();
                 _ts.Transacoes = new List<TransacaoPagSeguro>();
 
+                ErrorsPagSeguro errorsPagSeguro = new ErrorsPagSeguro();
+
                 XDocument doc = XDocument.Parse(response);
+
+                // Verificando se houve erro na requisição:
+                foreach (var er in doc.Descendants("error"))
+                {
+                    errorsPagSeguro.NotificationConde = "";
+                    errorsPagSeguro.DtNotificacaoErro = DateTime.Now;
+                    errorsPagSeguro.Code = (string)er.Element("code") ?? "";
+                    errorsPagSeguro.Message = (string)er.Element("message") ?? "";
+                }
+
+                if (errorsPagSeguro.Message != null)
+                    throw new Exception($"ATENÇÃO: Ocorreu um erro ao tentar obter listagem de recebimentos junto ao PagSeguro. Código do Erro: {errorsPagSeguro.Code} - Mensagem: {errorsPagSeguro.Message}");
+                // Fim da verificação:
 
                 foreach (var t in doc.Descendants("transactionSearchResult"))
                 {
@@ -246,15 +345,16 @@ namespace Fbtc.Api.Controllers
                         {
                             Date = (string) tr.Element("date") ?? String.Empty,
                             Reference = (string) tr.Element("reference") ?? String.Empty,
-                            Code = (string) tr.Element("code") ?? String.Empty,
+                            NotificationCode = (string) tr.Element("code") ?? String.Empty,
                             Type = (int?) tr.Element("type") ?? null,
                             Status = (int?) tr.Element("status") ?? null,
                             PaymentMethod = new PaymentMethodPagSeguro() { Type = (int?) tr.Element("type") ?? null},
                             GrossAmount = (decimal?) tr.Element("grossAmount") ?? null,
                             DiscountAmount = (decimal?) tr.Element("discountAmount") ?? null,
+                            FeeAmount = (decimal?)tr.Element("feeAmount") ?? null,
                             NetAmount = (decimal?) tr.Element("netAmount") ?? null,
                             ExtraAmount = (decimal?) tr.Element("extraAmount") ?? null,
-                            Lasteventdate = (string) tr.Element("lastEventDate") ?? String.Empty
+                            Lasteventdate = (string) tr.Element("date") ?? String.Empty
                         };
                         _ts.Transacoes.Add(_tran);
                     }
@@ -267,6 +367,90 @@ namespace Fbtc.Api.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Obtém o Token dinâmico no PagSeguro para cada pagamento da FBTC.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="CheckOutPagSeguro"></param>
+        /// <returns></returns>
+        public async Task<TokenCheckOutPagSeguro> GetTokenDinamicoAPIPagSeguro(string email, string token, CheckOutPagSeguro c)
+        {
+            try
+            {
+                Uri _uri = new Uri($"{BaseUrl}checkout");
+
+                var _parametros = new List<KeyValuePair<string, string>>();
+                _parametros.Add(new KeyValuePair<string, string>("email", email));
+                _parametros.Add(new KeyValuePair<string, string>("token", token));
+                _parametros.Add(new KeyValuePair<string, string>("currency", c.Currency));
+                _parametros.Add(new KeyValuePair<string, string>("itemId1", c.ItemId1));
+                _parametros.Add(new KeyValuePair<string, string>("itemDescription1", c.ItemDescription1));
+                _parametros.Add(new KeyValuePair<string, string>("itemAmount1", c.ItemAmount1.ToString()));
+                _parametros.Add(new KeyValuePair<string, string>("itemQuantity1", c.ItemQuantity1));
+                _parametros.Add(new KeyValuePair<string, string>("itemWeight1", c.ItemWeight1));
+                _parametros.Add(new KeyValuePair<string, string>("reference", c.Reference));
+                _parametros.Add(new KeyValuePair<string, string>("senderName", c.SenderName));
+                _parametros.Add(new KeyValuePair<string, string>("senderAreaCode", c.SenderAreaCode));
+                _parametros.Add(new KeyValuePair<string, string>("senderPhone", c.SenderPhone));
+                _parametros.Add(new KeyValuePair<string, string>("senderEmail", c.SenderEmail));
+                _parametros.Add(new KeyValuePair<string, string>("shippingType", c.ShippingType));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressRequired", c.ShippingAddressRequired));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressStreet", c.ShippingAddressStreet));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressNumber", c.ShippingAddressNumber));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressComplement", c.ShippingAddressComplement));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressDistrict", c.ShippingAddressDistrict));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressPostalCode", c.ShippingAddressPostalCode));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressCity", c.ShippingAddressCity));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressState", c.ShippingAddressState));
+                _parametros.Add(new KeyValuePair<string, string>("shippingAddressCountry", c.ShippingAddressCountry));
+                _parametros.Add(new KeyValuePair<string, string>("timeout", "25"));
+                _parametros.Add(new KeyValuePair<string, string>("enableRecovery", "false"));
+
+                var content = new System.Net.Http.FormUrlEncodedContent(_parametros);
+
+                HttpResponseMessage responsePost = await httpClient.PostAsync(_uri, content);
+
+                string response = await responsePost.Content.ReadAsStringAsync();
+
+                if (response.Equals("Unauthorized"))
+                    throw new Exception("ATENÇÃO: Ocorreu uma falha durante a autenticação do acesso ao serviço PagSeguro/Checkout");
+
+                TokenCheckOutPagSeguro _ck = new TokenCheckOutPagSeguro();
+                ErrorsPagSeguro errorsPagSeguro = new ErrorsPagSeguro();
+
+                XDocument doc = XDocument.Parse(response);
+
+                // Verificando se houve erro na requisição:
+                foreach (var er in doc.Descendants("error"))
+                {
+                    errorsPagSeguro.NotificationConde = "";
+                    errorsPagSeguro.DtNotificacaoErro = DateTime.Now;
+                    errorsPagSeguro.Code = (string)er.Element("code") ?? "";
+                    errorsPagSeguro.Message = (string)er.Element("message") ?? "";
+                }
+
+                if (errorsPagSeguro.Message != null)
+                    throw new Exception($"ATENÇÃO: Ocorreu um erro ao tentar obter token dinâmico junto ao PagSeguro. Reference: {c.Reference}, Código do Erro: {errorsPagSeguro.Code} - Mensagem: {errorsPagSeguro.Message}");
+                // Fim da verificação:
+
+                if (doc != null)
+                {
+                    foreach (var c1 in doc.Descendants("checkout"))
+                    {
+                        _ck.Date = (DateTime?)c1.Element("date") ?? null;
+                        _ck.Code = (String)c1.Element("code");
+                    }
+                    _ck.Reference = c.Reference;
+                }
+
+                return _ck;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"ATENÇÃO: Ocorreu um erro durante o acesso ao PagSeguro. Exception Type:{ex.GetType()}. Erro:{ex.Message}");
             }
         }
     }

@@ -8,6 +8,7 @@ using Fbtc.Application.Interfaces;
 using prmToolkit.Validation;
 using Fbtc.Application.Helper;
 
+
 namespace Fbtc.Application.Services
 {
     public class AssociadoApplication : IAssociadoApplication
@@ -49,8 +50,6 @@ namespace Fbtc.Application.Services
                 DtCertificacao = null,
                 DivulgarContato = false,
                 TipoFormaContato = "",
-                IntegraDiretoria = false,
-                IntegraConfi = false,
                 NrTelDivulgacao = "",
                 ComprovanteAfiliacaoAtc = "",
                 TipoProfissao = "",
@@ -61,6 +60,45 @@ namespace Fbtc.Application.Services
             return _a;
         }
 
+        public AssociadoDao SetAssociadoDao()
+        {
+
+            AssociadoDao _a = new AssociadoDao()
+            {
+                PessoaId = 0,
+                Nome = "",
+                EMail = "",
+                NomeFoto = "",
+                Sexo = "",
+                DtNascimento = null,
+                NrCelular = "",
+                PasswordHash = "",
+                Ativo = true,
+                DtCadastro = null,
+                ATCId = 0,
+                TipoPublicoId = 0,
+                Cpf = "",
+                Rg = "",
+                NrMatricula = "",
+                Crp = "",
+                Crm = "",
+                NomeInstFormacao = "",
+                Certificado = false,
+                DtCertificacao = null,
+                DivulgarContato = false,
+                TipoFormaContato = "",
+                NrTelDivulgacao = "",
+                ComprovanteAfiliacaoAtc = "",
+                TipoProfissao = "",
+                TipoTitulacao = "",
+                EnderecosPessoa = null,
+                AnuidadeAtcOk = false,
+                MembroDiretoria = false,
+                PerfilId = 0
+            };
+            return _a;
+        }
+               
         public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, 
             int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
@@ -81,29 +119,6 @@ namespace Fbtc.Application.Services
                 _cidade = _cidade.Replace("%20", " ");
             
             return _associadoService.FindByFilters(_nome, _cpf, _sexo, atcId, _crp, 
-                _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
-        }
-
-        public IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf, string sexo,
-            int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
-        {
-            string _nome, _cpf, _sexo, _crp, _tipoProfissao, _estado, _cidade;
-
-            _nome = nome == "0" ? "" : nome;
-            _cpf = cpf == "0" ? "" : cpf;
-            _sexo = sexo == "0" ? "" : sexo;
-            _crp = crp == "0" ? "" : crp;
-            _tipoProfissao = tipoProfissao == "0" ? "" : tipoProfissao;
-            _estado = estado == "0" ? "" : estado;
-            _cidade = cidade == "0" ? "" : cidade;
-
-            if (_nome.IndexOf("%20") > 0)
-                _nome = _nome.Replace("%20", " ");
-
-            if (_cidade.IndexOf("%20") > 0)
-                _cidade = _cidade.Replace("%20", " ");
-
-            return _associadoService.FindIsentoByFilters(isencaoId, _nome, _cpf, _sexo, atcId, _crp,
                 _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
         }
 
@@ -191,13 +206,13 @@ namespace Fbtc.Application.Services
 
             return _associado; 
         }
-        
-        public Associado GetAssociadoByPessoaId(int id)
+
+        public AssociadoDao GetAssociadoDaoById(int id, int anuidadeId)
         {
-            Associado _associado = _associadoService.GetAssociadoByPessoaId(id);
+            AssociadoDao _associadoDao = _associadoService.GetAssociadoDaoById(id, anuidadeId) ?? this.SetAssociadoDao();
 
             //Adicionando objeto Endereco caso não exista:
-            if (_associado.EnderecosPessoa == null)
+            if (_associadoDao.EnderecosPessoa == null)
             {
                 List<Endereco> lstEnd = new List<Endereco>();
 
@@ -219,6 +234,168 @@ namespace Fbtc.Application.Services
                         TipoEndereco = "",
                         OrdemEndereco = i.ToString()
                     });
+                    i++;
+                }
+                _associadoDao.EnderecosPessoa = lstEnd;
+            }
+            else
+            {
+                List<Endereco> lstEnd = new List<Endereco>();
+
+                foreach (var end in _associadoDao.EnderecosPessoa)
+                {
+                    lstEnd.Add(end);
+                }
+
+                if (lstEnd.Count < 2)
+                {
+                    int i = 0;
+                    int pessoaId = 0;
+
+                    foreach (var end in lstEnd)
+                    {
+                        i = int.Parse(end.OrdemEndereco);
+                        pessoaId = end.PessoaId;
+
+                        if (i == 1)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            i--;
+                        }
+                    }
+
+                    lstEnd.Add(new Endereco()
+                    {
+                        PessoaId = pessoaId,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    });
+                    _associadoDao.EnderecosPessoa = lstEnd;
+                }
+            }
+
+            return _associadoDao;
+        }
+
+        public AssociadoDao GetAssociadoDaoByPessoaId(int id)
+        {
+            AssociadoDao _associadoDao = _associadoService.GetAssociadoDaoByPessoaId(id) ?? this.SetAssociadoDao();
+
+            //Adicionando objeto Endereco caso não exista:
+            if (_associadoDao.EnderecosPessoa == null)
+            {
+                List<Endereco> lstEnd = new List<Endereco>();
+
+                int i = 1;
+
+                while (i < 3)
+                {
+                    lstEnd.Add(new Endereco()
+                    {
+                        PessoaId = 0,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    });
+                }
+                _associadoDao.EnderecosPessoa = lstEnd;
+            }
+            else
+            {
+                List<Endereco> lstEnd = new List<Endereco>();
+
+                foreach (var end in _associadoDao.EnderecosPessoa)
+                {
+                    lstEnd.Add(end);
+                }
+
+                if (lstEnd.Count < 2)
+                {
+                    int i = 0;
+                    int pessoaId = 0;
+
+                    foreach (var end in lstEnd)
+                    {
+                        i = int.Parse(end.OrdemEndereco);
+                        pessoaId = end.PessoaId;
+
+                        if (i == 1)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            i--;
+                        }
+                    }
+
+                    lstEnd.Add(new Endereco()
+                    {
+                        PessoaId = pessoaId,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    });
+                    _associadoDao.EnderecosPessoa = lstEnd;
+                }
+            }
+            return _associadoDao;
+        }
+
+        public Associado GetAssociadoByPessoaId(int id)
+        {
+            Associado _associado = _associadoService.GetAssociadoByPessoaId(id);
+
+            //Adicionando objeto Endereco caso não exista:
+            if (_associado.EnderecosPessoa == null)
+            {
+                List<Endereco> lstEnd = new List<Endereco>();
+
+                int i = 1;
+
+                while (i < 3)
+                {
+                    lstEnd.Add(new Endereco()
+                    {
+                        PessoaId = _associado.PessoaId,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    });
+
+                    i++;
                 }
                 _associado.EnderecosPessoa = lstEnd;
             }
@@ -272,7 +449,7 @@ namespace Fbtc.Application.Services
             return _associado;
         }
 
-        public string Save(Associado a)
+        public string Save(AssociadoDao a)
         {
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
                 RaiseException.IfNullOrEmpty(a.Nome, "Nome do Associado não informado"),
@@ -303,8 +480,6 @@ namespace Fbtc.Application.Services
                 DtCertificacao = a.DtCertificacao,
                 DivulgarContato = a.DivulgarContato,
                 TipoFormaContato = a.TipoFormaContato,
-                IntegraDiretoria = a.IntegraDiretoria,
-                IntegraConfi = a.IntegraConfi,
                 NrTelDivulgacao = Functions.AjustaTamanhoString(a.NrTelDivulgacao, 15),
                 ComprovanteAfiliacaoAtc = Functions.AjustaTamanhoString(a.ComprovanteAfiliacaoAtc, 100),
                 TipoProfissao = a.TipoProfissao,
@@ -336,6 +511,32 @@ namespace Fbtc.Application.Services
                 }
                 _a.EnderecosPessoa = lst;
             }
+            else
+            {
+                List<Endereco> lst = new List<Endereco>();
+
+
+                for (int i = 1; i < 3; i++)
+                {
+                    Endereco _endereco = new Endereco()
+                    {
+                        PessoaId = 0,
+                        EnderecoId = 0,
+                        Cep = "",
+                        Logradouro = "",
+                        Numero = "",
+                        Complemento = "",
+                        Bairro = "",
+                        Cidade = "",
+                        Estado = "",
+                        TipoEndereco = "",
+                        OrdemEndereco = i.ToString()
+                    };
+                    lst.Add(_endereco);
+                }
+                _a.EnderecosPessoa = lst;
+
+            }
 
             try
             {
@@ -345,34 +546,7 @@ namespace Fbtc.Application.Services
                 }
                 else
                 {
-                    return _associadoService.Update(a.PessoaId, _a);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public string SaveIsento(AssociadoIsentoDao a)
-        {
-            ArgumentsValidator.RaiseExceptionOfInvalidArguments(
-                RaiseException.IfTrue(a.IsencaoId == 0, "IsencaoId não informada"),
-                RaiseException.IfNull(a.IsencaoId, "IsencaoId está nula"),
-
-                RaiseException.IfTrue(a.AssociadoId == 0, "AssociadoId não informado"),
-                RaiseException.IfNull(a.AssociadoId, "AssociadoId está nulo")
-            );
-
-            try
-            {
-                if (a.AssociadoIsentoId == 0)
-                {
-                    return _associadoService.InsertIsento(a);
-                }
-                else
-                {
-                    return _associadoService.DeleteIsentoByAssociadoIsentoId(a.AssociadoIsentoId);
+                    return _associadoService.Update(_a.PessoaId, _a);
                 }
             }
             catch (Exception ex)

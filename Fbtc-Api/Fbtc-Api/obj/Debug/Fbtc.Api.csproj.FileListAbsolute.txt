@@ -21,7 +21,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.Owin.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\prmToolkit.Validation.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Infra.dll
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\prmToolkit.AccessMultipleDatabaseWithAdoNet.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\FirebirdSql.Data.FirebirdClient.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\MySql.Data.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Application.pdb

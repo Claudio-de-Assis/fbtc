@@ -6,13 +6,18 @@ namespace Fbtc.Domain.Entities
     public class Anuidade
     {
         public int AnuidadeId { get; set; }
-        public int Codigo { get; set; }
+        public int Exercicio { get; set; }
+        public DateTime DtVencimento { get; set; }
+        public DateTime DtInicioVigencia { get; set; }
+        public DateTime DtTerminoVigencia { get; set; }
+        public bool CobrancaLiberada { get; set; }
+        public DateTime? DtCobrancaLiberada { get; set; }
         public DateTime DtCadastro { get; set; }
         public bool Ativo { get; set; }
     }
    
     public class AnuidadeDao : Anuidade
     {
-        public IEnumerable<TipoPublicoValorAnuidadeDao> TiposPublicosValorsAnuidadesDao { get; set; }
+        public IEnumerable<AnuidadeTipoPublicoDao> AnuidadesTiposPublicosDao { get; set; }
     }
 }

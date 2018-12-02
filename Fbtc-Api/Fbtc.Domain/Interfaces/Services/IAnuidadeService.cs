@@ -7,9 +7,13 @@ namespace Fbtc.Domain.Interfaces.Services
     {
         IEnumerable<Anuidade> GetAll();
 
+        IEnumerable<Anuidade> GetAnuidadesPendentesByPessoaId(int pessoaId);
+
         Anuidade GetAnuidadeById(int id);
 
         AnuidadeDao GetAnuidadeDaoById(int id);
+
+        AnuidadeDao GetAnuidadeDaoByIdTipoPublicoId(int id, int tipoPublicoId);
 
         string DeleteById(int id);
 
@@ -21,6 +25,14 @@ namespace Fbtc.Domain.Interfaces.Services
 
         string UpdateAnuidadeDao(int id, AnuidadeDao anuidadeDao);
 
-        IEnumerable<Anuidade> FindByFilters(int codigo, bool? ativo);
+        IEnumerable<Anuidade> FindByFilters(int exercicio, bool? ativo);
+
+        IEnumerable<AnuidadeTipoPublicoDao> GetAnuidadeTipoPublicoDaoByAnuidadeId(int id);
+
+   //   IEnumerable<AnuidadeTipoPublicoDao> GetAnuidadeTipoPublicoDaoByAnuidadeIdTipoPublicoId(int id, int tipoPublicoId);
+
+        IEnumerable<ValorAnuidade> GetValoresAnuidadesByAnuidadeTipoPublicoId(int id);
+
+        IEnumerable<TipoPublico> GetTiposPublicosToAnuidade();
     }
 }

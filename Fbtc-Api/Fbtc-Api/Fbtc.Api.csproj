@@ -73,6 +73,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="prmToolkit.AccessMultipleDatabaseWithAdoNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
@@ -137,9 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AnuidadeController.cs" />
+    <Compile Include="Controllers\AssinaturaAnuidadeController.cs" />
+    <Compile Include="Controllers\AssinaturaEventoController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\AtcController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
+    <Compile Include="Controllers\DescontoAnuidadeAtcController.cs" />
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Fbtc.Infra.Helpers
 {
-    public static class Functions
+    public static class PasswordFunctions
     {
         /// <summary>
         /// Função que criptografa a senha, caso ele tenha alterada pelo usuário.

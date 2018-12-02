@@ -170,42 +170,5 @@ namespace Fbtc.Api.Controllers
                 return tsc.Task;
             }
         }
-
-        // [Authorize]
-        [Route("Anuidade/{id:int}")]
-        [HttpGet]
-        public Task<HttpResponseMessage> GetValorByAnuidadeId(int id)
-        {
-            HttpResponseMessage response = new HttpResponseMessage();
-            var tsc = new TaskCompletionSource<HttpResponseMessage>();
-
-            try
-            {
-                // if (id == 0) throw new Exception("Id não informado!");
-
-                var resultado = _tipoPublicoApplication.GetTipoPublicoValorByAnuidadeId(id);
-
-                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
-
-                tsc.SetResult(response);
-
-                return tsc.Task;
-            }
-            catch (Exception ex)
-            {
-                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
-                {
-                    response = Request.CreateResponse(HttpStatusCode.NotFound);
-                    response.ReasonPhrase = ex.Message;
-                }
-                else
-                {
-                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-                }
-                tsc.SetResult(response);
-
-                return tsc.Task;
-            }
-        }
     }
 }

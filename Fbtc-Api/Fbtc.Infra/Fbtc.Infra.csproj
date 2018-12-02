@@ -115,15 +115,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ConfigHelper.cs" />
-    <Compile Include="Helpers\Functions.cs" />
+    <Compile Include="Helpers\PasswordFunctions.cs" />
     <Compile Include="Helpers\SendEMail.cs" />
+    <Compile Include="Persistencia\AdoNet\AssinaturaEventoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\AnuidadeRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\AssinaturaAnuidadeRepository.cs" />
     <Compile Include="Persistencia\AdoNet\AssociadoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\AtcRepository.cs" />
     <Compile Include="Persistencia\AdoNet\ColaboradorRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\DescontoAnuidadeAtcRepository.cs" />
     <Compile Include="Persistencia\AdoNet\EnderecoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\EventoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\IsencaoRepository.cs" />
+    <Compile Include="Persistencia\AdoNet\LogRepository.cs" />
     <Compile Include="Persistencia\AdoNet\PerfilRepository.cs" />
     <Compile Include="Persistencia\AdoNet\RecebimentoRepository.cs" />
     <Compile Include="Persistencia\AdoNet\RelatoriosRepository.cs" />

@@ -16,11 +16,6 @@ namespace Fbtc.Domain.Services
             _recebimentoRepository = recebimentoRepository;
         }
 
-        public string DeleteByAssociadoIsentoId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public string DeleteById(int id)
         {
             throw new NotImplementedException();
@@ -92,12 +87,7 @@ namespace Fbtc.Domain.Services
 
         public string Insert(Recebimento recebimento)
         {
-            return _recebimentoRepository.Insert(recebimento);
-        }
-
-        public string InsertIsento(int associadoId, int associadoIsentoId, string ojetivoPagamento, string tipoIsencao)
-        {
-            throw new NotImplementedException();
+            return _recebimentoRepository.Insert(recebimento, "");
         }
 
         public string Update(int id, Recebimento recebimento)

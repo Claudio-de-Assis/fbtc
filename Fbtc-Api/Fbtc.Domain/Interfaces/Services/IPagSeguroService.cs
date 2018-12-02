@@ -11,7 +11,11 @@ namespace Fbtc.Domain.Interfaces.Services
 
         string UpdateRecebimentoPagSeguro(TransacaoPagSeguro transacaoPagSeguro);
 
+        string SaveDadosTransacaoPagSeguro(TransacaoPagSeguro transacaoPagSeguro);
+
         int UpdateRecebimentosPeriodoPagSeguro(TransactionSearchResult transactionSearchResult);
 
+        CheckOutPagSeguro getDadosParaCheckOutPagSeguro(int associadoId, string tipoEndereco,
+            int anoInicio, int anoTermino, bool enderecoRequerido, bool isAnuidade);
     }
 }

@@ -9,6 +9,8 @@ using Fbtc.Domain.Interfaces.Repositories;
 
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
+using System.Text;
+using System.Data.Common;
 
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
@@ -17,9 +19,17 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         private string query;
         private readonly string strConnSql;
 
+        private LogRepository logRep;
+        private readonly string className;
+        private string _instrucaoSql = "";
+        private string _result = "";
+
         public EnderecoRepository()
         {
             strConnSql = ConfigHelper.GetConnectionString("FBTC_ConnectionString");
+
+            className = "EnderecoRepository";
+            logRep = new LogRepository();
         }
 
         public string DeleteById(int id)
@@ -34,32 +44,60 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<Endereco> GetByPessoaId(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pid = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(pid);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT EnderecoId, PessoaId, Logradouro, Numero,  
                         Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco, OrdemEndereco 
                     FROM dbo.AD_Endereco  
-                    WHERE PessoaId = " + id + " ORDER BY OrdemEndereco";
+                    WHERE PessoaId = @id 
+                    ORDER BY OrdemEndereco";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<Endereco> _collection = GetCollection<Endereco>(cmd)?.ToList();
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetByPessoaId",
+                "SELECT", "ENDERECO", id, query, _collection.Count<Endereco>().ToString());
+            // Fim Log
 
             return _collection;
         }
 
         public Endereco GetEnderecoById(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pid = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(pid);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT EnderecoId, PessoaId, Logradouro, Numero,  
                         Complemento, Bairro, Cidade, Estado, CEP, TipoEndereco, OrdemEndereco 
                     FROM dbo.AD_Endereco  
-                    WHERE PessoaId = " + id + " ORDER BY OrdemEndereco";
+                    WHERE PessoaId = @id 
+                    ORDER BY OrdemEndereco";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
-            Endereco _endereco = GetCollection<Endereco>(cmd)?.First();
+            Endereco _endereco = GetCollection<Endereco>(cmd)?.FirstOrDefault<Endereco>();
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetEnderecoById",
+                "SELECT", "ENDERECO", id, query, _endereco != null ? "SUCESSO" : "0");
+            // Fim Log
 
             return _endereco;
         }
@@ -106,9 +144,26 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    _msg = id > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+                    _msg = id > 0 ? "Inclusão Realizada com sucesso" : "Inclusão Não Realizada com sucesso";
 
                     transaction.Commit();
+
+                    // Log da Inserção PESSOA:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ":" + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = id > 0 ? "SUCESSO" : "FALHA";
+
+                    string log = logRep.SetLogger(className + "/Insert",
+                      "INSERT", "ENDERECO", id, _instrucaoSql, _result);
+                    //Fim do Log
+
                 }
                 catch (Exception ex)
                 {
@@ -121,6 +176,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     {
                         throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
                     }
+
+                    string log = logRep.SetLogger(className + "/Insert",
+                      "INSERT", "ENDERECO", 0, ex.Message, "FALHA");
+
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
                 finally
@@ -172,9 +231,27 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     int x = command.ExecuteNonQuery();
                     _resultado = x > 0;
 
-                    _msg = x > 0 ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = x > 0 ? "Atualização Realizada com sucesso" : "Atualização NÃO Realizada com sucesso";
 
                     transaction.Commit();
+
+
+                    // Log do UPDATE PESSOA:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ":" + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = x > 0 ? "SUCESSO" : "FALHA";
+
+                    string log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "ENDERECO", id, _instrucaoSql, _result);
+                    //Fim do Log
+
                 }
                 catch (Exception ex)
                 {
@@ -186,6 +263,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     {
                         throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
                     }
+                    string log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "ENDERECO", 0, ex.Message, "FALHA");
+
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
                 finally
@@ -208,20 +288,40 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             // Obtém os dados do banco de dados:
             IEnumerable<EstadoEnderecoCepDao> _collection = GetCollection<EstadoEnderecoCepDao>(cmd)?.ToList();
 
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetAllNomesEstados",
+                "SELECT", "ENDERECO", 0, query, _collection.Count<EstadoEnderecoCepDao>().ToString());
+            // Fim Log
+
             return _collection;
         }
 
         public IEnumerable<CidadeEnderecoCepDao> GetNomesCidadesByEstado(string nomeEstado)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pnomeEstado = new SqlParameter() { ParameterName = "@nomeEstado", Value = nomeEstado };
+
+            _parametros.Add(pnomeEstado);
+            // Fim da definição dos parâmetros
+
+
             query = @"SELECT Distinct Cidade 
                     FROM dbo.AD_Endereco 
-                    WHERE Estado = '"+ nomeEstado + "' ORDER BY Cidade";
+                    WHERE Estado = @nomeEstado 
+                    ORDER BY Cidade";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<CidadeEnderecoCepDao> _collection = GetCollection<CidadeEnderecoCepDao>(cmd)?.ToList();
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetNomesCidadesByEstado",
+                "SELECT", "ENDERECO", 0, query, _collection.Count<CidadeEnderecoCepDao>().ToString());
+            // Fim Log
 
             return _collection;
         }

@@ -15,10 +15,6 @@ namespace Fbtc.Application.Interfaces
 
         string Save(Recebimento recebimento);
 
-        string InsertIsento(int associadoId, int associadoIsentoId, string ojetivoPagamento, string tipoIsencao);
-
-        string DeleteByAssociadoIsentoId(int id);
-
         IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf,
             string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 

@@ -92,6 +92,82 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
+        [Route("associadoDao/{id:int},{anuidadeId:int}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> GetAssociadoDaoById(int id, int anuidadeId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (id == 0) throw new Exception("Id não informado!");
+
+                if (anuidadeId == 0) throw new Exception("anuidadeId não informada!");
+
+                var resultado = _associadoApplication.GetAssociadoDaoById(id, anuidadeId);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
+        [Route("associadoDao/{id:int}")]
+        [HttpGet]
+        public Task<HttpResponseMessage> GetAssociadoDaoByPessoaId(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (id == 0) throw new Exception("Id não informado!");
+
+                var resultado = _associadoApplication.GetAssociadoDaoByPessoaId(id);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+               
+        // [Authorize]
         [Route("Pessoa/{id:int}")]
         [HttpGet]
         public Task<HttpResponseMessage> GetByPessoaId(int id)
@@ -275,9 +351,9 @@ namespace Fbtc.Api.Controllers
                         _ativo = false;
                 }
 
-                var resultado = _associadoApplication.FindIsentoByFilters(isencaoId, nome, cpf,
+                var resultado = ""; /*_associadoApplication.FindIsentoByFilters(isencaoId, nome, cpf,
                     sexo, Convert.ToInt16(atcId), crp, tipoProfissao, Convert.ToInt32(tipoPublicoId),
-                    estado, cidade, _ativo);
+                    estado, cidade, _ativo);*/
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 
@@ -305,7 +381,7 @@ namespace Fbtc.Api.Controllers
         // [Authorize]
         [Route("Associado")]
         [HttpPost]
-        public Task<HttpResponseMessage> Post(Associado associado)
+        public Task<HttpResponseMessage> Post(AssociadoDao associado)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -354,7 +430,7 @@ namespace Fbtc.Api.Controllers
             {
                 if (associadoIsentoDao == null) throw new ArgumentNullException("O objeto 'AssociadoIsentoDao' está nulo!");
 
-                resultado = _associadoApplication.SaveIsento(associadoIsentoDao);
+                resultado = ""; // _associadoApplication.SaveIsento(associadoIsentoDao);
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 

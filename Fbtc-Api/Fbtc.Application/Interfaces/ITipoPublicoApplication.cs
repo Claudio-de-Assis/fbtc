@@ -13,6 +13,7 @@ namespace Fbtc.Application.Interfaces
 
         IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id);
 
-        IEnumerable<TipoPublicoValorAnuidadeDao> GetTipoPublicoValorByAnuidadeId(int id);
+        int GetIdTipoPublicoByCodigo(string codigo);
+
     }
 }

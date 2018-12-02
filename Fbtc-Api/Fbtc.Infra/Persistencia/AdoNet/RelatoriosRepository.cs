@@ -9,6 +9,7 @@ using Fbtc.Domain.Interfaces.Repositories;
 
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
+using System.Data.Common;
 
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
@@ -24,23 +25,31 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<RptTotalAssociadosDAO> GetRptAssociadosAno(int ano)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pAno = new SqlParameter() { ParameterName = "@ano", Value = ano };
+
+            _parametros.Add(pAno);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT T.Nome as NomeTipoAssociado, T.Ordem,
                     (	SELECT COUNT(A1.AssociadoId) 
 	                    FROM dbo.AD_Associado A1 
 	                    INNER JOIN dbo.AD_Pessoa P ON A1.PessoaId = P.PessoaId 
 	                    WHERE P.Ativo = 1 
-	                    AND YEAR(P.DtCadastro) = "+ ano +" " +
-                    "   AND A1.TipoPublicoId = T.TipoPublicoId) Qtd, "+
-                    "(	SELECT COUNT(A1.AssociadoId) "+
-	                "    FROM dbo.AD_Associado A1 "+
-	                "    INNER JOIN dbo.AD_Pessoa P ON A1.PessoaId = P.PessoaId "+
-	                "    WHERE P.Ativo = 1" +
-                    "AND YEAR(P.DtCadastro) = " + ano + ") QtdTotal "+
-                    "FROM dbo.AD_Tipo_Publico T "+
-                    "ORDER BY T.Ordem";
+	                    AND YEAR(P.DtCadastro) = @ano
+                       AND A1.TipoPublicoId = T.TipoPublicoId) Qtd, 
+                    (	SELECT COUNT(A1.AssociadoId) 
+	                    FROM dbo.AD_Associado A1 
+	                    INNER JOIN dbo.AD_Pessoa P ON A1.PessoaId = P.PessoaId 
+	                    WHERE P.Ativo = 1 
+                    AND YEAR(P.DtCadastro) = @ano) QtdTotal 
+                    FROM dbo.AD_Tipo_Publico T 
+                    ORDER BY T.Ordem ";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<RptTotalAssociadosDAO> _collection = GetCollection<RptTotalAssociadosDAO>(cmd)?.ToList();
@@ -150,23 +159,31 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<RptTotalAssociadosDAO> GetRptAssociadosGenero(string genero)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pGenero = new SqlParameter() { ParameterName = "@genero", Value = genero };
+
+            _parametros.Add(pGenero);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT T.Nome as NomeTipoAssociado, T.Ordem,
                         (	SELECT COUNT(A1.AssociadoId) 
 	                        FROM dbo.AD_Associado A1 
 	                        INNER JOIN dbo.AD_Pessoa P ON A1.PessoaId = P.PessoaId 
 	                        WHERE P.Ativo = 1 
-	                        AND Sexo = '" + genero + "' ";
-            query = query + @"AND A1.TipoPublicoId = T.TipoPublicoId) Qtd, 
+	                        AND Sexo = @genero
+                            AND A1.TipoPublicoId = T.TipoPublicoId) Qtd, 
                         (	SELECT COUNT(A1.AssociadoId) 
 	                        FROM dbo.AD_Associado A1 
 	                        INNER JOIN dbo.AD_Pessoa P ON A1.PessoaId = P.PessoaId 
 	                        WHERE P.Ativo = 1
-	                        AND Sexo = '" + genero + "' ) QtdTotal ";
-            query = query + @"FROM dbo.AD_Tipo_Publico T 
+	                        AND Sexo = @genero) QtdTotal 
+                            FROM dbo.AD_Tipo_Publico T 
                         ORDER BY T.Ordem";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<RptTotalAssociadosDAO> _collection = GetCollection<RptTotalAssociadosDAO>(cmd)?.ToList();
@@ -181,35 +198,87 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
             if (statusPS != 0)
             {
-                R1status = " AND R1.StatusPS = " + statusPS + " ";
-                Status = " AND StatusPS = " + statusPS + " ";
+                R1status = " AND R1.StatusPS = @statusPS ";
+                Status = " AND R.StatusPS = @statusPS ";
             }
 
-            query = @"SELECT 
-	                    CASE StatusPS
-		                    WHEN '1' THEN 'Aguardando pagamento'
-		                    WHEN '2' THEN 'Em Análise'
-		                    WHEN '3' THEN 'Paga'
-		                    WHEN '4' THEN 'Disponível'
-		                    WHEN '5' THEN 'Em Disputa'
-		                    WHEN '6' THEN 'Devolvida'
-		                    WHEN '7' THEN 'Cancelada'
-		                    WHEN '8' THEN 'Debitado'
-		                    WHEN '9' THEN 'Retenção Temporária'
-		                    ELSE 'Não Identificado'
-	                    END AS StatusPagamento,
-	                    Count(RecebimentoId) Qtd,
-	                    Sum(NetAmountPS) ValorPorStatus,
-	                    (	Select Sum(R1.NetAmountPS) 
-		                    FROM dbo.AD_Recebimento R1 
-		                    WHERE R1.ObjetivoPagamento = " + objetivoPagamento + " " +
-                        "AND YEAR(R1.LastEventDatePS) = "+ anoEventoPS + R1status + ") ValorTotal " +
-                        "FROM dbo.AD_Recebimento WHERE ObjetivoPagamento = " + objetivoPagamento + " " +
-                        "AND ReferencePS is not null AND YEAR(LastEventDatePS) = " + anoEventoPS + Status + " " +
-                        "Group By StatusPS";
+            List<DbParameter> _parametros = new List<DbParameter>();
+            
+            // Definição do parâmetros da consulta:
+            SqlParameter pAnoEventoPS = new SqlParameter() { ParameterName = "@anoEventoPS", Value = anoEventoPS };
+            SqlParameter pStatusPS = new SqlParameter() { ParameterName = "@statusPS", Value = statusPS };
+
+            _parametros.Add(pAnoEventoPS);
+            _parametros.Add(pStatusPS);
+            // Fim da definição dos parâmetros
+
+            if (objetivoPagamento == 2)
+            {
+                //Objetivo: Assinatura Anuidade
+                query = $@"SELECT 
+                        CASE StatusPS
+	                        WHEN '1' THEN 'Aguardando pagamento'
+	                        WHEN '2' THEN 'Em Análise'
+	                        WHEN '3' THEN 'Paga'
+	                        WHEN '4' THEN 'Disponível'
+	                        WHEN '5' THEN 'Em Disputa'
+	                        WHEN '6' THEN 'Devolvida'
+	                        WHEN '7' THEN 'Cancelada'
+	                        WHEN '8' THEN 'Debitado'
+	                        WHEN '9' THEN 'Retenção Temporária'
+	                        ELSE 'Não Identificado'
+                        END AS StatusPagamento,
+                        Count(RecebimentoId) Qtd,
+                        Sum(NetAmountPS) ValorPorStatus,
+                        (	Select Sum(R1.NetAmountPS) 
+	                        FROM dbo.AD_Recebimento R1 
+                            INNER JOIN dbo.AD_Assinatura_Anuidade AA1 ON R1.AssinaturaAnuidadeId = AA1.AssinaturaAnuidadeId
+                            INNER JOIN dbo.AD_Valor_Anuidade VA1 ON AA1.ValorAnuidadeId = VA1.ValorAnuidadeId
+                            INNER JOIN dbo.AD_Anuidade_Tipo_Publico ATP1 ON VA1.AnuidadeTipoPublicoId = ATP1.AnuidadeTipoPublicoId
+                            INNER JOIN dbo.AD_Anuidade A1 ON ATP1.AnuidadeId = A1.AnuidadeId
+	                        WHERE A1.Exercicio = @anoEventoPS {R1status}) ValorTotal 
+                        FROM dbo.AD_Recebimento R 
+                            INNER JOIN dbo.AD_Assinatura_Anuidade AA ON R.AssinaturaAnuidadeId = AA.AssinaturaAnuidadeId
+                            INNER JOIN dbo.AD_Valor_Anuidade VA ON AA.ValorAnuidadeId = VA.ValorAnuidadeId
+                            INNER JOIN dbo.AD_Anuidade_Tipo_Publico ATP ON VA.AnuidadeTipoPublicoId = ATP.AnuidadeTipoPublicoId
+                            INNER JOIN dbo.AD_Anuidade A ON ATP.AnuidadeId = A.AnuidadeId
+                        WHERE A.Exercicio = @anoEventoPS {Status}
+                        Group By R.StatusPS";
+            }
+            else
+            {
+                //Objetivo: Assinatura Evento
+                query = $@"SELECT 
+                        CASE StatusPS
+	                        WHEN '1' THEN 'Aguardando pagamento'
+	                        WHEN '2' THEN 'Em Análise'
+	                        WHEN '3' THEN 'Paga'
+	                        WHEN '4' THEN 'Disponível'
+	                        WHEN '5' THEN 'Em Disputa'
+	                        WHEN '6' THEN 'Devolvida'
+	                        WHEN '7' THEN 'Cancelada'
+	                        WHEN '8' THEN 'Debitado'
+	                        WHEN '9' THEN 'Retenção Temporária'
+	                        ELSE 'Não Identificado'
+                        END AS StatusPagamento,
+                        Count(RecebimentoId) Qtd,
+                        Sum(NetAmountPS) ValorPorStatus,
+                        (	Select Sum(R1.NetAmountPS) 
+	                        FROM dbo.AD_Recebimento R1
+                            INNER JOIN dbo.AD_Assinatura_Evento AE1 ON R1.AssinaturaEventoId = AE1.AssinaturaEventoId
+                            INNER JOIN dbo.AD_Valor_Evento_Publico VEP1 ON AE1.ValorEventoPublicoId = VEP1.ValorEventoPublicoId
+                            INNER JOIN dbo.AD_Evento E1 ON VEP1.EventoId = E1.EventoId
+	                        WHERE YEAR(E1.DtTermino) = @anoEventoPS {R1status}) ValorTotal 
+                        FROM dbo.AD_Recebimento R
+                            INNER JOIN dbo.AD_Assinatura_Evento AE ON R.AssinaturaEventoId = AE.AssinaturaEventoId
+                            INNER JOIN dbo.AD_Valor_Evento_Publico VEP ON AE.ValorEventoPublicoId = VEP.ValorEventoPublicoId
+                            INNER JOIN dbo.AD_Evento E ON VEP.EventoId = E.EventoId
+                        WHERE YEAR(E.DtTermino) = @anoEventoPS {Status}
+                        Group By R.StatusPS";
+            }
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<RptRecebimentoStatusDAO> _collection = GetCollection<RptRecebimentoStatusDAO>(cmd)?.ToList();
@@ -243,35 +312,62 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public IEnumerable<RptReceitaAnualDAO> GetRptReceitaAnual()
         {
-            query = @"SELECT YEAR(R.DtCadastro) Ano, 
-	                    CASE R.ObjetivoPagamento
-		                    WHEN 1 THEN 'Eventos'
-		                    WHEN 2 THEN 'Mensalidades'
-	                    END as NomeObjetivoPagamento,
-	                    (	SELECT Isnull(SUM(NetAmountPS),0) 
-		                    FROM dbo.AD_Recebimento 
-		                    WHERE AssociadoIsentoId is null 
-		                    AND YEAR(DtCadastro) = YEAR(R.DtCadastro)
-		                    AND ObjetivoPagamento = R.ObjetivoPagamento
-		                    AND StatusPS in ('1','2','3','4','5')) as ValorPrevisto,
+            query = @"SELECT Ano, NomeObjetivoPagamento, ValorPrevisto, ValorRealizado, 
+                    QtdIsentos from (
+                        --Assinatura anuidade:
+                        SELECT YEAR(R.DtCadastro) Ano, 
+	                        CASE R.AssinaturaAnuidadeId 
+		                        WHEN NULL THEN 'Eventos'
+		                        ELSE 'Anuidades'
+	                        END as NomeObjetivoPagamento,
+	                        (	SELECT Isnull(SUM(NetAmountPS),0) 
+		                        FROM dbo.AD_Recebimento 
+		                        WHERE YEAR(DtCadastro) = YEAR(R.DtCadastro)
+		                        AND AssinaturaAnuidadeId Is Not Null
+		                        AND StatusPS in ('1','2','3','4','5')) as ValorPrevisto,
 
-	                    (	SELECT Isnull(SUM(NetAmountPS),0) 
-		                    FROM dbo.AD_Recebimento 
-		                    WHERE AssociadoIsentoId is null 
-		                    AND YEAR(DtCadastro) = YEAR(R.DtCadastro)
-		                    AND ObjetivoPagamento = R.ObjetivoPagamento
-		                    AND StatusPS in ('3','4')) as ValorRealizado,
+	                        (	SELECT Isnull(SUM(NetAmountPS),0) 
+		                        FROM dbo.AD_Recebimento 
+		                        WHERE YEAR(DtCadastro) = YEAR(R.DtCadastro)
+		                        AND AssinaturaAnuidadeId Is Not Null
+		                        AND StatusPS in ('3','4')) as ValorRealizado,
 	
-	                    (	SELECT COUNT(RecebimentoId) 
-		                    FROM dbo.AD_Recebimento 
-		                    WHERE AssociadoIsentoId is not null 
-		                    AND YEAR(DtCadastro) = YEAR(R.DtCadastro)
-		                    AND ObjetivoPagamento = R.ObjetivoPagamento) as QtdIsentos
+	                        (	SELECT COUNT(AssinaturaAnuidadeId) 
+		                        FROM dbo.AD_Assinatura_Anuidade 
+		                        WHERE YEAR(DtCadastro) = YEAR(R.DtCadastro)
+		                        AND PercentualDesconto = 100) as QtdIsentos
 	
-	                    FROM  dbo.AD_Recebimento R
-	                    WHERE R.AssociadoIsentoId is null
-	                    GROUP BY YEAR(R.DtCadastro), R.ObjetivoPagamento
-	                    ORDER BY YEAR(R.DtCadastro) DESC, R.ObjetivoPagamento";
+                        FROM  dbo.AD_Recebimento R
+                        WHERE R.Ativo = 1 AND R.AssinaturaAnuidadeId is not null
+
+                        UNION 
+
+                        --Assinatura Evento:
+                        SELECT YEAR(R.DtCadastro) Ano, 
+	                        CASE R.AssinaturaEventoId 
+		                        WHEN NULL THEN 'Anuidades'
+		                        ELSE 'Eventos'
+	                        END as NomeObjetivoPagamento,
+	                        (	SELECT Isnull(SUM(NetAmountPS),0) 
+		                        FROM dbo.AD_Recebimento 
+		                        WHERE YEAR(DtCadastro) = YEAR(R.DtCadastro)
+		                        AND AssinaturaEventoId is not null
+		                        AND StatusPS in ('1','2','3','4','5')) as ValorPrevisto,
+
+	                        (	SELECT Isnull(SUM(NetAmountPS),0) 
+		                        FROM dbo.AD_Recebimento 
+		                        WHERE YEAR(DtCadastro) = YEAR(R.DtCadastro)
+		                        AND AssinaturaEventoId is not null
+		                        AND StatusPS in ('3','4')) as ValorRealizado,
+	
+	                        (	SELECT COUNT(AssinaturaEventoId) 
+		                        FROM dbo.AD_Assinatura_Evento 
+		                        WHERE YEAR(DtCadastro) = YEAR(R.DtCadastro)
+		                        AND PercentualDesconto = 100) as QtdIsentos
+	
+                        FROM  dbo.AD_Recebimento R
+                        WHERE R.Ativo = 1 AND R.AssinaturaEventoId is not null ) as TAB
+                        ORDER BY Ano DESC, NomeObjetivoPagamento";
 
             // Define o banco de dados que será usando:
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);

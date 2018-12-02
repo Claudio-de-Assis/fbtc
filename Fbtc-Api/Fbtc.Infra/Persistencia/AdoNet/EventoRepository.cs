@@ -79,7 +79,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            Evento evento = GetCollection<Evento>(cmd)?.First();
+            Evento evento = GetCollection<Evento>(cmd)?.FirstOrDefault<Evento>();
 
             return evento;
         }
@@ -265,7 +265,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            Evento evento = GetCollection<Evento>(cmd)?.First();
+            Evento evento = GetCollection<Evento>(cmd)?.FirstOrDefault<Evento>();
 
             return evento;
         }
@@ -305,7 +305,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    _msg = _resultado ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
+                    _msg = _resultado ? "Inclusão Realizada com sucesso" : "Inclusão Não Realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -364,7 +364,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     int i = command.ExecuteNonQuery();
                     _resultado = i > 0;
 
-                    _msg = _resultado ? "Atualização realiada com sucesso" : "Atualização NÃO realiada com sucesso";
+                    _msg = _resultado ? "Atualização Realizada com sucesso" : "Atualização NÃO Realizada com sucesso";
 
                     transaction.Commit();
                 }
@@ -423,7 +423,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
 
             // Obtém os dados do banco de dados:
-            EventoDao eventoDao = GetCollection<EventoDao>(cmd)?.First();
+            EventoDao eventoDao = GetCollection<EventoDao>(cmd)?.FirstOrDefault<EventoDao>();
 
             if (eventoDao != null)
             {

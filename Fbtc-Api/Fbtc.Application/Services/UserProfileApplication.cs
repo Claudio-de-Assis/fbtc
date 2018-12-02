@@ -73,13 +73,6 @@ namespace Fbtc.Application.Services
                 RaiseException.IfNullOrEmpty(p.NrCelular, "NrCelular não informado")
             );
 
-            if (string.IsNullOrEmpty(p.PasswordHashReturned))
-            {
-                string _passwordHashReturned = "";
-                _passwordHashReturned = Functions.AjustaTamanhoString(p.PasswordHashReturned, 100);
-                p.PasswordHash = Functions.CriptografaSenhaNova(_passwordHashReturned);
-            }
-
             UserProfile _p = new UserProfile() {
                 PessoaId = p.PessoaId,
                 Nome = Functions.AjustaTamanhoString(p.Nome, 100),
@@ -87,7 +80,8 @@ namespace Fbtc.Application.Services
                 NomeFoto = Functions.AjustaTamanhoString(p.NomeFoto, 32),
                 Sexo = p.Sexo,
                 NrCelular = Functions.AjustaTamanhoString(p.NrCelular, 15),
-                PasswordHash = p.PasswordHash,
+                PasswordHash = Functions.AjustaTamanhoString(p.PasswordHash, 100),
+                PasswordHashReturned = Functions.AjustaTamanhoString(p.PasswordHashReturned, 100)
             };
 
             return _userProfileService.Save(p);

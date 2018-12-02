@@ -12,17 +12,11 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         string DeleteById(int id);
 
-        string Insert(Recebimento recebimento);
+        string Insert(Recebimento recebimento, string lastEventDate);
 
         string Update(int id, Recebimento recebimento);
 
-        string InsertIsento(int associadoId, int associadoIsentoId, string ojetivoPagamento, string tipoIsencao);
-
-        string DeleteByAssociadoIsentoId(int id);
-
-        string UpdateRecebimentoPagSeguro(string code, string reference, int type,
-            int status, string lasteventdate, int TypePaymentoMethod, int CodePaymentoMethod, decimal NetAmountPS);
-        
+        string UpdateRecebimentoPagSeguro(int recebimentoId, Recebimento recebimento, string lastEventDate);
 
         IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf,
            string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
@@ -49,5 +43,9 @@ namespace Fbtc.Domain.Interfaces.Repositories
         IEnumerable<Recebimento> GetRecebimentoByAnuidadeId(int id);
 
         RecebimentoAssociadoDao GetRecebimentoAssociadoDaoByRecebimentoId(int id);
+
+        string SaveDadosRecebimentoFromTransacaoPagSeguro(TransacaoPagSeguro transacaoPagSeguro);
+
+        Recebimento GetRecebimentoByReference(string reference);
     }
 }

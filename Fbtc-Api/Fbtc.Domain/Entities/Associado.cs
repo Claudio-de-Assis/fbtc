@@ -15,11 +15,16 @@ namespace Fbtc.Domain.Entities
         public DateTime? DtCertificacao { get; set; }
         public bool DivulgarContato { get; set; }
         public string TipoFormaContato { get; set; }
-        public bool IntegraDiretoria { get; set; }
-        public bool IntegraConfi { get; set; }
         public string NrTelDivulgacao { get; set; }
         public string ComprovanteAfiliacaoAtc { get; set; }
         public string TipoProfissao { get; set; }
         public string TipoTitulacao { get; set; }
+    }
+
+    public class AssociadoDao : Associado
+    {
+        public bool MembroDiretoria { get; set; }
+        public bool AnuidadeAtcOk { get; set; }
+        public bool MembroConfi { get; set; }
     }
 }

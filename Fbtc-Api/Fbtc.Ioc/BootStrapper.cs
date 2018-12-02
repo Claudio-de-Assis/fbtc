@@ -32,6 +32,10 @@ namespace Fbtc.Ioc
             container.Register<IRelatoriosApplication, RelatoriosApplication>(Lifestyle.Scoped);
             container.Register<IUserProfileApplication, UserProfileApplication>(Lifestyle.Scoped);
             container.Register<IPerfilApplication, PerfilApplication>(Lifestyle.Scoped);
+            container.Register<ILogApplication, LogApplication>(Lifestyle.Scoped);
+            container.Register<IAssinaturaAnuidadeApplication, AssinaturaAnuidadeApplication>(Lifestyle.Scoped);
+            container.Register<IAssinaturaEventoApplication, AssinaturaEventoApplication>(Lifestyle.Scoped);
+            container.Register<IDescontoAnuidadeAtcApplication, DescontoAnuidadeAtcApplication>(Lifestyle.Scoped);
 
             // Servicços de domínio:
             container.Register<IAssociadoService, AssociadoService>(Lifestyle.Scoped);
@@ -48,6 +52,10 @@ namespace Fbtc.Ioc
             container.Register<IRelatoriosService, RelatoriosService>(Lifestyle.Scoped);
             container.Register<IUserProfileService, UserProfileService>(Lifestyle.Scoped);
             container.Register<IPerfilService, PerfilService>(Lifestyle.Scoped);
+            container.Register<ILogService, LogService>(Lifestyle.Scoped);
+            container.Register<IAssinaturaAnuidadeService, AssinaturaAnuidadeService>(Lifestyle.Scoped);
+            container.Register<IAssinaturaEventoService, AssinaturaEventoService>(Lifestyle.Scoped);
+            container.Register<IDescontoAnuidadeAtcService, DescontoAnuidadeAtcService>(Lifestyle.Scoped);
 
             // Infra Repositórios:
             container.Register<IAssociadoRepository, AssociadoRepository>(Lifestyle.Scoped);
@@ -64,6 +72,10 @@ namespace Fbtc.Ioc
             container.Register<IRelatoriosRepository, RelatoriosRepository>(Lifestyle.Scoped);
             container.Register<IUserProfileRepository, UserProfileRepository>(Lifestyle.Scoped);
             container.Register<IPerfilRepository, PerfilRepository>(Lifestyle.Scoped);
+            container.Register<ILogRepository, LogRepository>(Lifestyle.Scoped);
+            container.Register<IAssinaturaAnuidadeRepository, AssinaturaAnuidadeRepository>(Lifestyle.Scoped);
+            container.Register<IAssinaturaEventoRepository, AssinaturaEventoRepository>(Lifestyle.Scoped);
+            container.Register<IDescontoAnuidadeAtcRepository, DescontoAnuidadeAtcRepository>(Lifestyle.Scoped);
         }
     }
 }

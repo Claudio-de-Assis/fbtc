@@ -31,6 +31,11 @@ namespace Fbtc.Application.Services
             return _tipoPublicoService.GetByTipoAssociacao(associado == true ? true : false);
         }
 
+        public int GetIdTipoPublicoByCodigo(string codigo)
+        {
+            return _tipoPublicoService.GetIdTipoPublicoByCodigo(codigo);
+        }
+
         public TipoPublico GetTipoPublicoById(int id)
         {
             return _tipoPublicoService.GetTipoPublicoById(id);
@@ -39,11 +44,6 @@ namespace Fbtc.Application.Services
         public IEnumerable<TipoPublicoValorDao> GetTipoPublicoValorByEventoId(int id)
         {
             return _tipoPublicoService.GetTipoPublicoValorByEventoId(id);
-        }
-
-        public IEnumerable<TipoPublicoValorAnuidadeDao> GetTipoPublicoValorByAnuidadeId(int id)
-        {
-            return _tipoPublicoService.GetTipoPublicoValorByAnuidadeId(id);
         }
     }
 }

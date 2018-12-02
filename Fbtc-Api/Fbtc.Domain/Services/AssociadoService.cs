@@ -21,22 +21,10 @@ namespace Fbtc.Domain.Services
             throw new NotImplementedException();
         }
 
-        public string DeleteIsentoByAssociadoIsentoId(int AssociadoIsentoId)
-        {
-            return _associadoRepository.DeleteIsentoByAssociadoIsentoId(AssociadoIsentoId);
-        }
-
         public IEnumerable<Associado> FindByFilters(string nome, string cpf, string sexo, int atcId, 
             string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
             return _associadoRepository.FindByFilters(nome, cpf, sexo, atcId, crp, 
-                tipoProfissao, tipoPublicoId, estado, cidade, ativo);
-        }
-
-        public IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf, string sexo, int atcId,
-            string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
-        {
-            return _associadoRepository.FindIsentoByFilters(isencaoId, nome, cpf, sexo, atcId, crp,
                 tipoProfissao, tipoPublicoId, estado, cidade, ativo);
         }
 
@@ -48,6 +36,16 @@ namespace Fbtc.Domain.Services
         public Associado GetAssociadoById(int id)
         {
             return _associadoRepository.GetAssociadoById(id);
+        }
+
+        public AssociadoDao GetAssociadoDaoById(int id, int anuidadeId)
+        {
+            return _associadoRepository.GetAssociadoDaoById(id, anuidadeId);
+        }
+
+        public AssociadoDao GetAssociadoDaoByPessoaId(int id)
+        {
+            return _associadoRepository.GetAssociadoDaoByPessoaId(id);
         }
 
         public Associado GetAssociadoByPessoaId(int id)
@@ -63,11 +61,6 @@ namespace Fbtc.Domain.Services
         public string Insert(Associado associado)
         {
             return _associadoRepository.Insert(associado);
-        }
-
-        public string InsertIsento(AssociadoIsentoDao associadoIsentoDao)
-        {
-            return _associadoRepository.InsertIsento(associadoIsentoDao);
         }
 
         public string RessetPasswordById(int id)

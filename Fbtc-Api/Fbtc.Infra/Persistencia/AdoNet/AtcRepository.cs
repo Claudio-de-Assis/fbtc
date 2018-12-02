@@ -9,6 +9,7 @@ using Fbtc.Domain.Interfaces.Repositories;
 
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
+using System.Data.Common;
 
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
@@ -45,16 +46,24 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public Atc GetAtcById(int id)
         {
-            query = @"SELECT AtcId, Nome, UF, NomePres, NomeVPres, NomePSec, NomeSSec,
-                        NomePTes, NomeSTes, Site, SiteDiretoria, Ativo, Codigo
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pid = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(pid);
+            // Fim da definição dos parâmetros
+
+            query = @"SELECT AtcId, Nome, UF, NomePres, NomeVPres, NomePSec, NomeSSec, 
+                        NomePTes, NomeSTes, Site, SiteDiretoria, Ativo, Codigo 
                     FROM dbo.AD_ATC 
-                    WHERE AtcId = " + id + "";
+                    WHERE AtcId = @id";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
-            Atc atc = GetCollection<Atc>(cmd)?.First();
+            Atc atc = GetCollection<Atc>(cmd)?.FirstOrDefault<Atc>();
 
             return atc;
         }
@@ -218,16 +227,24 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         
         public IEnumerable<Atc> FindByFilters(string siglaUF)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter psiglaUF = new SqlParameter() { ParameterName = "@siglaUF", Value = siglaUF };
+
+            _parametros.Add(psiglaUF);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT AtcId, Nome, UF, NomePres, NomeVPres, NomePSec, NomeSSec,
                         NomePTes, NomeSTes, Site, SiteDiretoria, Ativo, Codigo
                     FROM dbo.AD_ATC
-                    WHERE AtcId > 0 ";
+                    WHERE 1 = 1 ";
 
             if (!siglaUF.Equals("0"))
-                query = query + $" AND UF = '{siglaUF}' ";
+                query = query + $" AND UF = @siglaUF ";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<Atc> _collection = GetCollection<Atc>(cmd)?.ToList();

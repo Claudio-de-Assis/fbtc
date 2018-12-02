@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Fbtc.Domain.Entities
 {
     public class TipoPublico
@@ -8,6 +10,7 @@ namespace Fbtc.Domain.Entities
         public bool Ativo { get; set; }
         public int Ordem { get; set; }
         public bool Associado { get; set; }
+        public string Codigo { get; set; }
     }
     
     // Classe DAO usada para apresentar os valores no Cadastro de Eventos
@@ -20,10 +23,8 @@ namespace Fbtc.Domain.Entities
     }
 
     // Classe DAO usada para apresentar os valores no Cadastro de Anuidades
-    public class TipoPublicoValorAnuidadeDao : TipoPublico
+    public class TipoPublicoValoresAnuidadesDao : TipoPublico
     {
-        public int ValorAnuidadePublicoId { get; set; }
-        public decimal Valor { get; set; }
-        public int AnuidadeId { get; set; }
+        public IEnumerable<ValorAnuidadePublico> ValoresAnuidadesPublicos { get; set; }
     }
 }

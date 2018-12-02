@@ -9,22 +9,18 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         Associado GetAssociadoById(int id);
 
+        AssociadoDao GetAssociadoDaoById(int id, int anuidadeId);
+
+        AssociadoDao GetAssociadoDaoByPessoaId(int id);
+
         string DeleteById(int id);
 
         string Insert(Associado associado);
 
         string Update(int id, Associado associado);
 
-        string InsertIsento(AssociadoIsentoDao associadoIsentoDao);
-
-        string DeleteIsentoByAssociadoIsentoId(int AssociadoIsentoId);
-
         IEnumerable<Associado> FindByFilters(string nome, string cpf, 
             string sexo, int atcId, string crp, string tipoProfissao, 
-            int tipoPublico, string estado, string cidade, bool? ativo);
-
-        IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
-            string sexo, int atcId, string crp, string tipoProfissao,
             int tipoPublico, string estado, string cidade, bool? ativo);
 
         string GetNomeFotoByPessoaId(int id);

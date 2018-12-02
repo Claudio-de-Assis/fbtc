@@ -22,10 +22,14 @@ namespace Fbtc.Application.Interfaces
         /// <param name="notificationType"></param>
         /// <returns></returns>
         string NotificationTransacao(string notificationCode, string notificationType);
-
         
         string UpdateRecebimentoPagSeguro(TransacaoPagSeguro transacaoPagSeguro);
 
+        string SaveDadosTransacaoPagSeguro(TransacaoPagSeguro transacaoPagSeguro);
+
         int UpdateRecebimentosPeriodoPagSeguro(TransactionSearchResult transactionSearchResult);
+
+        CheckOutPagSeguro getDadosParaCheckOutPagSeguro(int associadoId, string valor, string tipoEndereco,
+            int anoInicio, int anoTermino, bool enderecoRequerido, bool isAnuidade);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
+using Fbtc.Domain.Entities;
 
 namespace Fbtc.Application.Helper
 {
@@ -102,6 +103,54 @@ namespace Fbtc.Application.Helper
             {
                 return false;
             }
+        }
+
+
+        public static bool CheckDate(String date)
+        {
+            DateTime Temp;
+            
+            if (DateTime.TryParse(date, out Temp) == true)
+                return true;
+            else
+                return false;
+        }
+
+
+        public static decimal CalcularDescontoAnuidade(AssinaturaAnuidadeDao a)
+        {
+
+            int _percentualDesconto = 0;
+            decimal _valor = a.Valor;
+
+            // Desconto aplicado para Membros CONFI:
+            if (a.MembroConfi == true)
+            {
+                _percentualDesconto = 100;
+                _valor = 0;
+            }
+            else
+            {
+                // O Desconto somente é aplicado para a Assinatura de Um Ano:
+                if (a.TipoAnuidade == 1)
+                {
+                    if (a.MembroDiretoria == true)
+                    {
+                        _percentualDesconto = 100;
+                        _valor = 0;
+                    }
+
+                    if (_percentualDesconto == 0)
+                    {
+                        if (a.AnuidadeAtcOk == true)
+                        {
+                            _percentualDesconto = 50;
+                            _valor = a.Valor > 0 ? a.Valor / 2 : 0;
+                        }
+                    }
+                }
+            }
+            return _valor;
         }
 
     }

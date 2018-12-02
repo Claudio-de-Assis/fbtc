@@ -30,7 +30,7 @@ namespace Fbtc.Domain.Entities
     public class TransacaoPagSeguro
     {
         public string Date { get; set; }
-        public string Code { get; set; }
+        public string NotificationCode { get; set; }
         public string Reference { get; set; }
         public int? Type { get; set; }
         public int? Status { get; set; }
@@ -38,6 +38,7 @@ namespace Fbtc.Domain.Entities
         public PaymentMethodPagSeguro PaymentMethod { get; set; }
         public decimal? GrossAmount { get; set; }
         public decimal? DiscountAmount { get; set; }
+        public decimal? FeeAmount { get; set; }
         public CreditorFeesPagSeguro CreditorFees { get; set; }
         public decimal? NetAmount { get; set; }
         public decimal? ExtraAmount { get; set; }
@@ -136,5 +137,48 @@ namespace Fbtc.Domain.Entities
         public int? ResultsInThisPage { get; set; }
         public int? CurrentPage { get; set; }
         public int? TotalPages { get; set; }
+    }
+
+    /// <summary>
+    /// Estrutura para obter o código do checkout do PagSeguro
+    /// </summary>
+    public class CheckOutPagSeguro
+    {
+        public string Currency { get; set; }
+        public string ItemId1 { get; set; }
+        public string ItemDescription1 { get; set; }
+        public string ItemAmount1 { get; set; }
+        public string ItemQuantity1 { get; set; }
+        public string ItemWeight1 { get; set; }
+        public string Reference { get; set; }
+        public string SenderName { get; set; }
+        public string SenderAreaCode { get; set; }
+        public string SenderPhone { get; set; }
+        public string SenderEmail { get; set; }
+        public string ShippingType { get; set; }
+        public string ShippingAddressRequired { get; set; }
+        public string ShippingAddressStreet { get; set; }
+        public string ShippingAddressNumber { get; set; }
+        public string ShippingAddressComplement { get; set; }
+        public string ShippingAddressDistrict { get; set; }
+        public string ShippingAddressPostalCode { get; set; }
+        public string ShippingAddressCity { get; set; }
+        public string ShippingAddressState { get; set; }
+        public string ShippingAddressCountry { get; set; }
+    }
+
+    public class TokenCheckOutPagSeguro
+    {
+        public string Code { get; set; }
+        public DateTime? Date { get; set; }
+        public string Reference { get; set; }
+    }
+
+    public class ErrorsPagSeguro
+    {
+        public string NotificationConde { get; set; }
+        public DateTime? DtNotificacaoErro { get; set; }
+        public string Code { get; set; }
+        public string Message { get; set; }
     }
 }

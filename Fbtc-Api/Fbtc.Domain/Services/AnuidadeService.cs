@@ -21,9 +21,9 @@ namespace Fbtc.Domain.Services
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Anuidade> FindByFilters(int codigo, bool? ativo)
+        public IEnumerable<Anuidade> FindByFilters(int exercicio, bool? ativo)
         {
-            return _anuidadeRepository.FindByFilters(codigo, ativo);
+            return _anuidadeRepository.FindByFilters(exercicio, ativo);
         }
 
         public IEnumerable<Anuidade> GetAll()
@@ -39,6 +39,31 @@ namespace Fbtc.Domain.Services
         public AnuidadeDao GetAnuidadeDaoById(int id)
         {
             return _anuidadeRepository.GetAnuidadeDaoById(id);
+        }
+
+        public AnuidadeDao GetAnuidadeDaoByIdTipoPublicoId(int id, int tipoPublicoId)
+        {
+            return _anuidadeRepository.GetAnuidadeDaoByIdTipoPublicoId(id, tipoPublicoId);
+        }
+
+        public IEnumerable<Anuidade> GetAnuidadesPendentesByPessoaId(int pessoaId)
+        {
+            return _anuidadeRepository.GetAnuidadesPendentesByPessoaId(pessoaId);
+        }
+
+        public IEnumerable<AnuidadeTipoPublicoDao> GetAnuidadeTipoPublicoDaoByAnuidadeId(int id)
+        {
+            return _anuidadeRepository.GetAnuidadeTipoPublicoDaoByAnuidadeId(id);
+        }
+
+        public IEnumerable<TipoPublico> GetTiposPublicosToAnuidade()
+        {
+            return _anuidadeRepository.GetTiposPublicosToAnuidade();
+        }
+
+        public IEnumerable<ValorAnuidade> GetValoresAnuidadesByAnuidadeTipoPublicoId(int id)
+        {
+            return _anuidadeRepository.GetValoresAnuidadesByAnuidadeTipoPublicoId(id);
         }
 
         public string Insert(Anuidade anuidade)

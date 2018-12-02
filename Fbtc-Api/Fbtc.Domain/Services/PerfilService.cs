@@ -24,5 +24,10 @@ namespace Fbtc.Domain.Services
         {
             return _perfilRepository.GetPerfilById(id);
         }
+
+        public int GetPerfilIdByNomePerfil(string nomePerfil)
+        {
+            return _perfilRepository.GetPerfilIdByNomePerfil(nomePerfil);
+        }
     }
 }

@@ -6,9 +6,12 @@ using System.Data.SqlClient;
 using Fbtc.Infra.Helpers;
 using Fbtc.Domain.Entities;
 using Fbtc.Domain.Interfaces.Repositories;
+using Fbtc.Application.Helper;
 
 using prmToolkit.AccessMultipleDatabaseWithAdoNet;
 using prmToolkit.AccessMultipleDatabaseWithAdoNet.Enumerators;
+using System.Text;
+using System.Data.Common;
 
 namespace Fbtc.Infra.Persistencia.AdoNet
 {
@@ -17,9 +20,17 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         private string query;
         private readonly string strConnSql;
 
+        private LogRepository logRep;
+        private readonly string className;
+        private string _instrucaoSql = "";
+        private string _result = "";
+        
         public AssociadoRepository()
         {
             strConnSql = ConfigHelper.GetConnectionString("FBTC_ConnectionString");
+
+            className = "AssociadoRepository";
+            logRep = new LogRepository();
         }
 
         public string DeleteById(int id)
@@ -30,12 +41,14 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public IEnumerable<Associado> FindByFilters(string nome, string cpf,
             string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
             query = @"SELECT Distinct P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento, P.NrCelular, P.PasswordHash, P.DtCadastro, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
-                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId ";
@@ -43,45 +56,84 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             if (!string.IsNullOrEmpty(estado) || !string.IsNullOrEmpty(cidade))
                 query = query + "INNER JOIN dbo.AD_Endereco E ON P.PessoaId = E.PessoaId ";
 
-            query = query + "WHERE P.PessoaId > 0 ";
+            query = query + "WHERE 1 = 1 ";
 
             if (!string.IsNullOrEmpty(nome))
-                query = query + $" AND P.Nome Like '%{nome}%' ";
+            {
+                query = query + $" AND P.Nome Like '%'+ @nome +'%' ";
+                SqlParameter pNome = new SqlParameter() { ParameterName = "@nome", Value = nome };
+                _parametros.Add(pNome);
+            }
 
             if (!string.IsNullOrEmpty(cpf))
-                query = query + $" AND P.CPF = '{cpf}' ";
+            {
+                query = query + $" AND P.CPF = @cpf ";
+                SqlParameter pCpf = new SqlParameter() { ParameterName = "@cpf", Value = cpf };
+                _parametros.Add(pCpf);
+            }
 
             if (!string.IsNullOrEmpty(sexo))
-                query = query + $" AND P.Sexo = '{sexo}' ";
-
+            {
+                query = query + $" AND P.Sexo = @sexo ";
+                SqlParameter pSexo = new SqlParameter() { ParameterName = "@sexo", Value = sexo };
+                _parametros.Add(pSexo);
+            }
             if (atcId != 0)
-                query = query + $" AND A.AtcId = {atcId} ";
+            {
+                query = query + $" AND A.AtcId = @atcId ";
+                SqlParameter pAtcId = new SqlParameter() { ParameterName = "@atcId", Value = atcId };
+                _parametros.Add(pAtcId);
 
+            }
             if (!string.IsNullOrEmpty(crp))
-                query = query + $" AND A.CRP = '{crp}' ";
-
+            {
+                query = query + $" AND A.CRP = @crp ";
+                SqlParameter pCrp = new SqlParameter() { ParameterName = "@crp", Value = crp };
+                _parametros.Add(pCrp);
+            }
             if (!string.IsNullOrEmpty(tipoProfissao))
-                query = query + $" AND A.TipoProfissao = '{tipoProfissao}' ";
-
+            {
+                query = query + $" AND A.TipoProfissao = @tipoProfissao ";
+                SqlParameter pTipoProfissao = new SqlParameter() { ParameterName = "@tipoProfissao", Value = tipoProfissao };
+                _parametros.Add(pTipoProfissao);
+            }
             if (tipoPublicoId != 0)
-                query = query + $" AND A.TipoPublicoId = {tipoPublicoId} ";
-
+            {
+                query = query + $" AND A.TipoPublicoId = @tipoPublicoId ";
+                SqlParameter pTipoPublicoId = new SqlParameter() { ParameterName = "@tipoPublicoId", Value = tipoPublicoId };
+                _parametros.Add(pTipoPublicoId);
+            }
             if (!string.IsNullOrEmpty(estado))
-                query = query + $" AND E.Estado = '{estado}' ";
-
+            {
+                query = query + $" AND E.Estado = @estado ";
+                SqlParameter pEstado = new SqlParameter() { ParameterName = "@estado", Value = estado };
+                _parametros.Add(pEstado);
+            }
             if (!string.IsNullOrEmpty(cidade))
-                query = query + $" AND E.Cidade = '{cidade}' ";
-
+            {
+                query = query + $" AND E.Cidade = @cidade ";
+                SqlParameter pCidade = new SqlParameter() { ParameterName = "@cidade", Value = cidade };
+                _parametros.Add(pCidade);
+            }
             if (ativo != null)
-                query = query + $" AND P.Ativo = '{ativo}' ";
+            {
+                query = query + $" AND P.Ativo = @ativo ";
+                SqlParameter pAtivo = new SqlParameter() { ParameterName = "@ativo", Value = ativo };
+                _parametros.Add(pAtivo);
+            }
 
             query = query + " ORDER BY P.Nome ";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<Associado> _collection = GetCollection<Associado>(cmd)?.ToList();
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/FindByFilters",
+                "SELECT", "ASSOCIADO", 0, query, _collection.Count<Associado>().ToString());
+            // Fim Log
 
             return _collection;
         }
@@ -89,55 +141,107 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         public IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
             string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            SqlParameter pisencaoId = new SqlParameter() { ParameterName = "@isencaoId", Value = isencaoId };
+            _parametros.Add(pisencaoId);
+
             query = @"SELECT AssociadoIsentoId, IsencaoId, AssociadoId, Nome, Cpf, Crp, AtcId, TipoPublicoId, Ativo from 
-                        (   SELECT  0 as AssociadoIsentoId, 0 as IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp, A.AtcId, A.TipoPublicoId, P.Ativo 
+                        (   SELECT  0 as AssociadoIsentoId, 0 as IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp, A.AtcId, A.TipoPublicoId, P.Ativo  
                             FROM dbo.AD_Associado A 
                             INNER JOIN  dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId 
-                            WHERE A.AssociadoId not in (SELECT AI2.AssociadoId FROM dbo.AD_Associado_Isento AI2 WHERE AI2.IsencaoId = " + isencaoId + ") ";
-            query = query + @"UNION 
+                            WHERE A.AssociadoId not in (SELECT AI2.AssociadoId FROM dbo.AD_Associado_Isento AI2 WHERE AI2.IsencaoId = @isencaoId) 
+                    UNION 
                             SELECT  AI.AssociadoIsentoId, AI.IsencaoId, A.AssociadoId, P.Nome, P.Cpf, A.Crp,  A.AtcId, A.TipoPublicoId, P.Ativo 
                             FROM dbo.AD_Associado A 
                             INNER JOIN  dbo.AD_Pessoa P ON A.PessoaId = P.PessoaId 
                             LEFT JOIN dbo.AD_Associado_Isento AI ON A.AssociadoId = AI.AssociadoId 
-                            WHERE AI.IsencaoId =  " + isencaoId + " ) AS TAB WHERE AssociadoId IS NOT NULL ";
+                            WHERE AI.IsencaoId =  @isencaoId) AS TAB 
+                    WHERE AssociadoId IS NOT NULL ";
 
             if (!string.IsNullOrEmpty(nome))
-                query = query + $" AND Nome Like '%{nome}%' ";
+            {
+                query = query + $" AND Nome Like '%'+ @nome +'%' ";
+                SqlParameter pNome = new SqlParameter() { ParameterName = "@nome", Value = nome };
+                _parametros.Add(pNome);
+            }
 
             if (!string.IsNullOrEmpty(cpf))
-                query = query + $" AND CPF = '{cpf}' ";
+            {
+                query = query + $" AND CPF = @cpf ";
+                SqlParameter pCpf = new SqlParameter() { ParameterName = "@cpf", Value = cpf };
+                _parametros.Add(pCpf);
+            }
 
             /* if (!string.IsNullOrEmpty(sexo))
-                query = query + $" AND Sexo = '{sexo}' ";*/
+            {    
+                query = query + $" AND Sexo = '{sexo}' ";
+                SqlParameter pSexo = new SqlParameter() { ParameterName = "@sexo", Value = sexo };
+                _parametros.Add(pSexo);
+             }
+             */
 
             if (atcId != 0)
-                query = query + $" AND AtcId = {atcId} ";
+            {
+                query = query + $" AND AtcId = @atcId ";
+                SqlParameter pAtcId = new SqlParameter() { ParameterName = "@atcId", Value = atcId };
+                _parametros.Add(pAtcId);
+            }
 
             if (!string.IsNullOrEmpty(crp))
-                query = query + $" AND CRP = '{crp}' ";
+            {
+                query = query + $" AND CRP = @crp ";
+                SqlParameter pCrp = new SqlParameter() { ParameterName = "@crp", Value = crp };
+                _parametros.Add(pCrp);
+            }
 
             /*if (!string.IsNullOrEmpty(tipoProfissao))
-                query = query + $" AND A.TipoProfissao = '{tipoProfissao}' ";*/
+             {
+                query = query + $" AND A.TipoProfissao = '{tipoProfissao}' ";
+                SqlParameter pTipoProfissao = new SqlParameter() { ParameterName = "@tipoProfissao", Value = tipoProfissao };
+                _parametros.Add(pTipoProfissao);   
+             */
 
             if (tipoPublicoId != 0)
-                query = query + $" AND TipoPublicoId = {tipoPublicoId} ";
+            {
+                query = query + $" AND TipoPublicoId = @tipoPublicoId ";
+                SqlParameter pTipoPublicoId = new SqlParameter() { ParameterName = "@tipoPublicoId", Value = tipoPublicoId };
+                _parametros.Add(pTipoPublicoId);
+            }
 
             /*if (!string.IsNullOrEmpty(estado))
-                query = query + $" AND Estado = '{estado}' ";*/
+             {
+                query = query + $" AND Estado = '{estado}' ";
+                SqlParameter pEstado = new SqlParameter() { ParameterName = "@estado", Value = estado };
+                _parametros.Add(pEstado);   
+             }
 
-            /*if (!string.IsNullOrEmpty(cidade))
-                query = query + $" AND Cidade = '{cidade}' ";*/
+             if (!string.IsNullOrEmpty(cidade))
+             {
+                query = query + $" AND Cidade = '{cidade}' ";
+                SqlParameter pCidade = new SqlParameter() { ParameterName = "@cidade", Value = cidade };
+                _parametros.Add(pCidade);   
+              }*/
 
             if (ativo != null)
-                query = query + $" AND Ativo = '{ativo}' ";
+            {
+                query = query + $" AND Ativo = @ativo ";
+                SqlParameter pAtivo = new SqlParameter() { ParameterName = "@ativo", Value = ativo };
+                _parametros.Add(pAtivo);
+            }
 
             query = query + " ORDER BY Nome ";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
             IEnumerable<AssociadoIsentoDao> _collection = GetCollection<AssociadoIsentoDao>(cmd)?.ToList();
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/FindIsentoByFilters",
+                "SELECT", "ASSOCIADO", 0, query, _collection.Count<AssociadoIsentoDao>().ToString());
+            // Fim Log
 
             return _collection;
         }
@@ -149,7 +253,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
-                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId
@@ -161,27 +265,40 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             // Obtém os dados do banco de dados:
             IEnumerable<Associado> _collection = GetCollection<Associado>(cmd)?.ToList();
 
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetAll",
+                "SELECT", "ASSOCIADO", 0, query, _collection.Count<Associado>().ToString());
+            // Fim Log
+
             return _collection;
         }
 
         public Associado GetAssociadoById(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pid = new SqlParameter() { ParameterName = "@id", Value = id };
+
+            _parametros.Add(pid);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
-                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE A.AssociadoId = " + id + "";
+                    WHERE A.AssociadoId = @id";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
-            Associado associado = GetCollection<Associado>(cmd)?.First();
+            Associado associado = GetCollection<Associado>(cmd)?.FirstOrDefault<Associado>();
 
             // Obtendo um endereco:
             if (associado != null)
@@ -195,28 +312,195 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     associado.EnderecosPessoa = ends;
                 }
             }
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetAssociadoById",
+                "SELECT", "ASSOCIADO", id, query, associado != null ? "SUCESSO" : "0");
+            // Fim Log
 
             return associado;
         }
 
-        public Associado GetAssociadoByPessoaId(int id)
+        public AssociadoDao GetAssociadoDaoById(int id, int anuidadeId)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pId = new SqlParameter() { ParameterName = "@id", Value = id };
+            _parametros.Add(pId);
+
+            SqlParameter pAnuidadeId = new SqlParameter() { ParameterName = "@anuidadeId", Value = anuidadeId };
+            _parametros.Add(pAnuidadeId);
+            // Fim da definição dos parâmetros
+
             query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
                         P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
-                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.NrTelDivulgacao, 
+                        A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao,
+	                    (SELECT 'AnuidadeAtcOk' =   
+                            Case 
+	                            WHEN Count(DAA.DescontoAnuidadeAtcId) > 0 THEN 'TRUE' 
+	                            ELSE 'FALSE' 
+                            END 
+                        FROM dbo.AD_Desconto_Anuidade_Atc DAA 
+                        WHERE DAA.AssociadoId = A.AssociadoId AND DAA.AnuidadeId = @anuidadeId )  AS AnuidadeAtcOk, 
+	                    (SELECT 'MembroDiretoria' = 
+	                        Case 
+		                        WHEN Count(GE.GestaoId) > 0 THEN 'TRUE' 
+		                        ELSE 'FALSE' 
+	                        END  
+                        FROM dbo.AD_Gestao GE 
+                            INNER JOIN dbo.AD_Membro_Gestao MG ON GE.GestaoId = MG.GestaoId
+                        WHERE MG.AssociadoId = A.AssociadoId  and (GE.AnoInicial <= (SELECT AN.Exercicio FROM dbo.AD_Anuidade AN where AN.AnuidadeId = @anuidadeId) 
+                                and GE.AnoFinal >= (SELECT A.Exercicio FROM dbo.AD_Anuidade A where A.AnuidadeId = @anuidadeId ))
+                        )  AS MembroDiretoria,
+                        (SELECT 'MembroConfi' = 
+	                        Case 
+		                        WHEN Count(G.GestaoId) > 0 THEN 'TRUE' 
+		                        ELSE 'FALSE' 
+	                        END  
+                        FROM dbo.AD_Gestao G 
+                        INNER JOIN dbo.AD_Membro_Gestao MG ON G.GestaoId = MG.GestaoId
+                        INNER JOIN dbo.AD_Cargo_Gestao CG ON MG.CargoGestaoId = CG.CargoGestaoId
+                        WHERE UPPER(CG.Nome) = 'PRESIDENTE'
+                        AND MG.AssociadoId = @id 
+                        ) as MembroConfi
+                    FROM dbo.AD_Associado A 
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
+                    WHERE A.AssociadoId = @id";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
+
+            // Obtém os dados do banco de dados:
+            AssociadoDao associadoDao = GetCollection<AssociadoDao>(cmd)?.FirstOrDefault<AssociadoDao>();
+
+            // Obtendo um endereco:
+            if (associadoDao != null)
+            {
+                EnderecoRepository _endRep = new EnderecoRepository();
+
+                var ends = _endRep.GetByPessoaId(associadoDao.PessoaId);
+
+                if (ends != null && ends.Count() > 0)
+                {
+                    associadoDao.EnderecosPessoa = ends;
+                }
+            }
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetAssociadoDaoById",
+                "SELECT", "ASSOCIADO", id, query, associadoDao != null ? "SUCESSO" : "0");
+            // Fim Log
+
+            return associadoDao;
+        }
+        
+        public AssociadoDao GetAssociadoDaoByPessoaId(int id)
+        {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pId = new SqlParameter() { ParameterName = "@id", Value = id };
+            _parametros.Add(pId);
+            // Fim da definição dos parâmetros
+
+            // As informações AnuidadeAtcOk e MembroDiretoria são obtidas através da data atual
+            query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
+                        A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
+                        A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
+                        A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
+                        A.NrTelDivulgacao, 
+                        A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao,
+	                    (SELECT 'AnuidadeAtcOk' =   
+                            Case 
+	                            WHEN Count(DAA.DescontoAnuidadeAtcId) > 0 THEN 'TRUE' 
+	                            ELSE 'FALSE' 
+                            END 
+                        FROM dbo.AD_Desconto_Anuidade_Atc DAA 
+                        WHERE DAA.AssociadoId = A.AssociadoId AND DAA.AnuidadeId = (select AAA.AnuidadeId from dbo.AD_Anuidade AAA WHERE AAA.Exercicio = YEAR(GETDATE())))  AS AnuidadeAtcOk, 
+	                    (SELECT 'MembroDiretoria' = 
+	                        Case 
+		                        WHEN Count(GE.GestaoId) > 0 THEN 'TRUE' 
+		                        ELSE 'FALSE' 
+	                        END  
+                        FROM dbo.AD_Gestao GE 
+                            INNER JOIN dbo.AD_Membro_Gestao MG ON GE.GestaoId = MG.GestaoId
+                        WHERE MG.AssociadoId = A.AssociadoId  and (GE.AnoInicial <= (SELECT AN.Exercicio FROM dbo.AD_Anuidade AN where AN.AnuidadeId = (select AAA.AnuidadeId from dbo.AD_Anuidade AAA WHERE AAA.Exercicio = YEAR(GETDATE()))) 
+                                and GE.AnoFinal >= (SELECT A.Exercicio FROM dbo.AD_Anuidade A where A.AnuidadeId = (select AAA.AnuidadeId from dbo.AD_Anuidade AAA WHERE AAA.Exercicio = YEAR(GETDATE()))))
+                        )  AS MembroDiretoria,
+                        (SELECT 'MembroConfi' = 
+	                        Case 
+		                        WHEN Count(G.GestaoId) > 0 THEN 'TRUE' 
+		                        ELSE 'FALSE' 
+	                        END  
+                        FROM dbo.AD_Gestao G 
+                        INNER JOIN dbo.AD_Membro_Gestao MG ON G.GestaoId = MG.GestaoId
+                        INNER JOIN dbo.AD_Cargo_Gestao CG ON MG.CargoGestaoId = CG.CargoGestaoId
+                        INNER JOIN dbo.AD_Associado A ON MG.AssociadoId = A.AssociadoId
+                        WHERE UPPER(CG.Nome) = 'PRESIDENTE'
+                        AND A.PessoaId = @id 
+                        ) as MembroConfi
+                    FROM dbo.AD_Associado A 
+                    INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
+                    WHERE A.PessoaId = @id";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
+
+            // Obtém os dados do banco de dados:
+            AssociadoDao associadoDao = GetCollection<AssociadoDao>(cmd)?.FirstOrDefault<AssociadoDao>();
+
+            // Obtendo um endereco:
+            if (associadoDao != null)
+            {
+                EnderecoRepository _endRep = new EnderecoRepository();
+
+                var ends = _endRep.GetByPessoaId(associadoDao.PessoaId);
+
+                if (ends != null && ends.Count() > 0)
+                {
+                    associadoDao.EnderecosPessoa = ends;
+                }
+            }
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetAssociadoDaoByPessoaId",
+                "SELECT", "ASSOCIADO", id, query, associadoDao != null ? "SUCESSO" : "0");
+            // Fim Log
+
+            return associadoDao;
+        }
+
+        public Associado GetAssociadoByPessoaId(int id)
+        {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pId = new SqlParameter() { ParameterName = "@id", Value = id };
+            _parametros.Add(pId);
+            // Fim da definição dos parâmetros
+
+            query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo, 
+                        A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
+                        A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
+                        A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
+                        A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE P.PessoaId = " + id + "";
+                    WHERE P.PessoaId = @id";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
-            Associado associado = GetCollection<Associado>(cmd)?.First();
+            Associado associado = GetCollection<Associado>(cmd)?.FirstOrDefault<Associado>();
 
             // Obtendo um endereco:
             if (associado != null)
@@ -230,6 +514,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     associado.EnderecosPessoa = ends;
                 }
             }
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetAssociadoByPessoaId",
+                "SELECT", "ASSOCIADO", id, query, associado != null ? "SUCESSO" : "0");
+            // Fim Log
 
             return associado;
         }
@@ -262,12 +551,19 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     string _dtNasc = associado.DtNascimento != null ? ", DtNascimento " : "";
                     string _paramDtNasc = associado.DtNascimento != null ? ", @DtNascimento " : "";
 
+                    if(associado.PerfilId == 0)
+                    {
+                        PerfilRepository perRep = new PerfilRepository();
+
+                        associado.PerfilId = perRep.GetPerfilIdByNomePerfil("Cliente Externo");
+                    }
+
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Pessoa (Nome, EMail, CPF, RG, NomeFoto, " +
                         "   Sexo, NrCelular, PerfilId, " +
                         "   DtCadastro " + _dtNasc + ") " +
                         "VALUES(@Nome, @EMail, @CPF, @RG, @NomeFoto, " +
-                        "   @Sexo, @NrCelular, @PerfilId " +
+                        "   @Sexo, @NrCelular, @PerfilId, " +
                         "   @DtCadastro " + _paramDtNasc + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
@@ -287,6 +583,22 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
+                    // Log da Inserção PESSOA:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = id > 0 ? "SUCESSO" : "FALHA";
+
+                    string log = logRep.SetLogger(className + "/Insert",
+                      "INSERT", "PESSOA", id, _instrucaoSql, _result);
+                    //Fim do Log
+
                     // Inserindo os dados na tabela ASSOCIADO:
                     string _dtCert = associado.DtCertificacao != null ? ", DtCertificacao " : "";
                     string _paramDtCert = associado.DtCertificacao != null ? ", @DtCertificacao " : "";
@@ -294,15 +606,14 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     string _atc = associado.ATCId != null ? ", AtcId " : "";
                     string _paramAtac = associado.ATCId != null ? ", @AtcId " : "";
 
-
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Associado (PessoaId "+ _atc +", TipoPublicoId, " +
                         "   NrMatricula, CRP, CRM, NomeInstFormacao, Certificado, " +
-                        "   DivulgarContato, TipoFormaContato, IntegraDiretoria, IntegraConfi, " +
+                        "   DivulgarContato, TipoFormaContato,  " +
                         "   NrTelDivulgacao, ComprovanteAfiliacaoAtc, TipoProfissao, TipoTitulacao " + _dtCert + ") " +
                         "VALUES (@PessoaId "+ _paramAtac +", @TipoPublicoId, " +
                         "   @NrMatricula, @CRP, @CRM, @NomeInstFormacao, @Certificado, " +
-                        "   @DivulgarContato, @TipoFormaContato, @IntegraDiretoria, @IntegraConfi, " +
+                        "   @DivulgarContato, @TipoFormaContato, " +
                         "   @NrTelDivulgacao, @ComprovanteAfiliacaoAtc, @TipoProfissao, @TipoTitulacao " + _paramDtCert + ") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
@@ -315,8 +626,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("Certificado", associado.Certificado);
                     command.Parameters.AddWithValue("DivulgarContato", associado.DivulgarContato);
                     command.Parameters.AddWithValue("TipoFormaContato", associado.TipoFormaContato);
-                    command.Parameters.AddWithValue("IntegraDiretoria", associado.IntegraDiretoria);
-                    command.Parameters.AddWithValue("IntegraConfi", associado.IntegraConfi);
                     command.Parameters.AddWithValue("NrTelDivulgacao", associado.NrTelDivulgacao);
                     command.Parameters.AddWithValue("ComprovanteAfiliacaoAtc", associado.ComprovanteAfiliacaoAtc);
                     command.Parameters.AddWithValue("TipoProfissao", associado.TipoProfissao);
@@ -332,20 +641,37 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     _resultado = assocId > 0;
 
+                    if (id > 0)
+                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
 
-                    if (assocId > 0)
-                        _ident = _ident.PadLeft(10 - assocId.ToString().Length, '0') + assocId.ToString();
-
-                    _msg = assocId > 0 ? $"{_ident}Inclusão realiada com sucesso" : $"{_ident}Inclusão Não realiada com sucesso";
+                    _msg = id > 0 ? $"{_ident}Inclusão realizada com sucesso" : $"{_ident}Inclusão Não realizada com sucesso";
 
                     transaction.Commit();
 
+                    // Log da Inserção ASSOCIADO:
+                    sb.Clear();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = assocId > 0 ? "SUCESSO" : "FALHA";
+
+                    log = logRep.SetLogger(className + "/Insert",
+                      "INSERT", "ASSOCIADO", assocId, _instrucaoSql, _result);
+                    //Fim do Log
+
                     // Inserindo endereco:
+
+                    EnderecoRepository _endRep = new EnderecoRepository();
+
                     if (associado.EnderecosPessoa != null)
                     {
                         foreach (var end in associado.EnderecosPessoa)
                         {
-                            EnderecoRepository _endRep = new EnderecoRepository();
 
                             end.PessoaId = id;
 
@@ -371,6 +697,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     {
                         throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
                     }
+                    string log = logRep.SetLogger(className + "/Insert",
+                        "INSERT", "PESSOA/ASSOCIADO", 0, ex.Message, "FALHA");
+
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
                 finally
@@ -405,6 +734,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     // Atualizando os dados na tabela PESSOA:
                     string _dtNasc = associado.DtNascimento != null ? ", DtNascimento = @DtNascimento " : "";
 
+                    if (associado.PerfilId == 0)
+                    {
+                        PerfilRepository perRep = new PerfilRepository();
+
+                        associado.PerfilId = perRep.GetPerfilIdByNomePerfil("Cliente Externo");
+                    }
+
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Pessoa " +
                         "SET Nome = @nome, EMail = @EMail, NomeFoto = @NomeFoto, CPF = @CPF, RG = @RG, " +
@@ -429,6 +765,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     int i = command.ExecuteNonQuery();
                     _resultado = i > 0;
 
+                    // Log do UPDATE PESSOA:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = i > 0 ? "SUCESSO" : "FALHA";
+
+
+                    string log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "PESSOA", id, _instrucaoSql, _result);
+                    //Fim do Log
+
                     // Atualizando os dados na tabela Associado:
                     string _dtCert = associado.DtCertificacao != null ? ", DtCertificacao = @DtCertificacao " : "";
                     string _atc = associado.ATCId != null ? " AtcId = @AtcId, " : "";
@@ -439,7 +792,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         "   NrMatricula = @NrMatricula, CRP = @CRP, CRM = @CRM, " +
                         "   NomeInstFormacao = @NomeInstFormacao, Certificado = @Certificado, " +
                         "   DivulgarContato = @DivulgarContato, TipoFormaContato = @TipoFormaContato, " +
-                        "   IntegraDiretoria = @IntegraDiretoria, IntegraConfi = @IntegraConfi, " +
                         "   NrTelDivulgacao = @NrTelDivulgacao, ComprovanteAfiliacaoAtc = @ComprovanteAfiliacaoAtc, " +
                         "   TipoProfissao = @TipoProfissao, TipoTitulacao = @TipoTitulacao  " + _dtCert +
                         "WHERE PessoaId = @id";
@@ -452,8 +804,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("Certificado", associado.Certificado);
                     command.Parameters.AddWithValue("DivulgarContato", associado.DivulgarContato);
                     command.Parameters.AddWithValue("TipoFormaContato", associado.TipoFormaContato);
-                    command.Parameters.AddWithValue("IntegraDiretoria", associado.IntegraDiretoria);
-                    command.Parameters.AddWithValue("IntegraConfi", associado.IntegraConfi);
                     command.Parameters.AddWithValue("NrTelDivulgacao", associado.NrTelDivulgacao);
                     command.Parameters.AddWithValue("ComprovanteAfiliacaoAtc", associado.ComprovanteAfiliacaoAtc);
                     command.Parameters.AddWithValue("TipoProfissao", associado.TipoProfissao);
@@ -472,13 +822,27 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     transaction.Commit();
 
+                    // Log do UPDATE ASSOCIADO:
+                    sb.Clear();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value +", "); 
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = x > 0 ? "SUCESSO" : "FALHA";
+
+                    log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "ASSOCIADO", id, _instrucaoSql, _result);
+                    // Fim do log
+
                     // Atualizando endereco:
                     if (associado.EnderecosPessoa != null)
                     {
                         foreach (var end in associado.EnderecosPessoa)
                         {
-                            // if (!string.IsNullOrWhiteSpace(end.Cep))
-                            // {
                             EnderecoRepository _endRep = new EnderecoRepository();
 
                             end.PessoaId = id;
@@ -491,12 +855,12 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                             {
                                 _msgEnd = _endRep.Insert(end);
                             }
-                            //  }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
+                    _result = ex.Message;
                     try
                     {
                         transaction.Rollback();
@@ -505,6 +869,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     {
                         throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
                     }
+
+                    string log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "PESSOA/ASSOCIADO", 0, ex.Message, "FALHA");
+
                     throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
                 }
                 finally
@@ -517,6 +885,13 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public string GetNomeFotoByPessoaId(int id)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pId = new SqlParameter() { ParameterName = "@id", Value = id };
+            _parametros.Add(pId);
+            // Fim da definição dos parâmetros
+            
             String NomeFoto = "_no-foto.png";
 
             query = @"SELECT P.NomeFoto, P.Sexo, 
@@ -524,17 +899,17 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
-                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE P.PessoaId = " + id + "";
+                    WHERE P.PessoaId = @id";
 
             // Define o banco de dados que será usando:
-            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
             // Obtém os dados do banco de dados:
-            Associado associado = GetCollection<Associado>(cmd)?.First();
+            Associado associado = GetCollection<Associado>(cmd)?.FirstOrDefault<Associado>();
 
             // Obtendo o nome da foto:
             if (associado != null)
@@ -542,134 +917,12 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 NomeFoto = associado.NomeFoto;
             }
 
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/GetNomeFotoByPessoaId",
+                "SELECT", "ASSOCIADO", 0, query, associado != null ? "SUCESSO" : "0");
+            // Fim Log
+
             return NomeFoto;
-        }
-
-        public string InsertIsento(AssociadoIsentoDao a)
-        {
-            RecebimentoRepository recebimentoRep = new RecebimentoRepository();
-
-            string _msg = "";
-            Int32 id = 0;
-
-            using (SqlConnection connection = new SqlConnection(strConnSql))
-            {
-                connection.Open();
-
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
-
-                // Start a local transaction.
-                transaction = connection.BeginTransaction("IncluirAssociadoIsento");
-
-                command.Connection = connection;
-                command.Transaction = transaction;
-
-                try
-                {
-                    command.CommandText = "" +
-                        "INSERT into dbo.AD_Associado_Isento (IsencaoId, AssociadoId) " +
-                        "VALUES(@IsencaoId, @AssociadoId) " +
-                        "SELECT CAST(scope_identity() AS int) ";
-
-                    command.Parameters.AddWithValue("IsencaoId", a.IsencaoId);
-                    command.Parameters.AddWithValue("AssociadoId", a.AssociadoId);
-                    command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
-
-                    id = (Int32)command.ExecuteScalar();
-
-                    transaction.Commit();
-
-                    if (id > 0)
-                    {
-                        string res = recebimentoRep.InsertIsento(a.AssociadoId, id, a.TipoIsencao, a.TipoIsencao);
-                    }
-
-                    _msg = id > 0 ? "Inclusão realiada com sucesso" : "Inclusão Não realiada com sucesso";
-
-                }
-                catch (Exception ex)
-                {
-                    // Attempt to roll back the transaction.
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
-                    }
-                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-            return _msg;
-        }
-
-        public string DeleteIsentoByAssociadoIsentoId(int AssociadoIsentoId)
-        {
-            string _msg = "";
-
-            using (SqlConnection connection = new SqlConnection(strConnSql))
-            {
-                connection.Open();
-
-                SqlCommand command = connection.CreateCommand();
-                SqlTransaction transaction;
-
-                // Start a local transaction.
-                transaction = connection.BeginTransaction("DeleteAssociadoIsento");
-
-                command.Connection = connection;
-                command.Transaction = transaction;
-
-                try
-                {
-                    RecebimentoRepository recebimentoRep = new RecebimentoRepository();
-
-                    string _result = recebimentoRep.DeleteByAssociadoIsentoId(AssociadoIsentoId);
-
-                    if (_result.Equals("SUCESSO"))
-                    {
-                        command.CommandText = "" +
-                            "DELETE " +
-                            "From dbo.AD_Associado_Isento " +
-                            "WHERE AssociadoIsentoId = @AssociadoIsentoId ";
-
-                        command.Parameters.AddWithValue("@AssociadoIsentoId", AssociadoIsentoId);
-
-                        int i = command.ExecuteNonQuery();
-
-                        _msg = i > 0 ? "Exclusão realizada com sucesso" : "Exclusão NÃO realizada com sucesso";
-
-                        transaction.Commit();
-                    }
-                    else
-                    {
-                        _msg = "Exclusão NÃO realizada com sucesso";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
-                    }
-                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-            return _msg;
         }
 
         public string RessetPasswordById(int id)
@@ -681,12 +934,12 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             string _subject, _textBody;
 
             Associado _associado = new Associado();
-            _associado = GetAssociadoById(id);
+            _associado = GetAssociadoByPessoaId(id);
 
             SendEMail _sendMail = new SendEMail();
 
-            _newPassword = Functions.GetNovaSenhaAcesso("");
-            _newPasswordHash = Functions.CriptografaSenha(_newPassword);
+            _newPassword = PasswordFunctions.GetNovaSenhaAcesso("");
+            _newPasswordHash = PasswordFunctions.CriptografaSenha(_newPassword);
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -716,6 +969,23 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                     transaction.Commit();
 
+                    // Log do UPDATE PESSOA:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = i > 0 ? "SUCESSO" : "FALHA";
+
+
+                    string log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "PESSOA", id, _instrucaoSql, _result);
+                    //Fim do Log
+
                     if (i > 0)
                     {
                         _subject = "Site FBTC - Troca de Senha - A sua nova senha de acesso chegou!";
@@ -739,7 +1009,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     }
                     else
                     {
-                        _msg = "Atualização NÃO realiada com sucesso";
+                        _msg = "Atualização NÃO Realizada com sucesso";
                         _sendSucess = false;
                     }
                 }
@@ -768,6 +1038,16 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
         public string ValidaEMail(int associadoId, string eMail)
         {
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pAssociadoId = new SqlParameter() { ParameterName = "@associadoId", Value = associadoId };
+            _parametros.Add(pAssociadoId);
+
+            SqlParameter pEMail = new SqlParameter() { ParameterName = "@eMail", Value = eMail };
+            _parametros.Add(pEMail);
+            // Fim da definição dos parâmetros
+
             string _msg = "OK";
 
             try
@@ -777,15 +1057,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         A.AssociadoId, A.PessoaId, A.AtcId, A.TipoPublicoId, P.CPF, P.RG, 
                         A.NrMatricula, A.CRP, A.CRM, A.NomeInstFormacao, A.Certificado, 
                         A.DtCertificacao, A.DivulgarContato, A.TipoFormaContato, 
-                        A.IntegraDiretoria, A.IntegraConfi, A.NrTelDivulgacao, 
+                        A.NrTelDivulgacao, 
                         A.ComprovanteAfiliacaoAtc, A.TipoProfissao, A.TipoTitulacao 
                     FROM dbo.AD_Associado A 
                     INNER JOIN dbo.AD_Pessoa P on A.PessoaId = P.PessoaId 
-                    WHERE AssociadoId != " + associadoId + " " +
-                        " AND P.EMail = '" + eMail + "' ";
+                    WHERE AssociadoId != @associadoId
+                        AND P.EMail = @eMail";
 
                 // Define o banco de dados que será usando:
-                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer);
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
 
                 // Obtém os dados do banco de dados:
                 IEnumerable<Associado> _collection = GetCollection<Associado>(cmd)?.ToList();
