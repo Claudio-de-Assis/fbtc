@@ -1026,7 +1026,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                             throw new Exception($"Rollback Exception Type:{ex2.GetType()}. Erro:{ex2.Message}");
                         }
                     }
-                    throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+
+                    if (ex.Message.IndexOf("System.Net.Mail.SmtpException") > 0)
+                    {
+                        return "ATENÇÃO: Não foi possível enviar o e-mail com a nova senha agora. Por favor, tente novamente mais tarde.";
+                    }
+                    else
+                    {
+                        throw new Exception($"Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}");
+                    }
                 }
                 finally
                 {

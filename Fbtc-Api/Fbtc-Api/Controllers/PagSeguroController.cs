@@ -240,7 +240,11 @@ namespace Fbtc.Api.Controllers
             {
                 if (nrDias == 0) throw new Exception("Número de dias não informado!");
 
-                DateTime _dtFinal = DateTime.Now;
+                var dtRef = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+
+                dtRef = dtRef.AddHours(-2);
+
+                DateTime _dtFinal = dtRef; 
                 DateTime _dtInicial = _dtFinal.AddDays(-nrDias);
 
                 string _dtIni, _dtFim;
@@ -263,7 +267,6 @@ namespace Fbtc.Api.Controllers
                     while (_currPage <= _transacoesPS.TotalPages)
                     {
                         _nrRegistrosAtualizados += _pagSeguroApplication.UpdateRecebimentosPeriodoPagSeguro(_transacoesPS);
-                        // _nrRegistrosAtualizados += _pagSeguroApplication.SaveDadosTransacaoPagSeguro(_transacoesPS);
 
                         _currPage++;
 
@@ -332,7 +335,7 @@ namespace Fbtc.Api.Controllers
                 }
 
                 if (errorsPagSeguro.Message != null)
-                    throw new Exception($"ATENÇÃO: Ocorreu um erro ao tentar obter listagem de recebimentos junto ao PagSeguro. Código do Erro: {errorsPagSeguro.Code} - Mensagem: {errorsPagSeguro.Message}");
+                    throw new Exception($"ATENÇÃO: Ocorreu um erro ao tentar obter listagem de recebimentos junto ao PagSeguro. Código do Erro: {errorsPagSeguro.Code} - Mensagem: {errorsPagSeguro.Message} - dtInicial: {dtInicial} & dtFinal: {dtFinal}");
                 // Fim da verificação:
 
                 foreach (var t in doc.Descendants("transactionSearchResult"))
