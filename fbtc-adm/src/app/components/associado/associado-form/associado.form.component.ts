@@ -216,8 +216,8 @@ export class AssociadoFormComponent implements OnInit {
 
             this.service.ressetPassWordById(this.editPessoaId)
             .subscribe(msg => {
-                this.alertClassType = 'alert alert-success';
                 this._msg = msg;
+                this.gotoAvaliaRetornoEMail(this._msg);
             });
 
         } else {
@@ -226,6 +226,15 @@ export class AssociadoFormComponent implements OnInit {
         }
     }
 
+    gotoAvaliaRetornoEMail(msg: string) {
+
+        if (msg.substring(0, 7) === 'ATENÇÃO') {
+            this.alertClassType = 'alert alert-danger';
+
+        } else {
+            this.alertClassType = 'alert alert-success';
+        }
+    }
 
     gotoShowPopUp(msg: string) {
 

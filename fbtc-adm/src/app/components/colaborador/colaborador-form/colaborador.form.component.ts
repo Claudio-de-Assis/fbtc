@@ -42,6 +42,10 @@ export class ColaboradorFormComponent implements OnInit {
     @Input() editMessagem: string;
     @Input() editShowPopup: boolean;
 
+    alertClassType: string;
+
+    _msgProgresso: string;
+
     submitted: boolean;
 
     constructor(
@@ -60,12 +64,21 @@ export class ColaboradorFormComponent implements OnInit {
         this._colabId = 0;
         this._msgRetorno = '';
         this._isEMailValid = false;
+
+        this.alertClassType = 'alert alert-info';
+
+        this._msgProgresso = '';
      }
 
     getColaboradorById(id: number): void {
 
+        this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
+
         this.service.getById(id)
-            .subscribe(colaborador => this.colaborador = colaborador);
+            .subscribe(colaborador => {
+                this.colaborador = colaborador;
+                this._msgProgresso = '';
+            });
     }
 
     setColaborador(): void {
@@ -85,6 +98,9 @@ export class ColaboradorFormComponent implements OnInit {
     }
 
     save() {
+
+        this.alertClassType = 'alert alert-info';
+        this._msg = 'Salvando os dados. Por favor, aguarde...';
 
          this.service.addColaborador(this.colaborador)
          .subscribe(
@@ -115,11 +131,15 @@ export class ColaboradorFormComponent implements OnInit {
 
             this.getColaboradorById(this._colabId);
 
+            this.alertClassType = 'alert alert-success';
+
             this._msg = this._msgRetorno.substring(10);
 
             this.badge = 'Edição';
 
         } else {
+
+            this.alertClassType = 'alert alert-success';
 
             this._msg = this._msgRetorno;
         }
@@ -136,15 +156,30 @@ export class ColaboradorFormComponent implements OnInit {
 
     gotoReenviarSenha() {
 
-        this._msg = '';
+        this.alertClassType = 'alert alert-info';
+        this._msg = 'Enviando a senha para o e-mail do associado. Por favor, aguarde...';
+
         if (this._id !== 0) {
 
             this.service.ressetPassWordById(this._id)
-            .subscribe(msg => this._msg = msg);
+            .subscribe(msg => {
+                this._msg = msg;
+                this.gotoAvaliaRetornoEMail(this._msg);
+            });
 
         } else {
 
             this._msg = 'Atenção: Você precisa primeiro incluir o registro';
+        }
+    }
+
+    gotoAvaliaRetornoEMail(msg: string) {
+
+        if (msg.substring(0, 7) === 'ATENÇÃO') {
+            this.alertClassType = 'alert alert-danger';
+
+        } else {
+            this.alertClassType = 'alert alert-success';
         }
     }
 

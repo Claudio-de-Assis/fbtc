@@ -3,7 +3,9 @@
     <div class="col-lg-12">
     <form (ngSubmit)="onSubmit()" #colaboradorForm="ngForm">
             <div class="panel panel-default">
-            <div class="panel-heading">Dados</div>
+            <div class="panel-heading">
+                Dados{{ _msgProgresso }}
+            </div>
             <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
@@ -69,7 +71,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <div *ngIf="_msg !== ''" class="alert alert-success">
+                            <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
                                 <div >{{ _msg }}</div>
                             </div>
                         </div>

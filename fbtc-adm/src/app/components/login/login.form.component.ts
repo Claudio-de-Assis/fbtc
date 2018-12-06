@@ -19,6 +19,7 @@ export class LoginComponent {
   title: string;
   _msg: string;
   _msgDng: string;
+  _msgPWD: string;
   editeMail: string;
   editPassword: string;
   permission = [];
@@ -34,6 +35,7 @@ export class LoginComponent {
     this._msgDng = '';
     this.editeMail = '';
     this.editPassword = '';
+    this._msgPWD = '';
   }
 
   setMessage() {
@@ -100,13 +102,27 @@ export class LoginComponent {
         this.editeMail = this.editeMail.toLowerCase();
 
         this.userProfileService.ressetPassWordByEMail(this.editeMail)
-           .subscribe(msg => this._msg = msg);
+           .subscribe(msg => {
+             this._msgPWD = msg;
+             this.gotoAvaliaRetornoEMail(this._msgPWD);
+            });
 
     } else {
 
         this._msgDng = 'Por favor, informe o seu E-Mail.';
     }
   }
+
+  gotoAvaliaRetornoEMail(msg: string) {
+
+    if (msg.substring(0, 7) === 'ATENÇÃO') {
+        // this.alertClassType = 'alert alert-danger';
+        this._msgDng = msg;
+    } else {
+        // this.alertClassType = 'alert alert-success';
+        this._msg = msg;
+    }
+}
 
   onSubmit() {
 
