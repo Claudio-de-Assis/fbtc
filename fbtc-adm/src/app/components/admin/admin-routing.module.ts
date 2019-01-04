@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminDashboardComponent } from './admin-dashboard.component';
-import { ManageHeroesComponent } from './manage-heroes.component';
-import { ManageCrisesComponent } from './manage-crises.component';
 import { AdminComponent } from './admin.component';
 
 import { AuthGuard } from '../shared/services/auth-guard.service';
@@ -54,7 +52,6 @@ import { DescontoAnuidadeAtcFormComponent } from './../desconto-anuidade-atc/des
 // tslint:disable-next-line:max-line-length
 import { AssinaturaEventoAssociadoListComponent } from '../assinatura-evento-associado/assinatura-evento-associado-list/assinatura.evento.associado.list.component';
 import { AssinaturaEventoAssociadoFormComponent } from '../assinatura-evento-associado/assinatura-evento-associado-form/assinatura.evento.associado.form.component';
-import { AssociadoCaptacaoFormComponent } from '../associado-captacao/associado-captacao-form/associado-captacao.form.component';
 
 const adminRoutes: Routes = [
     {path: '', redirectTo: 'admin', pathMatch: 'full'},
@@ -93,7 +90,6 @@ const adminRoutes: Routes = [
             { path: 'EventoPreview/:id', component: EventoPreviewComponent},
             { path: 'UserProfile/:id', component: UserProfileFormComponent },
             { path: 'AssociadoPublico', component: AssociadoSelfFormComponent},
-            // { path: 'AssociadoCaptacao', component: AssociadoCaptacaoFormComponent},
             { path: 'FichaFinanceira', component: FichaFinanceiraListComponent},
             { path: 'FichaFinanceira/:id', component: FichaFinanceiraFormComponent},
             { path: 'FichaFinanceiraNova', component: FichaFinanceiraFormComponent},
@@ -108,7 +104,6 @@ const adminRoutes: Routes = [
             { path: 'DescontoAnuidadeAtcDetalhe', component: DescontoAnuidadeAtcFormComponent},
             { path: 'MinhaAssinaturaEvento', component: AssinaturaEventoAssociadoListComponent},
             { path: 'MinhaAssinaturaEventoDetalhe/:id', component: AssinaturaEventoAssociadoFormComponent},
-
           ]
     }
   ];

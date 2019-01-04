@@ -187,8 +187,10 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
         && this.assinaturaAnuidadeDao.codePS !== ''
         && this.assinaturaAnuidadeDao.emProcessoPagamento === false
         ) {
-          this._botaoPagSeguroOk = true;
-          this._targetPagSeguro = this.routePS.postGotoChekOut(this.assinaturaAnuidadeDao.codePS);
+            if (this.assinaturaAnuidadeDao.codePS.substring(0, 13) !== 'Dado_Migrado_') {
+              this._botaoPagSeguroOk = true;
+              this._targetPagSeguro = this.routePS.postGotoChekOut(this.assinaturaAnuidadeDao.codePS);
+        }
       }
 
       if (this.assinaturaAnuidadeDao.emProcessoPagamento === true) {

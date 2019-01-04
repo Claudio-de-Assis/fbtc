@@ -14,16 +14,17 @@ import { UserProfile } from '../model/user-profile';
 export class HeaderComponent {
 
     user: string;
-    userProfile: UserProfile
+    userProfile: UserProfile;
     isLoged: boolean;
-    isToggleIn: string = '';
+    isToggleIn: string;
 
-    @ViewChild("toogle") toggle;
+    @ViewChild('toogle') toggle;
     constructor(userService: UserService, private authService: AuthService, private router: Router) {
 
+        this.isToggleIn = '';
         this.isLoged = true;
         // this.user = userService.userName;
-        this.getUserProfile()
+        this.getUserProfile();
     }
 
     isToggle(menuItem: string) {
@@ -34,17 +35,13 @@ export class HeaderComponent {
         }
     }
 
-    logout(){
+    logout() {
         this.authService.logout();
         this.router.navigate(['login']);
     }
 
-    getUserProfile(){
-        this.userProfile = this.authService.getUserProfile()
-        console.log('user profile header => ', this.userProfile)
+    getUserProfile() {
+        this.userProfile = this.authService.getUserProfile();
+        // console.log('user profile header => ', this.userProfile)
     }
-
-
-
-    
 }

@@ -3,8 +3,19 @@
         &nbsp;
     </div>
     <div class="col-lg-8">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
+            </div>
+            <div class="col-lg-4">
+                <a class="navbar-brand align-middle" [routerLink]="['/']">
+                    <svg >
+                        <image href="assets/fbtc-logo.png" src="fbtc-logo.png" />
+                    </svg>
+                </a>
+            </div>        
+        </div>
 
-        <h1 class="page-header">{{ title }} <span class="badge badge-default">{{ badge }}</span></h1>
         <div class="row">
 
 <!-- Formulário para cadastro de um novo Usuário -->
@@ -68,7 +79,7 @@
                                     sectionId="AS" 
                                     maxFiles="1" 
                                     maxSize="2" 
-                                    fileExt="JPG, GIF, PNG" 
+                                    fileExt="JPG, GIF, PNG, JPEG, BMP" 
                                     (uploadStatus)="refreshImages($event)" >
                                 </app-file-upload>
                             </div>
@@ -86,15 +97,15 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="inpRG">RG:</label>
-                                    <input id="inpRG" name="rg" class="form-control" type="number"
-                                        maxlength="15"
+                                    <input id="inpRG" name="rg" class="form-control" type="text"
+                                        maxlength="30"
                                         [(ngModel)]="associado.rg"  #rg="ngModel"/>
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="inpMatricula">Matricula:</label>
-                                    <input id="inpMatricula" name="matricula" class="form-control" type="number"
+                                    <input id="inpMatricula" name="matricula" class="form-control" type="text"
                                         maxlength="15"
                                         [(ngModel)]="associado.nrMatricula" #matricula="ngModel"/>
                                 </div>
@@ -102,8 +113,8 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="inpNrelular">Celular:</label>
-                                    <input id="inpNrCelular" name="nrCelular" class="form-control" type="number"
-                                        required  minlength="10" maxlength="11" 
+                                    <input id="inpNrCelular" name="nrCelular" class="form-control" type="text"
+                                        required  minlength="10" maxlength="12" 
                                         [(ngModel)]="associado.nrCelular" #nrCelular="ngModel"/>
                                     <div *ngIf="nrCelular.invalid && (nrCelular.dirty || nrCelular.touched)"
                                         class="alert alert-danger">
@@ -115,8 +126,8 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="inpNrTelDivulgacao">Telefone Divulgação:</label>
-                                    <input id="inpNrTelDivulgacao" name="nrTelDivulgacao" class="form-control" type="number"
-                                        minlength="10" maxlength="11"     
+                                    <input id="inpNrTelDivulgacao" name="nrTelDivulgacao" class="form-control" type="text"
+                                        minlength="10" maxlength="12"     
                                         [(ngModel)]="associado.nrTelDivulgacao" #nrTelDivulgacao="ngModel"/>
                                         <div *ngIf="nrTelDivulgacao.invalid && (nrTelDivulgacao.dirty || nrTelDivulgacao.touched)"
                                             class="alert alert-danger">
@@ -130,7 +141,6 @@
                                 <div class="form-group">
                                     <label for="sltATC">ATC:</label>
                                     <select id="sltATC"  name="ATC" class="form-control" 
-                                            
                                         [(ngModel)]="associado.atcId" #atcId="ngModel">
                                         <option *ngFor="let op of atcs" value="{{ op.atcId }}">{{ op.nome }}</option>
                                     </select>
@@ -153,16 +163,16 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="inpCRP">CRP:</label>
-                                    <input id="inpCRP" name="crp" class="form-control" type="number"
-                                        maxlength="15"
+                                    <input id="inpCRP" name="crp" class="form-control" type="text"
+                                        maxlength="60"
                                         [(ngModel)]="associado.crp" #crp="ngModel"/>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="inpCRM">CRM:</label>
-                                    <input id="inpCRM" name="crm" class="form-control" type="number"
-                                        maxlength="15"
+                                    <input id="inpCRM" name="crm" class="form-control" type="text"
+                                        maxlength="60"
                                         [(ngModel)]="associado.crm" #crm="ngModel"/>
                                 </div>    
                             </div>
@@ -178,7 +188,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label for="inpDataCadastro"> Data Cadastro:</label>
+                                    <label for="inpDataCadastro">Data Cadastro:</label>
                                     <input id="inpDataCadastro" name="dataCadastro" class="form-control" type="text"
                                         readonly
                                         value="{{ associado.dtCadastro | date:'dd/MM/yyyy'}}" />

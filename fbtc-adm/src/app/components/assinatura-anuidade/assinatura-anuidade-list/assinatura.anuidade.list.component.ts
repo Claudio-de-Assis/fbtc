@@ -26,6 +26,7 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
   editAtivo: boolean;
   editNome: string;
   editCpf: string;
+  editComAssinatura: boolean;
 
   submitted: boolean;
 
@@ -72,6 +73,7 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
     this._msgProgresso = '';
     this._msgProgresso2 = '';
 
+    this.editComAssinatura = true;
   }
 
   getAnuidades(): void {

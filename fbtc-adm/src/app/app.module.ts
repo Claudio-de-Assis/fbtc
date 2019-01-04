@@ -1,3 +1,4 @@
+import { AssociadoCaptacaoFormComponent } from './components/associado-captacao/associado-captacao-form/associado-captacao.form.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -40,6 +41,8 @@ import { AssinaturaAnuidadeAssociadoModule } from './components/assinatura-anuid
 import { DescontoAnuidadeAtcModule } from './components/desconto-anuidade-atc/desconto.anuidade.atc.module';
 import { AssinaturaEventoAssociadoModule } from './components/assinatura-evento-associado/assinatura-evento-associado.module';
 import { AssociadoCaptacaoModule } from './components/associado-captacao/associado-captacao.module';
+import { PageNotFoundComponent } from './not-found.component';
+import { LoginComponent } from './components/login/login.form.component';
 
 
 @NgModule({
@@ -71,6 +74,9 @@ import { AssociadoCaptacaoModule } from './components/associado-captacao/associa
   ],
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
+    // LoginComponent,
+    // AssociadoCaptacaoFormComponent,
     MessagesComponent,
   ],
   providers: [

@@ -20,7 +20,7 @@ export class ColaboradorFormComponent implements OnInit {
     enderecos: Endereco[];
     perfil: Perfil;
 
-    @Input() colaborador: Colaborador = { colaboradorId: 0, tipoPerfil: '',
+    @Input() colaborador: Colaborador = { colaboradorId: 0,
         pessoaId: 0, nome: '', cpf: '', rg: '', eMail: '', nomeFoto: '',
         sexo: '', dtNascimento: null, nrCelular: '', passwordHash: '',
         dtCadastro: null, ativo: true,

@@ -8,55 +8,52 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="sltAnuidade">Anuidade:</label>
-                                <select id="sltAnuidade" (ngModelChange)="gotoLimparGrids()" name="anuidade" class="form-control"
-                                    required
-                                    [(ngModel)]="editAnuidadeId" #anuidade="ngModel">
-                                    <option *ngFor="let op of anuidades" value="{{ op.anuidadeId }}">{{ op.exercicio }}</option>
-                                </select>
-                                <div *ngIf="anuidade.invalid && (anuidade.dirty || anuidade.touched)"
-                                    class="alert alert-danger">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="sltAnuidade">Anuidade:</label>
+                            <select id="sltAnuidade" (ngModelChange)="gotoLimparGrids()" name="anuidade" class="form-control"
+                                required
+                                [(ngModel)]="editAnuidadeId" #anuidade="ngModel">
+                                <option *ngFor="let op of anuidades" value="{{ op.anuidadeId }}">{{ op.exercicio }}</option>
+                            </select>
+                            <div *ngIf="anuidade.invalid && (anuidade.dirty || anuidade.touched)" class="alert alert-danger">
                                 <div *ngIf="anuidade.errors.required">* Informe a anuidade.</div>
                             </div>    
-
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" name="nome" class="form-control" type="text"
+                                minlength="2"  maxlength="100"
+                                [(ngModel)]="editNome"  #nome="ngModel"/>
+                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6">
-                                <div class="form-group">
-                                        <label for="inpNome">Nome:</label>
-                                        <input id="inpNome" name="nome" class="form-control" type="text"
-                                            minlength="2"  maxlength="100"
-                                            [(ngModel)]="editNome"  #nome="ngModel"/>
-                                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
-                                                class="alert alert-danger">
-                                                <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
-                                        </div>
-                                </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpCAssinatura">Associado com Assinatura:</label>
+                            <div>
+                                <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
+                                    <input type="radio" [(ngModel)]="editComAssinatura" name="rdaComAssinatura" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
+                                </label>
                             </div>
-<!--
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                        <label for="inpCpf">CPF:</label>
-                                        <input id="inpCpf" name="Cpf" class="form-control" type="number"
-                                            maxlength="15"
-                                            [(ngModel)]="editCpf" placeholder="000.000.000-00" #cpf="ngModel"/>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
             
--->
-                        <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Status da Assinatura:</label><br>
-                                    <div>
-                                        <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
-                                            <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
-                                        </label>
-                                    </div>
+                    <div class="col-lg-2">
+                            <div class="form-group">
+                                <label>Assinatura Ativa:</label><br>
+                                <div>
+                                    <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
+                                        <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
+                                    </label>
                                 </div>
-                        </div>
+                            </div>
+                    </div>
                 </div>
             </div>
             <div class="panel-footer">
@@ -64,13 +61,12 @@
                     <div class="col-lg-12 text-right">
                             <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                             <button type="submit" class="btn btn-primary" [disabled]="!assinaturaForm.form.valid">Pesquisar</button>
-                            <!--<button class="btn btn-default" [disabled]="!assinaturaForm.form.valid" (click)="gotoNovaAssinaturaAnuidade()">Nova</button>-->
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" *ngIf="editComAssinatura === true">
             <div class="panel-heading">
                 Listagem de Assinaturas{{ _msgProgresso }}
             </div>
@@ -111,7 +107,7 @@
             </div>
         </div>
 
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" *ngIf="editComAssinatura === false">
                 <div class="panel-heading">
                     Listagem de Assinaturas Pendentes{{ _msgProgresso2 }}
                 </div>

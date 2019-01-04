@@ -65,6 +65,11 @@ export class LoginComponent {
 
 //  console.log('pre: ' + this.authService.isLoggedIn);
 
+    this.editeMail = this.editeMail.trim();
+    this.editeMail = this.editeMail.toLowerCase();
+
+    this.editPassword = this.editPassword.trim();
+
     this.authService.login(this.editPassword, this.editeMail).subscribe((userProfile: UserProfile) => {
           this.setMessage();
 
@@ -111,6 +116,11 @@ export class LoginComponent {
 
         this._msgDng = 'Por favor, informe o seu E-Mail.';
     }
+  }
+
+  gotoNovoCadastro() {
+
+      this.router.navigate(['/AssociadoCaptacao']);
   }
 
   gotoAvaliaRetornoEMail(msg: string) {

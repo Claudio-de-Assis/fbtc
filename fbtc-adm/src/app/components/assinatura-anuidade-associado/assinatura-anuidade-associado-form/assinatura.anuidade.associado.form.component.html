@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-lg-3">
                         <label for="inpValorPraticado">Valor praticado:</label>
-                        <input id="inpValorPraticado" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.valor | mycurrency: 2 }}" disabled>
+                        <input id="inpValorPraticado" type="text" class="form-control" value="{{ assinaturaAnuidadeDao.valor | currency:'BRL':'symbol':'1.2-2':'pt-br' }}" disabled>
                     </div>
                     <div class="col-lg-3">
                         <label for="inpDtVencimento">Data Venc.:</label>

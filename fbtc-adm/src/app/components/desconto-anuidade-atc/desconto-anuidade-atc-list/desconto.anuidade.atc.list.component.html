@@ -8,52 +8,50 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="sltAnuidade">Anuidade:</label>
-                                <select id="sltAnuidade" (ngModelChange)="gotoLimparGrids()" name="anuidade" class="form-control"
-                                    required
-                                    [(ngModel)]="editAnuidadeId" #anuidade="ngModel">
-                                    <option *ngFor="let op of anuidades" value="{{ op.anuidadeId }}">{{ op.exercicio }}</option>
-                                </select>
-                                <div *ngIf="anuidade.invalid && (anuidade.dirty || anuidade.touched)"
-                                    class="alert alert-danger">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="sltAnuidade">Anuidade:</label>
+                            <select id="sltAnuidade" (ngModelChange)="gotoLimparGrids()" name="anuidade" class="form-control"
+                                required
+                                [(ngModel)]="editAnuidadeId" #anuidade="ngModel">
+                                <option *ngFor="let op of anuidades" value="{{ op.anuidadeId }}">{{ op.exercicio }}</option>
+                            </select>
+                            <div *ngIf="anuidade.invalid && (anuidade.dirty || anuidade.touched)" class="alert alert-danger">
                                 <div *ngIf="anuidade.errors.required">* Informe a anuidade.</div>
                             </div>    
-
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="inpNome">Nome:</label>
+                            <input id="inpNome" name="nome" class="form-control" type="text"
+                                minlength="2"  maxlength="100"
+                                [(ngModel)]="editNome"  #nome="ngModel"/>
+                                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="alert alert-danger">
+                                    <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="inpCDesconto">Associados com desconto:</label><br>
+                            <div>
+                                <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
+                                    <input type="radio" [(ngModel)]="editComDesconto" name="rdaComDesconto" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
+                                </label>
                             </div>
                         </div>
-
-                        <div class="col-lg-5">
-                                <div class="form-group">
-                                        <label for="inpNome">Nome:</label>
-                                        <input id="inpNome" name="nome" class="form-control" type="text"
-                                            minlength="2"  maxlength="100"
-                                            [(ngModel)]="editNome"  #nome="ngModel"/>
-                                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
-                                                class="alert alert-danger">
-                                                <div *ngIf="nome.errors.minlength"> * O Nome deve ter pelo menos 2 letras.</div>
-                                        </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                    <label>Associados com desconto:</label><br>
-                                    <div>
-                                        <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
-                                            <input type="radio" [(ngModel)]="editComDesconto" name="rdaComDesconto" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
-                                        </label>
-                                    </div>
-                            </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label>Status do desconto:</label><br>
-                                <div>
-                                    <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
-                                        <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
-                                    </label>
-                                </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="inpDescAtivo">Desconto Ativo?</label><br>
+                            <div>
+                                <label required class="radion-inline" *ngFor="let op of _util.optBoolean; let idx = index">
+                                    <input type="radio" [(ngModel)]="editAtivo" name="rdaAtivo" [value]="op.value" [checked]="idx === 1"> {{ op.name }} &nbsp;
+                                </label>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
             <div class="panel-footer">
@@ -61,17 +59,57 @@
                     <div class="col-lg-12 text-right">
                             <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                             <button type="submit" class="btn btn-primary" [disabled]="!assinaturaForm.form.valid">Pesquisar</button>
-                            <!--<button class="btn btn-default" [disabled]="!assinaturaForm.form.valid" (click)="gotoNovaAssinaturaAnuidade()">Nova</button>-->
                     </div>
                 </div>
             </div>
         </div>
     </form>
     <div class="panel panel-primary" *ngIf="editComDesconto === true">
-            <div class="panel-heading">
-                Listagem de Associados com desconto para a anuidade{{ _msgProgresso }}
+        <div class="panel-heading">
+            Listagem de Associados com desconto para a anuidade{{ _msgProgresso }}
+        </div>
+        <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>Exercício</td>
+                                <td>Nome</td>
+                                <td>ATC</td>
+                                <td>Data Desconto</td>
+                                <td>Ativo</td>
+                            </tr>
+                        </thead>
+                        <tbody class="DescontosAnuidadesAtcs">
+                            <tr (click)="onSelect(descontoAnuidadeAtcDao)" *ngFor="let descontoAnuidadeAtcDao of descontoAnuidadeAtcDaos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                                [class.selected]="descontoAnuidadeAtcDao.descontoAnuidadeAtcId === selectedId">
+                                <td>{{ descontoAnuidadeAtcDao.exercicio }}</td>
+                                <td>{{ descontoAnuidadeAtcDao.nomePessoa }}</td>
+                                <td>{{ descontoAnuidadeAtcDao.nomeAtc }}</td>
+                                <td>{{ descontoAnuidadeAtcDao.dtDesconto | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{ descontoAnuidadeAtcDao.ativo | booMessage }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-footer text-center" >
+                <div class="btn-group">
+                    <pagination-controls    (pageChange)="p = $event"
+                                            maxSize="9"
+                                            directionLinks="true"
+                                            previousLabel="Anterior"
+                                            nextLabel="Próxima"
+                    ></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary" *ngIf="editComDesconto === false">
+            <div class="panel-heading">
+                Listagem de Associados sem com desconto para a anuidade{{ _msgProgresso2 }}
+            </div>
+            <div class="panel-body" >
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -83,13 +121,13 @@
                                     <td>Ativo</td>
                                 </tr>
                             </thead>
-                            <tbody class="DescontosAnuidadesAtcs">
-                                <tr (click)="onSelect(descontoAnuidadeAtcDao)" *ngFor="let descontoAnuidadeAtcDao of descontoAnuidadeAtcDaos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
+                            <tbody class="SemDescontosAnuidadesAtcs">
+                                <tr (click)="onSelectSemDesconto(descontoAnuidadeAtcDao)" *ngFor="let descontoAnuidadeAtcDao of semDescontoAnuidadeAtcDaos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
                                     [class.selected]="descontoAnuidadeAtcDao.descontoAnuidadeAtcId === selectedId">
                                     <td>{{ descontoAnuidadeAtcDao.exercicio }}</td>
                                     <td>{{ descontoAnuidadeAtcDao.nomePessoa }}</td>
                                     <td>{{ descontoAnuidadeAtcDao.nomeAtc }}</td>
-                                    <td>{{ descontoAnuidadeAtcDao.dtDesconto | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{ descontoAnuidadeAtcDao.dtDesconto | date: 'dd/MM/yyyy' }}</td>
                                     <td>{{ descontoAnuidadeAtcDao.ativo | booMessage }}</td>
                                 </tr>
                             </tbody>
@@ -98,55 +136,14 @@
             </div>
             <div class="panel-footer text-center">
                 <div class="btn-group">
-                        <pagination-controls    (pageChange)="p = $event"
-                                                maxSize="9"
-                                                directionLinks="true"
-                                                previousLabel="Anterior"
-                                                nextLabel="Próxima"
-                        ></pagination-controls>
+                    <pagination-controls    (pageChange)="p = $event"
+                                            maxSize="9"
+                                            directionLinks="true"
+                                            previousLabel="Anterior"
+                                            nextLabel="Próxima"
+                    ></pagination-controls>
                 </div>
             </div>
         </div>
-
-        <div class="panel panel-primary" *ngIf="editComDesconto === false">
-                <div class="panel-heading">
-                    Listagem de Associados sem com desconto para a anuidade{{ _msgProgresso2 }}
-                </div>
-                <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <td>Exercício</td>
-                                        <td>Nome</td>
-                                        <td>ATC</td>
-                                        <td>Data Desconto</td>
-                                        <td>Ativo</td>
-                                    </tr>
-                                </thead>
-                                <tbody class="SemDescontosAnuidadesAtcs">
-                                    <tr (click)="onSelectSemDesconto(descontoAnuidadeAtcDao)" *ngFor="let descontoAnuidadeAtcDao of semDescontoAnuidadeAtcDaos | paginate: { itemsPerPage: _itensPerPage, currentPage: p }"
-                                        [class.selected]="descontoAnuidadeAtcDao.descontoAnuidadeAtcId === selectedId">
-                                        <td>{{ descontoAnuidadeAtcDao.exercicio }}</td>
-                                        <td>{{ descontoAnuidadeAtcDao.nomePessoa }}</td>
-                                        <td>{{ descontoAnuidadeAtcDao.nomeAtc }}</td>
-                                        <td>{{ descontoAnuidadeAtcDao.dtDesconto | date: 'dd/MM/yyyy' }}</td>
-                                        <td>{{ descontoAnuidadeAtcDao.ativo | booMessage }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                </div>
-                <div class="panel-footer text-center">
-                    <div class="btn-group">
-                            <pagination-controls    (pageChange)="p = $event"
-                                                    maxSize="9"
-                                                    directionLinks="true"
-                                                    previousLabel="Anterior"
-                                                    nextLabel="Próxima"
-                            ></pagination-controls>
-                    </div>
-                </div>
-            </div>
     </div>
 </div>
