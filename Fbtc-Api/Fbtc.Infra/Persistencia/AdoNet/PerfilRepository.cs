@@ -31,7 +31,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             logRep = new LogRepository();
         }
 
-
         public IEnumerable<Perfil> GetAll(bool? isAtivo, string dominio)
         {
             List<DbParameter> _parametros = new List<DbParameter>();

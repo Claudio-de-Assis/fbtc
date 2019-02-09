@@ -454,7 +454,6 @@ namespace Fbtc.Application.Services
             ArgumentsValidator.RaiseExceptionOfInvalidArguments(
                 RaiseException.IfNullOrEmpty(a.Nome, "Nome do Associado não informado"),
                 RaiseException.IfNotEmail(a.EMail, "E-Mail inválido"),
-                RaiseException.IfNullOrEmpty(a.NrCelular, "NrCelular não informado"),
                 RaiseException.IfEqualsZero(a.TipoPublicoId, "Tipo de Publico não informado")
             );
 
@@ -462,7 +461,7 @@ namespace Fbtc.Application.Services
                 PessoaId = a.PessoaId,
                 Nome = Functions.AjustaTamanhoString(a.Nome, 100),
                 EMail = Functions.AjustaTamanhoString(a.EMail, 100),
-                NomeFoto = Functions.AjustaTamanhoString(a.NomeFoto, 32),
+                NomeFoto = Functions.AjustaTamanhoString(a.NomeFoto, 100),
                 Sexo = a.Sexo,
                 DtNascimento = a.DtNascimento,
                 NrCelular = Functions.AjustaTamanhoString(a.NrCelular, 15),
@@ -471,10 +470,10 @@ namespace Fbtc.Application.Services
                 ATCId = a.ATCId == 0 ? null : a.ATCId,
                 TipoPublicoId = a.TipoPublicoId,
                 Cpf = Functions.AjustaTamanhoString(a.Cpf, 15),
-                Rg = Functions.AjustaTamanhoString(a.Rg, 15),
+                Rg = Functions.AjustaTamanhoString(a.Rg, 30),
                 NrMatricula = Functions.AjustaTamanhoString(a.NrMatricula, 15),
-                Crp = Functions.AjustaTamanhoString(a.Crp, 15),
-                Crm = Functions.AjustaTamanhoString(a.Crm, 15),
+                Crp = Functions.AjustaTamanhoString(a.Crp, 60),
+                Crm = Functions.AjustaTamanhoString(a.Crm, 60),
                 NomeInstFormacao = Functions.AjustaTamanhoString(a.NomeInstFormacao, 100),
                 Certificado = a.Certificado,
                 DtCertificacao = a.DtCertificacao,
@@ -551,7 +550,7 @@ namespace Fbtc.Application.Services
             }
             catch (Exception ex)
             {
-                throw ex;
+                return ex.Message;
             }
         }
 

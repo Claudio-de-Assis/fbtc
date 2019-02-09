@@ -12,8 +12,7 @@ namespace Fbtc.Application.Services
     public class PerfilApplication : IPerfilApplication
     {
         private readonly IPerfilService _perfilService;
-
-
+        
         public PerfilApplication(IPerfilService perfilService)
         {
             _perfilService = perfilService;

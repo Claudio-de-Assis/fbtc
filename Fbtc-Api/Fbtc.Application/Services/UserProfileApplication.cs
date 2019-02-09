@@ -77,7 +77,7 @@ namespace Fbtc.Application.Services
                 PessoaId = p.PessoaId,
                 Nome = Functions.AjustaTamanhoString(p.Nome, 100),
                 EMail = Functions.AjustaTamanhoString(p.EMail, 100),
-                NomeFoto = Functions.AjustaTamanhoString(p.NomeFoto, 32),
+                NomeFoto = Functions.AjustaTamanhoString(p.NomeFoto, 100),
                 Sexo = p.Sexo,
                 NrCelular = Functions.AjustaTamanhoString(p.NrCelular, 15),
                 PasswordHash = Functions.AjustaTamanhoString(p.PasswordHash, 100),

@@ -997,7 +997,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                                         "Para você logar-se, por favor, informe o seu e-mail e a senha abaixo:</br></br></br>" +
                                         $"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{_newPassword}</b></br></br></br>" +
                                         "Por favor, para seu segurança, troque-a no seu próximo acesso.</br></br></br>" +
-                                        "<a href='http://www.fbtc.org.br/Account/Login' target='_blank'>fbtc.org.br - Acessar sua Conta</a></br>" +
+                                        "<a href='http://administrativo.fbtc.org.br' target='_blank'>http://administrativo.fbtc.org.br - Acessar sua Conta</a></br>" +
                                     "</p>" +
                                     "<p><i>2018 - FBTC Federação Brasileira de Terapias Cognitivas - Direitos reservados.</i></p> " +
                                      "<p>Este é um e-mail automático da FBTC, por favor não o responda.</p> " +
