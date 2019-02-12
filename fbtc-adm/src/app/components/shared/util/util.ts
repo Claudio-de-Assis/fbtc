@@ -1,9 +1,7 @@
 export class Util {
 
-
     public static lstAno = [2000];
-
-    // public static lstPerfil = ['Gestor do Site', 'Secretaria', 'Financeiro'];
+    // static strRet: string;
 
     public static optTipoPerfil = [
         {name: 'Gestor', value: '1'},
@@ -95,4 +93,16 @@ export class Util {
         {name: 'Comercial', value: '2'},
         {name: 'Outro', value: '3'}
     ];
+
+
+    public static StringSanity(strEnt: string): string {
+
+        let strRet = strEnt;
+
+        if (strRet.length > 0) {
+            strRet = strRet.trim();
+             strRet = strRet.replace(/[^A-Za-z0-9_' 'áéíóúÁÉÍÓÚàÀâÃâÂêÊõÕôÔüÜçÇ/'/-]/g, '');
+        }
+        return strRet;
+    }
 }

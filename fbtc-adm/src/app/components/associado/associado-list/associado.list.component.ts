@@ -145,10 +145,12 @@ export class AssociadoListComponent implements OnInit {
     gotoBuscarAssociado(): void {
 
         if (this.editNome.trim() !== '') {
-            this._nome = this.editNome.trim();
+            this.editNome = this._util.StringSanity(this.editNome);
+            this._nome = this.editNome !== '' ? this.editNome : '0';
         }
         if (this.editCrp !== '') {
-            this._crp = this.editCrp;
+            this.editCrp = this._util.StringSanity(this.editCrp);
+            this._crp = this.editCrp !== '' ? this.editCrp : '0';
         }
         if (this.editAtivo !== null) {
             if (this.editAtivo) {

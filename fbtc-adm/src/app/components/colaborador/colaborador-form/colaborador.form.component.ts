@@ -112,14 +112,14 @@ export class ColaboradorFormComponent implements OnInit {
 
         this.submitted = false;
     }
-
+    /*
     gotoShowPopUp() {
 
       this.editMessagem = 'Registro salvo com sucesso!';
       this.editShowPopup = true;
       // Colocar a chamada para a implementação do PopUp modal de aviso:
       alert('Registro salvo com sucesso!');
-    }
+    }*/
 
     avaliaRetorno(msgRet: string) {
 

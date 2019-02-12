@@ -95,12 +95,13 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
     }
 
     if (this.editNome.trim() !== '') {
-      this._nome = this.editNome.trim();
+      this.editNome = this._util.StringSanity(this.editNome);
+      this._nome = this.editNome !== '' ? this.editNome : '0';
     }
 
-    if (this.editCpf !== '') {
+    /*if (this.editCpf !== '') {
         this._cpf = this.editCpf;
-    }
+    }*/
 
     if (this.editAtivo !== null) {
       if (this.editAtivo) {

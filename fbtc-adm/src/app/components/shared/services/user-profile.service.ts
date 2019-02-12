@@ -1,3 +1,4 @@
+import { UserProfileLogin } from './../model/user-profile';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -68,22 +69,30 @@ export class UserProfileService {
             catchError(this.handleError<string>(`getNomeImagemByPessoaId id=${id}`))
         );
     }
-
+/*
     getLogin(senha: string, eMail: string): Observable<UserProfile> {
-        return this.http.get<UserProfile>(this.apiRoute.loginUser(senha, eMail))
-            .do(result => this.userProfile = result)
+        return this.http.get<UserProfile>(this.apiRoute.login(senha, eMail))
+            .do(result => this.userProfile = result);
             // .pipe(tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
             //       catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
         // );
+    }*/
+
+    getLoginUser (userProfileLogin: UserProfileLogin): Observable<UserProfile> {
+        return this.http.post<UserProfile>(this.apiRoute.loginUser(), userProfileLogin, httpOptions).pipe(
+            tap(_ => this.log(`added UserProfile w/ id=${userProfileLogin.eMail}`)),
+            catchError(this.handleError<UserProfile>('getLoginUser'))
+        );
     }
 
+/*
     getByEmailPassword(senha: string, eMail: string): Observable<UserProfile> {
         return this.http.get<UserProfile>(this.apiRoute.getByEmailPassword(senha, eMail)).pipe(
             tap(_ => this.log(`fetched UserProfile senha=${senha},email=${eMail}`)),
             catchError(this.handleError<UserProfile>(`getUserProfile senha=${senha},email=${eMail}`))
         );
     }
-
+*/
     /**
     * Handle Http operation that failed.
     * Let the app continue.
@@ -124,7 +133,7 @@ export class UserProfileService {
         );
     }
 
-    getUserProfile(){
-        return this.userProfile
+    getUserProfile() {
+        return this.userProfile;
     }
 }

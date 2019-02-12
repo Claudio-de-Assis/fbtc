@@ -1,3 +1,4 @@
+import { UserProfileLogin } from './../model/user-profile';
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 
@@ -40,13 +41,19 @@ export class UserProfileRoute {
         return AppSettings.API_ENDPOINT + this.url + `ValidaEmail/${pessoaId},${eMail}/`;
     }
 
+    /*
     // [Route("Login/{password},{email}/")]
-    loginUser(senha: string, email: string): string {
+    login(senha: string, email: string): string {
         return AppSettings.API_ENDPOINT + this.url + `Login/${senha},${email}/`;
+    }*/
+
+    // [Route("LoginUser")]
+    loginUser(): string {
+        return AppSettings.API_ENDPOINT + this.url + `LoginUser`;
     }
 
     // [Route("GetByEmailPassword/{password},{email}/")]
-    getByEmailPassword(senha: string, email: string): string {
-        return AppSettings.API_ENDPOINT + this.url + `GetByEmailPassword/${senha},${email}/`;
-    }
+    // getByEmailPassword(senha: string, email: string): string {
+       //  return AppSettings.API_ENDPOINT + this.url + `GetByEmailPassword/${senha},${email}/`;
+    // }
 }

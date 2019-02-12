@@ -79,7 +79,8 @@ export class ColaboradorListComponent implements OnInit {
   gotoBuscarColaborador(): void {
 
     if (this.editNome.trim() !== '') {
-      this._nome = this.editNome.trim();
+      this.editNome = this._util.StringSanity(this.editNome);
+      this._nome = this.editNome !== '' ? this.editNome : '0';
     }
 
     if (this.editAtivo !== null) {

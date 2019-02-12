@@ -4,7 +4,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 
 import { AuthService } from '../shared/services/auth.service';
 
-import { UserProfile } from './../shared/model/user-profile';
+import { UserProfile, UserProfileLogin } from './../shared/model/user-profile';
 import { UserProfileService } from '../shared/services/user-profile.service';
 
 @Component({
@@ -18,48 +18,55 @@ export class LoginComponent {
   message: string;
   title: string;
   _msg: string;
-  _msgDng: string;
   _msgPWD: string;
   editeMail: string;
   editPassword: string;
   permission = [];
 
+  alertClassType: string;
+
+  userProfileLogin: UserProfileLogin;
+  _msgProgresso: string;
+
   constructor(
       public authService: AuthService,
       public userProfileService: UserProfileService,
       public router: Router,
-      private permissionsService: NgxPermissionsService) {
+      private permissionsService: NgxPermissionsService
+  ) {
     this.setMessage();
     this.title = 'Login';
     this._msg = '';
-    this._msgDng = '';
     this.editeMail = '';
     this.editPassword = '';
     this._msgPWD = '';
+    this.userProfileLogin = new UserProfileLogin();
+
+    this.alertClassType = 'alert alert-info';
+    this._msgProgresso = '';
   }
 
   setMessage() {
     this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-
-// console.log ( 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out'));
   }
 
   login() {
 
     this._msg = '';
-    this._msgDng = '';
-
-    this.message = 'Trying to log in ...';
-
-//  console.log('Trying to log in ...');
+//    this.message = 'Trying to log in ...';
+//    console.log('Trying to log in ...');
 
     if (this.editeMail.trim() === '') {
-      this._msgDng = 'Por favor, informe o seu E-Mail.';
+
+      this.alertClassType = 'alert alert-danger';
+      this._msg  = 'Por favor, informe o seu E-Mail.';
       return;
     }
 
     if (this.editPassword.trim() === '') {
-      this._msgDng = 'Por favor, informe a sua Senha.';
+
+      this.alertClassType = 'alert alert-danger';
+      this._msg  = 'Por favor, informe a sua Senha.';
       return;
     }
 
@@ -70,11 +77,17 @@ export class LoginComponent {
 
     this.editPassword = this.editPassword.trim();
 
-    this.authService.login(this.editPassword, this.editeMail).subscribe((userProfile: UserProfile) => {
-          this.setMessage();
+    this.userProfileLogin.eMail = this.editeMail;
+    this.userProfileLogin.passwordHash = this.editPassword;
 
-//        console.log('antes: ' + this.authService.isLoggedIn);
-//        console.log('userProfile: ' + userProfile);
+    this._msgProgresso = 'Validando os dados informados. Por favor, aguarde!...';
+
+    this.authService.loginUser( this.userProfileLogin).subscribe((userProfile: UserProfile) => {
+          this.setMessage();
+          this._msgProgresso = '';
+
+        // console.log('antes: ' + this.authService.isLoggedIn);
+        // console.log('userProfile: ' + userProfile);
 
           if (userProfile) {
             // Get the redirect URL from our auth service
@@ -88,7 +101,10 @@ export class LoginComponent {
             this.router.navigate([redirect]);
 
           } else {
-            this._msgDng = 'ATENÇÃO: E-Mail e/ou Senha inválidos.';
+
+            this.alertClassType = 'alert alert-danger';
+            this._msg  = 'ATENÇÃO: E-Mail e/ou Senha inválidos.';
+            this.editPassword = '';
           }
         }
       );
@@ -97,7 +113,7 @@ export class LoginComponent {
   gotoReenviarSenha() {
 
     this._msg = '';
-    this._msgDng = '';
+    this.editPassword = '';
 
     if (this.editeMail !== '') {
 
@@ -106,15 +122,19 @@ export class LoginComponent {
         this.editeMail = this.editeMail.trim();
         this.editeMail = this.editeMail.toLowerCase();
 
+        this._msgProgresso = 'Consultando o e-mail informado. Por favor, aguarde!...';
+
         this.userProfileService.ressetPassWordByEMail(this.editeMail)
            .subscribe(msg => {
-             this._msgPWD = msg;
-             this.gotoAvaliaRetornoEMail(this._msgPWD);
+              this._msgProgresso = '';
+              this._msgPWD = msg;
+              this.gotoAvaliaRetornoEMail(this._msgPWD);
             });
 
     } else {
 
-        this._msgDng = 'Por favor, informe o seu E-Mail.';
+      this.alertClassType = 'alert alert-danger';
+      this._msg  = 'Por favor, informe o seu E-Mail.';
     }
   }
 
@@ -126,10 +146,10 @@ export class LoginComponent {
   gotoAvaliaRetornoEMail(msg: string) {
 
     if (msg.substring(0, 7) === 'ATENÇÃO') {
-        // this.alertClassType = 'alert alert-danger';
-        this._msgDng = msg;
+        this.alertClassType = 'alert alert-danger';
+        this._msg  = msg;
     } else {
-        // this.alertClassType = 'alert alert-success';
+        this.alertClassType = 'alert alert-success';
         this._msg = msg;
     }
 }
@@ -137,8 +157,6 @@ export class LoginComponent {
   onSubmit() {
 
     this._msg = '';
-    this._msgDng = '';
-
     this.login();
   }
 

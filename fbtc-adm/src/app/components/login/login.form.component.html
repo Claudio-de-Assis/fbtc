@@ -23,7 +23,9 @@
             <div class="col-lg-12">
             <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
                     <div class="panel panel-default">
-                    <div class="panel-heading">&nbsp;</div>
+                    <div class="panel-heading">
+                        {{ _msgProgresso }}&nbsp;
+                    </div>
                     <div class="panel-body">
                             <div class="row">
                                 
@@ -50,12 +52,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
+
+                                    <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
+                                            <div >{{ _msg }}</div>
+                                    </div>
+<!--
                                     <div *ngIf="_msg !== ''" class="alert alert-success">
                                         <div >{{ _msg }}</div>
                                     </div>
                                     <div *ngIf="_msgDng !== ''" class="alert alert-danger">
                                         <div >{{ _msgDng }}</div>
                                     </div>
+-->
                                 </div>
                                 <div class="col-lg-6"></div>
                             </div>
