@@ -20,6 +20,8 @@ namespace Fbtc.Domain.Interfaces.Repositories
 
         UserProfile Login(string email, string password);
 
+        UserProfile LoginUser(UserProfileLogin userProfileLogin);
+
         UserProfile GetByEmailPassword(string email, string password);
     }
 }

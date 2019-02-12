@@ -50,6 +50,16 @@ namespace Fbtc.Application.Services
             return _userProfileService.Login(email, password);
         }
 
+        public UserProfile LoginUser(UserProfileLogin userProfileLogin)
+        {
+            ArgumentsValidator.RaiseExceptionOfInvalidArguments(
+                RaiseException.IfNotEmail(userProfileLogin.EMail, "Atenção: E-Mail inválido"),
+                RaiseException.IfNullOrEmpty(userProfileLogin.PasswordHash, "Atenção: Senha inválida")
+            );
+
+            return _userProfileService.LoginUser(userProfileLogin);
+        }
+
         public string RessetPasswordByEMail(string email)
         {
 

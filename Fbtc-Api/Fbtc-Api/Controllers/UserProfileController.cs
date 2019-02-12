@@ -245,7 +245,7 @@ namespace Fbtc.Api.Controllers
             }
         }
 
-
+        /*
         // [Authorize]
         [Route("Login/{password},{email}/")]
         [HttpGet]
@@ -283,6 +283,48 @@ namespace Fbtc.Api.Controllers
                 return tsc.Task;
             }
         }
+        */
+
+        // [Authorize]
+        [Route("LoginUser")]
+        [HttpPost]
+        public Task<HttpResponseMessage> LoginUser(UserProfileLogin userProfileLogin)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(userProfileLogin.EMail)) throw new InvalidOperationException("email não informado!");
+                if (string.IsNullOrWhiteSpace(userProfileLogin.PasswordHash)) throw new InvalidOperationException("password não informado!");
+
+                var resultado = _userProfileApplication.LoginUser(userProfileLogin);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+
+        /*
         // [Authorize]
         [Route("GetByEmailPassword/{password},{email}/")]
         [HttpGet]
@@ -319,7 +361,7 @@ namespace Fbtc.Api.Controllers
 
                 return tsc.Task;
             }
-        }
+        }*/
 
     }
 }

@@ -21,6 +21,8 @@ namespace Fbtc.Application.Interfaces
 
         UserProfile Login(string email, string password);
 
+        UserProfile LoginUser(UserProfileLogin userProfileLogin);
+
         UserProfile GetByEmailPassword(string email, string password);
     }
 }

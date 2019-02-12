@@ -38,6 +38,11 @@ namespace Fbtc.Domain.Services
             return _userProfileRepository.Login(email, password);
         }
 
+        public UserProfile LoginUser(UserProfileLogin userProfileLogin)
+        {
+            return _userProfileRepository.LoginUser(userProfileLogin);
+        }
+        
         public string RessetPasswordByEMail(string email)
         {
             return _userProfileRepository.RessetPasswordByEMail(email);

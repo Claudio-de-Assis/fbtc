@@ -450,6 +450,46 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
         }
 
+
+        public UserProfile LoginUser(UserProfileLogin userProfileLogin)
+        {
+            bool _isSucess = false;
+
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            // Definição do parâmetros da consulta:
+            SqlParameter pEmail = new SqlParameter() { ParameterName = "@email", Value = userProfileLogin.EMail };
+
+            _parametros.Add(pEmail);
+            // Fim da definição dos parâmetros
+
+            try
+            {
+                query = @"SELECT P.PessoaId, P.Nome, P.EMail, P.NomeFoto, P.Sexo, 
+                        P.DtNascimento , P.NrCelular, P.PasswordHash, P.DtCadastro, P.PerfilId, P.Ativo 
+                    FROM dbo.AD_Pessoa P  
+                    WHERE P.EMail = @email";
+
+                // Define o banco de dados que será usando:
+                CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
+
+                // Obtém os dados do banco de dados:
+                UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
+
+                if (userProfile != null)
+                    _isSucess = PasswordFunctions.ValidaSenha(userProfileLogin.PasswordHash, userProfile.PasswordHash);
+
+                if (!_isSucess)
+                    userProfile = null;
+
+                return userProfile;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{ex.Message}");
+            }
+        }
+
         public UserProfile GetByEMail(string email)
         {
             List<DbParameter> _parametros = new List<DbParameter>();
