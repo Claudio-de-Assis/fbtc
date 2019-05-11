@@ -49,7 +49,6 @@ export class AnuidadeFormComponent implements OnInit {
 
   onSubmit() {
 
-    this.submitted = true;
     this.saveAnuidade();
   }
 

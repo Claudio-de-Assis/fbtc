@@ -140,8 +140,8 @@
                         <tbody>
                             <tr *ngFor="let tp of eventoDao.tiposPublicosValoresDao" >
                                 <td>{{ tp.nome }}</td>
-                                <td><input currencyMask [(ngModel)]="tp.valor" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                    id="inp{{ tp.tipoPublicoId }}" name="inp{{ tp.tipoPublicoId }}"  class="form-control"/>
+                                <td><!--input currencyMask [(ngModel)]="tp.valor" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    id="inp{{ tp.tipoPublicoId }}" name="inp{{ tp.tipoPublicoId }}"  class="form-control"/-->
                                 <td><input id="chk{{ tp.tipoPublicoId }}" name="chk{{ tp.tipoPublicoId }}" type="checkbox" [(ngModel)]="tp.valorAtivo"/></td>
                             </tr>
                         </tbody>

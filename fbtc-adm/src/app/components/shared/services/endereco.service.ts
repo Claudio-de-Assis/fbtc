@@ -1,11 +1,11 @@
 import { EnderecoRoute } from '../webapi-routes/endereco.route';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs';
+// import 'rxjs';
 
 import { MessageService } from '../../../message.service';
 import { EstadoEnderecoCepDao, CidadeEnderecoCepDao, EnderecoCep } from '../model/endereco-cep';

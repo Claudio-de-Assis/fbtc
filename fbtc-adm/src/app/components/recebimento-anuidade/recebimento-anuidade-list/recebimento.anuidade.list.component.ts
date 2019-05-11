@@ -120,16 +120,21 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this.router.navigate(['admin/RecebimentoAnuidade', this.selectedRecebimento.recebimentoId]);
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
     this.mensagemSincronizacao = '';
     this._msg = '';
 
-    this.submitted = true;
     this.gotoBuscarRecebimento();
   }
 
   gotoBuscarRecebimento(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editNome.trim() !== '') {
       this.editNome = this._util.StringSanity(this.editNome);
@@ -174,9 +179,9 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
         .subscribe(recebimentos => {
           this.recebimentos = recebimentos;
           this._msgProgresso =  this.recebimentos.length === 0 ? ' - Não foram encontrados registros' : '';
+          this.submitted = false;
         });
 
-    this.submitted = false;
     this._nome = '0';
     this._cpf = '0';
     this._crp = '0';
@@ -195,21 +200,28 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
   }
 
   gotoSicronizarComPagSeguro(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
     this.mensagemSincronizacao = 'Processando a sincronização. Por favor, aguarde!....';
     this._msg = '';
     this._sincronizandoPS = true;
-    console.log('sinc..0' + this._sincronizandoPS),
 
     this.servicePS.postSincronizarRecebimentos().subscribe(
-      _msg => [
-          this._msg = _msg,
-          this.mensagemSincronizacao = '',
-          this._sincronizandoPS = false,
-          this.gotoBuscarRecebimento(),
-      ]);
+      _msg => {
+          this._msg = _msg;
+          this.mensagemSincronizacao = '';
+          this._sincronizandoPS = false;
+          this.submitted = false;
+          this.gotoBuscarRecebimento();
+      });
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
     this.editNome = '';
     this.editCpf = '';
     this.editCrp = '';
@@ -238,7 +250,7 @@ export class RecebimentoAnuidadeListComponent implements OnInit {
     this._msg = '';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getAnuidades();
     this.getTiposPublicos();

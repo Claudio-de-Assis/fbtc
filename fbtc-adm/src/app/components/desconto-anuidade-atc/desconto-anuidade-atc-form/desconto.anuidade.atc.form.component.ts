@@ -3,21 +3,9 @@ import { DescontoAnuidadeAtcService } from './../../shared/services/desconto-anu
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
-
-import { ValorAnuidade } from './../../shared/model/valor-anuidade';
-import { AnuidadeTipoPublicoDao } from './../../shared/model/anuidade-tipo-publico';
-import { AnuidadeService } from './../../shared/services/anuidade.service';
-import { AssociadoService } from './../../shared/services/associado.service';
-import { AssinaturaAnuidadeService } from './../../shared/services/assinatura-anuidade.service';
-import { AssinaturaAnuidadeDao, AssinaturaAnuidade } from './../../shared/model/assinatura-anuidade';
 
 import { Util } from '../../shared/util/util';
-import { Associado, AssociadoDao } from '../../shared/model/associado';
-import { AnuidadeDao } from '../../shared/model/anuidade';
 import { DescontoAnuidadeAtcDao } from '../../shared/model/desconto-anuidade-atc';
-import { Atc } from '../../shared/model/atc';
-import { AtcService } from '../../shared/services/atc.service';
 import { UserProfile } from '../../shared/model/user-profile';
 
 @Component({
@@ -91,7 +79,7 @@ export class DescontoAnuidadeAtcFormComponent implements OnInit {
         });
   }
 
-  getDadosNovoDescontoAnuidadeAtcDao(associadoId: number, anuidadeId: number, colaboradorPessoaId: number) {
+  getDadosNovoDescontoAnuidadeAtcDao(associadoId: number, anuidadeId: number, colaboradorPessoaId: number): void {
 
     this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
 
@@ -102,14 +90,20 @@ export class DescontoAnuidadeAtcFormComponent implements OnInit {
         });
   }
 
-  gotoDescontoAssinaturasAtcs() {
+  gotoDescontoAssinaturasAtcs(): void {
 
     const anuidadeId = this.descontoAnuidadeAtcDao ? this.descontoAnuidadeAtcDao.anuidadeId : null;
 
     this.router.navigate(['/admin/DescontoAnuidadeAtc', { anuidadeId: anuidadeId , foo: 'foo' }]);
   }
 
-  save() {
+  save(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this.alertClassType = 'alert alert-info';
     this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -119,12 +113,11 @@ export class DescontoAnuidadeAtcFormComponent implements OnInit {
       msg => {
           this._msgRetorno = msg;
           this.avaliaRetorno(this._msgRetorno);
+          this.submitted = false;
       });
-
-    this.submitted = false;
   }
 
-  avaliaRetorno(msgRet: string) {
+  avaliaRetorno(msgRet: string): void {
 
     if (msgRet.substring(0, 1) === '0') {
 
@@ -144,15 +137,14 @@ export class DescontoAnuidadeAtcFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
     this._msg = '';
     this._msgRetorno = '';
-    this.submitted = true;
     this.save();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // Usuário logado que está criando o novo desconto:
     const userProfile: UserProfile = this.authService.getUserProfile();

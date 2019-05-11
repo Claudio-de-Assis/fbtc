@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
 
 import { RecebimentoService } from '../../shared/services/recebimento.service';
-import { Recebimento, RecebimentoAssociadoDao } from '../../shared/model/recebimento';
+import { RecebimentoAssociadoDao } from '../../shared/model/recebimento';
 import { Endereco } from '../../shared/model/endereco';
+import { PdfService } from '../../shared/services/pdf.service';
 
 @Component({
   selector: 'app-associado-ficha-financeira-anuidade-form',
@@ -20,7 +20,8 @@ export class AssociadoFichaFinanceiraAnuidadeFormComponent implements OnInit {
                     eMail: '', nrCelular: '', ativoAssociado: false, recebimentoId: 0, assinaturaAnuidadeId: null,
                     assinaturaEventoId: null, observacao: '', notificationCodePS: '', typePS: null,
                     statusPS: null, lastEventDatePS: null, typePaymentMethodPS: null, codePaymentMethodPS: null,
-                    netAmountPS: 0, dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
+                    grossAmountPS: 0, discountAmountPS: 0, feeAmountPS: 0, netAmountPS: 0, extraAmountPS: 0,
+                    dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
                     dtCadastro: null, ativo: false};
 
   title: string;
@@ -33,6 +34,7 @@ export class AssociadoFichaFinanceiraAnuidadeFormComponent implements OnInit {
 
   constructor(
     private service: RecebimentoService,
+    private pdfService: PdfService,
     private router: Router,
     private route: ActivatedRoute
 ) {
@@ -55,18 +57,26 @@ export class AssociadoFichaFinanceiraAnuidadeFormComponent implements OnInit {
           });
   }
 
-  onSubmit() {
-    this.submitted = true;
-    // this.gotoSave();
-  }
-
-  gotoRecebimentoAnuidade() {
+  gotoRecebimentoAnuidade(): void {
 
     const recebimentoId = this.recebimentoDao ? this.recebimentoDao.recebimentoId : null;
     this.router.navigate(['admin/AssociadoFichaFinanceira', { id: recebimentoId, foo: 'foo' }]);
   }
 
-  ngOnInit() {
+  gotoGerarCertificadoAdimplencia(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
+    this.pdfService.getDeclaracaoAdimplenciaAssociado(this.recebimentoDao.nome, this.recebimentoDao.anuidade);
+
+    this.submitted = false;
+  }
+
+  ngOnInit(): void {
 
     const id = +this.route.snapshot.paramMap.get('id');
       if (id > 0) {

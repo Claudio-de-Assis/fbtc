@@ -17,6 +17,11 @@ export class AssinaturaAnuidade {
     dtInicioProcessamento: Date;
     dtAtualizacao: Date;
     ativo: boolean;
+
+    pagamentoIsento: boolean;
+    pagamentoIsentoBD: boolean;
+    dtIsencao: Date;
+    observacaoIsencao: string;
 }
 
 export class AssinaturaAnuidadeDao extends AssinaturaAnuidade {
@@ -32,5 +37,5 @@ export class AssinaturaAnuidadeDao extends AssinaturaAnuidade {
     membroDiretoria: boolean;
     membroConfi: boolean;
     valorAnuidadeIdOriginal: number;
-
+    recebimentoStatusPS: number;
 }

@@ -1,3 +1,4 @@
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,7 @@ import { FichaFinanceiraFormComponent } from './ficha-financeira-form/ficha.fina
 import { FichaFinanceiraRoutingModule } from './ficha-financeira.routing.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NgxCurrencyModule } from 'ngx-currency';
+// import { NgxCurrencyModule } from 'ngx-currency';
 import { SharedModule } from '../shared/shared.module';
 
 import {LOCALE_ID} from '@angular/core';
@@ -22,7 +23,9 @@ import {LOCALE_ID} from '@angular/core';
     FormsModule,
     FichaFinanceiraRoutingModule,
     NgxPaginationModule,
-    NgxCurrencyModule,
+    CurrencyMaskModule,
+    // CurrencyMaskModule,
+    // NgxCurrencyModule,
     SharedModule
   ],
   declarations: [

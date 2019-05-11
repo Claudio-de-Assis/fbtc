@@ -214,7 +214,7 @@
                     <div class="col-lg-3">
                         <label for="inpDtCertificacao">Data Certificação:</label>
                         <input id="inpDtCertificacao" name="inpDtCertificacao" class="form-control" type="date"
-                        [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificaca=$event" #dtCertificacao="ngModel"/>
+                        [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificacao=$event" #dtCertificacao="ngModel"/>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
@@ -468,7 +468,7 @@
                     </div>
                     <div class="col-lg-6 text-right">
                         <button type="submit" class="btn btn-primary" [disabled]="!associadoForm.form.valid">Salvar</button>
-                        <button class="btn btn-default" (click)="gotoAssociados()">Retornar</button>
+                        <button type="button" class="btn btn-default" (click)="gotoAssociados()">Retornar</button>
                     </div>
                 </div>
             </div>

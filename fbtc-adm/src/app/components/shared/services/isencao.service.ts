@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs';
+// import 'rxjs';
 
 import { MessageService } from '../../../message.service';
 import { Isencao, IsencaoDao } from '../model/isencao';
@@ -41,7 +41,7 @@ export class IsencaoService {
             catchError(this.handleError<Isencao>(`getById id=${id}`))
         );
     }
-
+    
     getIsencaoByFilters(tipoIsencao: string, nomeAssociado: string, anoIsencao: number, identificacao: string, tipoEvento: string): Observable<IsencaoDao[]> {
             return this.http.get<IsencaoDao[]>(this.apiRoute.getFindIsencaoByFilters(tipoIsencao, nomeAssociado, anoIsencao, identificacao, tipoEvento))
             .pipe(

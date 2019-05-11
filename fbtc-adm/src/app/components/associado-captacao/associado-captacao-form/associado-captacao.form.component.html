@@ -114,11 +114,10 @@
                                 <div class="form-group">
                                     <label for="inpNrelular">Celular:</label>
                                     <input id="inpNrCelular" name="nrCelular" class="form-control" type="text"
-                                        required  minlength="10" maxlength="12" 
+                                         minlength="10" maxlength="12" 
                                         [(ngModel)]="associado.nrCelular" #nrCelular="ngModel"/>
                                     <div *ngIf="nrCelular.invalid && (nrCelular.dirty || nrCelular.touched)"
                                         class="alert alert-danger">
-                                        <div *ngIf="nrCelular.errors.required">* O Nº do celular é obrigatório.</div>
                                         <div *ngIf="nrCelular.errors.minlength">* O Nº do celular deve ter pelo menos 10 algarismos.</div>
                                     </div> 
                                 </div>
@@ -232,7 +231,7 @@
                             <div class="col-lg-3">
                                 <label for="inpDtCertificacao">Data Certificação:</label>
                                 <input id="inpDtCertificacao" name="inpDtCertificacao" class="form-control" type="date"
-                                [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificaca=$event" #dtCertificacao="ngModel"/>
+                                [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificacao=$event" #dtCertificacao="ngModel"/>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">

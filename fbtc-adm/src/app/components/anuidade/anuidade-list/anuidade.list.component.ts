@@ -39,7 +39,6 @@ export class AnuidadeListComponent implements OnInit {
   submitted = false;
 
   onSubmit() {
-    this.submitted = true;
     this.gotoBuscaAnuidade();
   }
 

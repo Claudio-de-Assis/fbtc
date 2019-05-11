@@ -56,6 +56,7 @@
                                     <td>Valor Praticado</td>
                                     <td>Desconto</td>
                                     <td>Anuidade</td>
+                                    <td>Status Pagamento</td>
                                 </tr>
                             </thead>
                             <tbody class="AssinaturaAnuidades">
@@ -67,6 +68,9 @@
                                     <td>{{ assinaturaAnuidadeDao.valor | mycurrency: 2 }}</td>
                                     <td>{{ assinaturaAnuidadeDao.tipoDesconto | tipoDesconto }}</td>
                                     <td>{{ assinaturaAnuidadeDao.tipoAnuidade | tipoAnuidade }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.recebimentoStatusPS | statusPagamentoAssociado }}&nbsp;&nbsp;
+                                        <span class="label label-success" *ngIf="assinaturaAnuidadeDao.recebimentoStatusPS === null">Pague aqui!</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

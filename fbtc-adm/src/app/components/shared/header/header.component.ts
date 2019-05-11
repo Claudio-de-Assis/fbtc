@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 
-import { UserService } from '../services/user.service';
+// import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { UserProfile } from '../model/user-profile';
@@ -19,7 +19,7 @@ export class HeaderComponent {
     isToggleIn: string;
 
     @ViewChild('toogle') toggle;
-    constructor(userService: UserService, private authService: AuthService, private router: Router) {
+    constructor(private authService: AuthService, private router: Router) {
 
         this.isToggleIn = '';
         this.isLoged = true;

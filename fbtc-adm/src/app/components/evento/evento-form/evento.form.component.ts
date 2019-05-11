@@ -130,7 +130,6 @@ export class EventoFormComponent implements OnInit {
 
   onSubmit() {
 
-      this.submitted = true;
       this.SaveEvento();
   }
 

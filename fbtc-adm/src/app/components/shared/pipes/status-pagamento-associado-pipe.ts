@@ -1,31 +1,31 @@
 import {Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'statusPagamento', pure: true})
-export class StatusPagamentoPipe implements PipeTransform {
+@Pipe({name: 'statusPagamentoAssociado', pure: true})
+export class StatusPagamentoAssociadoPipe implements PipeTransform {
     transform(id: number): string {
         return this.getTipoStatus(id);
     }
     private getTipoStatus(id: number): string {
         if (id === 0) {
-            return 'Isento';
+            return 'Isento';                        /*ISENTO*/
         } else if (id === 1) {
-            return 'Aguardando pagamento';
+            return 'Pagamento em processamento';    /*AGUARDANDO PAGAMENTO*/
         } else if (id === 2) {
-            return 'Em análise';
+            return 'Pagamento em processamento';    /*EM ANÁLISE*/
         } else if (id === 3) {
-            return 'Paga';
+            return 'Adimplente';                    /*PAGA*/
         } else if (id === 4) {
-            return 'Disponível';
+            return 'Adimplente';                    /*DISPONÍVEL*/
         } else if (id === 5) {
-            return 'Em disputa';
+            return 'Pagamento em processamento';    /*EM DISPUTA*/
         } else if (id === 6) {
-            return 'Devolvida';
+            return 'Inadimplente - Verifique no PagSeguro';    /*DEVOLVIDA*/
         } else if (id === 7) {
-            return 'Cancelada';
+            return 'Inadimplente - Verifique no PagSeguro';    /*CANCELADA*/
         } else if (id === 8) {
-            return 'Debitado';
+            return 'Inadimplente - Verifique no PagSeguro';    /*DEBITADO*/
         } else if (id === 9) {
-            return 'Retenção temporária';
+            return 'Pagamento em processamento';    /*RETENÇÃO TEMPORÁRIA*/
         } else {
             return 'Inadimplente';
         }

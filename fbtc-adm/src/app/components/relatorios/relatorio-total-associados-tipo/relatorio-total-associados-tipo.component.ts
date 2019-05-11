@@ -43,22 +43,28 @@ export class RelatorioTotalAssociadosTipoComponent implements OnInit {
 
   getDadosRpt(): void {
 
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
     this._msgProgresso = '...Pesquisando...';
 
     this.service.getRptTotalAssociadosTipo().subscribe(
       rptTotalAssociadosDAOs => {
         this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs;
         this._msgProgresso =  this.rptTotalAssociadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+        this.submitted = false;
       });
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.getDadosRpt();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getDadosRpt();
   }

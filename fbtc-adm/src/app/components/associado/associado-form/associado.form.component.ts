@@ -116,19 +116,32 @@ export class AssociadoFormComponent implements OnInit {
 
     getAssociadoByPessoaId(id: number): void {
 
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
+
         this._msgProgresso = '...Carregando os dados. Por favor, aguarde!...';
 
         this.service.getAssociadoDaoByPessoaId(id)
             .subscribe(associadoDao => {
                 this.associado = associadoDao;
                 this._msgProgresso = '';
+                this.submitted = false;
             });
     }
 
     gotoAssociados() {
 
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
+
         const pessoaId = this.associado ? this.associado.pessoaId : null;
-        this.router.navigate(['admin/Associado', { id: pessoaId, foo: 'foo' }]);
+        this.router.navigate(['/admin/Associado/', { id: pessoaId, foo: 'foo' }]);
     }
 
     gotoValidarEMail() {
@@ -142,6 +155,12 @@ export class AssociadoFormComponent implements OnInit {
     }
 
     save() {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -164,25 +183,26 @@ export class AssociadoFormComponent implements OnInit {
             this.associado.enderecosPessoa[1].ordemEndereco = '2';
         }
 
+        this.associado.enderecosPessoa[0].cep = this._util.TelefoneSanity(this.associado.enderecosPessoa[0].cep);
+        this.associado.enderecosPessoa[1].cep = this._util.TelefoneSanity(this.associado.enderecosPessoa[1].cep);
+        this.associado.nrCelular = this._util.TelefoneSanity(this.associado.nrCelular);
+
         this.associado.nomeFoto = this._nomeFoto;
         this.service.addAssociado(this.associado)
         .subscribe(
             msg => {
                 this._msgRetorno = msg;
                 this.avaliaRetorno(this._msgRetorno);
+                this.submitted = false;
             }
         );
-
-        this.submitted = false;
     }
 
-    avaliaRetorno(msgRet: string) {
+    avaliaRetorno(msgRet: string): void {
 
         if (msgRet.substring(0, 1) === '0') {
 
             this._pessoaId = parseInt(msgRet.substring(0, 10), 10);
-
-            // this.router.navigate([`admin/Associado/${this._pessoaId}`]);
 
             this.getAssociadoByPessoaId(this._pessoaId);
 
@@ -198,7 +218,7 @@ export class AssociadoFormComponent implements OnInit {
         }
     }
 
-    avaliaRetornoEMail(msgRet: string) {
+    avaliaRetornoEMail(msgRet: string): void {
 
         if (msgRet !== 'OK') {
 
@@ -207,7 +227,7 @@ export class AssociadoFormComponent implements OnInit {
         }
     }
 
-    gotoReenviarSenha() {
+    gotoReenviarSenha(): void {
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Enviando a senha para o e-mail do associado. Por favor, aguarde...';
@@ -226,7 +246,7 @@ export class AssociadoFormComponent implements OnInit {
         }
     }
 
-    gotoAvaliaRetornoEMail(msg: string) {
+    gotoAvaliaRetornoEMail(msg: string): void {
 
         if (msg.substring(0, 7) === 'ATENÇÃO') {
             this.alertClassType = 'alert alert-danger';
@@ -234,17 +254,6 @@ export class AssociadoFormComponent implements OnInit {
         } else {
             this.alertClassType = 'alert alert-success';
         }
-    }
-
-    gotoShowPopUp(msg: string) {
-
-      // Colocar a chamada para a implementação do PopUp modal de aviso:
-      alert(msg);
-    }
-
-    excluir() {
-
-        this.gotoAssociados();
     }
 
     getTiposPublicos(): void {
@@ -285,13 +294,11 @@ export class AssociadoFormComponent implements OnInit {
         }
     }
 
-    onSubmit() {
+    onSubmit(): void {
 
-        this.submitted = true;
         this.save();
     }
 
-    /** Called by Angular after AssociadoForm component initialized */
     ngOnInit(): void {
 
         this.getAtcs();
@@ -309,9 +316,10 @@ export class AssociadoFormComponent implements OnInit {
         }
     }
 
+    /*
     refreshImages(status) {
         if (status) {
           console.log( 'Upload realizado com sucesso!');
         }
-    }
+    }*/
 }

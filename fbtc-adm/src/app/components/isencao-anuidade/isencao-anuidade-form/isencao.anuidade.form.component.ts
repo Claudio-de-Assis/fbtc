@@ -86,7 +86,6 @@ export class IsencaoAnuidadeFormComponent implements OnInit {
 
   onSubmit() {
 
-    this.submitted = true;
     this.saveIsencao();
   }
 

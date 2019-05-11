@@ -149,7 +149,6 @@ export class AssinaturaEventoAssociadoFormComponent implements OnInit {
 
   onSubmit() {
 
-      this.submitted = true;
       this.SaveEvento();
   }
 

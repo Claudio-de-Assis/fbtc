@@ -60,7 +60,6 @@ export class AssociadoListComponent implements OnInit {
 
     private selectedAssociado: Associado;
 
-    /** AssociadoList ctor */
     constructor(
         private service: AssociadoService,
         private serviceTP: TipoPublicoService,
@@ -98,7 +97,7 @@ export class AssociadoListComponent implements OnInit {
         this.serviceEnd.getAllEstados().subscribe(estados => this.estados = estados);
     }
 
-    gotoGetCidades() {
+    gotoGetCidades(): void {
 
         if (this.editEstado !== '') {
             this.serviceEnd.getGetCidadesByEstado(this.editEstado).subscribe(cidades => this.cidades = cidades);
@@ -107,17 +106,24 @@ export class AssociadoListComponent implements OnInit {
 
     getAssociados(): void {
 
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
+
         this._msgProgresso = '...Pesquisando...';
 
         this.service.getAssociados().subscribe(
             associados => {
+                this.submitted = false;
                 this.associados = associados;
                 this._msgProgresso =  this.associados.length === 0 ? ' - Não foram encontrados registros' : '';
             });
     }
 
-    onSubmit() {
-        this.submitted = true;
+    onSubmit(): void {
+
         this.gotoBuscarAssociado();
     }
 
@@ -133,16 +139,34 @@ export class AssociadoListComponent implements OnInit {
 
     onSelect(associado: Associado): void {
 
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
+
         this.selectedAssociado = associado;
         this.router.navigate(['admin/Associado', this.selectedAssociado.pessoaId]);
     }
 
-    gotoNovoAssociado() {
+    gotoNovoAssociado(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.router.navigate(['admin/AssociadoNovo']);
     }
 
     gotoBuscarAssociado(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         if (this.editNome.trim() !== '') {
             this.editNome = this._util.StringSanity(this.editNome);
@@ -166,18 +190,18 @@ export class AssociadoListComponent implements OnInit {
                 this._crp, this.editTipoProfissao, this.editTipoPublicoId, this.editEstado, this.editCidade, this._ativo)
             .subscribe(
                 associados => {
+                    this.submitted = false;
                     this.associados = associados;
                     this._msgProgresso =  this.associados.length === 0 ? ' - Não foram encontrados registros' : '';
                 });
 
-          this.submitted = false;
           this._nome = '0';
           this._cpf = '0';
           this._crp = '0';
           this._ativo = '2';
     }
 
-    gotoLimparFiltros() {
+    gotoLimparFiltros(): void {
 
         this.editNome = '';
         this.editCpf = '';

@@ -2,7 +2,7 @@ import { AssociadoDao } from '../../shared/model/associado';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 
 import { AssociadoService } from '../../shared/services/associado.service';
 import { CepCorreiosService } from '../../shared/services/cep-correios.service';
@@ -10,16 +10,16 @@ import { TipoPublicoService } from '../../shared/services/tipo-publico.service';
 import { AtcService } from '../../shared/services/atc.service';
 import { ValueShareService } from '../../shared/services/value-share.service';
 
-import { Associado } from '../../shared/model/associado';
+// import { Associado } from '../../shared/model/associado';
 import { TipoPublico } from '../../shared/model/tipo-publico';
 import { Atc } from '../../shared/model/atc';
 
 import { Util } from '../../shared/util/util';
 import { FileUploadRoute } from '../../shared/webapi-routes/file-upload.route';
 import { Endereco } from '../../shared/model/endereco';
-import { AuthService } from '../../shared/services/auth.service';
-import { UserProfile } from '../../shared/model/user-profile';
-import { stringify } from '@angular/core/src/util';
+// import { AuthService } from '../../shared/services/auth.service';
+// import { UserProfile } from '../../shared/model/user-profile';
+// import { stringify } from '@angular/core/src/util';
 
 @Component({
     selector: 'app-associado-captacao-form',
@@ -123,7 +123,7 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
             });
     }
 
-    gotoValidarEMail() {
+    gotoValidarEMail(): void {
 
         this.service.getValidaEMail(this.associado.associadoId, this.associado.eMail)
         .subscribe(
@@ -134,7 +134,13 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
     }
 
 
-    save() {
+    save(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -157,6 +163,10 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
             this.associado.enderecosPessoa[1].ordemEndereco = '2';
         }
 
+        this.associado.enderecosPessoa[0].cep = this._util.TelefoneSanity(this.associado.enderecosPessoa[0].cep);
+        this.associado.enderecosPessoa[1].cep = this._util.TelefoneSanity(this.associado.enderecosPessoa[1].cep);
+        this.associado.nrCelular = this._util.TelefoneSanity(this.associado.nrCelular);
+
         this.associado.nomeFoto = this._nomeFoto;
         this.service.addAssociado(this.associado)
         .subscribe(
@@ -168,7 +178,7 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
         );
     }
 
-    avaliaRetorno(msgRet: string) {
+    avaliaRetorno(msgRet: string): void {
 
         if (msgRet.substring(0, 1) === '0') {
 
@@ -193,12 +203,12 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
         }
     }
 
-    gotoLogin() {
+    gotoLogin(): void {
 
         this.router.navigate(['']);
     }
 
-    avaliaRetornoEMail(msgRet: string) {
+    avaliaRetornoEMail(msgRet: string): void {
 
         if (msgRet !== 'OK') {
 
@@ -207,7 +217,7 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
         }
     }
 
-    gotoEnviarSenha(_pessoaId: number) {
+    gotoEnviarSenha(_pessoaId: number): void {
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Enviando a senha para o seu e-mail. Por favor, aguarde...';
@@ -224,12 +234,6 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
                 }
             );
         }
-    }
-
-    gotoShowPopUp(msg: string) {
-
-      // Colocar a chamada para a implementação do PopUp modal de aviso:
-      alert(msg);
     }
 
     getTiposPublicos(): void {
@@ -270,9 +274,8 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
         }
     }
 
-    onSubmit() {
+    onSubmit(): void {
 
-        this.submitted = true;
         this.save();
     }
 
@@ -281,11 +284,5 @@ export class AssociadoCaptacaoFormComponent implements OnInit {
         this.getAtcs();
 
         this.getTiposPublicos();
-    }
-
-    refreshImages(status) {
-        if (status) {
-          console.log( 'Upload realizado com sucesso!');
-        }
     }
 }

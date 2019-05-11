@@ -90,9 +90,9 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-6">
-                        <button type="button" class="btn btn-default btn-xs" (click)="gotoPagSeguro()" *ngIf="_botaoPagSeguroOk === true">
-                            <a href="{{ _targetPagSeguro }}" target="blanck"><img id="imgFoto" name="foto" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/184x42-pagar-assina.gif" error="assets/no-foto.png"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"></a>
-                        </button>
+                       <button type="button" class="btn btn-default btn-xs" (click)="gotoPagSeguro()" *ngIf="_botaoPagSeguroOk === true">
+                            <a target="_blank" href="{{ _targetPagSeguro }}"><img id="imgFoto" name="foto" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/184x42-pagar-assina.gif" error="assets/no-foto.png"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"></a>
+                       </button>
                     </div>
                     <div class="col-lg-6 text-right">
                         <button type="submit" class="btn btn-primary" [disabled]="!assinaturaForm.form.valid">Salvar</button>

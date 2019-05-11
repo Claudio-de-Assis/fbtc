@@ -17,7 +17,7 @@ import { FileUploadRoute } from '../shared/webapi-routes/file-upload.route';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CKEditorModule } from 'ngx-ckeditor';
-import { NgxCurrencyModule } from 'ngx-currency';
+// import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   imports: [
@@ -28,7 +28,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
 //    FileUploadModule,
     NgxPaginationModule,
     HttpModule,
-    NgxCurrencyModule,
+    // NgxCurrencyModule,
     CKEditorModule
   ],
   declarations: [

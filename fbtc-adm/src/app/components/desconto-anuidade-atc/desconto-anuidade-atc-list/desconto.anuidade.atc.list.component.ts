@@ -81,16 +81,20 @@ export class DescontoAnuidadeAtcListComponent implements OnInit {
     this.serviceAnuidade.getAnuidades().subscribe(anuidades => this.anuidades = anuidades);
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
     if (this.editAnuidadeId !== 0) {
-      this.submitted = true;
-
       this.gotoDescontoAnuidadeAtc();
     }
   }
 
-  gotoDescontoAnuidadeAtc() {
+  gotoDescontoAnuidadeAtc(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editAnuidadeId !== null) {
       this._anuidadeId = this.editAnuidadeId;
@@ -126,6 +130,7 @@ export class DescontoAnuidadeAtcListComponent implements OnInit {
         descontoAnuidadeAtcDaos => {
           this.descontoAnuidadeAtcDaos = descontoAnuidadeAtcDaos;
           this._msgProgresso =  this.descontoAnuidadeAtcDaos.length === 0 ? ' - Não foram encontrados registros' : '';
+          this.submitted = false;
         });
 
     } else {
@@ -137,15 +142,14 @@ export class DescontoAnuidadeAtcListComponent implements OnInit {
         descontoAnuidadeAtcDaos => {
           this.semDescontoAnuidadeAtcDaos = descontoAnuidadeAtcDaos;
           this._msgProgresso2 =  this.semDescontoAnuidadeAtcDaos.length === 0 ? ' - Não foram encontrados registros' : '';
+          this.submitted = false;
         });
     }
 
     this._nome = '0';
     this._cpf = '0';
     this._ativo = '2';
-
   }
-
 
   onSelect(descontoAnuidadeAtcDao: DescontoAnuidadeAtcDao): void {
     this.selectedDescontoAnuidadeAtcDao = descontoAnuidadeAtcDao;
@@ -167,7 +171,7 @@ export class DescontoAnuidadeAtcListComponent implements OnInit {
 
 
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
 
     this._anuidadeId = 0;
     this.editAtivo = true;
@@ -179,7 +183,7 @@ export class DescontoAnuidadeAtcListComponent implements OnInit {
     this._cpf = '0';
   }
 
-  gotoLimparGrids() {
+  gotoLimparGrids(): void {
 
     this._msgProgresso = '';
     this._msgProgresso2 = '';
@@ -187,7 +191,7 @@ export class DescontoAnuidadeAtcListComponent implements OnInit {
     this.descontoAnuidadeAtcDaos = null;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getAnuidades();
 

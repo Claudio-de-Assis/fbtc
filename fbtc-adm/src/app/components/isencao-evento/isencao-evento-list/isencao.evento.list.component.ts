@@ -65,7 +65,6 @@ export class IsencaoEventoListComponent implements OnInit {
   submitted = false;
 
   onSubmit() {
-    this.submitted = true;
     this.gotoBuscarIsencao();
   }
 

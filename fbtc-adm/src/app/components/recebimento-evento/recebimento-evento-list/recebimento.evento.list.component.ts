@@ -103,7 +103,6 @@ export class RecebimentoEventoListComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     this.gotoBuscarRecebimento();
   }
 

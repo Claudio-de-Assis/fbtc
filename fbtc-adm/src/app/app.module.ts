@@ -1,4 +1,3 @@
-import { AssociadoCaptacaoFormComponent } from './components/associado-captacao/associado-captacao-form/associado-captacao.form.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,7 +8,6 @@ import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { MessageService } from './message.service';
-import { UserService } from './components/shared/services/user.service';
 
 import { AppRoutingModule } from './app.routing.module';
 import { RecebimentoEventoModule } from './components/recebimento-evento/recebimento-evento.module';
@@ -75,12 +73,10 @@ import { LoginComponent } from './components/login/login.form.component';
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    // LoginComponent,
-    // AssociadoCaptacaoFormComponent,
+
     MessagesComponent,
   ],
   providers: [
-    UserService,
     MessageService,
     IsencaoRoute,
     RecebimentoRoute,
@@ -89,7 +85,7 @@ import { LoginComponent } from './components/login/login.form.component';
     PagSeguroRoute,
     RelatoriosRoute,
     LoginRoute,
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [
 

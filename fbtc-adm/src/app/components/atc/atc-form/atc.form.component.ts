@@ -67,13 +67,19 @@ export class AtcFormComponent implements OnInit {
         });
   }
 
-  gotoAtcs() {
+  gotoAtcs(): void {
 
     const atcId = this.atc ? this.atc.atcId : null;
     this.router.navigate(['/admin/Atc', { id: atcId, foo: 'foo' }]);
   }
 
-  save() {
+  save(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this.alertClassType = 'alert alert-info';
     this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -83,12 +89,11 @@ export class AtcFormComponent implements OnInit {
       msg => {
           this._msgRetorno = msg;
           this.avaliaRetorno(this._msgRetorno);
+          this.submitted = false;
       });
-
-    this.submitted = false;
   }
 
-  avaliaRetorno(msgRet: string) {
+  avaliaRetorno(msgRet: string): void {
 
     if (msgRet.substring(0, 1) === '0') {
 
@@ -110,29 +115,17 @@ export class AtcFormComponent implements OnInit {
     }
   }
 
-  gotoShowPopUp(msg: string) {
-
-    // Colocar a chamada para a implementação do PopUp modal de aviso:
-    alert(msg);
-  }
-
-  excluir() {
-
-    this.gotoAtcs();
-  }
-
-  getUFsDisponiveis(atcId: number) {
+  getUFsDisponiveis(atcId: number): void {
 
     this.serviceUF.getUnidadesFederacaoDisponiveis(atcId).subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.save();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.editAtcId = +this.route.snapshot.paramMap.get('id');
 

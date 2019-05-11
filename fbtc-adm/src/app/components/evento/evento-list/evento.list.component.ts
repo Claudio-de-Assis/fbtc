@@ -65,7 +65,6 @@ export class EventoListComponent implements OnInit {
 
   onSubmit() {
 
-    this.submitted = true;
     this.gotoBuscareventos();
   }
 

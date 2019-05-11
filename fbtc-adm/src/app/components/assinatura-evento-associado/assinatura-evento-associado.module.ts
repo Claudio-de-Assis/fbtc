@@ -14,7 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AssinaturaEventoAssociadoRoutingModule } from './assinatura-evento-associado.routing.module';
 import { EventoRoute } from '../shared/webapi-routes/evento.route';
 import { CKEditorModule } from 'ngx-ckeditor';
-import { NgxCurrencyModule } from 'ngx-currency';
+// import { NgxCurrencyModule } from 'ngx-currency';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
       SharedModule,
       NgxPaginationModule,
       HttpModule,
-      NgxCurrencyModule,
+      // NgxCurrencyModule,
       CKEditorModule
   ],
   declarations: [

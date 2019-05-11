@@ -64,13 +64,18 @@ export class AtcListComponent implements OnInit {
       });
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.gotoBuscarAtcs();
   }
 
-  gotoBuscarAtcs() {
+  gotoBuscarAtcs(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editSiglaUF !== null) {
         this._siglaUF = this.editSiglaUF;
@@ -83,12 +88,13 @@ export class AtcListComponent implements OnInit {
           atcs => {
             this.atcs = atcs;
             this._msgProgresso =  this.atcs.length === 0 ? ' - Não foram encontrados registros' : '';
+            this.submitted = false;
           });
 
     this._siglaUF = '0';
   }
 
-  getUFsUtilizadas() {
+  getUFsUtilizadas(): void {
 
     this.serviceUF.getUnidadesFederacaoUtilizadas().subscribe(unidadesFederacao => this.unidadesFederacao = unidadesFederacao);
   }
@@ -99,16 +105,16 @@ export class AtcListComponent implements OnInit {
     this.router.navigate(['admin/Atc', this.selectedAtc.atcId]);
   }
 
-  gotoNovaAtc() {
+  gotoNovaAtc(): void {
       this.router.navigate(['/admin/Atc', 0]);
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
     this.editSiglaUF = null;
     this._siglaUF = '0';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getUFsUtilizadas();
     this.getAtcs();

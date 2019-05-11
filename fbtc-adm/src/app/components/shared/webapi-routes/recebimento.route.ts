@@ -84,6 +84,13 @@ export class RecebimentoRoute {
         return AppSettings.API_ENDPOINT + this.url + 'Recebimento';
     }
 
+
+    // [Route("Recebimento")]
+    postIsencaoRecebimento(): string {
+        return AppSettings.API_ENDPOINT + this.url + 'IsencaoRecebimento';
+    }
+
+
     // objetivoPagamento: 1: Evento; 2: Anuidade
     // [Route("GetByPessoaId/{objetivoPagamento},{id:int}")]
     getByPessoaId(objetivoPagamento: string, id: number): string {

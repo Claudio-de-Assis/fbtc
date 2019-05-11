@@ -78,27 +78,14 @@
                         </div>
                     </div>
                 </div>
-                <!--
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="areaObservacao">Observação:</label>
-                            <textarea id="areaObservacao" name="observacao" class="form-control" 
-                            rows="10" cols="134" maxlength="500"
-                            [(ngModel)]="recebimento.observacao" #observacao="ngModel"></textarea>
-                        </div>
-                    </div>
-                </div>
-            -->
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-6">
-                        <!--<button class="btn btn-success" (click)="gotoNotificarAssociado()">Notificar Associados</button>-->
+                        <button *ngIf="(recebimentoDao.statusPS === 3 || recebimentoDao.statusPS === 0) && recebimentoDao.ativo === true"  type="button" class="btn btn-info" (click)="gotoGerarCertificadoAdimplencia()">Certificado de Adimplência</button>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <!--button type="submit" class="btn btn-primary">Imprimir Boleto</button>-->
-                        <button class="btn btn-default" (click)="gotoRecebimentoAnuidade()">Retornar</button>
+                        <button type="button" class="btn btn-default" (click)="gotoRecebimentoAnuidade()">Retornar</button>
                     </div>
                 </div>
             </div>

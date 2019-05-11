@@ -77,9 +77,10 @@
                                 <tr>
                                     <td>Exercício</td>
                                     <td>Nome</td>
-                                    <td>CPF</td>
+                                    <!--<td>CPF</td>-->
                                     <td>Tipo Publico</td>
                                     <td>Tipo</td>
+                                    <td>Status Pagamento</td>
                                 </tr>
                             </thead>
                             <tbody class="AssinaturaAnuidades">
@@ -87,9 +88,10 @@
                                     [class.selected]="assinaturaAnuidadeDao.assinaturaAnuidadeId === selectedId">
                                     <td>{{ assinaturaAnuidadeDao.exercicio }}</td>
                                     <td>{{ assinaturaAnuidadeDao.nomePessoa }}</td>
-                                    <td>{{ assinaturaAnuidadeDao.cpf }}</td>
+                                    <!--<td>{{ assinaturaAnuidadeDao.cpf }}</td>-->
                                     <td>{{ assinaturaAnuidadeDao.nomeTP }}</td>
                                     <td>{{ assinaturaAnuidadeDao.tipoAnuidade | tipoAnuidade }}</td>
+                                    <td>{{ assinaturaAnuidadeDao.recebimentoStatusPS | statusPagamento }}</td>
                                 </tr>
                             </tbody>
                         </table>

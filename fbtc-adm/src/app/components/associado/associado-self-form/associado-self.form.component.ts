@@ -126,7 +126,7 @@ export class AssociadoSelfFormComponent implements OnInit {
             });
     }
 
-    gotoValidarEMail() {
+    gotoValidarEMail(): void {
 
         this.service.getValidaEMail(this.associado.associadoId, this.associado.eMail)
         .subscribe(
@@ -137,7 +137,13 @@ export class AssociadoSelfFormComponent implements OnInit {
     }
 
 
-    save() {
+    save(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -160,19 +166,23 @@ export class AssociadoSelfFormComponent implements OnInit {
             this.associado.enderecosPessoa[1].ordemEndereco = '2';
         }
 
+        this.associado.enderecosPessoa[0].cep = this._util.TelefoneSanity(this.associado.enderecosPessoa[0].cep);
+        this.associado.enderecosPessoa[1].cep = this._util.TelefoneSanity(this.associado.enderecosPessoa[1].cep);
+        this.associado.nrCelular = this._util.TelefoneSanity(this.associado.nrCelular);
+
         this.associado.nomeFoto = this._nomeFoto;
         this.service.addAssociado(this.associado)
         .subscribe(
             msg => {
                 this.alertClassType = 'alert alert-success';
                 this._msg = msg;
+                this.submitted = false;
             }
         );
 
-        this.submitted = false;
     }
 
-    avaliaRetornoEMail(msgRet: string) {
+    avaliaRetornoEMail(msgRet: string): void {
 
         if (msgRet !== 'OK') {
 
@@ -181,7 +191,13 @@ export class AssociadoSelfFormComponent implements OnInit {
         }
     }
 
-    gotoReenviarSenha() {
+    gotoReenviarSenha(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Enviando a senha para o seu e-mail. Por favor, aguarde...';
@@ -192,19 +208,14 @@ export class AssociadoSelfFormComponent implements OnInit {
             .subscribe(msg => {
                 this.alertClassType = 'alert alert-success';
                 this._msg = msg;
+                this.submitted = false;
             });
 
         } else {
 
+            this.submitted = false;
             alert('Atenção: Por favor, faça o login');
         }
-    }
-
-
-    gotoShowPopUp(msg: string) {
-
-      // Colocar a chamada para a implementação do PopUp modal de aviso:
-      alert(msg);
     }
 
     getTiposPublicos(): void {
@@ -245,9 +256,8 @@ export class AssociadoSelfFormComponent implements OnInit {
         }
     }
 
-    onSubmit() {
+    onSubmit(): void {
 
-        this.submitted = true;
         this.save();
     }
 
@@ -267,9 +277,4 @@ export class AssociadoSelfFormComponent implements OnInit {
         this.getAssociadoByPessoaId(this.editPessoaId);
     }
 
-    refreshImages(status) {
-        if (status) {
-          console.log( 'Upload realizado com sucesso!');
-        }
-    }
 }

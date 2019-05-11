@@ -1,11 +1,14 @@
-import { Endereco } from '../../shared/model/endereco';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
+
+import { Util } from './../../shared/util/util';
 
 import { RecebimentoService } from '../../shared/services/recebimento.service';
-import { Recebimento, RecebimentoAssociadoDao } from '../../shared/model/recebimento';
+import { RecebimentoAssociadoDao } from '../../shared/model/recebimento';
+import { Endereco } from '../../shared/model/endereco';
+
+import { PdfService } from '../../shared/services/pdf.service';
 
 @Component({
   selector: 'app-recebimento-anuidade-form',
@@ -20,16 +23,18 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
                     eMail: '', nrCelular: '', ativoAssociado: false, recebimentoId: 0, assinaturaAnuidadeId: null,
                     assinaturaEventoId: null, observacao: '', notificationCodePS: '', typePS: null,
                     statusPS: null, lastEventDatePS: null, typePaymentMethodPS: null, codePaymentMethodPS: null,
-                    netAmountPS: 0, dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
+                    grossAmountPS: 0, discountAmountPS: 0, feeAmountPS: 0, netAmountPS: 0, extraAmountPS: 0,
+                    dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
                     dtCadastro: null, ativo: false};
 
   title: string;
-  private selectedId: any;
   submitted: boolean;
 
   _msg: string;
   _msgRetorno: string;
   _recebimentoId: number;
+
+  _util = Util;
 
   alertClassType: string;
 
@@ -37,6 +42,7 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
 
   constructor(
     private service: RecebimentoService,
+    private pdfService: PdfService,
     private router: Router,
     private route: ActivatedRoute
 ) {
@@ -50,6 +56,7 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
   this.alertClassType = 'alert alert-info';
 
   this._msgProgresso = '';
+
 }
 
   getRecebimentoAssociadoDaoByRecebimentoId(id: number): void {
@@ -63,7 +70,13 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
           });
   }
 
-  gotoSave() {
+  gotoSave(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this.alertClassType = 'alert alert-info';
     this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -73,21 +86,18 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
         msg => {
           this._msgRetorno = msg;
           this.avaliaRetorno(this._msgRetorno);
+          this.submitted = false;
         }
       );
-      this.submitted = false;
       this._msgRetorno = '';
-      // this._msg = '';
       this._recebimentoId = 0;
   }
 
-  avaliaRetorno(msgRet: string) {
+  avaliaRetorno(msgRet: string): void {
 
     if (msgRet.substring(0, 1) === '0') {
 
         this._recebimentoId = parseInt(msgRet.substring(0, 10), 10);
-
-        // this.router.navigate([`admin/Recebimento/${this._recebimentoId}`]);
 
         this.getRecebimentoAssociadoDaoByRecebimentoId(this._recebimentoId);
 
@@ -101,18 +111,31 @@ export class RecebimentoAnuidadeFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
+
     this.gotoSave();
   }
 
-  gotoRecebimentoAnuidade() {
+  gotoRecebimentoAnuidade(): void {
 
     const recebimentoId = this.recebimentoDao ? this.recebimentoDao.recebimentoId : null;
     this.router.navigate(['/admin/RecebimentoAnuidade', { id: recebimentoId, foo: 'foo' }]);
   }
 
-  ngOnInit() {
+  gotoGerarCertificadoAdimplencia(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
+    this.pdfService.getDeclaracaoAdimplenciaAssociado(this.recebimentoDao.nome, this.recebimentoDao.anuidade);
+
+    this.submitted = false;
+  }
+
+  ngOnInit(): void {
 
     const id = +this.route.snapshot.paramMap.get('id');
       if (id > 0) {

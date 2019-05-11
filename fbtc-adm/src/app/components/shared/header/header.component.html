@@ -297,20 +297,19 @@
 
                 <li>
                 </li>
-                <!--
-                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                    <a href="javascript:void(0)" (click)="isToggle('menuIsencoes')"><i class="fa fa-wheelchair fa-fw"></i> Isenções<span class="fa arrow"></span></a>
-                    <ul id="menuIsencoes" class="nav nav-second-level collapse" [ngClass]="{'in':isToggleIn === 'menuIsencoes'}">
-                        <li>
-                            <a [routerLink]="['IsencaoAnuidade']" routerLinkActtive="active">Anuidades</a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['IsencaoEvento']" routerLinkActtive="active">Eventos</a>
-                        </li>
-                    </ul>
-                </li>-->
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a [routerLink]="['Atc']" routerLinkActtive="active"><i class="fa fa-group" aria-hidden="true"></i> Atc</a>
+                </li>
+                <!--
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a [routerLink]="['Cursos&Noticias']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Cursos e Notícias</a>
+                </li>
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                        <a [routerLink]="['Gestao']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Gestão</a>
+                </li>
+                -->
+                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
+                    <a [routerLink]="['DescontoAnuidadeAtc']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Desconto ATC</a>
                 </li>
                 <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
                     <a href="javascript:void(0)"  (click)="isToggle('menuRelatorios')"><i class="fa fa-newspaper-o"></i> Relatórios<span class="fa arrow"></span></a>
@@ -338,16 +337,6 @@
                         </li>
                     </ul>
                 </li>
-                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                    <a [routerLink]="['Cursos&Noticias']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Cursos e Notícias</a>
-                </li>
-                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                        <a [routerLink]="['Gestao']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Gestão</a>
-                </li>
-                <li *ngxPermissionsOnly="['Gestor','Financeiro', 'Secretário']">
-                        <a [routerLink]="['DescontoAnuidadeAtc']" routerLinkActtive="active"><i class="glyphicon glyphicon-th-list fa-fw" aria-hidden="true"></i> Desconto ATC</a>
-                </li>
-
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

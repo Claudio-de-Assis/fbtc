@@ -16,6 +16,7 @@ import { AssociadoFichaFinanceiraListComponent } from './associado-ficha-finance
 // tslint:disable-next-line:max-line-length
 import { AssociadoFichaFinanceiraEventoFormComponent } from './associado-ficha-financeira-evento-form/associado.ficha.financeira.evento.form.component';
 import { AssociadoFichaFinanceiraAnuidadeFormComponent } from './associado-ficha-financeira-anuidade-form/associado.ficha.financeira.anuidade.form.component';
+import { PdfService } from '../shared/services/pdf.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { AssociadoFichaFinanceiraAnuidadeFormComponent } from './associado-ficha
   ],
   providers: [
     AssociadoService,
-    RecebimentoService
+    RecebimentoService,
+    PdfService
   ]
 })
 export class AssociadoFichaFinanceiraModule { }

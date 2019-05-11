@@ -33,7 +33,7 @@ export class ColaboradorListComponent implements OnInit {
 
   private selectedColaborador: Colaborador;
 
-  submitted = false;
+  submitted: boolean;
 
   constructor(
     private service: ColaboradorService,
@@ -51,6 +51,7 @@ export class ColaboradorListComponent implements OnInit {
     this._ativo = '2';
 
     this._msgProgresso = '';
+    this.submitted = false;
   }
 
   getColaboradores(): void {
@@ -71,12 +72,18 @@ export class ColaboradorListComponent implements OnInit {
     this.router.navigate(['admin/Colaborador', this.selectedColaborador.colaboradorId]);
 }
 
-  gotoNovoColaborador() {
+  gotoNovoColaborador(): void {
 
       this.router.navigate(['admin/ColaboradorNovo']);
   }
 
   gotoBuscarColaborador(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editNome.trim() !== '') {
       this.editNome = this._util.StringSanity(this.editNome);
@@ -98,14 +105,14 @@ export class ColaboradorListComponent implements OnInit {
         colaboradores => {
           this.colaboradores = colaboradores;
           this._msgProgresso =  this.colaboradores.length === 0 ? ' - Não foram encontrados registros' : '';
+          this.submitted = false;
         });
 
-    this.submitted = false;
     this._nome = '0';
     this._ativo = '2';
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
     this.editAtivo = true;
     this.editNome = '';
     this.editTipoPerfil = '0';
@@ -114,12 +121,11 @@ export class ColaboradorListComponent implements OnInit {
   }
 
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
     this.gotoBuscarColaborador();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getColaboradores();
   }
 }

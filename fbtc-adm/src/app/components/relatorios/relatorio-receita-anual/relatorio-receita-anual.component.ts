@@ -44,22 +44,29 @@ export class RelatorioReceitaAnualComponent implements OnInit {
 
   getDadosRpt(): void {
 
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
     this._msgProgresso = '...Pesquisando...';
 
     this.service.getRptReceitaAnualDAO().subscribe(
       rptReceitaAnualDAOs => {
         this.rptReceitaAnualDAOs = rptReceitaAnualDAOs;
         this._msgProgresso =  this.rptReceitaAnualDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+        this.submitted = false;
+
       });
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.getDadosRpt();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getDadosRpt();
   }

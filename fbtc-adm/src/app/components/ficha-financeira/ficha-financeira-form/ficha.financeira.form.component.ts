@@ -111,7 +111,13 @@ export class FichaFinanceiraFormComponent implements OnInit {
           });
   }
 
-  gotoSave() {
+  gotoSave(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this.alertClassType = 'alert alert-info';
     this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -121,36 +127,26 @@ export class FichaFinanceiraFormComponent implements OnInit {
         msg => {
             this._msgRetorno = msg;
             this.avaliaRetorno(this._msgRetorno);
+            this.submitted = false;
         });
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
+
     this.gotoSave();
   }
 
-  gotoFichaFinanceira() {
+  gotoFichaFinanceira(): void {
 
     const anuidadeId = this.anuidadeDao ? this.anuidadeDao.anuidadeId : null;
     this.router.navigate(['/admin/FichaFinanceira', { id: anuidadeId, foo: 'foo' }]);
   }
-/*
-  getTiposPublicosByAnuidadeId(id: number): void {
 
-    this.service.getAnuidadeDaoById(id).
-      subscribe(anuidadesDao => this.anuidadeDao = anuidadesDao);
-  }*/
-
-  avaliaRetorno(msgRet: string) {
+  avaliaRetorno(msgRet: string): void {
 
     if (msgRet.substring(0, 1) === '0') {
 
-console.log('msgRet...' + msgRet);
-
         this._anuidadeId = parseInt(msgRet.substring(0, 10), 10);
-
-console.log('_anuidadeId...' + this._anuidadeId);
-        // this.router.navigate([`admin/FichaFinanceira/${this._anuidadeId}`]);
 
         this.getAnuidadeDaoById(this._anuidadeId);
 
@@ -166,7 +162,7 @@ console.log('_anuidadeId...' + this._anuidadeId);
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.anuidadeId = +this.route.snapshot.paramMap.get('id');
 

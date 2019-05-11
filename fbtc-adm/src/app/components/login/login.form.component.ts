@@ -28,6 +28,8 @@ export class LoginComponent {
   userProfileLogin: UserProfileLogin;
   _msgProgresso: string;
 
+  submitted: boolean;
+
   constructor(
       public authService: AuthService,
       public userProfileService: UserProfileService,
@@ -44,13 +46,20 @@ export class LoginComponent {
 
     this.alertClassType = 'alert alert-info';
     this._msgProgresso = '';
+    this.submitted = false;
   }
 
-  setMessage() {
+  setMessage(): void {
     this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
   }
 
-  login() {
+  login(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this._msg = '';
 //    this.message = 'Trying to log in ...';
@@ -85,6 +94,7 @@ export class LoginComponent {
     this.authService.loginUser( this.userProfileLogin).subscribe((userProfile: UserProfile) => {
           this.setMessage();
           this._msgProgresso = '';
+          this.submitted = false;
 
         // console.log('antes: ' + this.authService.isLoggedIn);
         // console.log('userProfile: ' + userProfile);
@@ -110,7 +120,13 @@ export class LoginComponent {
       );
   }
 
-  gotoReenviarSenha() {
+  gotoReenviarSenha(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this._msg = '';
     this.editPassword = '';
@@ -129,21 +145,23 @@ export class LoginComponent {
               this._msgProgresso = '';
               this._msgPWD = msg;
               this.gotoAvaliaRetornoEMail(this._msgPWD);
+              this.submitted = false;
             });
 
     } else {
 
       this.alertClassType = 'alert alert-danger';
       this._msg  = 'Por favor, informe o seu E-Mail.';
+      this.submitted = false;
     }
   }
 
-  gotoNovoCadastro() {
+  gotoNovoCadastro(): void {
 
       this.router.navigate(['/AssociadoCaptacao']);
   }
 
-  gotoAvaliaRetornoEMail(msg: string) {
+  gotoAvaliaRetornoEMail(msg: string): void {
 
     if (msg.substring(0, 7) === 'ATENÇÃO') {
         this.alertClassType = 'alert alert-danger';
@@ -154,13 +172,13 @@ export class LoginComponent {
     }
 }
 
-  onSubmit() {
+  onSubmit(): void {
 
     this._msg = '';
     this.login();
   }
 
-  logout() {
+  logout(): void {
 
     this.authService.logout();
     this.setMessage();

@@ -22,7 +22,8 @@ export class AssociadoFichaFinanceiraEventoFormComponent implements OnInit {
                     eMail: '', nrCelular: '', ativoAssociado: false, recebimentoId: 0, assinaturaAnuidadeId: null,
                     assinaturaEventoId: null, observacao: '', notificationCodePS: '', typePS: null,
                     statusPS: null, lastEventDatePS: null, typePaymentMethodPS: null, codePaymentMethodPS: null,
-                    netAmountPS: 0, dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
+                    grossAmountPS: 0, discountAmountPS: 0, feeAmountPS: 0, netAmountPS: 0, extraAmountPS: 0,
+                    dtVencimento: null, statusFBTC: null, dtStatusFBTC: null, origemEmissaoTitulo: null,
                     dtCadastro: null, ativo: false};
 
   title: string;
@@ -46,7 +47,7 @@ export class AssociadoFichaFinanceiraEventoFormComponent implements OnInit {
    }
 
   onSubmit() {
-    this.submitted = true;
+
   }
 
   gotoRecebimentoAnuidade() {

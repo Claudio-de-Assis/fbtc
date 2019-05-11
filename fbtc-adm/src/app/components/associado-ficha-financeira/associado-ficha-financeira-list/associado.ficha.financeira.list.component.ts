@@ -56,7 +56,7 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
       private route: ActivatedRoute,
       private authService: AuthService
   ) {
-      this.title = 'Consulta da Pagamentos';
+      this.title = 'Consulta de Pagamentos';
 
       this.editAno = 0;
       this.editStatusPS = 99;
@@ -80,14 +80,18 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
     this.router.navigate(['/admin/AssociadoFichaFinanceiraAnuidade', this.selectedRecebimento.recebimentoId]);
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
     this.gotoBuscarRecebimentoAnuidade();
-    // this.gotoBuscarRecebimentoEvento();
   }
 
 
   gotoBuscarRecebimentoAnuidade(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editStatusPS !== 99) {
       this._statusPS = this.editStatusPS;
@@ -101,17 +105,16 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
     this.service.getPagamentosByPessoaIdIdFilters(this._pessoaId, '2', this._ano, this._statusPS)
         .subscribe(recebimentos => {
           this.recebimentosAnuidade = recebimentos;
-          this._msgProgresso =  this.recebimentosAnuidade.length === 0 ? ' - Não foram encontrados registros' : '';
+          this._msgProgresso =  this.recebimentosAnuidade.length === 0 ? ' - Não foram encontrados registros de pagamentos' : '';
+          this.submitted = false;
         });
-
-    this.submitted = false;
 
     this._statusPS = 99;
     this._ano = 0;
     this._ativo = '2';
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
 
     this._statusPS = 99;
     this.editStatusPS = 99;
@@ -122,6 +125,12 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
 
   gotoBuscarRecebimentoEvento(): void {
 
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
     if (this.editStatusPS !== 99) {
       this._statusPS = this.editStatusPS;
     }
@@ -130,9 +139,7 @@ export class AssociadoFichaFinanceiraListComponent implements OnInit {
     }
 
     this.service.getPagamentosByPessoaIdIdFilters(this._pessoaId, '1', this._ano, this._statusPS)
-        .subscribe(recebimentos => this.recebimentosEvento = recebimentos);
-
-    this.submitted = false;
+        .subscribe(recebimentos => {this.recebimentosEvento = recebimentos; this.submitted = false; });
 
     this._statusPS = 99;
     this._ano = 0;

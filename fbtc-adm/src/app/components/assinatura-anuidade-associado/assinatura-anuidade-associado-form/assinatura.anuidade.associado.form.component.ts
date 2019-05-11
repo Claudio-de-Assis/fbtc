@@ -2,14 +2,13 @@ import { PagSeguroRoute } from './../../shared/webapi-routes/pagSeguro.route';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
 
 import { ValorAnuidade } from '../../shared/model/valor-anuidade';
 import { AnuidadeTipoPublicoDao } from '../../shared/model/anuidade-tipo-publico';
 import { AnuidadeService } from '../../shared/services/anuidade.service';
 import { AssociadoService } from '../../shared/services/associado.service';
 import { AssinaturaAnuidadeService } from '../../shared/services/assinatura-anuidade.service';
-import { AssinaturaAnuidadeDao, AssinaturaAnuidade } from '../../shared/model/assinatura-anuidade';
+import { AssinaturaAnuidadeDao } from '../../shared/model/assinatura-anuidade';
 
 import { Util } from '../../shared/util/util';
 import { Associado, AssociadoDao } from '../../shared/model/associado';
@@ -23,11 +22,12 @@ import { AnuidadeDao } from '../../shared/model/anuidade';
 export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
 
   @Input() assinaturaAnuidadeDao: AssinaturaAnuidadeDao = { nomePessoa: '', cpf: '', nomeTP: '', exercicio: 0,
-   tipoAnuidade: 0, assinaturaAnuidadeId: 0, associadoId: 0, valorAnuidadeId: null, valorAnuidadeIdOriginal: null, anoInicio: 0,
+   tipoAnuidade: 0, assinaturaAnuidadeId: 0, associadoId: 0, valorAnuidadeId: null, valorAnuidadeIdOriginal: null, 
+   recebimentoStatusPS: null, anoInicio: 0,
    anoTermino: 0, percentualDesconto: 0, tipoDesconto: '0', valor: 0, dtVencimentoPagamento: null,  dtAssinatura: null, dtAtualizacao: null,
    codePS: '', dtCodePS: null, reference: '', emProcessoPagamento: false, dtInicioProcessamento: null,
-   ativo: true, valorTipoAnuidade: 0, anuidadeId: 0, tipoPublicoId: 0, anuidadeAtcOk: false, membroDiretoria: false, membroConfi: false
-  };
+   ativo: true, valorTipoAnuidade: 0, anuidadeId: 0, tipoPublicoId: 0, anuidadeAtcOk: false, membroDiretoria: false, membroConfi: false,
+   pagamentoIsento: false, pagamentoIsentoBD: false, dtIsencao: null, observacaoIsencao: '' };
 
   anuidadesTiposPublicosDao: AnuidadeTipoPublicoDao[];
 
@@ -113,7 +113,13 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
     this._msgProgresso = '';
    }
 
-  getAssinaturaAnuidadeById(assinaturaAnuidadeId: number, anuidadeId: number, tipoPublicoId): void {
+  getAssinaturaAnuidadeById(assinaturaAnuidadeId: number, anuidadeId: number, tipoPublicoId: number): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this._msgProgresso = '...Carregando os dados da assinatura. Por favor, aguarde!...';
 
@@ -125,13 +131,20 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
                     .subscribe(anuidadeDao => {
                       this.anuidadeDao = anuidadeDao;
                       this._msgProgresso = '';
+                      this.submitted = false;
                     });
               this._valorAnuidadeIdOriginal = this.assinaturaAnuidadeDao.valorAnuidadeIdOriginal;
               this.gotoAvaliaBotaoPagSeguro();
             });
   }
 
-  getDadosNovaAssinatura(anuidadeId: number, associadoId: number, tipoPublicoId): void {
+  getDadosNovaAssinatura(anuidadeId: number, associadoId: number, tipoPublicoId: number): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this._msgProgresso = '...Carregando os dados para a nova assinatura. Por favor, aguarde!...';
 
@@ -145,11 +158,13 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
                         this.anuidadeDao = anuidadeDao;
                         this._msgProgresso = '';
                         this.setAssinaturaAssociadoDao(this.associadoDao, this.anuidadeDao);
+                        this.submitted = false;
                       });
           });
   }
 
-  setAssinaturaAssociadoDao(_associadoDao: AssociadoDao, _anuidadeDao: AnuidadeDao) {
+  setAssinaturaAssociadoDao(_associadoDao: AssociadoDao, _anuidadeDao: AnuidadeDao): void {
+
     this.assinaturaAnuidadeDao.nomePessoa = _associadoDao.nome;
     this.assinaturaAnuidadeDao.cpf = _associadoDao.cpf;
     this.assinaturaAnuidadeDao.nomeTP = _anuidadeDao.anuidadesTiposPublicosDao[0].nomeTipoPublico;
@@ -180,34 +195,46 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
   }
 
 
-  gotoAvaliaBotaoPagSeguro() {
+  gotoAvaliaBotaoPagSeguro(): void {
 
       if (this.assinaturaAnuidadeDao.assinaturaAnuidadeId > 0
         && this.assinaturaAnuidadeDao.valorAnuidadeId > 0
         && this.assinaturaAnuidadeDao.codePS !== ''
-        && this.assinaturaAnuidadeDao.emProcessoPagamento === false
-        ) {
-            if (this.assinaturaAnuidadeDao.codePS.substring(0, 13) !== 'Dado_Migrado_') {
-              this._botaoPagSeguroOk = true;
-              this._targetPagSeguro = this.routePS.postGotoChekOut(this.assinaturaAnuidadeDao.codePS);
-        }
+        && this.assinaturaAnuidadeDao.emProcessoPagamento === false) {
+
+          if (this.assinaturaAnuidadeDao.pagamentoIsento === false) {
+            if (this.assinaturaAnuidadeDao.codePS.substring(0, 13) !== 'Dado_Migrado_' ||
+              this.assinaturaAnuidadeDao.codePS.substring(0, 25) !== 'Isento Pagamento Anuidade') {
+
+                this._botaoPagSeguroOk = true;
+                this._targetPagSeguro = this.routePS.postGotoChekOut(this.assinaturaAnuidadeDao.codePS);
+            }
+          } else {
+
+            this._botaoPagSeguroOk = false;
+            this._emProcessoPagamento = 'false';
+          }
       }
 
       if (this.assinaturaAnuidadeDao.emProcessoPagamento === true) {
+
         this._emProcessoPagamento = 'true';
+
       } else {
+
         this._emProcessoPagamento = 'false';
+
       }
   }
 
-  gotoAssinaturasAnuidades() {
+  gotoAssinaturasAnuidades(): void {
 
     const anuidadeId = this.assinaturaAnuidadeDao ? this.assinaturaAnuidadeDao.anuidadeId : null;
 
     this.router.navigate(['/admin/MinhaAssinaturaAnuidade', { anuidadeId: anuidadeId , foo: 'foo' }]);
   }
 
-  setValorAnuidade(id: number) {
+  setValorAnuidade(id: number): void {
 
     this._msg = '';
     this._msgRetorno = '';
@@ -225,9 +252,15 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
             if (this._valorAnuidadeIdOriginal > 0) {
 
               if ( this._valorAnuidadeIdOriginal !== this.valorAnuidadeSelected.valorAnuidadeId) {
+
                 this._botaoPagSeguroOk = false;
               } else {
-                this._botaoPagSeguroOk = true;
+
+                if (this.assinaturaAnuidadeDao.codePS.substring(0, 13) !== 'Dado_Migrado_' &&
+                  this.assinaturaAnuidadeDao.codePS.substring(0, 25) !== 'Isento Pagamento Anuidade') {
+
+                  this._botaoPagSeguroOk = true;
+                }
               }
             }
           } else {
@@ -239,19 +272,33 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
     }
   }
 
-  save() {
+  save(): void {
 
-    this.alertClassType = 'alert alert-info';
-    this._msg = 'Salvando os dados. Por favor, aguarde...';
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
-    this.service.addAssinaturaAnuidadeDao(this.assinaturaAnuidadeDao)
-    .subscribe(
-      msg => {
-          this._msgRetorno = msg;
-          this.avaliaRetorno(this._msgRetorno);
-      });
+    if (this.assinaturaAnuidadeDao.pagamentoIsento === true) {
 
-    this.submitted = false;
+      this.alertClassType = 'alert alert-danger';
+      this._msg = 'Esta anuidade está isentada de pagamento';
+      this.submitted = false;
+
+    } else {
+
+      this.alertClassType = 'alert alert-info';
+      this._msg = 'Salvando os dados. Por favor, aguarde...';
+
+      this.service.addAssinaturaAnuidadeDao(this.assinaturaAnuidadeDao)
+      .subscribe(
+        msg => {
+            this._msgRetorno = msg;
+            this.avaliaRetorno(this._msgRetorno);
+            this.submitted = false;
+        });
+    }
   }
 
   avaliaRetorno(msgRet: string) {
@@ -277,20 +324,19 @@ export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
     this._msg = '';
     this._msgRetorno = '';
-    this.submitted = true;
     this.save();
   }
 
-  gotoPagSeguro() {
+  gotoPagSeguro(): void {
 
     this.gotoAssinaturasAnuidades();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // Mantem a atualização do parametro 'vivo'
     this.route.params.subscribe((params: Params) => {

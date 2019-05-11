@@ -45,7 +45,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-12 text-right">
-                        <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
+                        <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                                     <td>{{ recebimento.anuidade }}</td>
                                     <td>{{ recebimento.dtVencimento | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ recebimento.lastEventDatePS | date:'dd/MM/yyyy' }}</td>
-                                    <td>{{ recebimento.statusPS |  statusPagamento }}</td>
+                                    <td>{{ recebimento.statusPS |  statusPagamentoAssociado }}</td>
                                     <!--<td>
                                         <a [routerLink]="['/admin/AssociadoFichaFinanceiraAnuidade', recebimento.recebimentoId]"><i class="fa fa-pencil text-primary"></i></a>&nbsp;
                                     </td>-->

@@ -1,5 +1,3 @@
-import { Associado } from './associado';
-
 export class Recebimento {
     recebimentoId: number;
     assinaturaAnuidadeId: number;
@@ -11,15 +9,17 @@ export class Recebimento {
     lastEventDatePS: Date;
     typePaymentMethodPS: number;
     codePaymentMethodPS: number;
+    grossAmountPS: number;
+    discountAmountPS: number;
+    feeAmountPS: number;
     netAmountPS: number;
+    extraAmountPS: number;
     dtVencimento: Date;
     statusFBTC: string;
     dtStatusFBTC: Date;
     origemEmissaoTitulo: string;
     dtCadastro: Date;
     ativo: boolean;
-
-//    associado: Associado;
 }
 
 export class RecebimentoAssociadoDao extends Recebimento {

@@ -77,18 +77,24 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
   }
 
   getAnuidades(): void {
+
     this.serviceAnuidade.getAnuidades().subscribe(anuidades => this.anuidades = anuidades);
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
     if (this.editAnuidadeId !== 0) {
-      this.submitted = true;
       this.gotoBuscarAssinaturasAnuidades();
     }
   }
 
-  gotoBuscarAssinaturasAnuidades() {
+  gotoBuscarAssinaturasAnuidades(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editAnuidadeId !== null) {
         this._anuidadeId = this.editAnuidadeId;
@@ -118,14 +124,14 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
         .subscribe(assinaturaAnuidades => {
           this.assinaturaAnuidades = assinaturaAnuidades;
           this._msgProgresso =  this.assinaturaAnuidades.length === 0 ? ' - Não foram encontrados registros' : '';
-
+          this.submitted = false;
         });
 
     this.service.getAssinaturaPendenteByFilters(this._anuidadeId, this._nome, this._cpf, this._ativo)
         .subscribe(assinaturaAnuidadesPendentes => {
           this.assinaturaAnuidadesPendentes = assinaturaAnuidadesPendentes;
           this._msgProgresso2 =  this.assinaturaAnuidadesPendentes.length === 0 ? ' - Não foram encontrados registros' : '';
-
+          this.submitted = false;
         });
 
     this._nome = '0';
@@ -154,7 +160,7 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
       foo: 'foo'}]);
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
 
     this._anuidadeId = 0;
     this.editAtivo = true;
@@ -167,7 +173,7 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
     this._cpf = '0';
   }
 
-  gotoLimparGrids() {
+  gotoLimparGrids(): void {
 
     this._msgProgresso = '';
     this._msgProgresso2 = '';
@@ -176,7 +182,7 @@ export class AssinaturaAnuidadeListComponent implements OnInit {
     this.assinaturaAnuidadesPendentes = null;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getAnuidades();
 

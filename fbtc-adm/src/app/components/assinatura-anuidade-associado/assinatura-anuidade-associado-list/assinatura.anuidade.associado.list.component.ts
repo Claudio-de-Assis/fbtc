@@ -4,11 +4,11 @@ import { AssociadoService } from './../../shared/services/associado.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 
-import {FormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+// import {FormsModule} from '@angular/forms';
+// import {NgModule} from '@angular/core';
+// import {BrowserModule} from '@angular/platform-browser';
 
 import { AuthService } from './../../shared/services/auth.service';
 import { UserProfile } from './../../shared/model/user-profile';
@@ -66,7 +66,7 @@ export class AssinaturaAnuidadeAssociadoListComponent implements OnInit {
 
     this._pessoaId = 0;
 
-    this._labelAnuidade = 'Anuidades Pendentes';
+    this._labelAnuidade = 'Anuidades disponíveis para renovação';
     this._habilitaAnuidade = false;
   }
 
@@ -78,28 +78,27 @@ export class AssinaturaAnuidadeAssociadoListComponent implements OnInit {
       });
   }
 
-  avaliaRetorno() {
+  avaliaRetorno(): void {
     if (this.anuidades.length  === 0) {
-      this._labelAnuidade = 'Não há anuidades Pendentes';
+      this._labelAnuidade = 'Não há anuidades disponíveis para renovação';
       this._habilitaAnuidade = true;
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
     if (this.editAnuidadeId !== 0) {
-      this.submitted = true;
       this.gotoNovaAssinatura();
     }
   }
 
-  gotoBuscarAssinaturasAnuidades() {
+  gotoBuscarAssinaturasAnuidades(): void {
 
     this.service.getByPessoaId(this._pessoaId)
         .subscribe(assinaturaAnuidades => this.assinaturaAnuidades = assinaturaAnuidades);
   }
 
-  gotoNovaAssinatura() {
+  gotoNovaAssinatura(): void {
 
     this.router.navigate(['/admin/MinhaAssinaturaAnuidadeDetalhe', {
       id: 0,
@@ -109,7 +108,7 @@ export class AssinaturaAnuidadeAssociadoListComponent implements OnInit {
       foo: 'foo'}]);
   }
 
-  getAssociado() {
+  getAssociado(): void {
     this.pessoaService.getPessoaAssociadoById(this._pessoaId)
       .subscribe(associado => this.associado = associado);
   }
@@ -124,7 +123,7 @@ export class AssinaturaAnuidadeAssociadoListComponent implements OnInit {
        foo: 'foo'}]);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     const userProfile: UserProfile = this.authService.getUserProfile();
     this._pessoaId = userProfile.pessoaId;

@@ -12,6 +12,7 @@ import { RecebimentoAnuidadeListComponent } from './recebimento-anuidade-list/re
 import { RecebimentoAnuidadeRoutingModule } from './recebimento.anuidade.routing.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PdfService } from '../shared/services/pdf.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers: [
     AssociadoService,
     RecebimentoService,
-    PagSeguroService
+    PagSeguroService,
+    PdfService
   ]
 })
 export class RecebimentoAnuidadeModule { }

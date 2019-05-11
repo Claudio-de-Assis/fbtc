@@ -82,8 +82,8 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-12 text-right">
-                            <button class="btn btn-success" [disabled]="_sincronizandoPS" (click)="gotoSicronizarComPagSeguro()" alt="Sincronizar pagamentos dos últimos 30 dias">Sincronizar com PagSeguro</button>
-                            <button class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
+                            <button type="button" class="btn btn-success" [disabled]="_sincronizandoPS" (click)="gotoSicronizarComPagSeguro()" alt="Sincronizar pagamentos dos últimos 30 dias">Sincronizar com PagSeguro</button>
+                            <button type="button" class="btn btn-default" (click)="gotoLimparFiltros()">Limpar Filtros</button>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                                     <td>CPF</td>
                                     <td>Anuidade</td>
                                     <td>Data Status</td>
-                                    <td>Situação</td>
+                                    <td>Status Pagamento</td>
                                     <!--<td>Ações</td>-->
                                 </tr>
                             </thead>

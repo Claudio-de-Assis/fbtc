@@ -89,14 +89,27 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
-                            <div >{{ _msg }}</div>
+                        <div class="form-group">
+                            <div *ngIf="_msg !== ''" class="{{ alertClassType }}">
+                                <div >{{ _msg }}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <!--<div *ngIf="_msgVenc !== ''" class="alert alert-danger">
-                            <div >{{ _msgVenc }}</div>
-                        </div>-->
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="rdbIsencao">Processando pagamento?:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
+                                <input type="radio" [(ngModel)]="assinaturaAnuidadeDao.emProcessoPagamento" name="emProcessoPagamento"  
+                                [checked]="op.value === assinaturaAnuidadeDao.emProcessoPagamento" [value]="op.value" disabled> {{ op.name }} &nbsp; </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="rdbIsencao">Isenção Pagamento?:</label><br>
+                            <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
+                                <input type="radio" (ngModelChange)="setDadosParaIsencao($event)" [(ngModel)]="assinaturaAnuidadeDao.pagamentoIsento" name="pagamentoIsento"  
+                                [checked]="op.value === assinaturaAnuidadeDao.pagamentoIsento" [value]="op.value" [disabled]="_emProcessoPagamento"> {{ op.name }} &nbsp; </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,7 +117,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="button" class="btn btn-default btn-xs" (click)="gotoPagSeguro()" *ngIf="_botaoPagSeguroOk">
-                            <a href="{{ _targetPagSeguro }}" target="blanck"><img id="imgFoto" name="foto" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/184x42-pagar-assina.gif" error="assets/no-foto.png"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"></a>
+                            <a target="_blank" href="{{ _targetPagSeguro }}"><img id="imgFoto" name="foto" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/184x42-pagar-assina.gif" error="assets/no-foto.png"  alt="Pague com PagSeguro - é rápido, grátis e seguro!"></a>
                         </button>
                     </div>
                     <div class="col-lg-6 text-right">

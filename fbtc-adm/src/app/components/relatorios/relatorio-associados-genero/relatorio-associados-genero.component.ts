@@ -49,7 +49,12 @@ export class RelatorioAssociadosGeneroComponent implements OnInit {
 
   getDadosRpt(): void {
 
-    this.submitted = true;
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+        return;
+    }
+
     this.rptRoute = this.apiRoute.getRptAssociadosGeneroToExcel(this.editSexo);
 
     this._msgProgresso = '...Pesquisando...';
@@ -58,16 +63,16 @@ export class RelatorioAssociadosGeneroComponent implements OnInit {
     subscribe(rptTotalAssociadosDAOs => {
       this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs;
       this._msgProgresso =  this.rptTotalAssociadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+      this.submitted = false;
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.getDadosRpt();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getDadosRpt();
   }

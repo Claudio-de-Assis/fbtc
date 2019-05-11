@@ -81,13 +81,7 @@ export class ColaboradorFormComponent implements OnInit {
             });
     }
 
-    setColaborador(): void {
-
-        this.service.setColaborador()
-            .subscribe(colaborador => this.colaborador = colaborador);
-    }
-
-    gotoValidarEMail() {
+    gotoValidarEMail(): void {
 
         this.service.getValidaEMail(this.colaborador.pessoaId, this.colaborador.eMail)
         .subscribe(
@@ -97,7 +91,13 @@ export class ColaboradorFormComponent implements OnInit {
             });
     }
 
-    save() {
+    save(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Salvando os dados. Por favor, aguarde...';
@@ -107,27 +107,19 @@ export class ColaboradorFormComponent implements OnInit {
             msg => {
                 this._msgRetorno = msg;
                 this.avaliaRetorno(this._msgRetorno);
+                this.submitted = false;
             }
         );
 
-        this.submitted = false;
     }
-    /*
-    gotoShowPopUp() {
 
-      this.editMessagem = 'Registro salvo com sucesso!';
-      this.editShowPopup = true;
-      // Colocar a chamada para a implementação do PopUp modal de aviso:
-      alert('Registro salvo com sucesso!');
-    }*/
-
-    avaliaRetorno(msgRet: string) {
+    avaliaRetorno(msgRet: string): void {
 
         if (msgRet.substring(0, 1) === '0') {
 
             this._colabId = parseInt(msgRet.substring(0, 10), 10);
 
-            this.router.navigate([`admin/Colaborador/${this._colabId}`]);
+            // this.router.navigate([`admin/Colaborador/${this._colabId}`]);
 
             this.getColaboradorById(this._colabId);
 
@@ -145,7 +137,7 @@ export class ColaboradorFormComponent implements OnInit {
         }
     }
 
-    avaliaRetornoEMail(msgRet: string) {
+    avaliaRetornoEMail(msgRet: string): void {
 
         if (msgRet !== 'OK') {
 
@@ -154,7 +146,13 @@ export class ColaboradorFormComponent implements OnInit {
         }
     }
 
-    gotoReenviarSenha() {
+    gotoReenviarSenha(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         this.alertClassType = 'alert alert-info';
         this._msg = 'Enviando a senha para o e-mail do associado. Por favor, aguarde...';
@@ -165,15 +163,16 @@ export class ColaboradorFormComponent implements OnInit {
             .subscribe(msg => {
                 this._msg = msg;
                 this.gotoAvaliaRetornoEMail(this._msg);
+                this.submitted = false;
             });
 
         } else {
-
+            this.submitted = false;
             this._msg = 'Atenção: Você precisa primeiro incluir o registro';
         }
     }
 
-    gotoAvaliaRetornoEMail(msg: string) {
+    gotoAvaliaRetornoEMail(msg: string): void {
 
         if (msg.substring(0, 7) === 'ATENÇÃO') {
             this.alertClassType = 'alert alert-danger';
@@ -183,7 +182,7 @@ export class ColaboradorFormComponent implements OnInit {
         }
     }
 
-    gotoColaboradores() {
+    gotoColaboradores(): void {
 
         const colaboradorId = this.colaborador ? this.colaborador.colaboradorId : null;
         this.router.navigate(['admin/Colaborador', { id: colaboradorId, foo: 'foo' }]);
@@ -194,9 +193,8 @@ export class ColaboradorFormComponent implements OnInit {
         return true;
     }
 
-    onSubmit() {
+    onSubmit(): void {
 
-        this.submitted = true;
         this.save();
     }
 

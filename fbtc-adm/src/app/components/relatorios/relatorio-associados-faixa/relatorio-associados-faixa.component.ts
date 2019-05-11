@@ -44,7 +44,11 @@ export class RelatorioAssociadosFaixaComponent implements OnInit {
 
   getDadosRpt(): void {
 
-    this.submitted = true;
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     this._msgProgresso = '...Pesquisando...';
 
@@ -52,17 +56,16 @@ export class RelatorioAssociadosFaixaComponent implements OnInit {
       rptAssociadoFaixaDAOs => {
         this.rptAssociadoFaixaDAOs = rptAssociadoFaixaDAOs;
         this._msgProgresso =  this.rptAssociadoFaixaDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
-
+        this.submitted = false;
       });
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.getDadosRpt();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.getDadosRpt();
   }

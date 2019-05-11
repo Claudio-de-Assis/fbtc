@@ -64,7 +64,6 @@ export class IsencaoAnuidadeListComponent implements OnInit {
 
 
   onSubmit() {
-    this.submitted = true;
     this.gotoBuscarIsencao();
   }
 

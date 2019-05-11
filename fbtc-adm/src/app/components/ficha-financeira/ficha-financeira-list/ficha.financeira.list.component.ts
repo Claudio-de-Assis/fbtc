@@ -70,12 +70,18 @@ export class FichaFinanceiraListComponent implements OnInit {
     this.router.navigate(['admin/FichaFinanceira', this.selectedAnuidade.anuidadeId]);
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
+
     this.gotoBuscarAnuidade();
   }
 
   gotoBuscarAnuidade(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
 
     if (this.editExercicio !== null) {
       this._exercicio = this.editExercicio;
@@ -96,37 +102,46 @@ export class FichaFinanceiraListComponent implements OnInit {
           anuidades => {
             this.anuidades = anuidades;
             this._msgProgresso =  this.anuidades.length === 0 ? ' - Não foram encontrados registros' : '';
+            this.submitted = false;
           });
 
-    this.submitted = false;
     this._exercicio = 0;
     this._ativo = '2';
   }
 
-  gotoNovaAnuidade() {
+  gotoNovaAnuidade(): void {
 
     this.router.navigate(['admin/FichaFinanceiraNova']);
   }
 
   gotoSicronizarComPagSeguro(): void {
+
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
     this.mensagemSincronizacao = 'Processando a sincronização. Por favor, aguarde!....';
     this._msg = '';
 
     this.servicePS.postSincronizarRecebimentos().subscribe(
-      _msg => [
-          this._msg = _msg,
-          this.mensagemSincronizacao = ''
-      ]);
+      _msg => {
+          this._msg = _msg;
+          this.mensagemSincronizacao = '';
+          this.submitted = false;
+      });
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
     this._exercicio = 0;
     this._ativo = '2';
     this.editExercicio = null;
-    this.editAtivo = true;
+    this.editAtivo = null;
+
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.gotoBuscarAnuidade();
   }

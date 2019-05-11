@@ -53,6 +53,12 @@ export class RelatorioAssociadosAnoComponent implements OnInit {
 
   getDadosRpt(): void {
 
+    if (this.submitted === false) {
+      this.submitted = true;
+    } else {
+      return;
+    }
+
     this._msgProgresso = '...Pesquisando...';
 
     this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(this.editAno);
@@ -62,6 +68,7 @@ export class RelatorioAssociadosAnoComponent implements OnInit {
       rptTotalAssociadosDAOs => {
         this.rptTotalAssociadosDAOs = rptTotalAssociadosDAOs;
         this._msgProgresso =  this.rptTotalAssociadosDAOs.length === 0 ? ' - Não foram encontrados registros' : '';
+        this.submitted = false;
       });
   }
 
@@ -70,23 +77,22 @@ export class RelatorioAssociadosAnoComponent implements OnInit {
     this.rptRoute = this.apiRoute.getRptAssociadosAnoToExcel(this.editAno);
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.submitted = true;
     this.getDadosRpt();
   }
 
-  gotoLimparFiltros() {
+  gotoLimparFiltros(): void {
 
     this.editAno = null;
   }
 
   getAnuidades(): void {
+
     this.serviceAnuidade.getAnuidades().subscribe(anuidades => this.anuidades = anuidades);
   }
-  ngOnInit() {
-    this.getAnuidades();
+  ngOnInit(): void {
 
-    // this.getDadosRpt();
+    this.getAnuidades();
   }
 }

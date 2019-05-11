@@ -33,26 +33,6 @@ export class AuthService {
       this.redirectUrl = '';
       // this.userProfile = new UserProfile();
     }
-/*
-   getDadosUser(senha: string, eMail: string) {
-
-      this.userProfileService.getByEmailPassword(senha, eMail).subscribe(
-      userProfile => {
-        this.userProfile = userProfile;
-        console.log('então...: ' + this.userProfile.nome);
-      },
-
-    );
-   }*/
-
-   /*
-  login(senha: string, eMail: string ): Observable<UserProfile> {
-      return this.http.get<UserProfile>(this.apiRoute.login(senha, eMail))
-          .do(result => {
-            this.userProfile = result;
-            this.isLoggedIn = true;
-          });
-  }*/
 
   loginUser(userProfileLogin: UserProfileLogin): Observable<UserProfile> {
     return this.http.post<UserProfile>(this.apiRoute.loginUser(), userProfileLogin, httpOptions)

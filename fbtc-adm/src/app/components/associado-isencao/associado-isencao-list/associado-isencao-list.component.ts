@@ -108,12 +108,17 @@ export class AssociadoIsencaoListComponent implements OnInit {
         this.serviceTP.getTiposPublicos('true').subscribe(tiposPublicos => this.tiposPublicos = tiposPublicos);
     }
 
-    onSubmit() {
-        this.submitted = true;
+    onSubmit(): void {
         this.gotoBuscarAssociado();
     }
 
     gotoBuscarAssociado(): void {
+
+        if (this.submitted === false) {
+            this.submitted = true;
+        } else {
+            return;
+        }
 
         if (this.editNome.trim() !== '') {
             this._nome = this.editNome.trim();
@@ -131,9 +136,8 @@ export class AssociadoIsencaoListComponent implements OnInit {
 
         this.service.getIsentoByFilters(this.isencaoId, this._nome, this._cpf, this.editSexo, this.editAtcId,
                 this._crp, this.editTipoProfissao, this.editTipoPublicoId, this.editEstado, this.editCidade, this._ativo)
-            .subscribe(associados => this.associados = associados);
+            .subscribe(associados => {this.associados = associados; this.submitted = false; });
 
-          this.submitted = false;
           // this._nome = '0';
           // this._cpf = '0';
           // this._crp = '0';
@@ -167,13 +171,13 @@ export class AssociadoIsencaoListComponent implements OnInit {
         }
     }
 
-    gotoShowPopUp(msg: string) {
+    gotoShowPopUp(msg: string): void {
 
         // Colocar a chamada para a implementação do PopUp modal de aviso:
         alert(msg);
       }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.getTiposPublicos();
 

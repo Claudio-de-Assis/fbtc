@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs';
+// import 'rxjs';
 
 import { MessageService } from '../../../message.service';
 import { RecebimentoRoute } from '../webapi-routes/recebimento.route';
@@ -82,6 +82,15 @@ export class RecebimentoService {
             catchError(this.handleError<string>('addRecebimento'))
         );
     }
+
+    addIsencaoRecebimento (recebimento: Recebimento): Observable<string> {
+
+        return this.http.post<string>(this.apiRoute.postIsencaoRecebimento(), recebimento, httpOptions).pipe(
+            tap(_ => this.log(`added recebimento w/ id=${recebimento.recebimentoId}`)),
+            catchError(this.handleError<string>('addRecebimento'))
+        );
+    }
+
 
     getAnuidadeByFilters(nome: string, cpf: string, crp: string, crm: string, statusPS: number,
         ano: number, mes: number, ativo: string, tipoPublicoId: number): Observable<RecebimentoAssociadoDao[]> {

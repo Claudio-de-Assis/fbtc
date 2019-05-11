@@ -15,6 +15,7 @@ import { MycurrencyPipe } from './pipes/mycurrency';
 import { TipoAnuidadePipe } from './pipes/tipo-anuidade';
 import { StatusPagamentoFBTCPipe } from './pipes/status-pagamento-fbtc.pipe';
 import { TipoDescontoPipe } from './pipes/tipo-desconto.pipe';
+import { StatusPagamentoAssociadoPipe } from './pipes/status-pagamento-associado-pipe';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { TipoDescontoPipe } from './pipes/tipo-desconto.pipe';
     TipoEventoPipe,
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
+    StatusPagamentoAssociadoPipe,
     StatusPagamentoFBTCPipe,
     FormaPagamentoPipe,
     MycurrencyPipe,
@@ -42,6 +44,7 @@ import { TipoDescontoPipe } from './pipes/tipo-desconto.pipe';
     TipoEventoPipe,
     ObjetivoPagamentoPipe,
     StatusPagamentoPipe,
+    StatusPagamentoAssociadoPipe,
     StatusPagamentoFBTCPipe,
     FormaPagamentoPipe,
     FileUploadModule,
