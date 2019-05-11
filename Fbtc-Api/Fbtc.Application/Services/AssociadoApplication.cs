@@ -315,6 +315,7 @@ namespace Fbtc.Application.Services
                         TipoEndereco = "",
                         OrdemEndereco = i.ToString()
                     });
+                    i++;
                 }
                 _associadoDao.EnderecosPessoa = lstEnd;
             }

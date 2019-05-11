@@ -930,6 +930,290 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _msg;
         }
 
+        /// <summary>
+        /// Insere os dados na tabela de Recebimento para os títulos isentos de pagamento
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public string InsertRecebimentoIsencao(Recebimento r)
+        {
+
+            bool _resultado = false;
+            string _msg = "";
+            Int32 id = 0;
+            string _ident = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("IncluirRecebimento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    string _atributos = "";
+                    string _values = "";
+
+                    // Inserindo os dados na tabela:
+                    if (r.AssinaturaAnuidadeId != null)
+                    {
+                        _atributos = _atributos + ", AssinaturaAnuidadeId ";
+                        _values = _values + ", @AssinaturaAnuidadeId ";
+                        command.Parameters.AddWithValue("AssinaturaAnuidadeId", r.AssinaturaAnuidadeId);
+                    }
+
+                    if (r.AssinaturaEventoId != null)
+                    {
+                        _atributos = _atributos + ", AssinaturaEventoId ";
+                        _values = _values + ", @AssinaturaEventoId ";
+                        command.Parameters.AddWithValue("AssinaturaEventoId", r.AssinaturaEventoId);
+                    }
+
+                    command.CommandText = "" +
+                        "INSERT into dbo.AD_Recebimento ( " +
+                        "   StatusPS, " +
+                        "   GrossAmountPS, DiscountAmountPS, FeeAmountPS, " +
+                        "   NetAmountPS, ExtraAmountPS, DtCadastro, DtVencimento, StatusFBTC, " +
+                        "   DtStatusFBTC, OrigemEmissaoTitulo, LastEventDatePS, NotificationCodePS, Ativo " +
+                        "    " + _atributos + ") " +
+                        "VALUES( " +
+                        "   @StatusPS, " +
+                        "   @GrossAmountPS, @DiscountAmountPS, @FeeAmountPS, @NetAmountPS, @ExtraAmountPS, " +
+                        "   @DtCadastro, @DtVencimento, @StatusFBTC, " +
+                        "   @DtStatusFBCT, @OrigemEmissaoTitulo, @LastEventDatePS, @NotificationCodePS, @Ativo " +
+                        "    " + _values + ") " +
+                        "SELECT CAST(scope_identity() AS int) ";
+
+                    // command.Parameters.AddWithValue("Observacao", r.Observacao);
+                    command.Parameters.AddWithValue("StatusPS", r.StatusPS);
+                    command.Parameters.AddWithValue("GrossAmountPS", r.GrossAmountPS);
+                    command.Parameters.AddWithValue("DiscountAmountPS", r.DiscountAmountPS);
+                    command.Parameters.AddWithValue("FeeAmountPS", r.FeeAmountPS);
+                    command.Parameters.AddWithValue("NetAmountPS", r.NetAmountPS);
+                    command.Parameters.AddWithValue("ExtraAmountPS", r.ExtraAmountPS);
+                    command.Parameters.AddWithValue("DtCadastro", DateTime.Now);
+                    command.Parameters.AddWithValue("DtVencimento", r.DtVencimento);
+                    command.Parameters.AddWithValue("StatusFBTC", r.StatusFBTC);
+                    command.Parameters.AddWithValue("DtStatusFBCT", DateTime.Now);
+                    command.Parameters.AddWithValue("OrigemEmissaoTitulo", r.OrigemEmissaoTitulo);
+                    command.Parameters.AddWithValue("LastEventDatePS", DateTime.Now);
+                    command.Parameters.AddWithValue("NotificationCodePS", r.NotificationCodePS);
+                    command.Parameters.AddWithValue("Ativo", r.Ativo);
+
+                    id = (Int32)command.ExecuteScalar();
+                    _resultado = id > 0;
+
+                    if (id > 0)
+                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
+
+                    _msg = _resultado ? $"{_ident}Inclusão realizada com sucesso" : $"{_ident}Inclusão Não realizada com sucesso";
+
+                    transaction.Commit();
+
+                    // Log da Inserção RECEBIMENTO:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = id > 0 ? "SUCESSO" : "FALHA";
+
+                    string log = logRep.SetLogger(className + "/InsertRecebimentoIsencao",
+                        "INSERT", "RECEBIMENTO", id, _instrucaoSql, _result);
+                    //Fim do Log
+                }
+                catch (Exception ex)
+                {
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        _msg = $"ATENÇÃO: Ocorreu um erro ao tentar INCLUIR RECEBIMENTO ISENTO: Commit Exception Type:{ex2.GetType()}. Erro:{ex2.Message}";
+                    }
+
+                    string log = logRep.SetLogger(className + "/Insert",
+                        "INSERT", "RECEBIMENTO", 0, ex.Message, "FALHA");
+
+                    _msg = $"ATENÇÃO: Ocorreu um erro ao tentar INCLUIR RECEBIMENTO ISENTO: Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return _msg;
+        }
+
+        public string UpdateRecebimentoIsencao(int id, Recebimento r)
+        {
+            bool _resultado = false;
+            string _msg = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("AtualizarRecebimento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    // Atualizando os dados na tabela:
+                    command.CommandText = "" +
+                        "Update dbo.AD_Recebimento Set DtVencimento = @DtVencimento, Ativo = @Ativo  " +
+                        "WHERE StatusPS = 0 and StatusFBTC = '3' and AssinaturaAnuidadeId = @AssinaturaAnuidadeId ";
+
+                    // command.Parameters.AddWithValue("Observacao", r.Observacao);
+                    command.Parameters.AddWithValue("DtVencimento ", r.DtVencimento);
+                    command.Parameters.AddWithValue("Ativo", r.Ativo);
+                    command.Parameters.AddWithValue("AssinaturaAnuidadeId", r.AssinaturaAnuidadeId);
+
+                    int i = command.ExecuteNonQuery();
+                    _resultado = i > 0;
+
+                    transaction.Commit();
+
+                    _msg = _resultado ? "Atualização realizada com sucesso" : InsertRecebimentoIsencao(r);
+
+                    // Log do UPDATE RECEBIMENTO:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = i > 0 ? "SUCESSO" : "FALHA";
+
+                    string log = logRep.SetLogger(className + "/UpdateRecebimentoIsencao",
+                        "UPDATE", "RECEBIMENTO", id, _instrucaoSql, _result);
+                    //Fim do Log
+
+                }
+                catch (Exception ex)
+                {
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        _msg = $"ATENÇÃO: Ocorreu um erro ao tentar ATUALIZAR RECEBIMENTO: Commit Exception Type:{ex2.GetType()}. Erro:{ex2.Message}";
+                    }
+
+                    string log = logRep.SetLogger(className + "/Update",
+                        "UPDATE", "RECEBIMENTO", 0, ex.Message, "FALHA");
+
+                    _msg = $"ATENÇÃO: Ocorreu um erro ao tentar ATUALIZAR RECEBIMENTO: Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return _msg;
+        }
+
+        public string DeleteRecebimentoIsencao(int assinaturaAnuidadeId, int statusPS)
+        {
+            bool _resultado = false;
+            string _msg = "";
+
+            using (SqlConnection connection = new SqlConnection(strConnSql))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("ExcluirRecebimento");
+
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    // Atualizando os dados na tabela:
+                    command.CommandText = "" +
+                        "Delete FROM dbo.AD_Recebimento WHERE StatusPS = @StatusPS and AssinaturaAnuidadeId = @AssinaturaAnuidadeId ";
+
+                    // command.Parameters.AddWithValue("Observacao", r.Observacao);
+                    command.Parameters.AddWithValue("StatusPS ", statusPS);
+                    command.Parameters.AddWithValue("AssinaturaAnuidadeId", assinaturaAnuidadeId);
+
+                    int i = command.ExecuteNonQuery();
+                    _resultado = i > 0;
+
+                    transaction.Commit();
+
+                    _msg = _resultado ? "Exclusão realizada com sucesso" : "Exclusão não realizada com sucesso";
+
+                    // Log da EXCLUSÃO RECEBIMENTO:
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Parâmetros: ");
+
+                    for (int z = 0; z < command.Parameters.Count; z++)
+                    {
+                        sb.Append(command.Parameters[z].ParameterName + ": " + command.Parameters[z].Value + ", ");
+                    }
+
+                    _instrucaoSql = sb.ToString();
+                    _result = i > 0 ? "SUCESSO" : "FALHA";
+
+                    string log = logRep.SetLogger(className + "/DeleteRecebimentoIsencao",
+                        "DELETE", "RECEBIMENTO", assinaturaAnuidadeId, _instrucaoSql, _result);
+                    //Fim do Log
+
+                }
+                catch (Exception ex)
+                {
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        _msg = $"ATENÇÃO: Ocorreu um erro ao tentar EXCLUIR RECEBIMENTO: Commit Exception Type:{ex2.GetType()}. Erro:{ex2.Message}";
+                    }
+
+                    string log = logRep.SetLogger(className + "/Delete",
+                        "DELETE", "RECEBIMENTO", 0, ex.Message, "FALHA");
+
+                    _msg = $"ATENÇÃO: Ocorreu um erro ao tentar EXCLUIR RECEBIMENTO: Commit Exception Type:{ex.GetType()}. Erro:{ex.Message}";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return _msg;
+        }
+                     
         public string UpdateRecebimentoPagSeguro(int recebimentoId, Recebimento r,  string lastEventDate)
         {
             bool _resultado = false;
@@ -1138,6 +1422,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             // Fim Log
 
             return _recebimento;
+        }
+
+        public string DesativarByAssinaturaAnuidadeId(int assinaturaAnuidadeId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

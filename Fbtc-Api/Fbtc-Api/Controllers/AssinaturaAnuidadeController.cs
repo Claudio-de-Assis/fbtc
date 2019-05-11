@@ -182,37 +182,30 @@ namespace Fbtc.Api.Controllers
             {
                 if (a == null) throw new ArgumentNullException("O objeto 'assinaturaAnuidadeDao' está nulo!");
 
-                if (a.AssinaturaAnuidadeId == 0 || a.ValorAnuidadeId != a.ValorAnuidadeIdOriginal)
+                if (a.AssinaturaAnuidadeId == 0 || a.ValorAnuidadeId != a.ValorAnuidadeIdOriginal || a.CodePS == "")
                 {
-                    PagSeguroRepository r = new PagSeguroRepository();
-                    PagSeguroService s = new PagSeguroService(r);
-                    PagSeguroApplication p = new PagSeguroApplication(s);
-                    PagSeguroController pagSeguroController = new PagSeguroController(p);
-
-                    _valorDecimal = Functions.CalcularDescontoAnuidade(a);
-
-                    if (a.MembroConfi == false)
+                    if (a.PagamentoIsento == false)
                     {
-                        string _valor = _valorDecimal.ToString("F", CultureInfo.InvariantCulture);
+                        PagSeguroRepository r = new PagSeguroRepository();
+                        PagSeguroService s = new PagSeguroService(r);
+                        PagSeguroApplication p = new PagSeguroApplication(s);
+                        PagSeguroController pagSeguroController = new PagSeguroController(p);
 
-                        TokenCheckOutPagSeguro _token = await pagSeguroController.GetTokenCheckOutPessoaId(a.AssociadoId, _valor, "1", a.Exercicio, a.AnoTermino, true, true);
+                        _valorDecimal = Functions.CalcularDescontoAnuidade(a);
 
-                        if (_token != null)
+                        if (a.MembroConfi == false)
                         {
-                            a.CodePS = _token.Code;
-                            a.DtCodePS = _token.Date;
-                            a.Reference = _token.Reference;
-                        }
-                    }
-                    else
-                    {
-                        DateTime _date = DateTime.Now;
+                            string _valor = _valorDecimal.ToString("F", CultureInfo.InvariantCulture);
 
-                        a.CodePS = "";
-                        a.DtCodePS = _date;
-                        a.Reference = "CONFI-" + $"A{a.Exercicio}{_date.GetHashCode()}".Replace("-", "");
-                        a.EmProcessoPagamento = true;
-                        a.DtInicioProcessamento = _date;
+                            TokenCheckOutPagSeguro _token = await pagSeguroController.GetTokenCheckOutPessoaId(a.AssociadoId, _valor, "1", a.Exercicio, a.AnoTermino, true, true);
+
+                            if (_token != null)
+                            {
+                                a.CodePS = _token.Code;
+                                a.DtCodePS = _token.Date;
+                                a.Reference = _token.Reference;
+                            }
+                        }
                     }
                 }
 
@@ -235,6 +228,7 @@ namespace Fbtc.Api.Controllers
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                    response.ReasonPhrase = ex.Message;
                 }
                 tsc.SetResult(response);
 

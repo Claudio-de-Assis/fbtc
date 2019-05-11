@@ -15,6 +15,10 @@ namespace Fbtc.Domain.Interfaces.Services
 
         string Update(int id, Recebimento recebimento);
 
+        string InsertRecebimentoIsencao(Recebimento recebimento);
+
+        string UpdateRecebimentoIsencao(int id, Recebimento recebimento);
+               
         IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf,
             string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 

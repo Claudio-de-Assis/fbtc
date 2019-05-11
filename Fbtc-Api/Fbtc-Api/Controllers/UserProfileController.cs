@@ -237,53 +237,14 @@ namespace Fbtc.Api.Controllers
                 }
                 else
                 {
-                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-                }
-                tsc.SetResult(response);
-
-                return tsc.Task;
-            }
-        }
-
-        /*
-        // [Authorize]
-        [Route("Login/{password},{email}/")]
-        [HttpGet]
-        public Task<HttpResponseMessage> Login(string email, string password)
-        {
-            HttpResponseMessage response = new HttpResponseMessage();
-            var tsc = new TaskCompletionSource<HttpResponseMessage>();
-
-            try
-            {
-                if (string.IsNullOrWhiteSpace(email)) throw new InvalidOperationException("email não informado!");
-                if (string.IsNullOrWhiteSpace(password)) throw new InvalidOperationException("password não informado!");
-
-                var resultado = _userProfileApplication.Login(email, password);
-
-                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
-
-                tsc.SetResult(response);
-
-                return tsc.Task;
-            }
-            catch (Exception ex)
-            {
-                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
-                {
                     response = Request.CreateResponse(HttpStatusCode.NotFound);
                     response.ReasonPhrase = ex.Message;
                 }
-                else
-                {
-                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-                }
                 tsc.SetResult(response);
 
                 return tsc.Task;
             }
         }
-        */
 
         // [Authorize]
         [Route("LoginUser")]
@@ -322,46 +283,5 @@ namespace Fbtc.Api.Controllers
                 return tsc.Task;
             }
         }
-
-
-        /*
-        // [Authorize]
-        [Route("GetByEmailPassword/{password},{email}/")]
-        [HttpGet]
-        public Task<HttpResponseMessage> GetByEmailPassword(string email, string password)
-        {
-            HttpResponseMessage response = new HttpResponseMessage();
-            var tsc = new TaskCompletionSource<HttpResponseMessage>();
-
-            try
-            {
-                if (string.IsNullOrWhiteSpace(email)) throw new InvalidOperationException("email não informado!");
-                if (string.IsNullOrWhiteSpace(password)) throw new InvalidOperationException("password não informado!");
-
-                var resultado = _userProfileApplication.GetByEmailPassword(email, password);
-
-                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
-
-                tsc.SetResult(response);
-
-                return tsc.Task;
-            }
-            catch (Exception ex)
-            {
-                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
-                {
-                    response = Request.CreateResponse(HttpStatusCode.NotFound);
-                    response.ReasonPhrase = ex.Message;
-                }
-                else
-                {
-                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-                }
-                tsc.SetResult(response);
-
-                return tsc.Task;
-            }
-        }*/
-
     }
 }

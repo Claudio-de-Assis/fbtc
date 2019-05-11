@@ -94,5 +94,17 @@ namespace Fbtc.Domain.Services
         {
             return _recebimentoRepository.Update(id, recebimento);
         }
+
+
+        public string InsertRecebimentoIsencao(Recebimento recebimento)
+        {
+            return _recebimentoRepository.InsertRecebimentoIsencao(recebimento);
+        }
+
+        public string UpdateRecebimentoIsencao(int id, Recebimento recebimento)
+        {
+            return _recebimentoRepository.UpdateRecebimentoIsencao(id, recebimento);
+        }
+
     }
 }

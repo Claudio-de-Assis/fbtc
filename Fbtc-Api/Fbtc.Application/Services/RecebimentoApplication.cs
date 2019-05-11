@@ -163,6 +163,67 @@ namespace Fbtc.Application.Services
             }
         }
 
+        public string SaveRecebimentoIsencao(Recebimento r)
+        {
+
+            if (r.AssinaturaAnuidadeId == 0 && r.AssinaturaEventoId == 0)
+            {
+                return "O identificador da Anuidade ou Evento são inválidos";
+            }
+
+            Recebimento _r = new Recebimento()
+            {
+                RecebimentoId = r.RecebimentoId,
+                AssinaturaAnuidadeId = r.AssinaturaAnuidadeId,
+                AssinaturaEventoId = r.AssinaturaEventoId,
+                Observacao = Functions.AjustaTamanhoString(r.Observacao, 500),
+                NotificationCodePS = r.NotificationCodePS,
+                TypePS = r.TypePS,
+                StatusPS = r.StatusPS,
+                LastEventDatePS = r.LastEventDatePS,
+                TypePaymentMethodPS = r.TypePaymentMethodPS,
+                CodePaymentMethodPS = r.CodePaymentMethodPS,
+                NetAmountPS = r.NetAmountPS,
+                DtVencimento = r.DtVencimento,
+                StatusFBTC = r.StatusFBTC,
+                DtStatusFBTC = r.DtStatusFBTC,
+                OrigemEmissaoTitulo = r.OrigemEmissaoTitulo,
+                DtCadastro = r.DtCadastro,
+                Ativo = r.Ativo,
+            };
+
+
+
+            try
+            {
+                if (r.RecebimentoId == 0)
+                {
+                    return _recebimentoService.InsertRecebimentoIsencao(_r);
+                }
+                else
+                {
+                    return _recebimentoService.UpdateRecebimentoIsencao(r.RecebimentoId, _r);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+
+
+
+
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Recebimento SetRecebimento(string objetivoPagamento)
         {
             Recebimento r = new Recebimento() {

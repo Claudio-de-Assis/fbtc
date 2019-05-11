@@ -36,10 +36,10 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             List<DbParameter> _parametros = new List<DbParameter>();
 
-            query = @"SELECT AA.AssinaturaAnuidadeId, AA.AssociadoId, AA.ValorAnuidadeId, AA.AnoInicio, 
+        query = @"SELECT AA.AssinaturaAnuidadeId, AA.AssociadoId, AA.ValorAnuidadeId, AA.AnoInicio, 
                         AA.AnoTermino, AA.PercentualDesconto, AA.TipoDesconto, AA.Valor, AA.DtAssinatura, 
                         AA.DtAtualizacao, AA.Ativo, AA.CodePS, AA.DtCodePS, AA.Reference, AA.EmProcessoPagamento,
-                        AA.DtInicioProcessamento, P.Nome as NomePessoa, P.CPF, TP.Nome as NomeTP, 
+                        AA.DtInicioProcessamento, AA.PagamentoIsento, AA.PagamentoIsento as PagamentoIsentoBD, AA.DtIsencao, AA.ObservacaoIsencao, P.Nome as NomePessoa, P.CPF, TP.Nome as NomeTP, 
                         A.Exercicio, VA.ValorAnuidadeId, VA.ValorAnuidadeId as ValorAnuidadeIdOriginal, VA.TipoAnuidade, VA.Valor as ValorTipoAnuidade, A.AnuidadeId, TP.TipoPublicoId, 
 	                    (SELECT 'AnuidadeAtcOk' =   
 		                    Case 
@@ -67,7 +67,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         INNER JOIN dbo.AD_Cargo_Gestao CG ON MG.CargoGestaoId = CG.CargoGestaoId 
                         WHERE UPPER(CG.Nome) = 'PRESIDENTE' 
                         AND MG.AssociadoId = AA.AssociadoId 
-                        ) AS MembroConfi                       
+                        ) AS MembroConfi,
+                        (   SELECT StatusPS 
+                            FROM dbo.AD_Recebimento 
+                            WHERE AssinaturaAnuidadeId = AA.AssinaturaAnuidadeId
+                        ) AS RecebimentoStatusPS
                     FROM dbo.AD_Assinatura_Anuidade AA 
                         INNER JOIN dbo.AD_Valor_Anuidade VA ON AA.ValorAnuidadeId = VA.ValorAnuidadeId 
                         INNER JOIN dbo.AD_Anuidade_Tipo_Publico ATP ON VA.AnuidadeTipoPublicoId = ATP.AnuidadeTipoPublicoId 
@@ -126,7 +130,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             query = @"SELECT AssinaturaAnuidadeId, AssociadoId, ValorAnuidadeId, AnoInicio, AnoTermino, 
                         PercentualDesconto, TipoDesconto, Valor, DtVencimentoPagamento, DtAssinatura, 
                         DtAtualizacao, Ativo, CodePS, DtCodePS, Reference, EmProcessoPagamento,
-                        DtInicioProcessamento 
+                        DtInicioProcessamento, PagamentoIsento, PagamentoIsento as PagamentoIsentoBD,  DtIsencao, ObservacaoIsencao 
                     FROM dbo.AD_Assinatura_Anuidade 
                     ORDER BY AssociadoId, AssinaturaAnuidadeId ";
 
@@ -151,7 +155,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             query = @"SELECT AA.AssinaturaAnuidadeId, AA.AssociadoId, AA.ValorAnuidadeId, AA.AnoInicio, 
                         AA.AnoTermino, AA.PercentualDesconto, AA.TipoDesconto, AA.Valor, AA.DtVencimentoPagamento, 
                         AA.DtAssinatura, AA.DtAtualizacao, AA.Ativo, AA.CodePS, AA.DtCodePS, AA.Reference, AA.EmProcessoPagamento,
-                        AA.DtInicioProcessamento, P.Nome as NomePessoa, P.CPF, TP.Nome as NomeTP, 
+                        AA.DtInicioProcessamento, AA.PagamentoIsento, AA.PagamentoIsento as PagamentoIsentoBD, AA.DtIsencao, AA.ObservacaoIsencao, P.Nome as NomePessoa, P.CPF, TP.Nome as NomeTP, 
                         A.Exercicio, VA.ValorAnuidadeId, VA.ValorAnuidadeId as ValorAnuidadeIdOriginal, VA.TipoAnuidade, VA.Valor as ValorTipoAnuidade, A.AnuidadeId, TP.TipoPublicoId, 
 	                    (SELECT 'AnuidadeAtcOk' =   
 		                    Case 
@@ -215,6 +219,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             bool _resultado = false;
             string _msg = "";
+            string _msgIsento = "";
             Int32 id = 0;
             string _ident = "";
 
@@ -233,13 +238,20 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                 try
                 {
+                    // Passou a ter isenção:
+                    if (a.PagamentoIsento == true)
+                        a.DtIsencao = DateTime.Now;
+
+                    string _dtIsencao = a.DtIsencao != null ? ", DtIsencao ": "";
+                    string _paramDtIsencao = a.DtIsencao != null ? ", @DtIsencao " : "";
+
                     command.CommandText = "" +
                         "INSERT into dbo.AD_Assinatura_Anuidade (AssociadoId , ValorAnuidadeId,  AnoInicio, " +
                         "       AnoTermino, PercentualDesconto, TipoDesconto, Valor, DtVencimentoPagamento, DtAssinatura, DtAtualizacao, " +
-                        "       CodePS, DtCodePS, Reference) " +
+                        "       CodePS, DtCodePS, Reference, PagamentoIsento, ObservacaoIsencao "+ _dtIsencao +") " +
                         "VALUES (@AssociadoId , @ValorAnuidadeId,  @AnoInicio, " +
                         "       @AnoTermino, @PercentualDesconto, @TipoDesconto, @Valor, @DtVencimentoPagamento, @DtAssinatura, @DtAtualizacao, " +
-                        "       @CodePS, @DtCodePS, @Reference) " +
+                        "       @CodePS, @DtCodePS, @Reference, @PagamentoIsento, @ObservacaoIsencao "+ _paramDtIsencao +") " +
                         "SELECT CAST(scope_identity() AS int) ";
 
                     command.Parameters.AddWithValue("AssociadoId", a.AssociadoId);
@@ -255,16 +267,47 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("CodePS", a.CodePS);
                     command.Parameters.AddWithValue("DtCodePS", a.DtCodePS);
                     command.Parameters.AddWithValue("Reference", a.Reference);
+                    command.Parameters.AddWithValue("PagamentoIsento", a.PagamentoIsento);
+                    command.Parameters.AddWithValue("ObservacaoIsencao", a.ObservacaoIsencao);
+
+                    if(_dtIsencao != "")
+                        command.Parameters.AddWithValue("DtIsencao", a.DtIsencao);
 
                     id = (Int32)command.ExecuteScalar();
                     _resultado = id > 0;
 
-                    if (id > 0)
-                        _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
+                    _ident = _ident.PadLeft(10 - id.ToString().Length, '0') + id.ToString();
 
                     _msg = id > 0 ? $"{_ident}Inclusão realizada com sucesso" : $"{_ident}Inclusão Não realizada com sucesso";
 
                     transaction.Commit();
+
+                    if (id > 0)
+                    {
+                        //é isento:
+                        if (a.PagamentoIsento == true)
+                        {
+                            Recebimento recebimento = new Recebimento
+                            {
+                                AssinaturaAnuidadeId = id,
+                                DtVencimento = a.DtVencimentoPagamento,
+                                StatusPS = 0,
+                                GrossAmountPS = 0,
+                                DiscountAmountPS = 0,
+                                FeeAmountPS = 0,
+                                NetAmountPS = 0,
+                                ExtraAmountPS = 0,
+                                StatusFBTC = "3",
+                                OrigemEmissaoTitulo = "2",
+                                NotificationCodePS = a.Reference,
+                                Ativo = true
+                            };
+
+                            RecebimentoRepository recebimentoRepository = new RecebimentoRepository();
+
+                            _msgIsento = recebimentoRepository.InsertRecebimentoIsencao(recebimento);
+                        }
+                    }
 
                     // Log da Inserção ASSINATURA_ANUIDADE:
                     StringBuilder sb = new StringBuilder();
@@ -313,6 +356,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             bool _resultado = false;
             string _msg = "";
+            string _msgIsento = "";
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -329,10 +373,17 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                 try
                 {
+                    // Passou a ter isenção:
+                    if (a.PagamentoIsento == true & a.PagamentoIsentoBD == false)
+                        a.DtIsencao = DateTime.Now;
+
                     string _data = "";
                     if (a.DtInicioProcessamento != null)
                         _data = " DtInicioProcessamento = @DtInicioProcessamento, ";
 
+                    string _data2 = "";
+                    if (a.DtIsencao != null)
+                        _data2 = " DtIsencao = @DtIsencao, ";
 
                     command.CommandText = "" +
                         "UPDATE dbo.AD_Assinatura_Anuidade " +
@@ -341,8 +392,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         "   PercentualDesconto  = @PercentualDesconto, TipoDesconto = @TipoDesconto, " +
                         "   Valor = @Valor, DtVencimentoPagamento = @DtVencimentoPagamento, " +
                         "   DtAtualizacao = @DtAtualizacao, CodePS = @CodePS, DtCodePS = @DtCodePS, " +
-                        "   Reference = @Reference, EmProcessoPagamento = @EmProcessoPagamento, "                    +
-                        "   "+ _data +"Ativo = @Ativo " +
+                        "   Reference = @Reference, EmProcessoPagamento = @EmProcessoPagamento, " +
+                        "   " + _data + "" + _data2 + "Ativo = @Ativo, PagamentoIsento = @PagamentoIsento, ObservacaoIsencao = @ObservacaoIsencao " +
                         "WHERE AssinaturaAnuidadeId = @id";
 
                     command.Parameters.AddWithValue("ValorAnuidadeId", a.ValorAnuidadeId);
@@ -358,10 +409,16 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("Reference", a.Reference);
                     command.Parameters.AddWithValue("EmProcessoPagamento", a.EmProcessoPagamento);
                     command.Parameters.AddWithValue("Ativo", a.Ativo);
+                    command.Parameters.AddWithValue("PagamentoIsento ", a.PagamentoIsento);
+                    command.Parameters.AddWithValue("ObservacaoIsencao ", a.ObservacaoIsencao);
+
                     command.Parameters.AddWithValue("id", id);
 
-                    if(_data != "")
+                    if (_data != "")
                         command.Parameters.AddWithValue("DtInicioProcessamento", a.DtInicioProcessamento);
+
+                    if (_data2 != "")
+                        command.Parameters.AddWithValue("DtIsencao", a.DtIsencao);
 
                     int x = command.ExecuteNonQuery();
                     _resultado = x > 0;
@@ -369,6 +426,41 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     _msg = x > 0 ? "Atualização realizada com sucesso" : "Atualização NÃO realizada com sucesso";
 
                     transaction.Commit();
+
+                    if (x > 0)
+                    {
+                        Recebimento recebimento = new Recebimento();
+
+                        recebimento = new Recebimento
+                        {
+                            AssinaturaAnuidadeId = a.AssinaturaAnuidadeId,
+                            DtVencimento = a.DtVencimentoPagamento,
+                            StatusPS = 0,
+                            GrossAmountPS = 0,
+                            DiscountAmountPS = 0,
+                            FeeAmountPS = 0,
+                            NetAmountPS = 0,
+                            ExtraAmountPS = 0,
+                            StatusFBTC = "3",
+                            OrigemEmissaoTitulo = "2",
+                            NotificationCodePS = a.Reference,
+                            Ativo = a.PagamentoIsento
+                        };
+                        
+                        //Avaliar se houve alteração na isenção
+                        if (a.PagamentoIsento == true & a.PagamentoIsentoBD == false)
+                        {
+                            RecebimentoRepository recebimentoRepository = new RecebimentoRepository();
+                            _msgIsento = recebimentoRepository.UpdateRecebimentoIsencao(0, recebimento);
+                        }
+
+                        // desativo os dados na tabela de pagamento: 
+                        if (a.PagamentoIsento == false & a.PagamentoIsentoBD == true)
+                        {
+                            RecebimentoRepository recebimentoRepository = new RecebimentoRepository();
+                            _msgIsento = recebimentoRepository.DeleteRecebimentoIsencao(a.AssinaturaAnuidadeId, 0);
+                        }
+                    }
 
                     // Log do UPDATE ASSINATURA_ANUIDADE:
                     StringBuilder sb = new StringBuilder();
@@ -516,7 +608,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             query = @"SELECT AA.AssinaturaAnuidadeId, AA.AssociadoId, AA.ValorAnuidadeId, AA.AnoInicio, 
                         AA.AnoTermino, AA.PercentualDesconto, AA.TipoDesconto, AA.Valor, AA.DtAssinatura, 
                         AA.DtAtualizacao, AA.Ativo, AA.CodePS, AA.DtCodePS, AA.Reference, AA.EmProcessoPagamento,
-                        AA.DtInicioProcessamento, P.Nome as NomePessoa, P.CPF, TP.Nome as NomeTP, 
+                        AA.DtInicioProcessamento, AA.PagamentoIsento, AA.PagamentoIsento as PagamentoIsentoBD, AA.DtIsencao, AA.ObservacaoIsencao, P.Nome as NomePessoa, P.CPF, TP.Nome as NomeTP, 
                         A.Exercicio, VA.ValorAnuidadeId, VA.ValorAnuidadeId as ValorAnuidadeIdOriginal, VA.TipoAnuidade, VA.Valor as ValorTipoAnuidade, A.AnuidadeId, TP.TipoPublicoId, 
 	                    (SELECT 'AnuidadeAtcOk' =   
 		                    Case 
@@ -544,7 +636,11 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         INNER JOIN dbo.AD_Cargo_Gestao CG ON MG.CargoGestaoId = CG.CargoGestaoId 
                         WHERE UPPER(CG.Nome) = 'PRESIDENTE' 
                         AND MG.AssociadoId = AA.AssociadoId 
-                        ) AS MembroConfi                       
+                        ) AS MembroConfi,
+                        (   SELECT StatusPS 
+                            FROM dbo.AD_Recebimento 
+                            WHERE AssinaturaAnuidadeId = AA.AssinaturaAnuidadeId
+                        ) AS RecebimentoStatusPS
                     FROM dbo.AD_Assinatura_Anuidade AA 
                         INNER JOIN dbo.AD_Valor_Anuidade VA ON AA.ValorAnuidadeId = VA.ValorAnuidadeId 
                         INNER JOIN dbo.AD_Anuidade_Tipo_Publico ATP ON VA.AnuidadeTipoPublicoId = ATP.AnuidadeTipoPublicoId 
@@ -582,7 +678,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             query = @"SELECT AssinaturaAnuidadeId, AssociadoId, ValorAnuidadeId, AnoInicio, AnoTermino, 
                         PercentualDesconto, TipoDesconto, Valor, DtVencimentoPagamento, DtAssinatura, 
                         DtAtualizacao, Ativo, CodePS, DtCodePS, Reference, EmProcessoPagamento,
-                        DtInicioProcessamento 
+                        DtInicioProcessamento, PagamentoIsento, PagamentoIsento as PagamentoIsentoBD, DtIsencao, ObservacaoIsencao 
                     FROM dbo.AD_Assinatura_Anuidade 
                     WHERE Reference = @reference ";
 
@@ -682,5 +778,6 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             }
             return _msg;
         }
+
     }
 }

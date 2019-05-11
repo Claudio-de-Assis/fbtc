@@ -318,8 +318,15 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             string _subject, _textBody;
 
             UserProfile _userProfile = new UserProfile();
+                       
             _userProfile = GetByEMail(email);
 
+            if (_userProfile == null)
+            {
+                _msg = $"Atenção: Não foram encontrados dados para o E-Mail informado:{email}";
+                return _msg;
+            }
+    
             SendEMail _sendMail = new SendEMail();
 
             _newPassword = PasswordFunctions.GetNovaSenhaAcesso("");
@@ -449,8 +456,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 throw new Exception($"{ex.Message}");
             }
         }
-
-
+        
         public UserProfile LoginUser(UserProfileLogin userProfileLogin)
         {
             bool _isSucess = false;
@@ -512,12 +518,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                 // Obtém os dados do banco de dados:
                 UserProfile userProfile = GetCollection<UserProfile>(cmd)?.FirstOrDefault<UserProfile>();
-
-                if (userProfile == null)
-                {
-                    throw new Exception($"Atenção: Não foram encontrados dados para o E-Mail informado:{email}");
-                }
-
+                
                 return userProfile;
             }
             catch (Exception ex)

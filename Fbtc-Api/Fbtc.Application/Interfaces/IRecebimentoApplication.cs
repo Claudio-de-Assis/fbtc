@@ -15,6 +15,9 @@ namespace Fbtc.Application.Interfaces
 
         string Save(Recebimento recebimento);
 
+        // Para os associado que forem isentados do pagamento: Ex: Diretoria e Confi.
+        string SaveRecebimentoIsencao(Recebimento recebimento);
+
         IEnumerable<RecebimentoAssociadoDao> FindAnuidadeByFilters(string nome, string cpf,
             string crp, string crm, int statusPS, int ano, int mes, bool? ativo, int tipoPublicoId);
 

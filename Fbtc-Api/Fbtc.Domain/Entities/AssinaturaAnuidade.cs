@@ -25,6 +25,11 @@ namespace Fbtc.Domain.Entities
         public DateTime? DtInicioProcessamento { get; set; }
         public DateTime DtAtualizacao { get; set; }
         public bool Ativo { get; set; }
+
+        public bool PagamentoIsento { get; set; }
+        public bool PagamentoIsentoBD { get; set; }
+        public DateTime? DtIsencao { get; set; }
+        public string ObservacaoIsencao { get; set; }
     }
 
     public class AssinaturaAnuidadeDao : AssinaturaAnuidade
@@ -41,6 +46,7 @@ namespace Fbtc.Domain.Entities
         public bool? MembroDiretoria { get; set; }
         public bool? MembroConfi { get; set; }
         public int ValorAnuidadeIdOriginal { get; set; }
+        public int? RecebimentoStatusPS { get; set; }
 
     }
 }

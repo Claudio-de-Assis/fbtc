@@ -10,4 +10,10 @@ namespace Fbtc.Domain.Entities
     {
         public string PasswordHashReturned { get; set; }
     }
+
+    public class UserProfileLogin
+    {
+        public string EMail { get; set; }
+        public string PasswordHash { get; set; }
+    }
 }

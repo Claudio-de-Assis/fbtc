@@ -66,38 +66,65 @@ namespace Fbtc.Application.Services
             decimal _valor = a.Valor;
 
             _valor = Functions.CalcularDescontoAnuidade(a);
-   
-            // Desconto aplicado para Membros CONFI:
-            if (a.MembroConfi == true)
+
+            // Isenção concedida pela Secretaria:
+            if (a.PagamentoIsento == true)
             {
+                a.TipoAnuidade = 1; // isenção para somente para uma anuidade
                 _percentualDesconto = 100;
-                _tipoDesconto = "4";
-                //_valor = 0;
+                _tipoDesconto = "3";
+
+                if (a.PagamentoIsentoBD == false)
+                    a.DtCodePS = DateTime.Now; //Atualizo a data para a data da isenção
+
+                if (a.Reference == "")
+                    a.Reference = $"ISENTO-A{a.Exercicio}{a.DtCodePS.GetHashCode()}".Replace("-", "");
+
+                if(a.CodePS == "")
+                    a.CodePS = $"Isento Pagamento Anuidade {a.Exercicio}{a.DtCodePS.GetHashCode()}".Replace("-", "");
             }
             else
             {
-                // O Desconto somente é aplicado para a Assinatura de Um Ano:
-                if (a.TipoAnuidade == 1)
+                // Desconto aplicado para Membros CONFI:
+                if (a.MembroConfi == true)
                 {
-                    if (a.MembroDiretoria == true)
-                    {
-                        _percentualDesconto = 100;
-                        _tipoDesconto = "1";
-                        //_valor = 0;
-                    }
+                    _percentualDesconto = 100;
+                    _tipoDesconto = "4";
 
-                    if (_percentualDesconto == 0)
+                    if (a.AssinaturaAnuidadeId == 0)
                     {
-                        if (a.AnuidadeAtcOk == true)
+                        DateTime _date = DateTime.Now;
+
+                        a.CodePS = "";
+                        a.DtCodePS = _date;
+                        a.Reference = "CONFI-" + $"A{a.Exercicio}{_date.GetHashCode()}".Replace("-", "");
+                        a.EmProcessoPagamento = true;
+                        a.DtInicioProcessamento = _date;
+                    }
+                }
+                else
+                {
+                    // O Desconto somente é aplicado para a Assinatura de Um Ano:
+                    if (a.TipoAnuidade == 1)
+                    {
+                        if (a.MembroDiretoria == true)
                         {
-                            _percentualDesconto = 50;
-                            _tipoDesconto = "2";
-                            //_valor = a.Valor > 0 ? a.Valor / 2 : 0;
+                            _percentualDesconto = 100;
+                            _tipoDesconto = "1";
+                        }
+
+                        if (_percentualDesconto == 0)
+                        {
+                            if (a.AnuidadeAtcOk == true)
+                            {
+                                _percentualDesconto = 50;
+                                _tipoDesconto = "2";
+                            }
                         }
                     }
                 }
             }
-        
+
             AssinaturaAnuidade assinaturaAnuidade = new AssinaturaAnuidade
             {
                 AssinaturaAnuidadeId = a.AssinaturaAnuidadeId,
@@ -116,7 +143,11 @@ namespace Fbtc.Application.Services
                 EmProcessoPagamento = a.EmProcessoPagamento,
                 DtInicioProcessamento = a.DtInicioProcessamento,
                 DtAtualizacao = a.DtAtualizacao,
-                Ativo = a.Ativo
+                Ativo = a.Ativo,
+                DtIsencao = a.DtIsencao,
+                ObservacaoIsencao = a.ObservacaoIsencao,
+                PagamentoIsento = a.PagamentoIsento,
+                PagamentoIsentoBD = a.PagamentoIsentoBD
             };
 
             try

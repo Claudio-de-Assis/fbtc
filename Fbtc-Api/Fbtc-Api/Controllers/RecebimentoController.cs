@@ -435,6 +435,44 @@ namespace Fbtc.Api.Controllers
         }
 
         // [Authorize]
+        [Route("IsencaoRecebimento")]
+        [HttpPost]
+        public Task<HttpResponseMessage> IsencaoRecebimento(Recebimento recebimento)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+            string resultado = "false";
+
+            try
+            {
+                if (recebimento == null) throw new ArgumentNullException("O objeto 'recebimento' está nulo");
+
+                resultado = _recebimentoApplication.SaveRecebimentoIsencao(recebimento);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().Name == "InvalidOperationException" || ex.Source == "prmToolkit.Validation")
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound);
+                    response.ReasonPhrase = ex.Message;
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+                tsc.SetResult(response);
+
+                return tsc.Task;
+            }
+        }
+
+        // [Authorize]
         [Route("GetByPessoaId/{objetivoPagamento},{id:int}")]
         [HttpGet]
         public Task<HttpResponseMessage> GetByPessoaId(string objetivoPagamento, int id)

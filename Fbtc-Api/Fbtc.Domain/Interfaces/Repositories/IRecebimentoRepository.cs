@@ -15,6 +15,12 @@ namespace Fbtc.Domain.Interfaces.Repositories
         string Insert(Recebimento recebimento, string lastEventDate);
 
         string Update(int id, Recebimento recebimento);
+        
+        string InsertRecebimentoIsencao(Recebimento recebimento);
+
+        string UpdateRecebimentoIsencao(int id, Recebimento recebimento);
+
+        string DeleteRecebimentoIsencao(int assinaturaAnuidadeId, int statusPS);
 
         string UpdateRecebimentoPagSeguro(int recebimentoId, Recebimento recebimento, string lastEventDate);
 
@@ -47,5 +53,7 @@ namespace Fbtc.Domain.Interfaces.Repositories
         string SaveDadosRecebimentoFromTransacaoPagSeguro(TransacaoPagSeguro transacaoPagSeguro);
 
         Recebimento GetRecebimentoByReference(string reference);
+
+        string DesativarByAssinaturaAnuidadeId(int assinaturaAnuidadeId);
     }
 }

@@ -196,7 +196,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             string R1status = "";
             string Status = "";
 
-            if (statusPS != 0)
+            if (statusPS != 99)
             {
                 R1status = " AND R1.StatusPS = @statusPS ";
                 Status = " AND R.StatusPS = @statusPS ";
@@ -217,6 +217,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 //Objetivo: Assinatura Anuidade
                 query = $@"SELECT 
                         CASE StatusPS
+	                        WHEN '0' THEN 'Isento'
 	                        WHEN '1' THEN 'Aguardando pagamento'
 	                        WHEN '2' THEN 'Em Análise'
 	                        WHEN '3' THEN 'Paga'
@@ -250,6 +251,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                 //Objetivo: Assinatura Evento
                 query = $@"SELECT 
                         CASE StatusPS
+	                        WHEN '0' THEN 'Isento'
 	                        WHEN '1' THEN 'Aguardando pagamento'
 	                        WHEN '2' THEN 'Em Análise'
 	                        WHEN '3' THEN 'Paga'

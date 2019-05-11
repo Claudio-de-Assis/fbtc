@@ -123,35 +123,44 @@ namespace Fbtc.Application.Helper
             int _percentualDesconto = 0;
             decimal _valor = a.Valor;
 
-            // Desconto aplicado para Membros CONFI:
-            if (a.MembroConfi == true)
+
+            // Isenção foi concedida:
+            if (a.PagamentoIsento == true)
             {
                 _percentualDesconto = 100;
                 _valor = 0;
             }
             else
             {
-                // O Desconto somente é aplicado para a Assinatura de Um Ano:
-                if (a.TipoAnuidade == 1)
+                // Desconto aplicado para Membros CONFI:
+                if (a.MembroConfi == true)
                 {
-                    if (a.MembroDiretoria == true)
+                    _percentualDesconto = 100;
+                    _valor = 0;
+                }
+                else
+                {
+                    // O Desconto somente é aplicado para a Assinatura de Um Ano:
+                    if (a.TipoAnuidade == 1)
                     {
-                        _percentualDesconto = 100;
-                        _valor = 0;
-                    }
-
-                    if (_percentualDesconto == 0)
-                    {
-                        if (a.AnuidadeAtcOk == true)
+                        if (a.MembroDiretoria == true)
                         {
-                            _percentualDesconto = 50;
-                            _valor = a.Valor > 0 ? a.Valor / 2 : 0;
+                            _percentualDesconto = 100;
+                            _valor = 0;
+                        }
+
+                        if (_percentualDesconto == 0)
+                        {
+                            if (a.AnuidadeAtcOk == true)
+                            {
+                                _percentualDesconto = 50;
+                                _valor = a.Valor > 0 ? a.Valor / 2 : 0;
+                            }
                         }
                     }
                 }
             }
             return _valor;
         }
-
     }
 }
