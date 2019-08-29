@@ -24,11 +24,18 @@ namespace Fbtc.Application.Interfaces
         IEnumerable<Associado> FindByFilters(string nome, string cpf, 
             string sexo, int atcId, string crp, string tipoProfissao, 
             int tipoPublico, string estado, string cidade, bool? ativo);
-        /*
-        IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
-            string sexo, int atcId, string crp, string tipoProfissao,
-            int tipoPublico, string estado, string cidade, bool? ativo);
-            */
+
+        /// <summary>
+        /// Busco o Associado para apresentação na página de busca de associado na home FBTC
+        /// </summary>
+        /// <param name="nomeCidade"></param>
+        /// <param name="nomeAssociado"></param>
+        /// <param name="tipoPublicoId"></param>
+        /// <param name="statusCertificacao"></param>
+        /// <returns>AssociadoAdimplenteDao</returns>
+        ResultadoConAssociadoAdimplenteDao FindAssociadoAdimplente(int pageSize, int numPage,  string nomeCidade, string nomeAssociado,
+        int tipoPublicoId, string statusCertificacao);
+
         string GetNomeFotoByPessoaId(int id);
 
         string RessetPasswordById(int id);

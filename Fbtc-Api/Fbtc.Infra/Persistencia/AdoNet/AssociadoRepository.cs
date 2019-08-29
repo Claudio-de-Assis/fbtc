@@ -138,6 +138,134 @@ namespace Fbtc.Infra.Persistencia.AdoNet
             return _collection;
         }
 
+        public ResultadoConAssociadoAdimplenteDao FindAssociadoAdimplente(int pageSize, int numPage, int anuidadeReferencia, 
+            string nomeCidade, string nomeAssociado, int tipoPublicoId, string statusCertificacao)
+        {
+            ResultadoConAssociadoAdimplenteDao _resultDao = new ResultadoConAssociadoAdimplenteDao();
+
+            List<DbParameter> _parametros = new List<DbParameter>();
+
+            SqlParameter pAnuidadeReferencia = new SqlParameter() { ParameterName = "@anuidadeReferencia", Value = anuidadeReferencia };
+            _parametros.Add(pAnuidadeReferencia);
+
+            query = @"SELECT AssociadoId, Nome, TipoPublicoId, NomeTipoPublico, Certificado, NomeCidade, SiglaEstado, EMail, NomeFoto, 
+                        NomeProfissao, Sexo From (
+
+                        SELECT	A.AssociadoId, P.Nome, TP.TipoPublicoId, left(TP.nome, CHARINDEX(' -',TP.nome)) as NomeTipoPublico,
+                        Case A.Certificado
+	                        When '1' Then 'Sim'
+	                        When '0' then 'Não'
+                        End as Certificado, 
+                        Isnull((SELECT Top 1 Cidade FROM dbo.AD_Endereco E WHERE E.PessoaId = P.PessoaId AND E.TipoEndereco = 1),'') as NomeCidade,
+                        IsNull((SELECT Top 1 Estado FROM dbo.AD_Endereco E WHERE E.PessoaId = P.PessoaId AND E.TipoEndereco = 1),'') as SiglaEstado,
+                        P.Email, P.NomeFoto, 
+                        Case 
+	                        When A.TipoProfissao = '7' AND P.Sexo = 'M' THEN 'Psicólogo'
+	                        When A.TipoProfissao = '7' AND P.Sexo = 'F' THEN 'Psicóloga'
+	                        When A.TipoProfissao = '7' AND P.Sexo = '' THEN 'Psicólogo(a)'
+	                        When A.TipoProfissao = '8' AND P.Sexo = 'M' THEN 'Médico'
+	                        When A.TipoProfissao = '8' AND P.Sexo = 'F' THEN 'Médica'
+	                        When A.TipoProfissao = '8' AND P.Sexo = '' THEN 'Médico(a)'
+	                        else 'Não Informado'
+                        End as NomeProfissao,
+                        P.Sexo
+                        --,a.TipoProfissao, ,R.StatusPS, AA.AnoInicio, AA.AnoTermino, VA.TipoAnuidade
+                        FROM dbo.AD_Pessoa P
+	                        INNER JOIN dbo.AD_Associado A ON P.PessoaId = A.PessoaId
+	                        INNER JOIN dbo.AD_Tipo_Publico TP ON A.TipoPublicoId = TP.TipoPublicoId
+	                        INNER JOIN dbo.AD_Assinatura_Anuidade AA ON A.AssociadoId = AA.AssociadoId
+	                        INNER JOIN dbo.AD_Recebimento R ON AA.AssinaturaAnuidadeId = R.AssinaturaAnuidadeId
+	                        INNER JOIN dbo.AD_Valor_Anuidade VA ON AA.ValorAnuidadeId = VA.ValorAnuidadeId
+                        WHERE	TP.Associado = 1 AND P.Ativo = 1 AND P.PerfilId = 4
+		                        AND @anuidadeReferencia < AA.AnoTermino 
+		                        AND R.StatusPS in ('0','3','4')) as Tab 
+                        WHERE 1 = 1 ";
+
+            if (!string.IsNullOrEmpty(statusCertificacao))
+            {
+                query = query + $" AND Certificado = @statusCertificacao"; 
+                SqlParameter pStatusCertificacao = new SqlParameter() { ParameterName = "@statusCertificacao", Value = statusCertificacao };
+                _parametros.Add(pStatusCertificacao);
+            }
+
+            if (!string.IsNullOrEmpty(nomeCidade))
+            {
+                query = query + $" AND NomeCidade Like '%'+ @nomeCidade +'%' ";
+                SqlParameter pNomeCidade = new SqlParameter() { ParameterName = "@nomeCidade", Value = nomeCidade };
+                _parametros.Add(pNomeCidade);
+            }
+
+            if (!string.IsNullOrEmpty(nomeAssociado))
+            {
+                query = query + $" AND Nome Like '%'+ @nomeAssociado +'%' ";
+                SqlParameter pNomeAssociado = new SqlParameter() { ParameterName = "@nomeAssociado", Value = nomeAssociado };
+                _parametros.Add(pNomeAssociado);
+            }
+
+            if (tipoPublicoId > 0)
+            {
+                query = query + $" AND TipoPublicoId = @tipoPublicoId ";
+                SqlParameter pTipoPublico = new SqlParameter() { ParameterName = "@tipoPublicoId", Value = tipoPublicoId };
+                _parametros.Add(pTipoPublico);
+            }
+
+            query = query + " ORDER BY Nome ";
+
+            // Define o banco de dados que será usando:
+            CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);
+
+            // Obtém os dados do banco de dados:
+            IEnumerable<AssociadoAdimplenteDao> _collection = GetCollection<AssociadoAdimplenteDao>(cmd)?.ToList();
+
+            _resultDao.NumPage = numPage;
+            _resultDao.PageSize = pageSize;
+            _resultDao.QuantTotalRegistros = _collection.Count();
+            _resultDao.QtdTotalPages = _resultDao.QuantTotalRegistros == 0 ? 0 : 1 + Math.Ceiling(Convert.ToDecimal(_resultDao.QuantTotalRegistros / _resultDao.PageSize));
+            _resultDao.MsgRetorno = _collection.Count() == 0 ? "Não foram encontrados registos para os parâmetros informados" : "Sucesso";
+
+            if (_collection.Count() > 0)
+                _collection = Paginacao(pageSize, numPage, _collection);
+
+            _resultDao.AssociadoAdimplenteDaos = _collection;
+
+            // Log da consulta:
+            string log = logRep.SetLogger(className + "/FindAssociadoAdimplente",
+                "SELECT", "ASSOCIADO", 0, query, _collection.Count<AssociadoAdimplenteDao>().ToString());
+            // Fim Log
+
+            return _resultDao;
+        }
+
+        /// <summary>
+        /// Paginação da página de consulta para a FBTC.ORG
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="numPage"></param>
+        /// <param name="associadoAdimplenteDaos"></param>
+        /// <returns></returns>
+        public IEnumerable<AssociadoAdimplenteDao> Paginacao(int pageSize, int numPage,
+            IEnumerable<AssociadoAdimplenteDao> associadoAdimplenteDaos)
+        {
+            List<AssociadoAdimplenteDao> _lstAssociadoAdimplenteDao = new  List<AssociadoAdimplenteDao>();
+
+            int lstCount = associadoAdimplenteDaos.Count();
+
+             int _pageSize =  Convert.ToInt32(pageSize > 0 ? pageSize : lstCount);
+            _pageSize = _pageSize > lstCount ? lstCount : _pageSize;
+
+            int _numPage = Convert.ToInt32(pageSize > 0 ? numPage : 1);
+            _numPage =_numPage == 0 ? 1 : _numPage;
+            
+            foreach (AssociadoAdimplenteDao Asso in associadoAdimplenteDaos) {
+
+                _lstAssociadoAdimplenteDao.Add(Asso);
+            }
+
+            var _lstTemp =  _lstAssociadoAdimplenteDao.Skip((_numPage - 1) * _pageSize).Take(_pageSize);
+                                                                    
+            return _lstTemp;
+        }
+
         public IEnumerable<AssociadoIsentoDao> FindIsentoByFilters(int isencaoId, string nome, string cpf,
             string sexo, int atcId, string crp, string tipoProfissao, int tipoPublicoId, string estado, string cidade, bool? ativo)
         {

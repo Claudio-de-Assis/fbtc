@@ -2,6 +2,7 @@
 <Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="19EE4E0F-D0AF-3125-8359-DF610FE0506B" name="RECEBIMENTO">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2017-10-09 15:34:18 UTC</createdTime>
+<comment>Entidade de persiste os pagamentos realizados</comment>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <ordsAlias>table_6</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
@@ -90,7 +91,7 @@
 <Column name="StatusPS" id="DE979455-5DAD-4DC4-96A9-BF9736454F63">
 <createdBy>Cláudio de Assis</createdBy>
 <createdTime>2018-01-23 21:37:37 UTC</createdTime>
-<commentInRDBMS>Status da transação. Informa o código representando o status da transação, permitindo que você decida se deve liberar ou não os produtos ou serviços adquiridos. Os valores possíveis estão descritos no diagrama de status de transações e são apresentados juntamente com seus respectivos códigos na tabela abaixo. &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Código - Significado&lt;br/&gt;1 - Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.&lt;br/&gt;2 - Em análise: o comprador optou por pagar com um cartão de crédito e o PagSeguro está analisando o risco da transação.&lt;br/&gt;3 - Paga: a transação foi paga pelo comprador e o PagSeguro já recebeu uma confirmação da instituição financeira responsável pelo processamento.&lt;br/&gt;4 - Disponível: a transação foi paga e chegou ao final de seu prazo de liberação sem ter sido retornada e sem que haja nenhuma disputa aberta.&lt;br/&gt;5 - Em disputa: o comprador, dentro do prazo de liberação da transação, abriu uma disputa.&lt;br/&gt;6 - Devolvida: o valor da transação foi devolvido para o comprador.&lt;br/&gt;7 - Cancelada: a transação foi cancelada sem ter sido finalizada.&lt;br/&gt;8 - Debitado: o valor da transação foi devolvido para o comprador.&lt;br/&gt;9 - Retenção temporária: o comprador contestou o pagamento junto à operadora do cartão de crédito ou abriu uma demanda judicial ou administrativa (Procon).&lt;br/&gt;&lt;br/&gt;Outros status menos relevantes foram omitidos. Em resumo, você deve considerar transações nos status de Paga para liberação de produtos ou serviços.&lt;br/&gt;Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Inteiro. </commentInRDBMS>
+<commentInRDBMS>Status da transação. Informa o código representando o status da transação, permitindo que você decida se deve liberar ou não os produtos ou serviços adquiridos. Os valores possíveis estão descritos no diagrama de status de transações e são apresentados juntamente com seus respectivos códigos na tabela abaixo. &lt;br/&gt;&lt;br/&gt;Para efeito de controle dos associados que forem isentados do pagamento, foi criado o status 0, não gerado pelo PagSeguro, mas pelo sistema FBTC. Neste caso, o valor NetAmountPS será igual a 0,00&lt;br/&gt;&lt;br/&gt;Código - Significado&lt;br/&gt;1 - Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.&lt;br/&gt;2 - Em análise: o comprador optou por pagar com um cartão de crédito e o PagSeguro está analisando o risco da transação.&lt;br/&gt;3 - Paga: a transação foi paga pelo comprador e o PagSeguro já recebeu uma confirmação da instituição financeira responsável pelo processamento.&lt;br/&gt;4 - Disponível: a transação foi paga e chegou ao final de seu prazo de liberação sem ter sido retornada e sem que haja nenhuma disputa aberta.&lt;br/&gt;5 - Em disputa: o comprador, dentro do prazo de liberação da transação, abriu uma disputa.&lt;br/&gt;6 - Devolvida: o valor da transação foi devolvido para o comprador.&lt;br/&gt;7 - Cancelada: a transação foi cancelada sem ter sido finalizada.&lt;br/&gt;8 - Debitado: o valor da transação foi devolvido para o comprador.&lt;br/&gt;9 - Retenção temporária: o comprador contestou o pagamento junto à operadora do cartão de crédito ou abriu uma demanda judicial ou administrativa (Procon).&lt;br/&gt;&lt;br/&gt;Outros status menos relevantes foram omitidos. Em resumo, você deve considerar transações nos status de Paga para liberação de produtos ou serviços.&lt;br/&gt;Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Inteiro. </commentInRDBMS>
 <ownerDesignName>FBTC - v2</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -153,13 +154,12 @@
 <createdTime>2018-01-23 21:56:28 UTC</createdTime>
 <commentInRDBMS>Valor líquido da transação no PagSeguro. Informa o valor líquido da transação, que corresponde ao valor bruto, menos o valor das taxas. Caso presente, o valor de extraAmount (que pode ser positivo ou negativo) também é considerado no cálculo. Presença: Obrigatória.&lt;br/&gt;Tipo: Número.&lt;br/&gt;Formato: Decimal, com duas casas decimais separadas por ponto (&quot;.&quot;). Por exemplo, 1234.56. </commentInRDBMS>
 <ownerDesignName>FBTC - v2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
+<dataTypePrecision>7</dataTypePrecision>
 <dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<ownDataTypeParameters>,7,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="GrossAmountPS" id="8107AFC9-B3A5-BE37-F9E4-A6A190B58690">
@@ -171,9 +171,9 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT026</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
+<dataTypePrecision>7</dataTypePrecision>
 <dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<ownDataTypeParameters>,7,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="DiscountAmountPS" id="8B408A01-5D54-FFF1-5994-58C70CB1B76D">
@@ -184,9 +184,9 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT026</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
+<dataTypePrecision>7</dataTypePrecision>
 <dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<ownDataTypeParameters>,7,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="FeeAmountPS" id="6A58F5C1-2312-ED16-CC9A-54063FE20CB9">
@@ -198,9 +198,9 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT026</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
+<dataTypePrecision>7</dataTypePrecision>
 <dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<ownDataTypeParameters>,7,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="ExtraAmountPS" id="48890630-1F6D-21DF-8AC3-0090EB4DD46B">
@@ -212,9 +212,9 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT026</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
+<dataTypePrecision>7</dataTypePrecision>
 <dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<ownDataTypeParameters>,7,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="DtAtualizacaoPS" id="14D437F8-CF58-DB03-DE5E-4EB46EC01E68">
@@ -296,6 +296,18 @@
 <logicalDatatype>LOGDT034</logicalDatatype>
 <dataTypeSize>1</dataTypeSize>
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_PagamentoPagSeguro" id="7DB3A156-D935-EBF6-3F05-DCDCD813EDB3">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-12-16 10:34:08 UTC</createdTime>
+<commentInRDBMS>Identificador do registro na tabela TBL_PAGAMENTOPAGSEGURO (Sistema antigo)&lt;br/&gt;&lt;br/&gt;Usando durante o processo de migração dos dados </commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>

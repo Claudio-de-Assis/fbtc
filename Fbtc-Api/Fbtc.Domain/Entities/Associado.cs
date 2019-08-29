@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fbtc.Domain.Entities
 {
@@ -26,5 +27,29 @@ namespace Fbtc.Domain.Entities
         public bool MembroDiretoria { get; set; }
         public bool AnuidadeAtcOk { get; set; }
         public bool MembroConfi { get; set; }
+    }
+     
+    public class AssociadoAdimplenteDao
+    {
+        public int AssociadoId { get; set; }
+        public string Nome { get; set; }
+        public string NomeTipoPublico { get; set; }
+        public string Certificado { get; set; }
+        public string NomeCidade { get; set; }
+        public string SiglaEstado { get; set; }
+        public string EMail { get; set; }
+        public string NomeFoto { get; set; }
+        public string NomeProfissao { get; set; }
+        public string Sexo { get; set; }
+    }
+
+    public class ResultadoConAssociadoAdimplenteDao
+    {
+        public int NumPage { get; set; }
+        public int PageSize { get; set; }
+        public Decimal QtdTotalPages { get; set; }
+        public int QuantTotalRegistros { get; set; }
+        public string MsgRetorno { get; set; }
+        public IEnumerable<AssociadoAdimplenteDao> AssociadoAdimplenteDaos { get; set; }
     }
 }

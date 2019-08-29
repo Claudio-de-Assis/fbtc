@@ -1218,6 +1218,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
         {
             bool _resultado = false;
             string _msg = "";
+            bool _ativo = true;
 
             using (SqlConnection connection = new SqlConnection(strConnSql))
             {
@@ -1239,6 +1240,9 @@ namespace Fbtc.Infra.Persistencia.AdoNet
 
                 try
                 {
+                    if (r.StatusPS == 6 || r.StatusPS == 7)
+                        _ativo = false;
+                    
                     // Atualizando os dados na tabela:
                     command.CommandText = "" +
                         "Update dbo.AD_Recebimento Set " +
@@ -1253,7 +1257,8 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         "   FeeAmountPS = @FeeAmountPS, " +
                         "   NetAmountPS = @NetAmountPS, " +
                         "   ExtraAmountPS = @ExtraAmountPS, " +
-                        "   DtAtualizacaoPS = @DtAtualizacaoPS " +
+                        "   DtAtualizacaoPS = @DtAtualizacaoPS, " +
+                        "   Ativo = @Ativo " +
                         "WHERE NotificationCodePS = @NotificationCodePS ";
 
                     command.Parameters.AddWithValue("TypePS", r.TypePS);
@@ -1268,6 +1273,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                     command.Parameters.AddWithValue("NetAmountPS", r.NetAmountPS);
                     command.Parameters.AddWithValue("ExtraAmountPS", r.ExtraAmountPS);
                     command.Parameters.AddWithValue("DtAtualizacaoPS", DateTime.Now);
+                    command.Parameters.AddWithValue("Ativo", _ativo);
                     command.Parameters.AddWithValue("NotificationCodePS", r.NotificationCodePS);
 
                     int i = command.ExecuteNonQuery();

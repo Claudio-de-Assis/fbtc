@@ -389,7 +389,7 @@ namespace Fbtc.Infra.Persistencia.AdoNet
                         P.PerfilId 
                     FROM dbo.AD_Pessoa P 
                     WHERE P.PessoaId != @pessoaId 
-                        AND P.EMail = @eMai";
+                        AND P.EMail = @eMail";
 
                 // Define o banco de dados que será usando:
                 CommandSql cmd = new CommandSql(strConnSql, query, EnumDatabaseType.SqlServer, parametros: _parametros);

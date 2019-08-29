@@ -23,8 +23,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Cors.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.Owin.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\prmToolkit.Validation.dll
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\FirebirdSql.Data.FirebirdClient.dll
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\MySql.Data.dll
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Application.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Domain.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\Fbtc.Domain.dll.config
@@ -47,7 +45,6 @@ C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Net.Http.Formatting.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Net.Http.Primitives.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.xml
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\System.Web.Http.Owin.xml
-C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\bin\FirebirdSql.Data.FirebirdClient.pdb
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.App.config
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csprojAssemblyReference.cache
 C:\C-Projetos\fbtc\Fbtc-Api\Fbtc-Api\obj\Release\Fbtc.Api.csproj.CoreCompileInputs.cache

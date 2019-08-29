@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxPermissionsService } from 'ngx-permissions';
@@ -34,6 +35,7 @@ export class LoginComponent {
       public authService: AuthService,
       public userProfileService: UserProfileService,
       public router: Router,
+//      public tokenRouter: Router,
       private permissionsService: NgxPermissionsService
   ) {
     this.setMessage();
@@ -62,8 +64,6 @@ export class LoginComponent {
     }
 
     this._msg = '';
-//    this.message = 'Trying to log in ...';
-//    console.log('Trying to log in ...');
 
     if (this.editeMail.trim() === '') {
 
@@ -79,8 +79,6 @@ export class LoginComponent {
       return;
     }
 
-//  console.log('pre: ' + this.authService.isLoggedIn);
-
     this.editeMail = this.editeMail.trim();
     this.editeMail = this.editeMail.toLowerCase();
 
@@ -91,21 +89,26 @@ export class LoginComponent {
 
     this._msgProgresso = 'Validando os dados informados. Por favor, aguarde!...';
 
-    this.authService.loginUser( this.userProfileLogin).subscribe((userProfile: UserProfile) => {
+    if (1 > 1) {
+    // Login e obtendo o token:
+    this.authService.loginUserToken(this.editeMail, this.editPassword).subscribe((data: any) => {
+      localStorage.setItem('userToken', data.access_token);
+      console.log('Token...: ' + localStorage.getItem('userToken'));
+    },
+    (err: HttpErrorResponse) => {
+        console.log('Usuário ou senha inválidos');
+     });
+    }
+
+    this.authService.loginUser(this.userProfileLogin).subscribe((userProfile: UserProfile) => {
           this.setMessage();
           this._msgProgresso = '';
           this.submitted = false;
-
-        // console.log('antes: ' + this.authService.isLoggedIn);
-        // console.log('userProfile: ' + userProfile);
 
           if (userProfile) {
             // Get the redirect URL from our auth service
             // If no redirect has been set, use the default
             const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
-
-            // console.log(`User Name: ${this.authService.getUserProfile().nome}`);
-            // console.log(`User: ${JSON.stringify(this.authService.getUserProfile())}`);
 
             // Redirect the user
             this.router.navigate([redirect]);

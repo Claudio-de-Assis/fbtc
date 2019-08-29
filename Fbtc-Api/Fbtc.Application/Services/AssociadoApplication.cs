@@ -122,6 +122,31 @@ namespace Fbtc.Application.Services
                 _tipoProfissao, tipoPublicoId, _estado, _cidade, ativo);
         }
 
+        public ResultadoConAssociadoAdimplenteDao FindAssociadoAdimplente(int pageSize, int numPage, string nomeCidade, 
+            string nomeAssociado, int tipoPublicoId, string statusCertificacao)
+        {
+            //Se o mês vigente no momento da consulta for maior do que Fevereiro, a consulta 
+            //será realizada considerando o pagamento da anuidade/isenção da matricula do ano vigente 
+            //e ano posterior.
+            //Caso o mês vigente no momento da consulta for MENOR do que fevereiro, a consulta 
+            //será realizada considerando a partir do ano anterior ao ano vigente. 
+            int _anuidadeReferencia = DateTime.Now.Month > 2 ? DateTime.Now.Year : DateTime.Now.Year - 1;
+            
+            string _nomeCidade, _nomeAssociado;
+
+            _nomeCidade =  nomeCidade;
+            _nomeAssociado = nomeAssociado;
+
+            if (_nomeCidade.IndexOf("%20") > 0)
+                _nomeCidade = _nomeCidade.Replace("%20", " ");
+
+            if (_nomeAssociado.IndexOf("%20") > 0)
+                _nomeAssociado = _nomeAssociado.Replace("%20", " ");
+
+            return _associadoService.FindAssociadoAdimplente(pageSize, numPage, _anuidadeReferencia, _nomeCidade, _nomeAssociado, 
+                tipoPublicoId, statusCertificacao);
+        }
+
         public IEnumerable<Associado> GetAll()
         {
             return _associadoService.GetAll();

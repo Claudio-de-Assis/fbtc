@@ -68,8 +68,8 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>15</dataTypeSize>
-<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="EMail" id="B0456B0D-2C5A-DC24-4A9D-42EC2701FCC9">
@@ -93,8 +93,8 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>32,,</ownDataTypeParameters>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="Sexo" id="3ACD65D2-28CE-6E6B-D1ED-A8C446D3A887">
@@ -191,6 +191,18 @@
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>500</dataTypeSize>
 <ownDataTypeParameters>500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_Entidade" id="F0A88858-19AA-1DF4-C9C0-8E18D6231BF3">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2018-12-08 14:14:26 UTC</createdTime>
+<commentInRDBMS>Identificador do registro na tabela TBL_Entidade. A tabela TBL_Entidade é usada no modelo de dados do sistema antigo</commentInRDBMS>
+<ownerDesignName>FBTC - v2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>

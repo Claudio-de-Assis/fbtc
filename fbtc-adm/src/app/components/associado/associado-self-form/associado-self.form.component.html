@@ -206,14 +206,14 @@
                             <label for="rdbCertificado">Certificado?:</label>
                             <div>
                                 <label required class="radion-inline" *ngFor="let op of _util.optBoolean" >
-                                    <input type="radio" [(ngModel)]="associado.certificado" name="certificado" id="rdbCertificado" 
+                                    <input type="radio" disabled [(ngModel)]="associado.certificado" name="certificado" id="rdbCertificado" 
                                     [checked]="op.value === associado.certificado" [value]="op.value"> {{ op.name }} &nbsp;</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <label for="inpDtCertificacao">Data Certificação:</label>
-                        <input id="inpDtCertificacao" name="inpDtCertificacao" class="form-control" type="date"
+                        <input id="inpDtCertificacao" name="inpDtCertificacao" disabled class="form-control" type="date"
                         [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificacao=$event" #dtCertificacao="ngModel"/>
                     </div>
                     <div class="col-lg-2">

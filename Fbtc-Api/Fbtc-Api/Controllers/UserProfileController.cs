@@ -246,7 +246,7 @@ namespace Fbtc.Api.Controllers
             }
         }
 
-        // [Authorize]
+        //[Authorize]
         [Route("LoginUser")]
         [HttpPost]
         public Task<HttpResponseMessage> LoginUser(UserProfileLogin userProfileLogin)

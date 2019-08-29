@@ -1,4 +1,5 @@
 ﻿using Fbtc.Api.Security;
+using Fbtc.Infra.Helpers;
 using Fbtc.Ioc;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
@@ -14,6 +15,13 @@ namespace Fbtc.Api
 {
     public class Startup
     {
+        private readonly int _sessionDurationMinutes;
+
+        public Startup()
+        {
+            _sessionDurationMinutes = Int32.Parse(ConfigHelper.GetKeyAppSetting("SessionDurationMinutes"));
+        }
+
         public void Configuration(IAppBuilder app)
         {
             // Classe responsável por configurar a WebApi:
@@ -39,14 +47,12 @@ namespace Fbtc.Api
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(30),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(_sessionDurationMinutes),
                 Provider = new AuthorizationApi(container)
             };
 
             app.UseOAuthAuthorizationServer(oAuthServerOption);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
-            //throw new NotImplementedException();
         }
 
         private void ConfigureWebApi(HttpConfiguration config)

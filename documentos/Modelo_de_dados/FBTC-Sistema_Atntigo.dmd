@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="FBTC-Sistema_Atntigo" id="17F17130-4DB8-D6C6-63F0-E5B2B2C9EDE1" version="3.5">
+<createdBy>Cláudio de Assis</createdBy>
+<createdTime>2019-03-31 15:30:43 UTC</createdTime>
+<ownerDesignName>FBTC-Sistema_Atntigo</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>17F17130-4DB8-D6C6-63F0-E5B2B2C9EDE1</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="66950C4D-0DA8-B8BB-9A2B-9444E29495C6">
+<designStoragePath>E:\TBL_ENTIDADE</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="5490BB1B-765C-D9F9-559F-F06FACB7E99F">
+<designStoragePath>E:\TBL_ENTIDADE</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="3D917A99-7320-5F88-3871-6851D8E89390">
+<designStoragePath>E:\TBL_EntidadeTipoContaDado</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="8CB73BA3-AC57-1349-5A23-4C4847E2088C">
+<designStoragePath>E:\TBL_EntidadeTipoConta</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="35FD834A-27B8-9988-B603-F5580F127DE3">
+<designStoragePath>E:\TBL_EntidadeTipo</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

@@ -10,7 +10,6 @@ import { UserProfile } from '../shared/model/user-profile';
 
 // import { NgxPermissionsModule } from 'ngx-permissions';
 
-
 @NgModule({
     imports: [
       CommonModule,

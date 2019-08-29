@@ -82,7 +82,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-lg-6">
-                        <button *ngIf="(recebimentoDao.statusPS === 3 || recebimentoDao.statusPS === 0) && recebimentoDao.ativo === true"  type="button" class="btn btn-info" (click)="gotoGerarCertificadoAdimplencia()">Certificado de Adimplência</button>
+                        <button *ngIf="(recebimentoDao.statusPS === 3 || recebimentoDao.statusPS === 4 || recebimentoDao.statusPS === 0) && recebimentoDao.ativo === true"  type="button" class="btn btn-info" (click)="gotoGerarCertificadoAdimplencia()">Certificado de Adimplência</button>
                     </div>
                     <div class="col-lg-6 text-right">
                         <button type="button" class="btn btn-default" (click)="gotoRecebimentoAnuidade()">Retornar</button>

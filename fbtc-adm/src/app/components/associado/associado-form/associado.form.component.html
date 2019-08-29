@@ -213,7 +213,7 @@
                     </div>
                     <div class="col-lg-3">
                         <label for="inpDtCertificacao">Data Certificação:</label>
-                        <input id="inpDtCertificacao" name="inpDtCertificacao" class="form-control" type="date"
+                        <input id="inpDtCertificacao" name="inpDtCertificacao" class="form-control" type="date" 
                         [ngModel]="associado.dtCertificacao | date:'yyyy-MM-dd'" (ngModelChange)="associado.dtCertificacao=$event" #dtCertificacao="ngModel"/>
                     </div>
                     <div class="col-lg-2">

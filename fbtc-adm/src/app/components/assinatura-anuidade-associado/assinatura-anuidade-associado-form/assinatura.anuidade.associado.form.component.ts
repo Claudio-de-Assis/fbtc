@@ -22,7 +22,7 @@ import { AnuidadeDao } from '../../shared/model/anuidade';
 export class AssinaturaAnuidadeAssociadoFormComponent implements OnInit {
 
   @Input() assinaturaAnuidadeDao: AssinaturaAnuidadeDao = { nomePessoa: '', cpf: '', nomeTP: '', exercicio: 0,
-   tipoAnuidade: 0, assinaturaAnuidadeId: 0, associadoId: 0, valorAnuidadeId: null, valorAnuidadeIdOriginal: null, 
+   tipoAnuidade: 0, assinaturaAnuidadeId: 0, associadoId: 0, valorAnuidadeId: null, valorAnuidadeIdOriginal: null,
    recebimentoStatusPS: null, anoInicio: 0,
    anoTermino: 0, percentualDesconto: 0, tipoDesconto: '0', valor: 0, dtVencimentoPagamento: null,  dtAssinatura: null, dtAtualizacao: null,
    codePS: '', dtCodePS: null, reference: '', emProcessoPagamento: false, dtInicioProcessamento: null,

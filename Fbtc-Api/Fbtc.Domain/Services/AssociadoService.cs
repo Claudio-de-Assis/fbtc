@@ -28,6 +28,13 @@ namespace Fbtc.Domain.Services
                 tipoProfissao, tipoPublicoId, estado, cidade, ativo);
         }
 
+        public ResultadoConAssociadoAdimplenteDao FindAssociadoAdimplente(int pagSize, int numPage, int anuidadeReferencia, string nomeCidade, 
+            string nomeAssociado, int tipoPublicoId, string statusCertificacao)
+        {
+            return _associadoRepository.FindAssociadoAdimplente(pagSize, numPage, anuidadeReferencia, nomeCidade, nomeAssociado,
+                tipoPublicoId, statusCertificacao);
+        }
+
         public IEnumerable<Associado> GetAll()
         {
             return _associadoRepository.GetAll();

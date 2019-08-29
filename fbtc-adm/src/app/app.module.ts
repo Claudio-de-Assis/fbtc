@@ -25,7 +25,7 @@ import { LoginModule } from './components/login/login.module';
 import { AssinaturaAnuidadeModule } from './components/assinatura-anuidade/assinatura-anuidade.module';
 
 import { RelatoriosRoute } from './components/shared/webapi-routes/relatorios.route';
-import { LoginRoute } from './components/shared/webapi-routes/login.route';
+// import { LoginRoute } from './components/shared/webapi-routes/login.route';
 import { AnuidadeRoute } from './components/shared/webapi-routes/anuidade.route';
 import { IsencaoRoute } from './components/shared/webapi-routes/isencao.route';
 import { RecebimentoRoute } from './components/shared/webapi-routes/recebimento.route';
@@ -84,7 +84,7 @@ import { LoginComponent } from './components/login/login.form.component';
     AnuidadeRoute,
     PagSeguroRoute,
     RelatoriosRoute,
-    LoginRoute,
+    // LoginRoute,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [
